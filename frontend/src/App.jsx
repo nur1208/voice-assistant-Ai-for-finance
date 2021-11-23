@@ -1,22 +1,33 @@
 import React from "react";
-
+import SpeechRecognition, {
+  useSpeechRecognition,
+} from "react-speech-recognition";
+import { useSpeechSynthesis } from "react-speech-kit";
+import "./app.css";
 export const App = () => {
   const { speak } = useSpeechSynthesis();
 
+  const whatNameOptions = [
+    "my name is finanbro",
+    "I'm finanbro, bro",
+  ];
+
   const commands = [
-    {
-      command: ["Go to * page", "Go to *", "Open * page", "Open *"],
-      callback: (redirectPage) => setRedirectUrl(redirectPage),
-    },
     {
       command: ["what can you do", "how can you help me"],
       callback: (redirectPage) =>
         speak({ text: "I help you with navigation" }),
     },
     {
-      command: ["what's your name"],
-      callback: (redirectPage) =>
-        speak({ text: "my name is no name" }),
+      command: ["what is your name", "what's your name"],
+      callback: (redirectPage) => {
+        const optionsResponse = [
+          "my name is finanbro",
+          "I'm finanbro, bro",
+        ];
+        // randStock = stocks[Math.floor(Math.random() * stocks.length)];
+        speak({ text: "my name is finanbro" });
+      },
     },
     {
       command: ["Give me the news from *"],
@@ -50,25 +61,18 @@ export const App = () => {
   // the most active stock of yesterday is list of stocks
   const { transcript } = useSpeechRecognition({ commands });
 
-  const [redirectUrl, setRedirectUrl] = useState("");
-  const pages = ["home", "blog", "new blog post", "contact"];
-  const urls = {
-    home: "/",
-    blog: "/blog",
-    "new blog post": "/blog/new",
-    contact: "/contact",
-  };
-
   if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
     return null;
   }
 
   return (
     <div className="mainWrapper">
-      <p id="transcript">Transcript: {transcript}</p>
-      <button onClick={SpeechRecognition.startListening}>
-        Start
-      </button>
+      <div>
+        <p id="transcript">Transcript: {transcript}</p>
+        <button onClick={SpeechRecognition.startListening}>
+          Start
+        </button>
+      </div>
     </div>
   );
 };
