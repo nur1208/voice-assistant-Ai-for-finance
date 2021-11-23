@@ -1,0 +1,4 @@
+1 - {DONE} set up the frontend
+2 - {TODO} install the following packages, react-speech-recognition, react-speech-kit
+    react-speech-recognition is for speech recognition
+    react-speech-kit is for let "bro" speak
