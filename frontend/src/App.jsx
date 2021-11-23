@@ -24,9 +24,14 @@ export const App = () => {
         const optionsResponse = [
           "my name is finanbro",
           "I'm finanbro, bro",
+          "finanbro, Finance plus brother equals my name, finanbro",
         ];
-        // randStock = stocks[Math.floor(Math.random() * stocks.length)];
-        speak({ text: "my name is finanbro" });
+        const randomOption =
+          optionsResponse[
+            Math.floor(Math.random() * optionsResponse.length)
+          ];
+        console.log({ randomOption });
+        speak({ text: randomOption });
       },
     },
     {
