@@ -7,32 +7,31 @@ import "./app.css";
 export const App = () => {
   const { speak } = useSpeechSynthesis();
 
-  const whatNameOptions = [
-    "my name is finanbro",
-    "I'm finanbro, bro",
-  ];
+  const response = (optionsResponse) => {
+    const randomOption =
+      optionsResponse[
+        Math.floor(Math.random() * optionsResponse.length)
+      ];
+
+    console.log(typeof optionsResponse === "object");
+    if (optionsResponse === "object") speak({ text: randomOption });
+    else speak({ text: optionsResponse });
+  };
 
   const commands = [
     {
       command: ["what can you do", "how can you help me"],
       callback: (redirectPage) =>
-        speak({ text: "I help you with navigation" }),
+        response("I help you with navigation"),
     },
     {
       command: ["what is your name", "what's your name"],
-      callback: (redirectPage) => {
-        const optionsResponse = [
+      callback: (redirectPage) =>
+        response([
           "my name is finanbro",
-          "I'm finanbro, bro",
+          "I'm finanbro... bro",
           "finanbro, Finance plus brother equals my name, finanbro",
-        ];
-        const randomOption =
-          optionsResponse[
-            Math.floor(Math.random() * optionsResponse.length)
-          ];
-        console.log({ randomOption });
-        speak({ text: randomOption });
-      },
+        ]),
     },
     {
       command: ["Give me the news from *"],
