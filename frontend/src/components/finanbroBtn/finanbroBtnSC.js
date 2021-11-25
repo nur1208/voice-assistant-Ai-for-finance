@@ -390,3 +390,17 @@ export const TriangleMicIconBg = styled.div`
     alan-triangle-mic-pulsating;
 `;
 //     animation: 1.2s ease-in-out 0s infinite normal none running alan-triangle-mic-pulsating;
+
+export const NotNetSC = styled.svg`
+  min-height: 100%;
+  height: 100%;
+  max-height: 100%;
+  top: 0%;
+  left: -12%;
+  z-index: 3;
+  position: absolute;
+  transition: transform 0.4s ease-in-out 0s,
+    opacity 0.4s ease-in-out 0s;
+  opacity: 1;
+  pointer-events: none;
+`;
