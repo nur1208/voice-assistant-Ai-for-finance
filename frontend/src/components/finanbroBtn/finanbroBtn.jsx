@@ -22,8 +22,14 @@ import {
   TriangleMicIconBg,
   GiSpeakerIcon,
   NotNetSC,
+  VscDebugStartIcon,
+  SiProbotIcon,
 } from "./finanbroBtnSC";
-export const FinanbroBtn = ({ onClick, isListening }) => {
+export const FinanbroBtn = ({
+  onClick,
+  isListening,
+  isSpeaking,
+}) => {
   const [playing, toggle] = useAudio(
     "./audio/zapsplat_multimedia_button_click_007_53868.mp3"
   );
@@ -39,17 +45,23 @@ export const FinanbroBtn = ({ onClick, isListening }) => {
       <RecognizedTextHolder id="RecognizedTextHolder">
         <RecognizedTextContent id="RecognizedTextContent"></RecognizedTextContent>
       </RecognizedTextHolder>
-      <FinanbroBtnSC id="FinanbroBtnSC" isListening={isListening}>
+      <FinanbroBtnSC
+        id="FinanbroBtnSC"
+        isListening={isListening}
+        isSpeaking={isSpeaking}
+      >
         <Div1 id="Div1" />
         <Div2 id="Div2" />
         <BgDefault id="BgDefault" />
         <BgListening id="BgListening" isListening={isListening} />
-        <BgSpeaking id="BgSpeaking" />
+        <BgSpeaking id="BgSpeaking" isSpeaking={isSpeaking} />
         <BgIntermediate id="BgIntermediate" />
         <BgUnderstood id="BgUnderstood" />
         <IconWrapper>
-          <Icon src="./images/mic.png" />
+          {/* <Icon src="./images/mic.png" /> */}
           {/* <GiSpeakerIcon /> */}
+          {/* <VscDebugStartIcon /> */}
+          <SiProbotIcon />
         </IconWrapper>
         <TriangleMicIconBg />
         <CircleMicSvg />

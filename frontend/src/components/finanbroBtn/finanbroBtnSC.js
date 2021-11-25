@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { CircleMicSvg } from "../../svg/CircleMicSvg";
 import { GiSpeaker } from "react-icons/gi";
-
+import { VscDebugStart } from "react-icons/vsc";
+import { SiProbot } from "react-icons/si";
 export const FinanbroBtnRoot = styled.div`
   z-index: 5;
   position: fixed;
@@ -78,8 +79,8 @@ export const FinanbroBtnSC = styled.div`
   z-index: 5;
   cursor: pointer;
 
-  ${({ isListening }) =>
-    isListening
+  ${({ isListening, isSpeaking }) =>
+    isListening || isSpeaking
       ? `
     transform: scale(1);
     animation: 1.4s ease-in-out 0s infinite normal none running
@@ -192,7 +193,7 @@ export const BgSpeaking = styled.div`
   border-radius: 50%;
   z-index: 2;
   background-position: 0px 0px;
-  opacity: 0;
+  opacity: ${({ isSpeaking }) => (isSpeaking ? 1 : 0)};
   animation: 3s ease-in-out 0s infinite normal none running
     alan-gradient;
 
@@ -321,6 +322,38 @@ export const IconWrapper = styled.div`
 `;
 
 export const GiSpeakerIcon = styled(GiSpeaker)`
+  min-height: 74%;
+  height: 77%;
+  max-height: 100%;
+  min-width: 100%;
+  width: 100%;
+  max-width: 100%;
+  top: 11%;
+  left: 0%;
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50%;
+  opacity: 1;
+  font-size: 10px;
+`;
+
+export const SiProbotIcon = styled(SiProbot)`
+  min-height: 55%;
+  height: 56%;
+  max-height: 100%;
+  min-width: 100%;
+  width: 100%;
+  max-width: 100%;
+  top: 21%;
+  left: 0%;
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50%;
+  opacity: 1;
+  font-size: 10px;
+`;
+
+export const VscDebugStartIcon = styled(VscDebugStart)`
   min-height: 74%;
   height: 77%;
   max-height: 100%;

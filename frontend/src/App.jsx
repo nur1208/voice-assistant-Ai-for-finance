@@ -7,7 +7,7 @@ import "./app.css";
 import { FinanbroBtn } from "./components/finanbroBtn/finanbroBtn";
 import { useEffect } from "react";
 export const App = () => {
-  const { speak, voices } = useSpeechSynthesis();
+  const { speak, voices, speaking } = useSpeechSynthesis();
 
   const response = (optionsResponse) => {
     const randomOption =
@@ -45,7 +45,7 @@ export const App = () => {
         response([
           "my name is finansis",
           "I'm finansis... bro",
-          "finansis, Finance plus sister equals my name... finansis, simple ah",
+          "finansis, Finance plus sister equals my name... finansis, simple right?",
         ]),
     },
     {
@@ -97,6 +97,7 @@ export const App = () => {
     //   }),
     onClick: SpeechRecognition.startListening,
     isListening: listening,
+    isSpeaking: speaking,
   };
 
   return (
