@@ -7,7 +7,7 @@ import "./app.css";
 import { FinanbroBtn } from "./components/finanbroBtn/finanbroBtn";
 import { useEffect } from "react";
 export const App = () => {
-  const { speak } = useSpeechSynthesis();
+  const { speak, voices } = useSpeechSynthesis();
 
   const response = (optionsResponse) => {
     const randomOption =
@@ -22,6 +22,14 @@ export const App = () => {
   };
 
   const commands = [
+    {
+      command: ["你叫什么名字"],
+      callback: () =>
+        speak({
+          text: "我叫finanbro",
+          voice: voices[4],
+        }),
+    },
     {
       command: ["what can you do", "how can you help me"],
       callback: (redirectPage) =>
@@ -75,15 +83,18 @@ export const App = () => {
   });
 
   useEffect(() => {
-    console.log({ listening });
-  }, [listening]);
+    console.log({ voices });
+  }, [voices]);
 
   if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
     return null;
   }
 
   const FinanbroBtnProps = {
-    onClick: SpeechRecognition.startListening,
+    onClick: () =>
+      SpeechRecognition.startListening({
+        language: "zh-CN",
+      }),
     isListening: listening,
   };
 
@@ -92,7 +103,13 @@ export const App = () => {
       <div className="mainWrapper">
         <div>
           <p id="transcript">Transcript: {transcript}</p>
-          <button onClick={SpeechRecognition.startListening}>
+          <button
+            onClick={() =>
+              SpeechRecognition.startListening({
+                language: "zh-CN",
+              })
+            }
+          >
             Start
           </button>
         </div>
