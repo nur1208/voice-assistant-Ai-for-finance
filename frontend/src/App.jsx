@@ -4,6 +4,7 @@ import SpeechRecognition, {
 } from "react-speech-recognition";
 import { useSpeechSynthesis } from "react-speech-kit";
 import "./app.css";
+import { FinanbroBtn } from "./components/finanbroBtn/finanbroBtn";
 export const App = () => {
   const { speak } = useSpeechSynthesis();
 
@@ -13,9 +14,10 @@ export const App = () => {
         Math.floor(Math.random() * optionsResponse.length)
       ];
 
-    console.log(typeof optionsResponse === "object");
-    if (optionsResponse === "object") speak({ text: randomOption });
-    else speak({ text: optionsResponse });
+    // console.log(randomOption);
+    if (typeof optionsResponse !== "object")
+      speak({ text: optionsResponse });
+    else speak({ text: randomOption });
   };
 
   const commands = [
@@ -26,12 +28,15 @@ export const App = () => {
     },
     {
       command: ["what is your name", "what's your name"],
-      callback: (redirectPage) =>
-        response([
+      callback: (redirectPage) => {
+        console.log("here");
+        const options = [
           "my name is finanbro",
           "I'm finanbro... bro",
           "finanbro, Finance plus brother equals my name, finanbro",
-        ]),
+        ];
+        response(options);
+      },
     },
     {
       command: ["Give me the news from *"],
@@ -70,13 +75,16 @@ export const App = () => {
   }
 
   return (
-    <div className="mainWrapper">
-      <div>
-        <p id="transcript">Transcript: {transcript}</p>
-        <button onClick={SpeechRecognition.startListening}>
-          Start
-        </button>
+    <>
+      <div className="mainWrapper">
+        <div>
+          <p id="transcript">Transcript: {transcript}</p>
+          <button onClick={SpeechRecognition.startListening}>
+            Start
+          </button>
+        </div>
       </div>
-    </div>
+      <FinanbroBtn onClick={SpeechRecognition.startListening} />
+    </>
   );
 };

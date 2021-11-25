@@ -153,14 +153,6 @@ export const BgDefault = styled.div`
     rgb(34, 203, 255),
     rgb(25, 149, 255)
   );
-
-  ${FinanbroBtnSC}:hover {
-    background-image: linear-gradient(
-      122deg,
-      rgba(0, 70, 255, 0.95),
-      rgba(0, 156, 255, 0.95)
-    );
-  }
 `;
 
 export const BgListening = styled.div`
@@ -236,7 +228,7 @@ export const BgUnderstood = styled.div`
   border-radius: 50%;
   z-index: 2;
   background-position: 0px 0px;
-  opacity: 1;
+  opacity: 0;
   animation: 3s ease-in-out 0s infinite normal none running
     alan-gradient;
 
