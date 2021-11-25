@@ -1,4 +1,5 @@
 import React from "react";
+import { useAudio } from "../../hooks/useAudio";
 import { CircleMicSvg } from "../../svg/CircleMicSvg";
 import { DisconnectedMicrophoneSvg } from "../../svg/DisconnectedMicrophoneSvg";
 import {
@@ -21,8 +22,11 @@ import {
   GiSpeakerIcon,
 } from "./finanbroBtnSC";
 export const FinanbroBtn = () => {
+  const [playing, toggle] = useAudio(
+    "./audio/zapsplat_multimedia_button_click_007_53868.mp3"
+  );
   return (
-    <FinanbroBtnRoot id="FinanbroBtnRoot">
+    <FinanbroBtnRoot id="FinanbroBtnRoot" onClick={toggle}>
       <RecognizedTextHolder id="RecognizedTextHolder">
         <RecognizedTextContent id="RecognizedTextContent"></RecognizedTextContent>
       </RecognizedTextHolder>
