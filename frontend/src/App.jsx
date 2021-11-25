@@ -17,8 +17,8 @@ export const App = () => {
 
     // console.log(randomOption);
     if (typeof optionsResponse !== "object")
-      speak({ text: optionsResponse });
-    else speak({ text: randomOption });
+      speak({ text: optionsResponse, voice: voices[7] });
+    else speak({ text: randomOption, voice: voices[7] });
   };
 
   const commands = [
@@ -33,19 +33,19 @@ export const App = () => {
     {
       command: ["what can you do", "how can you help me"],
       callback: (redirectPage) =>
-        response("I help you with navigation"),
+        response("I provide finance information for you"),
     },
     {
       command: [
         "what is your name",
-        "bro what is your name",
+        "sis what is your name",
         "what's your name",
       ],
       callback: (redirectPage) =>
         response([
-          "my name is finanbro",
-          "I'm finanbro... bro",
-          "finanbro, Finance plus brother equals my name, finanbro",
+          "my name is finansis",
+          "I'm finansis... bro",
+          "finansis, Finance plus sister equals my name... finansis, simple ah",
         ]),
     },
     {
@@ -91,10 +91,11 @@ export const App = () => {
   }
 
   const FinanbroBtnProps = {
-    onClick: () =>
-      SpeechRecognition.startListening({
-        language: "zh-CN",
-      }),
+    // onClick: () =>
+    //   SpeechRecognition.startListening({
+    //     language: "zh-CN",
+    //   }),
+    onClick: SpeechRecognition.startListening,
     isListening: listening,
   };
 
@@ -103,13 +104,7 @@ export const App = () => {
       <div className="mainWrapper">
         <div>
           <p id="transcript">Transcript: {transcript}</p>
-          <button
-            onClick={() =>
-              SpeechRecognition.startListening({
-                language: "zh-CN",
-              })
-            }
-          >
+          <button onClick={SpeechRecognition.startListening}>
             Start
           </button>
         </div>
