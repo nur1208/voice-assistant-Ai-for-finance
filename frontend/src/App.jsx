@@ -5,6 +5,7 @@ import SpeechRecognition, {
 import { useSpeechSynthesis } from "react-speech-kit";
 import "./app.css";
 import { FinanbroBtn } from "./components/finanbroBtn/finanbroBtn";
+import { useEffect } from "react";
 export const App = () => {
   const { speak } = useSpeechSynthesis();
 
@@ -27,16 +28,17 @@ export const App = () => {
         response("I help you with navigation"),
     },
     {
-      command: ["what is your name", "what's your name"],
-      callback: (redirectPage) => {
-        console.log("here");
-        const options = [
+      command: [
+        "what is your name",
+        "bro what is your name",
+        "what's your name",
+      ],
+      callback: (redirectPage) =>
+        response([
           "my name is finanbro",
           "I'm finanbro... bro",
           "finanbro, Finance plus brother equals my name, finanbro",
-        ];
-        response(options);
-      },
+        ]),
     },
     {
       command: ["Give me the news from *"],
@@ -68,11 +70,22 @@ export const App = () => {
   ];
   // give me list of most active stocks
   // the most active stock of yesterday is list of stocks
-  const { transcript } = useSpeechRecognition({ commands });
+  const { transcript, listening } = useSpeechRecognition({
+    commands,
+  });
+
+  useEffect(() => {
+    console.log({ listening });
+  }, [listening]);
 
   if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
     return null;
   }
+
+  const FinanbroBtnProps = {
+    onClick: SpeechRecognition.startListening,
+    isListening: listening,
+  };
 
   return (
     <>
@@ -84,7 +97,7 @@ export const App = () => {
           </button>
         </div>
       </div>
-      <FinanbroBtn onClick={SpeechRecognition.startListening} />
+      <FinanbroBtn {...FinanbroBtnProps} />
     </>
   );
 };

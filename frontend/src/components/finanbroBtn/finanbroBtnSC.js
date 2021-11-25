@@ -78,9 +78,14 @@ export const FinanbroBtnSC = styled.div`
   z-index: 5;
   cursor: pointer;
 
-  /* transform: scale(1);
-  animation: 1.4s ease-in-out 0s infinite normal none running
-    alan-mic-pulsating; */
+  ${({ isListening }) =>
+    isListening
+      ? `
+    transform: scale(1);
+    animation: 1.4s ease-in-out 0s infinite normal none running
+      alan-mic-pulsating;
+  `
+      : ``}
 
   &:hover {
     transform: scale(1.11111);
@@ -165,7 +170,8 @@ export const BgListening = styled.div`
   border-radius: 50%;
   z-index: 2;
   background-position: 0px 0px;
-  opacity: 0;
+
+  opacity: ${({ isListening }) => (isListening ? 1 : 0)};
   animation: 3s ease-in-out 0s infinite normal none running
     alan-gradient;
 

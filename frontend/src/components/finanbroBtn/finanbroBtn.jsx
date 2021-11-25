@@ -23,7 +23,7 @@ import {
   GiSpeakerIcon,
   NotNetSC,
 } from "./finanbroBtnSC";
-export const FinanbroBtn = ({ onClick }) => {
+export const FinanbroBtn = ({ onClick, isListening }) => {
   const [playing, toggle] = useAudio(
     "./audio/zapsplat_multimedia_button_click_007_53868.mp3"
   );
@@ -39,11 +39,11 @@ export const FinanbroBtn = ({ onClick }) => {
       <RecognizedTextHolder id="RecognizedTextHolder">
         <RecognizedTextContent id="RecognizedTextContent"></RecognizedTextContent>
       </RecognizedTextHolder>
-      <FinanbroBtnSC id="FinanbroBtnSC">
+      <FinanbroBtnSC id="FinanbroBtnSC" isListening={isListening}>
         <Div1 id="Div1" />
         <Div2 id="Div2" />
         <BgDefault id="BgDefault" />
-        <BgListening id="BgListening" />
+        <BgListening id="BgListening" isListening={isListening} />
         <BgSpeaking id="BgSpeaking" />
         <BgIntermediate id="BgIntermediate" />
         <BgUnderstood id="BgUnderstood" />
