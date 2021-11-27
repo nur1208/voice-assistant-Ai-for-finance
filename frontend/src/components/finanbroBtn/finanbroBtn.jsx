@@ -58,10 +58,13 @@ export const FinanbroBtn = ({
         <BgIntermediate id="BgIntermediate" />
         <BgUnderstood id="BgUnderstood" />
         <IconWrapper>
-          {/* <Icon src="./images/mic.png" /> */}
-          {/* <GiSpeakerIcon /> */}
-          {/* <VscDebugStartIcon /> */}
-          <SiProbotIcon />
+          {isListening ? (
+            <Icon src="./images/mic.png" />
+          ) : isSpeaking ? (
+            <GiSpeakerIcon />
+          ) : (
+            <SiProbotIcon />
+          )}
         </IconWrapper>
         <TriangleMicIconBg />
         <CircleMicSvg />

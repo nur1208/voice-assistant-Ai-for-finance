@@ -1,4 +1,59 @@
 1 - {DONE} set up the frontend
-2 - {TODO} install the following packages, react-speech-recognition, react-speech-kit
+2 - {DONE} install the following packages, react-speech-recognition, react-speech-kit
     react-speech-recognition is for speech recognition
-    react-speech-kit is for let "bro" speak
+    react-speech-kit is for let "finanbro" speak
+3 - {DONE} test react-speech-recognition and  react-speech-kit
+4 - {DONE} let finanbro response with different ways
+5 - {DONE} create response function for finanbro
+6 - {DONE} create finanbro btn like alan ai
+7 - {TODO} make finanbro btn works like alan btn
+    7.1 {DONE} add audio when clicking on finanbro btn
+    7.2 {DONE} adding no internat icon to finanbro btn
+    7.3 {DONE} 🛠 fixing reading everything in the response array options 
+    7.4 {DONE} adding animation to finanbro' button while listening to a user
+    7.5 {DONE} learning how to let alan speak chinese
+    7.6 {DONE} finding a good voice, and changing finanbro to finansis
+    7.8 {DONE} adding animation to finansis's button while listening and adding robot icon 
+    7.9 {TODO} change icons when finansis listening show mic icon, and when she talk show 
+                speaker icon
+8 - {TODO} create main page for news section and called News
+9 - {TODO} create ListNews page to show list of the news that finanbro read
+10 - {TODO} if there is no command for a question response with
+    "I did't get it right this time. Sorry bro"
+
+
+
+
+Playing ----
+1 - add news information, for example, what's up with apple?...
+2 - add how can i help you question
+    list the the command that "bro" can understanding
+3 - let the user enter his or her info or make bro enter the info
+    like, what's your name? let the bro type the name in the input flied
+    then ask is your name? and something like that for email
+    sorry bro, you need to enter your password, i can't help you
+    with that.
+4 - add what's stock current price?
+    stock current price is ${currentPrice}$
+5 - add tell me the important fundamental analysis statistic about aapl?
+6 - ADD what's bid and ask price for aapl
+7 - add what's Price to sale ratio, and more finance questions
+    if the question bro knows let him say it
+    if not tell the user i'm looking for answers on the internat
+    and then save the most good answers by asking do you want my to
+    read another answer or that good enough
+7.1 - scrap stock market news data
+7.2 - save stock market data new the database
+8 - add show me chart of apple (optional from ${startDate} to ${endData})
+8.1 - add admin page to let a user control finanbro commands
+8.2 - if a user ask finanbro, and he didn't not let the admin see that question
+    and then maybe the admin can add i good answer from the list the finanbro
+    found in the internat.
+
+9 - tell me what stocks i should pay my attention to?
+    list of best 5 stocks base on fundamental analysis 
+    show the user table of the stock name and the fundamental analysis indicators
+10 - add technical analysis
+11 - add machine learning RNN algorithm
+12 - create bot that can buy and sell and show the result in the web
+    using fundamental analysis + technical analysis + machine learning RNN algorithm     
