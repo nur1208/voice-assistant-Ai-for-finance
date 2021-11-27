@@ -14,8 +14,8 @@
     7.5 {DONE} learning how to let alan speak chinese
     7.6 {DONE} finding a good voice, and changing finanbro to finansis
     7.8 {DONE} adding animation to finansis's button while listening and adding robot icon 
-    7.9 {TODO} change icons when finansis listening show mic icon, and when she talk show 
-                speaker icon
+    7.9 {DONE} change icons when finansis listening show mic icon, and when she talk show speaker icon
+
 8 - {TODO} create main page for news section and called News
 9 - {TODO} create ListNews page to show list of the news that finanbro read
 10 - {TODO} if there is no command for a question response with

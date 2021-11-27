@@ -29,6 +29,7 @@ export const FinanbroBtn = ({
   onClick,
   isListening,
   isSpeaking,
+  transcript,
 }) => {
   const [playing, toggle] = useAudio(
     "./audio/zapsplat_multimedia_button_click_007_53868.mp3"
@@ -43,7 +44,12 @@ export const FinanbroBtn = ({
       }}
     >
       <RecognizedTextHolder id="RecognizedTextHolder">
-        <RecognizedTextContent id="RecognizedTextContent"></RecognizedTextContent>
+        <RecognizedTextContent
+          id="RecognizedTextContent"
+          hasTranscript={transcript.length > 0}
+        >
+          {transcript}
+        </RecognizedTextContent>
       </RecognizedTextHolder>
       <FinanbroBtnSC
         id="FinanbroBtnSC"

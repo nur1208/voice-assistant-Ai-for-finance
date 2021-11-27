@@ -48,7 +48,15 @@ export const RecognizedTextHolder = styled.div`
   justify-content: start;
 `;
 
-export const RecognizedTextContent = styled.div``;
+export const RecognizedTextContent = styled.div`
+  ${({ hasTranscript }) =>
+    hasTranscript
+      ? `
+    padding:10px;
+
+`
+      : ``}
+`;
 
 export const FinanbroBtnSC = styled.div`
   @keyframes alan-mic-pulsating {

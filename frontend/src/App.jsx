@@ -98,13 +98,14 @@ export const App = () => {
     onClick: SpeechRecognition.startListening,
     isListening: listening,
     isSpeaking: speaking,
+    transcript,
   };
 
   return (
     <>
       <div className="mainWrapper">
         <div>
-          <p id="transcript">Transcript: {transcript}</p>
+          <p id="transcript">Transcript: {transcript.length}</p>
           <button onClick={SpeechRecognition.startListening}>
             Start
           </button>
