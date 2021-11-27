@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
@@ -9,16 +9,24 @@ import { useEffect } from "react";
 export const App = () => {
   const { speak, voices, speaking } = useSpeechSynthesis();
 
+  const [randomIndex, setRandomIndex] = useState(0);
+
   const response = (optionsResponse) => {
-    const randomOption =
-      optionsResponse[
-        Math.floor(Math.random() * optionsResponse.length)
-      ];
+    let randomOption;
+    if (optionsResponse.length - 1 < randomIndex)
+      randomOption = optionsResponse[0];
+    else randomOption = optionsResponse[randomIndex];
 
     // console.log(randomOption);
     if (typeof optionsResponse !== "object")
       speak({ text: optionsResponse, voice: voices[7] });
-    else speak({ text: randomOption, voice: voices[7] });
+    else {
+      speak({ text: randomOption, voice: voices[7] });
+      setRandomIndex(
+        Math.floor(Math.random() * optionsResponse.length)
+      );
+      // setRandomIndex(10);
+    }
   };
 
   const commands = [
@@ -78,13 +86,16 @@ export const App = () => {
   ];
   // give me list of most active stocks
   // the most active stock of yesterday is list of stocks
-  const { transcript, listening } = useSpeechRecognition({
-    commands,
-  });
+  const { transcript, listening, resetTranscript } =
+    useSpeechRecognition({
+      commands,
+    });
 
   useEffect(() => {
-    console.log({ voices });
-  }, [voices]);
+    if (speaking) {
+      resetTranscript();
+    }
+  }, [resetTranscript, speaking]);
 
   if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
     return null;
@@ -105,7 +116,7 @@ export const App = () => {
     <>
       <div className="mainWrapper">
         <div>
-          <p id="transcript">Transcript: {transcript.length}</p>
+          <p id="transcript">Transcript: {transcript}</p>
           <button onClick={SpeechRecognition.startListening}>
             Start
           </button>
