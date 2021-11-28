@@ -79,7 +79,7 @@ const NewsCards = ({ articles, activeArticle }) => {
   }
 
   return (
-    <>
+    <Grow in>
       <Grid
         className={classes.container}
         container
@@ -103,7 +103,7 @@ const NewsCards = ({ articles, activeArticle }) => {
           </Grid>
         ))}
       </Grid>
-    </>
+    </Grow>
   );
 };
 

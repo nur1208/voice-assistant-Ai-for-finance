@@ -5,7 +5,7 @@ import SpeechRecognition, {
 import { useSpeechSynthesis } from "react-speech-kit";
 import { useEffect } from "react";
 import axios from "axios";
-import "./app.css";
+// import "./app.css";
 import { FinanbroBtn } from "./components/finanbroBtn/finanbroBtn";
 import useStyles from "./styles";
 import { Modal, Typography } from "@material-ui/core";
@@ -170,6 +170,7 @@ export const App = () => {
             alt="logo"
           />
         </div>
+
         <NewsCards
           articles={newsArticles}
           activeArticle={activeArticle}
