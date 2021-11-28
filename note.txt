@@ -22,11 +22,14 @@
 9 - {DONE} add "give me the news from 'source'" functionality to finansis.
     9.1 - {DONE} 🛠 fixing cards of news UI 
 
-10 - {TODO} create ListNews page to show list of the news that finanbro read
+10 - {DONE} create ListNews page to show list of the news that finansis reads
 
-11 - {TODO} if there is no command for a question response with
-    "I did't get it right this time. Sorry bro"
-12 - {TODO} make 'Try saying' dynamic   
+11 - {DONE} if there is no response for a command then send default message 'I did't get that. you can try again... bro'
+    
+12 - {TODO} make 'Try saying' dynamic
+13 - {TODO} clean up App file.
+14 - {TODO} don't show finansis if the browser doesn't support that.
+15 - {TODO} add optional (finansis) what you can do   
 
 
 

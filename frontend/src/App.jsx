@@ -20,7 +20,7 @@ export const App = () => {
   const [activeArticle, setActiveArticle] = useState(0);
   const [newsArticles, setNewsArticles] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
-
+  const [isResponded, setIsResponded] = useState(false);
   const response = (optionsResponse) => {
     let randomOption;
     if (optionsResponse.length - 1 < randomIndex)
@@ -37,8 +37,9 @@ export const App = () => {
       );
       // setRandomIndex(10);
     }
+    setIsResponded(true);
   };
-
+  const [s, setS] = useState("");
   const giveMeSource = async (source) => {
     response(`Okay, I'm working on finding news from ${source}`);
     const API_KEY = "c8be8b2944eb4366aac8e7c44e783746";
@@ -113,13 +114,34 @@ export const App = () => {
           text: `no pathetic, motherfucker`,
         }),
     },
+    {
+      command: "undefined",
+      callback: (ticker) =>
+        response("I did't get that. you can try again... bro"),
+    },
   ];
   // give me list of most active stocks
   // the most active stock of yesterday is list of stocks
-  const { transcript, listening, resetTranscript } =
-    useSpeechRecognition({
-      commands,
-    });
+  const {
+    transcript,
+    listening,
+    resetTranscript,
+    finalTranscript,
+  } = useSpeechRecognition({
+    commands,
+  });
+
+  const checkIsResponded = () => {
+    console.log({ s });
+  };
+  useEffect(() => {
+    let timeoutId;
+    if (!listening && finalTranscript.length > 0) {
+      response("I didn't get that. you can try again... bro");
+    }
+
+    return () => clearTimeout(timeoutId);
+  }, [listening]);
 
   useEffect(() => {
     if (speaking) {
