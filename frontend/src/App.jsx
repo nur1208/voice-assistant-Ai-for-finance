@@ -3,13 +3,19 @@ import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 import { useSpeechSynthesis } from "react-speech-kit";
+import { useEffect } from "react";
 import "./app.css";
 import { FinanbroBtn } from "./components/finanbroBtn/finanbroBtn";
-import { useEffect } from "react";
+import useStyles from "./styles";
+import { Typography } from "@material-ui/core";
+import NewsCards from "./components/NewsCards/NewsCards";
+// import NewsCard from "./components";
 export const App = () => {
   const { speak, voices, speaking } = useSpeechSynthesis();
 
   const [randomIndex, setRandomIndex] = useState(0);
+  const [activeArticle, setActiveArticle] = useState(0);
+  const [newsArticles, setNewsArticles] = useState([]);
 
   const response = (optionsResponse) => {
     let randomOption;
@@ -96,7 +102,7 @@ export const App = () => {
       resetTranscript();
     }
   }, [resetTranscript, speaking]);
-
+  const classes = useStyles();
   if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
     return null;
   }
@@ -114,13 +120,36 @@ export const App = () => {
 
   return (
     <>
-      <div className="mainWrapper">
-        <div>
-          <p id="transcript">Transcript: {transcript}</p>
-          <button onClick={SpeechRecognition.startListening}>
-            Start
-          </button>
+      <div className={classes.mainContainer}>
+        <div className={classes.logoContainer}>
+          {0 ? (
+            <div className={classes.infoContainer}>
+              <div className={classes.card}>
+                <Typography variant="h5" component="h2">
+                  Try saying: <br />
+                  <br />
+                  Open article number [4]
+                </Typography>
+              </div>
+              <div className={classes.card}>
+                <Typography variant="h5" component="h2">
+                  Try saying: <br />
+                  <br />
+                  Go back
+                </Typography>
+              </div>
+            </div>
+          ) : null}
+          <img
+            src="./images/logo.png"
+            className={classes.alanLogo}
+            alt="logo"
+          />
         </div>
+        <NewsCards
+          articles={newsArticles}
+          activeArticle={activeArticle}
+        />
       </div>
       <FinanbroBtn {...FinanbroBtnProps} />
     </>

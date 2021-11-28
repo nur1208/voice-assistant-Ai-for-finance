@@ -16,12 +16,13 @@
     7.8 {DONE} adding animation to finansis's button while listening and adding robot icon 
     7.9 {DONE} change icons when finansis listening show mic icon, and when she talk show speaker icon
     7.10 {DONE} adding transcript to finansis btn
-    7.11 {TODO} reset transcript to empty after finansis response
+    7.11 {DONE} reset transcript to empty after finansis response
     7.12 {DONE} making finanbro response faster if there is array of responses options
 8 - {TODO} create main page for news section and called News
 9 - {TODO} create ListNews page to show list of the news that finanbro read
 10 - {TODO} if there is no command for a question response with
     "I did't get it right this time. Sorry bro"
+11 - {TODO} make 'Try saying' dynamic   
 
 
 
