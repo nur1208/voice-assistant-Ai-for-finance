@@ -10,8 +10,10 @@ node_modules
 
 # production
 /build
-
+*/tasks.json
+tasks.json
 # misc
+.env
 .DS_Store
 .env.local
 .env.development.local
