@@ -163,27 +163,22 @@ export const App = () => {
     isSpeaking: speaking,
     transcript,
   };
-
+  const trySayings = ["Open article number [4]", "Go back"];
   return (
     <>
       <div className={classes.mainContainer}>
         <div className={classes.logoContainer}>
           {newsArticles.length ? (
             <div className={classes.infoContainer}>
-              <div className={classes.card}>
-                <Typography variant="h5" component="h2">
-                  Try saying: <br />
-                  <br />
-                  Open article number [4]
-                </Typography>
-              </div>
-              <div className={classes.card}>
-                <Typography variant="h5" component="h2">
-                  Try saying: <br />
-                  <br />
-                  Go back
-                </Typography>
-              </div>
+              {trySayings.map((title) => (
+                <div className={classes.card}>
+                  <Typography variant="h5" component="h2">
+                    Try saying: <br />
+                    <br />
+                    {title}
+                  </Typography>
+                </div>
+              ))}
             </div>
           ) : null}
           <img
