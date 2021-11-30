@@ -48,6 +48,10 @@ export const useFinansis = () => {
     } = await axios.get(NEWS_API_URL);
     setNewsArticles(articles);
     setActiveArticle(-1);
+
+    if (articles.length === 0) {
+      response(`sorry, I didn't find news from ${source}`);
+    }
   };
 
   const commands = [
@@ -55,7 +59,7 @@ export const useFinansis = () => {
       command: ["你叫什么名字"],
       callback: () =>
         speak({
-          text: "我叫finanbro",
+          text: "我叫finansis",
           voice: voices[4],
         }),
     },

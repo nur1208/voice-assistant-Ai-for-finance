@@ -27,9 +27,14 @@
 11 - {DONE} if there is no response for a command then send default message 'I did't get that. you can try again... bro'
     
 12 - {DONE} make 'Try saying' dynamic
-13 - {TODO} clean up App file.
-14 - {TODO} don't show finansis if the browser doesn't support that.
-15 - {TODO} add optional (finansis) what you can do   
+13 - {DONE} clean up App file.
+14 - {DONE} don't show finansis if the browser doesn't support that.
+15 - {TODO} if there is no article for 'give me the news from 'source'' command let finansis tell users 'sorry, didn't find news from 'source''
+16 - {TODO} let finansis ask 'do you want me to read head lines', yes let finansis read, no let her say 'wow, thank you'
+17 - {TODO} highlight THE current article that finansis reading.  
+
+
+- {TODO} add optional (finansis) word at the beginning of each command   
 
 
 
