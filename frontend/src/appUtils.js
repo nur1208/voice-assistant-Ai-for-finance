@@ -5,13 +5,22 @@ import SpeechRecognition, {
 import { useSpeechSynthesis } from "react-speech-kit";
 import { useEffect } from "react";
 import axios from "axios";
+import { useAudio } from "./hooks/useAudio";
+
+export const useSecondCommand = (commands) => {
+  const { transcript } = useSpeechRecognition();
+};
 
 export const useFinansis = () => {
+  const [playing, toggle] = useAudio(
+    "./audio/zapsplat_multimedia_button_click_007_53868.mp3"
+  );
   const { speak, voices, speaking } = useSpeechSynthesis();
 
   const [randomIndex, setRandomIndex] = useState(0);
   const [activeArticle, setActiveArticle] = useState(0);
   const [newsArticles, setNewsArticles] = useState([]);
+  const [secondCommandFor, setSecondCommandFor] = useState("");
   const response = (optionsResponse) => {
     let randomOption;
     if (optionsResponse.length - 1 < randomIndex)
@@ -51,7 +60,54 @@ export const useFinansis = () => {
 
     if (articles.length === 0) {
       response(`sorry, I didn't find news from ${source}`);
+      return;
     }
+    response(`do you want me to read the head lines`);
+
+    setSecondCommandFor("giveMeSource");
+    // wait for 5 second and then let finansis listening again
+    setTimeout(() => {
+      toggle();
+      SpeechRecognition.startListening();
+    }, 1000 * 5);
+  };
+
+  const handleReadingHeadLines = () => {
+    console.log({ newsArticles });
+    for (let index = 0; index < newsArticles.length; index++) {
+      const { title } = newsArticles[index];
+
+      response(title);
+    }
+
+    setSecondCommandFor("");
+  };
+
+  const respondedWithYesSC = () => {
+    console.log(secondCommandFor);
+    switch (secondCommandFor) {
+      case "giveMeSource":
+        handleReadingHeadLines();
+        break;
+
+      default:
+        response("I didn't get that. you can try again... bro");
+        break;
+    }
+    resetTranscript();
+  };
+
+  const respondedWithNoSC = () => {
+    switch (secondCommandFor) {
+      case "giveMeSource":
+        response("WOW, thank you");
+        break;
+
+      default:
+        response("I didn't get that. you can try again... bro");
+        break;
+    }
+    resetTranscript();
   };
 
   const commands = [
@@ -108,9 +164,12 @@ export const useFinansis = () => {
         }),
     },
     {
-      command: "undefined",
-      callback: (ticker) =>
-        response("I did't get that. you can try again... bro"),
+      command: "yes",
+      callback: () => respondedWithYesSC(),
+    },
+    {
+      command: "no",
+      callback: () => respondedWithNoSC(),
     },
   ];
   // give me list of most active stocks
@@ -125,7 +184,14 @@ export const useFinansis = () => {
   });
 
   useEffect(() => {
-    if (!listening && finalTranscript.length > 0) {
+    console.log({ finalTranscript });
+  }, [finalTranscript]);
+
+  useEffect(() => {
+    if (
+      !listening &&
+      (finalTranscript.length > 0) & !(secondCommandFor.length > 0)
+    ) {
       response("I didn't get that. you can try again... bro");
     }
   }, [listening]);
