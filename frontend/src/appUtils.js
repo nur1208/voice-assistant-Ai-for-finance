@@ -207,6 +207,18 @@ export const useFinansis = () => {
       (finalTranscript.length > 0) & !(secondCommandFor.length > 0)
     ) {
       response("I didn't get that. you can try again... bro");
+    } else if (!listening && finalTranscript.length > 0) {
+      switch (finalTranscript) {
+        case "yes":
+        case "no":
+          break;
+
+        default:
+          console.log("do something");
+          // response("I didn't get that. you can try again... bro");
+          // resetTranscript();
+          break;
+      }
     }
   }, [listening]);
 
@@ -214,6 +226,21 @@ export const useFinansis = () => {
     if (speaking) {
       resetTranscript();
     }
+
+    // if (!speaking && secondCommandFor.length > 0) {
+
+    //   switch (finalTranscript) {
+    //     case "yes":
+    //     case "no":
+    //       break;
+
+    //     default:
+    //       console.log("do something");
+    //       // response("I didn't get that. you can try again... bro");
+    //       // resetTranscript();
+    //       break;
+    //   }
+    // }
   }, [resetTranscript, speaking]);
   if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
     return null;
