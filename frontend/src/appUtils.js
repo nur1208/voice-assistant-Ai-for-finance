@@ -74,12 +74,15 @@ export const useFinansis = () => {
 
   const responseAfter5Second = (title, index) =>
     new Promise((resolve, reject) => {
-      setTimeout(() => {
-        response(title);
-        setActiveArticle(index);
-        // console.log({ index });
-        resolve();
-      }, 1000 * 5);
+      setTimeout(
+        () => {
+          response(title);
+          setActiveArticle(index);
+          // console.log({ index });
+          resolve();
+        },
+        title.length > 80 ? 1000 * 8 : 1000 * 6
+      );
     });
 
   const handleReadingHeadLines = async () => {
