@@ -30,7 +30,7 @@
 13 - {DONE} clean up App file.
 14 - {DONE} don't show finansis if the browser doesn't support that.
 15 - {DONE} if there is no article for 'give me the news from 'source'' command let finansis tell users 'sorry, didn't find news from 'source''
-16 - {TODO} let finansis ask 'do you want me to read head lines', yes let finansis read, no let her say 'wow, thank you'
+16 - {DONE} let finansis ask 'do you want me to read head lines', yes let finansis read, no let her say 'wow, thank you'
 17 - {TODO} highlight THE current article that finansis reading.  
 18 - {TODO} fixing not saying 'I didn't get that. you can try again... bro' for unknown commands between first and second commands
 

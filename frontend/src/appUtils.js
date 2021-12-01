@@ -72,12 +72,26 @@ export const useFinansis = () => {
     }, 1000 * 5);
   };
 
-  const handleReadingHeadLines = () => {
-    console.log({ newsArticles });
+  const responseAfter5Second = (title, index) =>
+    new Promise((resolve, reject) => {
+      setTimeout(() => {
+        response(title);
+        setActiveArticle(index);
+        // console.log({ index });
+        resolve();
+      }, 1000 * 5);
+    });
+
+  const handleReadingHeadLines = async () => {
     for (let index = 0; index < newsArticles.length; index++) {
       const { title } = newsArticles[index];
 
-      response(title);
+      if (index !== 0) {
+        await responseAfter5Second(title, index);
+      } else {
+        response(title);
+        setActiveArticle(index);
+      }
     }
 
     setSecondCommandFor("");
