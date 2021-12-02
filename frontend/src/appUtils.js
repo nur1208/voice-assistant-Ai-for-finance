@@ -72,17 +72,15 @@ export const useFinansis = () => {
     }, 1000 * 5);
   };
 
-  const responseAfter5Second = (title, index) =>
+  const responseAfterTimeout = (title, { indexArticle, timeout }) =>
     new Promise((resolve, reject) => {
-      setTimeout(
-        () => {
-          response(title);
-          setActiveArticle(index);
-          // console.log({ index });
-          resolve();
-        },
-        title.length > 80 ? 1000 * 8 : 1000 * 6
-      );
+      setTimeout(() => {
+        response(title);
+        indexArticle && setActiveArticle(indexArticle);
+        // setActiveArticle(index);
+        // console.log({ index });
+        resolve();
+      }, timeout || 1000);
     });
 
   const handleReadingHeadLines = async () => {
@@ -90,14 +88,17 @@ export const useFinansis = () => {
       const { title } = newsArticles[index];
 
       if (index !== 0) {
-        await responseAfter5Second(title, index);
+        const timeout = title.length > 80 ? 1000 * 8 : 1000 * 6;
+        // const callback = (index) => setActiveArticle(index);
+        await responseAfterTimeout(title, {
+          indexArticle: index,
+          timeout,
+        });
       } else {
         response(title);
         setActiveArticle(index);
       }
     }
-
-    setSecondCommandFor("");
   };
 
   const respondedWithYesSC = () => {
@@ -111,6 +112,7 @@ export const useFinansis = () => {
         response("I didn't get that. you can try again... bro");
         break;
     }
+    setSecondCommandFor("");
     resetTranscript();
   };
 
@@ -124,7 +126,20 @@ export const useFinansis = () => {
         response("I didn't get that. you can try again... bro");
         break;
     }
+    setSecondCommandFor("");
     resetTranscript();
+  };
+
+  const goBackHandler = () => {
+    // 0 false, any other number true
+    if (newsArticles.length) {
+      response("back to the main news page");
+      setNewsArticles([]);
+    } else {
+      response(
+        "there is nothing back, you are in the main news page... good morning"
+      );
+    }
   };
 
   const commands = [
@@ -187,6 +202,10 @@ export const useFinansis = () => {
     {
       command: "no",
       callback: () => respondedWithNoSC(),
+    },
+    {
+      command: "go back",
+      callback: () => goBackHandler(),
     },
   ];
   // give me list of most active stocks
