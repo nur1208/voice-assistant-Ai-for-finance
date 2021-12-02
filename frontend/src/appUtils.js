@@ -144,6 +144,13 @@ export const useFinansis = () => {
     }
   };
 
+  const openArticleHandler = (articleNum) => {
+    response(`opening article ${articleNum}`);
+    const { url } = newsArticles[articleNum];
+    window.open(url, "_blank");
+    // window.location.href = url;
+  };
+
   const commands = [
     {
       command: ["你叫什么名字"],
@@ -208,6 +215,10 @@ export const useFinansis = () => {
     {
       command: "go back",
       callback: () => goBackHandler(),
+    },
+    {
+      command: "open article (number) *",
+      callback: (articleNum) => openArticleHandler(articleNum),
     },
   ];
   // give me list of most active stocks
