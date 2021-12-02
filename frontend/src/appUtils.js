@@ -39,7 +39,7 @@ export const useFinansis = () => {
     }
   };
   const giveMeSource = async (source) => {
-    response(`Okay, I'm working on finding news from ${source}`);
+    // response(`finding news from ${source}`);
     const API_KEY = "c8be8b2944eb4366aac8e7c44e783746";
     let NEWS_API_URL = `https://newsapi.org/v2/top-headlines?apiKey=${API_KEY}`;
 
@@ -61,6 +61,8 @@ export const useFinansis = () => {
     if (articles.length === 0) {
       response(`sorry, I didn't find news from ${source}`);
       return;
+    } else {
+      response(`here is the news from ${source}`);
     }
     response(`do you want me to read the head lines`);
 
@@ -145,9 +147,17 @@ export const useFinansis = () => {
   };
 
   const openArticleHandler = (articleNum) => {
-    response(`opening article ${articleNum}`);
-    const { url } = newsArticles[articleNum];
-    window.open(url, "_blank");
+    const articleNumberIsInRange =
+      articleNum > 0 && articleNum < newsArticles.length - 1;
+    if (newsArticles.length && articleNumberIsInRange) {
+      response(`opening article ${articleNum}`);
+      const { url } = newsArticles[articleNum - 1];
+      window.open(url, "_blank");
+    } else {
+      response(
+        `article with number ${articleNum} not exist, so yeah I can't open it.}`
+      );
+    }
     // window.location.href = url;
   };
 

@@ -37,8 +37,12 @@
 19.1 - {DONE} make responseAfter5Second function more dynamic.
 19.2 - {DONE} fixing 🛠: Cannot destructure property 'indexArticle' of 'undefined' as it is undefined.
 20 - {DONE} adding 'go back' command when the user in NewsCards page, if the user in main page let finansis say "there is nothing back, you are in the main news page, good morning"
-21 - {TODO} adding 'open article number {number}' command, if the number not exist let finansis say 'i can't open article with {number}' 
-22 - {TODO} handle if user said 'open article number {number}' when a user in th main page for news sections
+21 - {DONE} adding 'open article number {number}' command, if the number not exist let finansis say 'i can't open article with {number}' 
+22 - {DONE} handle if user said 'open article number {number}' when a user in th main page for news sections or for unexciting article number 
+23 - {TODO} adding 'what's up with {something}' command 
+24 - {TODO} adding 'Give me the latest {categories} news' command
+25 - {TODO} adding 'Give me the latest news" command 
+26 - {TODO} adding 'read the news' command
 - {TODO} add optional (finansis) word at the beginning of each command   
 
 
