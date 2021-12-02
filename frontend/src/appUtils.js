@@ -39,7 +39,7 @@ export const useFinansis = () => {
     }
   };
   const giveMeSource = async (source) => {
-    // response(`finding news from ${source}`);
+    response(`finding `);
     const API_KEY = "c8be8b2944eb4366aac8e7c44e783746";
     let NEWS_API_URL = `https://newsapi.org/v2/top-headlines?apiKey=${API_KEY}`;
 
@@ -161,6 +161,45 @@ export const useFinansis = () => {
     // window.location.href = url;
   };
 
+  const whatsUpWithHandler = async (query) => {
+    response(`I don't know what's up with ${query} yet.`);
+    // 445938e7b4214f4988780151868665cc
+    // response(`finding news from ${source}`);
+    // const API_KEY = "c8be8b2944eb4366aac8e7c44e783746";
+    const API_KEY = "445938e7b4214f4988780151868665cc";
+    let NEWS_API_URL = `https://newsapi.org/v2/top-headlines?apiKey=${API_KEY}`;
+
+    // here we add the source to the user url and convert
+    // cnn news to CNN-NEWS
+    if (query) {
+      NEWS_API_URL = `${NEWS_API_URL}&q=${query
+        .toLowerCase()
+        .split(" ")
+        .join("-")}`;
+    }
+
+    const {
+      data: { articles },
+    } = await axios.get(NEWS_API_URL);
+    setNewsArticles(articles);
+    setActiveArticle(-1);
+
+    if (articles.length === 0) {
+      response(`sorry, I didn't find news from ${query}`);
+      return;
+    } else {
+      response(`here is the news from ${query}`);
+    }
+    response(`do you want me to read the head lines`);
+
+    setSecondCommandFor("giveMeSource");
+    // wait for 5 second and then let finansis listening again
+    setTimeout(() => {
+      toggle();
+      SpeechRecognition.startListening();
+    }, 1000 * 5);
+  };
+
   const commands = [
     {
       command: ["你叫什么名字"],
@@ -230,6 +269,10 @@ export const useFinansis = () => {
       command: "open article (number) *",
       callback: (articleNum) => openArticleHandler(articleNum),
     },
+    {
+      command: "what's up with *",
+      callback: (query) => whatsUpWithHandler(query),
+    },
   ];
   // give me list of most active stocks
   // the most active stock of yesterday is list of stocks
@@ -243,13 +286,24 @@ export const useFinansis = () => {
   });
 
   useEffect(() => {
-    console.log({ finalTranscript });
+    // console.log({ finalTranscript });
   }, [finalTranscript]);
 
   useEffect(() => {
+    console.log({
+      listening,
+      finalTranscript,
+      secondCommandFor,
+      condition:
+        !listening &&
+        finalTranscript.length > 0 &&
+        !(secondCommandFor.length > 0),
+    });
+
     if (
       !listening &&
-      (finalTranscript.length > 0) & !(secondCommandFor.length > 0)
+      finalTranscript.length > 0 &&
+      !(secondCommandFor.length > 0)
     ) {
       response("I didn't get that. you can try again... bro");
     } else if (!listening && finalTranscript.length > 0) {
