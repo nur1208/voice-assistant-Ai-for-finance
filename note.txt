@@ -48,7 +48,7 @@
 27 - {TODO} clean up appUtils file 
             crete two files finansisCommands and finansisHandlers
 28 - {TODO} when the user says 'finansis' handle that error
-
+29 - {TODO} fixing 🛠: list of news page's style
 
 - {TODO} add optional (finansis) word at the beginning of each command   
 

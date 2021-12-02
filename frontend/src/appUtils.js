@@ -39,8 +39,10 @@ export const useFinansis = () => {
     }
   };
   const giveMeSource = async (source) => {
-    response(`finding `);
-    const API_KEY = "c8be8b2944eb4366aac8e7c44e783746";
+    response(`finding`);
+
+    // const API_KEY = "c8be8b2944eb4366aac8e7c44e783746";
+    const API_KEY = "445938e7b4214f4988780151868665cc";
     let NEWS_API_URL = `https://newsapi.org/v2/top-headlines?apiKey=${API_KEY}`;
 
     // here we add the source to the user url and convert
@@ -162,7 +164,7 @@ export const useFinansis = () => {
   };
 
   const whatsUpWithHandler = async (query) => {
-    response(`I don't know what's up with ${query} yet.`);
+    response(`finding`);
     // 445938e7b4214f4988780151868665cc
     // response(`finding news from ${source}`);
     // const API_KEY = "c8be8b2944eb4366aac8e7c44e783746";
@@ -185,10 +187,10 @@ export const useFinansis = () => {
     setActiveArticle(-1);
 
     if (articles.length === 0) {
-      response(`sorry, I didn't find news from ${query}`);
+      response(`sorry, I didn't find news for ${query} keyword`);
       return;
     } else {
-      response(`here is the news from ${query}`);
+      response(`here is what's up with ${query}`);
     }
     response(`do you want me to read the head lines`);
 
