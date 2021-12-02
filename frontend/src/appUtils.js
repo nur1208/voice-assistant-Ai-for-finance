@@ -72,15 +72,16 @@ export const useFinansis = () => {
     }, 1000 * 5);
   };
 
-  const responseAfterTimeout = (title, { indexArticle, timeout }) =>
+  const responseAfterTimeout = (title, option = {}) =>
     new Promise((resolve, reject) => {
       setTimeout(() => {
         response(title);
-        indexArticle && setActiveArticle(indexArticle);
+        option.indexArticle &&
+          setActiveArticle(option.indexArticle);
         // setActiveArticle(index);
         // console.log({ index });
         resolve();
-      }, timeout || 1000);
+      }, option.timeout || 1000);
     });
 
   const handleReadingHeadLines = async () => {
@@ -137,8 +138,9 @@ export const useFinansis = () => {
       setNewsArticles([]);
     } else {
       response(
-        "there is nothing back, you are in the main news page... good morning"
+        "there is nothing back, you are in the main news page"
       );
+      responseAfterTimeout("good morning", { timeout: 500 });
     }
   };
 

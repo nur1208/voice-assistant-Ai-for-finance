@@ -34,7 +34,8 @@
 17 - {DONE} highlight THE current article that finansis reading.  
 18 - {DONE} fixing not saying 'I didn't get that. you can try again... bro' for unknown commands between first and second commands
 19 - {DONE} fixing the timing of highlighting the current article that finansis reading
-19.1 - {TODO} make responseAfter5Second function more dynamic.
+19.1 - {DONE} make responseAfter5Second function more dynamic.
+19.2 - {TODO} fixing 🛠: Cannot destructure property 'indexArticle' of 'undefined' as it is undefined.
 20 - {DONE} add 'go back' command when the user in NewsCards page, if the user in main page let finansis say "there is nothing back, you are in the main news page, good morning"
 21 - {TODO} add 'open article number {number}' command, if the number not exist let finansis say 'i can't open article with {number}' 
 
