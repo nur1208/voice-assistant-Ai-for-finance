@@ -109,7 +109,7 @@ export const useFinansis = () => {
   const respondedWithYesSC = () => {
     console.log(secondCommandFor);
     switch (secondCommandFor) {
-      case "giveMeSource":
+      case "readThHeadLines":
         handleReadingHeadLines();
         break;
 
@@ -123,7 +123,7 @@ export const useFinansis = () => {
 
   const respondedWithNoSC = () => {
     switch (secondCommandFor) {
-      case "giveMeSource":
+      case "readThHeadLines":
         response("WOW, thank you");
         break;
 
@@ -202,6 +202,72 @@ export const useFinansis = () => {
     }, 1000 * 5);
   };
 
+  const getNews = async (query, type) => {
+    response(`finding`);
+    // 445938e7b4214f4988780151868665cc
+    // response(`finding news from ${source}`);
+    // const API_KEY = "c8be8b2944eb4366aac8e7c44e783746";
+    const API_KEY = "445938e7b4214f4988780151868665cc";
+    let NEWS_API_URL = `https://newsapi.org/v2/top-headlines?apiKey=${API_KEY}`;
+
+    // here we add the source to the user url and convert
+    // cnn news to CNN-NEWS
+    if (type === "giveMeSource") {
+      NEWS_API_URL = `${NEWS_API_URL}&sources=${query
+        .toLowerCase()
+        .split(" ")
+        .join("-")}`;
+    } else if (type === "whatsUpWith") {
+      NEWS_API_URL = `${NEWS_API_URL}&q=${query
+        .toLowerCase()
+        .split(" ")
+        .join("-")}`;
+    }
+
+    const {
+      data: { articles },
+    } = await axios.get(NEWS_API_URL);
+    setNewsArticles(articles);
+    setActiveArticle(-1);
+
+    const responsePositiveOrNegative = (positive, negative) => {
+      if (articles.length === 0) {
+        response(positive);
+        return;
+      } else {
+        response(negative);
+      }
+    };
+
+    switch (type) {
+      case "giveMeSource":
+        responsePositiveOrNegative(
+          `sorry, I didn't find news from ${query}`,
+          `here is the news from ${query}`
+        );
+        break;
+      case "whatsUpWith":
+        responsePositiveOrNegative(
+          `sorry, I didn't find news for ${query} keyword`,
+          `here is what's up with ${query}`
+        );
+
+        break;
+
+      default:
+        break;
+    }
+
+    response(`do you want me to read the head lines`);
+    setSecondCommandFor("readThHeadLines");
+
+    // wait for 5 second and then let finansis listening again
+    setTimeout(() => {
+      toggle();
+      SpeechRecognition.startListening();
+    }, 1000 * 5);
+  };
+
   const commands = [
     {
       command: ["你叫什么名字"],
@@ -231,7 +297,10 @@ export const useFinansis = () => {
     },
     {
       command: ["Give me the news from *"],
-      callback: async (source) => await giveMeSource(source),
+      // callback: async (source) => await giveMeSource(source),
+      // callback: async (source) => await giveMeSource(source),
+      callback: async (source) =>
+        await getNews(source, "giveMeSource"),
     },
     {
       command: ["what's the last closing price for *"],
@@ -240,21 +309,7 @@ export const useFinansis = () => {
           text: `the close last price for ${ticker} is 160$`,
         }),
     },
-    {
-      command: ["f*** you"],
-      callback: (ticker) =>
-        speak({
-          text: `fuck you too bitch, motherfucker, fuck you again`,
-        }),
-    },
 
-    {
-      command: ["do you like me"],
-      callback: (ticker) =>
-        speak({
-          text: `no pathetic, motherfucker`,
-        }),
-    },
     {
       command: "yes",
       callback: () => respondedWithYesSC(),
@@ -273,7 +328,9 @@ export const useFinansis = () => {
     },
     {
       command: "what's up with *",
-      callback: (query) => whatsUpWithHandler(query),
+      // callback: (query) => whatsUpWithHandler(query),
+      callback: async (query) =>
+        await getNews(query, "whatsUpWith"),
     },
   ];
   // give me list of most active stocks
