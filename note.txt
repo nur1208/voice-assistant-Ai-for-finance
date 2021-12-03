@@ -41,7 +41,7 @@
 22 - {DONE} handle if user said 'open article number {number}' when a user in th main page for news sections or for unexciting article number 
 23 - {DONE} adding 'what's up with {something}' command 
 23.1 - {DONE} fixing 🛠: saying i 'don't understand that' when the command exist. 
-23.2 - {TODO} combine giveMeSource and whatsUpWith functions to one function getNews
+23.2 - {DONE} combine giveMeSource and whatsUpWith functions to one function getNews
 24 - {TODO} adding 'Give me the latest {categories} news' command
 25 - {TODO} adding 'Give me the latest news" command 
 26 - {TODO} adding 'read the news' command

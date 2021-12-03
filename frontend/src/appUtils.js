@@ -208,7 +208,7 @@ export const useFinansis = () => {
     // response(`finding news from ${source}`);
     // const API_KEY = "c8be8b2944eb4366aac8e7c44e783746";
     const API_KEY = "445938e7b4214f4988780151868665cc";
-    let NEWS_API_URL = `https://newsapi.org/v2/top-headlines?apiKey=${API_KEY}`;
+    let NEWS_API_URL = `https://newsapi.org/v2/top-headlines?apiKey=${API_KEY}&language=en`;
 
     // here we add the source to the user url and convert
     // cnn news to CNN-NEWS
@@ -219,6 +219,11 @@ export const useFinansis = () => {
         .join("-")}`;
     } else if (type === "whatsUpWith") {
       NEWS_API_URL = `${NEWS_API_URL}&q=${query
+        .toLowerCase()
+        .split(" ")
+        .join("-")}`;
+    } else if (type === "category") {
+      NEWS_API_URL = `${NEWS_API_URL}&category=${query
         .toLowerCase()
         .split(" ")
         .join("-")}`;
@@ -250,6 +255,12 @@ export const useFinansis = () => {
         responsePositiveOrNegative(
           `sorry, I didn't find news for ${query} keyword`,
           `here is what's up with ${query}`
+        );
+        break;
+      case "category":
+        responsePositiveOrNegative(
+          `sorry, I didn't find news for ${query} category`,
+          `here is the news for ${query} category`
         );
 
         break;
@@ -331,6 +342,11 @@ export const useFinansis = () => {
       // callback: (query) => whatsUpWithHandler(query),
       callback: async (query) =>
         await getNews(query, "whatsUpWith"),
+    },
+    {
+      command: "Give me the latest * news",
+      // callback: (query) => whatsUpWithHandler(query),
+      callback: async (query) => await getNews(query, "category"),
     },
   ];
   // give me list of most active stocks
