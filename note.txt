@@ -42,13 +42,15 @@
 23 - {DONE} adding 'what's up with {something}' command 
 23.1 - {DONE} fixing 🛠: saying i 'don't understand that' when the command exist. 
 23.2 - {DONE} combine giveMeSource and whatsUpWith functions to one function getNews
-24 - {TODO} adding 'Give me the latest {categories} news' command
-25 - {TODO} adding 'Give me the latest news" command 
+24 - {DONE} adding 'Give me the latest {categories} news' command
+25 - {DONE} adding 'Give me the latest news" command 
 26 - {TODO} adding 'read the news' command
 27 - {TODO} clean up appUtils file 
             crete two files finansisCommands and finansisHandlers
+27.1 {TODO} change finansis name to sis
 28 - {TODO} when the user says 'finansis' handle that error
 29 - {TODO} fixing 🛠: list of news page's style
+30 - {TODO} adding 'stop reading' commands
 
 - {TODO} add optional (finansis) word at the beginning of each command   
 

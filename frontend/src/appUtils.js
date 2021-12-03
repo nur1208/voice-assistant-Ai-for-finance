@@ -89,21 +89,24 @@ export const useFinansis = () => {
     });
 
   const handleReadingHeadLines = async () => {
-    for (let index = 0; index < newsArticles.length; index++) {
-      const { title } = newsArticles[index];
+    if (newsArticles.length) {
+      for (let index = 0; index < newsArticles.length; index++) {
+        const { title } = newsArticles[index];
 
-      if (index !== 0) {
-        const timeout = title.length > 80 ? 1000 * 8 : 1000 * 6;
-        // const callback = (index) => setActiveArticle(index);
-        await responseAfterTimeout(title, {
-          indexArticle: index,
-          timeout,
-        });
-      } else {
-        response(title);
-        setActiveArticle(index);
+        if (index !== 0) {
+          const timeout = title.length > 80 ? 1000 * 8 : 1000 * 6;
+          // const callback = (index) => setActiveArticle(index);
+          await responseAfterTimeout(title, {
+            indexArticle: index,
+            timeout,
+          });
+        } else {
+          response(title);
+          setActiveArticle(index);
+        }
       }
     }
+    response("there is no news to read.");
   };
 
   const respondedWithYesSC = () => {
@@ -202,7 +205,7 @@ export const useFinansis = () => {
     }, 1000 * 5);
   };
 
-  const getNews = async (query, type) => {
+  const getNews = async (type, query) => {
     response(`finding`);
     // 445938e7b4214f4988780151868665cc
     // response(`finding news from ${source}`);
@@ -227,6 +230,8 @@ export const useFinansis = () => {
         .toLowerCase()
         .split(" ")
         .join("-")}`;
+    } else if (type === "latestNews") {
+      NEWS_API_URL = `${NEWS_API_URL}&sortBy=publishedAt`;
     }
 
     const {
@@ -261,6 +266,14 @@ export const useFinansis = () => {
         responsePositiveOrNegative(
           `sorry, I didn't find news for ${query} category`,
           `here is the news for ${query} category`
+        );
+
+        break;
+
+      case "latestNews":
+        responsePositiveOrNegative(
+          `sorry, I didn't find any news`,
+          `here is the latest news`
         );
 
         break;
@@ -311,7 +324,7 @@ export const useFinansis = () => {
       // callback: async (source) => await giveMeSource(source),
       // callback: async (source) => await giveMeSource(source),
       callback: async (source) =>
-        await getNews(source, "giveMeSource"),
+        await getNews("giveMeSource", source),
     },
     {
       command: ["what's the last closing price for *"],
@@ -341,12 +354,17 @@ export const useFinansis = () => {
       command: "what's up with *",
       // callback: (query) => whatsUpWithHandler(query),
       callback: async (query) =>
-        await getNews(query, "whatsUpWith"),
+        await getNews("whatsUpWith", query),
     },
     {
-      command: "Give me the latest * news",
+      command: "Give me the latest news",
       // callback: (query) => whatsUpWithHandler(query),
-      callback: async (query) => await getNews(query, "category"),
+      callback: async () => await getNews("latestNews"),
+    },
+    {
+      command: "read the news",
+      // callback: (query) => whatsUpWithHandler(query),
+      callback: async () => await handleReadingHeadLines(),
     },
   ];
   // give me list of most active stocks
