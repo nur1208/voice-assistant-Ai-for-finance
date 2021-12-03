@@ -45,10 +45,9 @@
 24 - {DONE} adding 'Give me the latest {categories} news' command
 25 - {DONE} adding 'Give me the latest news" command 
 26 - {DONE} adding 'read the news' command
-27 - {TODO} clean up appUtils file 
+27 - {DONE} clean up appUtils file 
             crete two files finansisCommands and finansisHandlers
-27.1 {TODO} change finansis name to sis
-28 - {TODO} when the user says 'finansis' handle that error
+28 {DONE} change finansis name to sis
 29 - {TODO} fixing 🛠: list of news page's style
 30 - {TODO} adding 'stop reading' commands
 

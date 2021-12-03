@@ -133,8 +133,8 @@ export const useFinansis = () => {
     response(`finding`);
     // 445938e7b4214f4988780151868665cc
     // response(`finding news from ${source}`);
-    // const API_KEY = "c8be8b2944eb4366aac8e7c44e783746";
-    const API_KEY = "445938e7b4214f4988780151868665cc";
+    const API_KEY = "c8be8b2944eb4366aac8e7c44e783746";
+    // const API_KEY = "445938e7b4214f4988780151868665cc";
     let NEWS_API_URL = `https://newsapi.org/v2/top-headlines?apiKey=${API_KEY}&language=en`;
 
     // here we add the source to the user url and convert
@@ -226,22 +226,20 @@ export const useFinansis = () => {
         }),
     },
     {
-      command: ["what can you do", "how can you help me"],
+      command: [
+        "(sis) what can you do",
+        "(sis) how can you help me",
+      ],
       callback: (redirectPage) =>
         response("I provide finance information for you"),
     },
     {
       command: [
-        "what is your name",
-        "sis what is your name",
-        "what's your name",
+        "(sis) what is your name",
+        "(sis) what's your name",
       ],
-      callback: (redirectPage) =>
-        response([
-          "my name is finansis",
-          "I'm finansis... bro",
-          "finansis, Finance plus sister equals my name... finansis, simple right?",
-        ]),
+      callback: () =>
+        response(["my name is sis", "I'm sis... bro"]),
     },
     {
       command: ["Give me the news from *"],
