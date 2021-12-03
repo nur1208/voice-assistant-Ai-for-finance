@@ -44,7 +44,7 @@
 23.2 - {DONE} combine giveMeSource and whatsUpWith functions to one function getNews
 24 - {DONE} adding 'Give me the latest {categories} news' command
 25 - {DONE} adding 'Give me the latest news" command 
-26 - {TODO} adding 'read the news' command
+26 - {DONE} adding 'read the news' command
 27 - {TODO} clean up appUtils file 
             crete two files finansisCommands and finansisHandlers
 27.1 {TODO} change finansis name to sis

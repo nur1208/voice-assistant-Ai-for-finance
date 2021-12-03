@@ -7,9 +7,9 @@ import { useEffect } from "react";
 import axios from "axios";
 import { useAudio } from "./hooks/useAudio";
 
-export const useSecondCommand = (commands) => {
-  const { transcript } = useSpeechRecognition();
-};
+// export const useSecondCommand = (commands) => {
+//   const { transcript } = useSpeechRecognition();
+// };
 
 export const useFinansis = () => {
   const [playing, toggle] = useAudio(
@@ -37,43 +37,6 @@ export const useFinansis = () => {
       );
       // setRandomIndex(10);
     }
-  };
-  const giveMeSource = async (source) => {
-    response(`finding`);
-
-    // const API_KEY = "c8be8b2944eb4366aac8e7c44e783746";
-    const API_KEY = "445938e7b4214f4988780151868665cc";
-    let NEWS_API_URL = `https://newsapi.org/v2/top-headlines?apiKey=${API_KEY}`;
-
-    // here we add the source to the user url and convert
-    // cnn news to CNN-NEWS
-    if (source) {
-      NEWS_API_URL = `${NEWS_API_URL}&sources=${source
-        .toLowerCase()
-        .split(" ")
-        .join("-")}`;
-    }
-
-    const {
-      data: { articles },
-    } = await axios.get(NEWS_API_URL);
-    setNewsArticles(articles);
-    setActiveArticle(-1);
-
-    if (articles.length === 0) {
-      response(`sorry, I didn't find news from ${source}`);
-      return;
-    } else {
-      response(`here is the news from ${source}`);
-    }
-    response(`do you want me to read the head lines`);
-
-    setSecondCommandFor("giveMeSource");
-    // wait for 5 second and then let finansis listening again
-    setTimeout(() => {
-      toggle();
-      SpeechRecognition.startListening();
-    }, 1000 * 5);
   };
 
   const responseAfterTimeout = (title, option = {}) =>
@@ -164,45 +127,6 @@ export const useFinansis = () => {
       );
     }
     // window.location.href = url;
-  };
-
-  const whatsUpWithHandler = async (query) => {
-    response(`finding`);
-    // 445938e7b4214f4988780151868665cc
-    // response(`finding news from ${source}`);
-    // const API_KEY = "c8be8b2944eb4366aac8e7c44e783746";
-    const API_KEY = "445938e7b4214f4988780151868665cc";
-    let NEWS_API_URL = `https://newsapi.org/v2/top-headlines?apiKey=${API_KEY}`;
-
-    // here we add the source to the user url and convert
-    // cnn news to CNN-NEWS
-    if (query) {
-      NEWS_API_URL = `${NEWS_API_URL}&q=${query
-        .toLowerCase()
-        .split(" ")
-        .join("-")}`;
-    }
-
-    const {
-      data: { articles },
-    } = await axios.get(NEWS_API_URL);
-    setNewsArticles(articles);
-    setActiveArticle(-1);
-
-    if (articles.length === 0) {
-      response(`sorry, I didn't find news for ${query} keyword`);
-      return;
-    } else {
-      response(`here is what's up with ${query}`);
-    }
-    response(`do you want me to read the head lines`);
-
-    setSecondCommandFor("giveMeSource");
-    // wait for 5 second and then let finansis listening again
-    setTimeout(() => {
-      toggle();
-      SpeechRecognition.startListening();
-    }, 1000 * 5);
   };
 
   const getNews = async (type, query) => {
