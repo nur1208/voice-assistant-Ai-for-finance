@@ -48,7 +48,8 @@
 27 - {DONE} clean up appUtils file 
             crete two files finansisCommands and finansisHandlers
 28 {DONE} change finansis name to sis
-29 - {TODO} fixing 🛠: list of news page's style
+29 - {DONE} fixing 🛠: list of news page's style
+29.1 - {DONE} fixing 🛠: getNews function: 'when sis did find any news, do let her say do you want me to read the head lines'
 30 - {TODO} adding 'stop reading' commands
 
 - {TODO} add optional (finansis) word at the beginning of each command   

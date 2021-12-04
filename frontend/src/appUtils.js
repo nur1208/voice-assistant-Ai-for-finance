@@ -15,12 +15,14 @@ export const useFinansis = () => {
   const [playing, toggle] = useAudio(
     "./audio/zapsplat_multimedia_button_click_007_53868.mp3"
   );
-  const { speak, voices, speaking } = useSpeechSynthesis();
+  const { speak, voices, speaking, cancel } = useSpeechSynthesis();
 
   const [randomIndex, setRandomIndex] = useState(0);
   const [activeArticle, setActiveArticle] = useState(0);
   const [newsArticles, setNewsArticles] = useState([]);
   const [secondCommandFor, setSecondCommandFor] = useState("");
+  const [timeoutIds, setTimeoutIds] = useState([]);
+  const [isStopReading, setIsStopReading] = useState(false);
   const response = (optionsResponse) => {
     let randomOption;
     if (optionsResponse.length - 1 < randomIndex)
@@ -41,7 +43,7 @@ export const useFinansis = () => {
 
   const responseAfterTimeout = (title, option = {}) =>
     new Promise((resolve, reject) => {
-      setTimeout(() => {
+      const timeoutId = setTimeout(() => {
         response(title);
         option.indexArticle &&
           setActiveArticle(option.indexArticle);
@@ -49,27 +51,41 @@ export const useFinansis = () => {
         // console.log({ index });
         resolve();
       }, option.timeout || 1000);
+      option.ids.push(timeoutId);
+      // return timeoutId;
     });
+
+  useEffect(() => {
+    console.log({ isStopReading, timeoutIds });
+  }, [isStopReading, timeoutIds]);
 
   const handleReadingHeadLines = async () => {
     if (newsArticles.length) {
+      const ids = [];
       for (let index = 0; index < newsArticles.length; index++) {
         const { title } = newsArticles[index];
-
         if (index !== 0) {
           const timeout = title.length > 80 ? 1000 * 8 : 1000 * 6;
           // const callback = (index) => setActiveArticle(index);
-          await responseAfterTimeout(title, {
+          const timeoutId = await responseAfterTimeout(title, {
             indexArticle: index,
             timeout,
+            ids,
           });
+
+          console.log({ isStopReading });
+          setTimeoutIds(ids);
+          console.log({ timeoutId });
         } else {
           response(title);
           setActiveArticle(index);
         }
       }
+
+      SpeechRecognition.stopListening();
+    } else {
+      response("there is no news to read.");
     }
-    response("there is no news to read.");
   };
 
   const respondedWithYesSC = () => {
@@ -164,42 +180,50 @@ export const useFinansis = () => {
     setNewsArticles(articles);
     setActiveArticle(-1);
 
-    const responsePositiveOrNegative = (positive, negative) => {
+    const responsePositiveOrNegative = (negative, positive) => {
       if (articles.length === 0) {
-        response(positive);
-        return;
-      } else {
         response(negative);
+        return false;
+      } else {
+        response(positive);
+        return true;
       }
     };
 
+    let isPositiveResponse;
     switch (type) {
       case "giveMeSource":
-        responsePositiveOrNegative(
+        isPositiveResponse = responsePositiveOrNegative(
           `sorry, I didn't find news from ${query}`,
           `here is the news from ${query}`
         );
+
+        if (!isPositiveResponse) return;
         break;
       case "whatsUpWith":
-        responsePositiveOrNegative(
+        isPositiveResponse = responsePositiveOrNegative(
           `sorry, I didn't find news for ${query} keyword`,
           `here is what's up with ${query}`
         );
+        if (!isPositiveResponse) return;
+
         break;
       case "category":
-        responsePositiveOrNegative(
+        isPositiveResponse = responsePositiveOrNegative(
           `sorry, I didn't find news for ${query} category`,
           `here is the news for ${query} category`
         );
+        if (!isPositiveResponse) return;
 
         break;
 
       case "latestNews":
-        responsePositiveOrNegative(
+        isPositiveResponse = responsePositiveOrNegative(
           `sorry, I didn't find any news`,
           `here is the latest news`
         );
 
+        if (!isPositiveResponse) return;
         break;
 
       default:
@@ -212,8 +236,15 @@ export const useFinansis = () => {
     // wait for 5 second and then let finansis listening again
     setTimeout(() => {
       toggle();
-      SpeechRecognition.startListening();
+      // SpeechRecognition.startListening();
+      SpeechRecognition.startListening({ continuous: true });
     }, 1000 * 5);
+  };
+
+  const handleStopReading = () => {
+    setIsStopReading(true);
+    // response("Good");
+    cancel();
   };
 
   const commands = [
@@ -287,6 +318,10 @@ export const useFinansis = () => {
       command: "read the news",
       // callback: (query) => whatsUpWithHandler(query),
       callback: async () => await handleReadingHeadLines(),
+    },
+    {
+      command: "stop reading",
+      callback: async () => await handleStopReading(),
     },
   ];
   // give me list of most active stocks
