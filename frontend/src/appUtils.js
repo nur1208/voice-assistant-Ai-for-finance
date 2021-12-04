@@ -55,10 +55,6 @@ export const useFinansis = () => {
       // return timeoutId;
     });
 
-  useEffect(() => {
-    console.log({ isStopReading, timeoutIds });
-  }, [isStopReading, timeoutIds]);
-
   const handleReadingHeadLines = async () => {
     if (newsArticles.length) {
       const ids = [];
@@ -180,6 +176,7 @@ export const useFinansis = () => {
     setNewsArticles(articles);
     setActiveArticle(-1);
 
+    // clean up the following code:
     const responsePositiveOrNegative = (negative, positive) => {
       if (articles.length === 0) {
         response(negative);
@@ -245,7 +242,24 @@ export const useFinansis = () => {
     setIsStopReading(true);
     // response("Good");
     cancel();
+    response("okay, I'll stop reading");
+
+    SpeechRecognition.stopListening();
   };
+
+  useEffect(() => {
+    let timeId;
+    if (isStopReading) {
+      console.log({ isStopReading, timeoutIds });
+      timeoutIds.forEach((id) => clearTimeout(id));
+
+      timeId = setTimeout(() => {
+        setIsStopReading(false);
+      }, 1000 * 3);
+    }
+
+    return () => clearTimeout(timeId);
+  }, [isStopReading, timeoutIds]);
 
   const commands = [
     {
