@@ -53,7 +53,7 @@
 30 - {DONE} adding 'stop reading' commands
 31 - {DONE} come up with a plan for the project
 32 - {DONE} create time table for the project
-32.1 - {TODO} set up the backend
+32.1 - {DONE} set up the backend
 33 - {TODO} create news model
     news model:
         id: objectId
