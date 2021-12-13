@@ -50,7 +50,25 @@
 28 {DONE} change finansis name to sis
 29 - {DONE} fixing 🛠: list of news page's style
 29.1 - {DONE} fixing 🛠: getNews function: 'when sis did find any news, do let her say do you want me to read the head lines'
-30 - {TODO} adding 'stop reading' commands
+30 - {DONE} adding 'stop reading' commands
+31 - {DONE} come up with a plan for the project
+32 - {DONE} create time table for the project
+32.1 - {TODO} set up the backend
+33 - {TODO} create news model
+    news model:
+        id: objectId
+        source:String
+        title:String
+        type:String
+        publishedAt:date
+        imageUrl:String
+        description:String
+        goToUrl:String
+        publisher:String
+33.1 - {TODO} create news api 
+34 - {TODO} scrap news from yahoo finance and save them in news model
+35 - {TODO} rename sis to finansis again
+
 
 - {TODO} add optional (finansis) word at the beginning of each command   
 
