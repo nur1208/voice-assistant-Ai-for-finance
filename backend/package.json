@@ -2,6 +2,7 @@
   "name": "backend",
   "type": "module",
   "version": "1.0.0",
+  "main": "server.js",
   "scripts": {
     "test": "jest addingJobs.test.js --verbose",
     "start": "nodemon --exec node --experimental-modules server.js"

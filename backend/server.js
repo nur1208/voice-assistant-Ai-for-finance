@@ -2,6 +2,7 @@ import express from "express";
 import morgan from "morgan";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import newsRouter from "./routes/newsRoute.js";
 
 dotenv.config();
 
@@ -27,8 +28,16 @@ const main = async () => {
     // app.use(express.static("public"));
     // app.use(initialize());
 
+    app.get("/", (req, res) => {
+      res.send("working");
+    });
+
+    // app.get("/api/v1/news", (req, res) => {
+    //   res.send("working");
+    // });
+
     // Routing
-    // app.use("/api/v1/stocks", stockRouter);
+    app.use("/api/v1/news", newsRouter);
 
     app.listen(port, () => {
       console.log(

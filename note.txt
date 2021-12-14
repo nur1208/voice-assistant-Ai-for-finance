@@ -54,7 +54,7 @@
 31 - {DONE} come up with a plan for the project
 32 - {DONE} create time table for the project
 32.1 - {DONE} set up the backend
-33 - {TODO} create news model
+33 - {DONE} create news model
     news model:
         id: objectId
         source:String
@@ -65,6 +65,7 @@
         description:String
         goToUrl:String
         publisher:String
+
 33.1 - {TODO} create news api 
 34 - {TODO} scrap news from yahoo finance and save them in news model
 35 - {TODO} rename sis to finansis again

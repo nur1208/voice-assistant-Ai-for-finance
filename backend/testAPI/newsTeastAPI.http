@@ -1,0 +1,21 @@
+@port = 3050
+@Host =  http://localhost
+
+@route = api/v1/news
+
+
+GET http://localhost:3050/api/v1/news 
+###
+GET {{Host}}:{{port}}/{{route}}?title=Production suspensions in Chinese manufacturing hub amid COVID-19 outbreak&publishedAt=2021-12-14T05:31:18.557Z&source=yahoo finance      
+
+###2021-12-14T05:31:18.557+00:00
+
+POST {{Host}}:{{port}}/{{route}}
+Content-Type: application/json
+
+{
+    "symbol":"T",
+    "dateOfBuyingSignal":"2021-12-5",
+    "shares":5, 
+    "stopLessPrice":15
+}
