@@ -67,8 +67,8 @@
         publisher:String
 
 33.1 - {DONE} create news api 
-34 - {TODO} scrap news from yahoo finance and save them in news model
-35 - {TODO} rename sis to finansis again
+34 - {DONE} scrap news from yahoo finance and save them in news model
+35 - {DONE} rename sis to finansis again
 
 
 - {TODO} add optional (finansis) word at the beginning of each command   

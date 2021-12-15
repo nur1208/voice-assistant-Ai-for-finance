@@ -271,20 +271,14 @@ export const useFinansis = () => {
         }),
     },
     {
-      command: [
-        "(sis) what can you do",
-        "(sis) how can you help me",
-      ],
+      command: ["what can you do", "how can you help me"],
       callback: (redirectPage) =>
         response("I provide finance information for you"),
     },
     {
-      command: [
-        "(sis) what is your name",
-        "(sis) what's your name",
-      ],
+      command: ["what is your name", "what's your name"],
       callback: () =>
-        response(["my name is sis", "I'm sis... bro"]),
+        response(["my name is finansis", "I'm sis... bro"]),
     },
     {
       command: ["Give me the news from *"],
