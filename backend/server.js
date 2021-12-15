@@ -16,7 +16,7 @@ const main = async () => {
     console.log("Connected to DB");
 
     const app = express();
-    const port = 3050;
+    const port = 4050;
 
     // TODO connect to that database then start the server.
     app.use(morgan("dev"));

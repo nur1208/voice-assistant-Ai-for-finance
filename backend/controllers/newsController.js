@@ -24,7 +24,18 @@ export const getNews = async (req, res) => {
   const publishedAtP = setMSSecondsToZero(publishedAt);
 
   try {
-    const news = await NewsModel.find(req.query);
+    // await NewsModel.deleteMany();
+    const news = await NewsModel.find(query);
+
+    console.log({
+      query,
+      publishedAt,
+      publishedAtP,
+      news,
+      publishedE:
+        news.length !== 0 &&
+        setMSSecondsToZero(news[0].publishedAt),
+    });
 
     if (
       news.length === 0 ||
@@ -35,12 +46,6 @@ export const getNews = async (req, res) => {
       return;
     }
 
-    console.log({
-      query,
-      publishedAt,
-      publishedAtP,
-      publishedE: setMSSecondsToZero(news[0].publishedAt),
-    });
     res.send({ isExist: true, status: "success", article: news });
   } catch (error) {
     res.status(400).send({ isExist: false, message: "working" });
