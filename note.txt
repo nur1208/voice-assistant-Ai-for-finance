@@ -70,7 +70,7 @@
 34 - {DONE} scrap news from yahoo finance and save them in news model
 35 - {DONE} rename sis to finansis again
 36 - {DONE} come up with 10 todos and give them deadline
-37 - {TODO} create getAllNews api's route with query options 
+37 - {DONE} create getAllNews api's route with query options 
 38 - {TODO} get news from my api for 'give me news from {source}'command
 39 - {TODO} add get latest news to getAllNews api's route
 40 - {TODO} get news from my api for 'give me the latest news" command
@@ -80,6 +80,7 @@
 45 - {TODO} create script for scraping news from 'www.investing.com'
 46 - {TODO} test all the commands for investing's news
 47 - {TODO} scrap news from 'seekingalpha.com'
+deadline - 2021-12-18
 
 - {TODO} add optional (finansis) word at the beginning of each command   
 

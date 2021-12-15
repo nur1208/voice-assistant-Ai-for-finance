@@ -27,15 +27,15 @@ export const getNews = async (req, res) => {
     // await NewsModel.deleteMany();
     const news = await NewsModel.find(query);
 
-    console.log({
-      query,
-      publishedAt,
-      publishedAtP,
-      news,
-      publishedE:
-        news.length !== 0 &&
-        setMSSecondsToZero(news[0].publishedAt),
-    });
+    // console.log({
+    //   query,
+    //   publishedAt,
+    //   publishedAtP,
+    //   news,
+    //   publishedE:
+    //     news.length !== 0 &&
+    //     setMSSecondsToZero(news[0].publishedAt),
+    // });
 
     if (
       news.length === 0 ||
@@ -46,7 +46,12 @@ export const getNews = async (req, res) => {
       return;
     }
 
-    res.send({ isExist: true, status: "success", article: news });
+    res.send({
+      isExist: true,
+      status: "success",
+      resultLength: news.length,
+      articles: news,
+    });
   } catch (error) {
     res.status(400).send({ isExist: false, message: "working" });
   }
