@@ -20,12 +20,16 @@ export const setMSSecondsToZero = (dateString) => {
 };
 
 export const getNews = async (req, res) => {
-  const { publishedAt, ...query } = req.query;
+  const { publishedAt, sortBy, ...query } = req.query;
   const publishedAtP = setMSSecondsToZero(publishedAt);
+  const options = {};
+  if (sortBy) {
+    options.sort = `-${sortBy}`;
+  }
 
   try {
     // await NewsModel.deleteMany();
-    const news = await NewsModel.find(query);
+    const news = await NewsModel.find(query, null, options);
 
     // console.log({
     //   query,
