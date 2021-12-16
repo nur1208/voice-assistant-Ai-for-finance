@@ -131,8 +131,9 @@ export const useFinansis = () => {
       articleNum > 0 && articleNum < newsArticles.length - 1;
     if (newsArticles.length && articleNumberIsInRange) {
       response(`opening article ${articleNum}`);
-      const { url } = newsArticles[articleNum - 1];
-      window.open(url, "_blank");
+      const { goToUrl } = newsArticles[articleNum - 1];
+      console.log({ goToUrl });
+      window.open(goToUrl, "_blank");
     } else {
       response(
         `article with number ${articleNum} not exist, so yeah I can't open it.}`
@@ -147,34 +148,57 @@ export const useFinansis = () => {
     // response(`finding news from ${source}`);
     const API_KEY = "c8be8b2944eb4366aac8e7c44e783746";
     // const API_KEY = "445938e7b4214f4988780151868665cc";
-    let NEWS_API_URL = `https://newsapi.org/v2/top-headlines?apiKey=${API_KEY}&language=en`;
+    // let NEWS_API_URL = `https://newsapi.org/v2/top-headlines?apiKey=${API_KEY}&language=en`;
+    let NEWS_API_URL = `http://localhost:4050/api/v1/news?`;
 
     // here we add the source to the user url and convert
     // cnn news to CNN-NEWS
     if (type === "giveMeSource") {
-      NEWS_API_URL = `${NEWS_API_URL}&sources=${query
-        .toLowerCase()
-        .split(" ")
-        .join("-")}`;
-    } else if (type === "whatsUpWith") {
-      NEWS_API_URL = `${NEWS_API_URL}&q=${query
-        .toLowerCase()
-        .split(" ")
-        .join("-")}`;
-    } else if (type === "category") {
-      NEWS_API_URL = `${NEWS_API_URL}&category=${query
-        .toLowerCase()
-        .split(" ")
-        .join("-")}`;
+      NEWS_API_URL = `${NEWS_API_URL}&source=${query.toLowerCase()}`;
     } else if (type === "latestNews") {
       NEWS_API_URL = `${NEWS_API_URL}&sortBy=publishedAt`;
     }
+    // else if (type === "whatsUpWith") {
+    //   NEWS_API_URL = `${NEWS_API_URL}&q=${query
+    //     .toLowerCase()
+    //     .split(" ")
+    //     .join("-")}`;
+    // } else if (type === "category") {
+    //   NEWS_API_URL = `${NEWS_API_URL}&category=${query
+    //     .toLowerCase()
+    //     .split(" ")
+    //     .join("-")}`;
 
     const {
       data: { articles },
     } = await axios.get(NEWS_API_URL);
+    console.log({ articles });
     setNewsArticles(articles);
     setActiveArticle(-1);
+    // if (type === "giveMeSource") {
+    //   NEWS_API_URL = `${NEWS_API_URL}&sources=${query
+    //     .toLowerCase()
+    //     .split(" ")
+    //     .join("-")}`;
+    // } else if (type === "whatsUpWith") {
+    //   NEWS_API_URL = `${NEWS_API_URL}&q=${query
+    //     .toLowerCase()
+    //     .split(" ")
+    //     .join("-")}`;
+    // } else if (type === "category") {
+    //   NEWS_API_URL = `${NEWS_API_URL}&category=${query
+    //     .toLowerCase()
+    //     .split(" ")
+    //     .join("-")}`;
+    // } else if (type === "latestNews") {
+    //   NEWS_API_URL = `${NEWS_API_URL}&sortBy=publishedAt`;
+    // }
+
+    // const {
+    //   data: { articles },
+    // } = await axios.get(NEWS_API_URL);
+    // setNewsArticles(articles);
+    // setActiveArticle(-1);
 
     // clean up the following code:
     const responsePositiveOrNegative = (negative, positive) => {

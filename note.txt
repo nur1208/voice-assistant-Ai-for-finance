@@ -71,8 +71,9 @@
 35 - {DONE} rename sis to finansis again
 36 - {DONE} come up with 10 todos and give them deadline
 37 - {DONE} create getAllNews api's route with query options 
-38 - {TODO} get news from my api for 'give me news from {source}'command
-39 - {TODO} add get latest news to getAllNews api's route
+38 - {DONE} get news from my api for 'give me news from {source}'command
+38.1 - {DONE} fix "open article {number}" command
+39 - {DONE} add get latest news to getAllNews api's route
 40 - {TODO} get news from my api for 'give me the latest news" command
 41 - {TODO} add query for keyword in title to getAllNews api's route
 42 - {TODO} get news from my api for 'what's up with {keyword}' command
@@ -81,7 +82,10 @@
 46 - {TODO} test all the commands for investing's news
 47 - {TODO} scrap news from 'seekingalpha.com'
 deadline - 2021-12-18
-
+48 - {DONE} fix the following error from yahoo finance scrap script "error: TimeoutError: waiting for selector `#Fin-Stream > ul` failed: timeout 120000ms exceeded"
+49 - {TODO} create 'give me more news' commands
+50 - {TODO} create 'give me more {number} news' commands
+51 - {TODO} only show short description and hide the rest
 - {TODO} add optional (finansis) word at the beginning of each command   
 
 
