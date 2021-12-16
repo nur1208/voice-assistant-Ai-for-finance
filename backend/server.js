@@ -2,6 +2,7 @@ import express from "express";
 import morgan from "morgan";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import cors from "cors";
 import newsRouter from "./routes/newsRoute.js";
 
 dotenv.config();
@@ -24,7 +25,7 @@ const main = async () => {
     // app.use(express.urlencoded({ extended: true })); // support encoded bodies
 
     // Setting up middleware
-    // app.use(cors("http://localhost:3000"));
+    app.use(cors("http://localhost:3000"));
     // app.use(express.static("public"));
     // app.use(initialize());
 
