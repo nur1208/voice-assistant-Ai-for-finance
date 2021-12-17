@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "jest addingJobs.test.js --verbose",
-    "start": "nodemon --exec node --experimental-modules server.js"
+    "start": "nodemon --exec node --experimental-modules server.js",
+    "run-script": "node backend/scrapScripts/getYahoofinanceNews.js"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.10",
