@@ -51,3 +51,32 @@ export const convertTimeSinceToDate = (dateS) => {
     Date.now() - number * (secondsOfTimeWords[timeWord] * 1000)
   ).toISOString();
 };
+
+export const autoScroll = async (page) => {
+  await page.evaluate(async () => {
+    await new Promise((resolve, reject) => {
+      //   var totalHeight = 0;
+      var distance = 100;
+      var timer = setInterval(() => {
+        // var scrollHeight = document.body.scrollHeight;
+        window.scrollBy(0, distance);
+        // totalHeight += distance;
+
+        // if (
+        //   document.scrollingElement.scrollTop +
+        //     window.innerHeight >=
+        //   document.scrollingElement.scrollHeight
+        // )
+
+        if (
+          document.scrollingElement.scrollTop +
+            window.innerHeight >=
+          4991
+        ) {
+          clearInterval(timer);
+          resolve();
+        }
+      }, 100);
+    });
+  });
+};

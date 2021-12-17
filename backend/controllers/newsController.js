@@ -1,6 +1,7 @@
 import NewsModel from "../models/News.js";
 
 export const createNews = async (req, res) => {
+  console.log(req.body);
   try {
     const news = new NewsModel(req.body);
 

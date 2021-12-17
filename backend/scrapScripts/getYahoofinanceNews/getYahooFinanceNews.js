@@ -17,61 +17,74 @@ import {
   descriptionSV2,
   adDivS,
 } from "./getYahooFinanceNewsSelector.js";
-import { convertTimeSinceToDate } from "../utils.js";
+import { autoScroll, convertTimeSinceToDate } from "../utils.js";
 
 export const getYahooFinanceNews = async () => {
   const mainPageHtml = "trailersContainer.html";
   const url = "https://finance.yahoo.com";
 
-  // const browser = await puppeteer.launch({ headless: false });
-  // const page = await browser.newPage();
-  // await page.goto(`${url}/news`);
-  // await page.waitForSelector(mainNewsWrapperV2);
+  const timeout = 1000 * 60 * 2;
 
-  // const html = await page.evaluate(() => document.body.innerHTML);
+  const browser = await puppeteer.launch({ headless: false });
+  const page = await browser.newPage();
+  await page.goto(`${url}/news`, { timeout });
 
-  // fs.writeFile(mainPageHtml, html, function (err) {
-  //   if (err) throw err;
-  //   console.log("Saved!");
-  // });
+  // start loop
+  while (true) {
+    await page.waitForSelector(mainNewsWrapperV2, { timeout });
 
-  // read the html body from the file system (this is very faster then reading it from the internet)
-  const html = await promisify(fs.readFile)(mainPageHtml);
+    await page.waitForTimeout(1000 * 60 * 1);
 
-  let $ = cheerio.load(html.toString());
+    await autoScroll(page);
 
-  const lis = $(mainNewsWrapperV2).children().toArray();
+    // await page.evaluate(() => window.scrollBy(0, 4991));
 
-  for (let index = 0; index < lis.length; index++) {
-    const li = lis[index];
+    await page.waitForTimeout(1000 * 60 * 1);
 
-    const liHtml = $(li).html();
+    const html = await page.evaluate(() => document.body.innerHTML);
+    // fs.writeFile(mainPageHtml, html, function (err) {
+    //   if (err) throw err;
+    //   console.log("Saved!");
+    // });
 
-    const article = {};
-    article.title = $(titleS, liHtml).text();
+    // read the html body from the file system (this is very faster then reading it from the internet)
+    // const html = await promisify(fs.readFile)(mainPageHtml);
 
-    // ads so skip them
-    if ($(adDivS, liHtml).text()) continue;
+    let $ = cheerio.load(html.toString());
 
-    if ($(imageURLS, liHtml).attr("src")) {
-      article.type = $(typeS, liHtml).text();
-      article.publishAt = convertTimeSinceToDate(
-        $(publishAtS, liHtml).text()
-      );
-      article.source = $(sourceS, liHtml).text();
-      article.imageUrl = $(imageURLS, liHtml).attr("src");
-      article.description = $(descriptionS, liHtml).text();
-    } else {
-      article.type = $(typeV2S, liHtml).text();
-      article.publishAt = article.publishAt =
-        convertTimeSinceToDate($(publishAtSV2, liHtml).text());
+    const lis = $(mainNewsWrapperV2).children().toArray();
 
-      article.source = $(sourceSV2, liHtml).text();
-      article.description = $(descriptionSV2, liHtml).text();
+    for (let index = 0; index < lis.length; index++) {
+      const li = lis[index];
 
+      const liHtml = $(li).html();
+
+      const article = {};
+      article.title = $(titleS, liHtml).text();
+      article.goToUrl = $(titleS, liHtml).attr("href");
+      article.source = "yahoo finance";
+      // ads so skip them
+      if ($(adDivS, liHtml).text()) continue;
+
+      if ($(imageURLS, liHtml).attr("src")) {
+        article.type = $(typeS, liHtml).text();
+        article.publishedAt = convertTimeSinceToDate(
+          $(publishAtS, liHtml).text()
+        );
+        article.source = $(sourceS, liHtml).text();
+        article.imageUrl = $(imageURLS, liHtml).attr("src");
+        article.description = $(descriptionS, liHtml).text();
+      } else {
+        article.type = $(typeV2S, liHtml).text();
+        article.publishedAt = article.publishAt =
+          convertTimeSinceToDate($(publishAtSV2, liHtml).text());
+
+        article.publisher = $(sourceSV2, liHtml).text();
+        article.description = $(descriptionSV2, liHtml).text();
+      }
       const apiUrl = "http://localhost:4050/api/v1/news";
       const {
-        data: { isExist, articles },
+        data: { isExist },
       } = await axios.get(
         `${apiUrl}?title=${encodeURIComponent(
           article.title
@@ -91,6 +104,11 @@ export const getYahooFinanceNews = async () => {
         );
       }
     }
+
+    await page.waitForTimeout(1000 * 60 * 3);
+    await page.reload({ timeout });
+
+    // loop ends
 
     // console.log(article);
   }
