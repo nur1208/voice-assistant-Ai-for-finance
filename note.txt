@@ -82,7 +82,7 @@
 40.2 - {DONE} fixing: 🛠 scraping white image from yahoo finance scrap script 
 40.3 - {DONE} add if there is an error just reload the page and try to scrap again to yahoo finance news script
 41 - {DONE} add query for keyword in title to getAllNews api's route
-42 - {TODO} get news from my api for 'what's up with {keyword}' command
+42 - {DONE} get news from my api for 'what's up with {keyword}' command
 43 - {TODO} search for "how to run my node js script in server for free"
 45 - {TODO} create script for scraping news from 'www.investing.com'
 46 - {TODO} test all the commands for investing's news
@@ -92,6 +92,9 @@ deadline - 2021-12-18
 49 - {TODO} create 'give me more news' commands
 50 - {TODO} create 'give me more {number} news' commands
 51 - {TODO} only show short description and hide the rest
+52 - {TODO} learning how to use vercel 
+53 - {TODO} create different folder and repository for each scraping script
+54 - {TODO} dep
 - {TODO} add optional (finansis) word at the beginning of each command   
 
 
