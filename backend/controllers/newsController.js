@@ -21,14 +21,24 @@ export const setMSSecondsToZero = (dateString) => {
 };
 
 export const getNews = async (req, res) => {
-  const { publishedAt, sortBy, ...query } = req.query;
+  const { publishedAt, keywordInTitle, sortBy, ...query } =
+    req.query;
   const publishedAtP = setMSSecondsToZero(publishedAt);
   const options = {};
   if (sortBy) {
     options.sort = `-${sortBy}`;
   }
+  if (keywordInTitle) {
+    query.title = {
+      $regex: new RegExp(
+        `(?<![a-zA-Z0-9])(${keywordInTitle})(?![a-zA-Z0-9])`,
+        "i"
+      ),
+    };
+  }
 
   try {
+    console.log(query);
     // await NewsModel.deleteMany();
     const news = await NewsModel.find(query, null, options);
 

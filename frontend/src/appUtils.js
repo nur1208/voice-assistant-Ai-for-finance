@@ -157,13 +157,10 @@ export const useFinansis = () => {
       NEWS_API_URL = `${NEWS_API_URL}&source=${query.toLowerCase()}`;
     } else if (type === "latestNews") {
       NEWS_API_URL = `${NEWS_API_URL}&sortBy=publishedAt`;
+    } else if (type === "whatsUpWith") {
+      NEWS_API_URL = `${NEWS_API_URL}&keywordInTitle=${query}`;
     }
-    // else if (type === "whatsUpWith") {
-    //   NEWS_API_URL = `${NEWS_API_URL}&q=${query
-    //     .toLowerCase()
-    //     .split(" ")
-    //     .join("-")}`;
-    // } else if (type === "category") {
+    // else if (type === "category") {
     //   NEWS_API_URL = `${NEWS_API_URL}&category=${query
     //     .toLowerCase()
     //     .split(" ")
