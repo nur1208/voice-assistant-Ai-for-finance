@@ -2,6 +2,7 @@ import puppeteer from "puppeteer";
 import cheerio from "cheerio";
 import fs from "fs";
 import { promisify } from "util";
+import axios from "axios";
 import {
   imageURLS,
   mainNewsWrapperV2,
@@ -67,9 +68,31 @@ export const getYahooFinanceNews = async () => {
 
       article.source = $(sourceSV2, liHtml).text();
       article.description = $(descriptionSV2, liHtml).text();
+
+      const apiUrl = "http://localhost:4050/api/v1/news";
+      const {
+        data: { isExist, articles },
+      } = await axios.get(
+        `${apiUrl}?title=${encodeURIComponent(
+          article.title
+        )}&publishedAt=${encodeURIComponent(
+          article.publishAt
+        )}&source=${article.source}`
+      );
+
+      if (isExist) {
+        console.log("article is exist");
+      } else {
+        console.log("article is not exist");
+
+        await axios.post(apiUrl, article);
+        console.log(
+          "so article added successfully to the database"
+        );
+      }
     }
 
-    console.log(article);
+    // console.log(article);
   }
 
   // await browser.close();

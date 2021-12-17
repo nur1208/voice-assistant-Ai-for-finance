@@ -75,7 +75,9 @@
 38.1 - {DONE} fix "open article {number}" command
 39 - {DONE} add get latest news to getAllNews api's route
 40 - {DONE} get news from my api for 'give me the latest news" command
-40.1 - {TODO} crate yahoo finance news scraping script again  
+40.1 - {TODO} crate yahoo finance news scraping script again 
+    40.1.1 {DONE} get simple data
+    40.1.1 {TODO} check if the article exist in the database if not add it
 40.2 - {TODO} fixing: 🛠 scraping white image from yahoo finance scrap script 
 41 - {TODO} add query for keyword in title to getAllNews api's route
 42 - {TODO} get news from my api for 'what's up with {keyword}' command
