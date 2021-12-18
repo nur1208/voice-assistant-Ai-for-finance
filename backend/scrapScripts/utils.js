@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const epochs = [
   ["year", 31536000],
   ["month", 2592000],
@@ -52,8 +54,37 @@ export const convertTimeSinceToDate = (dateS) => {
   ).toISOString();
 };
 
-export const autoScroll = async (page) => {
-  await page.evaluate(async () => {
+export const autoScroll = async (page, options = {}) => {
+  // const scrollFunction = (options) =>
+  //   new Promise((resolve, reject) => {
+  //     //   var totalHeight = 0;
+  //     var distance = 100;
+  //     var timer = setInterval(() => {
+  //       // var scrollHeight = document.body.scrollHeight;
+  //       window.scrollBy(0, distance);
+  //       // totalHeight += distance;
+
+  //       // if (
+  //       //   document.scrollingElement.scrollTop +
+  //       //     window.innerHeight >=
+  //       //   document.scrollingElement.scrollHeight
+  //       // )
+
+  //       if (
+  //         document.scrollingElement.scrollTop +
+  //           window.innerHeight >=
+  //         (options.scrollHeight || 4991)
+  //       ) {
+  //         clearInterval(timer);
+  //         resolve();
+  //       }
+  //     }, options.daly || 100);
+  //   });
+
+  // await page.evaluate(async () => {
+  //   await scrollFunction(options);
+  // });
+  await page.evaluate(async (options) => {
     await new Promise((resolve, reject) => {
       //   var totalHeight = 0;
       var distance = 100;
@@ -71,12 +102,34 @@ export const autoScroll = async (page) => {
         if (
           document.scrollingElement.scrollTop +
             window.innerHeight >=
-          4991
+          (options.scrollHeight || 4991)
         ) {
           clearInterval(timer);
           resolve();
         }
-      }, 100);
+      }, options.delay || 100);
     });
-  });
+  }, options);
+};
+
+export const addArticlesToDB = async (article) => {
+  const apiUrl = "http://localhost:4050/api/v1/news";
+  const {
+    data: { isExist },
+  } = await axios.get(
+    `${apiUrl}?title=${encodeURIComponent(
+      article.title
+    )}&publishedAt=${encodeURIComponent(
+      article.publishAt
+    )}&source=${article.source}`
+  );
+
+  if (isExist) {
+    console.log("article is exist");
+  } else {
+    console.log("article is not exist");
+
+    await axios.post(apiUrl, article);
+    console.log("so article added successfully to the database");
+  }
 };

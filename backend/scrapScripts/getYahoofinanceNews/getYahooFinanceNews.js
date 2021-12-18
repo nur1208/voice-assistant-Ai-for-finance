@@ -36,6 +36,8 @@ export const getYahooFinanceNews = async () => {
 
       await page.waitForTimeout(1000 * 60 * 1);
 
+      await page.evaluate(() => window.scrollBy(0, -9999));
+
       await autoScroll(page);
 
       // await page.evaluate(() => window.scrollBy(0, 4991));
@@ -74,7 +76,7 @@ export const getYahooFinanceNews = async () => {
           article.publishedAt = convertTimeSinceToDate(
             $(publishAtS, liHtml).text()
           );
-          article.source = $(sourceS, liHtml).text();
+          article.publisher = $(sourceS, liHtml).text();
           article.imageUrl = $(imageURLS, liHtml).attr("src");
           article.description = $(descriptionS, liHtml).text();
         } else {
@@ -112,7 +114,7 @@ export const getYahooFinanceNews = async () => {
       await page.reload({ timeout });
     } catch (error) {
       console.log(error);
-      await page.waitForTimeout(1000 * 60 * 3);
+      await page.waitForTimeout(1000 * 60 * 1);
       await page.reload({ timeout });
     }
     // loop ends
