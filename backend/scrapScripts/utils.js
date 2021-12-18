@@ -34,6 +34,8 @@ const secondsOfTimeWords = {
   years: 31536000,
   month: 2592000,
   months: 2592000,
+  yesterday: 172800,
+  today: 86400,
   day: 86400,
   days: 86400,
   hour: 3600,
@@ -55,35 +57,6 @@ export const convertTimeSinceToDate = (dateS) => {
 };
 
 export const autoScroll = async (page, options = {}) => {
-  // const scrollFunction = (options) =>
-  //   new Promise((resolve, reject) => {
-  //     //   var totalHeight = 0;
-  //     var distance = 100;
-  //     var timer = setInterval(() => {
-  //       // var scrollHeight = document.body.scrollHeight;
-  //       window.scrollBy(0, distance);
-  //       // totalHeight += distance;
-
-  //       // if (
-  //       //   document.scrollingElement.scrollTop +
-  //       //     window.innerHeight >=
-  //       //   document.scrollingElement.scrollHeight
-  //       // )
-
-  //       if (
-  //         document.scrollingElement.scrollTop +
-  //           window.innerHeight >=
-  //         (options.scrollHeight || 4991)
-  //       ) {
-  //         clearInterval(timer);
-  //         resolve();
-  //       }
-  //     }, options.daly || 100);
-  //   });
-
-  // await page.evaluate(async () => {
-  //   await scrollFunction(options);
-  // });
   await page.evaluate(async (options) => {
     await new Promise((resolve, reject) => {
       //   var totalHeight = 0;
@@ -132,4 +105,24 @@ export const addArticlesToDB = async (article) => {
     await axios.post(apiUrl, article);
     console.log("so article added successfully to the database");
   }
+};
+
+export const convertDayTimeToDate = (dateS) => {
+  const timeWord = dateS.split(",")[0];
+  let hours =
+    Number([...dateS.split(",")[1].matchAll(/\d+/g)][0][0]) *
+    secondsOfTimeWords.hours;
+  const minutes =
+    Number([...dateS.split(",")[1].matchAll(/\d+/g)][1][0]) *
+    secondsOfTimeWords.minutes;
+  const amOrPm = dateS.split(",")[1].split(" ")[2];
+  if (amOrPm === "Pm")
+    hours = hours * (12 * secondsOfTimeWords.hours);
+
+  return new Date(
+    Date.now() -
+      (secondsOfTimeWords[timeWord.toLowerCase()] -
+        (hours + minutes)) *
+        1000
+  ).toISOString();
 };

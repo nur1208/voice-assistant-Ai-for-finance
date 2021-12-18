@@ -6,7 +6,7 @@
 
 GET http://localhost:3050/api/v1/news 
 ###
-GET {{Host}}:{{port}}/{{route}}?keywordInTitle=friday   
+GET {{Host}}:{{port}}/{{route}}?source=seeking alpha   
 
 ###2021-12-14T05:31:18.557+00:00
 
