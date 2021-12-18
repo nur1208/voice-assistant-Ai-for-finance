@@ -86,18 +86,21 @@
 43 - {DONE} search for 'how to run my node js script in server for free'
 45 - {DONE} create script for scraping news from 'www.investing.com'
 46 - {DONE} test all the commands for investing's news
-47 - {TODO} scrap news from 'seekingalpha.com'
+47 - {DONE} scrap news from 'seekingalpha.com'
     47.1 - {DONE} add new property to News model called 'stockSymbol'
 deadline - 2021-12-18
 48 - {TODO} fix the following error from appUtils "when return an empty articles array handle that error"
 48.1 - {TODO} fix goToUrl property in yahoo finance scraping news script
-48 - {DONE} fix the following error from yahoo finance scrap script "error: TimeoutError: waiting for selector `#Fin-Stream > ul` failed: timeout 120000ms exceeded"
+48.2 - {DONE} fix the following error from yahoo finance scrap script "error: TimeoutError: waiting for selector `#Fin-Stream > ul` failed: timeout 120000ms exceeded"
+48.3 - {TODO} learning how to use limit and offset
+48.4 - {TODO} just return 10 articles at the time from the backend
 49 - {TODO} create 'give me more news' commands
 50 - {TODO} create 'give me more {number} news' commands
 51 - {TODO} only show short description and hide the rest
 52 - {TODO} learning how to use vercel 
 53 - {TODO} create different folder and repository for each scraping script
 54 - {TODO} deploy each scraping script 
+deadline - 2021-12-21
 - {TODO} add optional (finansis) word at the beginning of each command   
 
 

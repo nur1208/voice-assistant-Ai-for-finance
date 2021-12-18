@@ -167,39 +167,14 @@ export const useFinansis = () => {
     //     .join("-")}`;
 
     const {
-      data: { articles },
+      data: { articles, isExist },
     } = await axios.get(NEWS_API_URL);
-    console.log({ articles });
-    setNewsArticles(articles);
+
+    setNewsArticles(isExist ? articles : []);
     setActiveArticle(-1);
-    // if (type === "giveMeSource") {
-    //   NEWS_API_URL = `${NEWS_API_URL}&sources=${query
-    //     .toLowerCase()
-    //     .split(" ")
-    //     .join("-")}`;
-    // } else if (type === "whatsUpWith") {
-    //   NEWS_API_URL = `${NEWS_API_URL}&q=${query
-    //     .toLowerCase()
-    //     .split(" ")
-    //     .join("-")}`;
-    // } else if (type === "category") {
-    //   NEWS_API_URL = `${NEWS_API_URL}&category=${query
-    //     .toLowerCase()
-    //     .split(" ")
-    //     .join("-")}`;
-    // } else if (type === "latestNews") {
-    //   NEWS_API_URL = `${NEWS_API_URL}&sortBy=publishedAt`;
-    // }
 
-    // const {
-    //   data: { articles },
-    // } = await axios.get(NEWS_API_URL);
-    // setNewsArticles(articles);
-    // setActiveArticle(-1);
-
-    // clean up the following code:
     const responsePositiveOrNegative = (negative, positive) => {
-      if (articles.length === 0) {
+      if (!isExist) {
         response(negative);
         return false;
       } else {
