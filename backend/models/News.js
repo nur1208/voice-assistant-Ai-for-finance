@@ -10,6 +10,7 @@ const newsSchema = new mongoose.Schema(
     description: String,
     goToUrl: String,
     publisher: String,
+    stockSymbol: String,
   },
   {
     timestamps: true,

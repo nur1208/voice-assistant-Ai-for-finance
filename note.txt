@@ -84,8 +84,8 @@
 41 - {DONE} add query for keyword in title to getAllNews api's route
 42 - {DONE} get news from my api for 'what's up with {keyword}' command
 43 - {DONE} search for 'how to run my node js script in server for free'
-45 - {TODO} create script for scraping news from 'www.investing.com'
-46 - {TODO} test all the commands for investing's news
+45 - {DONE} create script for scraping news from 'www.investing.com'
+46 - {DONE} test all the commands for investing's news
 47 - {TODO} scrap news from 'seekingalpha.com'
 deadline - 2021-12-18
 48 - {TODO} fix the following error from appUtils "when return an empty articles array handle that error"
