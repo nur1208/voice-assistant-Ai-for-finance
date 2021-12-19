@@ -66,7 +66,7 @@ export const getYahooFinanceNews = async () => {
 
         const article = {};
         article.title = $(titleS, liHtml).text();
-        article.goToUrl = $(titleS, liHtml).attr("href");
+        article.goToUrl = `${url}${$(titleS, liHtml).attr("href")}`;
         article.source = "yahoo finance";
         // ads so skip them
         if ($(adDivS, liHtml).text()) continue;

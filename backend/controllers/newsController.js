@@ -21,10 +21,24 @@ export const setMSSecondsToZero = (dateString) => {
 };
 
 export const getNews = async (req, res) => {
-  const { publishedAt, keywordInTitle, sortBy, ...query } =
-    req.query;
+  const {
+    publishedAt,
+    keywordInTitle,
+    sortBy,
+    page,
+    size,
+    ...query
+  } = req.query;
+
   const publishedAtP = setMSSecondsToZero(publishedAt);
   const options = {};
+
+  const pageV = page ? parseInt(page) : 1;
+  const sizeV = size ? parseInt(size) : 10;
+
+  options.limit = sizeV;
+  options.skip = (pageV - 1) * sizeV;
+
   if (sortBy) {
     options.sort = `-${sortBy}`;
   }
@@ -38,7 +52,7 @@ export const getNews = async (req, res) => {
   }
 
   try {
-    console.log(query);
+    console.log({ query, options });
     // await NewsModel.deleteMany();
     const news = await NewsModel.find(query, null, options);
 
