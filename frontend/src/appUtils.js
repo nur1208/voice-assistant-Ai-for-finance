@@ -23,6 +23,8 @@ export const useFinansis = () => {
   const [secondCommandFor, setSecondCommandFor] = useState("");
   const [timeoutIds, setTimeoutIds] = useState([]);
   const [isStopReading, setIsStopReading] = useState(false);
+  const [pageNumber, setPageNumber] = useState(1);
+
   const response = (optionsResponse) => {
     let randomOption;
     if (optionsResponse.length - 1 < randomIndex)
@@ -58,9 +60,15 @@ export const useFinansis = () => {
   const handleReadingHeadLines = async () => {
     if (newsArticles.length) {
       const ids = [];
-      for (let index = 0; index < newsArticles.length; index++) {
+      const startReadingIndex =
+        pageNumber === 1 ? 0 : pageNumber * 10 - 10;
+      for (
+        let index = startReadingIndex;
+        index < newsArticles.length;
+        index++
+      ) {
         const { title } = newsArticles[index];
-        if (index !== 0) {
+        if (index !== startReadingIndex) {
           const timeout = title.length > 80 ? 1000 * 8 : 1000 * 6;
           // const callback = (index) => setActiveArticle(index);
           const timeoutId = await responseAfterTimeout(title, {
@@ -142,6 +150,10 @@ export const useFinansis = () => {
     // window.location.href = url;
   };
 
+  const [lastGetNewsCommand, setLastGetNewsCommand] = useState({
+    type: "",
+  });
+
   const getNews = async (type, query) => {
     response(`finding`);
     // 445938e7b4214f4988780151868665cc
@@ -151,14 +163,38 @@ export const useFinansis = () => {
     // let NEWS_API_URL = `https://newsapi.org/v2/top-headlines?apiKey=${API_KEY}&language=en`;
     let NEWS_API_URL = `http://localhost:4050/api/v1/news?`;
 
-    // here we add the source to the user url and convert
-    // cnn news to CNN-NEWS
-    if (type === "giveMeSource") {
-      NEWS_API_URL = `${NEWS_API_URL}&source=${query.toLowerCase()}`;
-    } else if (type === "latestNews") {
+    let lastCommand;
+    if (type === "giveMeMore") {
+      NEWS_API_URL = `${NEWS_API_URL}&page=${pageNumber + 1}`;
+      setPageNumber(pageNumber + 1);
+      lastCommand = { ...lastGetNewsCommand };
+    }
+    if (
+      type === "giveMeSource" ||
+      lastCommand.type === "giveMeSource"
+    ) {
+      // here we add the source to the user url and convert
+      // cnn news to CNN-NEWS
+      const localQuery =
+        type === "giveMeSource"
+          ? query.toLowerCase()
+          : lastCommand.localQuery.toLowerCase();
+      NEWS_API_URL = `${NEWS_API_URL}&source=${localQuery}`;
+      setLastGetNewsCommand({ type: "giveMeSource", localQuery });
+    } else if (
+      type === "latestNews" ||
+      lastCommand.type === "latestNews"
+    ) {
       NEWS_API_URL = `${NEWS_API_URL}&sortBy=publishedAt`;
-    } else if (type === "whatsUpWith") {
-      NEWS_API_URL = `${NEWS_API_URL}&keywordInTitle=${query}`;
+      setLastGetNewsCommand({ type: "latestNews" });
+    } else if (
+      type === "whatsUpWith" ||
+      lastCommand.type === "whatsUpWith"
+    ) {
+      NEWS_API_URL = `${NEWS_API_URL}&keywordInTitle=${
+        type === "whatsUpWith" ? query : lastCommand.query
+      }`;
+      setLastGetNewsCommand({ type: "whatsUpWith", query });
     }
     // else if (type === "category") {
     //   NEWS_API_URL = `${NEWS_API_URL}&category=${query
@@ -170,8 +206,15 @@ export const useFinansis = () => {
       data: { articles, isExist },
     } = await axios.get(NEWS_API_URL);
 
-    setNewsArticles(isExist ? articles : []);
-    setActiveArticle(-1);
+    if (type !== "giveMeMore") {
+      setNewsArticles(isExist ? articles : []);
+      setActiveArticle(-1);
+    } else {
+      setNewsArticles(
+        isExist ? [...newsArticles, ...articles] : newsArticles
+      );
+      setActiveArticle(pageNumber * 10);
+    }
 
     const responsePositiveOrNegative = (negative, positive) => {
       if (!isExist) {
@@ -219,6 +262,15 @@ export const useFinansis = () => {
         if (!isPositiveResponse) return;
         break;
 
+      case "giveMeMore":
+        isPositiveResponse = responsePositiveOrNegative(
+          `sorry, I didn't find any more news`,
+          `here is more news`
+        );
+
+        if (!isPositiveResponse) return;
+        break;
+
       default:
         break;
     }
@@ -232,6 +284,16 @@ export const useFinansis = () => {
       // SpeechRecognition.startListening();
       SpeechRecognition.startListening({ continuous: true });
     }, 1000 * 5);
+  };
+
+  const handleGiveMeMoreNews = async () => {
+    let NEWS_API_URL = `http://localhost:4050/api/v1/news?page=${
+      pageNumber + 10
+    }`;
+    setPageNumber(pageNumber + 10);
+    const {
+      data: { articles, isExist },
+    } = await axios.get(NEWS_API_URL);
   };
 
   const handleStopReading = () => {
@@ -326,6 +388,10 @@ export const useFinansis = () => {
     {
       command: "stop reading",
       callback: async () => await handleStopReading(),
+    },
+    {
+      command: "give me more news",
+      callback: async () => await getNews("giveMeMore"),
     },
   ];
   // give me list of most active stocks

@@ -32,7 +32,7 @@ const NewsCard = ({
     window.scroll(0, 0);
 
     setElRefs((refs) =>
-      Array(20)
+      Array(100)
         .fill()
         .map((_, j) => refs[j] || createRef())
     );

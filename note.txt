@@ -92,17 +92,18 @@ deadline - 2021-12-18
 48 - {DONE} fix the following error from appUtils "when return an empty articles array handle that error"
 48.1 - {DONE} fix goToUrl property in yahoo finance scraping news script
 48.2 - {DONE} fix the following error from yahoo finance scrap script "error: TimeoutError: waiting for selector `#Fin-Stream > ul` failed: timeout 120000ms exceeded"
-48.3 - {TODO} learning how to use limit and skip pagi
-48.4 - {TODO} just return 10 articles at the time from the backend
+48.3 - {DONE} learning how to use limit and skip 'pagination'
+48.4 - {DONE} just return 10 articles at the time from the backend
 49 - {TODO} create 'give me more news' commands
-50 - {TODO} create 'give me more {number} news' commands
 51 - {TODO} only show short description and hide the rest
 52 - {TODO} learning how to use vercel 
 53 - {TODO} create different folder and repository for each scraping script
 54 - {TODO} deploy each scraping script 
 deadline - 2021-12-21
 55 - {TODO} test news section 
-- {TODO} add optional (finansis) word at the beginning of each command   
+56 - {TODO} move all the commands functions to commandsHandler file
+- {CHANGED} add optional (finansis) word at the beginning of each command   
+50 - {CHANGED} create 'give me more {number} news' commands
 
 
 
