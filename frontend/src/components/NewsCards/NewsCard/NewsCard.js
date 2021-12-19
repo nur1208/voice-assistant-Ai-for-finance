@@ -90,7 +90,9 @@ const NewsCard = ({
             color="textSecondary"
             component="p"
           >
-            {description}
+            {description.length > 100
+              ? `${description.substring(0, 100)}...`
+              : description}
           </Typography>
         </CardContent>
       </CardActionArea>
