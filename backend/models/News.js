@@ -1,22 +1,22 @@
-import mongoose from "mongoose";
+  import mongoose from "mongoose";
 
-const newsSchema = new mongoose.Schema(
-  {
-    source: String,
-    title: String,
-    type: String,
-    publishedAt: Date,
-    imageUrl: String,
-    description: String,
-    goToUrl: String,
-    publisher: String,
-    stockSymbol: String,
-  },
-  {
-    timestamps: true,
-  }
-);
+  const newsSchema = new mongoose.Schema(
+    {
+      source: String,
+      title: String,
+      type: String,
+      publishedAt: Date,
+      imageUrl: String,
+      description: String,
+      goToUrl: String,
+      publisher: String,
+      stockSymbol: String,
+    },
+    {
+      timestamps: true,
+    }
+  );
 
-const NewsModel = mongoose.model("News", newsSchema);
+  const NewsModel = mongoose.model("News", newsSchema);
 
-export default NewsModel;
+  export default NewsModel;

@@ -51,6 +51,7 @@ export const getSeekingalphaNews = async () => {
 
         const article = {};
         article.title = $(titleS, articleHtml).text();
+        // something
         if (
           article.title === "On the hour" ||
           article.title.length > 1000

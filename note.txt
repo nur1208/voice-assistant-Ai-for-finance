@@ -96,14 +96,24 @@ deadline - 2021-12-18
 48.4 - {DONE} just return 10 articles at the time from the backend
 49 - {DONE} create 'give me more news' commands
 51 - {DONE} only show short description and hide the rest in NewsCards
-52 - {TODO} learning how to use vercel 
-53 - {TODO} create different folder and repository for each scraping script
-54 - {TODO} deploy each scraping script 
 deadline - 2021-12-21
+52 - {DONE} create news api 
+53 - {DONE} create yahoo finance news scraping news using python
+54 - {DONE} create investing news scraping news using python
+55 - {DONE} create seekingalpha news scraping news using python
+56 - {DONE} host news api in vercel
+57 - {DONE} make each scraping scripts scrap news and add them to database 
+            every 5 minutes using 
 55 - {TODO} test news section 
 56 - {TODO} move all the commands functions to commandsHandler file
 - {CHANGED} add optional (finansis) word at the beginning of each command   
 50 - {CHANGED} create 'give me more {number} news' commands
+52 - {CHANGED} learning how to use vercel 
+    1- {CHANGED} create api that calls scrips
+    2- {CHANGED} deploy the api in vercel
+    3 - {CHANGED} call api's routes every 5min using replit
+53 - {CHANGED} create different folder and repository for each scraping script
+54 - {CHANGED} deploy each scraping script 
 
 
 
