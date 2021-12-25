@@ -104,8 +104,18 @@ deadline - 2021-12-21
 56 - {DONE} host news api in vercel
 57 - {DONE} make each scraping scripts scrap news and add them to database 
             every 5 minutes using 
-55 - {TODO} test news section 
-56 - {TODO} move all the commands functions to commandsHandler file
+58 - {TODO} test news section with crated news api
+58.1 - {TODO} fixing not recognizing commands between two commands
+58.2 - {TODO} let finansis listening all the time and stop it when clicking on finansis btn
+58.3 - {TODO} fixing 🛠: scraping duplicate article
+58.4 - {TODO} fixing user:'give me more news' finansis: 'do you want me to ready the news' user: 'yes' finansis not reading the news.
+58.5- {TODO} fixing 🛠:❌ An exception occurred in skeeing alpha get news script ,list index out of range
+59 - {TODO} move all the commands functions to commandsHandler file
+60 - {TODO} create simple home page 
+61 - {TODO} create a simple stock information page like news page
+62 - {TODO} create a page to how stocks info like the most active in yahoo finance
+deadline - before 2021-12-28
+
 - {CHANGED} add optional (finansis) word at the beginning of each command   
 50 - {CHANGED} create 'give me more {number} news' commands
 52 - {CHANGED} learning how to use vercel 

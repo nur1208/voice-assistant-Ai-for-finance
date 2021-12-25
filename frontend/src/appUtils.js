@@ -161,7 +161,8 @@ export const useFinansis = () => {
     const API_KEY = "c8be8b2944eb4366aac8e7c44e783746";
     // const API_KEY = "445938e7b4214f4988780151868665cc";
     // let NEWS_API_URL = `https://newsapi.org/v2/top-headlines?apiKey=${API_KEY}&language=en`;
-    let NEWS_API_URL = `http://localhost:4050/api/v1/news?`;
+    // let NEWS_API_URL = `http://localhost:4050/api/v1/news?`;
+    let NEWS_API_URL = `https://news-api-lovat.vercel.app/api/v1/news?`;
 
     let lastCommand;
     if (type === "giveMeMore") {
@@ -171,7 +172,7 @@ export const useFinansis = () => {
     }
     if (
       type === "giveMeSource" ||
-      lastCommand.type === "giveMeSource"
+      lastCommand?.type === "giveMeSource"
     ) {
       // here we add the source to the user url and convert
       // cnn news to CNN-NEWS
@@ -183,13 +184,13 @@ export const useFinansis = () => {
       setLastGetNewsCommand({ type: "giveMeSource", localQuery });
     } else if (
       type === "latestNews" ||
-      lastCommand.type === "latestNews"
+      lastCommand?.type === "latestNews"
     ) {
       NEWS_API_URL = `${NEWS_API_URL}&sortBy=publishedAt`;
       setLastGetNewsCommand({ type: "latestNews" });
     } else if (
       type === "whatsUpWith" ||
-      lastCommand.type === "whatsUpWith"
+      lastCommand?.type === "whatsUpWith"
     ) {
       NEWS_API_URL = `${NEWS_API_URL}&keywordInTitle=${
         type === "whatsUpWith" ? query : lastCommand.query
