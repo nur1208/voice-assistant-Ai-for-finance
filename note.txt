@@ -114,6 +114,8 @@ deadline - 2021-12-21
 58.4 - {TODO} fixing user:'give me more news' finansis: 'do you want me to ready the news' user: 'yes' finansis not reading the news.
 58.5- {DONE} fixing 🛠:❌ An exception occurred in skeeing alpha get news script ,list index out of range and duplicate articles
 58.6 - {DONE} fixing 🛠: 'TypeError: Cannot read property 'split' of undefined' from news api
+58.7 - {DONE} fixing 🛠: xhr.js:210 GET https://news-api-lovat.vercel.app/api/v1/news?&source=a%20stick 400
+58.7 - {DONE} fixing 🛠: 'open article number one' not recognized
 59 - {TODO} move all the commands functions to commandsHandler file
 60 - {TODO} create simple home page 
 61 - {TODO} create a simple stock information page like news page

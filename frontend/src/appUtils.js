@@ -399,14 +399,24 @@ export const useFinansis = () => {
   const [onlyCommands, setOnlyCommands] = useState([]);
 
   useEffect(() => {
-    // newOnlyCommands = [];
+    const newOnlyCommands = [];
 
-    for (const command in commands) {
-      const element = command;
-      console.log("🧐");
-      console.log(command);
+    for (const index in commands) {
+      const element = commands[index];
+      // console.log(element);
+      const { command } = element;
+      if (typeof command === "string") {
+        newOnlyCommands.push(command.toLocaleLowerCase());
+      } else {
+        for (let index = 0; index < command.length; index++) {
+          const stringC = command[index];
+          newOnlyCommands.push(stringC.toLocaleLowerCase());
+        }
+      }
     }
-    setOnlyCommands();
+    setOnlyCommands(newOnlyCommands);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   // give me list of most active stocks
   // the most active stock of yesterday is list of stocks
@@ -419,41 +429,97 @@ export const useFinansis = () => {
     commands,
   });
 
+  // code for handling unknown commands
   useEffect(() => {
-    console.log({ finalTranscript });
+    console.log("🧐");
+    let isCommandExist = false;
+    if (finalTranscript) {
+      // console.log(
+      //   onlyCommands.includes(finalTranscript.toLocaleLowerCase())
+      // );
+      for (let index = 0; index < onlyCommands.length; index++) {
+        let element = onlyCommands[index];
+        let transcript = finalTranscript;
+
+        if (element.includes("(") && element.includes(")")) {
+          const optionalWord = element
+            .match(/\((.*?)\)/)[0]
+            .replace("(", "")
+            .replace(")", "");
+          transcript = transcript.replace(optionalWord, "").trim();
+
+          element = element.replace(/ \((.*?)\)/, "").trim();
+          console.log({ transcript, element });
+        }
+
+        if (element.includes("*")) {
+          const indexDynamic = element.split(" ").indexOf("*");
+          const lastWordBeforeDynamic =
+            element.split(" ")[indexDynamic - 1];
+          console.log({
+            test: finalTranscript.split(" "),
+            test2: element.split(" "),
+            test3: indexDynamic,
+            test4: finalTranscript
+              .split(" ")
+              .slice(0, indexDynamic)
+              .join(" "),
+          });
+
+          // if (element.replace(/\((.*?)\)/, ""))
+          if (
+            transcript
+              .split(" ")
+              .slice(0, indexDynamic)
+              .join(" ")
+              .toLocaleLowerCase() ===
+            element.split(" ").slice(0, indexDynamic).join(" ")
+          ) {
+            isCommandExist = true;
+          }
+        } else {
+          if (element === transcript.toLocaleLowerCase())
+            isCommandExist = true;
+        }
+      }
+      console.log({ isCommandExist });
+
+      if (!isCommandExist)
+        response("I didn't get that. you can try again... bro");
+    }
   }, [finalTranscript]);
 
-  useEffect(() => {
-    console.log({
-      listening,
-      finalTranscript,
-      secondCommandFor,
-      condition:
-        !listening &&
-        finalTranscript.length > 0 &&
-        !(secondCommandFor.length > 0),
-    });
+  // useEffect(() => {
+  //   console.log({
+  //     listening,
+  //     finalTranscript,
+  //     secondCommandFor,
+  //     condition:
+  //       !listening &&
+  //       finalTranscript.length > 0 &&
+  //       !(secondCommandFor.length > 0),
+  //   });
 
-    if (
-      !listening &&
-      finalTranscript.length > 0 &&
-      !(secondCommandFor.length > 0)
-    ) {
-      response("I didn't get that. you can try again... bro");
-    } else if (!listening && finalTranscript.length > 0) {
-      switch (finalTranscript) {
-        case "yes":
-        case "no":
-          break;
+  //   if (
+  //     !listening &&
+  //     finalTranscript.length > 0 &&
+  //     !(secondCommandFor.length > 0)
+  //   ) {
+  //     response("I didn't get that. you can try again... bro");
+  //   } else if (!listening && finalTranscript.length > 0) {
+  //     switch (finalTranscript) {
+  //       case "yes":
+  //       case "no":
+  //         break;
 
-        default:
-          console.log("do something");
-          // response("I didn't get that. you can try again... bro");
-          // resetTranscript();
-          break;
-      }
-    }
-  }, [listening]);
+  //       default:
+  //         console.log("do something");
+  //         // response("I didn't get that. you can try again... bro");
+  //         // resetTranscript();
+  //         break;
+  //     }
+  //   }
+  // }, [listening]);
 
   useEffect(() => {
     console.log(finalTranscript);
@@ -462,21 +528,6 @@ export const useFinansis = () => {
     if (speaking) {
       resetTranscript();
     }
-
-    // if (!speaking && secondCommandFor.length > 0) {
-
-    //   switch (finalTranscript) {
-    //     case "yes":
-    //     case "no":
-    //       break;
-
-    //     default:
-    //       console.log("do something");
-    //       // response("I didn't get that. you can try again... bro");
-    //       // resetTranscript();
-    //       break;
-    //   }
-    // }
   }, [resetTranscript, speaking]);
   if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
     return null;
