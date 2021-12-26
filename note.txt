@@ -107,9 +107,10 @@ deadline - 2021-12-21
 58 - {TODO} test news section with crated news api
 58.1 - {TODO} fixing not recognizing commands between two commands
 58.2 - {TODO} let finansis listening all the time and stop it when clicking on finansis btn
-58.3 - {TODO} fixing 🛠: scraping duplicate article
+58.3 - {DONE} fixing 🛠: scraping duplicate article
 58.4 - {TODO} fixing user:'give me more news' finansis: 'do you want me to ready the news' user: 'yes' finansis not reading the news.
 58.5- {TODO} fixing 🛠:❌ An exception occurred in skeeing alpha get news script ,list index out of range
+58.6 - {DONE} fixing 🛠: 'TypeError: Cannot read property 'split' of undefined' from news api
 59 - {TODO} move all the commands functions to commandsHandler file
 60 - {TODO} create simple home page 
 61 - {TODO} create a simple stock information page like news page
