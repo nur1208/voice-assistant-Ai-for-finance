@@ -395,6 +395,19 @@ export const useFinansis = () => {
       callback: async () => await getNews("giveMeMore"),
     },
   ];
+
+  const [onlyCommands, setOnlyCommands] = useState([]);
+
+  useEffect(() => {
+    // newOnlyCommands = [];
+
+    for (const command in commands) {
+      const element = command;
+      console.log("🧐");
+      console.log(command);
+    }
+    setOnlyCommands();
+  }, []);
   // give me list of most active stocks
   // the most active stock of yesterday is list of stocks
   const {
@@ -407,7 +420,7 @@ export const useFinansis = () => {
   });
 
   useEffect(() => {
-    // console.log({ finalTranscript });
+    console.log({ finalTranscript });
   }, [finalTranscript]);
 
   useEffect(() => {
@@ -442,6 +455,9 @@ export const useFinansis = () => {
     }
   }, [listening]);
 
+  useEffect(() => {
+    console.log(finalTranscript);
+  }, [finalTranscript]);
   useEffect(() => {
     if (speaking) {
       resetTranscript();

@@ -106,10 +106,13 @@ deadline - 2021-12-21
             every 5 minutes using 
 58 - {TODO} test news section with crated news api
 58.1 - {TODO} fixing not recognizing commands between two commands
+            1 - get all the commands in one array in the first render
+            2 - check if not finalTranscript in the array
+            3 - then if step 2 true let finansis say 'I didn't get that. you can try again... bro'
 58.2 - {TODO} let finansis listening all the time and stop it when clicking on finansis btn
 58.3 - {DONE} fixing 🛠: scraping duplicate article
 58.4 - {TODO} fixing user:'give me more news' finansis: 'do you want me to ready the news' user: 'yes' finansis not reading the news.
-58.5- {TODO} fixing 🛠:❌ An exception occurred in skeeing alpha get news script ,list index out of range
+58.5- {DONE} fixing 🛠:❌ An exception occurred in skeeing alpha get news script ,list index out of range and duplicate articles
 58.6 - {DONE} fixing 🛠: 'TypeError: Cannot read property 'split' of undefined' from news api
 59 - {TODO} move all the commands functions to commandsHandler file
 60 - {TODO} create simple home page 
