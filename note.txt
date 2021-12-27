@@ -104,7 +104,6 @@ deadline - 2021-12-21
 56 - {DONE} host news api in vercel
 57 - {DONE} make each scraping scripts scrap news and add them to database 
             every 5 minutes using 
-58 - {TODO} test news section with crated news api
 58.1 - {DONE} fixing 🛠 not recognizing commands between two commands and improving handling not recognized commands code
             1 - get all the commands in one array in the first render
             2 - check if not finalTranscript in the array
@@ -116,12 +115,13 @@ deadline - 2021-12-21
 58.6 - {DONE} fixing 🛠: 'TypeError: Cannot read property 'split' of undefined' from news api
 58.7 - {DONE} fixing 🛠: xhr.js:210 GET https://news-api-lovat.vercel.app/api/v1/news?&source=a%20stick 400
 58.7 - {DONE} fixing 🛠: 'open article number one' not recognized
-58.8 - {TODO} fixing 🛠: someting went wrong in the server 'get'
+58.8 - {DONE} fixing 🛠: someting went wrong in the server 'get'
                 TypeError: Cannot read property 'publishedAt' of undefined
 59 - {TODO} move all the commands functions to commandsHandler file
+58 - {TODO} test news section with crated news api
 60 - {TODO} create simple home page 
 61 - {TODO} create a simple stock information page like news page
-62 - {TODO} create a page to how stocks info like the most active in yahoo finance
+62 - {TODO} create a page to SHow stocks info like the most active in yahoo finance
 deadline - before 2021-12-28
 63 - {TODO} create stop reading command
 64 - {TODO} fixing 🛠 'start talking sound when finansis reading the news' stop it.
