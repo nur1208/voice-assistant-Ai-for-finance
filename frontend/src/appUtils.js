@@ -53,7 +53,7 @@ export const useFinansis = () => {
         // console.log({ index });
         resolve();
       }, option.timeout || 1000);
-      option.ids.push(timeoutId);
+      option?.ids?.push(timeoutId);
       // return timeoutId;
     });
 
@@ -86,7 +86,7 @@ export const useFinansis = () => {
         }
       }
 
-      SpeechRecognition.stopListening();
+      // SpeechRecognition.stopListening();
     } else {
       response("there is no news to read.");
     }
@@ -280,11 +280,11 @@ export const useFinansis = () => {
     setSecondCommandFor("readThHeadLines");
 
     // wait for 5 second and then let finansis listening again
-    setTimeout(() => {
-      toggle();
-      // SpeechRecognition.startListening();
-      SpeechRecognition.startListening({ continuous: true });
-    }, 1000 * 5);
+    // setTimeout(() => {
+    //   toggle();
+    //   // SpeechRecognition.startListening();
+    //   // SpeechRecognition.startListening({ continuous: true });
+    // }, 1000 * 5);
   };
 
   const handleGiveMeMoreNews = async () => {
@@ -303,7 +303,7 @@ export const useFinansis = () => {
     cancel();
     response("okay, I'll stop reading");
 
-    SpeechRecognition.stopListening();
+    // SpeechRecognition.stopListening();
   };
 
   useEffect(() => {
@@ -521,14 +521,19 @@ export const useFinansis = () => {
   //   }
   // }, [listening]);
 
-  useEffect(() => {
-    console.log(finalTranscript);
-  }, [finalTranscript]);
+  // useEffect(() => {
+  //   console.log(finalTranscript);
+  // }, [finalTranscript]);
+
   useEffect(() => {
     if (speaking) {
       resetTranscript();
+      setTimeout(() => {
+        toggle();
+      }, 1000 * 5);
     }
   }, [resetTranscript, speaking]);
+
   if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
     return null;
   }
@@ -538,7 +543,11 @@ export const useFinansis = () => {
     //   SpeechRecognition.startListening({
     //     language: "zh-CN",
     //   }),
-    onClick: SpeechRecognition.startListening,
+    onClick: () => {
+      if (!listening)
+        SpeechRecognition.startListening({ continuous: true });
+      else SpeechRecognition.stopListening();
+    },
     isListening: listening,
     isSpeaking: speaking,
     transcript,

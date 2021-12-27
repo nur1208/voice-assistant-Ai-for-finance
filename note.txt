@@ -105,7 +105,7 @@ deadline - 2021-12-21
 57 - {DONE} make each scraping scripts scrap news and add them to database 
             every 5 minutes using 
 58 - {TODO} test news section with crated news api
-58.1 - {TODO} fixing not recognizing commands between two commands
+58.1 - {DONE} fixing 🛠 not recognizing commands between two commands and improving handling not recognized commands code
             1 - get all the commands in one array in the first render
             2 - check if not finalTranscript in the array
             3 - then if step 2 true let finansis say 'I didn't get that. you can try again... bro'
@@ -121,7 +121,7 @@ deadline - 2021-12-21
 61 - {TODO} create a simple stock information page like news page
 62 - {TODO} create a page to how stocks info like the most active in yahoo finance
 deadline - before 2021-12-28
-
+63 - {TODO} create stop reading command
 - {CHANGED} add optional (finansis) word at the beginning of each command   
 50 - {CHANGED} create 'give me more {number} news' commands
 52 - {CHANGED} learning how to use vercel 
