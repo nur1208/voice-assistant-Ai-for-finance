@@ -117,6 +117,7 @@ deadline - 2021-12-21
 58.7 - {DONE} fixing 🛠: xhr.js:210 GET https://news-api-lovat.vercel.app/api/v1/news?&source=a%20stick 400
 58.7 - {DONE} fixing 🛠: 'open article number one' not recognized
 58.8 - {TODO} fixing 🛠: someting went wrong in the server 'get'
+                TypeError: Cannot read property 'publishedAt' of undefined
 59 - {TODO} move all the commands functions to commandsHandler file
 60 - {TODO} create simple home page 
 61 - {TODO} create a simple stock information page like news page
