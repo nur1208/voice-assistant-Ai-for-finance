@@ -62,6 +62,9 @@ export const useFinansis = () => {
       const ids = [];
       const startReadingIndex =
         pageNumber === 1 ? 0 : pageNumber * 10 - 10;
+      console.log("🧐");
+
+      console.log({ startReadingIndex });
       for (
         let index = startReadingIndex;
         index < newsArticles.length;
@@ -126,6 +129,7 @@ export const useFinansis = () => {
     if (newsArticles.length) {
       response("back to the main news page");
       setNewsArticles([]);
+      setPageNumber(1);
     } else {
       response(
         "there is nothing back, you are in the main news page"
@@ -170,6 +174,7 @@ export const useFinansis = () => {
       setPageNumber(pageNumber + 1);
       lastCommand = { ...lastGetNewsCommand };
     }
+
     if (
       type === "giveMeSource" ||
       lastCommand?.type === "giveMeSource"
@@ -210,6 +215,7 @@ export const useFinansis = () => {
     if (type !== "giveMeMore") {
       setNewsArticles(isExist ? articles : []);
       setActiveArticle(-1);
+      setPageNumber(1);
     } else {
       setNewsArticles(
         isExist ? [...newsArticles, ...articles] : newsArticles
@@ -431,7 +437,6 @@ export const useFinansis = () => {
 
   // code for handling unknown commands
   useEffect(() => {
-    console.log("🧐");
     let isCommandExist = false;
     if (finalTranscript) {
       // console.log(

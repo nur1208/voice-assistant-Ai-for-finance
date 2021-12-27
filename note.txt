@@ -109,19 +109,21 @@ deadline - 2021-12-21
             1 - get all the commands in one array in the first render
             2 - check if not finalTranscript in the array
             3 - then if step 2 true let finansis say 'I didn't get that. you can try again... bro'
-58.2 - {TODO} let finansis listening all the time and stop it when clicking on finansis btn
+58.2 - {DONE} let finansis listening all the time and stop it when clicking on finansis btn
 58.3 - {DONE} fixing 🛠: scraping duplicate article
-58.4 - {TODO} fixing user:'give me more news' finansis: 'do you want me to ready the news' user: 'yes' finansis not reading the news.
+58.4 - {DONE} fixing 🛠 user:'give me more news' finansis: 'do you want me to ready the news' user: 'yes' finansis not reading the news.
 58.5- {DONE} fixing 🛠:❌ An exception occurred in skeeing alpha get news script ,list index out of range and duplicate articles
 58.6 - {DONE} fixing 🛠: 'TypeError: Cannot read property 'split' of undefined' from news api
 58.7 - {DONE} fixing 🛠: xhr.js:210 GET https://news-api-lovat.vercel.app/api/v1/news?&source=a%20stick 400
 58.7 - {DONE} fixing 🛠: 'open article number one' not recognized
+58.8 - {TODO} fixing 🛠: someting went wrong in the server 'get'
 59 - {TODO} move all the commands functions to commandsHandler file
 60 - {TODO} create simple home page 
 61 - {TODO} create a simple stock information page like news page
 62 - {TODO} create a page to how stocks info like the most active in yahoo finance
 deadline - before 2021-12-28
 63 - {TODO} create stop reading command
+64 - {TODO} fixing 🛠 'start talking sound when finansis reading the news' stop it.
 - {CHANGED} add optional (finansis) word at the beginning of each command   
 50 - {CHANGED} create 'give me more {number} news' commands
 52 - {CHANGED} learning how to use vercel 
