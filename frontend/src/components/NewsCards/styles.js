@@ -19,7 +19,7 @@ export default makeStyles({
   },
   container: {
     // padding: "0 5%",
-    justifyContent: "flex-start",
+    justifyContent: "center",
     display: "flex",
 
     width: "100%",
