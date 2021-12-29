@@ -119,11 +119,11 @@ deadline - 2021-12-21
                 TypeError: Cannot read property 'publishedAt' of undefined
 59 - {DONE} move all the commands functions to commandsHandler file and create useResponse hook
 58 - {DONE} test news section with crated news api
-60 - {TODO} create simple home page 
-61 - {TODO} create a simple stock information page like news page
-62 - {TODO} create a page to SHow stocks info like the most active in yahoo finance
-deadline - before 2021-12-28
-63 - {TODO} create stop reading command
+60 - {DONE} create simple home page 
+61 - {DONE} create a simple stock information page like news page
+62 - {DONE} create a page to SHow stocks info like the most active in yahoo finance
+deadline - before 2021-12-28 ❌
+63 - {TODO} create stop listening command
 64 - {TODO} fixing 🛠 'start talking sound when finansis reading the news' stop it.
 - {CHANGED} add optional (finansis) word at the beginning of each command   
 50 - {CHANGED} create 'give me more {number} news' commands
@@ -135,7 +135,7 @@ deadline - before 2021-12-28
 54 - {CHANGED} deploy each scraping script 
 
 
-
+note - every time the user ask for the most active scrap the data and show the user when his been scraped
 note - open the browser and wait for 5 minutes then reload the page and scrap
 until hits exist.
 

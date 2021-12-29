@@ -6,7 +6,7 @@ export default makeStyles({
     flexDirection: "column",
     justifyContent: "space-between",
     alignItems: "center",
-    width: "60%",
+    width: "80%",
     height: "35vh",
     padding: "10%",
     borderRadius: 10,

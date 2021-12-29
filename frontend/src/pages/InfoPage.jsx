@@ -1,43 +1,39 @@
-import React, { useState } from "react";
+import React from "react";
+import Cards from "../components/Cards/Cards";
 import useStyles from "./../styles";
 
-import Cards from "../components/Cards/Cards";
-
-export const HomePage = ({ activeArticle, newsArticles }) => {
-  const trySayings = ["Open article number [4]", "Go back"];
+export const InfoPage = () => {
   const classes = useStyles();
-  const [isOpen, setIsOpen] = useState(true);
-
   const infoCards = [
     {
       color: "#00838f",
-      title: "News section",
-      text: "Give me the latest news",
+      title: "The Most Stocks",
+      text: "Give The most active stocks",
     },
     {
       color: "#1565c0",
-      title: "Stocks info section",
+      title: "Stock info",
       // info: "Business, Entertainment, General, Health, Science, Sports, Technology",
-      text: "what is the current price for Apple stock",
+      text: "Give me apple statistics",
     },
     {
       color: "#4527a0",
-      title: "Trading Section",
+      title: "What Is?",
       // info: "Bitcoin, PlayStation 5, Smartphones, Donald Trump...",
-      text: "can you trade for me",
+      text: "what is Price to earing ration?",
     },
-    //   {
-    //     color: "#283593",
-    //     title: "News by Sources",
-    //     info: "CNN, Wired, BBC News, Time, IGN, Buzzfeed, ABC News...",
-    //     text: "Give me the news from CNN",
-    //   },
+    {
+      color: "#283593",
+      title: "Chars",
+      // info: "CNN, Wired, BBC News, Time, IGN, Buzzfeed, ABC News...",
+      text: "Show me apple and Tesla charts",
+    },
   ];
 
   return (
     <div className={classes.mainContainer}>
       <div className={classes.logoContainer}>
-        <h1>Home Page</h1>
+        <h1>Info Page</h1>
         <img
           src="./images/logo.png"
           className={classes.alanLogo}

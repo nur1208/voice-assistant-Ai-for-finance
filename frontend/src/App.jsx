@@ -5,6 +5,8 @@ import { useFinansis } from "./appUtils";
 import { NoBrowserSupport } from "./components/NoBrowserSupport/NoBrowserSupport";
 import { Switch, Route } from "react-router-dom";
 import { HomePage } from "./pages/HomePage";
+import { InfoPage } from "./pages/InfoPage";
+import { TheMostTable } from "./components/TheMostTable/TheMostTable";
 
 export const App = () => {
   const {
@@ -25,6 +27,12 @@ export const App = () => {
         </Route>
         <Route path="/news">
           <NewsPage {...NewsPageProps} />
+        </Route>
+        <Route path="/info">
+          <InfoPage {...NewsPageProps} />
+        </Route>
+        <Route path="/test">
+          <TheMostTable />
         </Route>
       </Switch>
       <FinanbroBtn {...FinanbroBtnProps} />

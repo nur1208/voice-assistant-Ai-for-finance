@@ -8,6 +8,7 @@ node_modules
 # testing
 /coverage
 
+cFrom
 # production
 /build
 */tasks.json

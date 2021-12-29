@@ -3,33 +3,7 @@ import { Grid, Grow, Typography } from "@material-ui/core";
 
 import useStyles from "./../NewsCards/styles";
 
-const infoCards = [
-  {
-    color: "#00838f",
-    title: "News section",
-    text: "Give me the latest news",
-  },
-  {
-    color: "#1565c0",
-    title: "Stocks info section",
-    // info: "Business, Entertainment, General, Health, Science, Sports, Technology",
-    text: "what is the current price for Apple stock",
-  },
-  {
-    color: "#4527a0",
-    title: "Trading Section",
-    // info: "Bitcoin, PlayStation 5, Smartphones, Donald Trump...",
-    text: "can you trade for me",
-  },
-  //   {
-  //     color: "#283593",
-  //     title: "News by Sources",
-  //     info: "CNN, Wired, BBC News, Time, IGN, Buzzfeed, ABC News...",
-  //     text: "Give me the news from CNN",
-  //   },
-];
-
-const Cards = () => {
+const Cards = ({ infoCards }) => {
   const classes = useStyles();
 
   return (

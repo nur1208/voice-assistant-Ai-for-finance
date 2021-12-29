@@ -23,7 +23,9 @@ export const NewsPage = ({ activeArticle, newsArticles }) => {
               </div>
             ))}
           </div>
-        ) : null}
+        ) : (
+          <h1>News Section</h1>
+        )}
         <img
           src="./images/logo.png"
           className={classes.alanLogo}
