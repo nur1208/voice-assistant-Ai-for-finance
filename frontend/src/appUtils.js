@@ -40,6 +40,12 @@ export const useFinansis = () => {
     cancel
   );
 
+  const handleStopListening = () => {
+    console.log("here");
+    SpeechRecognition.stopListening();
+    response("okay, I'll stop listening");
+  };
+
   const commands = [
     // {
     //   command: ["你叫什么名字"],
@@ -113,6 +119,10 @@ export const useFinansis = () => {
     {
       command: "give me more news",
       callback: async () => await getNews("giveMeMore"),
+    },
+    {
+      command: "stop listening",
+      callback: () => handleStopListening(),
     },
   ];
 

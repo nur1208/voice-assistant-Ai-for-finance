@@ -123,8 +123,10 @@ deadline - 2021-12-21
 61 - {DONE} create a simple stock information page like news page
 62 - {DONE} create a page to SHow stocks info like the most active in yahoo finance
 deadline - before 2021-12-28 ❌
-63 - {TODO} create stop listening command
+63 - {DONE} create 'stop listening' command
 64 - {TODO} fixing 🛠 'start talking sound when finansis reading the news' stop it.
+65 - {TODO} come up with 5 todos 
+66 - {TODO} create'go to {home} page' command
 - {CHANGED} add optional (finansis) word at the beginning of each command   
 50 - {CHANGED} create 'give me more {number} news' commands
 52 - {CHANGED} learning how to use vercel 
