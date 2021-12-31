@@ -13,9 +13,9 @@ const main = async () => {
     "Content-Length": 113,
     "Content-Type": "application/vnd.apple.mpegurl",
     // Date: "Fri, 31 Dec 2021 10:24:10 GMT",
-    // ETag: "60720872-71",
+    ETag: "60720872-71",
     // "Last-Modified": "Sat, 10 Apr 2021 20:20:02 GMT",
-    // Server: "nginx",
+    Server: "nginx",
   };
   const proxy = {
     host: "127.0.0.1",

@@ -129,8 +129,8 @@ deadline - before 2021-12-28 ❌
 66 - {TODO} create'go to {home} page' command
 67 - {TODO} improve 'responseAfterTimeout' function by making the callback inside setTimeout dynamic
 68 - {TODO} fixing 🛠: let news commands works from home page and info page
-69 - {TODO} fixing 🛠: 'read the news' command don't let finansis  read the news she already read. 
-69 - {TODO} fixing 🛠:
+69 - {TODO} fixing 🛠: 'read the news' command don't let finansis  read the news that she already read. 
+69 - {TODO} fixing 🛠: scrolled view for 'give me the news from yahoo finance' then reading the news the 'give the news' command again but the view not from the first article 
 deadline - before 2022-1-1
 - {CHANGED} add optional (finansis) word at the beginning of each command   
 50 - {CHANGED} create 'give me more {number} news' commands
