@@ -34,6 +34,7 @@ export const useFinansis = () => {
     handleStopReading,
     activeArticle,
     newsArticles,
+    isReadingHeadLines,
   } = useNewsCommandsHandler(
     response,
     responseAfterTimeout,
@@ -158,8 +159,9 @@ export const useFinansis = () => {
   } = useSpeechRecognition({
     commands,
   });
-
+  const [isCommandExist, setIsCommandExist] = useState(true);
   // code for handling unknown commands
+  const [isStopListing, setIsStopListing] = useState(false);
   useEffect(() => {
     let isCommandExist = false;
     if (finalTranscript) {
@@ -213,17 +215,30 @@ export const useFinansis = () => {
       }
       console.log({ isCommandExist });
 
+      setIsCommandExist(isCommandExist);
       if (!isCommandExist)
         response("I didn't get that. you can try again... bro");
+
+      // if the command is yes after 'do you
+      // want me to read the headlines' command
+      // auto reset transcript won't work.
+      if (transcript === "yes") resetTranscript();
+      if (transcript === "stop reading") resetTranscript();
+      if (transcript === "stop listening") setIsStopListing(true);
     }
   }, [finalTranscript]);
 
+  // reset transcript
   useEffect(() => {
-    if (speaking) {
+    if (speaking && (!isReadingHeadLines || !isCommandExist)) {
       resetTranscript();
-      setTimeout(() => {
-        toggle();
-      }, 1000 * 5);
+      if (!isStopListing) {
+        setTimeout(() => {
+          toggle();
+        }, 1000 * 5);
+      }
+      setIsStopListing(false);
+      setIsCommandExist(true);
     }
   }, [resetTranscript, speaking]);
 

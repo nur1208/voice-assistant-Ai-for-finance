@@ -166,14 +166,17 @@ export const useNewsCommandsHandler = (
     // }, 1000 * 5);
   };
 
+  const [isReadingHeadLines, setIsReadingHeadLines] =
+    useState(false);
   const handleReadingHeadLines = async () => {
+    setIsReadingHeadLines(true);
     if (newsArticles.length) {
       const ids = [];
       const startReadingIndex =
         pageNumber === 1 ? 0 : pageNumber * 10 - 10;
-      console.log("🧐");
+      // console.log("🧐");
 
-      console.log({ startReadingIndex });
+      // console.log({ startReadingIndex });
       for (
         let index = startReadingIndex;
         index < newsArticles.length;
@@ -183,16 +186,19 @@ export const useNewsCommandsHandler = (
         if (index !== startReadingIndex) {
           const timeout = title.length > 80 ? 1000 * 8 : 1000 * 6;
           // const callback = (index) => setActiveArticle(index);
+
           const timeoutId = await responseAfterTimeout(title, {
             indexArticle: index,
             timeout,
             ids,
             setActiveArticle,
+            setIsReadingHeadLines,
+            isLast: index === newsArticles.length - 1,
           });
 
-          console.log({ isStopReading });
+          // console.log({ isStopReading });
           setTimeoutIds(ids);
-          console.log({ timeoutId });
+          // console.log({ timeoutId });
         } else {
           response(title);
           setActiveArticle(index);
@@ -210,6 +216,7 @@ export const useNewsCommandsHandler = (
     switch (secondCommandFor) {
       case "readThHeadLines":
         handleReadingHeadLines();
+
         break;
 
       default:
@@ -217,7 +224,6 @@ export const useNewsCommandsHandler = (
         break;
     }
     setSecondCommandFor("");
-    // resetTranscript();
   };
 
   const respondedWithNoSC = () => {
@@ -267,6 +273,7 @@ export const useNewsCommandsHandler = (
   const handleStopReading = () => {
     setIsStopReading(true);
     // response("Good");
+    setIsReadingHeadLines(false);
     cancel();
     response("okay, I'll stop reading");
 
@@ -297,5 +304,6 @@ export const useNewsCommandsHandler = (
     handleStopReading,
     activeArticle,
     newsArticles,
+    isReadingHeadLines,
   };
 };

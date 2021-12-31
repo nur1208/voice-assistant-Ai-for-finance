@@ -124,9 +124,13 @@ deadline - 2021-12-21
 62 - {DONE} create a page to SHow stocks info like the most active in yahoo finance
 deadline - before 2021-12-28 ❌
 63 - {DONE} create 'stop listening' command
-64 - {TODO} fixing 🛠 'start talking sound when finansis reading the news' stop it.
+64 - {TODO} fixing 🛠 'start talking sound when finansis reading the news' stop it and stop it after 'stop listening' command.
 65 - {TODO} come up with 5 todos 
 66 - {TODO} create'go to {home} page' command
+67 - {TODO} improve 'responseAfterTimeout' function by making the callback inside setTimeout dynamic
+68 - {TODO} fixing 🛠: let news commands works from home page and info page
+69 - {TODO} fixing 🛠: 'read the news' command don't let finansis  read the news she already read. 
+deadline - before 2022-1-1
 - {CHANGED} add optional (finansis) word at the beginning of each command   
 50 - {CHANGED} create 'give me more {number} news' commands
 52 - {CHANGED} learning how to use vercel 

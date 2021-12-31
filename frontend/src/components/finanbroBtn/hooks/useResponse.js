@@ -32,8 +32,12 @@ export const useResponse = () => {
           option.setActiveArticle(option.indexArticle);
         // setActiveArticle(index);
         // console.log({ index });
+        if (option.isLast) {
+          option.setIsReadingHeadLines(false);
+        }
         resolve();
       }, option.timeout || 1000);
+      // for stop reading command save timeoutIds
       option?.ids?.push(timeoutId);
       // return timeoutId;
     });
