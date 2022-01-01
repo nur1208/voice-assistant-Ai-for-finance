@@ -126,20 +126,28 @@ deadline - before 2021-12-28 ❌
 63 - {DONE} create 'stop listening' command
 64 - {DONE} fixing 🛠 'start talking sound when finansis reading the news' stop it and stop it after 'stop listening' command.
 65 - {DONE} come up with 5 todos 
-66 - {TODO} create'go to {home} page' command
-    1 - {DONE} handle not exist page 
-    2 - {TODO} handling going to the current page 
-67 - {TODO} improve 'responseAfterTimeout' function by making the callback inside setTimeout dynamic
-68 - {TODO} fixing 🛠: let news commands works from home page and info page
+66 - {DONE} create'go to {home} page' command
+    1 - {DONE} handling not exist page 
+    2 - {DONE} handling going to the current page 
+
+68 - {DONE} fixing 🛠: let news commands works from home page and info page
+        1 - add new property to command object called commandFor
+        2 - when the user say a command check if pathname equals commandFor
+        3 - step 2 false use history object in move the user to commandFor correct path 
 69 - {TODO} fixing 🛠: 'read the news' command don't let finansis  read the news that she already read. 
 69 - {TODO} fixing 🛠: scrolled view for 'give me the news from yahoo finance' then reading the news the 'give the news' command again but the view not from the first article 
 deadline - before 2022-1-1 ❌
-69 - {TODO} adding the 'page' to 'go to {page}' command 
+69 - {TODO} adding the word 'page' to 'go to {page}' command 
 69 - {TODO} fixing 🛠:don't let finansis listen to herself
 70 - {TODO} fixing 🛠: 'open article {number}' new popup window not new tap 
         window.open("http://www.cnn.com/", "CNN_WindowName", "popup");
 71 - {TODO} create 'close popup window' command after opening article with number {1}
-71 - {TODO} create 'do you want me to scroll every 1 seconds' command
+72 - {TODO} create 'do you want me to scroll every 1 seconds' command
+73 - {TODO} fixing 🛠: not reset transcript when saying 'stop listening' while finansis reading headlines
+73 - {TODO} add 'nope', 'yeah' and 'off course' as optional answer to 'do want me to read the headlines'
+
+
+
 - {CHANGED} add optional (finansis) word at the beginning of each command   
 50 - {CHANGED} create 'give me more {number} news' commands
 52 - {CHANGED} learning how to use vercel 
@@ -148,7 +156,7 @@ deadline - before 2022-1-1 ❌
     3 - {CHANGED} call api's routes every 5min using replit
 53 - {CHANGED} create different folder and repository for each scraping script
 54 - {CHANGED} deploy each scraping script 
-
+67 - {FAILED, TRY AGAIN LATER} improve 'responseAfterTimeout' function by making the callback inside setTimeout dynamic
 
 note - every time the user ask for the most active scrap the data and show the user when his been scraped
 note - open the browser and wait for 5 minutes then reload the page and scrap

@@ -37,6 +37,17 @@ export const useResponse = () => {
         }
         resolve();
       }, option.timeout || 1000);
+
+      // console.log({ callbackC: option?.callback });
+      // const timeoutId = setTimeout(
+      //   option?.callback
+      //     ? option.callback(resolve, option?.params)
+      //     : () => {
+      //         response(title);
+      //         resolve();
+      //       },
+      //   option.timeout || 1000
+      // );
       // for stop reading command save timeoutIds
       option?.ids?.push(timeoutId);
       // return timeoutId;

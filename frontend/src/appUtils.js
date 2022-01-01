@@ -93,11 +93,13 @@ export const useFinansis = () => {
       command: ["what can you do", "how can you help me"],
       callback: (redirectPage) =>
         response("I provide finance information for you"),
+      commandFor: "every section",
     },
     {
       command: ["what is your name", "what's your name"],
       callback: () =>
         response(["my name is finansis", "I'm sis... bro"]),
+      commandFor: "every section",
     },
     {
       command: ["Give me the news from *"],
@@ -105,6 +107,7 @@ export const useFinansis = () => {
       // callback: async (source) => await giveMeSource(source),
       callback: async (source) =>
         await getNews("giveMeSource", source),
+      commandFor: "news",
     },
     // {
     //   command: ["what's the last closing price for *"],
@@ -117,72 +120,86 @@ export const useFinansis = () => {
     {
       command: "yes",
       callback: () => respondedWithYesSC(),
+      commandFor: "news",
     },
     {
       command: "no",
       callback: () => respondedWithNoSC(),
+      commandFor: "news",
     },
     {
       command: "go back",
       callback: () => goBackHandler(),
+      commandFor: "every section",
     },
     {
       command: "open article (number) *",
       callback: (articleNum) => openArticleHandler(articleNum),
+      commandFor: "news",
     },
     {
       command: "what's up with *",
       // callback: (query) => whatsUpWithHandler(query),
       callback: async (query) =>
         await getNews("whatsUpWith", query),
+      commandFor: "news",
     },
     {
       command: "Give me the latest news",
       // callback: (query) => whatsUpWithHandler(query),
       callback: async () => await getNews("latestNews"),
+      commandFor: "news",
     },
     {
       command: "read the news",
       // callback: (query) => whatsUpWithHandler(query),
       callback: async () => await handleReadingHeadLines(),
+      commandFor: "news",
     },
     {
       command: "stop reading",
       callback: async () => await handleStopReading(),
+      commandFor: "news",
     },
     {
       command: "give me more news",
       callback: async () => await getNews("giveMeMore"),
+      commandFor: "news",
     },
     {
       command: "stop listening",
       callback: () => handleStopListening(),
+      commandFor: "every section",
     },
     {
       command: "go to *",
       callback: (page) => handleGoToPage(page),
+      commandFor: "every section",
     },
   ];
 
   const [onlyCommands, setOnlyCommands] = useState([]);
-
+  const [onlyCommandFor, setOnlyCommandFor] = useState([]);
   useEffect(() => {
     const newOnlyCommands = [];
-
+    const newOnlyCommandFor = [];
     for (const index in commands) {
       const element = commands[index];
       // console.log(element);
-      const { command } = element;
+      const { command, commandFor } = element;
       if (typeof command === "string") {
         newOnlyCommands.push(command.toLocaleLowerCase());
+        newOnlyCommandFor.push(commandFor);
       } else {
         for (let index = 0; index < command.length; index++) {
           const stringC = command[index];
           newOnlyCommands.push(stringC.toLocaleLowerCase());
+          newOnlyCommandFor.push(commandFor);
         }
       }
     }
     setOnlyCommands(newOnlyCommands);
+    setOnlyCommandFor(newOnlyCommandFor);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -205,6 +222,7 @@ export const useFinansis = () => {
       // console.log(
       //   onlyCommands.includes(finalTranscript.toLocaleLowerCase())
       // );
+      let foundCommand = "";
       for (let index = 0; index < onlyCommands.length; index++) {
         let element = onlyCommands[index];
         let transcript = finalTranscript;
@@ -244,13 +262,33 @@ export const useFinansis = () => {
             element.split(" ").slice(0, indexDynamic).join(" ")
           ) {
             isCommandExist = true;
+            foundCommand = onlyCommands[index];
           }
         } else {
-          if (element === transcript.toLocaleLowerCase())
+          if (element === transcript.toLocaleLowerCase()) {
             isCommandExist = true;
+            foundCommand = onlyCommands[index];
+          }
         }
       }
-      console.log({ isCommandExist });
+
+      if (isCommandExist) {
+        const currentCommandFor =
+          onlyCommandFor[onlyCommands.indexOf(foundCommand)];
+
+        const currentPath = pathname.split("/")[1];
+
+        // making  commands works from any page not just from the command that for
+        if (
+          currentCommandFor !== "every section" &&
+          currentPath !== currentCommandFor
+        ) {
+          history.push(`/${currentCommandFor}`);
+        }
+
+        // console.log(onlyCommands.indexOf(transcript));
+      }
+      // console.log({ isCommandExist });
 
       setIsCommandExist(isCommandExist);
       if (!isCommandExist)

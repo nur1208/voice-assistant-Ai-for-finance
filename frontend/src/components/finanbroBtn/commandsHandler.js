@@ -196,6 +196,39 @@ export const useNewsCommandsHandler = (
             isLast: index === newsArticles.length - 1,
           });
 
+          // const callback = (resolve) => {
+          //   response(title);
+          //   index && setActiveArticle(index);
+          //   // setActiveArticle(index);
+          //   // console.log({ index });
+          //   if (index === newsArticles.length - 1) {
+          //     setIsReadingHeadLines(false);
+          //   }
+          //   resolve();
+          // };
+          // await responseAfterTimeout(title, {
+          //   timeout,
+          //   ids,
+          //   params: {
+          //     indexArticle: index,
+          //     isLast: index === newsArticles.length - 1,
+          //     setActiveArticle,
+          //     setIsReadingHeadLines,
+          //   },
+          //   callback: (resolve, params = {}) => {
+          //     response(title);
+          //     console.log({ params });
+          //     params?.indexArticle &&
+          //       params?.setActiveArticle(params?.indexArticle);
+          //     // setActiveArticle(index);
+          //     // console.log({ index });
+          //     if (params?.isLast) {
+          //       params?.setIsReadingHeadLines(false);
+          //     }
+          //     resolve();
+          //   },
+          // });
+
           // console.log({ isStopReading });
           setTimeoutIds(ids);
           // console.log({ timeoutId });
