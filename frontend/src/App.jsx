@@ -8,6 +8,25 @@ import { HomePage } from "./pages/HomePage";
 import { InfoPage } from "./pages/InfoPage";
 import { TheMostTable } from "./components/TheMostTable/TheMostTable";
 
+export const PAGES = [
+  {
+    path: "/",
+    Component: (props) => <HomePage {...props} />,
+  },
+  {
+    path: "/news",
+    Component: (props) => <NewsPage {...props} />,
+  },
+  {
+    path: "/info",
+    Component: (props) => <InfoPage {...props} />,
+  },
+  {
+    path: "/test",
+    Component: (props) => <TheMostTable {...props} />,
+  },
+];
+
 export const App = () => {
   const {
     NewsPageProps,
@@ -22,10 +41,16 @@ export const App = () => {
   return (
     <>
       <Switch>
-        <Route exact path="/">
+        {/* <Route exact path="/">
           <HomePage {...NewsPageProps} />
-        </Route>
-        <Route path="/news">
+        </Route> */}
+        {PAGES.map((page, index) => (
+          <Route exact path={page.path} key={index}>
+            {page.Component(NewsPageProps)}
+          </Route>
+        ))}
+
+        {/* <Route path="/news">
           <NewsPage {...NewsPageProps} />
         </Route>
         <Route path="/info">
@@ -33,7 +58,7 @@ export const App = () => {
         </Route>
         <Route path="/test">
           <TheMostTable />
-        </Route>
+        </Route> */}
       </Switch>
       <FinanbroBtn {...FinanbroBtnProps} />
     </>

@@ -125,13 +125,21 @@ deadline - 2021-12-21
 deadline - before 2021-12-28 ❌
 63 - {DONE} create 'stop listening' command
 64 - {DONE} fixing 🛠 'start talking sound when finansis reading the news' stop it and stop it after 'stop listening' command.
-65 - {TODO} come up with 5 todos 
+65 - {DONE} come up with 5 todos 
 66 - {TODO} create'go to {home} page' command
+    1 - {DONE} handle not exist page 
+    2 - {TODO} handling going to the current page 
 67 - {TODO} improve 'responseAfterTimeout' function by making the callback inside setTimeout dynamic
 68 - {TODO} fixing 🛠: let news commands works from home page and info page
 69 - {TODO} fixing 🛠: 'read the news' command don't let finansis  read the news that she already read. 
 69 - {TODO} fixing 🛠: scrolled view for 'give me the news from yahoo finance' then reading the news the 'give the news' command again but the view not from the first article 
-deadline - before 2022-1-1
+deadline - before 2022-1-1 ❌
+69 - {TODO} adding the 'page' to 'go to {page}' command 
+69 - {TODO} fixing 🛠:don't let finansis listen to herself
+70 - {TODO} fixing 🛠: 'open article {number}' new popup window not new tap 
+        window.open("http://www.cnn.com/", "CNN_WindowName", "popup");
+71 - {TODO} create 'close popup window' command after opening article with number {1}
+71 - {TODO} create 'do you want me to scroll every 1 seconds' command
 - {CHANGED} add optional (finansis) word at the beginning of each command   
 50 - {CHANGED} create 'give me more {number} news' commands
 52 - {CHANGED} learning how to use vercel 
