@@ -135,6 +135,7 @@ deadline - before 2021-12-28 ❌
         2 - when the user say a command check if pathname equals commandFor
         3 - step 2 false use history object in move the user to commandFor correct path 
 69 - {TODO} fixing 🛠: 'read the news' command don't let finansis  read the news that she already read. 
+        1 - create useState called 
 69 - {TODO} fixing 🛠: scrolled view for 'give me the news from yahoo finance' then reading the news the 'give the news' command again but the view not from the first article 
 deadline - before 2022-1-1 ❌
 69 - {TODO} adding the word 'page' to 'go to {page}' command 
@@ -144,9 +145,9 @@ deadline - before 2022-1-1 ❌
 71 - {TODO} create 'close popup window' command after opening article with number {1}
 72 - {TODO} create 'do you want me to scroll every 1 seconds' command
 73 - {TODO} fixing 🛠: not reset transcript when saying 'stop listening' while finansis reading headlines
-73 - {TODO} add 'nope', 'yeah' and 'off course' as optional answer to 'do want me to read the headlines'
-
-
+74 - {TODO} add 'nope', 'yeah' and 'off course' as optional answer to 'do want me to read the headlines'
+75 - {TODO} fixing 🛠: not resetting transcript for 'read the news' commands
+75 - {TODO} creating 'start reading news from article 3 (number)' command
 
 - {CHANGED} add optional (finansis) word at the beginning of each command   
 50 - {CHANGED} create 'give me more {number} news' commands

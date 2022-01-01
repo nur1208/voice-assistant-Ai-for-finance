@@ -172,11 +172,17 @@ export const useNewsCommandsHandler = (
     setIsReadingHeadLines(true);
     if (newsArticles.length) {
       const ids = [];
-      const startReadingIndex =
+      let startReadingIndex =
         pageNumber === 1 ? 0 : pageNumber * 10 - 10;
       // console.log("🧐");
 
-      // console.log({ startReadingIndex });
+      const addMore = activeArticle === -1 ? 0 : activeArticle % 10;
+      startReadingIndex = startReadingIndex + addMore;
+      console.log({
+        startReadingIndex,
+        m: activeArticle % 10,
+        activeArticle,
+      });
       for (
         let index = startReadingIndex;
         index < newsArticles.length;
