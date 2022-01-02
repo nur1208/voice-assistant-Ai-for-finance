@@ -298,7 +298,8 @@ export const useNewsCommandsHandler = (
       response(`opening article ${articleNum}`);
       const { goToUrl } = newsArticles[articleNum - 1];
       console.log({ goToUrl });
-      window.open(goToUrl, "_blank");
+      window.open(goToUrl, "ORIGIN_ARTICLE_WINDOW", "popup");
+      // window.open(goToUrl, "_blank");
     } else {
       response(
         `article with number ${articleNum} not exist, so yeah I can't open it.}`
