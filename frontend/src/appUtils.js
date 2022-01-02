@@ -172,7 +172,7 @@ export const useFinansis = () => {
       commandFor: "every section",
     },
     {
-      command: "go to *",
+      command: "go to * (page)",
       callback: (page) => handleGoToPage(page),
       commandFor: "every section",
     },
@@ -243,13 +243,15 @@ export const useFinansis = () => {
           const lastWordBeforeDynamic =
             element.split(" ")[indexDynamic - 1];
           console.log({
-            test: finalTranscript.split(" "),
-            test2: element.split(" "),
-            test3: indexDynamic,
-            test4: finalTranscript
-              .split(" ")
-              .slice(0, indexDynamic)
-              .join(" "),
+            // test: finalTranscript.split(" "),
+            // test2: element.split(" "),
+            // test3: indexDynamic,
+            // test4: finalTranscript
+            //   .split(" ")
+            //   .slice(0, indexDynamic)
+            //   .join(" "),
+            transcript,
+            element,
           });
 
           // if (element.replace(/\((.*?)\)/, ""))

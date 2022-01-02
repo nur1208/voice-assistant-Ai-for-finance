@@ -134,9 +134,9 @@ deadline - before 2021-12-28 ❌
         1 - add new property to command object called commandFor
         2 - when the user say a command check if pathname equals commandFor
         3 - step 2 false use history object in move the user to commandFor correct path 
-69 - {TODO} fixing 🛠: 'read the news' command don't let finansis  read the news that she already read. 
+69 - {DONE} fixing 🛠: 'read the news' command don't let finansis  read the news that she already read. 
         1 - create useState called 
-69 - {TODO} fixing 🛠: scrolled view for 'give me the news from yahoo finance' then reading the news the 'give the news' command again but the view not from the first article 
+69 - {DONE} fixing 🛠: scrolled view for 'give me the news from yahoo finance' then reading the news the 'give the news' command again but the view not from the first article 
 deadline - before 2022-1-1 ❌
 69 - {TODO} adding the word 'page' to 'go to {page}' command 
 69 - {TODO} fixing 🛠:don't let finansis listen to herself
@@ -144,10 +144,13 @@ deadline - before 2022-1-1 ❌
         window.open("http://www.cnn.com/", "CNN_WindowName", "popup");
 71 - {TODO} create 'close popup window' command after opening article with number {1}
 72 - {TODO} create 'do you want me to scroll every 1 seconds' command
+deadline - before 2022-1-4
 73 - {TODO} fixing 🛠: not reset transcript when saying 'stop listening' while finansis reading headlines
 74 - {TODO} add 'nope', 'yeah' and 'off course' as optional answer to 'do want me to read the headlines'
 75 - {TODO} fixing 🛠: not resetting transcript for 'read the news' commands
 75 - {TODO} creating 'start reading news from article 3 (number)' command
+76 - {TODO} improving 'go back' command make for all the pages not just news page
+deadline - before 2022-1-6
 
 - {CHANGED} add optional (finansis) word at the beginning of each command   
 50 - {CHANGED} create 'give me more {number} news' commands

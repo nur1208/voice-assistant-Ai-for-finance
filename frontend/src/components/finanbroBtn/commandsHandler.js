@@ -90,6 +90,7 @@ export const useNewsCommandsHandler = (
       setNewsArticles(isExist ? articles : []);
       setActiveArticle(-1);
       setPageNumber(1);
+      window.scroll(0, 0);
     } else {
       setNewsArticles(
         isExist ? [...newsArticles, ...articles] : newsArticles
@@ -176,13 +177,10 @@ export const useNewsCommandsHandler = (
         pageNumber === 1 ? 0 : pageNumber * 10 - 10;
       // console.log("🧐");
 
+      // read the news from the last one has been read.
       const addMore = activeArticle === -1 ? 0 : activeArticle % 10;
       startReadingIndex = startReadingIndex + addMore;
-      console.log({
-        startReadingIndex,
-        m: activeArticle % 10,
-        activeArticle,
-      });
+
       for (
         let index = startReadingIndex;
         index < newsArticles.length;
