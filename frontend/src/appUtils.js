@@ -36,6 +36,7 @@ export const useFinansis = () => {
     activeArticle,
     newsArticles,
     isReadingHeadLines,
+    handleClosePopupWindow,
   } = useNewsCommandsHandler(
     response,
     responseAfterTimeout,
@@ -175,6 +176,15 @@ export const useFinansis = () => {
       command: "go to * (page)",
       callback: (page) => handleGoToPage(page),
       commandFor: "every section",
+    },
+    {
+      command: [
+        "close pop-up window",
+        "close the window",
+        "close the article",
+      ],
+      callback: () => handleClosePopupWindow(),
+      commandFor: "news",
     },
   ];
 

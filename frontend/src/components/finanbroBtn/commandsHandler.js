@@ -291,6 +291,7 @@ export const useNewsCommandsHandler = (
     }
   };
 
+  const [popupWindow, setPopupWindow] = useState(null);
   const openArticleHandler = (articleNum) => {
     const articleNumberIsInRange =
       articleNum > 0 && articleNum < newsArticles.length - 1;
@@ -298,7 +299,12 @@ export const useNewsCommandsHandler = (
       response(`opening article ${articleNum}`);
       const { goToUrl } = newsArticles[articleNum - 1];
       console.log({ goToUrl });
-      window.open(goToUrl, "ORIGIN_ARTICLE_WINDOW", "popup");
+      const newPopupWindow = window.open(
+        goToUrl,
+        "ORIGIN_ARTICLE_WINDOW",
+        "popup"
+      );
+      setPopupWindow(newPopupWindow);
       // window.open(goToUrl, "_blank");
     } else {
       response(
@@ -306,6 +312,15 @@ export const useNewsCommandsHandler = (
       );
     }
     // window.location.href = url;
+  };
+
+  const handleClosePopupWindow = () => {
+    if (popupWindow) {
+      popupWindow.close();
+      response("closing popup window");
+    } else {
+      response("popup window is not open, so i can't close it");
+    }
   };
 
   const handleStopReading = () => {
@@ -343,5 +358,6 @@ export const useNewsCommandsHandler = (
     activeArticle,
     newsArticles,
     isReadingHeadLines,
+    handleClosePopupWindow,
   };
 };
