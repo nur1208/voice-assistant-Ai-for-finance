@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+// import puppeteer from "puppeteer";
+
 import { useResponse } from "./hooks/useResponse";
 
 export const handleGiveMeMoreNews = async (
@@ -292,19 +294,46 @@ export const useNewsCommandsHandler = (
   };
 
   const [popupWindow, setPopupWindow] = useState(null);
-  const openArticleHandler = (articleNum) => {
+
+  // const openArticleHandler = (articleNum) => {
+  //   const articleNumberIsInRange =
+  //     articleNum > 0 && articleNum < newsArticles.length - 1;
+  //   if (newsArticles.length && articleNumberIsInRange) {
+  //     response(`opening article ${articleNum}`);
+  //     const { goToUrl } = newsArticles[articleNum - 1];
+  //     console.log({ goToUrl });
+  //     const newPopupWindow = window.open(
+  //       goToUrl,
+  //       "ORIGIN_ARTICLE_WINDOW",
+  //       "popup"
+  //     );
+  //     setPopupWindow(newPopupWindow);
+  //     // window.open(goToUrl, "_blank");
+  //   } else {
+  //     response(
+  //       `article with number ${articleNum} not exist, so yeah I can't open it.}`
+  //     );
+  //   }
+  //   // window.location.href = url;
+  // };
+
+  const openArticleHandler = async (articleNum) => {
     const articleNumberIsInRange =
       articleNum > 0 && articleNum < newsArticles.length - 1;
+    const width = window.outerWidth - 20;
+    const height = window.outerHeight - 20;
     if (newsArticles.length && articleNumberIsInRange) {
       response(`opening article ${articleNum}`);
       const { goToUrl } = newsArticles[articleNum - 1];
-      console.log({ goToUrl });
-      const newPopupWindow = window.open(
-        goToUrl,
-        "ORIGIN_ARTICLE_WINDOW",
-        "popup"
+      response("loading the page will take seconds");
+      const { data } = await axios.post(
+        "http://localhost:3333/open",
+        { goToUrl }
       );
-      setPopupWindow(newPopupWindow);
+      console.log(data);
+      setPopupWindow(data.isAutoBrowserOpen);
+      response("the page is done loading");
+
       // window.open(goToUrl, "_blank");
     } else {
       response(
@@ -314,9 +343,23 @@ export const useNewsCommandsHandler = (
     // window.location.href = url;
   };
 
-  const handleClosePopupWindow = () => {
+  // const handleClosePopupWindow = () => {
+  //   if (popupWindow) {
+  //     // popupWindow.close();
+  //     popupWindow.scrollBy(0, 1000);
+  //     popupWindow.response("closing popup window");
+  //   } else {
+  //     response("popup window is not open, so i can't close it");
+  //   }
+  // };
+
+  const handleClosePopupWindow = async () => {
     if (popupWindow) {
-      popupWindow.close();
+      const { data } = await axios.post(
+        "http://localhost:3333/close"
+      );
+
+      setPopupWindow(data.isAutoBrowserOpen);
       response("closing popup window");
     } else {
       response("popup window is not open, so i can't close it");
@@ -332,6 +375,22 @@ export const useNewsCommandsHandler = (
 
     // SpeechRecognition.stopListening();
   };
+
+  // note wait for the pop-up window to load
+  // useEffect(() => {
+  //   const currentPopupWindow = popupWindow;
+  //   if (currentPopupWindow) {
+  //     console.log("here 🧐🧐");
+  //     currentPopupWindow.addEventListener("load", (event) => {
+  //       console.log("page is fully loaded");
+  //     });
+
+  //     // return () =>
+  //     //   currentPopupWindow.removeEventListener("load", (event) => {
+  //     //     console.log("clean up load listener");
+  //     //   });
+  //   }
+  // }, [popupWindow]);
 
   useEffect(() => {
     let timeId;

@@ -183,7 +183,7 @@ export const useFinansis = () => {
         "close the window",
         "close the article",
       ],
-      callback: () => handleClosePopupWindow(),
+      callback: async () => await handleClosePopupWindow(),
       commandFor: "news",
     },
   ];
