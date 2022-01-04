@@ -295,21 +295,17 @@ export const useFinansis = () => {
       if (!isCommandExist)
         response("I didn't get that. you can try again... bro");
 
-      // if the command is yes after 'do you
-      // want me to read the headlines' command
-      // auto reset transcript won't work.
-      if (
-        transcript === "of course yes" ||
-        transcript === "of course yeah" ||
-        transcript === "yes" ||
-        transcript === "yeah"
-      )
+      const autoResetTranscriptNotWorking = [
+        "of course yes",
+        "of course yeah",
+        "yes",
+        "yeah",
+        "stop reading",
+        "stop listening",
+        "read the news",
+      ];
+      if (autoResetTranscriptNotWorking.includes(transcript))
         resetTranscript();
-      if (transcript === "stop reading") resetTranscript();
-      if (transcript === "stop listening") {
-        setIsStopListing(true);
-        resetTranscript();
-      }
     }
   }, [finalTranscript]);
 
