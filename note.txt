@@ -146,7 +146,7 @@ deadline - before 2022-1-1 ❌
 72 - {DONE} create 'do you want me to scroll every 5 seconds' command
 deadline - before 2022-1-4 ❌
 72.1 - {DONE} fixing 🛠: 'open article 10' commands when article 10 is exist
-73 - {TODO} fixing 🛠: not reset transcript when saying 'stop listening' while finansis reading headlines
+73 - {DONE} fixing 🛠: not reset transcript when saying 'stop listening' while finansis reading headlines
 74 - {TODO} add 'nope', 'yeah' and 'off course' as optional answer to 'do want me to read the headlines'
 75 - {TODO} fixing 🛠: not resetting transcript for 'read the news' commands
 75 - {TODO} creating 'start reading news from article 3 (number)' command

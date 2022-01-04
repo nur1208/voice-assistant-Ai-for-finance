@@ -119,12 +119,12 @@ export const useFinansis = () => {
     // },
 
     {
-      command: "yes",
+      command: ["(of course) yes", "(of course) yeah"],
       callback: async () => await respondedWithYesSC(),
       commandFor: "news",
     },
     {
-      command: "no",
+      command: ["no", "nope"],
       callback: () => respondedWithNoSC(),
       commandFor: "news",
     },
@@ -244,25 +244,14 @@ export const useFinansis = () => {
             .replace(")", "");
           transcript = transcript.replace(optionalWord, "").trim();
 
-          element = element.replace(/ \((.*?)\)/, "").trim();
-          console.log({ transcript, element });
+          element = element.replace(/\((.*?)\)/, "").trim();
         }
 
+        console.log({ transcript, element });
         if (element.includes("*")) {
           const indexDynamic = element.split(" ").indexOf("*");
           const lastWordBeforeDynamic =
             element.split(" ")[indexDynamic - 1];
-          console.log({
-            // test: finalTranscript.split(" "),
-            // test2: element.split(" "),
-            // test3: indexDynamic,
-            // test4: finalTranscript
-            //   .split(" ")
-            //   .slice(0, indexDynamic)
-            //   .join(" "),
-            transcript,
-            element,
-          });
 
           // if (element.replace(/\((.*?)\)/, ""))
           if (
@@ -309,7 +298,13 @@ export const useFinansis = () => {
       // if the command is yes after 'do you
       // want me to read the headlines' command
       // auto reset transcript won't work.
-      if (transcript === "yes") resetTranscript();
+      if (
+        transcript === "of course yes" ||
+        transcript === "of course yeah" ||
+        transcript === "yes" ||
+        transcript === "yeah"
+      )
+        resetTranscript();
       if (transcript === "stop reading") resetTranscript();
       if (transcript === "stop listening") {
         setIsStopListing(true);
