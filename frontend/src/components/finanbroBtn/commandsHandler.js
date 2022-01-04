@@ -332,7 +332,7 @@ export const useNewsCommandsHandler = (
   const [currentArticle, setCurrentArticle] = useState(null);
   const openArticleHandler = async (articleNum) => {
     const articleNumberIsInRange =
-      articleNum > 0 && articleNum < newsArticles.length - 1;
+      articleNum > 0 && articleNum <= newsArticles.length;
     const width = window.outerWidth - 20;
     const height = window.outerHeight - 20;
     if (newsArticles.length && articleNumberIsInRange) {
@@ -345,6 +345,12 @@ export const useNewsCommandsHandler = (
         "http://localhost:3333/open",
         { goToUrl }
       );
+      const w = window.open(
+        goToUrl,
+        "ORIGIN_ARTICLE_WINDOW",
+        "popup"
+      );
+      w.close();
       setCurrentArticle(newsArticles[articleNum - 1]);
       console.log(data);
       setPopupWindow(data.isAutoBrowserOpen);

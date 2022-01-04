@@ -74,7 +74,6 @@ app.post("/close", async (req, res) => {
 
 app.post("/scroll", async (req, res) => {
   const { source } = req.body;
-  console.log(source);
   if (browser && page) {
     const isEndOfPage = await page.evaluate((source) => {
       // if (

@@ -311,15 +311,19 @@ export const useFinansis = () => {
       // auto reset transcript won't work.
       if (transcript === "yes") resetTranscript();
       if (transcript === "stop reading") resetTranscript();
-      if (transcript === "stop listening") setIsStopListing(true);
+      if (transcript === "stop listening") {
+        setIsStopListing(true);
+        resetTranscript();
+      }
     }
   }, [finalTranscript]);
 
   // reset transcript
   useEffect(() => {
     if (speaking && (!isReadingHeadLines || !isCommandExist)) {
-      resetTranscript();
       if (!isStopListing) {
+        resetTranscript();
+
         setTimeout(() => {
           toggle();
         }, 1000 * 5);
