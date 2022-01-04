@@ -1,6 +1,12 @@
 @url = http://localhost:3333
 
 POST {{url}}/open
+Content-Type: application/json
 
+{
+    "goToUrl":"https://pocketadmin.tech/en/puppeteer-popup-window/"
+}
 ###
 POST {{url}}/close
+###
+POST {{url}}/scroll

@@ -120,7 +120,7 @@ export const useFinansis = () => {
 
     {
       command: "yes",
-      callback: () => respondedWithYesSC(),
+      callback: async () => await respondedWithYesSC(),
       commandFor: "news",
     },
     {

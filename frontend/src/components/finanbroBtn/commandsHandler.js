@@ -31,7 +31,10 @@ export const useNewsCommandsHandler = (
   const [newsArticles, setNewsArticles] = useState([]);
 
   const [secondCommandFor, setSecondCommandFor] = useState("");
-  const [timeoutIds, setTimeoutIds] = useState([]);
+  const [timeoutIdsForReadingH, setTimeoutIdsForReadingH] =
+    useState([]);
+  const [timeoutIdsForScrolling, setTimeoutIdsForScrolling] =
+    useState([]);
   const [isStopReading, setIsStopReading] = useState(false);
 
   const getNews = async (type, query) => {
@@ -236,7 +239,7 @@ export const useNewsCommandsHandler = (
           // });
 
           // console.log({ isStopReading });
-          setTimeoutIds(ids);
+          setTimeoutIdsForReadingH(ids);
           // console.log({ timeoutId });
         } else {
           response(title);
@@ -250,11 +253,18 @@ export const useNewsCommandsHandler = (
     }
   };
 
-  const respondedWithYesSC = () => {
+  const respondedWithYesSC = async () => {
     console.log(secondCommandFor);
     switch (secondCommandFor) {
       case "readThHeadLines":
         handleReadingHeadLines();
+
+        break;
+
+      case "scrollDetailsA":
+        response("scrolling the page every 5 seconds");
+
+        await handleScrollDetailPage();
 
         break;
 
@@ -270,7 +280,9 @@ export const useNewsCommandsHandler = (
       case "readThHeadLines":
         response("WOW, thank you");
         break;
-
+      case "scrollDetailsA":
+        response("thank you, I was feeling lazy to scroll");
+        break;
       default:
         response("I didn't get that. you can try again... bro");
         break;
@@ -317,6 +329,7 @@ export const useNewsCommandsHandler = (
   //   // window.location.href = url;
   // };
 
+  const [currentArticle, setCurrentArticle] = useState(null);
   const openArticleHandler = async (articleNum) => {
     const articleNumberIsInRange =
       articleNum > 0 && articleNum < newsArticles.length - 1;
@@ -326,14 +339,19 @@ export const useNewsCommandsHandler = (
       response(`opening article ${articleNum}`);
       const { goToUrl } = newsArticles[articleNum - 1];
       response("loading the page will take seconds");
+      setCurrentArticle(null);
+
       const { data } = await axios.post(
         "http://localhost:3333/open",
         { goToUrl }
       );
+      setCurrentArticle(newsArticles[articleNum - 1]);
       console.log(data);
       setPopupWindow(data.isAutoBrowserOpen);
       response("the page is done loading");
 
+      response("do you want me to scroll every 5 seconds");
+      setSecondCommandFor("scrollDetailsA");
       // window.open(goToUrl, "_blank");
     } else {
       response(
@@ -376,6 +394,61 @@ export const useNewsCommandsHandler = (
     // SpeechRecognition.stopListening();
   };
 
+  function postinsql(topicId) {
+    console.log(topicId);
+  }
+
+  const num = 1;
+  const scrollAfterTimeout = (source) =>
+    new Promise((resolve, reject) => {
+      console.log({ source });
+
+      const callApi = async (source) => {
+        const {
+          data: { isEndOfPage },
+        } = await axios.post("http://localhost:3333/scroll", {
+          source,
+        });
+
+        resolve(isEndOfPage);
+      };
+
+      const timeoutId = setTimeout(
+        callApi.bind(null, source),
+        1000 * 4
+      );
+      // const timeoutId = setTimeout(async () => {
+      //   const {
+      //     data: { isEndOfPage },
+      //   } = await axios.post("http://localhost:3333/scroll");
+
+      //   resolve(isEndOfPage);
+      // }, 1000 * 4);
+      setTimeoutIdsForScrolling(timeoutId);
+    });
+
+  const handleScrollDetailPage = async () => {
+    if (popupWindow) {
+      const { source } = currentArticle;
+      await axios.post("http://localhost:3333/scroll", { source });
+      for (let index = 0; index < 300; index++) {
+        try {
+          const isEngOfPage = await scrollAfterTimeout(source);
+          if (isEngOfPage) {
+            response("DONE scrolling");
+            break;
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
+      // setPopupWindow(data.isAutoBrowserOpen);
+    } else {
+      response("popup window is not open, so i can't scroll it");
+    }
+  };
+
   // note wait for the pop-up window to load
   // useEffect(() => {
   //   const currentPopupWindow = popupWindow;
@@ -395,8 +468,11 @@ export const useNewsCommandsHandler = (
   useEffect(() => {
     let timeId;
     if (isStopReading) {
-      console.log({ isStopReading, timeoutIds });
-      timeoutIds.forEach((id) => clearTimeout(id));
+      console.log({
+        isStopReading,
+        timeoutIds: timeoutIdsForReadingH,
+      });
+      timeoutIdsForReadingH.forEach((id) => clearTimeout(id));
 
       timeId = setTimeout(() => {
         setIsStopReading(false);
@@ -404,7 +480,7 @@ export const useNewsCommandsHandler = (
     }
 
     return () => clearTimeout(timeId);
-  }, [isStopReading, timeoutIds]);
+  }, [isStopReading, timeoutIdsForReadingH]);
 
   return {
     getNews,
