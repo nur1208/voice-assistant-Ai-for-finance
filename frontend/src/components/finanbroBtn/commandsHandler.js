@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useHistory, useLocation } from "react-router-dom";
 // import puppeteer from "puppeteer";
 
 import { useResponse } from "./hooks/useResponse";
@@ -307,16 +308,44 @@ export const useNewsCommandsHandler = (
     // resetTranscript();
   };
 
+  const history = useHistory();
+  const location = useLocation();
+  const [appHistoryIndex, setAppHistoryIndex] = useState(0);
+
+  // limiting the user to only move throw the app for 'go back' command
+  useEffect(() => {
+    return history.listen(() => {
+      if (history.action === "PUSH") {
+        setAppHistoryIndex(appHistoryIndex + 1);
+      }
+
+      if (history.action === "POP") {
+        setAppHistoryIndex(appHistoryIndex - 1);
+      }
+    });
+  }, [appHistoryIndex]);
+  // useEffect(() => {
+  //   console.log("🧐🧐");
+  //   console.log(history.action);
+  // }, [appHistoryIndex]);
   const goBackHandler = () => {
-    // 0 false, any other number true
+    // handling going back from list articles page to main news page
     if (newsArticles.length) {
       response("back to the main news page");
       setNewsArticles([]);
       setPageNumber(1);
+      return;
+    }
+    // 0 false, any other number true
+    if (appHistoryIndex > 0) {
+      // console.log(location);
+
+      history.goBack();
+      response("going back");
+
+      console.log(history.location.pathname);
     } else {
-      response(
-        "there is nothing back, you are in the main news page"
-      );
+      response("there is nothing back");
       responseAfterTimeout("good morning", { timeout: 500 });
     }
   };
