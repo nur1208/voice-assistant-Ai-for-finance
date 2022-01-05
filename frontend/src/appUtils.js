@@ -37,6 +37,7 @@ export const useFinansis = () => {
     newsArticles,
     isReadingHeadLines,
     handleClosePopupWindow,
+    readHeadLinesFrom,
   } = useNewsCommandsHandler(
     response,
     responseAfterTimeout,
@@ -186,6 +187,12 @@ export const useFinansis = () => {
       callback: async () => await handleClosePopupWindow(),
       commandFor: "news",
     },
+    {
+      command: "start reading (news) from article *",
+
+      callback: async (num) => await readHeadLinesFrom(num),
+      commandFor: "news",
+    },
   ];
 
   const [onlyCommands, setOnlyCommands] = useState([]);
@@ -244,7 +251,12 @@ export const useFinansis = () => {
             .replace(")", "");
           transcript = transcript.replace(optionalWord, "").trim();
 
-          element = element.replace(/\((.*?)\)/, "").trim();
+          // if the optional word is the first word then there is no white space behind it
+
+          if (element.indexOf("(") === 0)
+            element = element.replace(/\((.*?)\)/, "").trim();
+          // else there is white space so we need to remove it
+          else element = element.replace(/ \((.*?)\)/, "").trim();
         }
 
         console.log({ transcript, element });

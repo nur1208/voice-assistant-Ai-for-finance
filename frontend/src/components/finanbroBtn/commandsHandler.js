@@ -174,17 +174,33 @@ export const useNewsCommandsHandler = (
 
   const [isReadingHeadLines, setIsReadingHeadLines] =
     useState(false);
-  const handleReadingHeadLines = async () => {
+  const readHeadLinesFrom = async (num) => {
+    if (num > 0 && num <= newsArticles.length) {
+      response(`reading from article ${num}`);
+      await handleReadingHeadLines(num);
+    } else {
+      response(
+        `the article with number ${num} not exist so I can't read it.`
+      );
+    }
+  };
+  const handleReadingHeadLines = async (startReadingNum) => {
     setIsReadingHeadLines(true);
     if (newsArticles.length) {
       const ids = [];
-      let startReadingIndex =
-        pageNumber === 1 ? 0 : pageNumber * 10 - 10;
-      // console.log("🧐");
+      let startReadingIndex;
+      if (startReadingNum) {
+        startReadingIndex = startReadingNum - 1;
+      } else {
+        startReadingIndex =
+          pageNumber === 1 ? 0 : pageNumber * 10 - 10;
+        // console.log("🧐");
 
-      // read the news from the last one has been read.
-      const addMore = activeArticle === -1 ? 0 : activeArticle % 10;
-      startReadingIndex = startReadingIndex + addMore;
+        // read the news from the last one has been read.
+        const addMore =
+          activeArticle === -1 ? 0 : activeArticle % 10;
+        startReadingIndex = startReadingIndex + addMore;
+      }
 
       for (
         let index = startReadingIndex;
@@ -500,5 +516,6 @@ export const useNewsCommandsHandler = (
     newsArticles,
     isReadingHeadLines,
     handleClosePopupWindow,
+    readHeadLinesFrom,
   };
 };
