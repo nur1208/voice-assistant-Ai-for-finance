@@ -1,12 +1,13 @@
 import React from "react";
 import { FinanbroBtn } from "./components/finanbroBtn/finanbroBtn";
 import { NewsPage } from "./pages/NewsPage";
-import { useFinansis } from "./appUtils";
+import { useFinansis } from "./utils/appUtils";
 import { NoBrowserSupport } from "./components/NoBrowserSupport/NoBrowserSupport";
 import { Switch, Route } from "react-router-dom";
 import { HomePage } from "./pages/HomePage";
 import { InfoPage } from "./pages/InfoPage";
 import { TheMostTable } from "./components/TheMostTable/TheMostTable";
+import BasicModal from "./components/Modal";
 
 export const PAGES = [
   {
@@ -21,10 +22,10 @@ export const PAGES = [
     path: "/info",
     Component: (props) => <InfoPage {...props} />,
   },
-  {
-    path: "/test",
-    Component: (props) => <TheMostTable {...props} />,
-  },
+  // {
+  //   path: "/test",
+  //   Component: (props) => <BasicModal {...props} />,
+  // },
 ];
 
 export const App = () => {
@@ -32,6 +33,7 @@ export const App = () => {
     NewsPageProps,
     FinanbroBtnProps,
     isBrowserSupportsSpeechRecognition,
+    modalProps,
   } = useFinansis();
 
   if (!isBrowserSupportsSpeechRecognition) {
@@ -61,6 +63,7 @@ export const App = () => {
         </Route> */}
       </Switch>
       <FinanbroBtn {...FinanbroBtnProps} />
+      <BasicModal {...modalProps} />
     </>
   );
 };

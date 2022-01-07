@@ -1,5 +1,6 @@
 import React from "react";
 import Cards from "../components/Cards/Cards";
+import BasicModal from "../components/Modal";
 import useStyles from "./../styles";
 
 export const InfoPage = () => {

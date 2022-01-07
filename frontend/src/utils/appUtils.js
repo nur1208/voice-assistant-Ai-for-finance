@@ -5,14 +5,15 @@ import SpeechRecognition, {
 import { useSpeechSynthesis } from "react-speech-kit";
 import { useEffect } from "react";
 import axios from "axios";
-import { useAudio } from "./hooks/useAudio";
+import { useAudio } from "../hooks/useAudio";
+import { useInfoCommandsHandler } from "../components/finanbroBtn/hooks/useInfoCommandsHandler";
 import {
   getNews,
   useNewsCommandsHandler,
-} from "./components/finanbroBtn/commandsHandler";
-import { useResponse } from "./components/finanbroBtn/hooks/useResponse";
+} from "../components/finanbroBtn/commandsHandler";
+import { useResponse } from "../components/finanbroBtn/hooks/useResponse";
 import { useHistory, useLocation } from "react-router-dom";
-import { PAGES } from "./App";
+import { PAGES } from "../App";
 // export const useSecondCommand = (commands) => {
 //   const { transcript } = useSpeechRecognition();
 // };
@@ -21,6 +22,15 @@ export const useFinansis = () => {
   const [playing, toggle] = useAudio(
     "./audio/zapsplat_multimedia_button_click_007_53868.mp3"
   );
+  const [openModal, setOpenModal] = useState(false);
+  const [modalTitle, setModalTitle] = useState("");
+  const [modalContent, setModalContent] = useState("");
+  const handleOpenModal = (title, content) => {
+    setOpenModal(true);
+    setModalTitle(title);
+    setModalContent(content);
+  };
+  const handleCloseModal = () => setOpenModal(false);
 
   const { response, speaking, responseAfterTimeout, cancel } =
     useResponse();
@@ -43,6 +53,13 @@ export const useFinansis = () => {
     responseAfterTimeout,
     cancel
   );
+
+  const { openChart, closeChart, foundMultipleStocks } =
+    useInfoCommandsHandler(
+      response,
+      handleOpenModal,
+      handleCloseModal
+    );
 
   const handleStopListening = () => {
     console.log("here");
@@ -193,6 +210,34 @@ export const useFinansis = () => {
       callback: async (num) => await readHeadLinesFrom(num),
       commandFor: "news",
     },
+
+    {
+      command: ["close (the) chart"],
+      callback: async (target) => await closeChart(target),
+      commandFor: "info",
+    },
+    {
+      command: "open * chart",
+      callback: async (target) => await openChart(target),
+      commandFor: "info",
+    },
+    {
+      command: "stock (number) *",
+      callback: async (num) => await foundMultipleStocks(num),
+      commandFor: "info",
+    },
+    {
+      command: "can you hear me",
+      callback: (num) =>
+        response([
+          "yes",
+          "yes, I can",
+          "I can hear you",
+          "yep",
+          "yeah I can hear you",
+        ]),
+      commandFor: "every section",
+    },
   ];
 
   const [onlyCommands, setOnlyCommands] = useState([]);
@@ -249,7 +294,9 @@ export const useFinansis = () => {
             .match(/\((.*?)\)/)[0]
             .replace("(", "")
             .replace(")", "");
-          transcript = transcript.replace(optionalWord, "").trim();
+          transcript = transcript
+            .replace(" " + optionalWord, "")
+            .trim();
 
           // if the optional word is the first word then there is no white space behind it
 
@@ -266,6 +313,7 @@ export const useFinansis = () => {
             element.split(" ")[indexDynamic - 1];
 
           // if (element.replace(/\((.*?)\)/, ""))
+
           if (
             transcript
               .split(" ")
@@ -274,6 +322,8 @@ export const useFinansis = () => {
               .toLocaleLowerCase() ===
             element.split(" ").slice(0, indexDynamic).join(" ")
           ) {
+            // console.log("here 1");
+            // fix the error here
             isCommandExist = true;
             foundCommand = onlyCommands[index];
           }
@@ -301,7 +351,7 @@ export const useFinansis = () => {
 
         // console.log(onlyCommands.indexOf(transcript));
       }
-      // console.log({ isCommandExist });
+      console.log({ isCommandExist });
 
       setIsCommandExist(isCommandExist);
       if (!isCommandExist)
@@ -355,10 +405,18 @@ export const useFinansis = () => {
     transcript,
   };
 
+  const modalProps = {
+    open: openModal,
+    handleClose: handleCloseModal,
+    title: modalTitle,
+    content: modalContent,
+  };
+
   return {
     isBrowserSupportsSpeechRecognition:
       SpeechRecognition.browserSupportsSpeechRecognition(),
     NewsPageProps,
     FinanbroBtnProps,
+    modalProps,
   };
 };
