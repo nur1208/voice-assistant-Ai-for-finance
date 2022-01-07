@@ -178,7 +178,9 @@ export const useNewsCommandsHandler = (
   const readHeadLinesFrom = async (num) => {
     if (num > 0 && num <= newsArticles.length) {
       response(`reading from article ${num}`);
-      await handleReadingHeadLines(num);
+      setTimeout(async () => {
+        await handleReadingHeadLines(num);
+      }, 1000 * 4);
     } else {
       response(
         `the article with number ${num} not exist so I can't read it.`
@@ -306,48 +308,6 @@ export const useNewsCommandsHandler = (
     }
     setSecondCommandFor("");
     // resetTranscript();
-  };
-
-  const history = useHistory();
-  const location = useLocation();
-  const [appHistoryIndex, setAppHistoryIndex] = useState(0);
-
-  // limiting the user to only move throw the app for 'go back' command
-  useEffect(() => {
-    return history.listen(() => {
-      if (history.action === "PUSH") {
-        setAppHistoryIndex(appHistoryIndex + 1);
-      }
-
-      if (history.action === "POP") {
-        setAppHistoryIndex(appHistoryIndex - 1);
-      }
-    });
-  }, [appHistoryIndex]);
-  // useEffect(() => {
-  //   console.log("🧐🧐");
-  //   console.log(history.action);
-  // }, [appHistoryIndex]);
-  const goBackHandler = () => {
-    // handling going back from list articles page to main news page
-    if (newsArticles.length) {
-      response("back to the main news page");
-      setNewsArticles([]);
-      setPageNumber(1);
-      return;
-    }
-    // 0 false, any other number true
-    if (appHistoryIndex > 0) {
-      // console.log(location);
-
-      history.goBack();
-      response("going back");
-
-      console.log(history.location.pathname);
-    } else {
-      response("there is nothing back");
-      responseAfterTimeout("good morning", { timeout: 500 });
-    }
   };
 
   const [popupWindow, setPopupWindow] = useState(null);
@@ -500,22 +460,6 @@ export const useNewsCommandsHandler = (
     }
   };
 
-  // note wait for the pop-up window to load
-  // useEffect(() => {
-  //   const currentPopupWindow = popupWindow;
-  //   if (currentPopupWindow) {
-  //     console.log("here 🧐🧐");
-  //     currentPopupWindow.addEventListener("load", (event) => {
-  //       console.log("page is fully loaded");
-  //     });
-
-  //     // return () =>
-  //     //   currentPopupWindow.removeEventListener("load", (event) => {
-  //     //     console.log("clean up load listener");
-  //     //   });
-  //   }
-  // }, [popupWindow]);
-
   useEffect(() => {
     let timeId;
     if (isStopReading) {
@@ -538,7 +482,6 @@ export const useNewsCommandsHandler = (
     handleReadingHeadLines,
     respondedWithYesSC,
     respondedWithNoSC,
-    goBackHandler,
     openArticleHandler,
     handleStopReading,
     activeArticle,
@@ -546,5 +489,7 @@ export const useNewsCommandsHandler = (
     isReadingHeadLines,
     handleClosePopupWindow,
     readHeadLinesFrom,
+    setPageNumber,
+    setNewsArticles,
   };
 };

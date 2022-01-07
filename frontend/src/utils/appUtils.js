@@ -13,7 +13,7 @@ import {
 } from "../components/finanbroBtn/commandsHandler";
 import { useResponse } from "../components/finanbroBtn/hooks/useResponse";
 import { useHistory, useLocation } from "react-router-dom";
-import { PAGES } from "../App";
+import { useCommonCommandsHandler } from "../components/finanbroBtn/hooks/useCommonCommandsHandler";
 // export const useSecondCommand = (commands) => {
 //   const { transcript } = useSpeechRecognition();
 // };
@@ -40,7 +40,6 @@ export const useFinansis = () => {
     handleReadingHeadLines,
     respondedWithYesSC,
     respondedWithNoSC,
-    goBackHandler,
     openArticleHandler,
     handleStopReading,
     activeArticle,
@@ -48,6 +47,8 @@ export const useFinansis = () => {
     isReadingHeadLines,
     handleClosePopupWindow,
     readHeadLinesFrom,
+    setPageNumber,
+    setNewsArticles,
   } = useNewsCommandsHandler(
     response,
     responseAfterTimeout,
@@ -61,43 +62,18 @@ export const useFinansis = () => {
       handleCloseModal
     );
 
-  const handleStopListening = () => {
-    console.log("here");
-    SpeechRecognition.stopListening();
-    response("okay, I'll stop listening");
-  };
-
   const history = useHistory();
   const { pathname } = useLocation();
 
-  const handleGoToPage = (page) => {
-    console.log({ page, pathname });
-
-    // handling going to the current page
-    if (
-      (pathname === "/" && page.toLocaleLowerCase() === "home") ||
-      pathname.split("/")[1] === page.toLocaleLowerCase()
-    ) {
-      response(`you are in ${page} page`);
-      return;
-    }
-
-    if (page === "home") history.push("/");
-    else {
-      const paths = PAGES.map(({ path }) => path.split("/")[1]);
-      console.log("🧐");
-      console.log(paths);
-      if (paths.includes(page.toLocaleLowerCase())) {
-        history.push(`/${page}`);
-
-        // handle not exist page
-      } else {
-        response(`${page} page is not exist`);
-        return;
-      }
-    }
-    response(`here is ${page} page`);
-  };
+  const { goBackHandler, handleStopListening, handleGoToPage } =
+    useCommonCommandsHandler(
+      setPageNumber,
+      setNewsArticles,
+      response,
+      responseAfterTimeout,
+      newsArticles,
+      SpeechRecognition
+    );
 
   const commands = [
     // {
@@ -110,7 +86,7 @@ export const useFinansis = () => {
     // },
     {
       command: ["what can you do", "how can you help me"],
-      callback: (redirectPage) =>
+      callback: () =>
         response("I provide finance information for you"),
       commandFor: "every section",
     },
