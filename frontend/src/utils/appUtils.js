@@ -49,6 +49,8 @@ export const useFinansis = () => {
     readHeadLinesFrom,
     setPageNumber,
     setNewsArticles,
+    openArticleWithoutControllerItHandler,
+    handleClosePopupWindowWithoutController,
   } = useNewsCommandsHandler(
     response,
     responseAfterTimeout,
@@ -213,6 +215,12 @@ export const useFinansis = () => {
           "yeah I can hear you",
         ]),
       commandFor: "every section",
+    },
+    {
+      command: "open article (number) * without controlling it",
+      callback: async (num) =>
+        await openArticleWithoutControllerItHandler(num),
+      commandFor: "news",
     },
   ];
 

@@ -168,7 +168,7 @@ deadline - before 2022-1-8 ✅ DONE on 2022-1-7
 86 - {TODO} handle if the user didn't have internat and if he in china check for vpn 
 deadline - before 2022-1-11 ⏳
 87 - {TODO} fixing 'open chart' and not saying 'i don't recognized that command'
-
+88 - {TODO} fixing 🛠: finansis not checking any words after dynamic words when checking for unknown commands
 77 - {NOT important NOW TODO} convert all publishedAt timezone to one similarly timezone when scraping articles.
     note - https://stackoverflow.com/questions/10997577/python-timezone-conversion
 

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
+import { wordToNumber } from "../../utils/wordToNumber";
 // import puppeteer from "puppeteer";
 
 import { useResponse } from "./hooks/useResponse";
@@ -311,31 +312,42 @@ export const useNewsCommandsHandler = (
   };
 
   const [popupWindow, setPopupWindow] = useState(null);
+  const [
+    popupWindowWithoutController,
+    setPopupWindowWithoutController,
+  ] = useState(null);
 
-  // const openArticleHandler = (articleNum) => {
-  //   const articleNumberIsInRange =
-  //     articleNum > 0 && articleNum < newsArticles.length - 1;
-  //   if (newsArticles.length && articleNumberIsInRange) {
-  //     response(`opening article ${articleNum}`);
-  //     const { goToUrl } = newsArticles[articleNum - 1];
-  //     console.log({ goToUrl });
-  //     const newPopupWindow = window.open(
-  //       goToUrl,
-  //       "ORIGIN_ARTICLE_WINDOW",
-  //       "popup"
-  //     );
-  //     setPopupWindow(newPopupWindow);
-  //     // window.open(goToUrl, "_blank");
-  //   } else {
-  //     response(
-  //       `article with number ${articleNum} not exist, so yeah I can't open it.}`
-  //     );
-  //   }
-  //   // window.location.href = url;
-  // };
+  const openArticleWithoutControllerItHandler = (num) => {
+    const articleNum = wordToNumber(num);
+    const articleNumberIsInRange =
+      articleNum > 0 && articleNum < newsArticles.length - 1;
+    if (newsArticles.length && articleNumberIsInRange) {
+      response(`opening article ${articleNum} without my help`);
+      const { goToUrl } = newsArticles[articleNum - 1];
+      console.log({ goToUrl });
+      const newPopupWindow = window.open(
+        goToUrl,
+        "ORIGIN_ARTICLE_WINDOW",
+        "popup,width=1366,height=708"
+      );
+      setPopupWindowWithoutController(newPopupWindow);
+      // window.open(goToUrl, "_blank");
+    } else {
+      response(
+        `article with number ${articleNum} not exist, so yeah I can't open it.}`
+      );
+    }
+    // window.location.href = url;
+  };
 
   const [currentArticle, setCurrentArticle] = useState(null);
   const openArticleHandler = async (articleNum) => {
+    // there is some error because 'open article (number) * without controlling it'
+    // and 'open article number (number) *' commands are similar
+    // before '*' dynamic content symbol
+    //  so the flowing code will' fix it
+    if (articleNum.includes("without")) return;
+
     const articleNumberIsInRange =
       articleNum > 0 && articleNum <= newsArticles.length;
     const width = window.outerWidth - 20;
@@ -350,6 +362,7 @@ export const useNewsCommandsHandler = (
         "http://localhost:3333/open",
         { goToUrl }
       );
+      // this is just for pushing popup window at top
       const w = window.open(
         goToUrl,
         "ORIGIN_ARTICLE_WINDOW",
@@ -372,15 +385,15 @@ export const useNewsCommandsHandler = (
     // window.location.href = url;
   };
 
-  // const handleClosePopupWindow = () => {
-  //   if (popupWindow) {
-  //     // popupWindow.close();
-  //     popupWindow.scrollBy(0, 1000);
-  //     popupWindow.response("closing popup window");
-  //   } else {
-  //     response("popup window is not open, so i can't close it");
-  //   }
-  // };
+  const handleClosePopupWindowWithoutController = () => {
+    if (popupWindow) {
+      popupWindowWithoutController.close();
+      //     popupWindow.scrollBy(0, 1000);
+      response("closing popup window");
+    } else {
+      response("popup window is not open, so i can't close it");
+    }
+  };
 
   const handleClosePopupWindow = async () => {
     if (popupWindow) {
@@ -390,6 +403,11 @@ export const useNewsCommandsHandler = (
 
       setPopupWindow(data.isAutoBrowserOpen);
       response("closing popup window");
+    } else if (setPopupWindowWithoutController) {
+      popupWindowWithoutController.close();
+      //     popupWindow.scrollBy(0, 1000);
+      response("closing popup window");
+      setPopupWindowWithoutController(null);
     } else {
       response("popup window is not open, so i can't close it");
     }
@@ -491,5 +509,7 @@ export const useNewsCommandsHandler = (
     readHeadLinesFrom,
     setPageNumber,
     setNewsArticles,
+    handleClosePopupWindowWithoutController,
+    openArticleWithoutControllerItHandler,
   };
 };
