@@ -278,6 +278,13 @@ export const useFinansis = () => {
   const [isCommandExist, setIsCommandExist] = useState(true);
   // code for handling unknown commands
   const [isStopListing, setIsStopListing] = useState(false);
+  const responseFoUnknownCommand = [
+    "I didn't get that. you can try again... bro",
+    "sorry i don't understand that. try again",
+    "i don't understand that. try again",
+    "i didn't get it. please try again",
+    "i didn't get it. try again",
+  ];
   useEffect(() => {
     let isCommandExist = false;
     if (finalTranscript) {
@@ -354,8 +361,7 @@ export const useFinansis = () => {
       console.log({ isCommandExist });
 
       setIsCommandExist(isCommandExist);
-      if (!isCommandExist)
-        response("I didn't get that. you can try again... bro");
+      if (!isCommandExist) response(responseFoUnknownCommand);
 
       const autoResetTranscriptNotWorking = [
         "of course yes",
