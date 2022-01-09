@@ -174,19 +174,16 @@ deadline - before 2022-1-8 ✅ DONE on 2022-1-7
     5 - return found company [DONE]
     6 - {DONE} creating a better version of lookupForTickers function by connected to the database not just my file system
     6 - {DONE} creating a better version of searchCompanyName function by connected it to the database not just my file system
-85 - {TODO} improve 'open {} chart' by allowing the user to  open more then one chart
-    1 - calculate the size of the user window 
-    2 -     open the first window with full screen
-    3 - if the user ask for the other window open 
-        - resize the first or close it and open it with have size of the user screen
-        - open the second chart with the left half size  
-86 - {TODO} handle if the user didn't have internat and if he in china check for vpn 
+85 - {DONE} improve 'open {} chart' by allowing the user to  open more then one chart
+   - {TODO} handle if the user didn't have internat and if he in china check for vpn 
 deadline - before 2022-1-11 ⏳
 87 - {TODO} fixing 'open chart' and not saying 'i don't recognized that command'
 88 - {TODO} fixing 🛠: finansis not checking any words after dynamic words when checking for unknown commands
 89 - {TODO} creating serverUtils in utile folder and add all server stuff to it like urls
 90 - {TODO} let finansis remember 'not found keyword when search in yahoo finance for company name' like the keyword 'something'
     - didn't found public company name with 'something' form yahoo finance
+91 - {TODO} creating 'what's the date today' commands
+92 - {TODO} improve offline component by make it like youtube 
 77 - {NOT important NOW TODO} convert all publishedAt timezone to one similarly timezone when scraping articles.
     note - https://stackoverflow.com/questions/10997577/python-timezone-conversion
 

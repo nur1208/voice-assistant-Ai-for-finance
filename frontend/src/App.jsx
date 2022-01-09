@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FinanbroBtn } from "./components/finanbroBtn/finanbroBtn";
 import { NewsPage } from "./pages/NewsPage";
 import { useFinansis } from "./utils/appUtils";
@@ -9,6 +9,9 @@ import { InfoPage } from "./pages/InfoPage";
 import { TheMostTable } from "./components/TheMostTable/TheMostTable";
 import BasicModal from "./components/Modal";
 import { getAllTickersInDatabaseToJson } from "./utils/getAllTickersInDatabaseToJson";
+import { Offline } from "./components/Offline";
+import { NotWorkingInChina } from "./components/NotWorkingInChina";
+import { getCurrentCountry } from "./utils/getCurrentCountry";
 
 export const PAGES = [
   {
@@ -30,6 +33,7 @@ export const PAGES = [
 ];
 
 export const App = () => {
+  const [userCountry, setUserCountry] = useState("");
   const {
     NewsPageProps,
     FinanbroBtnProps,
@@ -37,10 +41,24 @@ export const App = () => {
     modalProps,
   } = useFinansis();
 
+  useEffect(() => {
+    (async () => {
+      const userCurrentCountry = await getCurrentCountry();
+      setUserCountry(userCurrentCountry);
+    })();
+  }, []);
+
+  if (userCountry.toLowerCase() === "china") {
+    return <NotWorkingInChina />;
+  }
+
   if (!isBrowserSupportsSpeechRecognition) {
     return <NoBrowserSupport />;
   }
 
+  // tell users finansis doesn't work without internet connection
+  // if the user offline
+  if (!navigator.onLine) return <Offline />;
   // getAllTickersInDatabaseToJson();
   return (
     <>
