@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cors from "cors";
 import newsRouter from "./routes/newsRoute.js";
+import companyRouter from "./routes/companyRoute.js";
 
 dotenv.config();
 
@@ -39,6 +40,7 @@ const main = async () => {
 
     // Routing
     app.use("/api/v1/news", newsRouter);
+    app.use("/api/v1/companies", companyRouter);
 
     app.listen(port, () => {
       console.log(

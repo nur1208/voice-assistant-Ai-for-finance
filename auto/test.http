@@ -10,3 +10,13 @@ Content-Type: application/json
 POST {{url}}/close
 ###
 POST {{url}}/scroll
+
+
+###
+POST {{url}}/findingCompanies
+Content-Type: application/json
+
+{
+    "keyword":"apple"
+}
+###

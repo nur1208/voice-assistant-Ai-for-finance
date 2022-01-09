@@ -1,10 +1,27 @@
-import tickers from "./tickerToName.json";
-
+// import tickers from "./tickerToName.json";
+import axios from "axios";
+import tickers from "./tickerToNameV2.json";
+// tickerToNameV2.json
 export const lookupForTickers = (input) => {
   const ticker = input.toUpperCase();
   return tickers.hasOwnProperty(ticker)
     ? tickers[ticker].name
     : null;
+};
+
+const apiUrl = "http://localhost:4050/api/v1/companies";
+export const lookupForTickersV2 = async (symbol) => {
+  try {
+    const {
+      data: { doc },
+    } = await axios.get(`${apiUrl}?symbol=${symbol}`);
+    console.log("🧐🧐");
+    console.log({ doc });
+    return doc.length > 0 ? doc[0].name : null;
+  } catch (error) {
+    console.log(error.message);
+    return null;
+  }
 };
 
 export const searchCompanyName = (input) => {

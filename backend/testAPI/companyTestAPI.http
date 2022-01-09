@@ -1,0 +1,17 @@
+@port = 4050
+@Host =  http://localhost
+
+@route = api/v1/companies
+
+POST {{Host}}:{{port}}/{{route}}
+Content-Type: application/json
+
+{
+    "symbol":"AUTL",
+    "name":"Autolus Therapeutics plc"
+}
+
+###
+
+GET {{Host}}:{{port}}/{{route}}?symbol=aapl
+

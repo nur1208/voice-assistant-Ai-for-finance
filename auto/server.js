@@ -1,7 +1,8 @@
 import express from "express";
 import puppeteer from "puppeteer";
 import cors from "cors";
-
+import cheerio from "cheerio";
+import axios from "axios";
 const app = express();
 const port = 3333;
 
@@ -14,6 +15,118 @@ let page;
 app.use(express.json());
 app.use(cors("http://localhost:3000"));
 // app.use(morgan("dev"));
+
+app.post("/findingCompanies", async (req, res) => {
+  //   const width = window.outerWidth - 20;
+  //   const height = window.outerHeight - 20;
+  const { keyword } = req.body;
+  //   console.log(req.body);
+  const width = 1366 - 20;
+  const height = 768 - 20;
+  const timeout = 1000 * 90;
+  //   const { goToUrl } = newsArticles[articleNum - 1];
+  //   console.log({ goToUrl });
+  const browserLocal = await puppeteer.launch({
+    headless: false,
+    executablePath:
+      "C:/Program Files/Google/Chrome/Application/chrome.exe",
+    defaultViewport: { width, height },
+    args: [
+      `--window-size=${width},${height}`,
+      // "--disable-infobars",
+      // "--start-fullscreen",
+      //   "'--no-sandbox'",
+      // "-app-cache-force-enabled",
+      "--arc-start-mode=always-start",
+    ],
+    // dumpio: true,
+    // pipe: true,
+    ignoreDefaultArgs: ["--enable-automation"],
+  });
+
+  page = await browserLocal.newPage();
+  // 800x600
+  await page.setViewport({
+    width,
+    height,
+  });
+
+  await page.goto("https://finance.yahoo.com/", {
+    timeout,
+    // waitUntil: "domcontentloaded",
+  });
+  await page.waitForTimeout(1000 * 30);
+
+  await page.type("#yfin-usr-qry", keyword, { delay: 500 });
+
+  await page.waitForTimeout(1000 * 30);
+  const ul = await page.evaluate(
+    () => document.querySelectorAll("ul")[1].outerHTML
+  );
+
+  const companies = [];
+  if (ul.includes('role="listbox"')) {
+    console.log("yes ✅");
+    const $ = cheerio.load(ul);
+    const lis = $("li").toArray();
+    for (let index = 0; index < lis.length; index++) {
+      const li = lis[index];
+
+      // console.log($("div:nth-child(2)", $(li).html()).text());
+      if ($("div:nth-child(2)", $(li).html()).text().trim()) {
+        if (
+          $(
+            "div:nth-child(1) > div:nth-child(1)",
+            $(li).html()
+          ).text() === "PRIVATE"
+        )
+          continue;
+
+        // console.log("found ✅");
+
+        const company = {};
+        company.symbol = $(
+          "div:nth-child(1) > div:nth-child(1)",
+          $(li).html()
+        ).text();
+
+        company.name = $(
+          "div:nth-child(1) > div:nth-child(2)",
+          $(li).html()
+        ).text();
+        companies.push(company);
+        try {
+          const { data } = await axios.post(
+            "http://localhost:4050/api/v1/companies",
+            company
+          );
+        } catch (error) {
+          console.log(company);
+
+          console.log(error.message + "❌");
+        }
+
+        // console.log(data);
+      } else
+        console.log($("div:nth-child(1)", $(li).html()).text());
+    }
+  } else {
+    console.log("no ❌");
+  }
+
+  // await page.waitForTimeout(1000 * 60 * 5);
+  // await page.evaluate(
+  //   (goToUrl) =>
+  //     window.open(goToUrl, "ORIGIN_ARTICLE_WINDOW", "popup"),
+  //   goToUrl
+  // );
+
+  await browserLocal.close();
+  res.json({
+    message: "findingCompanies working",
+    companies,
+  });
+});
 
 app.post("/open", async (req, res) => {
   //   const width = window.outerWidth - 20;

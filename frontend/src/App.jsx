@@ -8,6 +8,7 @@ import { HomePage } from "./pages/HomePage";
 import { InfoPage } from "./pages/InfoPage";
 import { TheMostTable } from "./components/TheMostTable/TheMostTable";
 import BasicModal from "./components/Modal";
+import { getAllTickersInDatabaseToJson } from "./utils/getAllTickersInDatabaseToJson";
 
 export const PAGES = [
   {
@@ -40,6 +41,7 @@ export const App = () => {
     return <NoBrowserSupport />;
   }
 
+  // getAllTickersInDatabaseToJson();
   return (
     <>
       <Switch>
