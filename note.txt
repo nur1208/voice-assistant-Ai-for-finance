@@ -163,7 +163,7 @@ deadline - before 2022-1-8 ✅ DONE on 2022-1-7
 82 - {DONE} movie goBack handle from useNewsCommandsHandler to useCommonCommandsHandler and add all the command handlers to it
 83 - {DONE} let the user chose if he want to let finansis control the popup window or not 
     note - 'open the article' or 'open the article and control it'
-84 - {TODO} if finansis don't knows a company name let her say "i'm learning about 'company' give me a minute' and search in yahoo finance
+84 - {DONE} if finansis don't knows a company name let her say "i'm learning about 'company' give me a minute' and search in yahoo finance
     - steps to let finansis learning about company's name
     - create company database
     - create get and post routes for company resource 
@@ -173,13 +173,20 @@ deadline - before 2022-1-8 ✅ DONE on 2022-1-7
     4 - else take the keyword and type it in yahoo finance search bar using puppeteer and then add found company the database
     5 - return found company [DONE]
     6 - {DONE} creating a better version of lookupForTickers function by connected to the database not just my file system
+    6 - {DONE} creating a better version of searchCompanyName function by connected it to the database not just my file system
 85 - {TODO} improve 'open {} chart' by allowing the user to  open more then one chart
+    1 - calculate the size of the user window 
+    2 -     open the first window with full screen
+    3 - if the user ask for the other window open 
+        - resize the first or close it and open it with have size of the user screen
+        - open the second chart with the left half size  
 86 - {TODO} handle if the user didn't have internat and if he in china check for vpn 
 deadline - before 2022-1-11 ⏳
 87 - {TODO} fixing 'open chart' and not saying 'i don't recognized that command'
 88 - {TODO} fixing 🛠: finansis not checking any words after dynamic words when checking for unknown commands
 89 - {TODO} creating serverUtils in utile folder and add all server stuff to it like urls
-
+90 - {TODO} let finansis remember 'not found keyword when search in yahoo finance for company name' like the keyword 'something'
+    - didn't found public company name with 'something' form yahoo finance
 77 - {NOT important NOW TODO} convert all publishedAt timezone to one similarly timezone when scraping articles.
     note - https://stackoverflow.com/questions/10997577/python-timezone-conversion
 

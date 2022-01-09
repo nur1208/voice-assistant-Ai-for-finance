@@ -190,7 +190,7 @@ export const useFinansis = () => {
     },
 
     {
-      command: ["close (the) chart"],
+      command: ["close (the) chart", "close charts"],
       callback: async (target) => await closeChart(target),
       commandFor: "info",
     },
