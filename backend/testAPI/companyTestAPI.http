@@ -13,5 +13,5 @@ Content-Type: application/json
 
 ###
 
-GET {{Host}}:{{port}}/{{route}}?symbol=aapl
+GET {{Host}}:{{port}}/{{route}}?name=apple
 

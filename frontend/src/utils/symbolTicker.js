@@ -15,8 +15,8 @@ export const lookupForTickersV2 = async (symbol) => {
     const {
       data: { doc },
     } = await axios.get(`${apiUrl}?symbol=${symbol}`);
-    console.log("🧐🧐");
-    console.log({ doc });
+    // console.log("🧐🧐");
+    // console.log({ doc });
     return doc.length > 0 ? doc[0].name : null;
   } catch (error) {
     console.log(error.message);
@@ -33,4 +33,18 @@ export const searchCompanyName = (input) => {
     }
   }
   return found;
+};
+
+export const searchCompanyNameV2 = async (name) => {
+  try {
+    const {
+      data: { doc },
+    } = await axios.get(`${apiUrl}?name=${name}`);
+    console.log("🧐🧐");
+    console.log({ doc });
+    return doc.length > 0 ? doc : null;
+  } catch (error) {
+    console.log(error.message);
+    return null;
+  }
 };

@@ -5,6 +5,7 @@ import {
   lookupForTickers,
   lookupForTickersV2,
   searchCompanyName,
+  searchCompanyNameV2,
 } from "./../../../utils/symbolTicker";
 
 import { getAllTickersInDatabaseToJson } from "./../../../utils/getAllTickersInDatabaseToJson";
@@ -129,9 +130,9 @@ export const useInfoCommandsHandler = (
     let finalTarget = target;
     // const isFound
     if (!(await lookupForTickersV2(finalTarget))) {
-      const symbolsFound = searchCompanyName(finalTarget);
+      const symbolsFound = await searchCompanyNameV2(finalTarget);
       console.log(symbolsFound);
-      if (symbolsFound.length > 2) {
+      if (symbolsFound && symbolsFound.length > 2) {
         finalTarget = symbolsFound[0].symbol;
 
         response(
@@ -144,7 +145,7 @@ export const useInfoCommandsHandler = (
 
         setFoundStock(symbolsFound);
         return;
-      } else if (symbolsFound.length === 1) {
+      } else if (symbolsFound && symbolsFound.length === 1) {
         finalTarget = symbolsFound[0].symbol;
       } else {
         response(
