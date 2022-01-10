@@ -1,5 +1,6 @@
 // import tickers from "./tickerToName.json";
 import axios from "axios";
+import { BACKEND_API_URL, COMPANIES_ROUTE } from "./serverUtils";
 import tickers from "./tickerToNameV2.json";
 // tickerToNameV2.json
 export const lookupForTickers = (input) => {
@@ -9,7 +10,7 @@ export const lookupForTickers = (input) => {
     : null;
 };
 
-const apiUrl = "http://localhost:4050/api/v1/companies";
+const apiUrl = `${BACKEND_API_URL}/${COMPANIES_ROUTE}`;
 export const lookupForTickersV2 = async (symbol) => {
   try {
     const {

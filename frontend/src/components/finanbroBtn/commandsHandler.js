@@ -1,6 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
+import {
+  AUTO_API_URL,
+  NEWS_API_URL_C,
+} from "../../utils/serverUtils";
 import { wordToNumber } from "../../utils/wordToNumber";
 // import puppeteer from "puppeteer";
 
@@ -47,7 +51,7 @@ export const useNewsCommandsHandler = (
     // const API_KEY = "445938e7b4214f4988780151868665cc";
     // let NEWS_API_URL = `https://newsapi.org/v2/top-headlines?apiKey=${API_KEY}&language=en`;
     // let NEWS_API_URL = `http://localhost:4050/api/v1/news?`;
-    let NEWS_API_URL = `https://news-api-lovat.vercel.app/api/v1/news?`;
+    let NEWS_API_URL = NEWS_API_URL_C;
 
     let lastCommand;
     if (type === "giveMeMore") {
@@ -358,10 +362,9 @@ export const useNewsCommandsHandler = (
       response("loading the page will take seconds");
       setCurrentArticle(null);
 
-      const { data } = await axios.post(
-        "http://localhost:3333/open",
-        { goToUrl }
-      );
+      const { data } = await axios.post(`${AUTO_API_URL}/open`, {
+        goToUrl,
+      });
       // this is just for pushing popup window at top
       const w = window.open(
         goToUrl,
@@ -397,9 +400,7 @@ export const useNewsCommandsHandler = (
 
   const handleClosePopupWindow = async () => {
     if (popupWindow) {
-      const { data } = await axios.post(
-        "http://localhost:3333/close"
-      );
+      const { data } = await axios.post(`${AUTO_API_URL}/close`);
 
       setPopupWindow(data.isAutoBrowserOpen);
       response("closing popup window");
@@ -435,7 +436,7 @@ export const useNewsCommandsHandler = (
       const callApi = async (source) => {
         const {
           data: { isEndOfPage },
-        } = await axios.post("http://localhost:3333/scroll", {
+        } = await axios.post(`${AUTO_API_URL}/scroll`, {
           source,
         });
 
@@ -459,7 +460,7 @@ export const useNewsCommandsHandler = (
   const handleScrollDetailPage = async () => {
     if (popupWindow) {
       const { source } = currentArticle;
-      await axios.post("http://localhost:3333/scroll", { source });
+      await axios.post(`${AUTO_API_URL}/scroll`, { source });
       for (let index = 0; index < 300; index++) {
         try {
           const isEngOfPage = await scrollAfterTimeout(source);

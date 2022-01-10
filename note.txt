@@ -177,8 +177,8 @@ deadline - before 2022-1-8 ✅ DONE on 2022-1-7
 85 - {DONE} improve 'open {} chart' by allowing the user to  open more then one chart
    - {DONE} handle if the user didn't have internat and if he in china  
 deadline - before 2022-1-11 ✅ DONE on 2022-1-9
-87 - {TODO} fixing 'open chart' and not saying 'i don't recognized that command'
-88 - {TODO} fixing 🛠: finansis not checking any words after dynamic words when checking for unknown commands
+87 - {DONE} fixing 'open chart' and not saying 'i don't recognized that command'
+88 - {DONE} fixing 🛠: finansis not checking any words after dynamic words when checking for unknown commands
 89 - {TODO} creating serverUtils in utile folder and add all server stuff to it like urls
 90 - {TODO} let finansis remember 'not found keyword when search in yahoo finance for company name' like the keyword 'something'
     didn't found public company name with 'something' form yahoo finance

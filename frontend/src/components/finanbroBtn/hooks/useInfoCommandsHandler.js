@@ -11,6 +11,7 @@ import {
 import { getAllTickersInDatabaseToJson } from "./../../../utils/getAllTickersInDatabaseToJson";
 
 import axios from "axios";
+import { AUTO_API_URL, YAHOO_FINANCE_URL } from "../../../utils/serverUtils";
 export const useInfoCommandsHandler = (
   response,
   handleOpenModal,
@@ -26,7 +27,7 @@ export const useInfoCommandsHandler = (
     const height = window.outerHeight - 20;
 
     const newPopupWindow = window.open(
-      `https://finance.yahoo.com/chart/${symbol}`,
+      `${YAHOO_FINANCE_URL}/chart/${symbol}`,
       `ORIGIN_CHART_WINDOW_${openedChartsNum + 1}`,
       `popup,width=${width},height=${height}`
     );
@@ -118,7 +119,7 @@ export const useInfoCommandsHandler = (
         const {
           data: { companies },
         } = await axios.post(
-          "http://localhost:3333/findingCompanies",
+          `${AUTO_API_URL}/findingCompanies`,
           { keyword: target }
         );
         // first one
