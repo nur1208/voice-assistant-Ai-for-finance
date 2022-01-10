@@ -67,15 +67,21 @@ export const useFinansis = () => {
   const history = useHistory();
   const { pathname } = useLocation();
 
-  const { goBackHandler, handleStopListening, handleGoToPage } =
-    useCommonCommandsHandler(
-      setPageNumber,
-      setNewsArticles,
-      response,
-      responseAfterTimeout,
-      newsArticles,
-      SpeechRecognition
-    );
+  const {
+    goBackHandler,
+    handleStopListening,
+    handleGoToPage,
+    handleTodaysDate,
+  } = useCommonCommandsHandler(
+    setPageNumber,
+    setNewsArticles,
+    response,
+    responseAfterTimeout,
+    newsArticles,
+    SpeechRecognition,
+    handleOpenModal,
+    handleCloseModal
+  );
 
   const commands = [
     // {
@@ -221,6 +227,16 @@ export const useFinansis = () => {
       callback: async (num) =>
         await openArticleWithoutControllerItHandler(num),
       commandFor: "news",
+    },
+    {
+      command: [
+        "what's the date today",
+        "what is the date today",
+        "what's today date",
+        "what's today's date",
+      ],
+      callback: (num) => handleTodaysDate(num),
+      commandFor: "every section",
     },
   ];
 

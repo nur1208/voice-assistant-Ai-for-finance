@@ -7,7 +7,9 @@ export const useCommonCommandsHandler = (
   response,
   responseAfterTimeout,
   newsArticles,
-  SpeechRecognition
+  SpeechRecognition,
+  handleOpenModal,
+  handleCloseModal
 ) => {
   const history = useHistory();
 
@@ -85,5 +87,31 @@ export const useCommonCommandsHandler = (
     response(`here is ${page} page`);
   };
 
-  return { goBackHandler, handleStopListening, handleGoToPage };
+  const handleTodaysDate = () => {
+    const today = new Date(Date.now());
+    // var options = { dateStyle: "full", timeStyle: "long" };
+    var options = { dateStyle: "full" };
+    // new Intl.DateTimeFormat("en-US", options);
+    // console.log(
+    //   new Intl.DateTimeFormat("en-US", options).format(today)
+    // );
+    handleOpenModal(
+      "today's date is:",
+      new Intl.DateTimeFormat("en-US", options).format(today)
+    );
+    response(
+      new Intl.DateTimeFormat("en-US", options).format(today)
+    );
+
+    setTimeout(() => {
+      handleCloseModal();
+    }, 1000 * 7);
+  };
+
+  return {
+    goBackHandler,
+    handleStopListening,
+    handleGoToPage,
+    handleTodaysDate,
+  };
 };

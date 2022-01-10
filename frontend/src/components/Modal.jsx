@@ -50,17 +50,20 @@ export default function BasicModal({
               {index + 1} - symbol: AAPL, company name: Apple inc.
             </Typography>
           ))} */}
-          {typeof content === "object"
-            ? content.map(({ symbol, name }, index) => (
-                <Typography
-                  id="modal-modal-description"
-                  sx={{ mt: 2 }}
-                >
-                  {index + 1} - symbol: {symbol}, company name:{" "}
-                  {name}
-                </Typography>
-              ))
-            : null}
+          {typeof content === "object" ? (
+            content.map(({ symbol, name }, index) => (
+              <Typography
+                id="modal-modal-description"
+                sx={{ mt: 2 }}
+              >
+                {index + 1} - symbol: {symbol}, company name: {name}
+              </Typography>
+            ))
+          ) : (
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+              {content}
+            </Typography>
+          )}
         </Box>
       </Modal>
     </div>
