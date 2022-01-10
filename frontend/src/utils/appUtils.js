@@ -303,8 +303,54 @@ export const useFinansis = () => {
           const lastWordBeforeDynamic =
             element.split(" ")[indexDynamic - 1];
 
+          let fistWordAfterDynamic = "";
+          // let fistIndexAfterDynamic = -1
+          if (element.split(" ").length > indexDynamic + 1)
+            fistWordAfterDynamic =
+              element.split(" ")[indexDynamic + 1];
           // if (element.replace(/\((.*?)\)/, ""))
 
+          // if (fistWordAfterDynamic) {
+          //   console.log("🧐🧐🧐");
+          //   // ['open', '*','chart']
+          //   // ['open', 'chart']
+          //   // ['open', "APPLE", 'chart'"]
+          //   console.log({
+          //     test1: fistWordAfterDynamic,
+          //     test2: element.split(" "),
+          //     test3: lastWordBeforeDynamic,
+          //     test4:
+          //       element
+          //         .split(" ")
+          //         .slice(0, indexDynamic)
+          //         .join(" ") +
+          //       " " +
+          //       element
+          //         .split(" ")
+          //         .slice(indexDynamic + 1)
+          //         .join(" "),
+          //     test5:
+          //       transcript
+          //         .split(" ")
+          //         .slice(0, indexDynamic)
+          //         .join(" ") +
+          //       " " +
+          //       transcript
+          //         .split(" ")
+          //         .slice(
+          //           transcript
+          //             .split(" ")
+          //             .indexOf(fistWordAfterDynamic)
+          //         )
+          //         .join(" "),
+          //     test6: transcript
+          //       .split(" ")
+          //       .indexOf(fistWordAfterDynamic),
+          //     test7: indexDynamic,
+          //   });
+          // }
+
+          // const isSameAfterDynamicWord = fistWordAfterDynamic &&
           if (
             transcript
               .split(" ")
@@ -313,10 +359,61 @@ export const useFinansis = () => {
               .toLocaleLowerCase() ===
             element.split(" ").slice(0, indexDynamic).join(" ")
           ) {
-            // console.log("here 1");
-            // fix the error here
-            isCommandExist = true;
-            foundCommand = onlyCommands[index];
+            if (fistWordAfterDynamic) {
+              const checkWithoutDynamicWord =
+                element
+                  .split(" ")
+                  .slice(0, indexDynamic)
+                  .join(" ") +
+                  " " +
+                  element
+                    .split(" ")
+                    .slice(indexDynamic + 1)
+                    .join(" ") ===
+                transcript
+                  .split(" ")
+                  .slice(0, indexDynamic)
+                  .join(" ") +
+                  " " +
+                  transcript
+                    .split(" ")
+                    .slice(
+                      transcript
+                        .split(" ")
+                        .indexOf(fistWordAfterDynamic)
+                    )
+                    .join(" ");
+              const checkDWInCommandNotSameIndexDWInTranscript =
+                transcript
+                  .split(" ")
+                  .indexOf(fistWordAfterDynamic) !== indexDynamic;
+
+              const checkDWIsExistInTranscript =
+                transcript
+                  .split(" ")
+                  .indexOf(fistWordAfterDynamic) !== -1;
+              const finalCondition =
+                checkWithoutDynamicWord &&
+                checkDWIsExistInTranscript &&
+                checkDWInCommandNotSameIndexDWInTranscript;
+
+              // console.log({
+              //   checkDWInCommandNotSameIndexDWInTranscript,
+              //   checkWithoutDynamicWord,
+              //   checkDWIsExistInTranscript,
+              //   finalCondition,
+              // });
+
+              if (finalCondition) {
+                isCommandExist = true;
+                foundCommand = onlyCommands[index];
+              }
+            } else {
+              // console.log("here 1");
+              // fix the error here
+              isCommandExist = true;
+              foundCommand = onlyCommands[index];
+            }
           }
         } else {
           if (element === transcript.toLocaleLowerCase()) {

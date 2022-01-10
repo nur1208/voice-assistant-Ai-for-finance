@@ -175,15 +175,26 @@ deadline - before 2022-1-8 ✅ DONE on 2022-1-7
     6 - {DONE} creating a better version of lookupForTickers function by connected to the database not just my file system
     6 - {DONE} creating a better version of searchCompanyName function by connected it to the database not just my file system
 85 - {DONE} improve 'open {} chart' by allowing the user to  open more then one chart
-   - {TODO} handle if the user didn't have internat and if he in china check for vpn 
-deadline - before 2022-1-11 ⏳
+   - {DONE} handle if the user didn't have internat and if he in china  
+deadline - before 2022-1-11 ✅ DONE on 2022-1-9
 87 - {TODO} fixing 'open chart' and not saying 'i don't recognized that command'
 88 - {TODO} fixing 🛠: finansis not checking any words after dynamic words when checking for unknown commands
 89 - {TODO} creating serverUtils in utile folder and add all server stuff to it like urls
 90 - {TODO} let finansis remember 'not found keyword when search in yahoo finance for company name' like the keyword 'something'
-    - didn't found public company name with 'something' form yahoo finance
+    didn't found public company name with 'something' form yahoo finance
 91 - {TODO} creating 'what's the date today' commands
 92 - {TODO} improve offline component by make it like youtube 
+deadline - before 2022-1-12 ⏳
+93 - {TODO} improve 'give me the news {source}' and 'what's up with {something}' commands 
+    by return the most published articles
+94 - {TODO} creating 'Give me apple statistics' commands 
+95 - {TODO} creating 'Give The most active stocks' commands
+96 - {TODO} creating 'Give The most gainers stocks' commands
+97 - {TODO} creating 'Give The most loser stocks' commands
+98 - {TODO} creating 'what is Price to earing ration?' commands
+    - search in duckduck
+    
+
 77 - {NOT important NOW TODO} convert all publishedAt timezone to one similarly timezone when scraping articles.
     note - https://stackoverflow.com/questions/10997577/python-timezone-conversion
 
