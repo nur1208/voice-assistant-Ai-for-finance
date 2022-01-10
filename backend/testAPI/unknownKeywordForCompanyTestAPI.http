@@ -1,0 +1,16 @@
+@port = 4050
+@Host =  http://localhost
+
+@route = api/v1/unknownKeywords
+
+POST {{Host}}:{{port}}/{{route}}
+Content-Type: application/json
+
+{
+    "keyword":"something"
+}
+
+###
+
+GET {{Host}}:{{port}}/{{route}}?keyword=somethings
+

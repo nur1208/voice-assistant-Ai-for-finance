@@ -179,9 +179,15 @@ deadline - before 2022-1-8 ✅ DONE on 2022-1-7
 deadline - before 2022-1-11 ✅ DONE on 2022-1-9
 87 - {DONE} fixing 'open chart' and not saying 'i don't recognized that command'
 88 - {DONE} fixing 🛠: finansis not checking any words after dynamic words when checking for unknown commands
-89 - {TODO} creating serverUtils in utile folder and add all server stuff to it like urls
+89 - {DONE} creating serverUtils in utile folder and add all server stuff to it like urls
 90 - {TODO} let finansis remember 'not found keyword when search in yahoo finance for company name' like the keyword 'something'
     didn't found public company name with 'something' form yahoo finance
+    - create unknownKeywordForCompany database
+        - keyword: unique, index ,type: string
+    - create route for unknownKeywordForCompany source (get and post)
+    - check for keyword in unknownKeywordForCompany before searching
+    - if finansis search in yahoo finance and  did't find any company for the keyword add the keyword to unknownKeywordForCompany
+    -      
 91 - {TODO} creating 'what's the date today' commands
 92 - {TODO} improve offline component by make it like youtube 
 deadline - before 2022-1-12 ⏳

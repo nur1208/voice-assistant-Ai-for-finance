@@ -11,7 +11,12 @@ import {
 import { getAllTickersInDatabaseToJson } from "./../../../utils/getAllTickersInDatabaseToJson";
 
 import axios from "axios";
-import { AUTO_API_URL, YAHOO_FINANCE_URL } from "../../../utils/serverUtils";
+import {
+  AUTO_API_URL,
+  BACKEND_API_URL,
+  KNOWN_KEYWORD_ROUTE,
+  YAHOO_FINANCE_URL,
+} from "../../../utils/serverUtils";
 export const useInfoCommandsHandler = (
   response,
   handleOpenModal,
@@ -107,36 +112,68 @@ export const useInfoCommandsHandler = (
       } else if (symbolsFound && symbolsFound.length === 1) {
         finalTarget = symbolsFound[0].symbol;
       } else {
-        response(
-          `didn't find chart for ${target}, so give me a minute to learn about ${target} from yahoo finance`
-        );
-
         // response(
         //   `so give me a minute to learn about ${target} from yahoo finance`
         // );
 
-        // so I'll learn about ${target} and you can try again after 3 minutes
-        const {
-          data: { companies },
-        } = await axios.post(
-          `${AUTO_API_URL}/findingCompanies`,
-          { keyword: target }
-        );
-        // first one
-        if (companies.length > 0) {
-          response(`I can open ${target} chart now`);
-          response(
-            "found the following stocks choose one by saying stock number 3 for example"
+        try {
+          const {
+            data: { status },
+          } = await axios.get(
+            `${BACKEND_API_URL}/${KNOWN_KEYWORD_ROUTE}?keyword=${target}`
           );
-          handleOpenModal("found the following stocks:", companies);
+          if (status === "fall") {
+            response(
+              `didn't find chart for ${target}, so give me a minute to learn about ${target} from yahoo finance`
+            );
 
-          setFoundStock(companies);
-          // await getAllTickersInDatabaseToJson();
-        } else {
+            // so I'll learn about ${target} and you can try again after 3 minutes
+            const {
+              data: { companies },
+            } = await axios.post(
+              `${AUTO_API_URL}/findingCompanies`,
+              {
+                keyword: target,
+              }
+            );
+            // first one
+            if (companies.length > 0) {
+              response(`I can open ${target} chart now`);
+              response(
+                "found the following stocks choose one by saying stock number 3 for example"
+              );
+              handleOpenModal(
+                "found the following stocks:",
+                companies
+              );
+
+              setFoundStock(companies);
+              // await getAllTickersInDatabaseToJson();
+              // TODO clean up the following code
+            } else {
+              response(
+                `I also didn't find chart for ${target} from yahoo finance`
+              );
+
+              await axios.post(
+                `${BACKEND_API_URL}/${KNOWN_KEYWORD_ROUTE}`,
+                {
+                  keyword: target,
+                }
+              );
+            }
+          } else {
+            response(
+              `I didn't find any chart with ${target} keyword from yahoo finance`
+            );
+          }
+        } catch (error) {
           response(
-            `I also didn't find chart for ${target} from yahoo finance`
+            `I didn't find any chart with ${target} keyword from yahoo finance`
           );
         }
+
+        // so I'll learn about ${target} and you can try again after 3 minutes
 
         return;
       }

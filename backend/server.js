@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import newsRouter from "./routes/newsRoute.js";
 import companyRouter from "./routes/companyRoute.js";
+import unknownKeywordForCompanyRouter from "./routes/unknownKeywordForCompanyRoute.js";
 
 dotenv.config();
 
@@ -41,7 +42,10 @@ const main = async () => {
     // Routing
     app.use("/api/v1/news", newsRouter);
     app.use("/api/v1/companies", companyRouter);
-
+    app.use(
+      "/api/v1/unknownKeywords",
+      unknownKeywordForCompanyRouter
+    );
     app.listen(port, () => {
       console.log(
         `express app listening at http://localhost:${port}`
