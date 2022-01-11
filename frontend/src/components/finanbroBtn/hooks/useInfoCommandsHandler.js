@@ -17,6 +17,7 @@ import {
   KNOWN_KEYWORD_ROUTE,
   YAHOO_FINANCE_URL,
 } from "../../../utils/serverUtils";
+
 export const useInfoCommandsHandler = (
   response,
   handleOpenModal,
@@ -24,23 +25,47 @@ export const useInfoCommandsHandler = (
 ) => {
   const [popupWindow, setPopupWindow] = useState(null);
   const [foundStock, setFoundStock] = useState([]);
-  const [openedChartsNum, setOpenedChartsNum] = useState(0);
+  const [openedWindowNum, setOpenedWindowNum] = useState(0);
+  const [windowType, setWindowType] = useState("");
 
-  const openWindow = (symbol) => {
+  const openWindow = (type, symbol) => {
     const width = window.outerWidth - 20;
     // const height = (window.outerHeight - 20) / 2;
     const height = window.outerHeight - 20;
 
-    const newPopupWindow = window.open(
-      `${YAHOO_FINANCE_URL}/chart/${symbol}`,
-      `ORIGIN_CHART_WINDOW_${openedChartsNum + 1}`,
-      `popup,width=${width},height=${height}`
-    );
+    let newPopupWindow;
+    if (type === "chart") {
+      newPopupWindow = window.open(
+        `${YAHOO_FINANCE_URL}/chart/${symbol}`,
+        `ORIGIN_CHART_WINDOW_${openedWindowNum + 1}`,
+        `popup,width=${width},height=${height}`
+      );
+    } else if (type === "statistics") {
+      newPopupWindow = window.open(
+        `${YAHOO_FINANCE_URL}/quote/${symbol}/key-statistics?p=${symbol}`,
+        `ORIGIN_CHART_WINDOW_${openedWindowNum + 1}`,
+        `popup,width=${width},height=${height}`
+      );
+    }
     if (popupWindow)
       setPopupWindow([...popupWindow, newPopupWindow]);
     else setPopupWindow([newPopupWindow]);
 
-    setOpenedChartsNum(openedChartsNum + 1);
+    setOpenedWindowNum(openedWindowNum + 1);
+    setWindowType("");
+  };
+  const yahooFinanceOpeningWResponses = (type, symbol) => {
+    switch (type) {
+      case "chart":
+        response(`opening ${symbol} chart`);
+        break;
+      case "statistics":
+        response(`here is ${symbol} statistics`);
+        break;
+
+      default:
+        break;
+    }
   };
   const foundMultipleStocks = (num) => {
     const wordNum = [
@@ -72,8 +97,8 @@ export const useInfoCommandsHandler = (
     console.log({ finalNum });
     if (finalNum > 0 && finalNum <= foundStock.length) {
       const { symbol } = foundStock[finalNum - 1];
-      response(`opening ${symbol} chart`);
 
+      yahooFinanceOpeningWResponses(windowType, symbol);
       handleCloseModal();
       // const width = window.outerWidth - 20;
       // const height = (window.outerHeight - 20) / 2;
@@ -84,13 +109,13 @@ export const useInfoCommandsHandler = (
       // );
       // setPopupWindow([...popupWindow, newPopupWindow]);
       // setOpenedChartsNum(openedChartsNum + 1);
-      openWindow(symbol);
+      openWindow(windowType, symbol);
     } else {
       response(`number ${finalNum} out of range`);
     }
   };
 
-  const openChart = async (target) => {
+  const openYahooFinance = async (type, target) => {
     let finalTarget = target;
     // const isFound
     if (!(await lookupForTickersV2(finalTarget))) {
@@ -107,6 +132,7 @@ export const useInfoCommandsHandler = (
           symbolsFound
         );
 
+        setWindowType(type);
         setFoundStock(symbolsFound);
         return;
       } else if (symbolsFound && symbolsFound.length === 1) {
@@ -147,6 +173,7 @@ export const useInfoCommandsHandler = (
                 companies
               );
 
+              setWindowType(type);
               setFoundStock(companies);
               // await getAllTickersInDatabaseToJson();
               // TODO clean up the following code
@@ -178,8 +205,9 @@ export const useInfoCommandsHandler = (
         return;
       }
     }
-    response(`opening ${target} chart`);
-    openWindow(finalTarget);
+    yahooFinanceOpeningWResponses(type, target);
+
+    openWindow(type, finalTarget);
     // two charts are open you can switch between them by presing alt and clikcing tab to switch betweens the windows
 
     // const width = window.outerWidth - 20;
@@ -197,8 +225,8 @@ export const useInfoCommandsHandler = (
 
   const closeChart = () => {
     if (popupWindow) {
-      if (popupWindow.length > 0) response(`closing the chart`);
-      else response(`closing all charts`);
+      if (popupWindow.length === 1) response(`closing the window`);
+      else response(`closing all windows`);
 
       for (let index = 0; index < popupWindow.length; index++) {
         const window = popupWindow[index];
@@ -210,5 +238,5 @@ export const useInfoCommandsHandler = (
     }
   };
 
-  return { openChart, closeChart, foundMultipleStocks };
+  return { openYahooFinance, closeChart, foundMultipleStocks };
 };

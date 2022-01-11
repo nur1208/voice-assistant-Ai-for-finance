@@ -57,7 +57,7 @@ export const useFinansis = () => {
     cancel
   );
 
-  const { openChart, closeChart, foundMultipleStocks } =
+  const { openYahooFinance, closeChart, foundMultipleStocks } =
     useInfoCommandsHandler(
       response,
       handleOpenModal,
@@ -196,13 +196,19 @@ export const useFinansis = () => {
     },
 
     {
-      command: ["close (the) chart", "close charts"],
+      command: [
+        "close (the) chart",
+        "close charts",
+        "close statistics",
+        "close (the) statistic",
+      ],
       callback: async (target) => await closeChart(target),
       commandFor: "info",
     },
     {
       command: "open * chart",
-      callback: async (target) => await openChart(target),
+      callback: async (target) =>
+        await openYahooFinance("chart", target),
       commandFor: "info",
     },
     {
@@ -237,6 +243,12 @@ export const useFinansis = () => {
       ],
       callback: (num) => handleTodaysDate(num),
       commandFor: "every section",
+    },
+    {
+      command: "give me * statistics",
+      callback: async (target) =>
+        await openYahooFinance("statistics", target),
+      commandFor: "info",
     },
   ];
 

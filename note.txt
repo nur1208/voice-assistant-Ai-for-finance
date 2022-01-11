@@ -189,19 +189,19 @@ deadline - before 2022-1-11 ✅ DONE on 2022-1-9
     - if finansis search in yahoo finance and  did't find any company for the keyword add the keyword to unknownKeywordForCompany
     -      
 91 - {DONE} creating 'what's the date today' commands
-92 - {TODO} improve offline component by make it like youtube 
-deadline - before 2022-1-12 ⏳
-93 - {TODO} improve 'give me the news {source}' and 'what's up with {something}' commands 
-    by return the most published articles
-94 - {TODO} creating 'Give me apple statistics' commands 
+93 - {DONE} improve 'give me the news {source}' and 'what's up with {something}' commands by return the most published articles
+deadline - before 2022-1-12 ✅ DONE on 2022-1-11
+94 - {DONE} creating 'Give me apple statistics' commands 
 95 - {TODO} creating 'Give The most active stocks' commands
 96 - {TODO} creating 'Give The most gainers stocks' commands
 97 - {TODO} creating 'Give The most loser stocks' commands
 98 - {TODO} creating 'what is Price to earing ration?' commands
     - search in duckduck
+deadline - before 2022-1-12 ⏳
 99 - handle the error if a user said 'open article {number}' and auto server is not running    
     
 
+92 - {NOT important NOW TODO} improve offline component by make it like youtube 
 77 - {NOT important NOW TODO} convert all publishedAt timezone to one similarly timezone when scraping articles.
     note - https://stackoverflow.com/questions/10997577/python-timezone-conversion
 
