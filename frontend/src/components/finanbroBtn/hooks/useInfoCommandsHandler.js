@@ -263,6 +263,14 @@ export const useInfoCommandsHandler = (
         `THE_MOST_WINDOW_${theMostNum + 1}`,
         `popup,width=${width},height=${height}`
       );
+    } else if (type === "losers" || type === "loser") {
+      response(`here is the most losers stocks from yahoo finance`);
+
+      newMostWindow = window.open(
+        `${YAHOO_FINANCE_URL}/losers`,
+        `THE_MOST_WINDOW_${theMostNum + 1}`,
+        `popup,width=${width},height=${height}`
+      );
     } else {
       response(`didn't find the most ${type} stocks`);
       return;
