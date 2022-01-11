@@ -70,7 +70,7 @@ export const useNewsCommandsHandler = (
         type === "giveMeSource"
           ? query.toLowerCase()
           : lastCommand.localQuery.toLowerCase();
-      NEWS_API_URL = `${NEWS_API_URL}&source=${localQuery}`;
+      NEWS_API_URL = `${NEWS_API_URL}&source=${localQuery}&sortBy=publishedAt`;
       setLastGetNewsCommand({ type: "giveMeSource", localQuery });
     } else if (
       type === "latestNews" ||
@@ -84,7 +84,7 @@ export const useNewsCommandsHandler = (
     ) {
       NEWS_API_URL = `${NEWS_API_URL}&keywordInTitle=${
         type === "whatsUpWith" ? query : lastCommand.query
-      }`;
+      }&sortBy=publishedAt`;
       setLastGetNewsCommand({ type: "whatsUpWith", query });
     }
     // else if (type === "category") {

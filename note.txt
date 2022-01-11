@@ -188,7 +188,7 @@ deadline - before 2022-1-11 ✅ DONE on 2022-1-9
     - check for keyword in unknownKeywordForCompany before searching
     - if finansis search in yahoo finance and  did't find any company for the keyword add the keyword to unknownKeywordForCompany
     -      
-91 - {TODO} creating 'what's the date today' commands
+91 - {DONE} creating 'what's the date today' commands
 92 - {TODO} improve offline component by make it like youtube 
 deadline - before 2022-1-12 ⏳
 93 - {TODO} improve 'give me the news {source}' and 'what's up with {something}' commands 
@@ -199,6 +199,7 @@ deadline - before 2022-1-12 ⏳
 97 - {TODO} creating 'Give The most loser stocks' commands
 98 - {TODO} creating 'what is Price to earing ration?' commands
     - search in duckduck
+99 - handle the error if a user said 'open article {number}' and auto server is not running    
     
 
 77 - {NOT important NOW TODO} convert all publishedAt timezone to one similarly timezone when scraping articles.
