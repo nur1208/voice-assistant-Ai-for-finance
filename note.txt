@@ -192,7 +192,7 @@ deadline - before 2022-1-11 ✅ DONE on 2022-1-9
 93 - {DONE} improve 'give me the news {source}' and 'what's up with {something}' commands by return the most published articles
 deadline - before 2022-1-12 ✅ DONE on 2022-1-11
 94 - {DONE} creating 'Give me apple statistics' commands 
-95 - {TODO} creating 'Give me The most active stocks' commands
+95 - {DONE} creating 'Give me The most active stocks' commands
 96 - {TODO} creating 'Give me The most gainers stocks' commands
 97 - {TODO} creating 'Give me The most losers stocks' commands
 98 - {TODO} creating 'what is Price to earing ration?' commands

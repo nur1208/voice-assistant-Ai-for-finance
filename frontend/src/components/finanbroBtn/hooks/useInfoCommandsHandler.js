@@ -242,15 +242,32 @@ export const useInfoCommandsHandler = (
   const [theMostNum, setTheMostNum] = useState(0);
   const openTheMost = (type) => {
     let newMostWindow;
+
     if (type === "actives" || type === "active") {
-      response(`here is the most actives stock from yahoo finance`);
+      response(
+        `here is the most actives stocks from yahoo finance`
+      );
 
       newMostWindow = window.open(
         `${YAHOO_FINANCE_URL}/most-active`,
         `THE_MOST_WINDOW_${theMostNum + 1}`,
         `popup,width=${width},height=${height}`
       );
+    } else if (type === "gainers" || type === "gainer") {
+      response(
+        `here is the most gainers stocks from yahoo finance`
+      );
+
+      newMostWindow = window.open(
+        `${YAHOO_FINANCE_URL}/gainers`,
+        `THE_MOST_WINDOW_${theMostNum + 1}`,
+        `popup,width=${width},height=${height}`
+      );
+    } else {
+      response(`didn't find the most ${type} stocks`);
+      return;
     }
+
     if (theMostWindow)
       setTheMostWindow([...theMostWindow, newMostWindow]);
     else setTheMostWindow([newMostWindow]);
