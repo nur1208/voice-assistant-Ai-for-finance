@@ -27,11 +27,11 @@ export const useInfoCommandsHandler = (
   const [foundStock, setFoundStock] = useState([]);
   const [openedWindowNum, setOpenedWindowNum] = useState(0);
   const [windowType, setWindowType] = useState("");
+  const width = window.outerWidth - 20;
+  const height = window.outerHeight - 20;
 
   const openWindow = (type, symbol) => {
-    const width = window.outerWidth - 20;
     // const height = (window.outerHeight - 20) / 2;
-    const height = window.outerHeight - 20;
 
     let newPopupWindow;
     if (type === "chart") {
@@ -238,5 +238,47 @@ export const useInfoCommandsHandler = (
     }
   };
 
-  return { openYahooFinance, closeChart, foundMultipleStocks };
+  const [theMostWindow, setTheMostWindow] = useState(null);
+  const [theMostNum, setTheMostNum] = useState(0);
+  const openTheMost = (type) => {
+    let newMostWindow;
+    if (type === "actives" || type === "active") {
+      response(`here is the most actives stock from yahoo finance`);
+
+      newMostWindow = window.open(
+        `${YAHOO_FINANCE_URL}/most-active`,
+        `THE_MOST_WINDOW_${theMostNum + 1}`,
+        `popup,width=${width},height=${height}`
+      );
+    }
+    if (theMostWindow)
+      setTheMostWindow([...theMostWindow, newMostWindow]);
+    else setTheMostWindow([newMostWindow]);
+
+    setTheMostNum(theMostNum + 1);
+  };
+
+  const closeTheMost = () => {
+    if (theMostWindow) {
+      if (theMostWindow.length === 1)
+        response(`closing the window`);
+      else response(`closing all windows`);
+
+      for (let index = 0; index < theMostWindow.length; index++) {
+        const window = theMostWindow[index];
+        window.close();
+      }
+      // popupWindow.close();
+    } else {
+      response(`there is no the most window open to close it`);
+    }
+  };
+
+  return {
+    openYahooFinance,
+    closeChart,
+    foundMultipleStocks,
+    openTheMost,
+    closeTheMost,
+  };
 };

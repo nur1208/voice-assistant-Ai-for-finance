@@ -57,12 +57,17 @@ export const useFinansis = () => {
     cancel
   );
 
-  const { openYahooFinance, closeChart, foundMultipleStocks } =
-    useInfoCommandsHandler(
-      response,
-      handleOpenModal,
-      handleCloseModal
-    );
+  const {
+    openYahooFinance,
+    closeChart,
+    foundMultipleStocks,
+    openTheMost,
+    closeTheMost,
+  } = useInfoCommandsHandler(
+    response,
+    handleOpenModal,
+    handleCloseModal
+  );
 
   const history = useHistory();
   const { pathname } = useLocation();
@@ -248,6 +253,16 @@ export const useFinansis = () => {
       command: "give me * statistics",
       callback: async (target) =>
         await openYahooFinance("statistics", target),
+      commandFor: "info",
+    },
+    {
+      command: "give me The most * stocks",
+      callback: async (type) => await openTheMost(type),
+      commandFor: "info",
+    },
+    {
+      command: "close The most window",
+      callback: async (type) => await closeTheMost(type),
       commandFor: "info",
     },
   ];
