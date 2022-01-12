@@ -26,7 +26,8 @@ export const handleGiveMeMoreNews = async (
 export const useNewsCommandsHandler = (
   response,
   responseAfterTimeout,
-  cancel
+  cancel,
+  setSecondCommandFor
 ) => {
   // const { response, responseAfterTimeout, cancel } = useResponse();
   const [pageNumber, setPageNumber] = useState(1);
@@ -36,7 +37,7 @@ export const useNewsCommandsHandler = (
   const [activeArticle, setActiveArticle] = useState(0);
   const [newsArticles, setNewsArticles] = useState([]);
 
-  const [secondCommandFor, setSecondCommandFor] = useState("");
+  // const [secondCommandFor, setSecondCommandFor] = useState("");
   const [timeoutIdsForReadingH, setTimeoutIdsForReadingH] =
     useState([]);
   const [timeoutIdsForScrolling, setTimeoutIdsForScrolling] =
@@ -277,43 +278,43 @@ export const useNewsCommandsHandler = (
     }
   };
 
-  const respondedWithYesSC = async () => {
-    console.log(secondCommandFor);
-    switch (secondCommandFor) {
-      case "readThHeadLines":
-        handleReadingHeadLines();
+  // const respondedWithYesSC = async () => {
+  //   console.log(secondCommandFor);
+  //   switch (secondCommandFor) {
+  //     case "readThHeadLines":
+  //       handleReadingHeadLines();
 
-        break;
+  //       break;
 
-      case "scrollDetailsA":
-        response("scrolling the page every 5 seconds");
+  //     case "scrollDetailsA":
+  //       response("scrolling the page every 5 seconds");
 
-        await handleScrollDetailPage();
+  //       await handleScrollDetailPage();
 
-        break;
+  //       break;
 
-      default:
-        response("I didn't get that. you can try again... bro");
-        break;
-    }
-    setSecondCommandFor("");
-  };
+  //     default:
+  //       response("I didn't get that. you can try again... bro");
+  //       break;
+  //   }
+  //   setSecondCommandFor("");
+  // };
 
-  const respondedWithNoSC = () => {
-    switch (secondCommandFor) {
-      case "readThHeadLines":
-        response("WOW, thank you");
-        break;
-      case "scrollDetailsA":
-        response("thank you, I was feeling lazy to scroll");
-        break;
-      default:
-        response("I didn't get that. you can try again... bro");
-        break;
-    }
-    setSecondCommandFor("");
-    // resetTranscript();
-  };
+  // const respondedWithNoSC = () => {
+  //   switch (secondCommandFor) {
+  //     case "readThHeadLines":
+  //       response("WOW, thank you");
+  //       break;
+  //     case "scrollDetailsA":
+  //       response("thank you, I was feeling lazy to scroll");
+  //       break;
+  //     default:
+  //       response("I didn't get that. you can try again... bro");
+  //       break;
+  //   }
+  //   setSecondCommandFor("");
+  //   // resetTranscript();
+  // };
 
   const [popupWindow, setPopupWindow] = useState(null);
   const [
@@ -499,8 +500,9 @@ export const useNewsCommandsHandler = (
   return {
     getNews,
     handleReadingHeadLines,
-    respondedWithYesSC,
-    respondedWithNoSC,
+    // respondedWithYesSC,
+    // respondedWithNoSC,
+    handleScrollDetailPage,
     openArticleHandler,
     handleStopReading,
     activeArticle,

@@ -53,5 +53,56 @@ export const useResponse = () => {
       // return timeoutId;
     });
 
-  return { response, responseAfterTimeout, speaking, cancel };
+  const [secondCommandFor, setSecondCommandFor] = useState("");
+
+  const respondedWithYesSC = async ({
+    handleReadingHeadLines,
+    handleScrollDetailPage,
+  }) => {
+    console.log(secondCommandFor);
+    switch (secondCommandFor) {
+      case "readThHeadLines":
+        handleReadingHeadLines();
+
+        break;
+
+      case "scrollDetailsA":
+        response("scrolling the page every 5 seconds");
+
+        await handleScrollDetailPage();
+
+        break;
+
+      default:
+        response("I didn't get that. you can try again... bro");
+        break;
+    }
+    setSecondCommandFor("");
+  };
+
+  const respondedWithNoSC = () => {
+    switch (secondCommandFor) {
+      case "readThHeadLines":
+        response("WOW, thank you");
+        break;
+      case "scrollDetailsA":
+        response("thank you, I was feeling lazy to scroll");
+        break;
+      default:
+        response("I didn't get that. you can try again... bro");
+        break;
+    }
+    setSecondCommandFor("");
+    // resetTranscript();
+  };
+
+  return {
+    response,
+    responseAfterTimeout,
+    speaking,
+    cancel,
+    respondedWithYesSC,
+    respondedWithNoSC,
+    setSecondCommandFor,
+  };
 };

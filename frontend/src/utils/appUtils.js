@@ -14,6 +14,7 @@ import {
 import { useResponse } from "../components/finanbroBtn/hooks/useResponse";
 import { useHistory, useLocation } from "react-router-dom";
 import { useCommonCommandsHandler } from "../components/finanbroBtn/hooks/useCommonCommandsHandler";
+import { BACKEND_API_URL, QUESTIONS_ROUTE } from "./serverUtils";
 // export const useSecondCommand = (commands) => {
 //   const { transcript } = useSpeechRecognition();
 // };
@@ -32,14 +33,21 @@ export const useFinansis = () => {
   };
   const handleCloseModal = () => setOpenModal(false);
 
-  const { response, speaking, responseAfterTimeout, cancel } =
-    useResponse();
+  const {
+    response,
+    speaking,
+    responseAfterTimeout,
+    cancel,
+    respondedWithYesSC,
+    respondedWithNoSC,
+    setSecondCommandFor,
+  } = useResponse();
 
   const {
     getNews,
     handleReadingHeadLines,
-    respondedWithYesSC,
-    respondedWithNoSC,
+    // respondedWithYesSC,
+    // respondedWithNoSC,
     openArticleHandler,
     handleStopReading,
     activeArticle,
@@ -51,10 +59,12 @@ export const useFinansis = () => {
     setNewsArticles,
     openArticleWithoutControllerItHandler,
     handleClosePopupWindowWithoutController,
+    handleScrollDetailPage,
   } = useNewsCommandsHandler(
     response,
     responseAfterTimeout,
     cancel
+    ,setSecondCommandFor
   );
 
   const {
@@ -106,7 +116,7 @@ export const useFinansis = () => {
     {
       command: ["what is your name", "what's your name"],
       callback: () =>
-        response(["my name is finansis", "I'm sis... bro"]),
+        response(["my name is finansis", "I'm finansis... bro"]),
       commandFor: "every section",
     },
     {
@@ -127,7 +137,11 @@ export const useFinansis = () => {
 
     {
       command: ["(of course) yes", "(of course) yeah"],
-      callback: async () => await respondedWithYesSC(),
+      callback: async () =>
+        await respondedWithYesSC({
+          handleReadingHeadLines,
+          handleScrollDetailPage,
+        }),
       commandFor: "news",
     },
     {
@@ -267,21 +281,43 @@ export const useFinansis = () => {
     },
   ];
 
+  const [questions, setQuestions] = useState([]);
+
+  // get questions from the database
+  useEffect(() => {
+    (async () => {
+      const {
+        data: { docs },
+      } = await axios.get(`${BACKEND_API_URL}/${QUESTIONS_ROUTE}`);
+
+      setQuestions(docs);
+    })();
+  }, []);
+
   const [onlyCommands, setOnlyCommands] = useState([]);
   const [onlyCommandFor, setOnlyCommandFor] = useState([]);
+  const [commandsWithQuestionWord, setCommandsWithQuestionWord] =
+    useState([]);
   useEffect(() => {
     const newOnlyCommands = [];
     const newOnlyCommandFor = [];
+    const newCommandWithQW = [];
     for (const index in commands) {
       const element = commands[index];
       // console.log(element);
       const { command, commandFor } = element;
       if (typeof command === "string") {
+        if (command.includes("what") || command.includes("how")) {
+          newCommandWithQW.push(command.toLocaleLowerCase());
+        }
         newOnlyCommands.push(command.toLocaleLowerCase());
         newOnlyCommandFor.push(commandFor);
       } else {
         for (let index = 0; index < command.length; index++) {
           const stringC = command[index];
+          if (stringC.includes("what") || stringC.includes("how")) {
+            newCommandWithQW.push(stringC.toLocaleLowerCase());
+          }
           newOnlyCommands.push(stringC.toLocaleLowerCase());
           newOnlyCommandFor.push(commandFor);
         }
@@ -289,7 +325,7 @@ export const useFinansis = () => {
     }
     setOnlyCommands(newOnlyCommands);
     setOnlyCommandFor(newOnlyCommandFor);
-
+    setCommandsWithQuestionWord(newCommandWithQW);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   // give me list of most active stocks
@@ -303,8 +339,10 @@ export const useFinansis = () => {
     commands,
   });
   const [isCommandExist, setIsCommandExist] = useState(true);
-  // code for handling unknown commands
+  const [isCommandQuestion, setIsCommandQuestion] = useState(false);
+
   const [isStopListing, setIsStopListing] = useState(false);
+  // code for handling unknown commands
   const responseFoUnknownCommand = [
     "I didn't get that. you can try again... bro",
     "sorry i don't understand that. try again",
@@ -313,8 +351,64 @@ export const useFinansis = () => {
     "i didn't get it. try again",
   ];
   useEffect(() => {
-    let isCommandExist = false;
+    // check if finalTranscript is one of the questions
+
+    let foundQuestion = null;
     if (finalTranscript) {
+      for (let index = 0; index < questions.length; index++) {
+        let { question } = questions[index];
+        let questionNoOptionsWord;
+        if (question.includes("the"))
+          questionNoOptionsWord = question.replace(" the", "");
+
+        // remove '?' symbol from  question
+        if (question.includes("?")) {
+          questionNoOptionsWord = questionNoOptionsWord.replace(
+            "?",
+            ""
+          );
+          question = question.replace("?", "");
+        }
+
+        console.log({
+          questionNoOptionsWord,
+          question,
+          finalTranscript,
+        });
+
+        if (
+          finalTranscript.toLocaleLowerCase() === question ||
+          finalTranscript.toLocaleLowerCase() ===
+            questionNoOptionsWord
+        )
+          foundQuestion = questions[index];
+      }
+
+      if (foundQuestion) {
+        // console.log("do something 🧐🧐");
+        handleOpenModal(
+          foundQuestion.question,
+          foundQuestion.answer
+        );
+        response(foundQuestion.answer);
+
+        const timeout =
+          foundQuestion.answer.length > 80 ? 1000 * 10 : 1000 * 7;
+
+        setTimeout(() => {
+          handleCloseModal();
+        }, timeout);
+        setIsCommandQuestion(true);
+      }
+
+      // const checkForQW = finalTranscript.includes("what") || finalTranscript.includes("how")
+
+      // if(checkForQW && commandsWithQuestionWord.includes(finalTranscript))
+    }
+
+    let isCommandExistLocal = false;
+    // the command not question and finalTranscript not empty string
+    if (!foundQuestion && finalTranscript) {
       // console.log(
       //   onlyCommands.includes(finalTranscript.toLocaleLowerCase())
       // );
@@ -352,46 +446,6 @@ export const useFinansis = () => {
             fistWordAfterDynamic =
               element.split(" ")[indexDynamic + 1];
           // if (element.replace(/\((.*?)\)/, ""))
-
-          // if (fistWordAfterDynamic) {
-          //   console.log("🧐🧐🧐");
-          //   // ['open', '*','chart']
-          //   // ['open', 'chart']
-          //   // ['open', "APPLE", 'chart'"]
-          //   console.log({
-          //     test1: fistWordAfterDynamic,
-          //     test2: element.split(" "),
-          //     test3: lastWordBeforeDynamic,
-          //     test4:
-          //       element
-          //         .split(" ")
-          //         .slice(0, indexDynamic)
-          //         .join(" ") +
-          //       " " +
-          //       element
-          //         .split(" ")
-          //         .slice(indexDynamic + 1)
-          //         .join(" "),
-          //     test5:
-          //       transcript
-          //         .split(" ")
-          //         .slice(0, indexDynamic)
-          //         .join(" ") +
-          //       " " +
-          //       transcript
-          //         .split(" ")
-          //         .slice(
-          //           transcript
-          //             .split(" ")
-          //             .indexOf(fistWordAfterDynamic)
-          //         )
-          //         .join(" "),
-          //     test6: transcript
-          //       .split(" ")
-          //       .indexOf(fistWordAfterDynamic),
-          //     test7: indexDynamic,
-          //   });
-          // }
 
           // const isSameAfterDynamicWord = fistWordAfterDynamic &&
           if (
@@ -448,25 +502,25 @@ export const useFinansis = () => {
               // });
 
               if (finalCondition) {
-                isCommandExist = true;
+                isCommandExistLocal = true;
                 foundCommand = onlyCommands[index];
               }
             } else {
               // console.log("here 1");
               // fix the error here
-              isCommandExist = true;
+              isCommandExistLocal = true;
               foundCommand = onlyCommands[index];
             }
           }
         } else {
           if (element === transcript.toLocaleLowerCase()) {
-            isCommandExist = true;
+            isCommandExistLocal = true;
             foundCommand = onlyCommands[index];
           }
         }
       }
 
-      if (isCommandExist) {
+      if (isCommandExistLocal) {
         const currentCommandFor =
           onlyCommandFor[onlyCommands.indexOf(foundCommand)];
 
@@ -481,11 +535,23 @@ export const useFinansis = () => {
         }
 
         // console.log(onlyCommands.indexOf(transcript));
-      }
-      console.log({ isCommandExist });
 
-      setIsCommandExist(isCommandExist);
-      if (!isCommandExist) response(responseFoUnknownCommand);
+        // if(checkForQW && commandsWithQuestionWord.includes(finalTranscript))
+      }
+      console.log({ isCommandExist: isCommandExistLocal });
+
+      setIsCommandExist(isCommandExistLocal);
+      if (!isCommandExistLocal) {
+        const checkForQW =
+          finalTranscript.includes("what") ||
+          finalTranscript.includes("how");
+        if (checkForQW) {
+          response(
+            `do you want me to learn about ${finalTranscript}`
+          );
+          // console.log("do something 🧐🧐");
+        } else response(responseFoUnknownCommand);
+      }
 
       const autoResetTranscriptNotWorking = [
         "of course yes",
@@ -499,6 +565,7 @@ export const useFinansis = () => {
       if (autoResetTranscriptNotWorking.includes(transcript))
         resetTranscript();
     }
+    foundQuestion = null;
   }, [finalTranscript]);
 
   // reset transcript

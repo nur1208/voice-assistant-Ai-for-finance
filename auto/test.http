@@ -20,3 +20,11 @@ Content-Type: application/json
     "keyword":"apple"
 }
 ###
+
+POST {{url}}/findingAnswers
+Content-Type: application/json
+
+{
+    "question":"what is price to earning ratio"
+}
+###

@@ -16,6 +16,101 @@ app.use(express.json());
 app.use(cors("http://localhost:3000"));
 // app.use(morgan("dev"));
 
+app.post("/findingAnswers", async (req, res) => {
+  //   const width = window.outerWidth - 20;
+  //   const height = window.outerHeight - 20;
+  const { question } = req.body;
+  //   console.log(req.body);
+  const width = 1366 - 20;
+  const height = 768 - 20;
+  const timeout = 1000 * 90;
+  //   const { goToUrl } = newsArticles[articleNum - 1];
+  //   console.log({ goToUrl });
+  const browserLocal = await puppeteer.launch({
+    headless: false,
+    executablePath:
+      "C:/Program Files/Google/Chrome/Application/chrome.exe",
+    defaultViewport: { width, height },
+    args: [
+      `--window-size=${width},${height}`,
+      // "--disable-infobars",
+      // "--start-fullscreen",
+      //   "'--no-sandbox'",
+      // "-app-cache-force-enabled",
+      "--arc-start-mode=always-start",
+    ],
+    // dumpio: true,
+    // pipe: true,
+    ignoreDefaultArgs: ["--enable-automation"],
+  });
+
+  page = await browserLocal.newPage();
+  // 800x600
+  await page.setViewport({
+    width,
+    height,
+  });
+
+  await page.goto("https://duckduckgo.com/", {
+    timeout,
+    // waitUntil: "domcontentloaded",
+  });
+  await page.waitForTimeout(1000 * 5);
+
+  await page.type(
+    "#search_form_input_homepage",
+    `${question} investopedia`,
+    {
+      delay: 500,
+    }
+  );
+
+  await Promise.all([
+    page.waitForNavigation({ timeout }),
+    page.click("#search_button_homepage"),
+  ]);
+  await page.waitForTimeout(1000 * 10);
+
+  await Promise.all([
+    page.waitForNavigation({ timeout }),
+    page.click("#r1-0 a"),
+  ]);
+  await page.waitForTimeout(1000 * 10);
+
+  const ul = await page.evaluate(
+    () =>
+      document.querySelector("#mntl-sc-block-callout-body_1-0")
+        .innerHTML
+  );
+  // nth-child(2)
+
+  const $ = cheerio.load(ul);
+
+  const questionObject = {};
+
+  questionObject.question = question;
+  questionObject.answer = $("ul > li:nth-child(1)").text();
+  questionObject.source = "investopedia";
+  questionObject.referenceUrl = page.url();
+
+  try {
+    const { data } = await axios.post(
+      "http://localh  ost:4050/api/v1/questions",
+      questionObject
+    );
+  } catch (error) {
+    console.log(company);
+
+    console.log(error.message + "❌");
+  }
+
+  await browserLocal.close();
+  res.json({
+    message: "findingAnswers working",
+    questionObject,
+  });
+});
+
 app.post("/findingCompanies", async (req, res) => {
   //   const width = window.outerWidth - 20;
   //   const height = window.outerHeight - 20;

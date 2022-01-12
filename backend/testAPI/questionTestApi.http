@@ -1,0 +1,19 @@
+@port = 4050
+@Host =  http://localhost
+
+@route = api/v1/questions
+
+POST {{Host}}:{{port}}/{{route}}
+Content-Type: application/json
+
+{
+    "question":"what is the price-to-book ratio?",
+    "answer":"Companies use the price-to-book ratio (P/B ratio) to compare a firm's market capitalization to its book value.",
+    "source":"investopedia",
+    "referenceUrl":"https://www.investopedia.com/terms/p/price-to-bookratio.asp"
+}
+
+###
+
+GET {{Host}}:{{port}}/{{route}}
+
