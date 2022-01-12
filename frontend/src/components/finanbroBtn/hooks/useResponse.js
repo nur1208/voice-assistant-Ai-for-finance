@@ -58,6 +58,8 @@ export const useResponse = () => {
   const respondedWithYesSC = async ({
     handleReadingHeadLines,
     handleScrollDetailPage,
+    handleFindingAnswer,
+    findingAnswerFor,
   }) => {
     console.log(secondCommandFor);
     switch (secondCommandFor) {
@@ -70,6 +72,13 @@ export const useResponse = () => {
         response("scrolling the page every 5 seconds");
 
         await handleScrollDetailPage();
+
+        break;
+
+      case "findingAnswer":
+        response("give me a minute to find an answer");
+
+        await handleFindingAnswer(findingAnswerFor);
 
         break;
 
@@ -88,6 +97,11 @@ export const useResponse = () => {
       case "scrollDetailsA":
         response("thank you, I was feeling lazy to scroll");
         break;
+
+      case "findingAnswer":
+        response("okay, I won't find answers");
+        break;
+
       default:
         response("I didn't get that. you can try again... bro");
         break;

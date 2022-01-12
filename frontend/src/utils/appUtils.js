@@ -63,8 +63,8 @@ export const useFinansis = () => {
   } = useNewsCommandsHandler(
     response,
     responseAfterTimeout,
-    cancel
-    ,setSecondCommandFor
+    cancel,
+    setSecondCommandFor
   );
 
   const {
@@ -82,11 +82,14 @@ export const useFinansis = () => {
   const history = useHistory();
   const { pathname } = useLocation();
 
+  const [questions, setQuestions] = useState([]);
+
   const {
     goBackHandler,
     handleStopListening,
     handleGoToPage,
     handleTodaysDate,
+    handleFindingAnswer,
   } = useCommonCommandsHandler(
     setPageNumber,
     setNewsArticles,
@@ -95,8 +98,12 @@ export const useFinansis = () => {
     newsArticles,
     SpeechRecognition,
     handleOpenModal,
-    handleCloseModal
+    handleCloseModal,
+    questions,
+    setQuestions
   );
+
+  const [findingAnswerFor, setFindingAnswerFor] = useState("");
 
   const commands = [
     // {
@@ -141,6 +148,8 @@ export const useFinansis = () => {
         await respondedWithYesSC({
           handleReadingHeadLines,
           handleScrollDetailPage,
+          handleFindingAnswer,
+          findingAnswerFor,
         }),
       commandFor: "news",
     },
@@ -280,8 +289,6 @@ export const useFinansis = () => {
       commandFor: "info",
     },
   ];
-
-  const [questions, setQuestions] = useState([]);
 
   // get questions from the database
   useEffect(() => {
@@ -549,7 +556,9 @@ export const useFinansis = () => {
           response(
             `do you want me to learn about ${finalTranscript}`
           );
+          setSecondCommandFor("findingAnswer");
           // console.log("do something 🧐🧐");
+          setFindingAnswerFor(finalTranscript);
         } else response(responseFoUnknownCommand);
       }
 

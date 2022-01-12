@@ -61,7 +61,7 @@ app.post("/findingAnswers", async (req, res) => {
     "#search_form_input_homepage",
     `${question} investopedia`,
     {
-      delay: 500,
+      delay: 200,
     }
   );
 
@@ -95,11 +95,11 @@ app.post("/findingAnswers", async (req, res) => {
 
   try {
     const { data } = await axios.post(
-      "http://localh  ost:4050/api/v1/questions",
+      "http://localhost:4050/api/v1/questions",
       questionObject
     );
   } catch (error) {
-    console.log(company);
+    console.log(questionObject);
 
     console.log(error.message + "❌");
   }

@@ -1,6 +1,8 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { PAGES } from "../../../App";
+import { AUTO_API_URL } from "../../../utils/serverUtils";
 export const useCommonCommandsHandler = (
   setPageNumber,
   setNewsArticles,
@@ -9,7 +11,9 @@ export const useCommonCommandsHandler = (
   newsArticles,
   SpeechRecognition,
   handleOpenModal,
-  handleCloseModal
+  handleCloseModal,
+  questions,
+  setQuestions
 ) => {
   const history = useHistory();
 
@@ -108,10 +112,30 @@ export const useCommonCommandsHandler = (
     }, 1000 * 7);
   };
 
+  const handleFindingAnswer = async (findingAnswerFor) => {
+    const {
+      data: { questionObject },
+    } = await axios.post(`${AUTO_API_URL}/findingAnswers`, {
+      question: findingAnswerFor,
+    });
+
+    handleOpenModal(questionObject.question, questionObject.answer);
+    response(questionObject.answer);
+
+    const timeout =
+      questionObject.answer.length > 80 ? 1000 * 10 : 1000 * 7;
+
+    setTimeout(() => {
+      handleCloseModal();
+    }, timeout);
+    setQuestions([...questions, questionObject]);
+  };
+
   return {
     goBackHandler,
     handleStopListening,
     handleGoToPage,
     handleTodaysDate,
+    handleFindingAnswer,
   };
 };

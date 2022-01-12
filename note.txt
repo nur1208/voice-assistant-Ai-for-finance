@@ -195,7 +195,7 @@ deadline - before 2022-1-12 ✅ DONE on 2022-1-11
 95 - {DONE} creating 'Give me The most active stocks' commands
 96 - {DONE} creating 'Give me The most gainers stocks' commands
 97 - {DONE} creating 'Give me The most losers stocks' commands
-98 - {TODO} creating 'what is Price to earing ration?' commands
+98 - {DONE} creating 'finance questions' commands like 'what is the price-to-book ratio?'
     - create questions model
         - question
         - answer
@@ -216,7 +216,7 @@ deadline - before 2022-1-12 ✅ DONE on 2022-1-11
     - and click on the first link then scrap the first statement is an answer and the other properties for questions model
     - then add  it to the model
     - and return the answer
-    98.1 - {TODO} moving respondedWithYesSC and respondedWithNoSC to useResponse
+    98.1 - {DONE} moving respondedWithYesSC and respondedWithNoSC to useResponse
 deadline - before 2022-1-13 ⏳
 99 - handle the error if a user said 'open article {number}' and auto server is not running    
 100 - {TODO} creating 'give me trending tickers' commands
