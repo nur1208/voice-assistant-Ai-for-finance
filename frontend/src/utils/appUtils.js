@@ -293,6 +293,11 @@ export const useFinansis = () => {
       callback: async () => await openTheMost("trending"),
       commandFor: "info",
     },
+    {
+      command: "give me top stories from google finance",
+      callback: async () => await getNews("topStories"),
+      commandFor: "news",
+    },
   ];
 
   // get questions from the database

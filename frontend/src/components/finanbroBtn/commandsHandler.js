@@ -80,6 +80,12 @@ export const useNewsCommandsHandler = (
       NEWS_API_URL = `${NEWS_API_URL}&sortBy=publishedAt`;
       setLastGetNewsCommand({ type: "latestNews" });
     } else if (
+      type === "topStories" ||
+      lastCommand?.type === "topStories"
+    ) {
+      NEWS_API_URL = `${NEWS_API_URL}&source=google finance&sortBy=publishedAt`;
+      setLastGetNewsCommand({ type: "topStories" });
+    } else if (
       type === "whatsUpWith" ||
       lastCommand?.type === "whatsUpWith"
     ) {
@@ -382,7 +388,9 @@ export const useNewsCommandsHandler = (
         setSecondCommandFor("scrollDetailsA");
         // window.open(goToUrl, "_blank");
       } catch (error) {
-        response("something wrong from auto app, please make sure your auto app is running")
+        response(
+          "something wrong from auto app, please make sure your auto app is running"
+        );
       }
     } else {
       response(
