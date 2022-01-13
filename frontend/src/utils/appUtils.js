@@ -288,6 +288,11 @@ export const useFinansis = () => {
       callback: async (type) => await closeTheMost(type),
       commandFor: "info",
     },
+    {
+      command: "give me trending stocks",
+      callback: async () => await openTheMost("trending"),
+      commandFor: "info",
+    },
   ];
 
   // get questions from the database

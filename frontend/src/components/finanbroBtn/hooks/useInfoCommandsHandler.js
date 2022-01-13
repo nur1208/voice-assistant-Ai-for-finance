@@ -271,6 +271,14 @@ export const useInfoCommandsHandler = (
         `THE_MOST_WINDOW_${theMostNum + 1}`,
         `popup,width=${width},height=${height}`
       );
+    } else if (type === "trending") {
+      response(`here is trending stocks from yahoo finance`);
+
+      newMostWindow = window.open(
+        `${YAHOO_FINANCE_URL}/trending-tickers`,
+        `THE_MOST_WINDOW_${theMostNum + 1}`,
+        `popup,width=${width},height=${height}`
+      );
     } else {
       response(`didn't find the most ${type} stocks`);
       return;

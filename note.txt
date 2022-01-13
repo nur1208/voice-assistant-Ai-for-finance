@@ -218,7 +218,7 @@ deadline - before 2022-1-12 ✅ DONE on 2022-1-11
     - and return the answer
     98.1 - {DONE} moving respondedWithYesSC and respondedWithNoSC to useResponse
 deadline - before 2022-1-13 ✅ DONE on 2022-1-12
-99 - {TODO} handle the error if a user said 'open article {number}' and auto server is not running    
+99 - {DONE} handle the error if a user said 'open article {number}' and auto server is not running    
 100 - {TODO} creating 'give me trending tickers' commands
 101 - {TODO} scrap top stories form google finance
         https://www.google.com/finance/
