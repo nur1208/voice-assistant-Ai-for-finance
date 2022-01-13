@@ -362,25 +362,28 @@ export const useNewsCommandsHandler = (
       const { goToUrl } = newsArticles[articleNum - 1];
       response("loading the page will take seconds");
       setCurrentArticle(null);
+      try {
+        const { data } = await axios.post(`${AUTO_API_URL}/open`, {
+          goToUrl,
+        });
+        // this is just for pushing popup window at top
+        const w = window.open(
+          goToUrl,
+          "ORIGIN_ARTICLE_WINDOW",
+          "popup"
+        );
+        w.close();
+        setCurrentArticle(newsArticles[articleNum - 1]);
+        console.log(data);
+        setPopupWindow(data.isAutoBrowserOpen);
+        response("the page is done loading");
 
-      const { data } = await axios.post(`${AUTO_API_URL}/open`, {
-        goToUrl,
-      });
-      // this is just for pushing popup window at top
-      const w = window.open(
-        goToUrl,
-        "ORIGIN_ARTICLE_WINDOW",
-        "popup"
-      );
-      w.close();
-      setCurrentArticle(newsArticles[articleNum - 1]);
-      console.log(data);
-      setPopupWindow(data.isAutoBrowserOpen);
-      response("the page is done loading");
-
-      response("do you want me to scroll every 5 seconds");
-      setSecondCommandFor("scrollDetailsA");
-      // window.open(goToUrl, "_blank");
+        response("do you want me to scroll every 5 seconds");
+        setSecondCommandFor("scrollDetailsA");
+        // window.open(goToUrl, "_blank");
+      } catch (error) {
+        response("something wrong from auto app, please make sure your auto app is running")
+      }
     } else {
       response(
         `article with number ${articleNum} not exist, so yeah I can't open it.}`
