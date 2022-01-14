@@ -298,6 +298,12 @@ export const useFinansis = () => {
       callback: async () => await getNews("topStories"),
       commandFor: "news",
     },
+    {
+      command: "open * chart with your control",
+      callback: async (target) =>
+        await openYahooFinance("chart", target, true),
+      commandFor: "info",
+    },
   ];
 
   // get questions from the database

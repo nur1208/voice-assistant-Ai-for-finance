@@ -223,7 +223,7 @@ deadline - before 2022-1-13 ✅ DONE on 2022-1-12
 101 - {DONE} scrap top stories form google finance
         https://www.google.com/finance/
 102 - {DONE} creating "give me top stories from google finance" commands
-103 - {TODO} create 'open chart with and control it' command
+103 - {DONE} create 'open chart with your control' command
 deadline - before 2022-1-15 ⏳ 
 
 

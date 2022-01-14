@@ -30,6 +30,23 @@ export const useInfoCommandsHandler = (
   const width = window.outerWidth - 20;
   const height = window.outerHeight - 20;
 
+  const openChartWithControl = async (symbol) => {
+    try {
+      const { data } = await axios.post(`${AUTO_API_URL}/open`, {
+        goToUrl: `${YAHOO_FINANCE_URL}/chart/${symbol}`,
+      });
+
+      setSetPopupWWControl(data.isAutoBrowserOpen);
+      response("the page is done loading");
+
+      // window.open(goToUrl, "_blank");
+    } catch (error) {
+      response(
+        "something wrong from auto app, please make sure your auto app is running"
+      );
+    }
+  };
+
   const openWindow = (type, symbol) => {
     // const height = (window.outerHeight - 20) / 2;
 
@@ -98,7 +115,7 @@ export const useInfoCommandsHandler = (
     if (finalNum > 0 && finalNum <= foundStock.length) {
       const { symbol } = foundStock[finalNum - 1];
 
-      yahooFinanceOpeningWResponses(windowType, symbol);
+      yahooFinanceOpeningWResponses(windowType.type, symbol);
       handleCloseModal();
       // const width = window.outerWidth - 20;
       // const height = (window.outerHeight - 20) / 2;
@@ -109,13 +126,17 @@ export const useInfoCommandsHandler = (
       // );
       // setPopupWindow([...popupWindow, newPopupWindow]);
       // setOpenedChartsNum(openedChartsNum + 1);
-      openWindow(windowType, symbol);
+      if (windowType.isWithControl) {
+        openChartWithControl(symbol);
+      } else {
+        openWindow(windowType.type, symbol);
+      }
     } else {
       response(`number ${finalNum} out of range`);
     }
   };
 
-  const openYahooFinance = async (type, target) => {
+  const openYahooFinance = async (type, target, isWithControl) => {
     let finalTarget = target;
     // const isFound
     if (!(await lookupForTickersV2(finalTarget))) {
@@ -132,7 +153,8 @@ export const useInfoCommandsHandler = (
           symbolsFound
         );
 
-        setWindowType(type);
+        setWindowType({ type, isWithControl });
+
         setFoundStock(symbolsFound);
         return;
       } else if (symbolsFound && symbolsFound.length === 1) {
@@ -173,7 +195,7 @@ export const useInfoCommandsHandler = (
                 companies
               );
 
-              setWindowType(type);
+              setWindowType({ type, isWithControl });
               setFoundStock(companies);
               // await getAllTickersInDatabaseToJson();
               // TODO clean up the following code
@@ -207,7 +229,11 @@ export const useInfoCommandsHandler = (
     }
     yahooFinanceOpeningWResponses(type, target);
 
-    openWindow(type, finalTarget);
+    if (isWithControl) {
+      openChartWithControl(finalTarget);
+    } else {
+      openWindow(type, finalTarget);
+    }
     // two charts are open you can switch between them by presing alt and clikcing tab to switch betweens the windows
 
     // const width = window.outerWidth - 20;
@@ -306,6 +332,8 @@ export const useInfoCommandsHandler = (
       response(`there is no the most window open to close it`);
     }
   };
+
+  const [setPopupWWControl, setSetPopupWWControl] = useState(null);
 
   return {
     openYahooFinance,
