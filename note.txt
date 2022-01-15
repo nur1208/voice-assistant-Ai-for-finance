@@ -212,7 +212,7 @@ deadline - before 2022-1-12 ✅ DONE on 2022-1-11
 
     - user say 'What Is the Price-to-Book Ratio?'
     - search for an answer from questions model if found return the answer [DONE]
-    - else search in duckduck 'what Is the Price-to-Book Ratio investopedia'
+    - else search in duckduck 'what Is the Price-to-B7ook Ratio investopedia'
     - and click on the first link then scrap the first statement is an answer and the other properties for questions model
     - then add  it to the model
     - and return the answer
@@ -224,7 +224,14 @@ deadline - before 2022-1-13 ✅ DONE on 2022-1-12
         https://www.google.com/finance/
 102 - {DONE} creating "give me top stories from google finance" commands
 103 - {DONE} create 'open chart with your control' command
-deadline - before 2022-1-15 ⏳ 
+deadline - before 2022-1-15 ✅ DONE on 2022-1-14
+104 - {DONE} create 'close chart' command for 'open chart with your control' command
+105 - {TODO} create 'zoom in' and 'zoom out' commands when finansis open chart with her control
+106 - {TODO} create  'what is the current price for apple (share)' command
+107 - {TODO} create 'Show me apple and Tesla charts' commands 
+108 - {TODO} create 'change the chart to {chart type daily for example}' command when finansis open chart with her control
+deadline - before 2022-1-17 ⏳
+109 - {TODO} come up with plan for 'trading' section
 
 
 92 - {NOT important NOW TODO} improve offline component by make it like youtube 

@@ -29,14 +29,16 @@ export const useInfoCommandsHandler = (
   const [windowType, setWindowType] = useState("");
   const width = window.outerWidth - 20;
   const height = window.outerHeight - 20;
+  const [popupWWControl, setPopupWWControl] = useState(null);
 
   const openChartWithControl = async (symbol) => {
     try {
+      response("loading the page will take seconds");
       const { data } = await axios.post(`${AUTO_API_URL}/open`, {
         goToUrl: `${YAHOO_FINANCE_URL}/chart/${symbol}`,
       });
 
-      setSetPopupWWControl(data.isAutoBrowserOpen);
+      setPopupWWControl(data.isAutoBrowserOpen);
       response("the page is done loading");
 
       // window.open(goToUrl, "_blank");
@@ -249,7 +251,7 @@ export const useInfoCommandsHandler = (
     // setOpenedChartsNum(openedChartsNum + 1);
   };
 
-  const closeChart = () => {
+  const closeChart = async () => {
     if (popupWindow) {
       if (popupWindow.length === 1) response(`closing the window`);
       else response(`closing all windows`);
@@ -259,6 +261,11 @@ export const useInfoCommandsHandler = (
         window.close();
       }
       // popupWindow.close();
+    } else if (popupWWControl) {
+      response(`closing the window`);
+      const { data } = await axios.post(`${AUTO_API_URL}/close`);
+
+      setPopupWWControl(data.isAutoBrowserOpen);
     } else {
       response(`there is no chart open to close it`);
     }
@@ -332,8 +339,6 @@ export const useInfoCommandsHandler = (
       response(`there is no the most window open to close it`);
     }
   };
-
-  const [setPopupWWControl, setSetPopupWWControl] = useState(null);
 
   return {
     openYahooFinance,
