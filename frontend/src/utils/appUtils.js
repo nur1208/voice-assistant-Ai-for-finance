@@ -73,6 +73,7 @@ export const useFinansis = () => {
     foundMultipleStocks,
     openTheMost,
     closeTheMost,
+    zoomChart,
   } = useInfoCommandsHandler(
     response,
     handleOpenModal,
@@ -302,6 +303,11 @@ export const useFinansis = () => {
       command: "open * chart with your control",
       callback: async (target) =>
         await openYahooFinance("chart", target, true),
+      commandFor: "info",
+    },
+    {
+      command: "zoom *",
+      callback: async (type) => await zoomChart(type),
       commandFor: "info",
     },
   ];

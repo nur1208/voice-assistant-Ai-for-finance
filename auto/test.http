@@ -4,13 +4,21 @@ POST {{url}}/open
 Content-Type: application/json
 
 {
-    "goToUrl":"https://pocketadmin.tech/en/puppeteer-popup-window/"
+    "goToUrl":"https://finance.yahoo.com/chart/AAPL",
+    "windowType":"chart"
 }
 ###
 POST {{url}}/close
 ###
 POST {{url}}/scroll
 
+###
+POST {{url}}/zoom
+Content-Type: application/json
+
+{
+    "type":"in"
+}
 
 ###
 POST {{url}}/findingCompanies

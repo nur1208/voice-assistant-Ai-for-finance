@@ -36,6 +36,7 @@ export const useInfoCommandsHandler = (
       response("loading the page will take seconds");
       const { data } = await axios.post(`${AUTO_API_URL}/open`, {
         goToUrl: `${YAHOO_FINANCE_URL}/chart/${symbol}`,
+        windowType: "chart",
       });
 
       setPopupWWControl(data.isAutoBrowserOpen);
@@ -45,6 +46,31 @@ export const useInfoCommandsHandler = (
     } catch (error) {
       response(
         "something wrong from auto app, please make sure your auto app is running"
+      );
+    }
+  };
+
+  const zoomChart = async (type) => {
+    const validOptions = ["in", "out"];
+    const isValidOption = validOptions.includes(type.toLowerCase());
+
+    if (!popupWWControl) {
+      response("the window is close so I can not zoom in or out");
+      return;
+    }
+
+    if (!isValidOption) {
+      response(`${type} is not valid option for zooming`);
+      return;
+    }
+
+    // if all validation true then only execute the following code:
+    try {
+      await axios.post(`${AUTO_API_URL}/zoom`, { type });
+      response(`zooming ${type}`);
+    } catch (error) {
+      response(
+        "something went wrong from auto app, please check if auto app is running"
       );
     }
   };
@@ -346,5 +372,6 @@ export const useInfoCommandsHandler = (
     foundMultipleStocks,
     openTheMost,
     closeTheMost,
+    zoomChart,
   };
 };

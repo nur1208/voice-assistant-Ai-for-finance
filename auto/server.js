@@ -12,6 +12,8 @@ app.get("/", (req, res) => {
 
 let browser;
 let page;
+let windowTypeHolder;
+
 app.use(express.json());
 app.use(cors("http://localhost:3000"));
 // app.use(morgan("dev"));
@@ -226,7 +228,10 @@ app.post("/findingCompanies", async (req, res) => {
 app.post("/open", async (req, res) => {
   //   const width = window.outerWidth - 20;
   //   const height = window.outerHeight - 20;
-  const { goToUrl } = req.body;
+  const { goToUrl, windowType } = req.body;
+  if (windowType) {
+    windowTypeHolder = windowType;
+  }
   //   console.log(req.body);
   const width = 1366 - 20;
   const height = 768 - 20;
@@ -276,6 +281,8 @@ app.post("/close", async (req, res) => {
   if (browser) {
     await browser.close();
     browser = null;
+    windowTypeHolder = null;
+    page = null;
   }
   res.json({ message: "close working", isAutoBrowserOpen: false });
 });
@@ -313,6 +320,24 @@ app.post("/scroll", async (req, res) => {
       return true;
     }, source);
     res.json({ message: "scroll working", isEndOfPage });
+    return;
+  }
+  res.status(404).json({ message: "browser is not open" });
+});
+
+app.post("/zoom", async (req, res) => {
+  const { type } = req.body;
+  if (browser && page && windowTypeHolder === "chart") {
+    let isZoomed = false;
+    if (type === "out") {
+      await page.click("span.stx-zoom-out");
+      isZoomed = true;
+    } else if (type === "in") {
+      await page.click("span.stx-zoom-in");
+      isZoomed = true;
+    }
+
+    res.json({ message: "zoom working", isZoomed });
     return;
   }
   res.status(404).json({ message: "browser is not open" });
