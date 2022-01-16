@@ -15,3 +15,9 @@ Content-Type: application/json
 
 GET {{Host}}:{{port}}/{{route}}?name=apple
 
+###
+GET {{Host}}:{{port}}/{{route}}/currentPrice/AAPL
+
+###
+
+GET https://yahoo-finance-api.vercel.app/AAPL

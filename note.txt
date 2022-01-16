@@ -226,14 +226,20 @@ deadline - before 2022-1-13 ✅ DONE on 2022-1-12
 103 - {DONE} create 'open chart with your control' command
 deadline - before 2022-1-15 ✅ DONE on 2022-1-14
 104 - {DONE} create 'close chart' command for 'open chart with your control' command
-105 - {TODO} create 'zoom in' and 'zoom out' commands when finansis open chart with her control
-106 - {TODO} create  'what is the current price for apple (share)' command
+105 - {DONE} create 'zoom in' and 'zoom out' commands when finansis open chart with her control
+106 - {DONE} create  'what is the current price for apple (share)' command
 107 - {TODO} create 'Show me apple and Tesla charts' commands 
 108 - {TODO} create 'change the chart to {chart type daily for example}' command when finansis open chart with her control
 deadline - before 2022-1-17 ⏳
 109 - {TODO} come up with plan for 'trading' section
 110 - {TODO} clean up server auto file
 111 - {TODO} add windowType to auto opening articles
+112 - {TODO} fix 'close the chart' finansis say 'closing the chart' when there is no opened chart 
+113 - {TODO} improve finansis answers for questions by let finansis open the reference page 'open details page for the answer'
+114 - {TODO} fixing 'show me' command and finansis says 'do you want me to learn about show me'
+    - show = s + how so the finalTranscript includes the word how
+
+
 
 92 - {NOT important NOW TODO} improve offline component by make it like youtube 
 77 - {NOT important NOW TODO} convert all publishedAt timezone to one similarly timezone when scraping articles.

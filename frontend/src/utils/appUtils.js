@@ -74,6 +74,7 @@ export const useFinansis = () => {
     openTheMost,
     closeTheMost,
     zoomChart,
+    openMultipleCharts,
   } = useInfoCommandsHandler(
     response,
     handleOpenModal,
@@ -308,6 +309,21 @@ export const useFinansis = () => {
     {
       command: "zoom *",
       callback: async (type) => await zoomChart(type),
+      commandFor: "info",
+    },
+    {
+      command: [
+        "what is the current price for * (share)",
+        "what's the current price for * (share)",
+      ],
+      callback: async (symbol) =>
+        await openYahooFinance("currentPrice", symbol),
+      commandFor: "info",
+    },
+    {
+      command: "show me * charts",
+      callback: async (companies) =>
+        await openMultipleCharts(companies),
       commandFor: "info",
     },
   ];

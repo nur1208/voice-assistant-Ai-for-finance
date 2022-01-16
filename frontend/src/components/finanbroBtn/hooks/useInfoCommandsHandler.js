@@ -31,6 +31,66 @@ export const useInfoCommandsHandler = (
   const height = window.outerHeight - 20;
   const [popupWWControl, setPopupWWControl] = useState(null);
 
+  let companyIndex = 0;
+  const openMultipleCharts = async (companies) => {
+    if (companies.includes("and")) {
+      let companiesArray = companies.split("and");
+      // companiesArray = companiesArray.map((s) => s.trim());
+      response(`opening  ${companiesArray.join(" and ")} charts`);
+
+      const popupWindows = [];
+      let newPopupWindow;
+      for (let index = 0; index < companiesArray.length; index++) {
+        const company = companiesArray[index];
+
+        const finalTarget = await openYahooFinance(
+          "chart",
+          company.trim(),
+          false,
+          true
+        );
+        if (finalTarget) {
+          newPopupWindow = window.open(
+            `${YAHOO_FINANCE_URL}/chart/${finalTarget}`,
+            `ORIGIN_CHART_WINDOW_${index + 1}`,
+            `popup,width=${width},height=${height}`
+          );
+          popupWindows.push(newPopupWindow);
+        }
+      }
+
+      setPopupWindow(popupWindows);
+    } else {
+      response("sorry I can't open that");
+    }
+    // console.log({ companiesArray });
+    // response(`DONE opening ${companiesArray.join(" and ")} charts`);
+  };
+
+  const currentStockPrice = async (symbol) => {
+    const {
+      data: {
+        chart: { result },
+      },
+    } = await axios.get(
+      `https://yahoo-finance-api.vercel.app/${symbol}`
+    );
+
+    const {
+      meta: { regularMarketPrice },
+    } = result[0];
+
+    handleOpenModal(
+      `${symbol} ticker`,
+      `the current price for ${symbol} is ${regularMarketPrice}`
+    );
+
+    response(`${regularMarketPrice}`);
+    setTimeout(() => {
+      handleCloseModal();
+    }, 1000 * 7);
+  };
+
   const openChartWithControl = async (symbol) => {
     try {
       response("loading the page will take seconds");
@@ -79,6 +139,7 @@ export const useInfoCommandsHandler = (
     // const height = (window.outerHeight - 20) / 2;
 
     let newPopupWindow;
+
     if (type === "chart") {
       newPopupWindow = window.open(
         `${YAHOO_FINANCE_URL}/chart/${symbol}`,
@@ -108,11 +169,15 @@ export const useInfoCommandsHandler = (
         response(`here is ${symbol} statistics`);
         break;
 
+      case "currentPrice":
+        response(`the current price for ${symbol} is`);
+        break;
+
       default:
         break;
     }
   };
-  const foundMultipleStocks = (num) => {
+  const foundMultipleStocks = async (num) => {
     const wordNum = [
       "",
       "one",
@@ -154,6 +219,12 @@ export const useInfoCommandsHandler = (
       // );
       // setPopupWindow([...popupWindow, newPopupWindow]);
       // setOpenedChartsNum(openedChartsNum + 1);
+
+      if (windowType.type === "currentPrice") {
+        await currentStockPrice(symbol);
+        return;
+      }
+
       if (windowType.isWithControl) {
         openChartWithControl(symbol);
       } else {
@@ -164,7 +235,12 @@ export const useInfoCommandsHandler = (
     }
   };
 
-  const openYahooFinance = async (type, target, isWithControl) => {
+  const openYahooFinance = async (
+    type,
+    target,
+    isWithControl,
+    isIgnoreFoundMultiple
+  ) => {
     let finalTarget = target;
     // const isFound
     if (!(await lookupForTickersV2(finalTarget))) {
@@ -173,18 +249,22 @@ export const useInfoCommandsHandler = (
       if (symbolsFound && symbolsFound.length > 2) {
         finalTarget = symbolsFound[0].symbol;
 
-        response(
-          "found the following stocks choose one by saying stock number 3 for example"
-        );
-        handleOpenModal(
-          "found the following stocks:",
-          symbolsFound
-        );
+        if (isIgnoreFoundMultiple) {
+          finalTarget = symbolsFound[0].symbol;
+        } else {
+          response(
+            "found the following stocks choose one by saying stock number 3 for example"
+          );
+          handleOpenModal(
+            "found the following stocks:",
+            symbolsFound
+          );
 
-        setWindowType({ type, isWithControl });
+          setWindowType({ type, isWithControl });
 
-        setFoundStock(symbolsFound);
-        return;
+          setFoundStock(symbolsFound);
+          return;
+        }
       } else if (symbolsFound && symbolsFound.length === 1) {
         finalTarget = symbolsFound[0].symbol;
       } else {
@@ -215,16 +295,21 @@ export const useInfoCommandsHandler = (
             // first one
             if (companies.length > 0) {
               response(`I can open ${target} chart now`);
-              response(
-                "found the following stocks choose one by saying stock number 3 for example"
-              );
-              handleOpenModal(
-                "found the following stocks:",
-                companies
-              );
+              if (isIgnoreFoundMultiple) {
+                finalTarget = companies[0].symbol;
+              } else {
+                response(
+                  "found the following stocks choose one by saying stock number 3 for example"
+                );
+                handleOpenModal(
+                  "found the following stocks:",
+                  companies
+                );
 
-              setWindowType({ type, isWithControl });
-              setFoundStock(companies);
+                setWindowType({ type, isWithControl });
+                setFoundStock(companies);
+              }
+
               // await getAllTickersInDatabaseToJson();
               // TODO clean up the following code
             } else {
@@ -238,43 +323,40 @@ export const useInfoCommandsHandler = (
                   keyword: target,
                 }
               );
+              return;
             }
           } else {
             response(
               `I didn't find any chart with ${target} keyword from yahoo finance`
             );
+            return;
           }
         } catch (error) {
           response(
             `I didn't find any chart with ${target} keyword from yahoo finance`
           );
+          return;
         }
 
         // so I'll learn about ${target} and you can try again after 3 minutes
 
-        return;
+        if (!isIgnoreFoundMultiple) return;
       }
     }
     yahooFinanceOpeningWResponses(type, target);
 
+    if (type === "currentPrice") {
+      await currentStockPrice(target);
+      return;
+    }
+
     if (isWithControl) {
-      openChartWithControl(finalTarget);
+      await openChartWithControl(finalTarget);
+    } else if (isIgnoreFoundMultiple) {
+      return finalTarget;
     } else {
       openWindow(type, finalTarget);
     }
-    // two charts are open you can switch between them by presing alt and clikcing tab to switch betweens the windows
-
-    // const width = window.outerWidth - 20;
-    // const height = (window.outerHeight - 20) / 2;
-
-    // const newPopupWindow = window.open(
-    //   `https://finance.yahoo.com/chart/${finalTarget}`,
-    //   `ORIGIN_CHART_WINDOW_${openedChartsNum + 1}`,
-    //   `popup,width=${width},height=${height}`
-    // );
-    // // setPopupWindow(newPopupWindow);
-    // setPopupWindow([...popupWindow, newPopupWindow]);
-    // setOpenedChartsNum(openedChartsNum + 1);
   };
 
   const closeChart = async () => {
@@ -373,5 +455,6 @@ export const useInfoCommandsHandler = (
     openTheMost,
     closeTheMost,
     zoomChart,
+    openMultipleCharts,
   };
 };
