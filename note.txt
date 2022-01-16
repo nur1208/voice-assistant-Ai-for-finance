@@ -228,7 +228,7 @@ deadline - before 2022-1-15 ✅ DONE on 2022-1-14
 104 - {DONE} create 'close chart' command for 'open chart with your control' command
 105 - {DONE} create 'zoom in' and 'zoom out' commands when finansis open chart with her control
 106 - {DONE} create  'what is the current price for apple (share)' command
-107 - {TODO} create 'Show me apple and Tesla charts' commands 
+107 - {DONE} create 'Show me apple and Tesla charts' commands 
 108 - {TODO} create 'change the chart to {chart type daily for example}' command when finansis open chart with her control
 deadline - before 2022-1-17 ⏳
 109 - {TODO} come up with plan for 'trading' section

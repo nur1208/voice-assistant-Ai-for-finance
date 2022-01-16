@@ -31,7 +31,40 @@ export const useInfoCommandsHandler = (
   const height = window.outerHeight - 20;
   const [popupWWControl, setPopupWWControl] = useState(null);
 
-  let companyIndex = 0;
+  const changeChartTo = async (type) => {
+    const validOptions = [
+      "1 minute",
+      "2 minutes",
+      "5 minutes",
+      "15 minutes",
+      "30 minutes",
+      "1 hour",
+      "4 hours",
+      "1 day",
+      "1 week",
+      "1 month",
+      "1 year",
+    ];
+
+    if (!popupWWControl) {
+      response(`browser with my control is closed`);
+      return;
+    }
+
+    if (!validOptions.includes(type)) {
+      response(`${type} is not valid option`);
+      return;
+    }
+
+    try {
+      await axios.post(`${AUTO_API_URL}/changeChart`, { type });
+
+      response(`here is ${type} chart`);
+    } catch (error) {
+      response("something went wrong from auto app");
+    }
+  };
+
   const openMultipleCharts = async (companies) => {
     if (companies.includes("and")) {
       let companiesArray = companies.split("and");
@@ -456,5 +489,6 @@ export const useInfoCommandsHandler = (
     closeTheMost,
     zoomChart,
     openMultipleCharts,
+    changeChartTo,
   };
 };

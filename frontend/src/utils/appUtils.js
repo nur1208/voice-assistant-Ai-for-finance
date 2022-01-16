@@ -75,6 +75,7 @@ export const useFinansis = () => {
     closeTheMost,
     zoomChart,
     openMultipleCharts,
+    changeChartTo,
   } = useInfoCommandsHandler(
     response,
     handleOpenModal,
@@ -324,6 +325,11 @@ export const useFinansis = () => {
       command: "show me * charts",
       callback: async (companies) =>
         await openMultipleCharts(companies),
+      commandFor: "info",
+    },
+    {
+      command: "change the chart to *",
+      callback: async (companies) => await changeChartTo(companies),
       commandFor: "info",
     },
   ];

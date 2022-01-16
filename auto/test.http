@@ -20,6 +20,15 @@ Content-Type: application/json
     "type":"in"
 }
 
+
+###
+POST {{url}}/changeChart
+Content-Type: application/json
+
+{
+    "type":"2 week"
+}
+
 ###
 POST {{url}}/findingCompanies
 Content-Type: application/json
