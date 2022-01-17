@@ -26,6 +26,9 @@ export const useFinansis = () => {
   const [openModal, setOpenModal] = useState(false);
   const [modalTitle, setModalTitle] = useState("");
   const [modalContent, setModalContent] = useState("");
+
+  const [currentQuestion, setCurrentQuestion] = useState(null);
+
   const handleOpenModal = (title, content) => {
     setOpenModal(true);
     setModalTitle(title);
@@ -93,6 +96,8 @@ export const useFinansis = () => {
     handleGoToPage,
     handleTodaysDate,
     handleFindingAnswer,
+    openAnswerDetail,
+    closeAnswerDetail,
   } = useCommonCommandsHandler(
     setPageNumber,
     setNewsArticles,
@@ -153,6 +158,7 @@ export const useFinansis = () => {
           handleScrollDetailPage,
           handleFindingAnswer,
           findingAnswerFor,
+          setCurrentQuestion
         }),
       commandFor: "news",
     },
@@ -332,6 +338,16 @@ export const useFinansis = () => {
       callback: async (companies) => await changeChartTo(companies),
       commandFor: "info",
     },
+    {
+      command: "open details page for the answer",
+      callback: () => openAnswerDetail(currentQuestion),
+      commandFor: "every section",
+    },
+    {
+      command: "close details answer (window)",
+      callback: () => closeAnswerDetail(),
+      commandFor: "every section",
+    },
   ];
 
   // get questions from the database
@@ -442,7 +458,7 @@ export const useFinansis = () => {
           foundQuestion.answer
         );
         response(foundQuestion.answer);
-
+        setCurrentQuestion(foundQuestion);
         const timeout =
           foundQuestion.answer.length > 80 ? 1000 * 10 : 1000 * 7;
 

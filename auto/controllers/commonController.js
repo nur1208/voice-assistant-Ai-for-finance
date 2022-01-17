@@ -1,5 +1,7 @@
 // import { browser, page } from "../server.js";
 import puppeteer from "puppeteer";
+import cheerio from "cheerio";
+import axios from "axios";
 
 export let browser;
 export let page;

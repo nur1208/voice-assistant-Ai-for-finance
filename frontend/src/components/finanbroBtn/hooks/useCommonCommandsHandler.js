@@ -18,7 +18,47 @@ export const useCommonCommandsHandler = (
   const history = useHistory();
 
   const [appHistoryIndex, setAppHistoryIndex] = useState(0);
+  const [openedWindowNum, setOpenedWindowNum] = useState(0);
+  const width = window.outerWidth - 20;
+  const height = window.outerHeight - 20;
+  const [popupWindow, setPopupWindow] = useState(null);
 
+  const openAnswerDetail = (questionObject) => {
+    console.log({ questionObject });
+    if (!questionObject) {
+      response("there is no detail answer page to open");
+      return;
+    }
+
+    response("opening details page for the answer");
+    const newPopupWindow = window.open(
+      questionObject.referenceUrl,
+      `ORIGIN_DETAILS_ANSWER_WINDOW_${openedWindowNum + 1}`,
+      `popup,width=${width},height=${height}`
+    );
+
+    if (popupWindow)
+      setPopupWindow([...popupWindow, newPopupWindow]);
+    else setPopupWindow([newPopupWindow]);
+
+    setOpenedWindowNum(openedWindowNum + 1);
+  };
+
+  const closeAnswerDetail = async () => {
+    if (popupWindow) {
+      if (popupWindow.length === 1) response(`closing the window`);
+      else response(`closing all windows`);
+
+      for (let index = 0; index < popupWindow.length; index++) {
+        const window = popupWindow[index];
+        window.close();
+      }
+      setPopupWindow(null);
+      // popupWindow.close();
+    } else {
+      response(`there is no chart open to close it`);
+    }
+  };
   // limiting the user to only move throw the app for 'go back' command
   useEffect(() => {
     return history.listen(() => {
@@ -112,7 +152,10 @@ export const useCommonCommandsHandler = (
     }, 1000 * 7);
   };
 
-  const handleFindingAnswer = async (findingAnswerFor) => {
+  const handleFindingAnswer = async (
+    findingAnswerFor,
+    setCurrentQuestion
+  ) => {
     const {
       data: { questionObject },
     } = await axios.post(`${AUTO_API_URL}/findingAnswers`, {
@@ -128,6 +171,9 @@ export const useCommonCommandsHandler = (
     setTimeout(() => {
       handleCloseModal();
     }, timeout);
+
+    setCurrentQuestion(questionObject);
+
     setQuestions([...questions, questionObject]);
   };
 
@@ -137,5 +183,7 @@ export const useCommonCommandsHandler = (
     handleGoToPage,
     handleTodaysDate,
     handleFindingAnswer,
+    openAnswerDetail,
+    closeAnswerDetail,
   };
 };

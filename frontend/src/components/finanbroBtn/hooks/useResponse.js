@@ -60,6 +60,7 @@ export const useResponse = () => {
     handleScrollDetailPage,
     handleFindingAnswer,
     findingAnswerFor,
+    setCurrentQuestion,
   }) => {
     console.log(secondCommandFor);
     switch (secondCommandFor) {
@@ -78,7 +79,10 @@ export const useResponse = () => {
       case "findingAnswer":
         response("give me a minute to find an answer");
 
-        await handleFindingAnswer(findingAnswerFor);
+        await handleFindingAnswer(
+          findingAnswerFor,
+          setCurrentQuestion
+        );
 
         break;
 
