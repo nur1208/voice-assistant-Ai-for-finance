@@ -158,7 +158,7 @@ export const useFinansis = () => {
           handleScrollDetailPage,
           handleFindingAnswer,
           findingAnswerFor,
-          setCurrentQuestion
+          setCurrentQuestion,
         }),
       commandFor: "news",
     },
@@ -374,7 +374,8 @@ export const useFinansis = () => {
       // console.log(element);
       const { command, commandFor } = element;
       if (typeof command === "string") {
-        if (command.includes("what") || command.includes("how")) {
+        // if (command.includes("what") || command.includes("how")) {
+        if (command.match(/^what/) || command.match(/^how/)) {
           newCommandWithQW.push(command.toLocaleLowerCase());
         }
         newOnlyCommands.push(command.toLocaleLowerCase());
@@ -382,7 +383,9 @@ export const useFinansis = () => {
       } else {
         for (let index = 0; index < command.length; index++) {
           const stringC = command[index];
-          if (stringC.includes("what") || stringC.includes("how")) {
+          // if (stringC.includes("what") || stringC.includes("how")) {
+          // stringC.match(new RegExp("what's")) ||
+          if (stringC.match(/^what/) || stringC.match(/^how/)) {
             newCommandWithQW.push(stringC.toLocaleLowerCase());
           }
           newOnlyCommands.push(stringC.toLocaleLowerCase());
@@ -610,8 +613,8 @@ export const useFinansis = () => {
       setIsCommandExist(isCommandExistLocal);
       if (!isCommandExistLocal) {
         const checkForQW =
-          finalTranscript.includes("what") ||
-          finalTranscript.includes("how");
+          finalTranscript.match(/^what/) ||
+          finalTranscript.match(/^how/);
         if (checkForQW) {
           response(
             `do you want me to learn about ${finalTranscript}`
