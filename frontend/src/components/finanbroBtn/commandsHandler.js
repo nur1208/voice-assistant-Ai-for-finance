@@ -371,6 +371,7 @@ export const useNewsCommandsHandler = (
       try {
         const { data } = await axios.post(`${AUTO_API_URL}/open`, {
           goToUrl,
+          windowType: "detailArticle",
         });
         // this is just for pushing popup window at top
         const w = window.open(

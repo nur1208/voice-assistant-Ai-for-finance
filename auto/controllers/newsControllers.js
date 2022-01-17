@@ -1,10 +1,14 @@
 // import { browser, page } from "../server.js";
 
-import { browser, page } from "./commonController.js";
+import {
+  browser,
+  page,
+  windowTypeHolder,
+} from "./commonController.js";
 
 export const scrollHandler = async (req, res) => {
   const { source } = req.body;
-  if (browser && page) {
+  if (browser && page && windowTypeHolder === "detailArticle") {
     const isEndOfPage = await page.evaluate((source) => {
       // if (
       //   document.scrollingElement.scrollTop + window.innerHeight <
