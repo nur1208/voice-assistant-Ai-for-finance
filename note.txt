@@ -233,7 +233,7 @@ deadline - before 2022-1-15 ✅ DONE on 2022-1-14
 deadline - before 2022-1-17 ✅ DONE on 2022-1-16
 109 - {DONE} come up with simple plan for 'trading' section
 110 - {DONE} clean up server auto file
-111 - {TODO} add windowType to auto opening articles
+111 - {DONE} add windowType to auto opening articles
 112 - {TODO} fix 'close the chart' finansis say 'closing the chart' when there is no opened chart 
 113 - {TODO} improve finansis answers for questions by let finansis open the reference page 'open details page for the answer'
 deadline - before 2022-1-18 ⏳

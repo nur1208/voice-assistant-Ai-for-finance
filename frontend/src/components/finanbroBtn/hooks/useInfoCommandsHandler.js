@@ -401,6 +401,7 @@ export const useInfoCommandsHandler = (
         const window = popupWindow[index];
         window.close();
       }
+      setPopupWindow(null);
       // popupWindow.close();
     } else if (popupWWControl) {
       response(`closing the window`);
