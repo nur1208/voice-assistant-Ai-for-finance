@@ -237,13 +237,14 @@ deadline - before 2022-1-17 ✅ DONE on 2022-1-16
 112 - {DONE} fix 'close the chart' finansis say 'closing the chart' when there is no opened chart 
 113 - {DONE} improve finansis answers for questions by let finansis open the reference page 'open details page for the answer'
 deadline - before 2022-1-18 ✅ DONE on 2022-1-17
-114 - {TODO} fixing 'show me' command and finansis says 'do you want me to learn about show me'
+114 - {DONE} fixing 'show me' command and finansis says 'do you want me to learn about show me'
     - show = s + how so the finalTranscript includes the word how
 115 - {TODO} set up trading api 
 116 - {TODO} move the code from my trading bot to trading api 
 117 - {TODO} create different database for trading api
 118 - {TODO} create python api using flex for let finansis call buy, sell and test scripts
 119 - {TODO} improve test script
+deadline - before 2022-1-20
 120 - {TODO} create simulator for back testing
     - the interface like https://www.investopedia.com/simulator/
     - let finansis pass day by day 
