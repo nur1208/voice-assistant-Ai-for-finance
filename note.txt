@@ -239,7 +239,7 @@ deadline - before 2022-1-17 ✅ DONE on 2022-1-16
 deadline - before 2022-1-18 ✅ DONE on 2022-1-17
 114 - {DONE} fixing 'show me' command and finansis says 'do you want me to learn about show me'
     - show = s + how so the finalTranscript includes the word how
-115 - {TODO} set up trading api 
+115 - {DONE} set up trading api 
 116 - {TODO} move the code from my trading bot to trading api 
 117 - {TODO} create different database for trading api
 118 - {TODO} create python api using flex for let finansis call buy, sell and test scripts
