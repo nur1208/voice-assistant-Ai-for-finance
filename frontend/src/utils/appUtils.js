@@ -337,7 +337,7 @@ export const useFinansis = () => {
     {
       command: "buy stocks",
       callback: () => buyStocks(),
-      commandFor: "trading",
+      commandFor: "info",
     },
   ];
 

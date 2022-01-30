@@ -243,6 +243,7 @@ deadline - before 2022-1-18 ✅ DONE on 2022-1-17
 116 - {DONE} move the code from my trading bot to trading api 
 117 - {DONE} create different database for trading api
 118 - {TODO} create python api using flex for let finansis call buy, sell and test scripts
+ - creating buyStock handler 
 119 - {TODO} improve test script
 deadline - before 2022-1-20
 120 - {TODO} create simulator for back testing

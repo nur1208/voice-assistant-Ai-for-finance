@@ -3,8 +3,8 @@ import { PYTHON_API, TRADING_API } from "../../../utils/serverUtils";
 export const useTradingCommendsHandler = (response) => {
   const buyStocks = async () => {
     try {
-      response("first getting s&p 500 stocks");
-      await axios(`${PYTHON_API}/saveSp500Tickers/`);
+      response("getting s&p 500 stocks");
+      await axios(`${PYTHON_API}/saveSp500Tickers`);
 
       response("S and P 500 stocks saved successfully");
 
@@ -12,7 +12,7 @@ export const useTradingCommendsHandler = (response) => {
         response("Finding buy signals");
         const {
           data: { totalNumberOfBuying },
-        } = await axios(`${PYTHON_API}/findBuySignal/`);
+        } = await axios(`${PYTHON_API}/findBuySignal`);
         // # print(f"found {totalNumberOfBuying} buying signals ✅")
 
         if (totalNumberOfBuying > 0) {
