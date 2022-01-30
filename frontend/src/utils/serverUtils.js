@@ -7,3 +7,4 @@ export const KNOWN_KEYWORD_ROUTE = "api/v1/unknownKeywords";
 export const QUESTIONS_ROUTE = "api/v1/questions";
 export const PYTHON_API = "http://127.0.0.1:5000";
 export const TRADING_API = "http://localhost:3053";
+export const SOTCK_ROUTE = "api/v1/stocks";

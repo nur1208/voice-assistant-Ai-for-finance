@@ -1,5 +1,9 @@
 import axios from "axios";
-import { PYTHON_API, TRADING_API } from "../../../utils/serverUtils";
+import {
+  PYTHON_API,
+  SOTCK_ROUTE,
+  TRADING_API,
+} from "../../../utils/serverUtils";
 export const useTradingCommendsHandler = (response) => {
   const buyStocks = async () => {
     try {
@@ -16,12 +20,13 @@ export const useTradingCommendsHandler = (response) => {
         // # print(f"found {totalNumberOfBuying} buying signals ✅")
 
         if (totalNumberOfBuying > 0) {
+          // if (5 > 0) {
           try {
             response(`found ${totalNumberOfBuying} buying signals`);
             response("buying stocks");
             const {
               data: { message },
-            } = await axios(`${TRADING_API}/buyStock/`);
+            } = await axios(`${TRADING_API}/${SOTCK_ROUTE}/buyStock?gameNum=4`);
             response(message);
           } catch (error) {
             response("something went wrong while buying Stocks");
