@@ -11,15 +11,13 @@ export const useResponse = () => {
     if (optionsResponse.length - 1 < randomIndex)
       randomOption = optionsResponse[0];
     else randomOption = optionsResponse[randomIndex];
-
-    // console.log(randomOption);
+    console.log("here");
+    console.log(voices);
     if (typeof optionsResponse !== "object")
-      speak({ text: optionsResponse, voice: voices[7] });
+      speak({ text: optionsResponse, voice: voices[4] });
     else {
-      speak({ text: randomOption, voice: voices[7] });
-      setRandomIndex(
-        Math.floor(Math.random() * optionsResponse.length)
-      );
+      speak({ text: randomOption, voice: voices[4] });
+      setRandomIndex(Math.floor(Math.random() * optionsResponse.length));
       // setRandomIndex(10);
     }
   };
@@ -28,8 +26,7 @@ export const useResponse = () => {
     new Promise((resolve, reject) => {
       const timeoutId = setTimeout(() => {
         response(title);
-        option.indexArticle &&
-          option.setActiveArticle(option.indexArticle);
+        option.indexArticle && option.setActiveArticle(option.indexArticle);
         // setActiveArticle(index);
         // console.log({ index });
         if (option.isLast) {
@@ -79,10 +76,7 @@ export const useResponse = () => {
       case "findingAnswer":
         response("give me a minute to find an answer");
 
-        await handleFindingAnswer(
-          findingAnswerFor,
-          setCurrentQuestion
-        );
+        await handleFindingAnswer(findingAnswerFor, setCurrentQuestion);
 
         break;
 
