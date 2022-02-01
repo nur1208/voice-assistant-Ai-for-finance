@@ -108,7 +108,7 @@ export const useFinansis = () => {
     setQuestions
   );
 
-  const { buyStocks } = useTradingCommendsHandler(response);
+  const { buyStocks, sellStocks, stopLess } = useTradingCommendsHandler(response);
 
   const [findingAnswerFor, setFindingAnswerFor] = useState("");
 
@@ -123,7 +123,7 @@ export const useFinansis = () => {
     // },
     {
       command: ["what can you do", "how can you help me"],
-      callback: () => response("I provide finance information for you"),
+     callback: () => response("I provide finance information for you"),
       commandFor: "every section",
     },
     {
@@ -337,6 +337,16 @@ export const useFinansis = () => {
     {
       command: "buy stocks",
       callback: () => buyStocks(),
+      commandFor: "info",
+    },
+    {
+      command: "sell stocks",
+      callback: () => sellStocks(),
+      commandFor: "info",
+    },
+    {
+      command: ["set stop-loss for stocks", "buy stop loss for stocks"],
+      callback: () => stopLess(),
       commandFor: "info",
     },
   ];
