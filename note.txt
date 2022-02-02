@@ -245,6 +245,15 @@ deadline - before 2022-1-18 ✅ DONE on 2022-1-17
 118 - {DONE} create python api using flex for let finansis call buy, sell and stop loss scripts
  - creating buyStock handler 
 119 - {TODO} improve test script
+    - create strategyTested model:
+        - boughtDate: date
+        - boughtPrice: number
+        - soldDate: date
+        - soldPrice: number
+        - symbol: string
+        - shares: string
+        - return: number 
+        
 deadline - before 2022-1-20
 120 - {TODO} create simulator for back testing
     - the interface like https://www.investopedia.com/simulator/
