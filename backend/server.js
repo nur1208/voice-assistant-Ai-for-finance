@@ -7,6 +7,7 @@ import newsRouter from "./routes/newsRoute.js";
 import companyRouter from "./routes/companyRoute.js";
 import questionRouter from "./routes/questionRoute.js";
 import unknownKeywordForCompanyRouter from "./routes/unknownKeywordForCompanyRoute.js";
+import strategyTestedRouter from "./routes/strategyTestedRoute.js";
 
 dotenv.config();
 
@@ -44,14 +45,11 @@ const main = async () => {
     app.use("/api/v1/news", newsRouter);
     app.use("/api/v1/companies", companyRouter);
     app.use("/api/v1/questions", questionRouter);
-    app.use(
-      "/api/v1/unknownKeywords",
-      unknownKeywordForCompanyRouter
-    );
+    app.use("/api/v1/unknownKeywords", unknownKeywordForCompanyRouter);
+    app.use("/api/v1/testedStrategy", strategyTestedRouter);
+
     app.listen(port, () => {
-      console.log(
-        `express app listening at http://localhost:${port}`
-      );
+      console.log(`express app listening at http://localhost:${port}`);
     });
   } catch (error) {
     console.log(error);

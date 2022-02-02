@@ -1,0 +1,24 @@
+@port = 4050
+@Host =  http://localhost
+
+@route = api/v1/testedStrategy
+
+POST {{Host}}:{{port}}/{{route}}
+Content-Type: application/json
+
+{   "symbol": "ABT", 
+    "boughtPrice": 124.5, 
+    "boughtDate": "2021-02-08", 
+    "soldDate": "2021-12-17", 
+    "soldPrice": 137.11, 
+    "shares": 107, 
+    "stopLessPrice": 87.15, 
+    "isReachedStopLoss": false
+}
+###
+
+GET {{Host}}:{{port}}/{{route}}
+
+###
+DELETE {{Host}}:{{port}}/{{route}}
+

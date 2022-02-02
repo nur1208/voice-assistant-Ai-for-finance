@@ -2,13 +2,14 @@ import mongoose from "mongoose";
 
 const strategyTestedSchema = new mongoose.Schema(
   {
-    boughtDate: { type: String, unique: true },
-    boughtPrice: String,
-    soldDate: String,
-    soldPrice: String,
+    boughtDate: Date,
+    boughtPrice: Number,
+    soldDate: Date,
+    soldPrice: Number,
     symbol: String,
-    shares: String,
-    shares: String,
+    shares: Number,
+    stopLessPrice: Number,
+    isReachedStopLoss: Boolean,
   },
   {
     timestamps: true,
