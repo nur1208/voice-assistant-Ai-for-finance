@@ -242,7 +242,7 @@ deadline - before 2022-1-18 ✅ DONE on 2022-1-17
 115 - {DONE} set up trading api 
 116 - {DONE} move the code from my trading bot to trading api 
 117 - {DONE} create different database for trading api
-118 - {TODO} create python api using flex for let finansis call buy, sell and test scripts
+118 - {DONE} create python api using flex for let finansis call buy, sell and stop loss scripts
  - creating buyStock handler 
 119 - {TODO} improve test script
 deadline - before 2022-1-20
@@ -254,6 +254,9 @@ deadline - before 2022-1-20
 122 - {TODO} test findingAnswersHandler and findingAnswersHandler functions
 123 - {TODO} improve 'code for handling unknown commands' by checking for commands first then for questions
 124 - {TODO} add redux to the project
+125 - {TODO} create 'trade for me' command
+126 - {TODO} create 'trading section'
+127 - {TODO} create trade progress popup window
 
 
 92 - {NOT important NOW TODO} improve offline component by make it like youtube 

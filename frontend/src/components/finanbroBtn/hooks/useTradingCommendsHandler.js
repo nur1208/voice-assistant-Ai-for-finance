@@ -50,7 +50,7 @@ export const useTradingCommendsHandler = (response) => {
       } = await axios(`${PYTHON_API}/findSellSignal`);
 
       if (totalNumberOfSell > 0) {
-      // if (4 > 0) {
+        // if (4 > 0) {
         try {
           response(`found ${totalNumberOfSell} sell signals`);
           response("selling stocks:");
@@ -72,15 +72,13 @@ export const useTradingCommendsHandler = (response) => {
 
   const stopLess = async () => {
     try {
-      response("buying stop loss")
+      response("buying stop loss");
       const {
         data: { message },
       } = await axios(`${TRADING_API}/${STOCK_ROUTE}/addStopLess?gameNum=5`);
-
     } catch (error) {
-      response("something went wrong while buying stop loss")
+      response("something went wrong while buying stop loss");
     }
-  }
+  };
   return { buyStocks, sellStocks, stopLess };
-
 };
