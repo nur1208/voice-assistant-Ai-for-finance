@@ -14,7 +14,24 @@ export const createStrategyTested = async (req, res) => {
 
 export const getStrategyTested = async (req, res) => {
   try {
-    const docs = await StrategyTestedModel.find();
+    const queryObject = {};
+
+    const validUpdateProp = [
+      "boughtDate",
+      "symbol",
+      "soldDate",
+      "isReachedStopLoss",
+    ];
+
+    for (let index = 0; index < validUpdateProp.length; index++) {
+      const prop = validUpdateProp[index];
+      if (req.query[prop]) {
+        queryObject[prop] = req.query[prop];
+      }
+    }
+
+    console.log(queryObject);
+    const docs = await StrategyTestedModel.find(queryObject);
 
     if (docs.length > 0)
       res.json({ status: "success", resultLength: docs.length, docs });

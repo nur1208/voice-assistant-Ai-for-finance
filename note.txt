@@ -254,6 +254,7 @@ deadline - before 2022-1-18 ✅ DONE on 2022-1-17
         - shares: number
         - return: number
     - create routes (get and put) for strategyTested model
+    - improve getStrategyTested controller 
         
 deadline - before 2022-1-20
 120 - {TODO} create simulator for back testing
