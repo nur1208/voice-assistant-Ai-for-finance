@@ -36,7 +36,7 @@ export const getStrategyTested = async (req, res) => {
     if (docs.length > 0)
       res.json({ status: "success", resultLength: docs.length, docs });
     else
-      res.status(401).json({
+      res.status(404).json({
         status: "fall",
         message: "didn't find tested date",
       });

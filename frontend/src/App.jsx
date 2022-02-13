@@ -12,6 +12,9 @@ import { getAllTickersInDatabaseToJson } from "./utils/getAllTickersInDatabaseTo
 import { Offline } from "./components/Offline";
 import { NotWorkingInChina } from "./components/NotWorkingInChina";
 import { getCurrentCountry } from "./utils/getCurrentCountry";
+import {Test} from "./components/Test"
+import {Simulator} from "./components/Simulator/Simulator"
+import {GlobalStyle} from "./appSC"
 
 export const PAGES = [
   {
@@ -26,10 +29,10 @@ export const PAGES = [
     path: "/info",
     Component: (props) => <InfoPage {...props} />,
   },
-  // {
-  //   path: "/test",
-  //   Component: (props) => <BasicModal {...props} />,
-  // },
+  {
+    path: "/test",
+    Component: (props) => <Simulator {...props} />,
+  },
 ];
 
 export const App = () => {
@@ -62,7 +65,9 @@ export const App = () => {
   // getAllTickersInDatabaseToJson();
   return (
     <>
+      <GlobalStyle/>
       <Switch>
+
         {/* <Route exact path="/">
           <HomePage {...NewsPageProps} />
         </Route> */}

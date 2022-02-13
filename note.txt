@@ -244,7 +244,7 @@ deadline - before 2022-1-18 ✅ DONE on 2022-1-17
 117 - {DONE} create different database for trading api
 118 - {DONE} create python api using flex for let finansis call buy, sell and stop loss scripts
  - creating buyStock handler 
-119 - {TODO} improve test script
+119 - {DONE} improve test script
     - create strategyTested model:
         - boughtDate: date
         - boughtPrice: number
@@ -255,8 +255,7 @@ deadline - before 2022-1-18 ✅ DONE on 2022-1-17
         - return: number
     - create routes (get and put) for strategyTested model
     - improve getStrategyTested controller 
-        
-deadline - before 2022-1-20
+deadline - before 2022-1-20 ❌ DONE on 2022-2-2
 120 - {TODO} create simulator for back testing
     - the interface like https://www.investopedia.com/simulator/
     - let finansis pass day by day 
@@ -265,6 +264,7 @@ deadline - before 2022-1-20
 122 - {TODO} test findingAnswersHandler and findingAnswersHandler functions
 123 - {TODO} improve 'code for handling unknown commands' by checking for commands first then for questions
 124 - {TODO} add redux to the project
+deadline - before 2022-2-6
 125 - {TODO} create 'trade for me' command
 126 - {TODO} create 'trading section'
 127 - {TODO} create trade progress popup window

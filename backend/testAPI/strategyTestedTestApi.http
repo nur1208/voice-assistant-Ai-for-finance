@@ -17,7 +17,7 @@ Content-Type: application/json
 }
 ###
 
-GET {{Host}}:{{port}}/{{route}}?soldDate=2021-12-17
+GET {{Host}}:{{port}}/{{route}}
 
 ###
 DELETE {{Host}}:{{port}}/{{route}}
