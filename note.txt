@@ -258,10 +258,16 @@ deadline - before 2022-1-18 ✅ DONE on 2022-1-17
 deadline - before 2022-1-20 ❌ DONE on 2022-2-2
 120 - {TODO} create simulator for back testing
     - {DONE} creating backTesting interface the interface like https://www.investopedia.com/simulator/
-    - let finansis pass day by day 
-    - save the historical price to save time 
+    - {DONE} let finansis pass day by day 
+    - {DONE} save the historical price to save time
+    - {TODO} create finding buy signal api's route for back testing
+    - {TODO} create find sell signal api's route for back testing
+    - {TODO} create get stocks price based on specific date
+    - {TODO} call the routes from finansis and get the data
+    - {TODO} display the data in similarly page 
     - replace description to data of buying and day holding 
-    - replace Trading actions to price chart with buy data 
+    - replace Trading actions to price chart with buy data
+    - when saving tested data make userId unique and today date plus last four digits of userId 
 
 121 - {TODO} create user model 
 122 - {TODO} test findingAnswersHandler and findingAnswersHandler functions

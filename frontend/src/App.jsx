@@ -12,9 +12,9 @@ import { getAllTickersInDatabaseToJson } from "./utils/getAllTickersInDatabaseTo
 import { Offline } from "./components/Offline";
 import { NotWorkingInChina } from "./components/NotWorkingInChina";
 import { getCurrentCountry } from "./utils/getCurrentCountry";
-import {Test} from "./components/Test"
-import {Simulator} from "./components/Simulator/Simulator"
-import {GlobalStyle} from "./appSC"
+import { Test } from "./components/Test";
+import { Simulator } from "./components/Simulator/Simulator";
+import { GlobalStyle } from "./appSC";
 
 export const PAGES = [
   {
@@ -31,7 +31,7 @@ export const PAGES = [
   },
   {
     path: "/test",
-    Component: (props) => <Simulator {...props} />,
+    Component: (props) => <Test {...props} />,
   },
 ];
 
@@ -65,9 +65,8 @@ export const App = () => {
   // getAllTickersInDatabaseToJson();
   return (
     <>
-      <GlobalStyle/>
+      <GlobalStyle />
       <Switch>
-
         {/* <Route exact path="/">
           <HomePage {...NewsPageProps} />
         </Route> */}
