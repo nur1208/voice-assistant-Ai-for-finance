@@ -10,18 +10,19 @@ export const Test = () => {
   const [bough, setBough] = useState([]);
 
   const [testedData, setTestData] = useState([]);
+  const [holdingStocks, setHoldingStocks] = useState([]);
 
-  useEffect(() => {
-    (async () => {
-      const {
-        data: { docs },
-      } = await axios.get(
-        `${BACKEND_API_URL}/${TESTED_DATA_ROUTE}`
-      );
-      // console.log(docs);
-      setTestData(docs);
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     const {
+  //       data: { docs },
+  //     } = await axios.get(
+  //       `${BACKEND_API_URL}/${TESTED_DATA_ROUTE}`
+  //     );
+  //     // console.log(docs);
+  //     setTestData(docs);
+  //   })();
+  // }, []);
 
   // const callApi = async (date) => {
   //   try {
@@ -78,6 +79,7 @@ export const Test = () => {
 
   const [currentCash, setCurrentCash] = useState(1000000);
   // 702316;
+  let holdStocksLocal = holdingStocks;
   let coute = 0;
   const getTestedData = async () => {
     const end = new Date("02/03/2021");
@@ -97,13 +99,56 @@ export const Test = () => {
         // const data = await callApi(date);
 
         const {
+          data: { stocks: SoldStocks },
+        } = await axios.post(
+          `${PYTHON_API}/findSellSignalBT?date=${date}`,
+          { boughtStocks: holdStocksLocal },
+          {
+            onDownloadProgress(progress) {
+              console.log("download progress:", progress);
+            },
+          }
+        );
+
+        if (SoldStocks.length > 0) {
+          console.log(SoldStocks);
+          for (
+            let index = 0;
+            index < SoldStocks.length;
+            index++
+          ) {
+            const sStock = SoldStocks[index];
+
+            holdStocksLocal = holdStocksLocal.filter(
+              ({ symbol }) => symbol !== sStock.symbol
+            );
+
+            setHoldingStocks((oldStocks) =>
+              oldStocks.filter(
+                ({ symbol }) => symbol !== sStock.symbol
+              )
+            );
+          }
+        }
+
+        const {
           data: { stocks },
         } = await axios.post(
           `${PYTHON_API}/findBuySignalBT?date=${date}`,
-          { boughtStocks: [] }
+          { boughtStocks: holdStocksLocal },
+          {
+            onDownloadProgress(progress) {
+              console.log("download progress:", progress);
+            },
+          }
         );
 
         // newBought.push(data);
+        setHoldingStocks((oldStocks) => [
+          ...oldStocks,
+          ...stocks,
+        ]);
+        holdStocksLocal = [...holdStocksLocal, ...stocks];
         console.log(stocks);
         coute = +1;
         // console.log(bough);
@@ -151,19 +196,26 @@ export const Test = () => {
       setBough((button) => [...button, newBought]);
 
       await getTestedData();
+    } else {
+      holdStocksLocal = [];
     }
     // while (loop <= end) {
   };
 
   return (
     <div>
-      <h1>{bough.length}</h1>
+      <h1>{holdingStocks.length}</h1>
       <h1>{coute}</h1>
       <h1>{loop + ""}</h1>
       <h1>{currentCash}</h1>
       <button onClick={getTestedData}>
         click here to get data
       </button>{" "}
+      <ul>
+        {holdingStocks.map(({ symbol }) => (
+          <li>{symbol}</li>
+        ))}
+      </ul>
     </div>
   );
 };
