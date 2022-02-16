@@ -15,6 +15,17 @@ export const GameInfo = () => {
             </span>
             <span className="ml-2">of 213,358 Players</span>
           </div>
+          <div>
+            <span className="overline">Top Player</span>
+            <div data-v-67bfb397="">
+              <span data-v-67bfb397="" class="top-player mr-2">
+                huangcharles
+              </span>{" "}
+              <span data-v-67bfb397="" class="top-player-value">
+                $1,280,730,768,687,300.00
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </>

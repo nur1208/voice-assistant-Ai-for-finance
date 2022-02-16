@@ -1,6 +1,8 @@
 import React from "react";
 import { Alert } from "./components/Alert";
 import { GameInfo } from "./components/GameInfo";
+import { PerformanceChart } from "./components/PerformanceChart";
+import { PortfolioHoldings } from "./components/PortfolioHoldings";
 import { PortfolioSummary } from "./components/PortfolioSummary";
 
 import { MainWrapper } from "./SimulatorSC";
@@ -18,7 +20,9 @@ export const Simulator = () => {
             <PortfolioSummary />
             <GameInfo />
           </div>
+          <PerformanceChart />
         </div>
+        <PortfolioHoldings />
       </div>
     </MainWrapper>
   );
