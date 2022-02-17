@@ -262,7 +262,7 @@ deadline - before 2022-1-20 ❌ DONE on 2022-2-2
     - {DONE} save the historical price to save time
     - {DONE} create finding buy signal api's route for back testing and let finansis use it
     - {DONE} create find sell signal api's route for back testing and let finansis use it
-    - {TODO} create get stocks price based on specific date
+    - {DONE} create get stocks price based on specific date
     - {TODO} create useBackTest hook
     - {TODO} display the data in similarly page 
     - replace description to data of buying and day holding 
@@ -337,8 +337,3 @@ Playing ----
 12 - create bot that can buy and sell and show the result in the web
     using fundamental analysis + technical analysis + machine learning RNN algorithm     
 
-
---- note HSK 4 APP
-1 - {DONE} DELETE AND SAVE SAVEDWORD 
-2 - {TODO} fix exresice page
-3 - {TODO} search functionality for any words 
