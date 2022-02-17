@@ -98,39 +98,59 @@ export const Test = () => {
       try {
         // const data = await callApi(date);
 
-        const {
-          data: { stocks: SoldStocks },
-        } = await axios.post(
-          `${PYTHON_API}/findSellSignalBT?date=${date}`,
-          { boughtStocks: holdStocksLocal },
-          {
-            onDownloadProgress(progress) {
-              console.log("download progress:", progress);
-            },
-          }
-        );
+        if (holdStocksLocal.length > 0) {
+          // get the current price fot hold stocks
+          const {
+            data: { stocks: updatePriceStocks },
+          } = await axios.post(
+            `${PYTHON_API}/getCurrentStockPrice?date=${date}`,
+            { boughtStocks: holdStocksLocal },
+            {
+              onDownloadProgress(progress) {
+                console.log("download progress:", progress);
+              },
+            }
+          );
 
-        if (SoldStocks.length > 0) {
-          console.log(SoldStocks);
-          for (
-            let index = 0;
-            index < SoldStocks.length;
-            index++
-          ) {
-            const sStock = SoldStocks[index];
+          setHoldingStocks(updatePriceStocks);
+          holdStocksLocal = updatePriceStocks;
 
-            holdStocksLocal = holdStocksLocal.filter(
-              ({ symbol }) => symbol !== sStock.symbol
-            );
+          // look for sell signals for hold stocks
+          const {
+            data: { stocks: SoldStocks },
+          } = await axios.post(
+            `${PYTHON_API}/findSellSignalBT?date=${date}`,
+            { boughtStocks: holdStocksLocal },
+            {
+              onDownloadProgress(progress) {
+                console.log("download progress:", progress);
+              },
+            }
+          );
 
-            setHoldingStocks((oldStocks) =>
-              oldStocks.filter(
+          if (SoldStocks.length > 0) {
+            console.log(SoldStocks);
+            for (
+              let index = 0;
+              index < SoldStocks.length;
+              index++
+            ) {
+              const sStock = SoldStocks[index];
+
+              holdStocksLocal = holdStocksLocal.filter(
                 ({ symbol }) => symbol !== sStock.symbol
-              )
-            );
+              );
+
+              setHoldingStocks((oldStocks) =>
+                oldStocks.filter(
+                  ({ symbol }) => symbol !== sStock.symbol
+                )
+              );
+            }
           }
         }
 
+        // look for buy signals
         const {
           data: { stocks },
         } = await axios.post(
@@ -212,9 +232,15 @@ export const Test = () => {
         click here to get data
       </button>{" "}
       <ul>
-        {holdingStocks.map(({ symbol }) => (
-          <li>{symbol}</li>
-        ))}
+        {holdingStocks.map(
+          ({ symbol, currentPrice, boughtPrice }) => (
+            <>
+              <li>{symbol}</li>
+              <li>{boughtPrice}</li>
+              <li>{currentPrice ? currentPrice : 0}</li>
+            </>
+          )
+        )}
       </ul>
     </div>
   );

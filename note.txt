@@ -260,15 +260,17 @@ deadline - before 2022-1-20 ❌ DONE on 2022-2-2
     - {DONE} creating backTesting interface the interface like https://www.investopedia.com/simulator/
     - {DONE} let finansis pass day by day 
     - {DONE} save the historical price to save time
-    - {TODO} create finding buy signal api's route for back testing and let finansis use it
-    - {TODO} create find sell signal api's route for back testing
+    - {DONE} create finding buy signal api's route for back testing and let finansis use it
+    - {DONE} create find sell signal api's route for back testing and let finansis use it
     - {TODO} create get stocks price based on specific date
-    - {TODO} call the routes from finansis and get the data
+    - {TODO} create useBackTest hook
     - {TODO} display the data in similarly page 
     - replace description to data of buying and day holding 
     - replace Trading actions to price chart with buy data
     - when saving tested data make userId unique and today date plus last four digits of userId 
     - let the user see number of holding stocks and number of sold and total bought stock 
+    - handle error
+    - create justSell than purchase price
 
 121 - {TODO} create user model 
 122 - {TODO} test findingAnswersHandler and findingAnswersHandler functions
@@ -334,3 +336,9 @@ Playing ----
 11 - add machine learning RNN algorithm
 12 - create bot that can buy and sell and show the result in the web
     using fundamental analysis + technical analysis + machine learning RNN algorithm     
+
+
+--- note HSK 4 APP
+1 - {DONE} DELETE AND SAVE SAVEDWORD 
+2 - {TODO} fix exresice page
+3 - {TODO} search functionality for any words 
