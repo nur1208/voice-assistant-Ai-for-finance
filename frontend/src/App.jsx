@@ -7,7 +7,7 @@ import { Switch, Route } from "react-router-dom";
 import { HomePage } from "./pages/HomePage";
 import { InfoPage } from "./pages/InfoPage";
 import { TheMostTable } from "./components/TheMostTable/TheMostTable";
-import BasicModal from "./components/Modal";
+// import BasicModal from "./components/Modal";
 import { getAllTickersInDatabaseToJson } from "./utils/getAllTickersInDatabaseToJson";
 import { Offline } from "./components/Offline";
 import { NotWorkingInChina } from "./components/NotWorkingInChina";
@@ -15,6 +15,7 @@ import { getCurrentCountry } from "./utils/getCurrentCountry";
 import { Test } from "./components/Test";
 import { Simulator } from "./components/Simulator/Simulator";
 import { GlobalStyle } from "./appSC";
+import BasicModal from "./components/Modal/Modal";
 
 export const PAGES = [
   {
@@ -31,7 +32,7 @@ export const PAGES = [
   },
   {
     path: "/test",
-    Component: (props) => <Test {...props} />,
+    Component: (props) => <Simulator {...props} />,
   },
 ];
 

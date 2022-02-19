@@ -1,16 +1,21 @@
 import React from "react";
-import { ArrowDownIcon } from "./ArrowDownIcon";
-import { ClockIcon } from "./ClockIcon";
-import { SymbolTable } from "./SymbolTable";
-import { XIcon } from "./XIcon";
+import { ArrowDownIcon } from "../ArrowDownIcon";
+import { ClockIcon } from "../ClockIcon";
+import { SymbolTable } from "../SymbolTable";
+import { XIcon } from "../XIcon";
+import {
+  symbolTablePropsHolding,
+  symbolTablePropsSold,
+} from "./PortfolioHoldingsUtils";
+import PlayCircleFilledWhiteIcon from "@material-ui/icons/PlayCircleFilledWhite";
 
-export const PortfolioHoldings = () => {
+export const PortfolioHoldings = ({ getTestedData }) => {
   return (
     <>
       <div className="text-overline white--text">Holdings</div>
       <div className="container portfolio-holdings white">
         <div className="row">
-          <div className="col-12 col-md-6 col-lg-8 pa-0 text-md-right order-md-2 col order-1">
+          {/* <div className="col-12 col-md-6 col-lg-8 pa-0 text-md-right order-md-2 col order-1">
             <div className="pa-md-3 text--text white--text">
               <div>
                 <XIcon />
@@ -19,6 +24,33 @@ export const PortfolioHoldings = () => {
                 </span>
               </div>
             </div>
+          </div> */}
+          <div className="col-12 text-center mt-6">
+            <button
+              style={{
+                height: "3rem",
+                width: "300px",
+                // cursor: "auto",
+              }}
+              onClick={getTestedData}
+              // href="#here"
+              className="semi-bold v-btn v-btn--has-bg v-btn--router v-btn--tile theme--light elevation-0 v-size--default primary"
+            >
+              <div
+                className="v-btn__content"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                <PlayCircleFilledWhiteIcon
+                  style={{ paddingRight: "20px" }}
+                  className="v-icon notranslate v-icon--left theme--light"
+                />
+                {/* <ClockIcon style={{ paddingRight: "20px" }} /> */}
+                Start Back Testing
+              </div>
+            </button>
           </div>
           <div className="col-12 col-md-6 col-lg-4 pa-0 order-md-1 col order-2">
             <header
@@ -114,14 +146,19 @@ export const PortfolioHoldings = () => {
               <div className="horizontal-scroll-shadow">
                 <div className="v-data-table theme--light">
                   <div className="v-data-table__wrapper">
-                    <SymbolTable />
+                    <SymbolTable {...symbolTablePropsHolding} />
                   </div>
                 </div>
               </div>
               <div className="col-12 text-center mt-6">
-                <a
-                  style={{ height: "3rem", width: "300px" }}
-                  href="#here"
+                <button
+                  disabled
+                  style={{
+                    height: "3rem",
+                    width: "300px",
+                    cursor: "auto",
+                  }}
+                  // href="#here"
                   className="semi-bold v-btn v-btn--has-bg v-btn--router v-btn--tile theme--light elevation-0 v-size--default primary"
                 >
                   <div
@@ -134,9 +171,9 @@ export const PortfolioHoldings = () => {
                     <ClockIcon
                       style={{ paddingRight: "20px" }}
                     />
-                    Trade History
+                    Sold Stocks
                   </div>
-                </a>
+                </button>
               </div>
             </div>
           </div>
@@ -151,7 +188,7 @@ export const PortfolioHoldings = () => {
             <div className="horizontal-scroll-shadow">
               <div className="v-data-table theme--light  blue_bgc">
                 <div className="v-data-table__wrapper">
-                  <SymbolTable />
+                  <SymbolTable {...symbolTablePropsSold} />
                 </div>
               </div>
             </div>
