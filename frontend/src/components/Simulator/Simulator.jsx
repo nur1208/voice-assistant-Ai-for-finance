@@ -1,6 +1,7 @@
 import React from "react";
 import { Alert } from "./components/Alert";
-import { GameInfo } from "./components/GameInfo";
+import { BackTestInfo } from "./components/BackTestInfo";
+// import { GameInfo } from "./components/GameInfo";
 import { PerformanceChart } from "./components/PerformanceChart";
 import { PortfolioHoldings } from "./components/PortfolioHoldings/PortfolioHoldings";
 import { PortfolioSummary } from "./components/PortfolioSummary";
@@ -16,16 +17,29 @@ export const Simulator = () => {
     getTestedData,
     currentStockPrice,
     userChange,
+    accountValue,
+    date,
+    wins,
+    loess,
+    soldStocks,
   } = useBackTest();
 
-  const PortfolioHoldingsProps = { getTestedData };
+  const PortfolioHoldingsProps = {
+    getTestedData,
+    currentStockPrice,
+    accountValue,
+    holdingStocks,
+  };
 
   const PortfolioSummaryProps = {
     holdingStocksLength: holdingStocks.length,
     currentCash,
     currentStockPrice,
     userChange,
+    accountValue,
   };
+
+  const backTestProps = { date, wins, loess, soldStocks };
 
   return (
     <MainWrapper>
@@ -38,7 +52,7 @@ export const Simulator = () => {
         <div className="d-md-flex mb-2">
           <div className="d-flex flex-column flex-shrink-0 mr-md-7">
             <PortfolioSummary {...PortfolioSummaryProps} />
-            <GameInfo />
+            <BackTestInfo {...backTestProps} />
           </div>
           <PerformanceChart />
         </div>

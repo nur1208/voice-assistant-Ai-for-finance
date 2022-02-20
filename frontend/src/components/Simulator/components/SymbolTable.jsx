@@ -1,4 +1,5 @@
 import React from "react";
+import { calculateReturn } from "../SimulatorUtils";
 import { ArrowDownIcon } from "./ArrowDownIcon";
 import { ArrowUpIcon } from "./ArrowUpIcon";
 import { HorizontalLineIcon } from "./HorizontalLineIcon";
@@ -46,10 +47,11 @@ export const SymbolTable = ({
               shares,
               totalValue,
               totalGainLoss,
-              stopLose,
+              stopLossPrice,
               soldPrice,
               soldDate,
               isReachedStopLoss,
+              previousPrice,
             },
             index
           ) => (
@@ -63,7 +65,12 @@ export const SymbolTable = ({
                 {boughtDate}
               </td>
               <td className="text-right semi-bold">
-                <div>${currentPrice || soldPrice}</div>
+                <div>
+                  $
+                  {Number(
+                    currentPrice || soldPrice || 0.0
+                  ).toFixed(2)}
+                </div>
               </td>
               <td className="text-right">
                 <div
@@ -71,7 +78,7 @@ export const SymbolTable = ({
                     todayChange ? "success--text" : ""
                   }`}
                 >
-                  {!todayChange ? (
+                  {soldDate !== undefined ? (
                     <>
                       <div>
                         {soldDate.date}
@@ -85,13 +92,36 @@ export const SymbolTable = ({
                       </div>
                       <HorizontalLineIcon />
                     </>
+                  ) : currentPrice !== undefined &&
+                    previousPrice !== undefined ? (
+                    <>
+                      <div>
+                        $
+                        {
+                          calculateReturn(
+                            previousPrice,
+                            currentPrice
+                          ).money
+                        }
+                        <br />(
+                        {
+                          calculateReturn(
+                            previousPrice,
+                            currentPrice
+                          ).percentage
+                        }
+                        %)
+                      </div>
+                      <ArrowUpIcon />
+                    </>
                   ) : (
                     <>
                       <div>
-                        ${todayChange.money}
-                        <br />({todayChange.percentage}%)
+                        ${0.0}
+                        <br />({0.0}
+                        %)
                       </div>
-                      <ArrowUpIcon />
+                      {/* <ArrowUpIcon /> */}
                     </>
                   )}
                 </div>
@@ -103,15 +133,40 @@ export const SymbolTable = ({
                 <div>{shares}</div>
               </td>
               <td className="text-right semi-bold">
-                <div>${totalValue}</div>
+                <div>
+                  ${Number(boughtPrice * shares).toFixed(2)}
+                </div>
               </td>
               <td className="text-right">
                 <div className="gain-loss semi-bold d-inline-flex align-center success--text">
-                  <div>
-                    ${totalGainLoss.money}
-                    <br />({totalGainLoss.percentage}%)
-                  </div>
-                  <ArrowUpIcon />
+                  {currentPrice === undefined ? (
+                    <div>
+                      $ 0.00
+                      <br />
+                      0.00%
+                    </div>
+                  ) : (
+                    <>
+                      <div>
+                        $
+                        {Number(
+                          calculateReturn(
+                            boughtPrice,
+                            currentPrice
+                          ).money * shares
+                        ).toFixed(2)}
+                        <br />
+                        {
+                          calculateReturn(
+                            boughtPrice,
+                            currentPrice
+                          ).percentage
+                        }
+                        %
+                      </div>
+                      <ArrowUpIcon />
+                    </>
+                  )}
                 </div>
               </td>
               <td
@@ -123,7 +178,7 @@ export const SymbolTable = ({
                     : "success--text"
                 }`}
               >
-                <div>${stopLose}</div>
+                <div>${stopLossPrice}</div>
               </td>
             </tr>
           )

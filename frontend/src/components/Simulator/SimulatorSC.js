@@ -1337,6 +1337,11 @@ export const MainWrapper = styled.div`
     background-color: ${PRIMARY_LIGHTEN5} !important;
   }
 
+  .out_of {
+    color: black;
+    font-size: 13px;
+  }
+
   @media (min-width: 960px) {
     /* .symbol-row-toggle[data-v-547e8c4e] {
       cursor: pointer;

@@ -6,10 +6,30 @@ import { XIcon } from "../XIcon";
 import {
   symbolTablePropsHolding,
   symbolTablePropsSold,
+  tableBodyDateHold,
+  tableBodyDateSold,
+  tableHeadDateHolding,
+  tableHeadDateSold,
 } from "./PortfolioHoldingsUtils";
 import PlayCircleFilledWhiteIcon from "@material-ui/icons/PlayCircleFilledWhite";
+import { renderPriceChangeReturn } from "../../SimulatorUtils";
 
-export const PortfolioHoldings = ({ getTestedData }) => {
+export const PortfolioHoldings = ({
+  getTestedData,
+  currentStockPrice,
+  accountValue,
+  holdingStocks,
+}) => {
+  const symbolTablePropsHolding = {
+    tableHeadDate: tableHeadDateHolding,
+    tableBodyDate: holdingStocks,
+  };
+
+  const symbolTablePropsSold = {
+    tableHeadDate: tableHeadDateSold,
+    tableBodyDate: tableBodyDateSold,
+  };
+
   return (
     <>
       <div className="text-overline white--text">Holdings</div>
@@ -117,7 +137,10 @@ export const PortfolioHoldings = ({ getTestedData }) => {
                 <div className="container d-flex white">
                   <div className="mr-8">
                     <div className="overline"> Total Value </div>
-                    <div className="semi-bold"> $57,056.44 </div>
+                    <div className="semi-bold">
+                      {" "}
+                      ${currentStockPrice.toFixed(2)}
+                    </div>
                   </div>
                   <div className="mr-8">
                     <div className="overline text-no-wrap">
@@ -125,7 +148,17 @@ export const PortfolioHoldings = ({ getTestedData }) => {
                     </div>
                     <div className="gain-loss semi-bold d-inline-flex align-center">
                       <div className="text-no-wrap">
-                        $0.00 (0.00%)
+                        $
+                        {renderPriceChangeReturn(
+                          "money",
+                          accountValue
+                        )}{" "}
+                        (
+                        {renderPriceChangeReturn(
+                          "percentage",
+                          accountValue
+                        )}
+                        %)
                       </div>
                     </div>
                   </div>
@@ -135,7 +168,19 @@ export const PortfolioHoldings = ({ getTestedData }) => {
                     </div>
                     <div className="gain-loss semi-bold d-inline-flex align-center error--text">
                       <div className="text-no-wrap">
-                        -$1,860.09 (-3.16%)
+                        $
+                        {renderPriceChangeReturn(
+                          "money",
+                          accountValue,
+                          true
+                        )}{" "}
+                        (
+                        {renderPriceChangeReturn(
+                          "percentage",
+                          accountValue,
+                          true
+                        )}
+                        %)
                         <ArrowDownIcon size="small" />
                       </div>
                     </div>

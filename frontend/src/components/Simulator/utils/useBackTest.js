@@ -3,10 +3,21 @@ import { useState } from "react";
 import { PYTHON_API } from "../../../utils/serverUtils";
 
 export const useBackTest = () => {
+  const customDateFormat = (currentDate) =>
+    `${currentDate.getFullYear()}-${
+      currentDate.getMonth() + 1 < 10
+        ? `0${currentDate.getMonth() + 1}`
+        : currentDate.getMonth() + 1
+    }-${
+      currentDate.getDate() + 1 < 10
+        ? `0${currentDate.getDate()}`
+        : currentDate.getDate()
+    }`;
+
   const [bough, setBough] = useState([]);
   const [testedData, setTestData] = useState([]);
   const [holdingStocks, setHoldingStocks] = useState([]);
-
+  const [soldStocks, setSoldStocks] = useState([]);
   const start = new Date("02/01/2021");
   let startDate = new Date(start);
   const [currentDate, setCurrentDate] = useState(startDate);
@@ -15,7 +26,11 @@ export const useBackTest = () => {
   const [wins, setWins] = useState(0);
   const [loess, setLoess] = useState(0);
   const [accountValue, setAccountValue] = useState([
-    { catch: 100000, stockValue: 0 },
+    {
+      catch: 1000000,
+      stockValue: 0,
+      data: customDateFormat(startDate),
+    },
   ]);
 
   const [userChange, setUserChange] = useState({
@@ -26,104 +41,145 @@ export const useBackTest = () => {
   // 702316;
   let holdStocksLocal = holdingStocks;
   let currentCashLocal = currentCash;
+  let currentStockPriceLocal = currentStockPrice;
   let count = 0;
+
+  const updateCurrentPrice = async (date) => {
+    // get the current price fot hold stocks
+    const {
+      data: { stocks: updatePriceStocks, todayChange },
+    } = await axios.post(
+      `${PYTHON_API}/getCurrentStockPrice?date=${date}`,
+      {
+        boughtStocks: holdStocksLocal,
+      },
+      {
+        onDownloadProgress(progress) {
+          console.log("download progress:", progress);
+        },
+      }
+    );
+
+    setHoldingStocks(updatePriceStocks);
+    holdStocksLocal = updatePriceStocks;
+    setCurrentStockPrice((lastPrice) => lastPrice + todayChange);
+    currentStockPriceLocal =
+      currentStockPriceLocal + todayChange;
+  };
+
+  const sell = async (date) => {
+    const {
+      data: {
+        stocks: SoldStocksP,
+        portfolio: portfolioAfterSell,
+        totalReturnMoney,
+      },
+    } = await axios.post(
+      `${PYTHON_API}/findSellSignalBT?date=${date}`,
+      {
+        boughtStocks: holdStocksLocal,
+        portfolio: currentCashLocal,
+      },
+      {
+        onDownloadProgress(progress) {
+          console.log("download progress:", progress);
+        },
+      }
+    );
+    if (SoldStocksP.length > 0) {
+      setSoldStocks(SoldStocksP);
+      for (let index = 0; index < SoldStocksP.length; index++) {
+        const sStock = SoldStocksP[index];
+        const filteredArray = holdStocksLocal.filter(
+          ({ symbol }) => symbol !== sStock.symbol
+        );
+
+        if (sStock.isReachedStopLoss) {
+          setLoess((oldValue) => oldValue + 1);
+        } else {
+          setWins((oldValue) => oldValue + 1);
+        }
+
+        holdStocksLocal = filteredArray;
+        setHoldingStocks((oldStocks) => filteredArray);
+      }
+
+      currentCashLocal = portfolioAfterSell;
+      setCurrentCash(portfolioAfterSell);
+
+      // currentStockPriceLocal = totalReturnMoney * -1;
+      setCurrentStockPrice(
+        (lastPrice) => lastPrice - totalReturnMoney
+      );
+      currentStockPriceLocal =
+        currentStockPriceLocal - totalReturnMoney;
+    }
+  };
+
+  const buy = async (date) => {
+    const {
+      data: { stocks, portfolio: portfolioAfterBuy, totalCost },
+    } = await axios.post(
+      `${PYTHON_API}/findBuySignalBT?date=${date}`,
+      {
+        boughtStocks: holdStocksLocal,
+        portfolio: currentCashLocal,
+      },
+      {
+        onDownloadProgress(progress) {
+          console.log("download progress:", progress);
+        },
+      }
+    );
+
+    currentCashLocal = portfolioAfterBuy;
+    setCurrentCash(portfolioAfterBuy);
+    setCurrentStockPrice((lastPrice) => lastPrice - totalCost);
+    currentStockPriceLocal = currentStockPriceLocal - totalCost;
+
+    // newBought.push(data);
+    setHoldingStocks((oldStocks) => [...oldStocks, ...stocks]);
+    holdStocksLocal = [...holdStocksLocal, ...stocks];
+  };
+
   const getTestedData = async () => {
     const end = new Date("02/03/2021");
     const newBought = [];
     if (currentDate <= end) {
-      const date = `${currentDate.getFullYear()}-${
-        currentDate.getMonth() + 1 < 10
-          ? `0${currentDate.getMonth() + 1}`
-          : currentDate.getMonth() + 1
-      }-${
-        currentDate.getDate() + 1 < 10
-          ? `0${currentDate.getDate()}`
-          : currentDate.getDate()
-      }`;
+      // const date = `${currentDate.getFullYear()}-${
+      //   currentDate.getMonth() + 1 < 10
+      //     ? `0${currentDate.getMonth() + 1}`
+      //     : currentDate.getMonth() + 1
+      // }-${
+      //   currentDate.getDate() + 1 < 10
+      //     ? `0${currentDate.getDate()}`
+      //     : currentDate.getDate()
+      // }`;
+
+      const date = customDateFormat(currentDate);
       try {
         // const data = await callApi(date);
         if (holdStocksLocal.length > 0) {
           // get the current price fot hold stocks
-          const {
-            data: { stocks: updatePriceStocks },
-          } = await axios.post(
-            `${PYTHON_API}/getCurrentStockPrice?date=${date}`,
-            {
-              boughtStocks: holdStocksLocal,
-            },
-            {
-              onDownloadProgress(progress) {
-                console.log("download progress:", progress);
-              },
-            }
-          );
 
-          setHoldingStocks(updatePriceStocks);
-          holdStocksLocal = updatePriceStocks;
+          await updateCurrentPrice(date);
           // look for sell signals for hold stocks
-          const {
-            data: {
-              stocks: SoldStocks,
-              portfolio: portfolioAfterSell,
-            },
-          } = await axios.post(
-            `${PYTHON_API}/findSellSignalBT?date=${date}`,
-            {
-              boughtStocks: holdStocksLocal,
-              portfolio: currentCash,
-            },
-            {
-              onDownloadProgress(progress) {
-                console.log("download progress:", progress);
-              },
-            }
-          );
-          if (SoldStocks.length > 0) {
-            console.log(SoldStocks);
-            for (
-              let index = 0;
-              index < SoldStocks.length;
-              index++
-            ) {
-              const sStock = SoldStocks[index];
-              holdStocksLocal = holdStocksLocal.filter(
-                ({ symbol }) => symbol !== sStock.symbol
-              );
-              setHoldingStocks((oldStocks) =>
-                oldStocks.filter(
-                  ({ symbol }) => symbol !== sStock.symbol
-                )
-              );
-            }
 
-            currentCashLocal = portfolioAfterSell;
-            setCurrentCash(portfolioAfterSell);
-          }
+          await sell(date);
         }
         // look for buy signals TODO clean up this code
-        const {
-          data: { stocks, portfolioAfterBuy },
-        } = await axios.post(
-          `${PYTHON_API}/findBuySignalBT?date=${date}`,
-          {
-            boughtStocks: holdStocksLocal,
-            portfolio: currentCashLocal,
-          },
-          {
-            onDownloadProgress(progress) {
-              console.log("download progress:", progress);
-            },
-          }
-        );
+        await buy(date);
 
-        currentCashLocal = portfolioAfterBuy;
-        setCurrentCash(portfolioAfterBuy);
-        // newBought.push(data);
-        setHoldingStocks((oldStocks) => [
-          ...oldStocks,
-          ...stocks,
+        setAccountValue((oldData) => [
+          ...oldData,
+          {
+            catch: currentCashLocal,
+            stockValue: currentStockPriceLocal,
+            date,
+          },
         ]);
-        holdStocksLocal = [...holdStocksLocal, ...stocks];
+
+        // setUserChange()
         // console.log(stocks);
         count = +1;
       } catch (error) {
@@ -143,6 +199,8 @@ export const useBackTest = () => {
       currentCashLocal = 0;
     }
   };
+
+  const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   return {
     holdingStocks,
     count,
@@ -151,5 +209,12 @@ export const useBackTest = () => {
     getTestedData,
     currentStockPrice,
     userChange,
+    accountValue,
+    date: `${customDateFormat(currentDate)} ${
+      days[currentDate.getDay()]
+    }`,
+    wins,
+    loess,
+    soldStocks,
   };
 };

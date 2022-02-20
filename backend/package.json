@@ -1,6 +1,10 @@
 {
   "name": "backend",
   "type": "module",
+  "author": {
+    "name": "nur",
+    "email": "medo0o6665@gmail.com"
+  },
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {

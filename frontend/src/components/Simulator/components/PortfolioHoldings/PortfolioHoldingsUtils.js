@@ -31,7 +31,7 @@ export const tableHeadDateHolding = [
   },
 ];
 
-const tableHeadDateSold = [
+export const tableHeadDateSold = [
   { className: "text-left semi-bold", value: "Symbol" },
   { className: "text-left semi-bold", value: "Bought date" },
   {
@@ -64,37 +64,31 @@ const tableHeadDateSold = [
   },
 ];
 
-const tableBodyDateHold = new Array(10).fill(0).map(() => ({
-  symbol: "AMAT",
-  boughtDate: "2020-1-1",
-  currentPrice: "100",
-  todayChange: { percentage: "+3", money: "100" },
-  boughtPrice: "120",
-  shares: "30",
-  totalValue: "10000",
-  totalGainLoss: { percentage: "+13%", money: "1100" },
-  stopLose: 80,
-}));
+export const tableBodyDateHold = new Array(10)
+  .fill(0)
+  .map(() => ({
+    symbol: "AMAT",
+    boughtDate: "2020-1-1",
+    currentPrice: "100",
+    todayChange: { percentage: "+3", money: "100" },
+    boughtPrice: "120",
+    shares: "30",
+    totalValue: "10000",
+    totalGainLoss: { percentage: "+13%", money: "1100" },
+    stopLose: 80,
+  }));
 
-const tableBodyDateSold = new Array(10).fill(0).map(() => ({
-  symbol: "AMAT",
-  boughtDate: "2020-1-1",
-  soldPrice: "120",
-  soldDate: { date: "2020-1-5", holdingDays: 4 },
-  boughtPrice: "120",
-  shares: "30",
-  totalValue: "10000",
-  totalGainLoss: { percentage: "+13%", money: "1100" },
-  stopLose: 80,
-  isReachedStopLoss: false,
-}));
-
-export const symbolTablePropsHolding = {
-  tableHeadDate: tableHeadDateHolding,
-  tableBodyDate: tableBodyDateHold,
-};
-
-export const symbolTablePropsSold = {
-  tableHeadDate: tableHeadDateSold,
-  tableBodyDate: tableBodyDateSold,
-};
+export const tableBodyDateSold = new Array(10)
+  .fill(0)
+  .map(() => ({
+    symbol: "AMAT",
+    boughtDate: "2020-1-1",
+    soldPrice: "120",
+    soldDate: { date: "2020-1-5", holdingDays: 4 },
+    boughtPrice: "120",
+    shares: "30",
+    totalValue: "10000",
+    totalGainLoss: { percentage: "+13%", money: "1100" },
+    stopLose: 80,
+    isReachedStopLoss: false,
+  }));

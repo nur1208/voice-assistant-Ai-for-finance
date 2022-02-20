@@ -271,7 +271,8 @@ deadline - before 2022-1-20 ❌ DONE on 2022-2-2
     - let the user see number of holding stocks and number of sold and total bought stock 
     - handle error
     - create justSell than purchase price
-    - get S&P 500 changes 
+    - get S&P 500 changes price
+    - save S$P 500 stocks like {date:{added:[stocks],removed:[stocks] }}
 
 121 - {TODO} create user model 
 122 - {TODO} test findingAnswersHandler and findingAnswersHandler functions
@@ -283,6 +284,7 @@ deadline - before 2022-2-6
 127 - {TODO} create trade progress popup window
 128 - {TODO} create give me the news for specific stock, let the user type the symbol or choose from his watch list
 129 - {TODO} show me charts for all stock that you will buy
+get  is the market open data using python and get the data every day
 
 92 - {NOT important NOW TODO} improve offline component by make it like youtube 
 77 - {NOT important NOW TODO} convert all publishedAt timezone to one similarly timezone when scraping articles.
@@ -337,4 +339,3 @@ Playing ----
 11 - add machine learning RNN algorithm
 12 - create bot that can buy and sell and show the result in the web
     using fundamental analysis + technical analysis + machine learning RNN algorithm     
-

@@ -2,15 +2,22 @@ import React from "react";
 import { ArrowDownIcon } from "./ArrowDownIcon";
 import { TextOverLine } from "./TextOverLine";
 
-export const GameInfo = () => {
+export const BackTestInfo = ({
+  date,
+  wins,
+  loess,
+  soldStocks,
+}) => {
   return (
     <>
-      <div className="text-overline white--text">Game Info</div>
+      <div className="text-overline white--text">
+        Back Test Info
+      </div>
       <div className="v-card v-sheet theme--light elevation-0 rounded-0 game-info pb-5">
         <div className="v-card__text text--text text-body-1 text--text text-body-1">
           <div className="overline">Current Date</div>
           <div className="d-flex align-end mb-2">
-            <div className="text-h4">2010-10-1 Monday</div>
+            <div className="text-h4">{date}</div>
             {/* <span>
               <ArrowDownIcon />
             </span> */}
@@ -20,12 +27,20 @@ export const GameInfo = () => {
             <div className="col">
               <TextOverLine title="Wins" />
               <div className="buying-power text-h5 success--text">
-                10
+                {wins}{" "}
+                <span className="out_of">
+                  of {soldStocks.length}
+                </span>
               </div>
             </div>
             <div className="col">
               <TextOverLine title="Losses" />
-              <div className="cash text-h5 error--text">5</div>
+              <div className="cash text-h5 error--text">
+                {loess}{" "}
+                <span className="out_of">
+                  of {soldStocks.length}
+                </span>
+              </div>
             </div>
           </div>
         </div>
