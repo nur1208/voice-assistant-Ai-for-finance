@@ -60,7 +60,7 @@ export const PortfolioSummary = ({
           </div>
           <div className="row">
             <div className="pb-0 col">
-              <TextOverLine title="Your Change" />
+              <TextOverLine title="Today's Change" />
               <div
                 className={`today-change text-h5 ${renderPriceChangeStyle(
                   renderPriceChangeReturn(

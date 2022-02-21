@@ -264,7 +264,7 @@ deadline - before 2022-1-20 ❌ DONE on 2022-2-2
     - {DONE} create find sell signal api's route for back testing and let finansis use it
     - {DONE} create get stocks price based on specific date
     - {DONE} create useBackTest hook
-    - {DONE} display the data in similarly page
+    - {DONE} display the data in similarly page -final
     - {TODO} fix getting current price on 2021-02-06 from python script 
     - replace description to data of buying and day holding 
     - replace Trading actions to price chart with buy data
@@ -345,3 +345,5 @@ Playing ----
 11 - add machine learning RNN algorithm
 12 - create bot that can buy and sell and show the result in the web
     using fundamental analysis + technical analysis + machine learning RNN algorithm     
+
+finansis color 1 - #0033CC , 2 - #131313 3 - 

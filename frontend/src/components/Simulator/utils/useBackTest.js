@@ -9,7 +9,7 @@ export const useBackTest = () => {
         ? `0${currentDate.getMonth() + 1}`
         : currentDate.getMonth() + 1
     }-${
-      currentDate.getDate() + 1 < 10
+      currentDate.getDate() < 10
         ? `0${currentDate.getDate()}`
         : currentDate.getDate()
     }`;

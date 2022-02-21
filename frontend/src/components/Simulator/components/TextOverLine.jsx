@@ -6,7 +6,7 @@ export const TextOverLine = ({ title }) => {
     <div className="text-overline">
       {title}
       <button className="v-icon notranslate ml-1 v-icon--link theme--light primary--text small pLeft">
-        <Icon1 />
+        {/* <Icon1 /> */}
       </button>
     </div>
   );
