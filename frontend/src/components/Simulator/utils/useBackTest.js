@@ -38,11 +38,13 @@ export const useBackTest = () => {
     percentage: 0.0,
   });
 
+  const [countDays, setCountDays] = useState(0);
+
   // 702316;
   let holdStocksLocal = holdingStocks;
   let currentCashLocal = currentCash;
   let currentStockPriceLocal = currentStockPrice;
-  let count = 0;
+  // let countDays = 0;
 
   const updateCurrentPrice = async (date) => {
     // get the current price fot hold stocks
@@ -87,7 +89,7 @@ export const useBackTest = () => {
       }
     );
     if (SoldStocksP.length > 0) {
-      setSoldStocks(SoldStocksP);
+      setSoldStocks((oldData) => [...oldData, ...SoldStocksP]);
       for (let index = 0; index < SoldStocksP.length; index++) {
         const sStock = SoldStocksP[index];
         const filteredArray = holdStocksLocal.filter(
@@ -143,7 +145,7 @@ export const useBackTest = () => {
   };
 
   const getTestedData = async () => {
-    const end = new Date("02/03/2021");
+    const end = new Date("02/10/2021");
     const newBought = [];
     if (currentDate <= end) {
       // const date = `${currentDate.getFullYear()}-${
@@ -181,7 +183,7 @@ export const useBackTest = () => {
 
         // setUserChange()
         // console.log(stocks);
-        count = +1;
+        setCountDays((oldValue) => oldValue + 1);
       } catch (error) {
         console.log(error);
       }
@@ -203,8 +205,8 @@ export const useBackTest = () => {
   const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   return {
     holdingStocks,
-    count,
-    loop: currentDate,
+    countDays,
+
     currentCash,
     getTestedData,
     currentStockPrice,

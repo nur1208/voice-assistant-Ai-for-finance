@@ -12,13 +12,18 @@ import {
   tableHeadDateSold,
 } from "./PortfolioHoldingsUtils";
 import PlayCircleFilledWhiteIcon from "@material-ui/icons/PlayCircleFilledWhite";
-import { renderPriceChangeReturn } from "../../SimulatorUtils";
+import {
+  renderPriceChangeIcon,
+  renderPriceChangeReturn,
+  renderPriceChangeStyle,
+} from "../../SimulatorUtils";
 
 export const PortfolioHoldings = ({
   getTestedData,
   currentStockPrice,
   accountValue,
   holdingStocks,
+  soldStocks,
 }) => {
   const symbolTablePropsHolding = {
     tableHeadDate: tableHeadDateHolding,
@@ -27,7 +32,7 @@ export const PortfolioHoldings = ({
 
   const symbolTablePropsSold = {
     tableHeadDate: tableHeadDateSold,
-    tableBodyDate: tableBodyDateSold,
+    tableBodyDate: soldStocks,
   };
 
   return (
@@ -35,16 +40,6 @@ export const PortfolioHoldings = ({
       <div className="text-overline white--text">Holdings</div>
       <div className="container portfolio-holdings white">
         <div className="row">
-          {/* <div className="col-12 col-md-6 col-lg-8 pa-0 text-md-right order-md-2 col order-1">
-            <div className="pa-md-3 text--text white--text">
-              <div>
-                <XIcon />
-                <span class="pl-1">
-                  Market is closed. Opens in 3hr, 35min
-                </span>
-              </div>
-            </div>
-          </div> */}
           <div className="col-12 text-center mt-6">
             <button
               style={{
@@ -146,7 +141,14 @@ export const PortfolioHoldings = ({
                     <div className="overline text-no-wrap">
                       Today's Change
                     </div>
-                    <div className="gain-loss semi-bold d-inline-flex align-center">
+                    <div
+                      className={`gain-loss semi-bold d-inline-flex align-center ${renderPriceChangeStyle(
+                        renderPriceChangeReturn(
+                          "percentage",
+                          accountValue
+                        )
+                      )}`}
+                    >
                       <div className="text-no-wrap">
                         $
                         {renderPriceChangeReturn(
@@ -159,6 +161,13 @@ export const PortfolioHoldings = ({
                           accountValue
                         )}
                         %)
+                        {renderPriceChangeIcon(
+                          renderPriceChangeReturn(
+                            "percentage",
+                            accountValue
+                          ),
+                          "small"
+                        )}
                       </div>
                     </div>
                   </div>
@@ -166,7 +175,15 @@ export const PortfolioHoldings = ({
                     <div className="overline no-wrap">
                       Total Gain/Loss
                     </div>
-                    <div className="gain-loss semi-bold d-inline-flex align-center error--text">
+                    <div
+                      className={`gain-loss semi-bold d-inline-flex align-center ${renderPriceChangeStyle(
+                        renderPriceChangeReturn(
+                          "percentage",
+                          accountValue,
+                          true
+                        )
+                      )}`}
+                    >
                       <div className="text-no-wrap">
                         $
                         {renderPriceChangeReturn(
@@ -181,7 +198,14 @@ export const PortfolioHoldings = ({
                           true
                         )}
                         %)
-                        <ArrowDownIcon size="small" />
+                        {renderPriceChangeIcon(
+                          renderPriceChangeReturn(
+                            "percentage",
+                            accountValue,
+                            true
+                          ),
+                          "small"
+                        )}
                       </div>
                     </div>
                   </div>

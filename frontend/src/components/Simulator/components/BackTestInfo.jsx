@@ -1,4 +1,5 @@
 import React from "react";
+import { renderDay } from "../SimulatorUtils";
 import { ArrowDownIcon } from "./ArrowDownIcon";
 import { TextOverLine } from "./TextOverLine";
 
@@ -7,6 +8,7 @@ export const BackTestInfo = ({
   wins,
   loess,
   soldStocks,
+  countDays,
 }) => {
   return (
     <>
@@ -17,10 +19,13 @@ export const BackTestInfo = ({
         <div className="v-card__text text--text text-body-1 text--text text-body-1">
           <div className="overline">Current Date</div>
           <div className="d-flex align-end mb-2">
-            <div className="text-h4">{date}</div>
-            {/* <span>
-              <ArrowDownIcon />
-            </span> */}
+            <div className="text-h4">
+              {date}{" "}
+              <span className="out_of">
+                {countDays} {renderDay(countDays)}
+              </span>
+            </div>
+
             {/* <span className="ml-2">of 213,358 Players</span> */}
           </div>
           <div className="row">
@@ -29,7 +34,7 @@ export const BackTestInfo = ({
               <div className="buying-power text-h5 success--text">
                 {wins}{" "}
                 <span className="out_of">
-                  of {soldStocks.length}
+                  out of {soldStocks.length}
                 </span>
               </div>
             </div>
@@ -38,7 +43,7 @@ export const BackTestInfo = ({
               <div className="cash text-h5 error--text">
                 {loess}{" "}
                 <span className="out_of">
-                  of {soldStocks.length}
+                  out of {soldStocks.length}
                 </span>
               </div>
             </div>

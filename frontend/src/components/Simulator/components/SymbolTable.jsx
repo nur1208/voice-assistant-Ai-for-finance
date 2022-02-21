@@ -1,5 +1,10 @@
 import React from "react";
-import { calculateReturn } from "../SimulatorUtils";
+import {
+  calculateReturn,
+  renderDay,
+  renderPriceChangeIcon,
+  renderPriceChangeStyle,
+} from "../SimulatorUtils";
 import { ArrowDownIcon } from "./ArrowDownIcon";
 import { ArrowUpIcon } from "./ArrowUpIcon";
 import { HorizontalLineIcon } from "./HorizontalLineIcon";
@@ -52,6 +57,7 @@ export const SymbolTable = ({
               soldDate,
               isReachedStopLoss,
               previousPrice,
+              numDaysOfHolding,
             },
             index
           ) => (
@@ -74,20 +80,19 @@ export const SymbolTable = ({
               </td>
               <td className="text-right">
                 <div
-                  className={`gain-loss semi-bold d-inline-flex align-center ${
-                    todayChange ? "success--text" : ""
-                  }`}
+                  className={`gain-loss semi-bold d-inline-flex align-center ${renderPriceChangeStyle(
+                    calculateReturn(previousPrice, currentPrice)
+                      .percentage
+                  )}`}
                 >
                   {soldDate !== undefined ? (
                     <>
                       <div>
-                        {soldDate.date}
+                        {soldDate}
                         <br data-v-08f29e58="" />(
-                        {`${soldDate.holdingDays} ${
-                          soldDate.holdingDays <= 1
-                            ? "day"
-                            : "days"
-                        }`}
+                        {`${numDaysOfHolding} ${renderDay(
+                          numDaysOfHolding
+                        )}`}
                         )
                       </div>
                       <HorizontalLineIcon />
@@ -112,7 +117,13 @@ export const SymbolTable = ({
                         }
                         %)
                       </div>
-                      <ArrowUpIcon />
+                      {renderPriceChangeIcon(
+                        calculateReturn(
+                          previousPrice,
+                          currentPrice
+                        ).percentage,
+                        "medium"
+                      )}
                     </>
                   ) : (
                     <>
@@ -138,8 +149,39 @@ export const SymbolTable = ({
                 </div>
               </td>
               <td className="text-right">
-                <div className="gain-loss semi-bold d-inline-flex align-center success--text">
-                  {currentPrice === undefined ? (
+                <div
+                  className={`gain-loss semi-bold d-inline-flex align-center ${renderPriceChangeStyle(
+                    soldPrice !== undefined
+                      ? calculateReturn(boughtPrice, soldPrice)
+                          .percentage
+                      : calculateReturn(
+                          boughtPrice,
+                          currentPrice
+                        ).percentage
+                  )}`}
+                >
+                  {soldPrice !== undefined ? (
+                    <>
+                      <div>
+                        $
+                        {Number(
+                          calculateReturn(boughtPrice, soldPrice)
+                            .money * shares
+                        ).toFixed(2)}
+                        <br />
+                        {
+                          calculateReturn(boughtPrice, soldPrice)
+                            .percentage
+                        }
+                        %
+                      </div>
+                      {renderPriceChangeIcon(
+                        calculateReturn(boughtPrice, soldPrice)
+                          .percentage,
+                        "medium"
+                      )}
+                    </>
+                  ) : currentPrice === undefined ? (
                     <div>
                       $ 0.00
                       <br />
@@ -164,7 +206,13 @@ export const SymbolTable = ({
                         }
                         %
                       </div>
-                      <ArrowUpIcon />
+                      {renderPriceChangeIcon(
+                        calculateReturn(
+                          boughtPrice,
+                          currentPrice
+                        ).percentage,
+                        "medium"
+                      )}
                     </>
                   )}
                 </div>

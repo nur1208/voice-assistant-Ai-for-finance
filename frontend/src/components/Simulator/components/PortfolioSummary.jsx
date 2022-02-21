@@ -2,6 +2,7 @@ import React from "react";
 import {
   calculateReturn,
   renderPriceChangeReturn,
+  renderPriceChangeStyle,
 } from "../SimulatorUtils";
 import { TextOverLine } from "./TextOverLine";
 
@@ -11,6 +12,7 @@ export const PortfolioSummary = ({
   currentStockPrice,
   userChange,
   accountValue,
+  countDays,
 }) => {
   // const renderPriceChangeReturn = (
   //   type,
@@ -59,9 +61,24 @@ export const PortfolioSummary = ({
           <div className="row">
             <div className="pb-0 col">
               <TextOverLine title="Your Change" />
-              <div className="today-change text-h5 success--text">
-                <span>+</span>
-                {/* {userChange?.money.toFixed(2)} */}$
+              <div
+                className={`today-change text-h5 ${renderPriceChangeStyle(
+                  renderPriceChangeReturn(
+                    "percentage",
+                    accountValue
+                  )
+                )}`}
+              >
+                $
+                <span>
+                  {renderPriceChangeReturn(
+                    "money",
+                    accountValue
+                  ) > 0
+                    ? "+"
+                    : ""}
+                </span>
+                {/* {userChange?.money.toFixed(2)} */}
                 {renderPriceChangeReturn("money", accountValue)}
               </div>
               <div className="today-change-percent text-subtitle-1 ml-2 success--text">

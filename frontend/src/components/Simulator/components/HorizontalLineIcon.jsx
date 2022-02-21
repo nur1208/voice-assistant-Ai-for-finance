@@ -1,6 +1,7 @@
 import React from "react";
+import { iconSizeOptions } from "../SimulatorUtils";
 
-export const HorizontalLineIcon = () => {
+export const HorizontalLineIcon = ({ size }) => {
   return (
     <span
       data-v-08f29e58=""
@@ -13,6 +14,7 @@ export const HorizontalLineIcon = () => {
         role="img"
         aria-hidden="true"
         class="v-icon__svg"
+        style={iconSizeOptions(size)}
       >
         <path d="M19,13H5V11H19V13Z"></path>
       </svg>

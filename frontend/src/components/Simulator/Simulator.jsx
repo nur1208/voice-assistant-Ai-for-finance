@@ -11,8 +11,7 @@ import { useBackTest } from "./utils/useBackTest";
 export const Simulator = () => {
   const {
     holdingStocks,
-    count,
-    loop,
+    countDays,
     currentCash,
     getTestedData,
     currentStockPrice,
@@ -29,6 +28,7 @@ export const Simulator = () => {
     currentStockPrice,
     accountValue,
     holdingStocks,
+    soldStocks,
   };
 
   const PortfolioSummaryProps = {
@@ -39,7 +39,13 @@ export const Simulator = () => {
     accountValue,
   };
 
-  const backTestProps = { date, wins, loess, soldStocks };
+  const backTestProps = {
+    date,
+    wins,
+    loess,
+    soldStocks,
+    countDays,
+  };
 
   return (
     <MainWrapper>

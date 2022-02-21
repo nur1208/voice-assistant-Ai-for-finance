@@ -264,7 +264,8 @@ deadline - before 2022-1-20 ❌ DONE on 2022-2-2
     - {DONE} create find sell signal api's route for back testing and let finansis use it
     - {DONE} create get stocks price based on specific date
     - {DONE} create useBackTest hook
-    - {TODO} display the data in similarly page 
+    - {DONE} display the data in similarly page
+    - {TODO} fix getting current price on 2021-02-06 from python script 
     - replace description to data of buying and day holding 
     - replace Trading actions to price chart with buy data
     - when saving tested data make userId unique and today date plus last four digits of userId 
@@ -273,7 +274,12 @@ deadline - before 2022-1-20 ❌ DONE on 2022-2-2
     - create justSell than purchase price
     - get S&P 500 changes price
     - save S$P 500 stocks like {date:{added:[stocks],removed:[stocks] }}
-
+    - create 'start back testing' command
+    - let account risk dynamic value
+    - let the user enter start date , end data, catch and Account Risk
+    - add cancel axios request when the page unmounted 
+        ref:https://stackoverflow.com/questions/53861916/canceling-an-axios-rest-call-in-react-hooks-useeffects-cleanup-failing
+    - show loading for buy sell and stop
 121 - {TODO} create user model 
 122 - {TODO} test findingAnswersHandler and findingAnswersHandler functions
 123 - {TODO} improve 'code for handling unknown commands' by checking for commands first then for questions
@@ -285,7 +291,7 @@ deadline - before 2022-2-6
 128 - {TODO} create give me the news for specific stock, let the user type the symbol or choose from his watch list
 129 - {TODO} show me charts for all stock that you will buy
 get  is the market open data using python and get the data every day
-
+130 - {TODO} check for internat connection every 10 seconds when the user offline
 92 - {NOT important NOW TODO} improve offline component by make it like youtube 
 77 - {NOT important NOW TODO} convert all publishedAt timezone to one similarly timezone when scraping articles.
     note - https://stackoverflow.com/questions/10997577/python-timezone-conversion
