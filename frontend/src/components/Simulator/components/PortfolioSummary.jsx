@@ -81,7 +81,14 @@ export const PortfolioSummary = ({
                 {/* {userChange?.money.toFixed(2)} */}
                 {renderPriceChangeReturn("money", accountValue)}
               </div>
-              <div className="today-change-percent text-subtitle-1 ml-2 success--text">
+              <div
+                className={`today-change-percent text-subtitle-1 ml-2 ${renderPriceChangeStyle(
+                  renderPriceChangeReturn(
+                    "percentage",
+                    accountValue
+                  )
+                )}`}
+              >
                 (
                 {renderPriceChangeReturn(
                   "percentage",

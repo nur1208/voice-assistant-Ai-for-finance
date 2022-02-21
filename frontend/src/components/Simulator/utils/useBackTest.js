@@ -1,44 +1,57 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useLocalStorage } from "../../../hooks/useLocalStorage";
 import { PYTHON_API } from "../../../utils/serverUtils";
+import { customDateFormat } from "../SimulatorUtils";
+import { useSaveTestedData } from "./useSaveTestedData";
 
 export const useBackTest = () => {
-  const customDateFormat = (currentDate) =>
-    `${currentDate.getFullYear()}-${
-      currentDate.getMonth() + 1 < 10
-        ? `0${currentDate.getMonth() + 1}`
-        : currentDate.getMonth() + 1
-    }-${
-      currentDate.getDate() < 10
-        ? `0${currentDate.getDate()}`
-        : currentDate.getDate()
-    }`;
+  const [localStorageData, updateLocalStorage] =
+    useSaveTestedData();
+  const [holdingStocks, setHoldingStocks] = useState(
+    localStorageData.holdingStocks
+  );
+  const [soldStocks, setSoldStocks] = useState(
+    localStorageData.soldStocks
+  );
+  const [currentDate, setCurrentDate] = useState(
+    localStorageData.currentDate
+  );
+  const [currentCash, setCurrentCash] = useState(
+    localStorageData.currentCash
+  );
+  const [currentStockPrice, setCurrentStockPrice] = useState(
+    localStorageData.currentStockPrice
+  );
+  const [wins, setWins] = useState(localStorageData.wins);
+  const [loess, setLoess] = useState(localStorageData.loess);
+  const [accountValue, setAccountValue] = useState(
+    localStorageData.accountValue
+  );
 
-  const [bough, setBough] = useState([]);
-  const [testedData, setTestData] = useState([]);
-  const [holdingStocks, setHoldingStocks] = useState([]);
-  const [soldStocks, setSoldStocks] = useState([]);
-  const start = new Date("02/01/2021");
-  let startDate = new Date(start);
-  const [currentDate, setCurrentDate] = useState(startDate);
-  const [currentCash, setCurrentCash] = useState(1000000);
-  const [currentStockPrice, setCurrentStockPrice] = useState(0);
-  const [wins, setWins] = useState(0);
-  const [loess, setLoess] = useState(0);
-  const [accountValue, setAccountValue] = useState([
-    {
-      catch: 1000000,
-      stockValue: 0,
-      data: customDateFormat(startDate),
-    },
-  ]);
+  const [countDays, setCountDays] = useState(
+    localStorageData.countDays
+  );
 
-  const [userChange, setUserChange] = useState({
-    money: 0.0,
-    percentage: 0.0,
-  });
+  // const [testedData, setTestData] = useState([]);
+  // const [holdingStocks, setHoldingStocks] = useState([]);
+  // const [soldStocks, setSoldStocks] = useState([]);
+  // const start = new Date("02/01/2021");
+  // let startDate = new Date(start);
+  // const [currentDate, setCurrentDate] = useState(startDate);
+  // const [currentCash, setCurrentCash] = useState(1000000);
+  // const [currentStockPrice, setCurrentStockPrice] = useState(0);
+  // const [wins, setWins] = useState(0);
+  // const [loess, setLoess] = useState(0);
+  // const [accountValue, setAccountValue] = useState([
+  //   {
+  //     catch: 1000000,
+  //     stockValue: 0,
+  //     data: customDateFormat(startDate),
+  //   },
+  // ]);
 
-  const [countDays, setCountDays] = useState(0);
+  // const [countDays, setCountDays] = useState(0);
 
   // 702316;
   let holdStocksLocal = holdingStocks;
@@ -145,9 +158,17 @@ export const useBackTest = () => {
   };
 
   const getTestedData = async () => {
-    const end = new Date("02/10/2021");
+    // const end = new Date("02/10/2021");
+    const end = new Date("04/13/2020");
+
+    // 2020 - 04 - 13;
     const newBought = [];
-    if (currentDate <= end) {
+    let currentDataLocal = currentDate;
+
+    if (typeof currentDataLocal === "string")
+      currentDataLocal = new Date(currentDataLocal);
+
+    if (currentDataLocal <= end) {
       // const date = `${currentDate.getFullYear()}-${
       //   currentDate.getMonth() + 1 < 10
       //     ? `0${currentDate.getMonth() + 1}`
@@ -158,7 +179,7 @@ export const useBackTest = () => {
       //     : currentDate.getDate()
       // }`;
 
-      const date = customDateFormat(currentDate);
+      const date = customDateFormat(currentDataLocal);
       try {
         // const data = await callApi(date);
         if (holdStocksLocal.length > 0) {
@@ -187,33 +208,67 @@ export const useBackTest = () => {
       } catch (error) {
         console.log(error);
       }
-      let newDate = currentDate.setDate(
-        currentDate.getDate() + 1
+      let newDate = currentDataLocal.setDate(
+        currentDataLocal.getDate() + 1
       );
       // loop = new Date(newDate);
       // loop =
       setCurrentDate(new Date(newDate));
       // }
-      setBough((boughs) => [...boughs, newBought]);
+      // setBough((boughs) => [...boughs, newBought]);
       await getTestedData();
     } else {
       holdStocksLocal = [];
       currentCashLocal = 0;
+      // updateLocalStorage({
+      //   holdingStocks,
+      //   soldStocks,
+      //   currentDate,
+      //   currentStockPrice,
+      //   currentCash,
+      //   wins,
+      //   loess,
+      //   accountValue,
+      //   countDays,
+      // });
     }
   };
+
+  useEffect(() => {
+    updateLocalStorage({
+      holdingStocks,
+      soldStocks,
+      currentDate,
+      currentStockPrice,
+      currentCash,
+      wins,
+      loess,
+      accountValue,
+      countDays,
+    });
+  }, [
+    updateLocalStorage,
+    holdingStocks,
+    soldStocks,
+    currentDate,
+    currentStockPrice,
+    currentCash,
+    wins,
+    loess,
+    accountValue,
+    countDays,
+  ]);
 
   const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   return {
     holdingStocks,
     countDays,
-
     currentCash,
     getTestedData,
     currentStockPrice,
-    userChange,
     accountValue,
-    date: `${customDateFormat(currentDate)} ${
-      days[currentDate.getDay()]
+    date: `${customDateFormat(new Date(currentDate))} ${
+      days[new Date(currentDate).getDay()]
     }`,
     wins,
     loess,

@@ -2,6 +2,20 @@ import { ArrowDownIcon } from "./components/ArrowDownIcon";
 import { ArrowUpIcon } from "./components/ArrowUpIcon";
 import { HorizontalLineIcon } from "./components/HorizontalLineIcon";
 
+export const customDateFormat = (currentDate) => {
+  console.log({ currentDate, type: typeof currentDate });
+
+  return `${currentDate.getFullYear()}-${
+    currentDate.getMonth() + 1 < 10
+      ? `0${currentDate.getMonth() + 1}`
+      : currentDate.getMonth() + 1
+  }-${
+    currentDate.getDate() < 10
+      ? `0${currentDate.getDate()}`
+      : currentDate.getDate()
+  }`;
+};
+
 export const calculateReturn = (initPrice, endPrice) => {
   const money = Number(endPrice - initPrice).toFixed(2);
   const percentage = Number(
