@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
 import { PYTHON_API } from "../../../utils/serverUtils";
+import { sleep } from "../../../utils/sleep";
 import { customDateFormat } from "../SimulatorUtils";
 import { useSaveTestedData } from "./useSaveTestedData";
 
@@ -59,8 +60,29 @@ export const useBackTest = () => {
   let currentStockPriceLocal = currentStockPrice;
   // let countDays = 0;
 
+  const handleBackTestingAxiosError = async (
+    callFunction,
+    paramsFunction,
+    messageError
+  ) => {
+    let isFoundError = true;
+    while (isFoundError) {
+      try {
+        await callFunction(paramsFunction);
+        isFoundError = false;
+      } catch (error) {
+        console.log(error);
+
+        console.log(messageError);
+
+        await sleep(1000 * 10);
+      }
+    }
+  };
+
   const updateCurrentPrice = async (date) => {
     // get the current price fot hold stocks
+
     const {
       data: { stocks: updatePriceStocks, todayChange },
     } = await axios.post(
@@ -80,6 +102,42 @@ export const useBackTest = () => {
     setCurrentStockPrice((lastPrice) => lastPrice + todayChange);
     currentStockPriceLocal =
       currentStockPriceLocal + todayChange;
+    //     isFoundError = false;
+    // let isFoundError = true;
+    // while (isFoundError) {
+    //   try {
+    //     const {
+    //       data: { stocks: updatePriceStocks, todayChange },
+    //     } = await axios.post(
+    //       `${PYTHON_API}/getCurrentStockPrice?date=${date}`,
+    //       {
+    //         boughtStocks: holdStocksLocal,
+    //       },
+    //       {
+    //         onDownloadProgress(progress) {
+    //           console.log("download progress:", progress);
+    //         },
+    //       }
+    //     );
+
+    //     setHoldingStocks(updatePriceStocks);
+    //     holdStocksLocal = updatePriceStocks;
+    //     setCurrentStockPrice(
+    //       (lastPrice) => lastPrice + todayChange
+    //     );
+    //     currentStockPriceLocal =
+    //       currentStockPriceLocal + todayChange;
+    //     isFoundError = false;
+    //   } catch (error) {
+    //     console.log(error);
+
+    //     console.log(
+    //       "something went wrong while updating Stocks price ❌"
+    //     );
+
+    //     await sleep(1000 * 10);
+    //   }
+    // }
   };
 
   const sell = async (date) => {
@@ -157,13 +215,15 @@ export const useBackTest = () => {
     holdStocksLocal = [...holdStocksLocal, ...stocks];
   };
 
+  let currentDataLocal = currentDate;
+
   const getTestedData = async () => {
     // const end = new Date("02/10/2021");
-    const end = new Date("04/13/2020");
+    const end = new Date("04/22/2020");
+    console.log("here");
 
     // 2020 - 04 - 13;
     const newBought = [];
-    let currentDataLocal = currentDate;
 
     if (typeof currentDataLocal === "string")
       currentDataLocal = new Date(currentDataLocal);
@@ -185,13 +245,25 @@ export const useBackTest = () => {
         if (holdStocksLocal.length > 0) {
           // get the current price fot hold stocks
 
-          await updateCurrentPrice(date);
+          await handleBackTestingAxiosError(
+            updateCurrentPrice,
+            date,
+            "something went wrong while updating Stocks price ❌"
+          );
           // look for sell signals for hold stocks
 
-          await sell(date);
+          await handleBackTestingAxiosError(
+            sell,
+            date,
+            "something went wrong while selling Stocks price ❌"
+          );
         }
         // look for buy signals TODO clean up this code
-        await buy(date);
+        await handleBackTestingAxiosError(
+          buy,
+          date,
+          "something went wrong while buying Stocks price ❌"
+        );
 
         setAccountValue((oldData) => [
           ...oldData,
@@ -220,17 +292,6 @@ export const useBackTest = () => {
     } else {
       holdStocksLocal = [];
       currentCashLocal = 0;
-      // updateLocalStorage({
-      //   holdingStocks,
-      //   soldStocks,
-      //   currentDate,
-      //   currentStockPrice,
-      //   currentCash,
-      //   wins,
-      //   loess,
-      //   accountValue,
-      //   countDays,
-      // });
     }
   };
 

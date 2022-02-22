@@ -270,7 +270,7 @@ deadline - before 2022-1-20 ❌ DONE on 2022-2-2
     - {DONE} fixing todayChange value that return from getCurrentStockPrice in python script and stopLoss from sellSignalBackTest
     - {DONE} fix user today change not changing for the first loop
     - {DONE} let the user see number of holding stocks and number of sold and total bought stock 
-    - handle error
+    - {DONE} handle error axios error 
     - create justSell than purchase price
     - get S&P 500 changes price
     - save S$P 500 stocks like {date:{added:[stocks],removed:[stocks] }}
@@ -293,7 +293,7 @@ deadline - before 2022-2-6
 get  is the market open data using python and get the data every day
 130 - {TODO} check for internat connection every 10 seconds when the user offline
 131 - {TODO} show the user sold stock start using yahoo finance chart 
-
+132 - {TODO} test Modal component 
 
 92 - {NOT important NOW TODO} improve offline component by make it like youtube 
 77 - {NOT important NOW TODO} convert all publishedAt timezone to one similarly timezone when scraping articles.
