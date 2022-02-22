@@ -266,11 +266,10 @@ deadline - before 2022-1-20 ❌ DONE on 2022-2-2
     - {DONE} create useBackTest hook
     - {DONE} display the data in similarly page -final
     - {DONE} fix getting current price on 2021-02-06 from python script  
-    - {TODO} save tested data 
-    - {TODO} fixing todayChange value that return from getCurrentStockPrice in python script and stopLoss from sell
-    - {TODO} fix user today change not changing for the first loop
-    - when saving tested data make userId unique and today date plus last four digits of userId 
-    - let the user see number of holding stocks and number of sold and total bought stock 
+    - {DONE} save tested data 
+    - {DONE} fixing todayChange value that return from getCurrentStockPrice in python script and stopLoss from sellSignalBackTest
+    - {DONE} fix user today change not changing for the first loop
+    - {DONE} let the user see number of holding stocks and number of sold and total bought stock 
     - handle error
     - create justSell than purchase price
     - get S&P 500 changes price

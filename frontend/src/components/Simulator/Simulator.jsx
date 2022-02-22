@@ -37,6 +37,7 @@ export const Simulator = () => {
     currentStockPrice,
     userChange,
     accountValue,
+    soldStocksLength: soldStocks.length,
   };
 
   const backTestProps = {

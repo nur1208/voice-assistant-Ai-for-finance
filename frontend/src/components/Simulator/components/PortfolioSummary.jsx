@@ -13,6 +13,7 @@ export const PortfolioSummary = ({
   userChange,
   accountValue,
   countDays,
+  soldStocksLength,
 }) => {
   // const renderPriceChangeReturn = (
   //   type,
@@ -109,7 +110,10 @@ export const PortfolioSummary = ({
             <div className="col">
               <TextOverLine title="Holding Stock" />
               <div className="buying-power text-h5">
-                {holdingStocksLength}
+                {holdingStocksLength}{" "}
+                <span className="out_of">
+                  bought {soldStocksLength + holdingStocksLength}
+                </span>
               </div>
             </div>
             <div className="col">
