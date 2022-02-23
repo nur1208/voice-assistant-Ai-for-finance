@@ -271,6 +271,7 @@ deadline - before 2022-1-20 ❌ DONE on 2022-2-2
     - {DONE} fix user today change not changing for the first loop
     - {DONE} let the user see number of holding stocks and number of sold and total bought stock 
     - {DONE} handle error axios error 
+    - {DONE} create reset backTesting functionality
     - {TODO} create justSell than purchase price functionality
     - {TODO} get S&P 500 changes price
     - {TODO} save S$P 500 stocks like {date:{added:[stocks],removed:[stocks] }}
@@ -278,6 +279,7 @@ deadline - before 2022-1-20 ❌ DONE on 2022-2-2
     - {TODO} let the user enter start date , end data, catch and Account Risk
     - {TODO} tell the user you are about to close the window when backTesting still not end 
     - show loading for buy sell and stop
+    - {TODO} add 'do you want me to force selling' command and add 'what is force selling' question
 121 - {TODO} create user model 
 122 - {TODO} test findingAnswersHandler and findingAnswersHandler functions
 123 - {TODO} improve 'code for handling unknown commands' by checking for commands first then for questions
