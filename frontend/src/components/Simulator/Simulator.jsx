@@ -21,6 +21,7 @@ export const Simulator = () => {
     wins,
     loess,
     soldStocks,
+    isEndDate,
   } = useBackTest();
 
   const PortfolioHoldingsProps = {
@@ -29,6 +30,7 @@ export const Simulator = () => {
     accountValue,
     holdingStocks,
     soldStocks,
+    isEndDate,
   };
 
   const PortfolioSummaryProps = {

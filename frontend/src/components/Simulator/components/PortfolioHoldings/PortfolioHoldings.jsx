@@ -17,14 +17,17 @@ import {
   renderPriceChangeReturn,
   renderPriceChangeStyle,
 } from "../../SimulatorUtils";
-
+import RotateLeftIcon from "@material-ui/icons/RotateLeft";
+import { useSaveTestedData } from "../../utils/useSaveTestedData";
 export const PortfolioHoldings = ({
   getTestedData,
   currentStockPrice,
   accountValue,
   holdingStocks,
   soldStocks,
+  isEndDate,
 }) => {
+  const [_, { resetLOcalStorage }] = useSaveTestedData();
   const symbolTablePropsHolding = {
     tableHeadDate: tableHeadDateHolding,
     tableBodyDate: holdingStocks,
@@ -41,6 +44,62 @@ export const PortfolioHoldings = ({
       <div className="container portfolio-holdings white">
         <div className="row">
           <div className="col-12 text-center mt-6">
+            {isEndDate && (
+              <>
+                <button
+                  style={{
+                    height: "3rem",
+                    width: "300px",
+                    // cursor: "auto",
+                    marginRight: "30px",
+                  }}
+                  onClick={getTestedData}
+                  // href="#here"
+                  className="semi-bold v-btn v-btn--has-bg v-btn--router v-btn--tile theme--light elevation-0 v-size--default primary"
+                >
+                  <div
+                    className="v-btn__content"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    <PlayCircleFilledWhiteIcon
+                      style={{ paddingRight: "20px" }}
+                      className="v-icon notranslate v-icon--left theme--light"
+                    />
+                    {/* <ClockIcon style={{ paddingRight: "20px" }} /> */}
+                    force selling
+                  </div>
+                </button>
+                <button
+                  style={{
+                    height: "3rem",
+                    width: "300px",
+                    // cursor: "auto",
+                    marginRight: "30px",
+                  }}
+                  onClick={resetLOcalStorage}
+                  // href="#here"
+                  className="semi-bold v-btn v-btn--has-bg v-btn--router v-btn--tile theme--light elevation-0 v-size--default primary"
+                >
+                  <div
+                    className="v-btn__content"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    <RotateLeftIcon
+                      style={{ paddingRight: "20px" }}
+                      className="v-icon notranslate v-icon--left theme--light"
+                    />
+                    {/* <ClockIcon style={{ paddingRight: "20px" }} /> */}
+                    reset
+                  </div>
+                </button>
+              </>
+            )}{" "}
             <button
               style={{
                 height: "3rem",
@@ -67,6 +126,7 @@ export const PortfolioHoldings = ({
               </div>
             </button>
           </div>
+
           <div className="col-12 col-md-6 col-lg-4 pa-0 order-md-1 col order-2">
             <header
               className="v-sheet theme--light v-toolbar v-toolbar--dense v-toolbar--flat"

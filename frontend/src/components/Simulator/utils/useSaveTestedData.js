@@ -11,7 +11,7 @@ export const useSaveTestedData = () => {
     []
   );
   //   const start = new Date("02/01/2021");
-  const start = new Date("02/18/2020");
+  const start = new Date("04/20/2020");
   let startDate = new Date(start);
   const [currentDate, setCurrentDate] = useLocalStorage(
     "currentDate",
@@ -42,6 +42,11 @@ export const useSaveTestedData = () => {
     0
   );
 
+  const [endDate, setEndDate] = useLocalStorage(
+    "endDate",
+    new Date("04/26/2020")
+  );
+
   const updateLocalStorage = (data) => {
     setHoldingStocks(data["holdingStocks"]);
     setSoldStocks(data["soldStocks"]);
@@ -52,6 +57,12 @@ export const useSaveTestedData = () => {
     setLoess(data["loess"]);
     setAccountValue(data["accountValue"]);
     setCountDays(data["countDays"]);
+    setEndDate(data["endDate"]);
+  };
+
+  const resetLOcalStorage = () => {
+    localStorage.clear();
+    window.location.reload();
   };
 
   return [
@@ -65,7 +76,8 @@ export const useSaveTestedData = () => {
       loess,
       accountValue,
       countDays,
+      endDate,
     },
-    updateLocalStorage,
+    { updateLocalStorage, resetLOcalStorage },
   ];
 };

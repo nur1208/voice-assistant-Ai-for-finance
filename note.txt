@@ -271,14 +271,12 @@ deadline - before 2022-1-20 ❌ DONE on 2022-2-2
     - {DONE} fix user today change not changing for the first loop
     - {DONE} let the user see number of holding stocks and number of sold and total bought stock 
     - {DONE} handle error axios error 
-    - create justSell than purchase price
-    - get S&P 500 changes price
-    - save S$P 500 stocks like {date:{added:[stocks],removed:[stocks] }}
-    - create 'start back testing' command
-    - let account risk dynamic value
-    - let the user enter start date , end data, catch and Account Risk
-    - add cancel axios request when the page unmounted 
-        ref:https://stackoverflow.com/questions/53861916/canceling-an-axios-rest-call-in-react-hooks-useeffects-cleanup-failing
+    - {TODO} create justSell than purchase price functionality
+    - {TODO} get S&P 500 changes price
+    - {TODO} save S$P 500 stocks like {date:{added:[stocks],removed:[stocks] }}
+    - {TODO} create 'start back testing' command
+    - {TODO} let the user enter start date , end data, catch and Account Risk
+    - {TODO} tell the user you are about to close the window when backTesting still not end 
     - show loading for buy sell and stop
 121 - {TODO} create user model 
 122 - {TODO} test findingAnswersHandler and findingAnswersHandler functions
@@ -294,6 +292,9 @@ get  is the market open data using python and get the data every day
 130 - {TODO} check for internat connection every 10 seconds when the user offline
 131 - {TODO} show the user sold stock start using yahoo finance chart 
 132 - {TODO} test Modal component 
+
+- {TODO NOT IMPORTANT NOW} add cancel axios request when the page unmounted 
+    ref:https://stackoverflow.com/questions/53861916/canceling-an-axios-rest-call-in-react-hooks-useeffects-cleanup-failing
 
 92 - {NOT important NOW TODO} improve offline component by make it like youtube 
 77 - {NOT important NOW TODO} convert all publishedAt timezone to one similarly timezone when scraping articles.

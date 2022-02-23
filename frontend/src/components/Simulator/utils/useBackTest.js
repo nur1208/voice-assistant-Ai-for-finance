@@ -7,7 +7,7 @@ import { customDateFormat } from "../SimulatorUtils";
 import { useSaveTestedData } from "./useSaveTestedData";
 
 export const useBackTest = () => {
-  const [localStorageData, updateLocalStorage] =
+  const [localStorageData, { updateLocalStorage }] =
     useSaveTestedData();
   const [holdingStocks, setHoldingStocks] = useState(
     localStorageData.holdingStocks
@@ -16,7 +16,7 @@ export const useBackTest = () => {
     localStorageData.soldStocks
   );
   const [currentDate, setCurrentDate] = useState(
-    localStorageData.currentDate
+    new Date(localStorageData.currentDate)
   );
   const [currentCash, setCurrentCash] = useState(
     localStorageData.currentCash
@@ -32,6 +32,9 @@ export const useBackTest = () => {
 
   const [countDays, setCountDays] = useState(
     localStorageData.countDays
+  );
+  const [endDate, setEndDate] = useState(
+    new Date(localStorageData.endDate)
   );
 
   // const [testedData, setTestData] = useState([]);
@@ -102,45 +105,9 @@ export const useBackTest = () => {
     setCurrentStockPrice((lastPrice) => lastPrice + todayChange);
     currentStockPriceLocal =
       currentStockPriceLocal + todayChange;
-    //     isFoundError = false;
-    // let isFoundError = true;
-    // while (isFoundError) {
-    //   try {
-    //     const {
-    //       data: { stocks: updatePriceStocks, todayChange },
-    //     } = await axios.post(
-    //       `${PYTHON_API}/getCurrentStockPrice?date=${date}`,
-    //       {
-    //         boughtStocks: holdStocksLocal,
-    //       },
-    //       {
-    //         onDownloadProgress(progress) {
-    //           console.log("download progress:", progress);
-    //         },
-    //       }
-    //     );
-
-    //     setHoldingStocks(updatePriceStocks);
-    //     holdStocksLocal = updatePriceStocks;
-    //     setCurrentStockPrice(
-    //       (lastPrice) => lastPrice + todayChange
-    //     );
-    //     currentStockPriceLocal =
-    //       currentStockPriceLocal + todayChange;
-    //     isFoundError = false;
-    //   } catch (error) {
-    //     console.log(error);
-
-    //     console.log(
-    //       "something went wrong while updating Stocks price ❌"
-    //     );
-
-    //     await sleep(1000 * 10);
-    //   }
-    // }
   };
 
-  const sell = async (date) => {
+  const sell = async (date, isJustSell) => {
     const {
       data: {
         stocks: SoldStocksP,
@@ -152,6 +119,7 @@ export const useBackTest = () => {
       {
         boughtStocks: holdStocksLocal,
         portfolio: currentCashLocal,
+        isJustSell,
       },
       {
         onDownloadProgress(progress) {
@@ -215,20 +183,20 @@ export const useBackTest = () => {
     holdStocksLocal = [...holdStocksLocal, ...stocks];
   };
 
-  let currentDataLocal = currentDate;
+  let currentDateLocal = currentDate;
 
   const getTestedData = async () => {
     // const end = new Date("02/10/2021");
-    const end = new Date("04/22/2020");
+    // const endDate = new Date("04/22/2020");
     console.log("here");
 
     // 2020 - 04 - 13;
     const newBought = [];
 
-    if (typeof currentDataLocal === "string")
-      currentDataLocal = new Date(currentDataLocal);
+    if (typeof currentDateLocal === "string")
+      currentDateLocal = new Date(currentDateLocal);
 
-    if (currentDataLocal <= end) {
+    if (currentDateLocal <= endDate) {
       // const date = `${currentDate.getFullYear()}-${
       //   currentDate.getMonth() + 1 < 10
       //     ? `0${currentDate.getMonth() + 1}`
@@ -239,7 +207,7 @@ export const useBackTest = () => {
       //     : currentDate.getDate()
       // }`;
 
-      const date = customDateFormat(currentDataLocal);
+      const date = customDateFormat(currentDateLocal);
       try {
         // const data = await callApi(date);
         if (holdStocksLocal.length > 0) {
@@ -280,8 +248,8 @@ export const useBackTest = () => {
       } catch (error) {
         console.log(error);
       }
-      let newDate = currentDataLocal.setDate(
-        currentDataLocal.getDate() + 1
+      let newDate = currentDateLocal.setDate(
+        currentDateLocal.getDate() + 1
       );
       // loop = new Date(newDate);
       // loop =
@@ -306,6 +274,7 @@ export const useBackTest = () => {
       loess,
       accountValue,
       countDays,
+      endDate,
     });
   }, [
     updateLocalStorage,
@@ -318,6 +287,7 @@ export const useBackTest = () => {
     loess,
     accountValue,
     countDays,
+    endDate,
   ]);
 
   const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -328,11 +298,12 @@ export const useBackTest = () => {
     getTestedData,
     currentStockPrice,
     accountValue,
-    date: `${customDateFormat(new Date(currentDate))} ${
-      days[new Date(currentDate).getDay()]
+    date: `${customDateFormat(currentDate)} ${
+      days[currentDate.getDay()]
     }`,
     wins,
     loess,
     soldStocks,
+    isEndDate: currentDate >= endDate,
   };
 };
