@@ -1,7 +1,7 @@
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
 import { customDateFormat } from "../SimulatorUtils";
 
-const start = new Date("04/20/2020");
+const start = new Date("04/25/2020");
 let startDate = new Date(start);
 export const statesDefault = {
   holdingStocks: [],
@@ -19,7 +19,7 @@ export const statesDefault = {
     },
   ],
   countDays: 0,
-  endDate: new Date("04/26/2020"),
+  endDate: new Date("04/28/2020"),
 };
 
 export const useSaveTestedData = () => {

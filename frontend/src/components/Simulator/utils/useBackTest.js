@@ -40,26 +40,6 @@ export const useBackTest = () => {
     new Date(localStorageData.endDate)
   );
 
-  // const [testedData, setTestData] = useState([]);
-  // const [holdingStocks, setHoldingStocks] = useState([]);
-  // const [soldStocks, setSoldStocks] = useState([]);
-  // const start = new Date("02/01/2021");
-  // let startDate = new Date(start);
-  // const [currentDate, setCurrentDate] = useState(startDate);
-  // const [currentCash, setCurrentCash] = useState(1000000);
-  // const [currentStockPrice, setCurrentStockPrice] = useState(0);
-  // const [wins, setWins] = useState(0);
-  // const [loess, setLoess] = useState(0);
-  // const [accountValue, setAccountValue] = useState([
-  //   {
-  //     catch: 1000000,
-  //     stockValue: 0,
-  //     data: customDateFormat(startDate),
-  //   },
-  // ]);
-
-  // const [countDays, setCountDays] = useState(0);
-
   const resetAllStates = () => {
     setHoldingStocks(statesDefault.holdingStocks);
     setSoldStocks(statesDefault.soldStocks);
@@ -82,12 +62,13 @@ export const useBackTest = () => {
   const handleBackTestingAxiosError = async (
     callFunction,
     paramsFunction,
-    messageError
+    messageError,
+    paramsFunction2
   ) => {
     let isFoundError = true;
     while (isFoundError) {
       try {
-        await callFunction(paramsFunction);
+        await callFunction(paramsFunction, paramsFunction2);
         isFoundError = false;
       } catch (error) {
         console.log(error);
@@ -176,60 +157,18 @@ export const useBackTest = () => {
   let currentDateLocal = currentDate;
 
   const forceSelling = async () => {
-    let endDateLocal = endDate;
-    endDateLocal = currentDateLocal.setDate(
-      currentDateLocal.getDate() + 30
+    let endDateLocal = new Date(endDate);
+    console.log({ endDateLocal, type: typeof endDateLocal });
+
+    endDateLocal = new Date(
+      endDateLocal.setDate(endDateLocal.getDate() + 5)
     );
-    while (currentDateLocal) {
-      const date = customDateFormat(currentDateLocal);
-      try {
-        // const data = await callApi(date);
-        if (holdStocksLocal.length > 0) {
-          // get the current price fot hold stocks
+    setEndDate(endDateLocal);
+    runForceSelling(endDateLocal);
+  };
 
-          await handleBackTestingAxiosError(
-            updateCurrentPrice,
-            date,
-            "something went wrong while updating Stocks price ❌"
-          );
-          // look for sell signals for hold stocks
-
-          await handleBackTestingAxiosError(
-            sell,
-            date,
-            "something went wrong while selling Stocks price ❌"
-          );
-        }
-        // look for buy signals TODO clean up this code
-        await handleBackTestingAxiosError(
-          buy,
-          date,
-          "something went wrong while buying Stocks price ❌"
-        );
-
-        setAccountValue((oldData) => [
-          ...oldData,
-          {
-            catch: currentCashLocal,
-            stockValue: currentStockPriceLocal,
-            date,
-          },
-        ]);
-
-        // setUserChange()
-        // console.log(stocks);
-        setCountDays((oldValue) => oldValue + 1);
-      } catch (error) {
-        console.log(error);
-      }
-      let newDate = currentDateLocal.setDate(
-        currentDateLocal.getDate() + 1
-      );
-      // loop = new Date(newDate);
-      // loop =
-      setCurrentDate(new Date(newDate));
-      //
-    }
+  const runForceSelling = async (endDateLocal) => {
+    await backTestMain(endDateLocal, runForceSelling, true);
   };
 
   const buy = async (date) => {
@@ -262,11 +201,39 @@ export const useBackTest = () => {
     await backTestMain(endDate, getTestedData);
   };
 
-  const backTestMain = async (endDateP, callBackRecursively) => {
+  const backTestMain = async (
+    endDateP,
+    callBackRecursively,
+    isForceSell
+  ) => {
     if (typeof currentDateLocal === "string")
       currentDateLocal = new Date(currentDateLocal);
 
-    if (currentDateLocal <= endDateP) {
+    console.log({
+      currentDateLocal,
+      endDateP,
+      isForceSell,
+      l: holdStocksLocal.length,
+    });
+
+    // false
+    // getData
+    // !(false && false) = !(false && true)  =true && true = go in
+    // !(false && false) = !(false && true)  =true && false = go to else
+    // !(true && false) = true && true = go in
+    // !(true && false) = true && false = go to else
+    // !(true && true) = false && false = go to else
+    // !(true && true) = false && true = go to else
+    if (
+      !(isForceSell && holdStocksLocal.length === 0) &&
+      currentDateLocal <= endDateP
+    ) {
+      // if (
+      //   (currentDateLocal <= endDateP &&
+      //     isForceSell &&
+      //     holdStocksLocal.length > 0) ||
+      //   currentDateLocal <= endDateP
+      // ) {
       // const date = `${currentDate.getFullYear()}-${
       //   currentDate.getMonth() + 1 < 10
       //     ? `0${currentDate.getMonth() + 1}`
@@ -280,6 +247,8 @@ export const useBackTest = () => {
       const date = customDateFormat(currentDateLocal);
       try {
         // const data = await callApi(date);
+        console.log({ holdStocksLocal, endDateP });
+
         if (holdStocksLocal.length > 0) {
           // get the current price fot hold stocks
 
@@ -293,24 +262,28 @@ export const useBackTest = () => {
           await handleBackTestingAxiosError(
             sell,
             date,
-            "something went wrong while selling Stocks price ❌"
+            "something went wrong while selling Stocks price ❌",
+            isForceSell
           );
+          setAccountValue((oldData) => [
+            ...oldData,
+            {
+              catch: currentCashLocal,
+              stockValue: currentStockPriceLocal,
+              date,
+            },
+          ]);
         }
         // look for buy signals TODO clean up this code
-        await handleBackTestingAxiosError(
-          buy,
-          date,
-          "something went wrong while buying Stocks price ❌"
-        );
-
-        setAccountValue((oldData) => [
-          ...oldData,
-          {
-            catch: currentCashLocal,
-            stockValue: currentStockPriceLocal,
+        if (!isForceSell) {
+          await handleBackTestingAxiosError(
+            buy,
             date,
-          },
-        ]);
+            "something went wrong while buying Stocks price ❌"
+          );
+        } else {
+          await sleep(1000 * 10);
+        }
 
         // setUserChange()
         // console.log(stocks);
@@ -321,13 +294,24 @@ export const useBackTest = () => {
       let newDate = currentDateLocal.setDate(
         currentDateLocal.getDate() + 1
       );
+      currentDateLocal = new Date(newDate);
+
       // loop = new Date(newDate);
       // loop =
       setCurrentDate(new Date(newDate));
       // }
       // setBough((boughs) => [...boughs, newBought]);
-      await callBackRecursively();
+      if (isForceSell) await callBackRecursively(endDateP);
+      else await callBackRecursively();
     } else {
+      let newDate = currentDateLocal.setDate(
+        currentDateLocal.getDate() - 1
+      );
+      setCurrentDate(new Date(newDate));
+
+      setCountDays((oldValue) => oldValue - 1);
+      setEndDate(new Date(newDate));
+
       holdStocksLocal = [];
       currentCashLocal = 0;
     }
@@ -376,5 +360,6 @@ export const useBackTest = () => {
     soldStocks,
     isEndDate: currentDate >= endDate,
     resetAllStates,
+    forceSelling,
   };
 };

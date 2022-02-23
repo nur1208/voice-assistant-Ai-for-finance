@@ -272,7 +272,8 @@ deadline - before 2022-1-20 ❌ DONE on 2022-2-2
     - {DONE} let the user see number of holding stocks and number of sold and total bought stock 
     - {DONE} handle error axios error 
     - {DONE} create reset backTesting functionality
-    - {TODO} create justSell than purchase price functionality
+    - {DONE} improving reset backTesting functionality
+    - {DONE} create justSell than purchase price functionality
     - {TODO} get S&P 500 changes price
     - {TODO} save S$P 500 stocks like {date:{added:[stocks],removed:[stocks] }}
     - {TODO} create 'start back testing' command

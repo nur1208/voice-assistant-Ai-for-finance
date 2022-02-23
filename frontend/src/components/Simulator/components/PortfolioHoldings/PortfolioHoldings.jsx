@@ -27,6 +27,7 @@ export const PortfolioHoldings = ({
   soldStocks,
   isEndDate,
   resetAllStates,
+  forceSelling,
 }) => {
   const [_, { resetLOcalStorage }] = useSaveTestedData();
   const symbolTablePropsHolding = {
@@ -54,7 +55,7 @@ export const PortfolioHoldings = ({
                     // cursor: "auto",
                     marginRight: "30px",
                   }}
-                  onClick={getTestedData}
+                  onClick={forceSelling}
                   // href="#here"
                   className="semi-bold v-btn v-btn--has-bg v-btn--router v-btn--tile theme--light elevation-0 v-size--default primary"
                 >
