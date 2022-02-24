@@ -12,14 +12,15 @@ export const statesDefault = {
   wins: 0,
   loess: 0,
   accountValue: [
-    {
-      catch: 1000000,
-      stockValue: 0,
-      data: customDateFormat(start),
-    },
+    // {
+    //   catch: 1000000,
+    //   stockValue: 0,
+    //   data: customDateFormat(start),
+    // },
   ],
   countDays: 0,
-  endDate: new Date("04/28/2020"),
+  endDate: new Date("05/28/2020"),
+  sp500Data: [],
 };
 
 export const useSaveTestedData = () => {
@@ -71,6 +72,11 @@ export const useSaveTestedData = () => {
     statesDefault.endDate
   );
 
+  const [sp500Data, setSp500Data] = useLocalStorage(
+    "sp500Date",
+    statesDefault.sp500Data
+  );
+
   const updateLocalStorage = (data) => {
     setHoldingStocks(data["holdingStocks"]);
     setSoldStocks(data["soldStocks"]);
@@ -82,6 +88,7 @@ export const useSaveTestedData = () => {
     setAccountValue(data["accountValue"]);
     setCountDays(data["countDays"]);
     setEndDate(data["endDate"]);
+    setSp500Data(data["sp500Data"]);
   };
 
   const resetLocalStorage = () => {
@@ -101,6 +108,7 @@ export const useSaveTestedData = () => {
       accountValue,
       countDays,
       endDate,
+      sp500Data,
     },
     { updateLocalStorage, resetLOcalStorage: resetLocalStorage },
   ];

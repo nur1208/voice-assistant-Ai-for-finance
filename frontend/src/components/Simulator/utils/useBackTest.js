@@ -40,6 +40,10 @@ export const useBackTest = () => {
     new Date(localStorageData.endDate)
   );
 
+  const [sp500Data, setSp500Data] = useState(
+    localStorageData.sp500Data
+  );
+
   const resetAllStates = () => {
     setHoldingStocks(statesDefault.holdingStocks);
     setSoldStocks(statesDefault.soldStocks);
@@ -51,6 +55,7 @@ export const useBackTest = () => {
     setAccountValue(statesDefault.accountValue);
     setCountDays(statesDefault.countDays);
     setEndDate(statesDefault.endDate);
+    setSp500Data(statesDefault.sp500Data);
   };
 
   // 702316;
@@ -78,6 +83,31 @@ export const useBackTest = () => {
         await sleep(1000 * 10);
       }
     }
+  };
+
+  const getSp500Data = async (date) => {
+    const {
+      data: { close },
+    } = await axios.get(
+      `${PYTHON_API}/getSP500Date?date=${date}`,
+      null,
+      {
+        onDownloadProgress(progress) {
+          console.log("download progress:", progress);
+        },
+      }
+    );
+
+    if (close > 0)
+      setSp500Data((oldData) => [...oldData, { date, close }]);
+    else
+      setSp500Data((oldData) => [
+        ...oldData,
+        { close: oldData[oldData.length - 1].close, date },
+      ]);
+
+    // sp500Data.length > 0
+    //   : setSp500Data([close]);
   };
 
   const updateCurrentPrice = async (date) => {
@@ -228,22 +258,6 @@ export const useBackTest = () => {
       !(isForceSell && holdStocksLocal.length === 0) &&
       currentDateLocal <= endDateP
     ) {
-      // if (
-      //   (currentDateLocal <= endDateP &&
-      //     isForceSell &&
-      //     holdStocksLocal.length > 0) ||
-      //   currentDateLocal <= endDateP
-      // ) {
-      // const date = `${currentDate.getFullYear()}-${
-      //   currentDate.getMonth() + 1 < 10
-      //     ? `0${currentDate.getMonth() + 1}`
-      //     : currentDate.getMonth() + 1
-      // }-${
-      //   currentDate.getDate() + 1 < 10
-      //     ? `0${currentDate.getDate()}`
-      //     : currentDate.getDate()
-      // }`;
-
       const date = customDateFormat(currentDateLocal);
       try {
         // const data = await callApi(date);
@@ -251,6 +265,12 @@ export const useBackTest = () => {
 
         if (holdStocksLocal.length > 0) {
           // get the current price fot hold stocks
+
+          await handleBackTestingAxiosError(
+            getSp500Data,
+            date,
+            "something went wrong while getting S&P 500 data ❌"
+          );
 
           await handleBackTestingAxiosError(
             updateCurrentPrice,
@@ -310,13 +330,14 @@ export const useBackTest = () => {
       setCurrentDate(new Date(newDate));
 
       setCountDays((oldValue) => oldValue - 1);
-      setEndDate(new Date(newDate));
+      if (isForceSell) setEndDate(new Date(newDate));
 
       holdStocksLocal = [];
       currentCashLocal = 0;
     }
   };
 
+  // update local storage when any state in useBackTest change.
   useEffect(() => {
     updateLocalStorage({
       holdingStocks,
@@ -329,6 +350,7 @@ export const useBackTest = () => {
       accountValue,
       countDays,
       endDate,
+      sp500Data,
     });
   }, [
     updateLocalStorage,
@@ -342,6 +364,7 @@ export const useBackTest = () => {
     accountValue,
     countDays,
     endDate,
+    sp500Data,
   ]);
 
   const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -361,5 +384,6 @@ export const useBackTest = () => {
     isEndDate: currentDate >= endDate,
     resetAllStates,
     forceSelling,
+    sp500Data,
   };
 };

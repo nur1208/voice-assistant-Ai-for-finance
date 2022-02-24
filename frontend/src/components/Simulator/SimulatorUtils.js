@@ -61,13 +61,21 @@ export const renderPriceChangeIcon = (percentage, size) =>
 export const renderPriceChangeReturn = (
   type,
   accountValue,
-  isTotalChange
+  isTotalChange,
+  isSp500
 ) => {
   const perPrice = accountValue[accountValue.length - 2];
   const currentPrice = accountValue[accountValue.length - 1];
 
   const perPriceTotal = accountValue[0];
   // const currentPriceTotal = accountValue[accountValue.length - 1];
+
+  console.log({
+    isSp500,
+    perPrice,
+    currentPrice,
+    calculateReturn: calculateReturn(perPrice, currentPrice),
+  });
 
   const returnData =
     accountValue.length > 1
@@ -76,11 +84,15 @@ export const renderPriceChangeReturn = (
             perPriceTotal.catch + perPriceTotal.stockValue,
             currentPrice.catch + currentPrice.stockValue
           )
+        : isSp500
+        ? calculateReturn(perPrice.close, currentPrice.close)
         : calculateReturn(
             perPrice.catch + perPrice.stockValue,
             currentPrice.catch + currentPrice.stockValue
           )
       : { money: 0, percentage: 0 };
+
+  console.log({ returnData });
 
   return Number(returnData[type]).toFixed(2);
 };

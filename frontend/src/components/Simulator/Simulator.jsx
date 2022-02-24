@@ -24,6 +24,7 @@ export const Simulator = () => {
     isEndDate,
     resetAllStates,
     forceSelling,
+    sp500Data,
   } = useBackTest();
 
   const PortfolioHoldingsProps = {
@@ -44,6 +45,7 @@ export const Simulator = () => {
     userChange,
     accountValue,
     soldStocksLength: soldStocks.length,
+    sp500Data,
   };
 
   const backTestProps = {

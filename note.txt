@@ -295,6 +295,7 @@ get  is the market open data using python and get the data every day
 130 - {TODO} check for internat connection every 10 seconds when the user offline
 131 - {TODO} show the user sold stock start using yahoo finance chart 
 132 - {TODO} test Modal component 
+133 - {TODO} create callAxios function and use it in useBackTest    
 
 - {TODO NOT IMPORTANT NOW} add cancel axios request when the page unmounted 
     ref:https://stackoverflow.com/questions/53861916/canceling-an-axios-rest-call-in-react-hooks-useeffects-cleanup-failing

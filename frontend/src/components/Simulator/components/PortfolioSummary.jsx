@@ -14,6 +14,7 @@ export const PortfolioSummary = ({
   accountValue,
   countDays,
   soldStocksLength,
+  sp500Data,
 }) => {
   // const renderPriceChangeReturn = (
   //   type,
@@ -101,8 +102,31 @@ export const PortfolioSummary = ({
             </div>
             <div className="col">
               <TextOverLine title="S&P 500's Change" />
-              <div className="annual-return text-h5 error--text">
-                -34.28%
+              <div
+                className={`annual-return text-h5 ${renderPriceChangeStyle(
+                  renderPriceChangeReturn(
+                    "percentage",
+                    sp500Data,
+                    false,
+                    true
+                  )
+                )}`}
+              >
+                {renderPriceChangeReturn(
+                  "money",
+                  sp500Data,
+                  false,
+                  true
+                ) > 0
+                  ? "+"
+                  : ""}
+                {renderPriceChangeReturn(
+                  "percentage",
+                  sp500Data,
+                  false,
+                  true
+                )}
+                %
               </div>
             </div>
           </div>

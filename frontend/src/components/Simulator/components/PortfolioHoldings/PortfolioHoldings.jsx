@@ -46,7 +46,7 @@ export const PortfolioHoldings = ({
       <div className="container portfolio-holdings white">
         <div className="row">
           <div className="col-12 text-center mt-6">
-            {isEndDate && (
+            {isEndDate ? (
               <>
                 <button
                   style={{
@@ -104,32 +104,33 @@ export const PortfolioHoldings = ({
                   </div>
                 </button>
               </>
-            )}{" "}
-            <button
-              style={{
-                height: "3rem",
-                width: "300px",
-                // cursor: "auto",
-              }}
-              onClick={getTestedData}
-              // href="#here"
-              className="semi-bold v-btn v-btn--has-bg v-btn--router v-btn--tile theme--light elevation-0 v-size--default primary"
-            >
-              <div
-                className="v-btn__content"
+            ) : (
+              <button
                 style={{
-                  display: "flex",
-                  alignItems: "center",
+                  height: "3rem",
+                  width: "300px",
+                  // cursor: "auto",
                 }}
+                onClick={getTestedData}
+                // href="#here"
+                className="semi-bold v-btn v-btn--has-bg v-btn--router v-btn--tile theme--light elevation-0 v-size--default primary"
               >
-                <PlayCircleFilledWhiteIcon
-                  style={{ paddingRight: "20px" }}
-                  className="v-icon notranslate v-icon--left theme--light"
-                />
-                {/* <ClockIcon style={{ paddingRight: "20px" }} /> */}
-                Start Back Testing
-              </div>
-            </button>
+                <div
+                  className="v-btn__content"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  <PlayCircleFilledWhiteIcon
+                    style={{ paddingRight: "20px" }}
+                    className="v-icon notranslate v-icon--left theme--light"
+                  />
+                  {/* <ClockIcon style={{ paddingRight: "20px" }} /> */}
+                  Start Back Testing
+                </div>
+              </button>
+            )}{" "}
           </div>
 
           <div className="col-12 col-md-6 col-lg-4 pa-0 order-md-1 col order-2">
