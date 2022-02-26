@@ -19,7 +19,7 @@ export const statesDefault = {
     // },
   ],
   countDays: 0,
-  endDate: new Date("05/28/2020"),
+  endDate: new Date("04/30/2020"),
   sp500Data: [],
 };
 
@@ -110,6 +110,6 @@ export const useSaveTestedData = () => {
       endDate,
       sp500Data,
     },
-    { updateLocalStorage, resetLOcalStorage: resetLocalStorage },
+    { updateLocalStorage, resetLocalStorage },
   ];
 };

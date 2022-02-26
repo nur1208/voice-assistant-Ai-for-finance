@@ -274,13 +274,16 @@ deadline - before 2022-1-20 ❌ DONE on 2022-2-2
     - {DONE} create reset backTesting functionality
     - {DONE} improving reset backTesting functionality
     - {DONE} create justSell than purchase price functionality
-    - {TODO} get S&P 500 changes price
-    - {TODO} save S$P 500 stocks like {date:{added:[stocks],removed:[stocks] }}
+    - {DONE} get S&P 500 changes price
+    - {TODO} learning about redux
     - {TODO} create 'start back testing' command
     - {TODO} let the user enter start date , end data, catch and Account Risk
     - {TODO} tell the user you are about to close the window when backTesting still not end 
     - show loading for buy sell and stop
     - {TODO} add 'do you want me to force selling' command and add 'what is force selling' question
+    - {TODO} create sell stocks anyway functionality with profit or not
+
+
 121 - {TODO} create user model 
 122 - {TODO} test findingAnswersHandler and findingAnswersHandler functions
 123 - {TODO} improve 'code for handling unknown commands' by checking for commands first then for questions
@@ -296,6 +299,8 @@ get  is the market open data using python and get the data every day
 131 - {TODO} show the user sold stock start using yahoo finance chart 
 132 - {TODO} test Modal component 
 133 - {TODO} create callAxios function and use it in useBackTest    
+134 - {TODO} make sure that finansis voice is always "Google US English" 
+- {TODO NOT IMPORTANT NOW} save S&P 500 stocks like {date:{added:[stocks],removed:[stocks] }}
 
 - {TODO NOT IMPORTANT NOW} add cancel axios request when the page unmounted 
     ref:https://stackoverflow.com/questions/53861916/canceling-an-axios-rest-call-in-react-hooks-useeffects-cleanup-failing

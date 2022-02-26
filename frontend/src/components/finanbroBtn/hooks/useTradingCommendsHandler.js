@@ -4,7 +4,13 @@ import {
   STOCK_ROUTE,
   TRADING_API,
 } from "../../../utils/serverUtils";
-export const useTradingCommendsHandler = (response) => {
+import { useBackTest } from "../../Simulator/utils/useBackTest";
+import { sleep } from "../../../utils/sleep";
+import { secondCommandOptions } from "../hooks/useResponse";
+export const useTradingCommendsHandler = (
+  response,
+  setSecondCommandFor
+) => {
   const buyStocks = async () => {
     try {
       response("getting s&p 500 stocks");
@@ -26,7 +32,9 @@ export const useTradingCommendsHandler = (response) => {
             response("buying stocks");
             const {
               data: { message },
-            } = await axios(`${TRADING_API}/${STOCK_ROUTE}/buyStock?gameNum=5`);
+            } = await axios(
+              `${TRADING_API}/${STOCK_ROUTE}/buyStock?gameNum=5`
+            );
             response(message);
           } catch (error) {
             response("something went wrong while buying Stocks");
@@ -35,10 +43,14 @@ export const useTradingCommendsHandler = (response) => {
           response("didn't find any buy signal");
         }
       } catch (error) {
-        response("something went wrong while looking for buying signals");
+        response(
+          "something went wrong while looking for buying signals"
+        );
       }
     } catch (error) {
-      response("something went wrong while saving S&P 500 stocks");
+      response(
+        "something went wrong while saving S&P 500 stocks"
+      );
     }
   };
 
@@ -57,7 +69,9 @@ export const useTradingCommendsHandler = (response) => {
 
           const {
             data: { message },
-          } = await axios(`${TRADING_API}/${STOCK_ROUTE}/sellStock?gameNum=5`);
+          } = await axios(
+            `${TRADING_API}/${STOCK_ROUTE}/sellStock?gameNum=5`
+          );
           response(message);
         } catch (error) {
           response("something went wrong while selling stocks");
@@ -66,7 +80,9 @@ export const useTradingCommendsHandler = (response) => {
         response("didn't find any sell signals today");
       }
     } catch (error) {
-      response("something went wrong while checking for selling signals");
+      response(
+        "something went wrong while checking for selling signals"
+      );
     }
   };
 
@@ -75,10 +91,35 @@ export const useTradingCommendsHandler = (response) => {
       response("buying stop loss");
       const {
         data: { message },
-      } = await axios(`${TRADING_API}/${STOCK_ROUTE}/addStopLess?gameNum=5`);
+      } = await axios(
+        `${TRADING_API}/${STOCK_ROUTE}/addStopLess?gameNum=5`
+      );
     } catch (error) {
       response("something went wrong while buying stop loss");
     }
   };
+
+  // const { getTestedData, holdingStocks, isEndDate } =
+  //   useBackTest();
+
+  // const startBackTesting = async () => {
+  //   console.log({ holdingStocks, isEndDate });
+
+  //   // if (holdingStocks.length > 0 || isEndDate) {
+  //   //   response("you already have tested data");
+  //   //   await sleep(1000);
+  //   //   response(
+  //   //     "do you want me to over write the old data and start back testing"
+  //   //   );
+  //   //   setSecondCommandFor(
+  //   //     secondCommandOptions.rewritingTestedData
+  //   //   );
+  //   // } else {
+  //   //   response("starting back testing");
+  //   //   await getTestedData();
+  //   //   response("back testing is done");
+  //   // }
+  // };
+
   return { buyStocks, sellStocks, stopLess };
 };

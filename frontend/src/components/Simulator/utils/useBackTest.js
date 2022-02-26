@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
+// import { updateBTState } from "../../../state/action-creator";
 import { PYTHON_API } from "../../../utils/serverUtils";
 import { sleep } from "../../../utils/sleep";
 import { customDateFormat } from "../SimulatorUtils";
@@ -8,6 +10,8 @@ import {
   statesDefault,
   useSaveTestedData,
 } from "./useSaveTestedData";
+import { bindActionCreators } from "redux";
+import { actionCreators } from "../../../state";
 
 export const useBackTest = () => {
   const [localStorageData, { updateLocalStorage }] =
@@ -28,7 +32,7 @@ export const useBackTest = () => {
     localStorageData.currentStockPrice
   );
   const [wins, setWins] = useState(localStorageData.wins);
-  const [loess, setLoess] = useState(localStorageData.loess);
+  const [losses, setLosses] = useState(localStorageData.loess);
   const [accountValue, setAccountValue] = useState(
     localStorageData.accountValue
   );
@@ -44,6 +48,13 @@ export const useBackTest = () => {
     localStorageData.sp500Data
   );
 
+  const dispatch = useDispatch();
+
+  const { updateBTState, resetBTState } = bindActionCreators(
+    actionCreators,
+    dispatch
+  );
+
   const resetAllStates = () => {
     setHoldingStocks(statesDefault.holdingStocks);
     setSoldStocks(statesDefault.soldStocks);
@@ -51,18 +62,48 @@ export const useBackTest = () => {
     setCurrentStockPrice(statesDefault.currentStockPrice);
     setCurrentCash(statesDefault.currentCash);
     setWins(statesDefault.wins);
-    setLoess(statesDefault.loess);
+    setLosses(statesDefault.loess);
     setAccountValue(statesDefault.accountValue);
     setCountDays(statesDefault.countDays);
     setEndDate(statesDefault.endDate);
     setSp500Data(statesDefault.sp500Data);
+    // resetLocalStorage();
+    resetBTState();
   };
 
+  const startBackTesting = async () => {
+    console.log({
+      holdingStocks,
+      isEndDate: currentDate >= endDate,
+    });
+
+    // if (holdingStocks.length > 0 || isEndDate) {
+    //   response("you already have tested data");
+    //   await sleep(1000);
+    //   response(
+    //     "do you want me to over write the old data and start back testing"
+    //   );
+    //   setSecondCommandFor(
+    //     secondCommandOptions.rewritingTestedData
+    //   );
+    // } else {
+    //   response("starting back testing");
+    //   await getTestedData();
+    //   response("back testing is done");
+    // }
+  };
   // 702316;
   let holdStocksLocal = holdingStocks;
   let currentCashLocal = currentCash;
   let currentStockPriceLocal = currentStockPrice;
+  let accountValueLocal = accountValue;
   // let countDays = 0;
+  let countDaysLocal = countDays;
+  let soldStocksLocal = soldStocks;
+  let winsLocal = wins;
+  let lossesLocal = losses;
+  let endDateLocal = endDate;
+  let sp500DataLocal = sp500Data;
 
   const handleBackTestingAxiosError = async (
     callFunction,
@@ -98,13 +139,23 @@ export const useBackTest = () => {
       }
     );
 
-    if (close > 0)
+    if (close > 0) {
+      sp500DataLocal = [...sp500DataLocal, { date, close }];
       setSp500Data((oldData) => [...oldData, { date, close }]);
-    else
+    } else {
+      sp500DataLocal = [
+        ...sp500DataLocal,
+        {
+          close: sp500DataLocal[sp500DataLocal.length - 1].close,
+          date,
+        },
+      ];
+
       setSp500Data((oldData) => [
         ...oldData,
         { close: oldData[oldData.length - 1].close, date },
       ]);
+    }
 
     // sp500Data.length > 0
     //   : setSp500Data([close]);
@@ -135,6 +186,10 @@ export const useBackTest = () => {
   };
 
   const sell = async (date, isJustSell) => {
+    // create axiosPayload object if justSellType === "take any profit"
+    // add isJustSell : true to axiosPayload
+    // if justSellType === "sell anyway"
+    // add isJustSellWithoutProfit === "true"
     const {
       data: {
         stocks: SoldStocksP,
@@ -156,6 +211,7 @@ export const useBackTest = () => {
     );
     if (SoldStocksP.length > 0) {
       setSoldStocks((oldData) => [...oldData, ...SoldStocksP]);
+      soldStocksLocal = [...soldStocksLocal, ...SoldStocksP];
       for (let index = 0; index < SoldStocksP.length; index++) {
         const sStock = SoldStocksP[index];
         const filteredArray = holdStocksLocal.filter(
@@ -163,8 +219,10 @@ export const useBackTest = () => {
         );
 
         if (sStock.isReachedStopLoss) {
-          setLoess((oldValue) => oldValue + 1);
+          lossesLocal = lossesLocal + 1;
+          setLosses((oldValue) => oldValue + 1);
         } else {
+          winsLocal = winsLocal + 1;
           setWins((oldValue) => oldValue + 1);
         }
 
@@ -187,14 +245,18 @@ export const useBackTest = () => {
   let currentDateLocal = currentDate;
 
   const forceSelling = async () => {
-    let endDateLocal = new Date(endDate);
-    console.log({ endDateLocal, type: typeof endDateLocal });
+    let endDateLocalP = new Date(endDate);
+    // console.log({
+    //   endDateLocal: endDateLocalP,
+    //   type: typeof endDateLocalP,
+    // });
 
-    endDateLocal = new Date(
-      endDateLocal.setDate(endDateLocal.getDate() + 5)
+    endDateLocalP = new Date(
+      endDateLocalP.setDate(endDateLocalP.getDate() + 5)
     );
-    setEndDate(endDateLocal);
-    runForceSelling(endDateLocal);
+    endDateLocal = endDateLocalP;
+    setEndDate(endDateLocalP);
+    runForceSelling(endDateLocalP);
   };
 
   const runForceSelling = async (endDateLocal) => {
@@ -293,6 +355,15 @@ export const useBackTest = () => {
               date,
             },
           ]);
+
+          accountValueLocal = [
+            ...accountValueLocal,
+            {
+              catch: currentCashLocal,
+              stockValue: currentStockPriceLocal,
+              date,
+            },
+          ];
         }
         // look for buy signals TODO clean up this code
         if (!isForceSell) {
@@ -307,6 +378,7 @@ export const useBackTest = () => {
 
         // setUserChange()
         // console.log(stocks);
+        countDaysLocal = countDaysLocal + 1;
         setCountDays((oldValue) => oldValue + 1);
       } catch (error) {
         console.log(error);
@@ -321,6 +393,23 @@ export const useBackTest = () => {
       setCurrentDate(new Date(newDate));
       // }
       // setBough((boughs) => [...boughs, newBought]);
+
+      console.log("here where");
+      // updateBTState("soksdja;kl");
+      updateBTState({
+        holdStocks: holdStocksLocal,
+        soldStocks: soldStocksLocal,
+        currentDate: currentDateLocal,
+        currentStockPrice: currentStockPriceLocal,
+        currentCash: currentCashLocal,
+        wins: winsLocal,
+        losses: lossesLocal,
+        accountValue: accountValueLocal,
+        countDays: countDaysLocal,
+        endDate: endDateLocal,
+        sp500Data: sp500DataLocal,
+      });
+
       if (isForceSell) await callBackRecursively(endDateP);
       else await callBackRecursively();
     } else {
@@ -328,10 +417,26 @@ export const useBackTest = () => {
         currentDateLocal.getDate() - 1
       );
       setCurrentDate(new Date(newDate));
-
+      countDaysLocal = countDaysLocal - 1;
       setCountDays((oldValue) => oldValue - 1);
-      if (isForceSell) setEndDate(new Date(newDate));
+      if (isForceSell) {
+        endDateLocal = new Date(newDate);
+        setEndDate(new Date(newDate));
+      }
 
+      updateBTState({
+        holdStocks: holdStocksLocal,
+        soldStocks: soldStocksLocal,
+        currentDate: currentDateLocal,
+        currentStockPrice: currentStockPriceLocal,
+        currentCash: currentCashLocal,
+        wins: winsLocal,
+        losses: lossesLocal,
+        accountValue: accountValueLocal,
+        countDays: countDaysLocal,
+        endDate: endDateLocal,
+        sp500Data: sp500DataLocal,
+      });
       holdStocksLocal = [];
       currentCashLocal = 0;
     }
@@ -346,21 +451,21 @@ export const useBackTest = () => {
       currentStockPrice,
       currentCash,
       wins,
-      loess,
+      loess: losses,
       accountValue,
       countDays,
       endDate,
       sp500Data,
     });
   }, [
-    updateLocalStorage,
+    // updateLocalStorage,
     holdingStocks,
     soldStocks,
     currentDate,
     currentStockPrice,
     currentCash,
     wins,
-    loess,
+    losses,
     accountValue,
     countDays,
     endDate,
@@ -379,11 +484,12 @@ export const useBackTest = () => {
       days[currentDate.getDay()]
     }`,
     wins,
-    loess,
+    loess: losses,
     soldStocks,
     isEndDate: currentDate >= endDate,
     resetAllStates,
     forceSelling,
     sp500Data,
+    startBackTesting,
   };
 };

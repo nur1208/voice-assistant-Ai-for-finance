@@ -16,11 +16,12 @@ import { useHistory, useLocation } from "react-router-dom";
 import { useCommonCommandsHandler } from "../components/finanbroBtn/hooks/useCommonCommandsHandler";
 import { BACKEND_API_URL, QUESTIONS_ROUTE } from "./serverUtils";
 import { useTradingCommendsHandler } from "../components/finanbroBtn/hooks/useTradingCommendsHandler";
+import { useBackTest } from "../components/Simulator/utils/useBackTest";
 // export const useSecondCommand = (commands) => {
 //   const { transcript } = useSpeechRecognition();
 // };
 
-export const useFinansis = () => {
+export const useFinansis = (resetAllStates) => {
   const [playing, toggle] = useAudio(
     "./audio/zapsplat_multimedia_button_click_007_53868.mp3"
   );
@@ -80,7 +81,11 @@ export const useFinansis = () => {
     zoomChart,
     openMultipleCharts,
     changeChartTo,
-  } = useInfoCommandsHandler(response, handleOpenModal, handleCloseModal);
+  } = useInfoCommandsHandler(
+    response,
+    handleOpenModal,
+    handleCloseModal
+  );
 
   const history = useHistory();
   const { pathname } = useLocation();
@@ -109,10 +114,11 @@ export const useFinansis = () => {
   );
 
   const { buyStocks, sellStocks, stopLess } =
-    useTradingCommendsHandler(response);
+    useTradingCommendsHandler(response, setSecondCommandFor);
 
   const [findingAnswerFor, setFindingAnswerFor] = useState("");
 
+  const { startBackTesting } = useBackTest();
   const commands = [
     // {
     //   command: ["你叫什么名字"],
@@ -124,19 +130,22 @@ export const useFinansis = () => {
     // },
     {
       command: ["what can you do", "how can you help me"],
-      callback: () => response("I provide finance information for you"),
+      callback: () =>
+        response("I provide finance information for you"),
       commandFor: "every section",
     },
     {
       command: ["what is your name", "what's your name"],
-      callback: () => response(["my name is finansis", "I'm finansis... bro"]),
+      callback: () =>
+        response(["my name is finansis", "I'm finansis... bro"]),
       commandFor: "every section",
     },
     {
       command: ["Give me the news from *"],
       // callback: async (source) => await giveMeSource(source),
       // callback: async (source) => await giveMeSource(source),
-      callback: async (source) => await getNews("giveMeSource", source),
+      callback: async (source) =>
+        await getNews("giveMeSource", source),
       commandFor: "news",
     },
     // {
@@ -157,12 +166,12 @@ export const useFinansis = () => {
           findingAnswerFor,
           setCurrentQuestion,
         }),
-      commandFor: "news",
+      commandFor: "every section",
     },
     {
       command: ["no", "nope"],
       callback: () => respondedWithNoSC(),
-      commandFor: "news",
+      commandFor: "every section",
     },
     {
       command: "go back",
@@ -177,7 +186,8 @@ export const useFinansis = () => {
     {
       command: "what's up with *",
       // callback: (query) => whatsUpWithHandler(query),
-      callback: async (query) => await getNews("whatsUpWith", query),
+      callback: async (query) =>
+        await getNews("whatsUpWith", query),
       commandFor: "news",
     },
     {
@@ -213,7 +223,11 @@ export const useFinansis = () => {
       commandFor: "every section",
     },
     {
-      command: ["close pop-up window", "close the window", "close the article"],
+      command: [
+        "close pop-up window",
+        "close the window",
+        "close the article",
+      ],
       callback: async () => await handleClosePopupWindow(),
       commandFor: "news",
     },
@@ -236,7 +250,8 @@ export const useFinansis = () => {
     },
     {
       command: "open * chart",
-      callback: async (target) => await openYahooFinance("chart", target),
+      callback: async (target) =>
+        await openYahooFinance("chart", target),
       commandFor: "info",
     },
     {
@@ -258,7 +273,8 @@ export const useFinansis = () => {
     },
     {
       command: "open article (number) * without controlling it",
-      callback: async (num) => await openArticleWithoutControllerItHandler(num),
+      callback: async (num) =>
+        await openArticleWithoutControllerItHandler(num),
       commandFor: "news",
     },
     {
@@ -273,7 +289,8 @@ export const useFinansis = () => {
     },
     {
       command: "give me * statistics",
-      callback: async (target) => await openYahooFinance("statistics", target),
+      callback: async (target) =>
+        await openYahooFinance("statistics", target),
       commandFor: "info",
     },
     {
@@ -298,7 +315,8 @@ export const useFinansis = () => {
     },
     {
       command: "open * chart with your control",
-      callback: async (target) => await openYahooFinance("chart", target, true),
+      callback: async (target) =>
+        await openYahooFinance("chart", target, true),
       commandFor: "info",
     },
     {
@@ -317,12 +335,14 @@ export const useFinansis = () => {
     },
     {
       command: "show me * charts",
-      callback: async (companies) => await openMultipleCharts(companies),
+      callback: async (companies) =>
+        await openMultipleCharts(companies),
       commandFor: "info",
     },
     {
       command: "change the chart to *",
-      callback: async (companies) => await changeChartTo(companies),
+      callback: async (companies) =>
+        await changeChartTo(companies),
       commandFor: "info",
     },
     {
@@ -354,6 +374,11 @@ export const useFinansis = () => {
       callback: () => stopLess(),
       commandFor: "info",
     },
+    {
+      command: ["start back testing", "start pack testing"],
+      callback: () => startBackTesting(),
+      commandFor: "backTesting",
+    },
   ];
 
   // get questions from the database
@@ -361,7 +386,9 @@ export const useFinansis = () => {
     (async () => {
       const {
         data: { docs },
-      } = await axios.get(`${BACKEND_API_URL}/${QUESTIONS_ROUTE}`);
+      } = await axios.get(
+        `${BACKEND_API_URL}/${QUESTIONS_ROUTE}`
+      );
 
       setQuestions(docs);
     })();
@@ -369,7 +396,8 @@ export const useFinansis = () => {
 
   const [onlyCommands, setOnlyCommands] = useState([]);
   const [onlyCommandFor, setOnlyCommandFor] = useState([]);
-  const [commandsWithQuestionWord, setCommandsWithQuestionWord] = useState([]);
+  const [commandsWithQuestionWord, setCommandsWithQuestionWord] =
+    useState([]);
   useEffect(() => {
     const newOnlyCommands = [];
     const newOnlyCommandFor = [];
@@ -405,12 +433,17 @@ export const useFinansis = () => {
   }, []);
   // give me list of most active stocks
   // the most active stock of yesterday is list of stocks
-  const { transcript, listening, resetTranscript, finalTranscript } =
-    useSpeechRecognition({
-      commands,
-    });
+  const {
+    transcript,
+    listening,
+    resetTranscript,
+    finalTranscript,
+  } = useSpeechRecognition({
+    commands,
+  });
   const [isCommandExist, setIsCommandExist] = useState(true);
-  const [isCommandQuestion, setIsCommandQuestion] = useState(false);
+  const [isCommandQuestion, setIsCommandQuestion] =
+    useState(false);
 
   const [isStopListing, setIsStopListing] = useState(false);
   // code for handling unknown commands
@@ -434,7 +467,10 @@ export const useFinansis = () => {
 
         // remove '?' symbol from  question
         if (question.includes("?")) {
-          questionNoOptionsWord = questionNoOptionsWord.replace("?", "");
+          questionNoOptionsWord = questionNoOptionsWord.replace(
+            "?",
+            ""
+          );
           question = question.replace("?", "");
         }
 
@@ -446,17 +482,24 @@ export const useFinansis = () => {
 
         if (
           finalTranscript.toLocaleLowerCase() === question ||
-          finalTranscript.toLocaleLowerCase() === questionNoOptionsWord
+          finalTranscript.toLocaleLowerCase() ===
+            questionNoOptionsWord
         )
           foundQuestion = questions[index];
       }
 
       if (foundQuestion) {
         // console.log("do something 🧐🧐");
-        handleOpenModal(foundQuestion.question, foundQuestion.answer);
+        handleOpenModal(
+          foundQuestion.question,
+          foundQuestion.answer
+        );
         response(foundQuestion.answer);
         setCurrentQuestion(foundQuestion);
-        const timeout = foundQuestion.answer.length > 80 ? 1000 * 10 : 1000 * 7;
+        const timeout =
+          foundQuestion.answer.length > 80
+            ? 1000 * 10
+            : 1000 * 7;
 
         setTimeout(() => {
           handleCloseModal();
@@ -485,25 +528,30 @@ export const useFinansis = () => {
             .match(/\((.*?)\)/)[0]
             .replace("(", "")
             .replace(")", "");
-          transcript = transcript.replace(" " + optionalWord, "").trim();
+          transcript = transcript
+            .replace(" " + optionalWord, "")
+            .trim();
 
           // if the optional word is the first word then there is no white space behind it
 
           if (element.indexOf("(") === 0)
             element = element.replace(/\((.*?)\)/, "").trim();
           // else there is white space so we need to remove it
-          else element = element.replace(/ \((.*?)\)/, "").trim();
+          else
+            element = element.replace(/ \((.*?)\)/, "").trim();
         }
 
         console.log({ transcript, element });
         if (element.includes("*")) {
           const indexDynamic = element.split(" ").indexOf("*");
-          const lastWordBeforeDynamic = element.split(" ")[indexDynamic - 1];
+          const lastWordBeforeDynamic =
+            element.split(" ")[indexDynamic - 1];
 
           let fistWordAfterDynamic = "";
           // let fistIndexAfterDynamic = -1
           if (element.split(" ").length > indexDynamic + 1)
-            fistWordAfterDynamic = element.split(" ")[indexDynamic + 1];
+            fistWordAfterDynamic =
+              element.split(" ")[indexDynamic + 1];
           // if (element.replace(/\((.*?)\)/, ""))
 
           // const isSameAfterDynamicWord = fistWordAfterDynamic &&
@@ -517,24 +565,38 @@ export const useFinansis = () => {
           ) {
             if (fistWordAfterDynamic) {
               const checkWithoutDynamicWord =
-                element.split(" ").slice(0, indexDynamic).join(" ") +
+                element
+                  .split(" ")
+                  .slice(0, indexDynamic)
+                  .join(" ") +
                   " " +
                   element
                     .split(" ")
                     .slice(indexDynamic + 1)
                     .join(" ") ===
-                transcript.split(" ").slice(0, indexDynamic).join(" ") +
+                transcript
+                  .split(" ")
+                  .slice(0, indexDynamic)
+                  .join(" ") +
                   " " +
                   transcript
                     .split(" ")
-                    .slice(transcript.split(" ").indexOf(fistWordAfterDynamic))
+                    .slice(
+                      transcript
+                        .split(" ")
+                        .indexOf(fistWordAfterDynamic)
+                    )
                     .join(" ");
               const checkDWInCommandNotSameIndexDWInTranscript =
-                transcript.split(" ").indexOf(fistWordAfterDynamic) !==
+                transcript
+                  .split(" ")
+                  .indexOf(fistWordAfterDynamic) !==
                 indexDynamic;
 
               const checkDWIsExistInTranscript =
-                transcript.split(" ").indexOf(fistWordAfterDynamic) !== -1;
+                transcript
+                  .split(" ")
+                  .indexOf(fistWordAfterDynamic) !== -1;
               const finalCondition =
                 checkWithoutDynamicWord &&
                 checkDWIsExistInTranscript &&
@@ -589,9 +651,12 @@ export const useFinansis = () => {
       setIsCommandExist(isCommandExistLocal);
       if (!isCommandExistLocal) {
         const checkForQW =
-          finalTranscript.match(/^what/) || finalTranscript.match(/^how/);
+          finalTranscript.match(/^what/) ||
+          finalTranscript.match(/^how/);
         if (checkForQW) {
-          response(`do you want me to learn about ${finalTranscript}`);
+          response(
+            `do you want me to learn about ${finalTranscript}`
+          );
           setSecondCommandFor("findingAnswer");
           // console.log("do something 🧐🧐");
           setFindingAnswerFor(finalTranscript);
@@ -607,7 +672,8 @@ export const useFinansis = () => {
         "stop listening",
         "read the news",
       ];
-      if (autoResetTranscriptNotWorking.includes(transcript)) resetTranscript();
+      if (autoResetTranscriptNotWorking.includes(transcript))
+        resetTranscript();
     }
     foundQuestion = null;
   }, [finalTranscript]);
@@ -637,7 +703,8 @@ export const useFinansis = () => {
     //     language: "zh-CN",
     //   }),
     onClick: () => {
-      if (!listening) SpeechRecognition.startListening({ continuous: true });
+      if (!listening)
+        SpeechRecognition.startListening({ continuous: true });
       else SpeechRecognition.stopListening();
     },
     isListening: listening,

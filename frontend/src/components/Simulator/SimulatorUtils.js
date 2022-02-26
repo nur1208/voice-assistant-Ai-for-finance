@@ -3,7 +3,7 @@ import { ArrowUpIcon } from "./components/ArrowUpIcon";
 import { HorizontalLineIcon } from "./components/HorizontalLineIcon";
 
 export const customDateFormat = (currentDate) => {
-  console.log({ currentDate, type: typeof currentDate });
+  // console.log({ currentDate, type: typeof currentDate });
 
   return `${currentDate.getFullYear()}-${
     currentDate.getMonth() + 1 < 10
@@ -70,12 +70,12 @@ export const renderPriceChangeReturn = (
   const perPriceTotal = accountValue[0];
   // const currentPriceTotal = accountValue[accountValue.length - 1];
 
-  console.log({
-    isSp500,
-    perPrice,
-    currentPrice,
-    calculateReturn: calculateReturn(perPrice, currentPrice),
-  });
+  // console.log({
+  //   isSp500,
+  //   perPrice,
+  //   currentPrice,
+  //   calculateReturn: calculateReturn(perPrice, currentPrice),
+  // });
 
   const returnData =
     accountValue.length > 1
@@ -92,7 +92,7 @@ export const renderPriceChangeReturn = (
           )
       : { money: 0, percentage: 0 };
 
-  console.log({ returnData });
+  // console.log({ returnData });
 
   return Number(returnData[type]).toFixed(2);
 };

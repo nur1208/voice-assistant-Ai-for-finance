@@ -16,7 +16,11 @@ import { Test } from "./components/Test";
 import { Simulator } from "./components/Simulator/Simulator";
 import { GlobalStyle } from "./appSC";
 import BasicModal from "./components/Modal/Modal";
-
+import { useSelector } from "react-redux";
+import { bindActionCreators } from "redux";
+import { actionCreators } from "./state";
+import { useReduxActions } from "./hooks/useReduxActions";
+import { useSaveTestedData } from "./components/Simulator/utils/useSaveTestedData";
 export const PAGES = [
   {
     path: "/",
@@ -31,12 +35,26 @@ export const PAGES = [
     Component: (props) => <InfoPage {...props} />,
   },
   {
-    path: "/test",
+    path: "/backTesting",
     Component: (props) => <Simulator {...props} />,
+  },
+  {
+    path: "/test",
+    Component: (props) => <Test {...props} />,
   },
 ];
 
 export const App = () => {
+  const state = useSelector((state) => state.back_testing);
+
+  const { updateBTState } = useReduxActions();
+
+  // const { updateBTState, resetBTState } = bindActionCreators(
+  //   actionCreators,
+  //   dispatch
+  // );
+  console.log({ stateBackTesting: state });
+
   const [userCountry, setUserCountry] = useState("");
   const {
     NewsPageProps,
@@ -45,6 +63,16 @@ export const App = () => {
     modalProps,
   } = useFinansis();
 
+  // get localStorage date in add it to redux store
+  const [localStorageData] = useSaveTestedData();
+
+  useEffect(() => {
+    updateBTState(localStorageData);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // get user current country
   useEffect(() => {
     (async () => {
       const userCurrentCountry = await getCurrentCountry();

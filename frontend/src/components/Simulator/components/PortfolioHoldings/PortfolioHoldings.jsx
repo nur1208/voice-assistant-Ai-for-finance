@@ -29,7 +29,7 @@ export const PortfolioHoldings = ({
   resetAllStates,
   forceSelling,
 }) => {
-  const [_, { resetLOcalStorage }] = useSaveTestedData();
+  const [_, { resetLocalStorage }] = useSaveTestedData();
   const symbolTablePropsHolding = {
     tableHeadDate: tableHeadDateHolding,
     tableBodyDate: holdingStocks,
@@ -48,32 +48,34 @@ export const PortfolioHoldings = ({
           <div className="col-12 text-center mt-6">
             {isEndDate ? (
               <>
-                <button
-                  style={{
-                    height: "3rem",
-                    width: "300px",
-                    // cursor: "auto",
-                    marginRight: "30px",
-                  }}
-                  onClick={forceSelling}
-                  // href="#here"
-                  className="semi-bold v-btn v-btn--has-bg v-btn--router v-btn--tile theme--light elevation-0 v-size--default primary"
-                >
-                  <div
-                    className="v-btn__content"
+                {holdingStocks.length > 0 && (
+                  <button
                     style={{
-                      display: "flex",
-                      alignItems: "center",
+                      height: "3rem",
+                      width: "300px",
+                      // cursor: "auto",
+                      marginRight: "30px",
                     }}
+                    onClick={forceSelling}
+                    // href="#here"
+                    className="semi-bold v-btn v-btn--has-bg v-btn--router v-btn--tile theme--light elevation-0 v-size--default primary"
                   >
-                    <PlayCircleFilledWhiteIcon
-                      style={{ paddingRight: "20px" }}
-                      className="v-icon notranslate v-icon--left theme--light"
-                    />
-                    {/* <ClockIcon style={{ paddingRight: "20px" }} /> */}
-                    force selling
-                  </div>
-                </button>
+                    <div
+                      className="v-btn__content"
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                    >
+                      <PlayCircleFilledWhiteIcon
+                        style={{ paddingRight: "20px" }}
+                        className="v-icon notranslate v-icon--left theme--light"
+                      />
+                      {/* <ClockIcon style={{ paddingRight: "20px" }} /> */}
+                      force selling
+                    </div>
+                  </button>
+                )}
                 <button
                   style={{
                     height: "3rem",
@@ -82,7 +84,8 @@ export const PortfolioHoldings = ({
                     marginRight: "30px",
                   }}
                   onClick={() => {
-                    resetLOcalStorage();
+                    // resetLocalStorage();
+                    localStorage.clear();
                     resetAllStates();
                   }}
                   // href="#here"
