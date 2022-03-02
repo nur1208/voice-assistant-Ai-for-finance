@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useSpeechSynthesis } from "react-speech-kit";
+import { useLocalStorage } from "../../../hooks/useLocalStorage";
+import { useReduxActions } from "../../../hooks/useReduxActions";
 import { sleep } from "../../../utils/sleep";
 import { useBackTest } from "../../Simulator/utils/useBackTest";
 import { useSaveTestedData } from "../../Simulator/utils/useSaveTestedData";
@@ -65,6 +67,13 @@ export const useResponse = () => {
 
   const { getTestedData } = useBackTest();
 
+  const { updateIsResetBTData, resetBTState } =
+    useReduxActions();
+
+  const [isResetBTData, setIsResetBTData] = useLocalStorage(
+    "isResetBTData",
+    false
+  );
   const respondedWithYesSC = async ({
     handleReadingHeadLines,
     handleScrollDetailPage,
@@ -98,13 +107,23 @@ export const useResponse = () => {
         break;
 
       case secondCommandOptions.rewritingTestedData:
-        response("resetting back testing data");
-        resetAllStates();
-        await sleep(1000);
-        response("starting back testing again");
+        response(
+          "resetting back testing data then starting back testing"
+        );
+        resetBTState();
+        // updateIsResetBTData(true);
+        setIsResetBTData(true);
+        // response(
+        //   "after the page reload tell me start back testing"
+        // );
 
-        await getTestedData();
-        response("back testing is done");
+        await sleep(1000);
+        window.location.reload();
+        // resetAllStates();
+        // response("starting back testing again");
+
+        // await getTestedData();
+        // response("back testing is done");
 
         break;
 

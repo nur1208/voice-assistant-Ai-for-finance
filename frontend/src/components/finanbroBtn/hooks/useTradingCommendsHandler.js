@@ -7,9 +7,13 @@ import {
 import { useBackTest } from "../../Simulator/utils/useBackTest";
 import { sleep } from "../../../utils/sleep";
 import { secondCommandOptions } from "../hooks/useResponse";
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useLocalStorage } from "../../../hooks/useLocalStorage";
 export const useTradingCommendsHandler = (
   response,
-  setSecondCommandFor
+  setSecondCommandFor,
+  SpeechRecognition
 ) => {
   const buyStocks = async () => {
     try {
@@ -99,27 +103,66 @@ export const useTradingCommendsHandler = (
     }
   };
 
-  // const { getTestedData, holdingStocks, isEndDate } =
-  //   useBackTest();
+  const { getTestedData } = useBackTest();
 
-  // const startBackTesting = async () => {
-  //   console.log({ holdingStocks, isEndDate });
+  const { holdingStocks, currentDate, endDate, isBTDone } =
+    useSelector((state) => state.back_testing);
 
-  //   // if (holdingStocks.length > 0 || isEndDate) {
-  //   //   response("you already have tested data");
-  //   //   await sleep(1000);
-  //   //   response(
-  //   //     "do you want me to over write the old data and start back testing"
-  //   //   );
-  //   //   setSecondCommandFor(
-  //   //     secondCommandOptions.rewritingTestedData
-  //   //   );
-  //   // } else {
-  //   //   response("starting back testing");
-  //   //   await getTestedData();
-  //   //   response("back testing is done");
-  //   // }
-  // };
+  const [isResetBTData, setIsResetBTData] = useLocalStorage(
+    "isResetBTData",
+    false
+  );
 
-  return { buyStocks, sellStocks, stopLess };
+  const [checkForBTIsDone, setCheckForBTIsDone] =
+    useState(false);
+
+  // let finansis response after resetting and starting back testing again
+  useEffect(() => {
+    if (checkForBTIsDone && isBTDone) {
+      response("back testing is done");
+      setCheckForBTIsDone(false);
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isBTDone]);
+
+  useEffect(() => {
+    (async () => {
+      console.log(
+        "useEffect for starting finansis after reloading the page "
+      );
+
+      if (isResetBTData) {
+        SpeechRecognition.startListening({ continuous: true });
+        setIsResetBTData(false);
+        await sleep(5000);
+        setCheckForBTIsDone(true);
+        // response("starting back testing");
+        await getTestedData();
+        // response("back testing is done");
+      }
+    })();
+  }, [isResetBTData]);
+
+  const startBackTesting = async () => {
+    console.log({
+      holdingStocks,
+      isEndBackTesting: currentDate >= endDate,
+    });
+
+    if (holdingStocks.length > 0 && currentDate >= endDate) {
+      response("you already have tested data");
+      await sleep(1000);
+      response("do you want me to over write the old data");
+      setSecondCommandFor(
+        secondCommandOptions.rewritingTestedData
+      );
+    } else {
+      response("starting back testing");
+      await getTestedData();
+      response("back testing is done");
+    }
+  };
+
+  return { buyStocks, sellStocks, stopLess, startBackTesting };
 };

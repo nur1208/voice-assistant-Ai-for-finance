@@ -1,7 +1,7 @@
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
 import { customDateFormat } from "../SimulatorUtils";
 
-const start = new Date("04/25/2020");
+const start = new Date("04/27/2020");
 let startDate = new Date(start);
 export const statesDefault = {
   holdingStocks: [],
@@ -21,6 +21,7 @@ export const statesDefault = {
   countDays: 0,
   endDate: new Date("04/30/2020"),
   sp500Data: [],
+  isBTDone: false,
 };
 
 export const useSaveTestedData = () => {
@@ -77,6 +78,11 @@ export const useSaveTestedData = () => {
     statesDefault.sp500Data
   );
 
+  const [isBTDone, setIsBTDone] = useLocalStorage(
+    "isBTDone",
+    statesDefault.isBTDone
+  );
+
   const updateLocalStorage = (data) => {
     setHoldingStocks(data["holdingStocks"]);
     setSoldStocks(data["soldStocks"]);
@@ -89,6 +95,7 @@ export const useSaveTestedData = () => {
     setCountDays(data["countDays"]);
     setEndDate(data["endDate"]);
     setSp500Data(data["sp500Data"]);
+    setIsBTDone(data["isBTDone"]);
   };
 
   const resetLocalStorage = () => {
@@ -109,6 +116,7 @@ export const useSaveTestedData = () => {
       countDays,
       endDate,
       sp500Data,
+      isBTDone,
     },
     { updateLocalStorage, resetLocalStorage },
   ];

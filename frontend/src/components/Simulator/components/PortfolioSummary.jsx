@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import {
   calculateReturn,
   renderPriceChangeReturn,
@@ -6,16 +7,26 @@ import {
 } from "../SimulatorUtils";
 import { TextOverLine } from "./TextOverLine";
 
-export const PortfolioSummary = ({
-  holdingStocksLength,
-  currentCash,
-  currentStockPrice,
-  userChange,
-  accountValue,
-  countDays,
-  soldStocksLength,
-  sp500Data,
-}) => {
+// {
+//   holdingStocksLength,
+//   currentCash,
+//   currentStockPrice,
+//   userChange,
+//   accountValue,
+//   countDays,
+//   soldStocksLength,
+//   sp500Data,
+// }
+export const PortfolioSummary = () => {
+  const {
+    holdingStocks,
+    currentCash,
+    currentStockPrice,
+    accountValue,
+    soldStocks,
+    sp500Data,
+  } = useSelector(({ back_testing }) => back_testing);
+
   // const renderPriceChangeReturn = (
   //   type,
 
@@ -134,9 +145,11 @@ export const PortfolioSummary = ({
             <div className="col">
               <TextOverLine title="Holding Stock" />
               <div className="buying-power text-h5">
-                {holdingStocksLength}{" "}
+                {holdingStocks.length}{" "}
                 <span className="out_of">
-                  bought {soldStocksLength + holdingStocksLength}
+                  holding{" "}
+                  {soldStocks.length + holdingStocks.length}{" "}
+                  bought
                 </span>
               </div>
             </div>

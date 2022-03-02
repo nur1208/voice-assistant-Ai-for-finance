@@ -5,14 +5,15 @@ import { HorizontalLineIcon } from "./components/HorizontalLineIcon";
 export const customDateFormat = (currentDate) => {
   // console.log({ currentDate, type: typeof currentDate });
 
-  return `${currentDate.getFullYear()}-${
-    currentDate.getMonth() + 1 < 10
-      ? `0${currentDate.getMonth() + 1}`
-      : currentDate.getMonth() + 1
+  let date = currentDate;
+  if (typeof date === "string") date = new Date(date);
+
+  return `${date.getFullYear()}-${
+    date.getMonth() + 1 < 10
+      ? `0${date.getMonth() + 1}`
+      : date.getMonth() + 1
   }-${
-    currentDate.getDate() < 10
-      ? `0${currentDate.getDate()}`
-      : currentDate.getDate()
+    date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()
   }`;
 };
 

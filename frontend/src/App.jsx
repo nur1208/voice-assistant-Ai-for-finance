@@ -15,12 +15,14 @@ import { getCurrentCountry } from "./utils/getCurrentCountry";
 import { Test } from "./components/Test";
 import { Simulator } from "./components/Simulator/Simulator";
 import { GlobalStyle } from "./appSC";
-import BasicModal from "./components/Modal/Modal";
+// import BasicModal from "./components/Modal/Modal";
 import { useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "./state";
 import { useReduxActions } from "./hooks/useReduxActions";
 import { useSaveTestedData } from "./components/Simulator/utils/useSaveTestedData";
+import BasicModal from "./components/Modal/BasicModal";
+
 export const PAGES = [
   {
     path: "/",

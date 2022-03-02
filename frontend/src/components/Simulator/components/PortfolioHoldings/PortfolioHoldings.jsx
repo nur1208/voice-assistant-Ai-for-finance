@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ArrowDownIcon } from "../ArrowDownIcon";
 import { ClockIcon } from "../ClockIcon";
 import { SymbolTable } from "../SymbolTable";
@@ -19,17 +19,20 @@ import {
 } from "../../SimulatorUtils";
 import RotateLeftIcon from "@material-ui/icons/RotateLeft";
 import { useSaveTestedData } from "../../utils/useSaveTestedData";
-export const PortfolioHoldings = ({
-  getTestedData,
-  currentStockPrice,
-  accountValue,
-  holdingStocks,
-  soldStocks,
-  isEndDate,
-  resetAllStates,
-  forceSelling,
-}) => {
-  const [_, { resetLocalStorage }] = useSaveTestedData();
+import { useSelector } from "react-redux";
+import { useReduxActions } from "../../../../hooks/useReduxActions";
+export const PortfolioHoldings = ({ getTestedData }) => {
+  const {
+    currentStockPrice,
+    accountValue,
+    holdingStocks,
+    soldStocks,
+    currentDate,
+    endDate,
+    forceSelling,
+    isBTDone,
+  } = useSelector(({ back_testing }) => back_testing);
+
   const symbolTablePropsHolding = {
     tableHeadDate: tableHeadDateHolding,
     tableBodyDate: holdingStocks,
@@ -40,13 +43,30 @@ export const PortfolioHoldings = ({
     tableBodyDate: soldStocks,
   };
 
+  const { isResetBTData } = useSelector(
+    (state) => state.back_testing
+  );
+
+  const { updateIsResetBTData, resetBTState } =
+    useReduxActions();
+  // useEffect(() => {
+  //   if (isResetBTData) {
+  //     localStorage.clear();
+  //     // resetAllStates();
+  //     resetBTState();
+  //     updateIsResetBTData(false);
+  //     console.log("reset all states");
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [isResetBTData]);
+
   return (
     <>
       <div className="text-overline white--text">Holdings</div>
       <div className="container portfolio-holdings white">
         <div className="row">
           <div className="col-12 text-center mt-6">
-            {isEndDate ? (
+            {isBTDone ? (
               <>
                 {holdingStocks.length > 0 && (
                   <button
@@ -86,7 +106,7 @@ export const PortfolioHoldings = ({
                   onClick={() => {
                     // resetLocalStorage();
                     localStorage.clear();
-                    resetAllStates();
+                    // resetAllStates();
                   }}
                   // href="#here"
                   className="semi-bold v-btn v-btn--has-bg v-btn--router v-btn--tile theme--light elevation-0 v-size--default primary"

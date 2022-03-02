@@ -14,6 +14,7 @@ export default function BasicModal({
   //   const handleClose = () => setOpen(false);
 
   const infoModalProps = { title, content };
+  console.log({ infoModalProps, title, content });
 
   return (
     <div>

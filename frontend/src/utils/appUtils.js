@@ -17,6 +17,7 @@ import { useCommonCommandsHandler } from "../components/finanbroBtn/hooks/useCom
 import { BACKEND_API_URL, QUESTIONS_ROUTE } from "./serverUtils";
 import { useTradingCommendsHandler } from "../components/finanbroBtn/hooks/useTradingCommendsHandler";
 import { useBackTest } from "../components/Simulator/utils/useBackTest";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 // export const useSecondCommand = (commands) => {
 //   const { transcript } = useSpeechRecognition();
 // };
@@ -92,6 +93,28 @@ export const useFinansis = (resetAllStates) => {
 
   const [questions, setQuestions] = useState([]);
 
+  // const [localStorageData] = useSaveTestedData();
+
+  // const [isResetBTData, setIsResetBTData] = useLocalStorage(
+  //   "isResetBTData",
+  //   false
+  // );
+
+  // useEffect(() => {
+  //   console.log(
+  //     "useEffect for starting finansis after reloading the page "
+  //   );
+
+  //   if (isResetBTData) {
+  //     SpeechRecognition.startListening({ continuous: true });
+  //     setIsResetBTData(false);
+  //     response("starting back testing");
+      
+  //   }
+  // }, [isResetBTData, setIsResetBTData]);
+
+  // SpeechRecognition.startListening({ continuous: true });
+
   const {
     goBackHandler,
     handleStopListening,
@@ -113,12 +136,16 @@ export const useFinansis = (resetAllStates) => {
     setQuestions
   );
 
-  const { buyStocks, sellStocks, stopLess } =
-    useTradingCommendsHandler(response, setSecondCommandFor);
+  const { buyStocks, sellStocks, stopLess, startBackTesting } =
+    useTradingCommendsHandler(
+      response,
+      setSecondCommandFor,
+      SpeechRecognition
+    );
 
   const [findingAnswerFor, setFindingAnswerFor] = useState("");
 
-  const { startBackTesting } = useBackTest();
+  // const { startBackTesting } = useBackTest();
   const commands = [
     // {
     //   command: ["你叫什么名字"],
@@ -288,7 +315,7 @@ export const useFinansis = (resetAllStates) => {
       commandFor: "every section",
     },
     {
-      command: "give me * statistics",
+      command: ["give me * statistics", "open Apple statistics"],
       callback: async (target) =>
         await openYahooFinance("statistics", target),
       commandFor: "info",
@@ -314,7 +341,10 @@ export const useFinansis = (resetAllStates) => {
       commandFor: "news",
     },
     {
-      command: "open * chart with your control",
+      command: [
+        "open * chart with your control",
+        "open * tart with your control",
+      ],
       callback: async (target) =>
         await openYahooFinance("chart", target, true),
       commandFor: "info",

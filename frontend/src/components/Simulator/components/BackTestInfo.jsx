@@ -1,15 +1,14 @@
 import React from "react";
-import { renderDay } from "../SimulatorUtils";
+import { useSelector } from "react-redux";
+import { customDateFormat, renderDay } from "../SimulatorUtils";
 import { ArrowDownIcon } from "./ArrowDownIcon";
 import { TextOverLine } from "./TextOverLine";
 
-export const BackTestInfo = ({
-  date,
-  wins,
-  loess,
-  soldStocks,
-  countDays,
-}) => {
+export const BackTestInfo = () => {
+  const { currentDate, wins, loess, soldStocks, countDays } =
+    useSelector(({ back_testing }) => back_testing);
+  const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
   return (
     <>
       <div className="text-overline white--text">
@@ -20,7 +19,9 @@ export const BackTestInfo = ({
           <div className="overline">Current Date</div>
           <div className="d-flex align-end mb-2">
             <div className="text-h4">
-              {date}{" "}
+              {`${customDateFormat(new Date(currentDate))} ${
+                days[new Date(currentDate).getDay()]
+              }`}{" "}
               <span className="out_of">
                 {countDays} {renderDay(countDays)}
               </span>

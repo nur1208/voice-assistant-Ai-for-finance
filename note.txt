@@ -275,11 +275,12 @@ deadline - before 2022-1-20 ❌ DONE on 2022-2-2
     - {DONE} improving reset backTesting functionality
     - {DONE} create justSell than purchase price functionality
     - {DONE} get S&P 500 changes price
-    - {TODO} learning about redux
-    - {TODO} create 'start back testing' command
+    - {DONE} learning about redux add create backTestingReducer, redux store and useReduxActions
+    - {DONE} create parameters to show if backTesting is done or not
+    - {DONE} create 'start back testing' command
     - {TODO} let the user enter start date , end data, catch and Account Risk
     - {TODO} tell the user you are about to close the window when backTesting still not end 
-    - show loading for buy sell and stop
+    - {TODO} show loading for buy sell and stop
     - {TODO} add 'do you want me to force selling' command and add 'what is force selling' question
     - {TODO} create sell stocks anyway functionality with profit or not
 
@@ -300,6 +301,15 @@ get  is the market open data using python and get the data every day
 132 - {TODO} test Modal component 
 133 - {TODO} create callAxios function and use it in useBackTest    
 134 - {TODO} make sure that finansis voice is always "Google US English" 
+135 - {TODO} fix user say 'close the window' after opening statistic window error and also for 'open * chart with your control'
+136 - {TODO} fix 2
+
+    {catch: 884659.884098053, date: "2020-04-30", stock…}
+
+    {catch: 884659.884098053, date: "2020-04-30", stock…} for accountValue and sp500Data
+- {TODO} create 'go froward' commands
+
+-----
 - {TODO NOT IMPORTANT NOW} save S&P 500 stocks like {date:{added:[stocks],removed:[stocks] }}
 
 - {TODO NOT IMPORTANT NOW} add cancel axios request when the page unmounted 
