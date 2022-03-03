@@ -107,9 +107,15 @@ export const useResponse = () => {
         break;
 
       case secondCommandOptions.rewritingTestedData:
+        // then starting back testing
+        response("resetting back testing data ");
+        await sleep(1000);
+
         response(
-          "resetting back testing data then starting back testing"
+          "enter initial cash then click enter to submit after the reloading"
         );
+        await sleep(5000);
+
         resetBTState();
         // updateIsResetBTData(true);
         setIsResetBTData(true);
@@ -117,7 +123,6 @@ export const useResponse = () => {
         //   "after the page reload tell me start back testing"
         // );
 
-        await sleep(1000);
         window.location.reload();
         // resetAllStates();
         // response("starting back testing again");

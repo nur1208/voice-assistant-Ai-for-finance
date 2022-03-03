@@ -2,18 +2,20 @@ import * as React from "react";
 
 import Modal from "@mui/material/Modal";
 import { InfoModal } from "./InfoModal";
-
+import InputModal from "./InputModal/InputModal";
 export default function BasicModal({
   open,
   handleClose,
   title,
   content,
+  isInput,
 }) {
   //   const [open, setOpen] = React.useState(false);
   //   const handleOpen = () => setOpen(true);
   //   const handleClose = () => setOpen(false);
 
   const infoModalProps = { title, content };
+  const inputModalProps = { handleClose };
   console.log({ infoModalProps, title, content });
 
   return (
@@ -25,7 +27,11 @@ export default function BasicModal({
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <InfoModal {...infoModalProps} />
+        {isInput ? (
+          <InputModal {...inputModalProps} />
+        ) : (
+          <InfoModal {...infoModalProps} />
+        )}
       </Modal>
     </div>
   );

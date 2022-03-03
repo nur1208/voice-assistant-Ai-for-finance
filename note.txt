@@ -279,6 +279,16 @@ deadline - before 2022-1-20 ❌ DONE on 2022-2-2
     - {DONE} create parameters to show if backTesting is done or not
     - {DONE} create 'start back testing' command
     - {TODO} let the user enter start date , end data, catch and Account Risk
+            - {DONE} create input popup window
+            - {DONE} create when clicking 'enter' keyword (console.log ) the input data functionality 
+            - {TODO} let finansis open the popup window
+            - {TODO} create close the window functionality after clicking on enter
+            - {TODO} make the popup window dynamic 
+            - {TODO} create userBTInput(dataInput) action- {TODO}creator
+            - {TODO} let backTestingReducer handle USER_INPUT type
+            - {TODO} create finansis script to get user input one by one using inputModal
+            - {TODO} start back testing with user input
+
     - {TODO} tell the user you are about to close the window when backTesting still not end 
     - {TODO} show loading for buy sell and stop
     - {TODO} add 'do you want me to force selling' command and add 'what is force selling' question

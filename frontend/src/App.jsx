@@ -1,4 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, {
+  useContext,
+  useEffect,
+  useState,
+  createContext,
+} from "react";
 import { FinanbroBtn } from "./components/finanbroBtn/finanbroBtn";
 import { NewsPage } from "./pages/NewsPage";
 import { useFinansis } from "./utils/appUtils";
@@ -22,6 +27,7 @@ import { actionCreators } from "./state";
 import { useReduxActions } from "./hooks/useReduxActions";
 import { useSaveTestedData } from "./components/Simulator/utils/useSaveTestedData";
 import BasicModal from "./components/Modal/BasicModal";
+import InputModal from "./components/Modal/InputModal/InputModal";
 
 export const PAGES = [
   {
@@ -42,12 +48,29 @@ export const PAGES = [
   },
   {
     path: "/test",
-    Component: (props) => <Test {...props} />,
+    Component: (props) => (
+      <BasicModal open={true} isInput>
+        {/* <InputModal /> */}
+      </BasicModal>
+    ),
   },
 ];
 
+export const WaitForUserInputContext = createContext();
+
 export const App = () => {
   const state = useSelector((state) => state.back_testing);
+
+  const [isWaitingUserDone, setIsWaitingUserDone] =
+    useState(false);
+
+  // const handleWaitUserInput = () =>
+  //   new Promise((resolve, reject) => {
+  //     if (isWaitingUserDone) {
+  //       resolve();
+  //       setIsWaitingUserDone(false);
+  //     }
+  //   });
 
   const { updateBTState } = useReduxActions();
 
@@ -63,7 +86,7 @@ export const App = () => {
     FinanbroBtnProps,
     isBrowserSupportsSpeechRecognition,
     modalProps,
-  } = useFinansis();
+  } = useFinansis({ isWaitingUserDone, setIsWaitingUserDone });
 
   // get localStorage date in add it to redux store
   const [localStorageData] = useSaveTestedData();
@@ -94,8 +117,12 @@ export const App = () => {
   // if the user offline
   if (!navigator.onLine) return <Offline />;
   // getAllTickersInDatabaseToJson();
+  const waitOption = {
+    // handleWaitUserInput,
+    setIsWaitingUserDone,
+  };
   return (
-    <>
+    <WaitForUserInputContext.Provider value={waitOption}>
       <GlobalStyle />
       <Switch>
         {/* <Route exact path="/">
@@ -119,6 +146,6 @@ export const App = () => {
       </Switch>
       <FinanbroBtn {...FinanbroBtnProps} />
       <BasicModal {...modalProps} />
-    </>
+    </WaitForUserInputContext.Provider>
   );
 };

@@ -18,24 +18,29 @@ import { BACKEND_API_URL, QUESTIONS_ROUTE } from "./serverUtils";
 import { useTradingCommendsHandler } from "../components/finanbroBtn/hooks/useTradingCommendsHandler";
 import { useBackTest } from "../components/Simulator/utils/useBackTest";
 import { useLocalStorage } from "../hooks/useLocalStorage";
+import { sleep } from "./sleep";
 // export const useSecondCommand = (commands) => {
 //   const { transcript } = useSpeechRecognition();
 // };
 
-export const useFinansis = (resetAllStates) => {
+export const useFinansis = ({
+  isWaitingUserDone,
+  setIsWaitingUserDone,
+}) => {
   const [playing, toggle] = useAudio(
     "./audio/zapsplat_multimedia_button_click_007_53868.mp3"
   );
   const [openModal, setOpenModal] = useState(false);
   const [modalTitle, setModalTitle] = useState("");
   const [modalContent, setModalContent] = useState("");
-
+  const [modalIsInput, setModalIsInput] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(null);
 
-  const handleOpenModal = (title, content) => {
+  const handleOpenModal = (title, content, isInput) => {
     setOpenModal(true);
     setModalTitle(title);
     setModalContent(content);
+    setModalIsInput(isInput);
   };
   const handleCloseModal = () => setOpenModal(false);
 
@@ -109,7 +114,7 @@ export const useFinansis = (resetAllStates) => {
   //     SpeechRecognition.startListening({ continuous: true });
   //     setIsResetBTData(false);
   //     response("starting back testing");
-      
+
   //   }
   // }, [isResetBTData, setIsResetBTData]);
 
@@ -140,7 +145,10 @@ export const useFinansis = (resetAllStates) => {
     useTradingCommendsHandler(
       response,
       setSecondCommandFor,
-      SpeechRecognition
+      SpeechRecognition,
+      handleOpenModal,
+      isWaitingUserDone,
+      setIsWaitingUserDone
     );
 
   const [findingAnswerFor, setFindingAnswerFor] = useState("");
@@ -240,7 +248,7 @@ export const useFinansis = (resetAllStates) => {
       commandFor: "news",
     },
     {
-      command: "stop listening",
+      command: ["stop listening", "see you"],
       callback: () => handleStopListening(),
       commandFor: "every section",
     },
@@ -407,6 +415,15 @@ export const useFinansis = (resetAllStates) => {
     {
       command: ["start back testing", "start pack testing"],
       callback: () => startBackTesting(),
+      commandFor: "backTesting",
+    },
+    {
+      command: ["thank you", "thanks"],
+      callback: async () => {
+        response("fuck you");
+        await sleep(3000);
+        response("no sorry, I meant love you");
+      },
       commandFor: "backTesting",
     },
   ];
@@ -747,6 +764,7 @@ export const useFinansis = (resetAllStates) => {
     handleClose: handleCloseModal,
     title: modalTitle,
     content: modalContent,
+    isInput: modalIsInput,
   };
 
   return {

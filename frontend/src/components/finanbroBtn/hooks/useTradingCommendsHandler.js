@@ -8,12 +8,17 @@ import { useBackTest } from "../../Simulator/utils/useBackTest";
 import { sleep } from "../../../utils/sleep";
 import { secondCommandOptions } from "../hooks/useResponse";
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
+import { WaitForUserInputContext } from "../../../App";
+
 export const useTradingCommendsHandler = (
   response,
   setSecondCommandFor,
-  SpeechRecognition
+  SpeechRecognition,
+  handleOpenModal,
+  isWaitingUserDone,
+  setIsWaitingUserDone
 ) => {
   const buyStocks = async () => {
     try {
@@ -105,26 +110,48 @@ export const useTradingCommendsHandler = (
 
   const { getTestedData } = useBackTest();
 
-  const { holdingStocks, currentDate, endDate, isBTDone } =
-    useSelector((state) => state.back_testing);
+  const { holdingStocks, isBTDone } = useSelector(
+    (state) => state.back_testing
+  );
 
   const [isResetBTData, setIsResetBTData] = useLocalStorage(
     "isResetBTData",
     false
   );
 
-  const [checkForBTIsDone, setCheckForBTIsDone] =
-    useState(false);
+  // const [checkForBTIsDone, setCheckForBTIsDone] =
+  //   useState(false);
 
   // let finansis response after resetting and starting back testing again
-  useEffect(() => {
-    if (checkForBTIsDone && isBTDone) {
-      response("back testing is done");
-      setCheckForBTIsDone(false);
-    }
+  // useEffect(() => {
+  //   if (checkForBTIsDone && isBTDone) {
+  //     response("back testing is done");
+  //     setCheckForBTIsDone(false);
+  //   }
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isBTDone]);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [isBTDone]);
+
+  // const data = useContext(WaitForUserInputContext);
+
+  const getBTInput = () => {
+    response("enter initial cash then click enter to submit");
+    handleOpenModal("", "", true);
+    // console.log("waiting");
+
+    // console.log({ isWaitingUserDone });
+
+    // while (true) {
+    // if (isWaitingUserDone) {
+    //   resolve();
+    //   // break;
+    // }
+    // // }
+    // console.log(data);
+
+    // await handleWaitUserInput();
+    // console.log("it's done waiting");
+  };
 
   useEffect(() => {
     (async () => {
@@ -135,22 +162,21 @@ export const useTradingCommendsHandler = (
       if (isResetBTData) {
         SpeechRecognition.startListening({ continuous: true });
         setIsResetBTData(false);
-        await sleep(5000);
-        setCheckForBTIsDone(true);
+        // await sleep(50000);
+        // setCheckForBTIsDone(true);
         // response("starting back testing");
-        await getTestedData();
+
+        getBTInput();
+
+        // await getTestedData();
         // response("back testing is done");
       }
     })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isResetBTData]);
 
   const startBackTesting = async () => {
-    console.log({
-      holdingStocks,
-      isEndBackTesting: currentDate >= endDate,
-    });
-
-    if (holdingStocks.length > 0 && currentDate >= endDate) {
+    if (holdingStocks.length > 0 && isBTDone) {
       response("you already have tested data");
       await sleep(1000);
       response("do you want me to over write the old data");
@@ -158,11 +184,24 @@ export const useTradingCommendsHandler = (
         secondCommandOptions.rewritingTestedData
       );
     } else {
-      response("starting back testing");
-      await getTestedData();
-      response("back testing is done");
+      getBTInput();
+      // response("starting back testing");
+      // await getTestedData();
+      // response("back testing is done");
     }
   };
+
+  useEffect(() => {
+    if (isWaitingUserDone) {
+      (async () => {
+        response("starting back testing");
+        await getTestedData();
+        response("back testing is done");
+        setIsWaitingUserDone(false);
+      })();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isWaitingUserDone]);
 
   return { buyStocks, sellStocks, stopLess, startBackTesting };
 };
