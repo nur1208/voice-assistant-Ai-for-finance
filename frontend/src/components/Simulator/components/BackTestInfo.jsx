@@ -1,13 +1,16 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { customDateFormat, renderDay } from "../SimulatorUtils";
+import {
+  customDateFormat,
+  days,
+  renderDay,
+} from "../SimulatorUtils";
 import { ArrowDownIcon } from "./ArrowDownIcon";
 import { TextOverLine } from "./TextOverLine";
 
 export const BackTestInfo = () => {
   const { currentDate, wins, loess, soldStocks, countDays } =
     useSelector(({ back_testing }) => back_testing);
-  const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
   return (
     <>

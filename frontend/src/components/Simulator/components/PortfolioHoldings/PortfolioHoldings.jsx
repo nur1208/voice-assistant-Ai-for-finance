@@ -13,6 +13,8 @@ import {
 } from "./PortfolioHoldingsUtils";
 import PlayCircleFilledWhiteIcon from "@material-ui/icons/PlayCircleFilledWhite";
 import {
+  customDateFormat,
+  days,
   renderPriceChangeIcon,
   renderPriceChangeReturn,
   renderPriceChangeStyle,
@@ -27,7 +29,7 @@ export const PortfolioHoldings = ({ getTestedData }) => {
     accountValue,
     holdingStocks,
     soldStocks,
-
+    endDate,
     forceSelling,
     isBTDone,
     accountRisk,
@@ -295,6 +297,21 @@ export const PortfolioHoldings = ({ getTestedData }) => {
                           ),
                           "small"
                         )}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="text-left mr-8">
+                    <div className="overline no-wrap">
+                      End Date
+                    </div>
+                    <div
+                      className={`gain-loss  semi-bold d-inline-flex align-center`}
+                    >
+                      <div className="text-no-wrap ">
+                        {`${customDateFormat(endDate)} ${
+                          days[new Date(endDate).getDay()]
+                        }`}
                       </div>
                     </div>
                   </div>

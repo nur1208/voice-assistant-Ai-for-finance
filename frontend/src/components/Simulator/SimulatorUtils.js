@@ -2,6 +2,16 @@ import { ArrowDownIcon } from "./components/ArrowDownIcon";
 import { ArrowUpIcon } from "./components/ArrowUpIcon";
 import { HorizontalLineIcon } from "./components/HorizontalLineIcon";
 
+export const days = [
+  "Sun",
+  "Mon",
+  "Tue",
+  "Wed",
+  "Thu",
+  "Fri",
+  "Sat",
+];
+
 export const customDateFormat = (currentDate) => {
   // console.log({ currentDate, type: typeof currentDate });
 
