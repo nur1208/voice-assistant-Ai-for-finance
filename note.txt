@@ -281,18 +281,20 @@ deadline - before 2022-1-20 ❌ DONE on 2022-2-2
     - {TODO} let the user enter start date , end data, catch and Account Risk
             - {DONE} create input popup window
             - {DONE} create when clicking 'enter' keyword (console.log ) the input data functionality 
-            - {TODO} let finansis open the popup window
-            - {TODO} create close the window functionality after clicking on enter
-            - {TODO} make the popup window dynamic 
-            - {TODO} create userBTInput(dataInput) action- {TODO}creator
-            - {TODO} let backTestingReducer handle USER_INPUT type
+            - {DONE} let finansis open the popup window
+            - {DONE} create close the window functionality after clicking on enter
+            - {DONE} make the popup window dynamic 
+            - {DONE} create userBTInput(dataInput) action-creator
+            - {DONE} let backTestingReducer handle USER_INPUT type
             - {TODO} create finansis script to get user input one by one using inputModal
             - {TODO} start back testing with user input
-
+            - {TODO} show the user endData
+            
     - {TODO} tell the user you are about to close the window when backTesting still not end 
     - {TODO} show loading for buy sell and stop
     - {TODO} add 'do you want me to force selling' command and add 'what is force selling' question
     - {TODO} create sell stocks anyway functionality with profit or not
+
 
 
 121 - {TODO} create user model 
@@ -318,6 +320,9 @@ get  is the market open data using python and get the data every day
 
     {catch: 884659.884098053, date: "2020-04-30", stock…} for accountValue and sp500Data
 - {TODO} create 'go froward' commands
+- {TODO} use react-currency-format package to when a user enter date (startDate, ...) 
+- {TODO} create "you not login, do you want to login" command
+         when the uer start the app and he is not logged in
 
 -----
 - {TODO NOT IMPORTANT NOW} save S&P 500 stocks like {date:{added:[stocks],removed:[stocks] }}

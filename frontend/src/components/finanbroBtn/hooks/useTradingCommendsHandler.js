@@ -11,6 +11,26 @@ import { useSelector } from "react-redux";
 import { useContext, useEffect, useState } from "react";
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
 import { WaitForUserInputContext } from "../../../App";
+import { useHandleUserInput } from "./useHandleUserInput";
+
+export const BTfields = {
+  CASH: {
+    label: { view: "Cash", stateName: "currentCash" },
+    message: "enter initial cash",
+  },
+  START_DATE: {
+    label: { view: "Start Date", stateName: "currentDate" },
+    message: "enter start date",
+  },
+  ACCOUNT_RISK: {
+    label: { view: "Account Risk", stateName: "accountRisk" },
+    message: "enter percentage of account risk per trade",
+  },
+  EDN_DATE: {
+    label: { view: "End Date", stateName: "endDate" },
+    message: "enter end date",
+  },
+};
 
 export const useTradingCommendsHandler = (
   response,
@@ -134,23 +154,13 @@ export const useTradingCommendsHandler = (
 
   // const data = useContext(WaitForUserInputContext);
 
-  const getBTInput = () => {
-    response("enter initial cash then click enter to submit");
-    handleOpenModal("", "", true);
-    // console.log("waiting");
+  // note make getBTInput dynamic
 
-    // console.log({ isWaitingUserDone });
-
-    // while (true) {
-    // if (isWaitingUserDone) {
-    //   resolve();
-    //   // break;
-    // }
-    // // }
-    // console.log(data);
-
-    // await handleWaitUserInput();
-    // console.log("it's done waiting");
+  const getBTInput = async (label, message) => {
+    response(message);
+    await sleep(1000);
+    response("then click on enter to submit");
+    handleOpenModal("", "", true, label);
   };
 
   useEffect(() => {
@@ -166,7 +176,10 @@ export const useTradingCommendsHandler = (
         // setCheckForBTIsDone(true);
         // response("starting back testing");
 
-        getBTInput();
+        await getBTInput(
+          BTfields.CASH.label,
+          BTfields.CASH.message
+        );
 
         // await getTestedData();
         // response("back testing is done");
@@ -184,24 +197,60 @@ export const useTradingCommendsHandler = (
         secondCommandOptions.rewritingTestedData
       );
     } else {
-      getBTInput();
-      // response("starting back testing");
-      // await getTestedData();
-      // response("back testing is done");
+      await getBTInput(
+        BTfields.CASH.label,
+        BTfields.CASH.message
+      );
     }
   };
 
-  useEffect(() => {
-    if (isWaitingUserDone) {
-      (async () => {
-        response("starting back testing");
-        await getTestedData();
-        response("back testing is done");
-        setIsWaitingUserDone(false);
-      })();
+  const otherHandleInputParams = {
+    isWaitingUserDone,
+    setIsWaitingUserDone,
+  };
+
+  useHandleUserInput(
+    BTfields.CASH.label.stateName,
+    otherHandleInputParams,
+    async () => {
+      await getBTInput(
+        BTfields.START_DATE.label,
+        BTfields.START_DATE.message
+      );
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isWaitingUserDone]);
+  );
+
+  useHandleUserInput(
+    BTfields.START_DATE.label.stateName,
+    otherHandleInputParams,
+    async () => {
+      await getBTInput(
+        BTfields.ACCOUNT_RISK.label,
+        BTfields.ACCOUNT_RISK.message
+      );
+    }
+  );
+
+  useHandleUserInput(
+    BTfields.ACCOUNT_RISK.label.stateName,
+    otherHandleInputParams,
+    async () => {
+      await getBTInput(
+        BTfields.EDN_DATE.label,
+        BTfields.EDN_DATE.message
+      );
+    }
+  );
+
+  useHandleUserInput(
+    BTfields.EDN_DATE.label.stateName,
+    otherHandleInputParams,
+    async () => {
+      response("starting back testing");
+      await getTestedData();
+      response("back testing is done");
+    }
+  );
 
   return { buyStocks, sellStocks, stopLess, startBackTesting };
 };

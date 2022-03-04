@@ -27,10 +27,10 @@ export const PortfolioHoldings = ({ getTestedData }) => {
     accountValue,
     holdingStocks,
     soldStocks,
-    currentDate,
-    endDate,
+
     forceSelling,
     isBTDone,
+    accountRisk,
   } = useSelector(({ back_testing }) => back_testing);
 
   const symbolTablePropsHolding = {
@@ -260,7 +260,7 @@ export const PortfolioHoldings = ({ getTestedData }) => {
                       </div>
                     </div>
                   </div>
-                  <div>
+                  <div className="mr-8">
                     <div className="overline no-wrap">
                       Total Gain/Loss
                     </div>
@@ -295,6 +295,18 @@ export const PortfolioHoldings = ({ getTestedData }) => {
                           ),
                           "small"
                         )}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="overline no-wrap">
+                      Account Risk
+                    </div>
+                    <div
+                      className={`gain-loss  semi-bold d-inline-flex align-center error--text`}
+                    >
+                      <div className="text-no-wrap ">
+                        {accountRisk}% per trade
                       </div>
                     </div>
                   </div>

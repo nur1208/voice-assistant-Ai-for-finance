@@ -9,13 +9,14 @@ export default function BasicModal({
   title,
   content,
   isInput,
+  label,
 }) {
   //   const [open, setOpen] = React.useState(false);
   //   const handleOpen = () => setOpen(true);
   //   const handleClose = () => setOpen(false);
 
   const infoModalProps = { title, content };
-  const inputModalProps = { handleClose };
+  const inputModalProps = { handleClose, label };
   console.log({ infoModalProps, title, content });
 
   return (

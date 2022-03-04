@@ -34,13 +34,15 @@ export const useFinansis = ({
   const [modalTitle, setModalTitle] = useState("");
   const [modalContent, setModalContent] = useState("");
   const [modalIsInput, setModalIsInput] = useState(false);
+  const [modalIsLabel, setModalIsLabel] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(null);
 
-  const handleOpenModal = (title, content, isInput) => {
+  const handleOpenModal = (title, content, isInput, label) => {
     setOpenModal(true);
     setModalTitle(title);
     setModalContent(content);
     setModalIsInput(isInput);
+    setModalIsLabel(label);
   };
   const handleCloseModal = () => setOpenModal(false);
 
@@ -765,6 +767,7 @@ export const useFinansis = ({
     title: modalTitle,
     content: modalContent,
     isInput: modalIsInput,
+    label: modalIsLabel,
   };
 
   return {

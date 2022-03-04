@@ -9,6 +9,10 @@ import TextField from "@material-ui/core/TextField";
 import { Box } from "@material-ui/core";
 import { Wrapper } from "./InputModalSC";
 import { WaitForUserInputContext } from "../../../App";
+import { useReduxActions } from "../../../hooks/useReduxActions";
+import { useSaveTestedData } from "../../Simulator/utils/useSaveTestedData";
+import { BTfields } from "../../finanbroBtn/hooks/useTradingCommendsHandler";
+import { useLocalStorage } from "../../../hooks/useLocalStorage";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,7 +35,10 @@ const style = {
   p: 4,
 };
 
-export default function InputModal({ handleClose }) {
+export default function InputModal({
+  handleClose,
+  label: { stateName, view },
+}) {
   const classes = useStyles();
   // const refTF = useRef(null);
   const [userInput, setUserInput] = useState("");
@@ -39,8 +46,17 @@ export default function InputModal({ handleClose }) {
   //   refTF.current.focus();
   // }, []);
 
+  const { updateBTState } = useReduxActions();
   const { setIsWaitingUserDone } = useContext(
     WaitForUserInputContext
+  );
+
+  const [currentLocalStorage, { updateLocalStorage }] =
+    useSaveTestedData();
+
+  const [accountRisk, setAccountRisk] = useLocalStorage(
+    "accountRisk",
+    1
   );
 
   const handleKeypress = (e) => {
@@ -49,7 +65,17 @@ export default function InputModal({ handleClose }) {
     if (e.key === "Enter") {
       console.log({ userInput });
       handleClose();
-      setIsWaitingUserDone(true);
+      setIsWaitingUserDone(stateName);
+      const newState = {};
+      if (stateName.includes("Date"))
+        newState[stateName] = new Date(userInput);
+      else {
+        newState[stateName] = Number(userInput);
+        if (stateName === BTfields.ACCOUNT_RISK.label.stateName)
+          setAccountRisk(Number(userInput));
+      }
+      // updateLocalStorage({ ...currentLocalStorage, newState });
+      updateBTState(newState);
     }
   };
 
@@ -66,7 +92,7 @@ export default function InputModal({ handleClose }) {
           style={{ width: 350 }}
           id="filled-basic"
           onKeyPress={handleKeypress}
-          label="Filled"
+          label={view}
           variant="filled"
           // inputRef={refTF}
           onChange={(e) => setUserInput(e.target.value)}

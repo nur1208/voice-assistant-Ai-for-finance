@@ -28,6 +28,7 @@ import { useReduxActions } from "./hooks/useReduxActions";
 import { useSaveTestedData } from "./components/Simulator/utils/useSaveTestedData";
 import BasicModal from "./components/Modal/BasicModal";
 import InputModal from "./components/Modal/InputModal/InputModal";
+import { useLocalStorage } from "./hooks/useLocalStorage";
 
 export const PAGES = [
   {
@@ -61,8 +62,7 @@ export const WaitForUserInputContext = createContext();
 export const App = () => {
   const state = useSelector((state) => state.back_testing);
 
-  const [isWaitingUserDone, setIsWaitingUserDone] =
-    useState(false);
+  const [isWaitingUserDone, setIsWaitingUserDone] = useState("");
 
   // const handleWaitUserInput = () =>
   //   new Promise((resolve, reject) => {
@@ -91,8 +91,13 @@ export const App = () => {
   // get localStorage date in add it to redux store
   const [localStorageData] = useSaveTestedData();
 
+  const [accountRisk, setAccountRisk] = useLocalStorage(
+    "accountRisk",
+    1
+  );
+
   useEffect(() => {
-    updateBTState(localStorageData);
+    updateBTState({ ...localStorageData, accountRisk });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -125,24 +130,11 @@ export const App = () => {
     <WaitForUserInputContext.Provider value={waitOption}>
       <GlobalStyle />
       <Switch>
-        {/* <Route exact path="/">
-          <HomePage {...NewsPageProps} />
-        </Route> */}
         {PAGES.map((page, index) => (
           <Route exact path={page.path} key={index}>
             {page.Component(NewsPageProps)}
           </Route>
         ))}
-
-        {/* <Route path="/news">
-          <NewsPage {...NewsPageProps} />
-        </Route>
-        <Route path="/info">
-          <InfoPage {...NewsPageProps} />
-        </Route>
-        <Route path="/test">
-          <TheMostTable />
-        </Route> */}
       </Switch>
       <FinanbroBtn {...FinanbroBtnProps} />
       <BasicModal {...modalProps} />

@@ -22,6 +22,7 @@ export const statesDefault = {
   endDate: new Date("04/30/2020"),
   sp500Data: [],
   isBTDone: false,
+  accountRisk: 1,
 };
 
 export const useSaveTestedData = () => {
@@ -96,6 +97,7 @@ export const useSaveTestedData = () => {
     setEndDate(data["endDate"]);
     setSp500Data(data["sp500Data"]);
     setIsBTDone(data["isBTDone"]);
+    // setAccountRisk()
   };
 
   const resetLocalStorage = () => {

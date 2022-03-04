@@ -1,6 +1,10 @@
 import { statesDefault } from "../../components/Simulator/utils/useSaveTestedData";
 
-const initialState = { ...statesDefault, isResetBTData: false };
+const initialState = {
+  ...statesDefault,
+  isResetBTData: false,
+  accountRisk: 1,
+};
 
 export const BT_ACTIONS = {
   UPDATE_STATE: "UPDATE_STATE",
