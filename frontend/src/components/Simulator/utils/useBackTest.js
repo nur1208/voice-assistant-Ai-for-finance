@@ -83,6 +83,7 @@ export const useBackTest = () => {
     endDate,
     sp500Data,
     currentDate,
+    accountRisk,
   } = useSelector((state) => state.back_testing);
 
   // 702316;
@@ -265,6 +266,7 @@ export const useBackTest = () => {
       {
         boughtStocks: holdStocksLocal,
         portfolio: currentCashLocal,
+        accountRisk
       },
       {
         onDownloadProgress(progress) {

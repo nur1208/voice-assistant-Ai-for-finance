@@ -286,10 +286,12 @@ deadline - before 2022-1-20 ❌ DONE on 2022-2-2
             - {DONE} make the popup window dynamic 
             - {DONE} create userBTInput(dataInput) action-creator
             - {DONE} let backTestingReducer handle USER_INPUT type
-            - {TODO} create finansis script to get user input one by one using inputModal
-            - {TODO} start back testing with user input
+            - {DONE} create finansis script to get user input one by one using inputModal for backTesting
+            - {DONE} improve buySignalBT function in tradeApi by adding accountRisk
+                    and let finansis pass that param to tradeApi 
+            - {DONE} start back testing with user input
             - {TODO} show the user endData
-            
+
     - {TODO} tell the user you are about to close the window when backTesting still not end 
     - {TODO} show loading for buy sell and stop
     - {TODO} add 'do you want me to force selling' command and add 'what is force selling' question
@@ -323,6 +325,9 @@ get  is the market open data using python and get the data every day
 - {TODO} use react-currency-format package to when a user enter date (startDate, ...) 
 - {TODO} create "you not login, do you want to login" command
          when the uer start the app and he is not logged in
+- {TODO} fix  buying stock if the share is zero in buySignalBT python's function error 
+- {TODO} fix finansis moving to right when inputModal opened error
+
 
 -----
 - {TODO NOT IMPORTANT NOW} save S&P 500 stocks like {date:{added:[stocks],removed:[stocks] }}
