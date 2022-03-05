@@ -29,6 +29,7 @@ import { useSaveTestedData } from "./components/Simulator/utils/useSaveTestedDat
 import BasicModal from "./components/Modal/BasicModal";
 import InputModal from "./components/Modal/InputModal/InputModal";
 import { useLocalStorage } from "./hooks/useLocalStorage";
+import { useExitPrompt } from "./hooks/useExitPrompt";
 
 export const PAGES = [
   {
@@ -95,6 +96,8 @@ export const App = () => {
     "accountRisk",
     1
   );
+
+  useExitPrompt(false);
 
   useEffect(() => {
     updateBTState({ ...localStorageData, accountRisk });

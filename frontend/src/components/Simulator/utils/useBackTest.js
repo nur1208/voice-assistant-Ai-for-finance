@@ -14,8 +14,7 @@ import { bindActionCreators } from "redux";
 import { actionCreators } from "../../../state";
 
 export const useBackTest = () => {
-  const [localStorageData, { updateLocalStorage }] =
-    useSaveTestedData();
+  const [_, { updateLocalStorage }] = useSaveTestedData();
   // const [holdingStocks, setHoldingStocks] = useState(
   //   localStorageData.holdingStocks
   // );
@@ -266,7 +265,7 @@ export const useBackTest = () => {
       {
         boughtStocks: holdStocksLocal,
         portfolio: currentCashLocal,
-        accountRisk
+        accountRisk,
       },
       {
         onDownloadProgress(progress) {
@@ -294,6 +293,8 @@ export const useBackTest = () => {
     callBackRecursively,
     isForceSell
   ) => {
+    // setIsBTRunning(true);
+    updateBTState({ isBTRunning: true });
     if (typeof currentDateLocal === "string")
       currentDateLocal = new Date(currentDateLocal);
 
@@ -442,9 +443,12 @@ export const useBackTest = () => {
         isBTDone: true,
       };
 
-      updateBTState(updateValue);
+      updateBTState({ ...updateValue, isBTRunning: false });
 
       updateLocalStorage(updateValue);
+      // setIsBTRunning(true);
+      // updateBTState({ isBTRunning: true });
+
       holdStocksLocal = [];
       currentCashLocal = 0;
     }

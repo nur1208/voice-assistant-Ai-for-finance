@@ -22,7 +22,8 @@ export const statesDefault = {
   endDate: new Date("04/30/2020"),
   sp500Data: [],
   isBTDone: false,
-  accountRisk: 1,
+  // accountRisk: 1,
+  isBTRunning: false,
 };
 
 export const useSaveTestedData = () => {
@@ -84,6 +85,11 @@ export const useSaveTestedData = () => {
     statesDefault.isBTDone
   );
 
+  // const [isBTRunning, setIsBTRunning] = useLocalStorage(
+  //   "isBTRunning",
+  //   statesDefault.isBTRunning
+  // );
+
   const updateLocalStorage = (data) => {
     setHoldingStocks(data["holdingStocks"]);
     setSoldStocks(data["soldStocks"]);
@@ -97,7 +103,7 @@ export const useSaveTestedData = () => {
     setEndDate(data["endDate"]);
     setSp500Data(data["sp500Data"]);
     setIsBTDone(data["isBTDone"]);
-    // setAccountRisk()
+    // setIsBTRunning(data["isBTRunning"]);
   };
 
   const resetLocalStorage = () => {
@@ -119,6 +125,7 @@ export const useSaveTestedData = () => {
       endDate,
       sp500Data,
       isBTDone,
+      // isBTRunning,
     },
     { updateLocalStorage, resetLocalStorage },
   ];

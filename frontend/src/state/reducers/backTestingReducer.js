@@ -22,7 +22,7 @@ export const backTestingReducer = (
     case BT_ACTIONS.UPDATE_STATE:
       return { ...state, ...action.payload };
     case BT_ACTIONS.RESET_STATE:
-      return { ...statesDefault };
+      return { ...initialState };
     case BT_ACTIONS.UPDATE_IS_RESET_BT_DATA:
       return { ...state, isResetBTData: action.payload };
 
