@@ -294,8 +294,10 @@ deadline - before 2022-1-20 ❌ DONE on 2022-2-2
 
     - {DONE} tell the user you are about to close the window when backTesting still not done 
     - {DONE} fix the typo 'loess' to 'losses'
-    - {TODO} show loading for buy sell and stop
-    - {TODO} add 'do you want me to force selling' command and add 'what is force selling' question
+    - {DONE} show loading for buy sell and stop
+    - {DONE} add 'do you want me to force selling' command
+    - {TODO} let finansis say 'if you want me to force sell again, tell me force sell again' and create 'force sell (again)' command 
+    - {TODO} add 'what is force selling' question, answer 'I will just only sell stock with any profit without following selling strategy'
     - {TODO} create sell stocks anyway functionality with profit or not
 
 
@@ -305,7 +307,7 @@ deadline - before 2022-1-20 ❌ DONE on 2022-2-2
 123 - {TODO} improve 'code for handling unknown commands' by checking for commands first then for questions
 124 - {TODO} add redux to the project
 deadline - before 2022-2-6
-125 - {TODO} create 'trade for me' command
+125 - {TODO} create 'trade for me' command sell, set stop loss and buy 
 126 - {TODO} create 'trading section'
 127 - {TODO} create trade progress popup window
 128 - {TODO} create give me the news for specific stock, let the user type the symbol or choose from his watch list
@@ -329,7 +331,9 @@ get  is the market open data using python and get the data every day
 - {TODO} fix  buying stock if the share is zero in buySignalBT python's function error 
 - {TODO} fix finansis moving to right when inputModal opened error
 - {TODO} show the user when the market close in the same place as simulator
-
+- {TODO} handle stop force selling after not existing dates
+- {TODO} improve tell the user you are about to close the window when backTesting still not done 
+- {TODO} create 'reset back testing data' command
 -----
 - {TODO NOT IMPORTANT NOW} save S&P 500 stocks like {date:{added:[stocks],removed:[stocks] }}
 

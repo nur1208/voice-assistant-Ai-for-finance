@@ -8,6 +8,7 @@ import { useSaveTestedData } from "../../Simulator/utils/useSaveTestedData";
 
 export const secondCommandOptions = {
   rewritingTestedData: "rewritingTestedData",
+  forceSelling: "forceSelling",
 };
 
 export const useResponse = () => {
@@ -65,7 +66,7 @@ export const useResponse = () => {
 
   const [secondCommandFor, setSecondCommandFor] = useState("");
 
-  const { getTestedData } = useBackTest();
+  const { forceSelling } = useBackTest();
 
   const { updateIsResetBTData, resetBTState } =
     useReduxActions();
@@ -131,7 +132,11 @@ export const useResponse = () => {
         // response("back testing is done");
 
         break;
-
+      case secondCommandOptions.forceSelling:
+        response("start force selling");
+        await forceSelling();
+        response("force selling is done");
+        break;
       default:
         response("I didn't get that. you can try again... bro");
         break;
@@ -156,6 +161,9 @@ export const useResponse = () => {
         response("okay, I won't rewrite your back testing data");
         break;
 
+      case secondCommandOptions.forceSelling:
+        response("what every you see, won't force sell");
+        break;
       default:
         response("I didn't get that. you can try again... bro");
         break;

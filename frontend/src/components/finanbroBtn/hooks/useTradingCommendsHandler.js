@@ -159,7 +159,7 @@ export const useTradingCommendsHandler = (
   const getBTInput = async (label, message) => {
     response(message);
     await sleep(1000);
-    response("then click on enter to submit");
+    response("then click enter to submit");
     handleOpenModal("", "", true, label);
   };
 
@@ -188,6 +188,7 @@ export const useTradingCommendsHandler = (
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isResetBTData]);
 
+  // const useReduxActions
   const startBackTesting = async () => {
     if (holdingStocks.length > 0 && isBTDone) {
       response("you already have tested data");
@@ -197,6 +198,8 @@ export const useTradingCommendsHandler = (
         secondCommandOptions.rewritingTestedData
       );
     } else {
+      // updateBTState({ isBTRunning: true });
+
       await getBTInput(
         BTfields.CASH.label,
         BTfields.CASH.message
@@ -242,6 +245,8 @@ export const useTradingCommendsHandler = (
     }
   );
 
+  const [isForForceSell, setIsForForceSell] = useState(false);
+
   useHandleUserInput(
     BTfields.EDN_DATE.label.stateName,
     otherHandleInputParams,
@@ -249,8 +254,30 @@ export const useTradingCommendsHandler = (
       response("starting back testing");
       await getTestedData();
       response("back testing is done");
+      console.log("here in last useHandleUser");
+      await sleep(1000);
+      console.log(holdingStocks.length);
+      setIsForForceSell(true);
+      if (holdingStocks.length > 0) {
+        response("do you want me to force sell");
+        setSecondCommandFor(secondCommandOptions.forceSelling);
+      }
     }
   );
+
+  useEffect(() => {
+    if (isForForceSell) {
+      console.log(holdingStocks.length);
+      console.log("in useEffect check for force sell");
+      if (holdingStocks.length > 0) {
+        response("do you want me to force sell");
+        setSecondCommandFor(secondCommandOptions.forceSelling);
+      }
+
+      setIsForForceSell(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isForForceSell]);
 
   return { buyStocks, sellStocks, stopLess, startBackTesting };
 };

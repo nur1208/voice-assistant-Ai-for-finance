@@ -13,7 +13,7 @@ export const createQuestion = async (req, res) => {
 
   res.json({
     status: "success",
-    message: "company added successfully",
+    message: "question added successfully",
     doc,
   });
 };
