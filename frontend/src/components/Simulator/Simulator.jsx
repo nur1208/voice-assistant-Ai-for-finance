@@ -19,7 +19,7 @@ export const Simulator = () => {
     accountValue,
     date,
     wins,
-    loess,
+    losses,
     soldStocks,
     isEndDate,
     resetAllStates,
@@ -51,7 +51,7 @@ export const Simulator = () => {
   const backTestProps = {
     date,
     wins,
-    loess,
+    losses,
     soldStocks,
     countDays,
   };

@@ -9,7 +9,7 @@ import { ArrowDownIcon } from "./ArrowDownIcon";
 import { TextOverLine } from "./TextOverLine";
 
 export const BackTestInfo = () => {
-  const { currentDate, wins, loess, soldStocks, countDays } =
+  const { currentDate, wins, losses, soldStocks, countDays } =
     useSelector(({ back_testing }) => back_testing);
 
   return (
@@ -45,7 +45,7 @@ export const BackTestInfo = () => {
             <div className="col">
               <TextOverLine title="Losses" />
               <div className="cash text-h5 error--text">
-                {loess}{" "}
+                {losses}{" "}
                 <span className="out_of">
                   out of {soldStocks.length}
                 </span>

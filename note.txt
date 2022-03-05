@@ -278,7 +278,7 @@ deadline - before 2022-1-20 ❌ DONE on 2022-2-2
     - {DONE} learning about redux add create backTestingReducer, redux store and useReduxActions
     - {DONE} create parameters to show if backTesting is done or not
     - {DONE} create 'start back testing' command
-    - {DONE} let the user enter start date , end data, catch and Account Risk
+    - {DONE} let the user enter start date , end data, catch and Account Risk  
             - {DONE} create input popup window
             - {DONE} create when clicking 'enter' keyword (console.log ) the input data functionality 
             - {DONE} let finansis open the popup window
@@ -292,7 +292,7 @@ deadline - before 2022-1-20 ❌ DONE on 2022-2-2
             - {DONE} start back testing with user input
             - {DONE} show the user endData
 
-    - {DONE} tell the user you are about to close the window when backTesting still not end 
+    - {DONE} tell the user you are about to close the window when backTesting still not done 
     - {TODO} fix the typo 'loess' to 'losses'
     - {TODO} show loading for buy sell and stop
     - {TODO} add 'do you want me to force selling' command and add 'what is force selling' question

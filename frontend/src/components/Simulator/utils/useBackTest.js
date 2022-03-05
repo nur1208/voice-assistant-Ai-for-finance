@@ -496,7 +496,7 @@ export const useBackTest = () => {
     //   days[currentDate.getDay()]
     // }`,
     wins,
-    loess: losses,
+    losses,
     soldStocks,
     isEndDate: currentDate >= endDate,
     // resetAllStates,

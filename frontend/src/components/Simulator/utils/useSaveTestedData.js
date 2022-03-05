@@ -10,7 +10,7 @@ export const statesDefault = {
   currentCash: 1000000,
   currentStockPrice: 0,
   wins: 0,
-  loess: 0,
+  losses: 0,
   accountValue: [
     // {
     //   catch: 1000000,
@@ -55,9 +55,9 @@ export const useSaveTestedData = () => {
     "wins",
     statesDefault.wins
   );
-  const [loess, setLoess] = useLocalStorage(
-    "loess",
-    statesDefault.loess
+  const [losses, setLosses] = useLocalStorage(
+    "losses",
+    statesDefault.losses
   );
 
   const [accountValue, setAccountValue] = useLocalStorage(
@@ -97,7 +97,7 @@ export const useSaveTestedData = () => {
     setCurrentStockPrice(data["currentStockPrice"]);
     setCurrentCash(data["currentCash"]);
     setWins(data["wins"]);
-    setLoess(data["loess"]);
+    setLosses(data["losses"]);
     setAccountValue(data["accountValue"]);
     setCountDays(data["countDays"]);
     setEndDate(data["endDate"]);
@@ -119,7 +119,7 @@ export const useSaveTestedData = () => {
       currentStockPrice,
       currentCash,
       wins,
-      loess,
+      losses,
       accountValue,
       countDays,
       endDate,
