@@ -16,6 +16,7 @@ import { TheMostTable } from "./components/TheMostTable/TheMostTable";
 import { getAllTickersInDatabaseToJson } from "./utils/getAllTickersInDatabaseToJson";
 import { Offline } from "./components/Offline";
 import { NotWorkingInChina } from "./components/NotWorkingInChina";
+import { ProgressFetch } from "./components/ProgressFetch/ProgressFetch";
 import { getCurrentCountry } from "./utils/getCurrentCountry";
 import { Test } from "./components/Test";
 import { Simulator } from "./components/Simulator/Simulator";
@@ -30,6 +31,7 @@ import BasicModal from "./components/Modal/BasicModal";
 import InputModal from "./components/Modal/InputModal/InputModal";
 import { useLocalStorage } from "./hooks/useLocalStorage";
 import { useExitPrompt } from "./hooks/useExitPrompt";
+import { LinearLoading } from "./components/LinearLoading";
 
 export const PAGES = [
   {
@@ -50,11 +52,7 @@ export const PAGES = [
   },
   {
     path: "/test",
-    Component: (props) => (
-      <BasicModal open={true} isInput>
-        {/* <InputModal /> */}
-      </BasicModal>
-    ),
+    Component: (props) => <LinearLoading />,
   },
 ];
 

@@ -23,6 +23,7 @@ import RotateLeftIcon from "@material-ui/icons/RotateLeft";
 import { useSaveTestedData } from "../../utils/useSaveTestedData";
 import { useSelector } from "react-redux";
 import { useReduxActions } from "../../../../hooks/useReduxActions";
+import { LinearLoading } from "../../../LinearLoading";
 export const PortfolioHoldings = ({ getTestedData }) => {
   const {
     currentStockPrice,
@@ -33,6 +34,7 @@ export const PortfolioHoldings = ({ getTestedData }) => {
     forceSelling,
     isBTDone,
     accountRisk,
+    isBTRunning,
   } = useSelector(({ back_testing }) => back_testing);
 
   const symbolTablePropsHolding = {
@@ -66,6 +68,7 @@ export const PortfolioHoldings = ({ getTestedData }) => {
     <>
       <div className="text-overline white--text">Holdings</div>
       <div className="container portfolio-holdings white">
+        {isBTRunning && <LinearLoading />}
         <div className="row">
           <div className="col-12 text-center mt-6">
             {isBTDone ? (

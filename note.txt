@@ -293,7 +293,7 @@ deadline - before 2022-1-20 ❌ DONE on 2022-2-2
             - {DONE} show the user endData
 
     - {DONE} tell the user you are about to close the window when backTesting still not done 
-    - {TODO} fix the typo 'loess' to 'losses'
+    - {DONE} fix the typo 'loess' to 'losses'
     - {TODO} show loading for buy sell and stop
     - {TODO} add 'do you want me to force selling' command and add 'what is force selling' question
     - {TODO} create sell stocks anyway functionality with profit or not
