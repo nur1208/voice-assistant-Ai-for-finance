@@ -250,7 +250,7 @@ export const useBackTest = () => {
     );
     endDateLocal = endDateLocalP;
     // setEndDate(endDateLocalP);
-    runForceSelling(endDateLocalP);
+    await runForceSelling(endDateLocalP);
   };
 
   const runForceSelling = async (endDateLocal) => {

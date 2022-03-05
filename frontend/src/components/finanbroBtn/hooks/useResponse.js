@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { useSpeechSynthesis } from "react-speech-kit";
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
 import { useReduxActions } from "../../../hooks/useReduxActions";
@@ -68,13 +69,17 @@ export const useResponse = () => {
 
   const { forceSelling } = useBackTest();
 
-  const { updateIsResetBTData, resetBTState } =
-    useReduxActions();
+  const { resetBTState } = useReduxActions();
 
   const [isResetBTData, setIsResetBTData] = useLocalStorage(
     "isResetBTData",
     false
   );
+
+  const { holdingStocks } = useSelector(
+    (state) => state.back_testing
+  );
+
   const respondedWithYesSC = async ({
     handleReadingHeadLines,
     handleScrollDetailPage,
@@ -82,6 +87,7 @@ export const useResponse = () => {
     findingAnswerFor,
     setCurrentQuestion,
     resetAllStates,
+    setIsForceSellAgain,
   }) => {
     console.log(secondCommandFor);
     switch (secondCommandFor) {
@@ -92,6 +98,7 @@ export const useResponse = () => {
 
       case "scrollDetailsA":
         response("scrolling the page every 5 seconds");
+        setSecondCommandFor("");
 
         await handleScrollDetailPage();
 
@@ -99,6 +106,8 @@ export const useResponse = () => {
 
       case "findingAnswer":
         response("give me a minute to find an answer");
+
+        setSecondCommandFor("");
 
         await handleFindingAnswer(
           findingAnswerFor,
@@ -133,9 +142,12 @@ export const useResponse = () => {
 
         break;
       case secondCommandOptions.forceSelling:
-        response("start force selling");
+        setSecondCommandFor("");
+        response("starting force selling");
+
         await forceSelling();
         response("force selling is done");
+        setIsForceSellAgain(true);
         break;
       default:
         response("I didn't get that. you can try again... bro");
@@ -162,7 +174,7 @@ export const useResponse = () => {
         break;
 
       case secondCommandOptions.forceSelling:
-        response("what every you see, won't force sell");
+        response("what every you say, I won't force sell");
         break;
       default:
         response("I didn't get that. you can try again... bro");

@@ -46,6 +46,8 @@ export const useFinansis = ({
   };
   const handleCloseModal = () => setOpenModal(false);
 
+  const [isForceSellAgain, setIsForceSellAgain] =
+    useState(false);
   const {
     response,
     speaking,
@@ -143,15 +145,23 @@ export const useFinansis = ({
     setQuestions
   );
 
-  const { buyStocks, sellStocks, stopLess, startBackTesting } =
-    useTradingCommendsHandler(
-      response,
-      setSecondCommandFor,
-      SpeechRecognition,
-      handleOpenModal,
-      isWaitingUserDone,
-      setIsWaitingUserDone
-    );
+  const {
+    buyStocks,
+    sellStocks,
+    stopLess,
+    startBackTesting,
+    forceSellingHandler,
+    resetBTDataHandler,
+  } = useTradingCommendsHandler(
+    response,
+    setSecondCommandFor,
+    SpeechRecognition,
+    handleOpenModal,
+    isWaitingUserDone,
+    setIsWaitingUserDone,
+    isForceSellAgain,
+    setIsForceSellAgain
+  );
 
   const [findingAnswerFor, setFindingAnswerFor] = useState("");
 
@@ -168,7 +178,9 @@ export const useFinansis = ({
     {
       command: ["what can you do", "how can you help me"],
       callback: () =>
-        response("I provide finance information for you"),
+        response(
+          "I help you with finance, that's why my name is finansis"
+        ),
       commandFor: "every section",
     },
     {
@@ -202,6 +214,7 @@ export const useFinansis = ({
           handleFindingAnswer,
           findingAnswerFor,
           setCurrentQuestion,
+          setIsForceSellAgain,
         }),
       commandFor: "every section",
     },
@@ -426,6 +439,24 @@ export const useFinansis = ({
         await sleep(3000);
         response("no sorry, I meant love you");
       },
+      commandFor: "every section",
+    },
+    {
+      command: [
+        "force",
+        "force sell (again)",
+        "for sale (again)",
+      ],
+      callback: async () => await forceSellingHandler(),
+      commandFor: "backTesting",
+    },
+    {
+      command: [
+        "reset back testing (data)",
+        "reset pack testing (data)",
+        "reset back-testing (data)",
+      ],
+      callback: async () => await resetBTDataHandler(),
       commandFor: "backTesting",
     },
   ];

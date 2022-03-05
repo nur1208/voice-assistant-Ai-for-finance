@@ -10,6 +10,7 @@ import { secondCommandOptions } from "../hooks/useResponse";
 import { useSelector } from "react-redux";
 import { useContext, useEffect, useState } from "react";
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
+import { useReduxActions } from "../../../hooks/useReduxActions";
 import { WaitForUserInputContext } from "../../../App";
 import { useHandleUserInput } from "./useHandleUserInput";
 
@@ -38,7 +39,9 @@ export const useTradingCommendsHandler = (
   SpeechRecognition,
   handleOpenModal,
   isWaitingUserDone,
-  setIsWaitingUserDone
+  setIsWaitingUserDone,
+  isForceSellAgain,
+  setIsForceSellAgain
 ) => {
   const buyStocks = async () => {
     try {
@@ -128,7 +131,7 @@ export const useTradingCommendsHandler = (
     }
   };
 
-  const { getTestedData } = useBackTest();
+  const { getTestedData, forceSelling } = useBackTest();
 
   const { holdingStocks, isBTDone } = useSelector(
     (state) => state.back_testing
@@ -188,9 +191,10 @@ export const useTradingCommendsHandler = (
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isResetBTData]);
 
-  // const useReduxActions
+  const { resetBTState } = useReduxActions();
   const startBackTesting = async () => {
-    if (holdingStocks.length > 0 && isBTDone) {
+    // if (holdingStocks.length > 0 && isBTDone) {
+    if (isBTDone) {
       response("you already have tested data");
       await sleep(1000);
       response("do you want me to over write the old data");
@@ -256,12 +260,7 @@ export const useTradingCommendsHandler = (
       response("back testing is done");
       console.log("here in last useHandleUser");
       await sleep(1000);
-      console.log(holdingStocks.length);
       setIsForForceSell(true);
-      if (holdingStocks.length > 0) {
-        response("do you want me to force sell");
-        setSecondCommandFor(secondCommandOptions.forceSelling);
-      }
     }
   );
 
@@ -279,5 +278,49 @@ export const useTradingCommendsHandler = (
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isForForceSell]);
 
-  return { buyStocks, sellStocks, stopLess, startBackTesting };
+  const forceSellingHandler = async () => {
+    if (holdingStocks.length > 0) {
+      response("starting force selling");
+      await forceSelling();
+      response("force selling is done");
+      setIsForceSellAgain(true);
+    } else {
+      response("you don't have any stocks to sell");
+    }
+  };
+
+  useEffect(() => {
+    if (isForceSellAgain) {
+      (async () => {
+        if (holdingStocks.length > 0) {
+          response("you still have stocks that haven't sold ");
+          await sleep(1000);
+
+          response(
+            "if you want me to force sell again, tell me force sell again"
+          );
+        }
+        setIsForceSellAgain(false);
+      })();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isForceSellAgain]);
+
+  const resetBTDataHandler = async () => {
+    response("resetting back testing data ");
+    await sleep(1000);
+
+    resetBTState();
+
+    window.location.reload();
+  };
+
+  return {
+    buyStocks,
+    sellStocks,
+    stopLess,
+    startBackTesting,
+    forceSellingHandler,
+    resetBTDataHandler,
+  };
 };

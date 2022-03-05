@@ -296,10 +296,14 @@ deadline - before 2022-1-20 ❌ DONE on 2022-2-2
     - {DONE} fix the typo 'loess' to 'losses'
     - {DONE} show loading for buy sell and stop
     - {DONE} add 'do you want me to force selling' command
-    - {TODO} let finansis say 'if you want me to force sell again, tell me force sell again' and create 'force sell (again)' command 
-    - {TODO} add 'what is force selling' question, answer 'I will just only sell stock with any profit without following selling strategy'
+    - {DONE} add 'what is force selling' question, answer 'I will just only sell stock with any profit without following selling strategy'
+    - {DONE} let finansis say 'if you want me to force sell again, tell me force sell again' and create 'force sell (again)' command 
+    - {TODO} create 'reset back testing data' command
     - {TODO} create sell stocks anyway functionality with profit or not
-
+            - {TODO} update sellSignalBT function by adding new param called isWithProfitOrNot and make that is condition to force selling
+            - {TODO} update forceSelling function by adding isWithProfitOrNot param to it and pass it to sell function
+            - {TODO} change last param of handleBackTestingAxiosError from paramsFunction2 to extraParams as an object  
+            - {TODO} create withProfitOrNOt handler and 'sell with profit or not' command
 
 
 121 - {TODO} create user model 
@@ -333,7 +337,8 @@ get  is the market open data using python and get the data every day
 - {TODO} show the user when the market close in the same place as simulator
 - {TODO} handle stop force selling after not existing dates
 - {TODO} improve tell the user you are about to close the window when backTesting still not done 
-- {TODO} create 'reset back testing data' command
+- {TODO} improve sell strategy by just sell after 30 days of holding stocks
+- {TODO} let the user enter sell after {30, 20, 10, 90} days
 -----
 - {TODO NOT IMPORTANT NOW} save S&P 500 stocks like {date:{added:[stocks],removed:[stocks] }}
 
