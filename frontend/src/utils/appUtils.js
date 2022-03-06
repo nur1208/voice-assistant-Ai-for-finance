@@ -559,63 +559,16 @@ export const useFinansis = ({
     let foundQuestion = null;
     console.log({ questions });
 
-    if (finalTranscript && questions.length !== undefined) {
-      for (let index = 0; index < questions.length; index++) {
-        let { question } = questions[index];
-        let questionNoOptionsWord;
-        if (question.includes("the"))
-          questionNoOptionsWord = question.replace(" the", "");
+  
+    //   // const checkForQW = finalTranscript.includes("what") || finalTranscript.includes("how")
 
-        // remove '?' symbol from  question
-        if (question.includes("?")) {
-          questionNoOptionsWord = questionNoOptionsWord.replace(
-            "?",
-            ""
-          );
-          question = question.replace("?", "");
-        }
-
-        console.log({
-          questionNoOptionsWord,
-          question,
-          finalTranscript,
-        });
-
-        if (
-          finalTranscript.toLocaleLowerCase() === question ||
-          finalTranscript.toLocaleLowerCase() ===
-            questionNoOptionsWord
-        )
-          foundQuestion = questions[index];
-      }
-
-      if (foundQuestion) {
-        // console.log("do something 🧐🧐");
-        handleOpenModal(
-          foundQuestion.question,
-          foundQuestion.answer
-        );
-        response(foundQuestion.answer);
-        setCurrentQuestion(foundQuestion);
-        const timeout =
-          foundQuestion.answer.length > 80
-            ? 1000 * 10
-            : 1000 * 7;
-
-        setTimeout(() => {
-          handleCloseModal();
-        }, timeout);
-        setIsCommandQuestion(true);
-      }
-
-      // const checkForQW = finalTranscript.includes("what") || finalTranscript.includes("how")
-
-      // if(checkForQW && commandsWithQuestionWord.includes(finalTranscript))
-    }
+    //   // if(checkForQW && commandsWithQuestionWord.includes(finalTranscript))
+    // }
 
     let isCommandExistLocal = false;
     // the command not question and finalTranscript not empty string
-    if (!foundQuestion && finalTranscript) {
+    // if (!foundQuestion && finalTranscript) {
+    if (finalTranscript) {
       // console.log(
       //   onlyCommands.includes(finalTranscript.toLocaleLowerCase())
       // );
@@ -747,21 +700,81 @@ export const useFinansis = ({
 
         // if(checkForQW && commandsWithQuestionWord.includes(finalTranscript))
       }
-      console.log({ isCommandExist: isCommandExistLocal });
+      // console.log({ isCommandExist: isCommandExistLocal });
 
       setIsCommandExist(isCommandExistLocal);
       if (!isCommandExistLocal) {
-        const checkForQW =
-          finalTranscript.match(/^what/) ||
-          finalTranscript.match(/^how/);
-        if (checkForQW) {
-          response(
-            `do you want me to learn about ${finalTranscript}`
-          );
-          setSecondCommandFor("findingAnswer");
-          // console.log("do something 🧐🧐");
-          setFindingAnswerFor(finalTranscript);
-        } else response(responseFoUnknownCommand);
+        // Look for questions
+        if (finalTranscript && questions.length !== undefined) {
+          for (
+            let index = 0;
+            index < questions.length;
+            index++
+          ) {
+            let { question } = questions[index];
+            let questionNoOptionsWord;
+            if (question.includes("the"))
+              questionNoOptionsWord = question.replace(
+                " the",
+                ""
+              );
+
+            // remove '?' symbol from  question
+            if (question.includes("?")) {
+              questionNoOptionsWord =
+                questionNoOptionsWord.replace("?", "");
+              question = question.replace("?", "");
+            }
+
+            console.log({
+              questionNoOptionsWord,
+              question,
+              finalTranscript,
+            });
+
+            if (
+              finalTranscript.toLocaleLowerCase() === question ||
+              finalTranscript.toLocaleLowerCase() ===
+                questionNoOptionsWord
+            )
+              foundQuestion = questions[index];
+          }
+
+          if (foundQuestion) {
+            // console.log("do something 🧐🧐");
+            handleOpenModal(
+              foundQuestion.question,
+              foundQuestion.answer
+            );
+            response(foundQuestion.answer);
+            setCurrentQuestion(foundQuestion);
+            const timeout =
+              foundQuestion.answer.length > 80
+                ? 1000 * 10
+                : 1000 * 7;
+
+            setTimeout(() => {
+              handleCloseModal();
+            }, timeout);
+            setIsCommandQuestion(true);
+          } else {
+            const checkForQW =
+              finalTranscript.match(/^what/) ||
+              finalTranscript.match(/^how/);
+            if (checkForQW) {
+              response(
+                `do you want me to learn about ${finalTranscript}`
+              );
+              setSecondCommandFor("findingAnswer");
+              // console.log("do something 🧐🧐");
+              setFindingAnswerFor(finalTranscript);
+            } else response(responseFoUnknownCommand);
+          }
+
+          // const checkForQW = finalTranscript.includes("what") || finalTranscript.includes("how")
+
+          // if(checkForQW && commandsWithQuestionWord.includes(finalTranscript))
+        }
       }
 
       const autoResetTranscriptNotWorking = [
