@@ -5,7 +5,10 @@ import { useLocalStorage } from "../../../hooks/useLocalStorage";
 // import { updateBTState } from "../../../state/action-creator";
 import { PYTHON_API } from "../../../utils/serverUtils";
 import { sleep } from "../../../utils/sleep";
-import { customDateFormat } from "../SimulatorUtils";
+import {
+  calculateReturn,
+  customDateFormat,
+} from "../SimulatorUtils";
 import {
   statesDefault,
   useSaveTestedData,
@@ -221,7 +224,20 @@ export const useBackTest = () => {
           ({ symbol }) => symbol !== sStock.symbol
         );
 
-        if (sStock.isReachedStopLoss) {
+        const returnPercentage = calculateReturn(
+          sStock.boughtPrice,
+          sStock.soldPrice
+        ).percentage;
+
+        // console.log({
+        //   return: Number(returnPercentage),
+        //   returnPercentage,
+        // });
+
+        if (
+          sStock.isReachedStopLoss ||
+          Number(returnPercentage) < 0
+        ) {
           lossesLocal = lossesLocal + 1;
           // setLosses((oldValue) => oldValue + 1);
         } else {

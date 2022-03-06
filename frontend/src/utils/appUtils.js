@@ -465,6 +465,7 @@ export const useFinansis = ({
         "sell with profit or without",
         "tell with profit or without",
         "so with profit or without",
+        "cell with profit or without",
         // "reset pack testing (data)",
         // "reset back-testing (data)",
       ],
@@ -764,6 +765,7 @@ export const useFinansis = ({
         "stop reading",
         "stop listening",
         "read the news",
+        "see you",
       ];
       if (autoResetTranscriptNotWorking.includes(transcript))
         resetTranscript();

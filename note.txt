@@ -340,6 +340,10 @@ get  is the market open data using python and get the data every day
 - {TODO} improve tell the user you are about to close the window when backTesting still not done 
 - {TODO} improve sell strategy by just sell after 30 days of holding stocks
 - {TODO} let the user enter sell after {30, 20, 10, 90} days
+- {TODO} don't get questions every render from the api, save the documents in 
+        user localStorage and just check the number of the questions in LS 
+        same as in the database
+- {TODO} fix handleGoToPage function when a user say 'go to back testing'
 -----
 - {TODO NOT IMPORTANT NOW} save S&P 500 stocks like {date:{added:[stocks],removed:[stocks] }}
 

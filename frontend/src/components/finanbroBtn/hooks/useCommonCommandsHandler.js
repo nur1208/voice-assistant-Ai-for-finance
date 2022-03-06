@@ -46,7 +46,8 @@ export const useCommonCommandsHandler = (
 
   const closeAnswerDetail = async () => {
     if (popupWindow) {
-      if (popupWindow.length === 1) response(`closing the window`);
+      if (popupWindow.length === 1)
+        response(`closing the window`);
       else response(`closing all windows`);
 
       for (let index = 0; index < popupWindow.length; index++) {
@@ -105,9 +106,11 @@ export const useCommonCommandsHandler = (
   const handleGoToPage = (page) => {
     console.log({ page, pathname });
 
+    // let pageLocal
     // handling going to the current page
     if (
-      (pathname === "/" && page.toLocaleLowerCase() === "home") ||
+      (pathname === "/" &&
+        page.toLocaleLowerCase() === "home") ||
       pathname.split("/")[1] === page.toLocaleLowerCase()
     ) {
       response(`you are in ${page} page`);
@@ -162,7 +165,10 @@ export const useCommonCommandsHandler = (
       question: findingAnswerFor,
     });
 
-    handleOpenModal(questionObject.question, questionObject.answer);
+    handleOpenModal(
+      questionObject.question,
+      questionObject.answer
+    );
     response(questionObject.answer);
 
     const timeout =
