@@ -31,7 +31,7 @@ export const getQuestions = async (req, res) => {
       docs,
     });
   else
-    res.json({
+    res.status(404).json({
       status: "fall",
       message: `didn't find answer`,
     });

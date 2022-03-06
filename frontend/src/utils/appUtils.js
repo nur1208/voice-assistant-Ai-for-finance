@@ -478,13 +478,18 @@ export const useFinansis = ({
   // get questions from the database
   useEffect(() => {
     (async () => {
-      const {
-        data: { docs },
-      } = await axios.get(
-        `${BACKEND_API_URL}/${QUESTIONS_ROUTE}`
-      );
+      try {
+        const {
+          data: { docs },
+        } = await axios.get(
+          `${BACKEND_API_URL}/${QUESTIONS_ROUTE}`
+        );
 
-      setQuestions(docs);
+        setQuestions(docs);
+      } catch (error) {
+        console.log(error);
+        setQuestions([]);
+      }
     })();
   }, []);
 
@@ -552,7 +557,9 @@ export const useFinansis = ({
     // check if finalTranscript is one of the questions
 
     let foundQuestion = null;
-    if (finalTranscript) {
+    console.log({ questions });
+
+    if (finalTranscript && questions.length !== undefined) {
       for (let index = 0; index < questions.length; index++) {
         let { question } = questions[index];
         let questionNoOptionsWord;

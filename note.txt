@@ -320,7 +320,7 @@ deadline - before 2022-1-20 ❌ DONE on 2022-2-2
             - {DONE} create mongoose Schema for user model
             - {DONE} create express routes and controllers for user model
             - {DONE} test created express routes, controllers and mongoose Schema
-122 - {TODO} test findingAnswersHandler and findingAnswersHandler functions
+122 - {TODO} test findingAnswersHandler functions
 123 - {TODO} improve 'code for handling unknown commands' by checking for commands first then for questions
 124 - {TODO} add redux to the project
 deadline - before 2022-2-6
