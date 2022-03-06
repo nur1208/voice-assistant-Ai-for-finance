@@ -107,6 +107,7 @@ export const useCommonCommandsHandler = (
     console.log({ page, pathname });
 
     // let pageLocal
+
     // handling going to the current page
     if (
       (pathname === "/" &&

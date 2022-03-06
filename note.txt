@@ -299,15 +299,24 @@ deadline - before 2022-1-20 ❌ DONE on 2022-2-2
     - {DONE} add 'what is force selling' question, answer 'I will just only sell stock with any profit without following selling strategy'
     - {DONE} let finansis say 'if you want me to force sell again, tell me force sell again' and create 'force sell (again)' command 
     - {DONE} create 'reset back testing data' command
-    - {TODO} create sell stocks anyway functionality with profit or not
+    - {DONE} create sell stocks anyway functionality with profit or not
             - {DONE} update sellSignalBT function by adding new param called isWithProfitOrNot and make that is condition to force selling
             - {DONE} update forceSelling function by adding isWithProfitOrNot param to it and pass it to sell function in useBackTesting
             - {DONE} create paramsFunction3 param for handleBackTestingAxiosError  function in useBackTest 
             - {DONE} create  'sell with profit or without' command for back testing
-            - {TODO} count stocks that sold without profit as losses not wins
+            - {DONE} count stocks that sold without profit as losses not wins
 
 
-121 - {TODO} create user model 
+121 - {TODO} create user model
+            - {DONE} database design for user modal:
+                    - id : objectId required
+                    - name : String required
+                    - gander : String only ["male", "female"] required
+                    - email : String required
+                    - password: String required
+                    - executableChromePath: String
+                    - chromeDataPath: String
+                    note: update Stock modal by adding userId 
 122 - {TODO} test findingAnswersHandler and findingAnswersHandler functions
 123 - {TODO} improve 'code for handling unknown commands' by checking for commands first then for questions
 124 - {TODO} add redux to the project
