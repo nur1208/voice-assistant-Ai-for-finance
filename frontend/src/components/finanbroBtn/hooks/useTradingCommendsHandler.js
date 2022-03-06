@@ -315,6 +315,12 @@ export const useTradingCommendsHandler = (
     window.location.reload();
   };
 
+  const sellWithProfitOrNot = async () => {
+    response("starting selling stocks with profit or without");
+    await forceSelling(true);
+    response("selling stocks with profit or without is done");
+  };
+
   return {
     buyStocks,
     sellStocks,
@@ -322,5 +328,6 @@ export const useTradingCommendsHandler = (
     startBackTesting,
     forceSellingHandler,
     resetBTDataHandler,
+    sellWithProfitOrNot,
   };
 };

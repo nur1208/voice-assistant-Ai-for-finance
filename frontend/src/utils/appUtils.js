@@ -152,6 +152,7 @@ export const useFinansis = ({
     startBackTesting,
     forceSellingHandler,
     resetBTDataHandler,
+    sellWithProfitOrNot,
   } = useTradingCommendsHandler(
     response,
     setSecondCommandFor,
@@ -459,6 +460,18 @@ export const useFinansis = ({
       callback: async () => await resetBTDataHandler(),
       commandFor: "backTesting",
     },
+    {
+      command: [
+        "sell with profit or without",
+        "tell with profit or without",
+        "so with profit or without",
+        // "reset pack testing (data)",
+        // "reset back-testing (data)",
+      ],
+      callback: async () => await sellWithProfitOrNot(),
+      commandFor: "backTesting",
+    },
+    // sellWithProfitOrNot
   ];
 
   // get questions from the database

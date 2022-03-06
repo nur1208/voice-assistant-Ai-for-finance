@@ -103,12 +103,17 @@ export const useBackTest = () => {
     callFunction,
     paramsFunction,
     messageError,
-    paramsFunction2
+    paramsFunction2,
+    paramsFunction3
   ) => {
     let isFoundError = true;
     while (isFoundError) {
       try {
-        await callFunction(paramsFunction, paramsFunction2);
+        await callFunction(
+          paramsFunction,
+          paramsFunction2,
+          paramsFunction3
+        );
         isFoundError = false;
       } catch (error) {
         console.log(error);
@@ -179,7 +184,7 @@ export const useBackTest = () => {
       currentStockPriceLocal + todayChange;
   };
 
-  const sell = async (date, isJustSell) => {
+  const sell = async (date, isJustSell, isWithProfitOrNot) => {
     // create axiosPayload object if justSellType === "take any profit"
     // add isJustSell : true to axiosPayload
     // if justSellType === "sell anyway"
@@ -196,6 +201,10 @@ export const useBackTest = () => {
         boughtStocks: holdStocksLocal,
         portfolio: currentCashLocal,
         isJustSell,
+        isWithProfitOrNot:
+          isWithProfitOrNot === undefined
+            ? false
+            : isWithProfitOrNot,
       },
       {
         onDownloadProgress(progress) {
@@ -238,7 +247,7 @@ export const useBackTest = () => {
 
   // let currentDateLocal = currentDate;
 
-  const forceSelling = async () => {
+  const forceSelling = async (isWithProfitOrNot) => {
     let endDateLocalP = new Date(endDate);
     // console.log({
     //   endDateLocal: endDateLocalP,
@@ -250,11 +259,19 @@ export const useBackTest = () => {
     );
     endDateLocal = endDateLocalP;
     // setEndDate(endDateLocalP);
-    await runForceSelling(endDateLocalP);
+    await runForceSelling(endDateLocalP, isWithProfitOrNot);
   };
 
-  const runForceSelling = async (endDateLocal) => {
-    await backTestMain(endDateLocal, runForceSelling, true);
+  const runForceSelling = async (
+    endDateLocal,
+    isWithProfitOrNot
+  ) => {
+    await backTestMain(
+      endDateLocal,
+      runForceSelling,
+      true,
+      isWithProfitOrNot
+    );
   };
 
   const buy = async (date) => {
@@ -291,7 +308,8 @@ export const useBackTest = () => {
   const backTestMain = async (
     endDateP,
     callBackRecursively,
-    isForceSell
+    isForceSell,
+    isWithProfitOrNot
   ) => {
     // setIsBTRunning(true);
     updateBTState({ isBTRunning: true });
@@ -342,7 +360,8 @@ export const useBackTest = () => {
             sell,
             date,
             "something went wrong while selling Stocks price ❌",
-            isForceSell
+            isForceSell,
+            isWithProfitOrNot
           );
           // setAccountValue((oldData) => [
           //   ...oldData,
@@ -412,7 +431,8 @@ export const useBackTest = () => {
 
       updateLocalStorage(updateValues);
 
-      if (isForceSell) await callBackRecursively(endDateP);
+      if (isForceSell)
+        await callBackRecursively(endDateP, isWithProfitOrNot);
       else await callBackRecursively();
     } else {
       let newDate = currentDateLocal.setDate(

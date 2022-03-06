@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "./ProgressFetch.css";
+// import "./ProgressFetch.css";
 import { PYTHON_API } from "../../utils/serverUtils";
 
 export const ProgressFetch = () => {
