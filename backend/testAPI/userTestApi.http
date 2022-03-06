@@ -1,0 +1,15 @@
+@port = 4050
+@Host =  http://localhost
+
+@route = api/v1/users
+
+POST {{Host}}:{{port}}/{{route}}
+Content-Type: application/json
+
+{
+    "name":"nur",
+    "password":"12341234",
+    "email":"nur4@yahoo.com",
+    "gander":"Male"
+}
+

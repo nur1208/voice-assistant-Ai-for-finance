@@ -307,8 +307,8 @@ deadline - before 2022-1-20 ❌ DONE on 2022-2-2
             - {DONE} count stocks that sold without profit as losses not wins
 
 
-121 - {TODO} create user model
-            - {DONE} database design for user modal:
+121 - {DONE} create user model
+            - {DONE} database design for user model:
                     - id : objectId required
                     - name : String required
                     - gander : String only ["male", "female"] required
@@ -317,6 +317,9 @@ deadline - before 2022-1-20 ❌ DONE on 2022-2-2
                     - executableChromePath: String
                     - chromeDataPath: String
                     note: update Stock modal by adding userId 
+            - {DONE} create mongoose Schema for user model
+            - {DONE} create express routes and controllers for user model
+            - {DONE} test created express routes, controllers and mongoose Schema
 122 - {TODO} test findingAnswersHandler and findingAnswersHandler functions
 123 - {TODO} improve 'code for handling unknown commands' by checking for commands first then for questions
 124 - {TODO} add redux to the project
