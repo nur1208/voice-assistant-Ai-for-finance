@@ -33,6 +33,8 @@ export const BTfields = {
   },
 };
 
+const gameNum = 2;
+const strategyVersion = 4;
 export const useTradingCommendsHandler = (
   response,
   setSecondCommandFor,
@@ -67,7 +69,7 @@ export const useTradingCommendsHandler = (
             const {
               data: { message },
             } = await axios(
-              `${TRADING_API}/${STOCK_ROUTE}/buyStock?gameNum=6`
+              `${TRADING_API}/${STOCK_ROUTE}/buyStock?gameNum=${gameNum}`
             );
             response(message);
           } catch (error) {
@@ -104,7 +106,7 @@ export const useTradingCommendsHandler = (
           const {
             data: { message },
           } = await axios(
-            `${TRADING_API}/${STOCK_ROUTE}/sellStock?gameNum=6`
+            `${TRADING_API}/${STOCK_ROUTE}/sellStock?gameNum=${gameNum}`
           );
           response(message);
         } catch (error) {
@@ -124,10 +126,16 @@ export const useTradingCommendsHandler = (
     try {
       response("buying stop loss");
       const {
-        data: { message },
+        data: { message, status },
       } = await axios(
-        `${TRADING_API}/${STOCK_ROUTE}/addStopLess?gameNum=6`
+        `${TRADING_API}/${STOCK_ROUTE}/addStopLess?gameNum=${gameNum}&strategyVersion=${strategyVersion}`
       );
+
+      if (status === "fall") {
+        response("didn't found stocks to set stop loss to them");
+      } else {
+        response(message);
+      }
     } catch (error) {
       response("something went wrong while buying stop loss");
     }
