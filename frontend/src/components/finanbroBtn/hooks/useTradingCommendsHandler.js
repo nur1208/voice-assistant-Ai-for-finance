@@ -52,20 +52,22 @@ export const useTradingCommendsHandler = (
 
       try {
         response("Finding buy signals");
-        // const {
-        //   data: { totalNumberOfBuying },
-        // } = await axios(`${PYTHON_API}/findBuySignal`);
+        const {
+          data: { totalNumberOfBuying },
+        } = await axios(`${PYTHON_API}/findBuySignal`);
         // # print(f"found {totalNumberOfBuying} buying signals ✅")
 
-        // if (totalNumberOfBuying > 0) {
-        if (5 > 0) {
+        if (totalNumberOfBuying > 0) {
+          // if (5 > 0) {
           try {
-            // response(`found ${totalNumberOfBuying} buying signals`);
+            response(
+              `found ${totalNumberOfBuying} buying signals`
+            );
             response("buying stocks");
             const {
               data: { message },
             } = await axios(
-              `${TRADING_API}/${STOCK_ROUTE}/buyStock?gameNum=5`
+              `${TRADING_API}/${STOCK_ROUTE}/buyStock?gameNum=6`
             );
             response(message);
           } catch (error) {
@@ -102,7 +104,7 @@ export const useTradingCommendsHandler = (
           const {
             data: { message },
           } = await axios(
-            `${TRADING_API}/${STOCK_ROUTE}/sellStock?gameNum=5`
+            `${TRADING_API}/${STOCK_ROUTE}/sellStock?gameNum=6`
           );
           response(message);
         } catch (error) {
@@ -124,7 +126,7 @@ export const useTradingCommendsHandler = (
       const {
         data: { message },
       } = await axios(
-        `${TRADING_API}/${STOCK_ROUTE}/addStopLess?gameNum=5`
+        `${TRADING_API}/${STOCK_ROUTE}/addStopLess?gameNum=6`
       );
     } catch (error) {
       response("something went wrong while buying stop loss");
@@ -321,6 +323,13 @@ export const useTradingCommendsHandler = (
     response("selling stocks with profit or without is done");
   };
 
+  const tradeStocks = async () => {
+    response("starting stocks trading");
+    await stopLess();
+    await sellStocks();
+    await buyStocks();
+  };
+
   return {
     buyStocks,
     sellStocks,
@@ -329,5 +338,6 @@ export const useTradingCommendsHandler = (
     forceSellingHandler,
     resetBTDataHandler,
     sellWithProfitOrNot,
+    tradeStocks,
   };
 };

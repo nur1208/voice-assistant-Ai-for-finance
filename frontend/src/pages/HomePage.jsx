@@ -45,7 +45,7 @@ export const HomePage = ({ activeArticle, newsArticles }) => {
         />
       </div>
 
-      <Cards infoCards={infoCards} />
+      <Cards CardsData={infoCards} />
       {/* <Modal isOpen={isOpen} setIsOpen={setIsOpen} /> */}
     </div>
   );

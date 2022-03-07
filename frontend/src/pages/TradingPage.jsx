@@ -3,38 +3,38 @@ import Cards from "../components/Cards/Cards";
 // import BasicModal from "../components/Modal";
 import useStyles from "./../styles";
 
-export const InfoPage = () => {
+export const TradingPage = () => {
   const classes = useStyles();
   const infoCards = [
     {
       color: "#00838f",
-      title: "The Most Stocks",
-      text: "Give The most active stocks",
+      title: "Trade Stocks",
+      text: "Trade Stocks for me",
     },
     {
       color: "#1565c0",
-      title: "Stock info",
+      title: "Back Testing The Strategy",
       // info: "Business, Entertainment, General, Health, Science, Sports, Technology",
-      text: "Give me apple statistics",
+      text: "Start Back Testing",
     },
     {
       color: "#4527a0",
-      title: "What Is?",
+      title: "Buy Stocks",
       // info: "Bitcoin, PlayStation 5, Smartphones, Donald Trump...",
-      text: "what is Price to earing ration?",
+      text: "Buy Stocks",
     },
     {
       color: "#283593",
-      title: "Chars",
+      title: "Sell stocks",
       // info: "CNN, Wired, BBC News, Time, IGN, Buzzfeed, ABC News...",
-      text: "Show me apple and Tesla charts",
+      text: "Sell Stocks",
     },
   ];
 
   return (
     <div className={classes.mainContainer}>
       <div className={classes.logoContainer}>
-        <h1>Info Page</h1>
+        <h1>Trading Page</h1>
         <img
           src="./images/logo.png"
           className={classes.alanLogo}

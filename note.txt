@@ -323,13 +323,13 @@ deadline - before 2022-1-20 ❌ DONE on 2022-2-2
 122 - {DONE} test findingAnswersHandler functions and fixing some error
 123 - {DONE} improve 'code for handling unknown commands' by checking for commands first then for questions
 124 - {DONE} add redux to the project
-deadline - before 2022-2-6
-125 - {TODO} create 'trade for me' command sell, set stop loss and buy 
-126 - {TODO} create 'trading section'
-127 - {TODO} create trade progress popup window
+deadline - before 2022-2-6 ❌ DONE on 2022-3-6
+125 - {DONE} create 'trade for me' command sell, set stop loss and buy 
+126 - {DONE} create 'trading section'
+127 - {DONE} create trade progress popup window
 128 - {TODO} create give me the news for specific stock, let the user type the symbol or choose from his watch list
 129 - {TODO} show me charts for all stock that you will buy
-get  is the market open data using python and get the data every day
+deadline - before 2022-3-10
 130 - {TODO} check for internat connection every 10 seconds when the user offline
 131 - {TODO} show the user sold stock start using yahoo finance chart 
 132 - {TODO} test Modal component 
@@ -356,8 +356,12 @@ get  is the market open data using python and get the data every day
         user localStorage and just check the number of the questions in LS 
         same as in the database
 - {TODO} fix handleGoToPage function when a user say 'go to back testing'
+- {TODO} create 'there was and error while selling stocks, do you want me to try to sell again' command
+- {TODO} create trade progress functionality
+- {TODO} create 'show me trade progress' command
 -----
 - {TODO NOT IMPORTANT NOW} save S&P 500 stocks like {date:{added:[stocks],removed:[stocks] }}
+get  is the market open data using python and get the data every day
 
 - {TODO NOT IMPORTANT NOW} add cancel axios request when the page unmounted 
     ref:https://stackoverflow.com/questions/53861916/canceling-an-axios-rest-call-in-react-hooks-useeffects-cleanup-failing

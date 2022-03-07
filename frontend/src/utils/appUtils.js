@@ -153,6 +153,7 @@ export const useFinansis = ({
     forceSellingHandler,
     resetBTDataHandler,
     sellWithProfitOrNot,
+    tradeStocks
   } = useTradingCommendsHandler(
     response,
     setSecondCommandFor,
@@ -412,12 +413,12 @@ export const useFinansis = ({
     {
       command: "buy stocks",
       callback: () => buyStocks(),
-      commandFor: "info",
+      commandFor: "trading",
     },
     {
       command: "sell stocks",
       callback: () => sellStocks(),
-      commandFor: "info",
+      commandFor: "trading",
     },
     {
       command: [
@@ -426,7 +427,7 @@ export const useFinansis = ({
         "set stop loss for stocks",
       ],
       callback: () => stopLess(),
-      commandFor: "info",
+      commandFor: "trading",
     },
     {
       command: ["start back testing", "start pack testing"],
@@ -471,6 +472,11 @@ export const useFinansis = ({
       ],
       callback: async () => await sellWithProfitOrNot(),
       commandFor: "backTesting",
+    },
+    {
+      command: ["trade stocks for me", "trade stocks"],
+      callback: async () => await tradeStocks(),
+      commandFor: "trading",
     },
     // sellWithProfitOrNot
   ];

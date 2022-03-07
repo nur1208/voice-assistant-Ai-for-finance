@@ -5,8 +5,10 @@ export const NotWorkingInChina = () => {
   return (
     <NoBrowserSupportWrapper>
       <span>Sorry</span>
-      <span className="red">, finansis dons't work in china</span>,
-      please use VPN.
+      <span className="red">
+        , finansis dons't work in china
+      </span>
+      , please use VPN.
     </NoBrowserSupportWrapper>
   );
 };

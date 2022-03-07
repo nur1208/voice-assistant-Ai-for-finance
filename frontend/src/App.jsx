@@ -32,6 +32,8 @@ import InputModal from "./components/Modal/InputModal/InputModal";
 import { useLocalStorage } from "./hooks/useLocalStorage";
 import { useExitPrompt } from "./hooks/useExitPrompt";
 import { LinearLoading } from "./components/LinearLoading";
+import { TradingPage } from "./pages/TradingPage";
+import { ProgressModal } from "./components/Modal/ProgressModal/ProgressModal";
 
 export const PAGES = [
   {
@@ -47,12 +49,26 @@ export const PAGES = [
     Component: (props) => <InfoPage {...props} />,
   },
   {
+    path: "/trading",
+    Component: (props) => <TradingPage {...props} />,
+  },
+  {
     path: "/backTesting",
     Component: (props) => <Simulator {...props} />,
   },
   {
     path: "/test",
-    Component: (props) => <LinearLoading />,
+    Component: (props) => (
+      <BasicModal
+        open={true}
+        isProgress
+        progressData={{
+          sell: "fall",
+          buy: "loading",
+          setStopLoss: "success",
+        }}
+      />
+    ),
   },
 ];
 
@@ -79,7 +95,7 @@ export const App = () => {
   // );
   console.log({ stateBackTesting: state });
 
-  const [userCountry, setUserCountry] = useState("");
+  const [userCountry, setUserCountry] = useState("loading");
   const {
     NewsPageProps,
     FinanbroBtnProps,
@@ -111,7 +127,10 @@ export const App = () => {
     })();
   }, []);
 
-  if (userCountry.toLowerCase() === "china") {
+  if (
+    (userCountry !== "loading" && !userCountry) ||
+    userCountry.toLowerCase() === "china"
+  ) {
     return <NotWorkingInChina />;
   }
 

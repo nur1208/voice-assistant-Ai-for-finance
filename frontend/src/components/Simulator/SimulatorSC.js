@@ -3,9 +3,9 @@ import styled from "styled-components";
 const INFO_BASE = "#2c40d0";
 const PRIMARY_DARKEN4 = " #323a56;";
 const TEXT_BASE = "#111111";
-const PRIMARY_BASE = "#2c40d0";
-const SUCCESS_BASE = "#009688";
-const ERROR_BASE = "#ff5252";
+export const PRIMARY_BASE = "#2c40d0";
+export const SUCCESS_BASE = "#009688";
+export const ERROR_BASE = "#ff5252";
 const PRIMARY_LIGHTEN5 = "#dde9fb";
 
 export const MainWrapper = styled.div`
