@@ -328,8 +328,14 @@ deadline - before 2022-2-6 ❌ DONE on 2022-3-6
 126 - {DONE} create 'trading section'
 127 - {DONE} create trade progress popup window
 128 - {DONE} create 'give me {stocks} stock news' command, 
-    - {TODO} improving set stop loss functionality and fixing errors
+    - {DONE} improving set stop loss functionality and fixing errors
 129 - {TODO} show me charts for all stock that you will buy
+        - {DONE} let findBuySignal return stocks not just the number of stocks
+        - {TODO} create findBuySignal function in useTradingHandlers and then use it in buyStock function
+        - {TODO} create 'find buy signals' commands just find signals without buying stocks
+        - {TODO} save found stocks in a state call foundBuySignalStocks
+        - {TODO} create 'show me charts for found buy signals (stocks)' command
+                - note: use 'openMultipleCharts' function to open all charts
 deadline - before 2022-3-10
 130 - {TODO} check for internat connection every 10 seconds when the user offline
 131 - {TODO} show the user sold stock start using yahoo finance chart 
@@ -365,6 +371,9 @@ deadline - before 2022-3-10
 - {TODO} let the user type the symbol or choose a number when open Multiple companies found popup 
 
 
+---- after create user functionality (login, sign up, ...)
+- {TODO} create watchList functionality
+- {TODO} let the user update his/her options (like alway with your controller, ignore Multiple stocks,...)
 ----- NOT IMPORTANT NOW
 - {TODO} let the user type the symbol or choose a number from his watch list
 - {TODO NOT IMPORTANT NOW} save S&P 500 stocks like {date:{added:[stocks],removed:[stocks] }}
