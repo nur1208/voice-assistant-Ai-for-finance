@@ -154,6 +154,7 @@ export const useFinansis = ({
     resetBTDataHandler,
     sellWithProfitOrNot,
     tradeStocks,
+    findBuySignal,
   } = useTradingCommendsHandler(
     response,
     setSecondCommandFor,
@@ -484,6 +485,16 @@ export const useFinansis = ({
       callback: async (symbol) =>
         await openYahooFinance("news", symbol),
       commandFor: "news",
+    },
+    {
+      command: [
+        "find buy signals",
+        "find buy signal",
+        "find by signals",
+        "find by signal",
+      ],
+      callback: async () => await findBuySignal(),
+      commandFor: "trading",
     },
     // sellWithProfitOrNot
   ];

@@ -45,6 +45,7 @@ export const useTradingCommendsHandler = (
   isForceSellAgain,
   setIsForceSellAgain
 ) => {
+  
   const findBuySignal = async () => {
     try {
       response("getting s&p 500 stocks");
@@ -57,6 +58,14 @@ export const useTradingCommendsHandler = (
           data: { totalNumberOfBuying },
         } = await axios(`${PYTHON_API}/findBuySignal`);
         // # print(f"found {totalNumberOfBuying} buying signals ✅")
+
+        if (totalNumberOfBuying > 0) {
+          response(
+            `found ${totalNumberOfBuying} buying signals`
+          );
+        } else {
+          response("didn't find any buy signal");
+        }
 
         return { totalNumberOfBuying };
       } catch (error) {
@@ -77,76 +86,20 @@ export const useTradingCommendsHandler = (
     const { totalNumberOfBuying, error } = await findBuySignal();
 
     // if findBuySignal through an error exit this function here
-    if (error) return;
+    if (error || !totalNumberOfBuying) return;
 
-    if (totalNumberOfBuying > 0) {
+    try {
       response(`found ${totalNumberOfBuying} buying signals`);
-
-      // if (5 > 0) {
-      // try {
-      //   response(
-      //     `found ${totalNumberOfBuying} buying signals`
-      //   );
-      //   response("buying stocks");
-      //   const {
-      //     data: { message },
-      //   } = await axios(
-      //     `${TRADING_API}/${STOCK_ROUTE}/buyStock?gameNum=${gameNum}`
-      //   );
-      //   response(message);
-      // } catch (error) {
-      //   response("something went wrong while buying Stocks");
-      // }
-    } else {
-      response("didn't find any buy signal");
+      response("buying stocks");
+      const {
+        data: { message },
+      } = await axios(
+        `${TRADING_API}/${STOCK_ROUTE}/buyStock?gameNum=${gameNum}`
+      );
+      response(message);
+    } catch (error) {
+      response("something went wrong while buying Stocks");
     }
-
-    // try {
-    //   response("getting s&p 500 stocks");
-    //   await axios(`${PYTHON_API}/saveSp500Tickers`);
-
-    //   response("S and P 500 stocks saved successfully");
-
-    //   try {
-    //     response("Finding buy signals");
-    //     const {
-    //       data: { totalNumberOfBuying },
-    //     } = await axios(`${PYTHON_API}/findBuySignal`);
-    //     // # print(f"found {totalNumberOfBuying} buying signals ✅")
-
-    //     if (totalNumberOfBuying > 0) {
-    //       response(
-    //         `found ${totalNumberOfBuying} buying signals`
-    //       );
-
-    //       // if (5 > 0) {
-    //       // try {
-    //       //   response(
-    //       //     `found ${totalNumberOfBuying} buying signals`
-    //       //   );
-    //       //   response("buying stocks");
-    //       //   const {
-    //       //     data: { message },
-    //       //   } = await axios(
-    //       //     `${TRADING_API}/${STOCK_ROUTE}/buyStock?gameNum=${gameNum}`
-    //       //   );
-    //       //   response(message);
-    //       // } catch (error) {
-    //       //   response("something went wrong while buying Stocks");
-    //       // }
-    //     } else {
-    //       response("didn't find any buy signal");
-    //     }
-    //   } catch (error) {
-    //     response(
-    //       "something went wrong while looking for buying signals"
-    //     );
-    //   }
-    // } catch (error) {
-    //   response(
-    //     "something went wrong while saving S&P 500 stocks"
-    //   );
-    // }
   };
 
   const sellStocks = async () => {
@@ -406,5 +359,6 @@ export const useTradingCommendsHandler = (
     resetBTDataHandler,
     sellWithProfitOrNot,
     tradeStocks,
+    findBuySignal,
   };
 };
