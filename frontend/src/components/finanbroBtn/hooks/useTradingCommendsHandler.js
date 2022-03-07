@@ -43,9 +43,9 @@ export const useTradingCommendsHandler = (
   isWaitingUserDone,
   setIsWaitingUserDone,
   isForceSellAgain,
-  setIsForceSellAgain
+  setIsForceSellAgain,
+  setFoundBuySignalStocks
 ) => {
-  
   const findBuySignal = async () => {
     try {
       response("getting s&p 500 stocks");
@@ -55,7 +55,7 @@ export const useTradingCommendsHandler = (
       try {
         response("Finding buy signals");
         const {
-          data: { totalNumberOfBuying },
+          data: { totalNumberOfBuying, foundBuySignalStocks },
         } = await axios(`${PYTHON_API}/findBuySignal`);
         // # print(f"found {totalNumberOfBuying} buying signals ✅")
 
@@ -67,6 +67,7 @@ export const useTradingCommendsHandler = (
           response("didn't find any buy signal");
         }
 
+        setFoundBuySignalStocks(foundBuySignalStocks);;
         return { totalNumberOfBuying };
       } catch (error) {
         response(

@@ -36,7 +36,8 @@ export const useFinansis = ({
   const [modalIsInput, setModalIsInput] = useState(false);
   const [modalIsLabel, setModalIsLabel] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(null);
-
+  const [foundBuySignalStocks, setFoundBuySignalStocks] =
+    useState([]);
   const handleOpenModal = (title, content, isInput, label) => {
     setOpenModal(true);
     setModalTitle(title);
@@ -163,7 +164,8 @@ export const useFinansis = ({
     isWaitingUserDone,
     setIsWaitingUserDone,
     isForceSellAgain,
-    setIsForceSellAgain
+    setIsForceSellAgain,
+    setFoundBuySignalStocks
   );
 
   const [findingAnswerFor, setFindingAnswerFor] = useState("");
@@ -494,6 +496,19 @@ export const useFinansis = ({
         "find by signal",
       ],
       callback: async () => await findBuySignal(),
+      commandFor: "trading",
+    },
+    {
+      command: [
+        "show me (a) chart for found buy signals (stocks)",
+        "show me (a) chart for found buy signal (stocks)",
+        "show me (a) chart for found by signals (stocks)",
+        "show me (a) chart for found by signal (stocks)",
+      ],
+      callback: async () =>
+        await openMultipleCharts(
+          foundBuySignalStocks.join(" and ")
+        ),
       commandFor: "trading",
     },
     // sellWithProfitOrNot

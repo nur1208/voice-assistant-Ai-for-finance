@@ -332,8 +332,8 @@ deadline - before 2022-2-6 ❌ DONE on 2022-3-6
 129 - {TODO} show me charts for all stock that you will buy
         - {DONE} let findBuySignal return stocks not just the number of stocks
         - {DONE} create findBuySignal function in useTradingHandlers and then use it in buyStock function
-        - {TODO} create 'find buy signals' commands just find signals without buying stocks
-        - {TODO} save found stocks in a state call foundBuySignalStocks
+        - {DONE} create 'find buy signals' commands just find signals without buying stocks
+        - {DONE} save found stocks in a state call foundBuySignalStocks
         - {TODO} create 'show me charts for found buy signals (stocks)' command
                 - note: use 'openMultipleCharts' function to open all charts
 deadline - before 2022-3-10
