@@ -153,7 +153,7 @@ export const useFinansis = ({
     forceSellingHandler,
     resetBTDataHandler,
     sellWithProfitOrNot,
-    tradeStocks
+    tradeStocks,
   } = useTradingCommendsHandler(
     response,
     setSecondCommandFor,
@@ -295,6 +295,7 @@ export const useFinansis = ({
         "close (the) chart",
         "close charts",
         "close statistics",
+        "close news (window)",
         "close (the) statistic",
       ],
       callback: async (target) => await closeChart(target),
@@ -439,7 +440,7 @@ export const useFinansis = ({
       callback: async () => {
         response("fuck you");
         await sleep(3000);
-        response("no sorry, I meant love you");
+        response("no sorry, I meant I love you");
       },
       commandFor: "every section",
     },
@@ -477,6 +478,12 @@ export const useFinansis = ({
       command: ["trade stocks for me", "trade stocks"],
       callback: async () => await tradeStocks(),
       commandFor: "trading",
+    },
+    {
+      command: ["give me * stock news"],
+      callback: async (symbol) =>
+        await openYahooFinance("news", symbol),
+      commandFor: "news",
     },
     // sellWithProfitOrNot
   ];
@@ -565,7 +572,6 @@ export const useFinansis = ({
     let foundQuestion = null;
     console.log({ questions });
 
-  
     //   // const checkForQW = finalTranscript.includes("what") || finalTranscript.includes("how")
 
     //   // if(checkForQW && commandsWithQuestionWord.includes(finalTranscript))

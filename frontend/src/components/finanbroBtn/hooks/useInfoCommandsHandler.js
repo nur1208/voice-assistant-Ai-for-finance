@@ -69,11 +69,17 @@ export const useInfoCommandsHandler = (
     if (companies.includes("and")) {
       let companiesArray = companies.split("and");
       // companiesArray = companiesArray.map((s) => s.trim());
-      response(`opening  ${companiesArray.join(" and ")} charts`);
+      response(
+        `opening  ${companiesArray.join(" and ")} charts`
+      );
 
       const popupWindows = [];
       let newPopupWindow;
-      for (let index = 0; index < companiesArray.length; index++) {
+      for (
+        let index = 0;
+        index < companiesArray.length;
+        index++
+      ) {
         const company = companiesArray[index];
 
         const finalTarget = await openYahooFinance(
@@ -145,10 +151,14 @@ export const useInfoCommandsHandler = (
 
   const zoomChart = async (type) => {
     const validOptions = ["in", "out"];
-    const isValidOption = validOptions.includes(type.toLowerCase());
+    const isValidOption = validOptions.includes(
+      type.toLowerCase()
+    );
 
     if (!popupWWControl) {
-      response("the window is close so I can not zoom in or out");
+      response(
+        "the window is close so I can not zoom in or out"
+      );
       return;
     }
 
@@ -185,6 +195,12 @@ export const useInfoCommandsHandler = (
         `ORIGIN_CHART_WINDOW_${openedWindowNum + 1}`,
         `popup,width=${width},height=${height}`
       );
+    } else if (type === "news") {
+      newPopupWindow = window.open(
+        `${YAHOO_FINANCE_URL}/quote/${symbol}?p=${symbol}`,
+        `ORIGIN_CHART_WINDOW_${openedWindowNum + 1}`,
+        `popup,width=${width},height=${height}`
+      );
     }
     if (popupWindow)
       setPopupWindow([...popupWindow, newPopupWindow]);
@@ -206,13 +222,19 @@ export const useInfoCommandsHandler = (
         response(`the current price for ${symbol} is`);
         break;
 
+      case "news":
+        response(
+          `scroll the window a bit down and you will find ${symbol} news`
+        );
+        break;
+
       default:
         break;
     }
   };
   const foundMultipleStocks = async (num) => {
     const wordNum = [
-      "",
+      "zero",
       "one",
       "two",
       "three",
@@ -277,8 +299,11 @@ export const useInfoCommandsHandler = (
     let finalTarget = target;
     // const isFound
     if (!(await lookupForTickersV2(finalTarget))) {
-      const symbolsFound = await searchCompanyNameV2(finalTarget);
+      const symbolsFound = await searchCompanyNameV2(
+        finalTarget
+      );
       console.log(symbolsFound);
+
       if (symbolsFound && symbolsFound.length > 2) {
         finalTarget = symbolsFound[0].symbol;
 
@@ -305,7 +330,9 @@ export const useInfoCommandsHandler = (
         //   `so give me a minute to learn about ${target} from yahoo finance`
         // );
 
+        // just let finansis remember that didn't find stocks for current keyword
         try {
+          // check if the keyword is not exist in the database
           const {
             data: { status },
           } = await axios.get(
@@ -325,6 +352,7 @@ export const useInfoCommandsHandler = (
                 keyword: target,
               }
             );
+
             // first one
             if (companies.length > 0) {
               response(`I can open ${target} chart now`);
@@ -394,7 +422,8 @@ export const useInfoCommandsHandler = (
 
   const closeChart = async () => {
     if (popupWindow) {
-      if (popupWindow.length === 1) response(`closing the window`);
+      if (popupWindow.length === 1)
+        response(`closing the window`);
       else response(`closing all windows`);
 
       for (let index = 0; index < popupWindow.length; index++) {
@@ -439,7 +468,9 @@ export const useInfoCommandsHandler = (
         `popup,width=${width},height=${height}`
       );
     } else if (type === "losers" || type === "loser") {
-      response(`here is the most losers stocks from yahoo finance`);
+      response(
+        `here is the most losers stocks from yahoo finance`
+      );
 
       newMostWindow = window.open(
         `${YAHOO_FINANCE_URL}/losers`,
@@ -472,7 +503,11 @@ export const useInfoCommandsHandler = (
         response(`closing the window`);
       else response(`closing all windows`);
 
-      for (let index = 0; index < theMostWindow.length; index++) {
+      for (
+        let index = 0;
+        index < theMostWindow.length;
+        index++
+      ) {
         const window = theMostWindow[index];
         window.close();
       }

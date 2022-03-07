@@ -327,7 +327,7 @@ deadline - before 2022-2-6 ❌ DONE on 2022-3-6
 125 - {DONE} create 'trade for me' command sell, set stop loss and buy 
 126 - {DONE} create 'trading section'
 127 - {DONE} create trade progress popup window
-128 - {TODO} create give me the news for specific stock, let the user type the symbol or choose from his watch list
+128 - {TODO} create 'give me {stocks} stock news' command, let the user type the symbol or choose from his watch list
 129 - {TODO} show me charts for all stock that you will buy
 deadline - before 2022-3-10
 130 - {TODO} check for internat connection every 10 seconds when the user offline
@@ -359,6 +359,9 @@ deadline - before 2022-3-10
 - {TODO} create 'there was and error while selling stocks, do you want me to try to sell again' command
 - {TODO} create trade progress functionality
 - {TODO} create 'show me trade progress' command
+- {TODO} make sure the last line in openMultipleCharts 'setPopupWindow(popupWindows)';
+        doesn't affect other windows
+ 
 -----
 - {TODO NOT IMPORTANT NOW} save S&P 500 stocks like {date:{added:[stocks],removed:[stocks] }}
 get  is the market open data using python and get the data every day

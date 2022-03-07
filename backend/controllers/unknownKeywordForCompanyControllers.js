@@ -1,6 +1,9 @@
 import unknownKeywordForCompanyModel from "../models/unknownKeywordForCompanyModel.js";
 
-export const createUnknownKeywordForCompany = async (req, res) => {
+export const createUnknownKeywordForCompany = async (
+  req,
+  res
+) => {
   const { keyword } = req.body;
   const newDoc = new unknownKeywordForCompanyModel({ keyword });
   const doc = await newDoc.save();
@@ -19,6 +22,7 @@ export const getUnknownKeywordForCompany = async (req, res) => {
     keyword,
   });
 
+  // zero is false
   if (docs.length)
     res.json({
       status: "success",

@@ -72,7 +72,10 @@ export const useNewsCommandsHandler = (
           ? query.toLowerCase()
           : lastCommand.localQuery.toLowerCase();
       NEWS_API_URL = `${NEWS_API_URL}&source=${localQuery}&sortBy=publishedAt`;
-      setLastGetNewsCommand({ type: "giveMeSource", localQuery });
+      setLastGetNewsCommand({
+        type: "giveMeSource",
+        localQuery,
+      });
     } else if (
       type === "latestNews" ||
       lastCommand?.type === "latestNews"
@@ -224,7 +227,8 @@ export const useNewsCommandsHandler = (
       ) {
         const { title } = newsArticles[index];
         if (index !== startReadingIndex) {
-          const timeout = title.length > 80 ? 1000 * 8 : 1000 * 6;
+          const timeout =
+            title.length > 80 ? 1000 * 8 : 1000 * 6;
           // const callback = (index) => setActiveArticle(index);
 
           const timeoutId = await responseAfterTimeout(title, {
@@ -369,10 +373,13 @@ export const useNewsCommandsHandler = (
       response("loading the page will take seconds");
       setCurrentArticle(null);
       try {
-        const { data } = await axios.post(`${AUTO_API_URL}/open`, {
-          goToUrl,
-          windowType: "detailArticle",
-        });
+        const { data } = await axios.post(
+          `${AUTO_API_URL}/open`,
+          {
+            goToUrl,
+            windowType: "detailArticle",
+          }
+        );
         // this is just for pushing popup window at top
         const w = window.open(
           goToUrl,
@@ -508,6 +515,10 @@ export const useNewsCommandsHandler = (
 
     return () => clearTimeout(timeId);
   }, [isStopReading, timeoutIdsForReadingH]);
+
+  // export const getStockNews = () => {
+
+  // }
 
   return {
     getNews,
