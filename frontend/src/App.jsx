@@ -17,7 +17,10 @@ import { getAllTickersInDatabaseToJson } from "./utils/getAllTickersInDatabaseTo
 import { Offline } from "./components/Offline";
 import { NotWorkingInChina } from "./components/NotWorkingInChina";
 import { ProgressFetch } from "./components/ProgressFetch/ProgressFetch";
-import { getCurrentCountry } from "./utils/getCurrentCountry";
+import {
+  getCurrentCountry,
+  useGetCurrentCountry,
+} from "./utils/getCurrentCountry";
 import { Test } from "./components/Test";
 import { Simulator } from "./components/Simulator/Simulator";
 import { GlobalStyle } from "./appSC";
@@ -34,7 +37,7 @@ import { useExitPrompt } from "./hooks/useExitPrompt";
 import { LinearLoading } from "./components/LinearLoading";
 import { TradingPage } from "./pages/TradingPage";
 import { ProgressModal } from "./components/Modal/ProgressModal/ProgressModal";
-
+import { useNetworkStatus } from "./hooks/useNetworkStatus";
 export const PAGES = [
   {
     path: "/",
@@ -95,7 +98,7 @@ export const App = () => {
   // );
   console.log({ stateBackTesting: state });
 
-  const [userCountry, setUserCountry] = useState("loading");
+  // const [userCountry, setUserCountry] = useState("loading");
   const {
     NewsPageProps,
     FinanbroBtnProps,
@@ -120,12 +123,15 @@ export const App = () => {
   }, []);
 
   // get user current country
-  useEffect(() => {
-    (async () => {
-      const userCurrentCountry = await getCurrentCountry();
-      setUserCountry(userCurrentCountry);
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     const userCurrentCountry = await getCurrentCountry();
+  //     setUserCountry(userCurrentCountry);
+  //   })();
+  // }, []);
+
+  const userCountry = useGetCurrentCountry();
+  const networkStatus = useNetworkStatus();
 
   if (
     (userCountry !== "loading" && !userCountry) ||
@@ -140,7 +146,7 @@ export const App = () => {
 
   // tell users finansis doesn't work without internet connection
   // if the user offline
-  if (!navigator.onLine) return <Offline />;
+  if (networkStatus === "offline") return <Offline />;
   // getAllTickersInDatabaseToJson();
   const waitOption = {
     // handleWaitUserInput,

@@ -329,19 +329,20 @@ deadline - before 2022-2-6 ❌ DONE on 2022-3-6
 127 - {DONE} create trade progress popup window
 128 - {DONE} create 'give me {stocks} stock news' command, 
     - {DONE} improving set stop loss functionality and fixing errors
-129 - {TODO} show me charts for all stock that you will buy
+129 - {DONE} show me charts for all stock that you will buy
         - {DONE} let findBuySignal return stocks not just the number of stocks
         - {DONE} create findBuySignal function in useTradingHandlers and then use it in buyStock function
         - {DONE} create 'find buy signals' commands just find signals without buying stocks
         - {DONE} save found stocks in a state call foundBuySignalStocks
-        - {TODO} create 'show me charts for found buy signals (stocks)' command
+        - {DONE} create 'show me charts for found buy signals (stocks)' command
                 - note: use 'openMultipleCharts' function to open all charts
-deadline - before 2022-3-10
-130 - {TODO} check for internat connection every 10 seconds when the user offline
+deadline - before 2022-3-10 ✔ DONE on 2022-3-8
+130 - {DONE} check for internat connection changes and user location every 5 seconds
 131 - {TODO} show the user sold stock start using yahoo finance chart 
 132 - {TODO} test Modal component 
-133 - {TODO} create callAxios function and use it in useBackTest    
-134 - {TODO} make sure that finansis voice is always "Google US English" 
+133 - {TODO} create callAxios function and use it in useBackTest for clean up axios calls   
+134 - {TODO} make sure that finansis voice is always "Google US English"
+deadline - before 2022-3-12 
 135 - {TODO} fix user say 'close the window' after opening statistic window error and also for 'open * chart with your control'
 136 - {TODO} fix 2
 
@@ -374,6 +375,8 @@ deadline - before 2022-3-10
 ---- after create user functionality (login, sign up, ...)
 - {TODO} create watchList functionality
 - {TODO} let the user update his/her options (like alway with your controller, ignore Multiple stocks,...)
+- {TODO} move useGetCurrentCountry TO hooks folder
+- {TODO} useGetCurrentCountry test if that function doesn't slow down finansis
 ----- NOT IMPORTANT NOW
 - {TODO} let the user type the symbol or choose a number from his watch list
 - {TODO NOT IMPORTANT NOW} save S&P 500 stocks like {date:{added:[stocks],removed:[stocks] }}
