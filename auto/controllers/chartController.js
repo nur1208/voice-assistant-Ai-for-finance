@@ -1,4 +1,9 @@
 import {
+  applyDateS,
+  endDateInputS,
+  startDateInputS,
+} from "../selectors/chartSelectors.js";
+import {
   browser,
   page,
   windowTypeHolder,
@@ -62,4 +67,88 @@ export const zoomHandler = async (req, res) => {
   return;
   // }
   // res.status(404).json({ message: "browser is not open" });
+};
+
+function isValidDate(d) {
+  return d instanceof Date && !isNaN(d);
+}
+
+export const dateValidation = (req, res, next) => {
+  const { startDate, endDate } = req.body;
+
+  if (!isValidDate(new Date(startDate)))
+    return res.status(400).json({
+      message: "start date should exit and valid date",
+      status: "fall",
+    });
+
+  if (!isValidDate(new Date(endDate)))
+    return res.status(400).json({
+      message: "end date should exit and valid date",
+      status: "fall",
+    });
+
+  if (new Date(startDate) > new Date(endDate))
+    return res.status(400).json({
+      message: "start date should be less then endDate",
+      status: "fall",
+    });
+
+  next();
+};
+
+const customDateFormat = (currentDate) => {
+  // console.log({ currentDate, type: typeof currentDate });
+
+  let date = currentDate;
+  if (typeof date === "string") date = new Date(date);
+
+  return `${
+    date.getMonth() + 1 < 10
+      ? `0${date.getMonth() + 1}`
+      : date.getMonth() + 1
+  }/${
+    date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()
+  }/${date.getFullYear()}`;
+};
+
+const selectDeleteAllInputDate = async (selector, date) => {
+  await page.click(selector);
+  await page.keyboard.down("ControlLeft");
+  await page.keyboard.press("KeyA");
+  await page.keyboard.up("ControlLeft");
+  await page.keyboard.press("Delete");
+
+  await page.waitForTimeout(1000 * 1);
+
+  await page.type(selector, date, {
+    delay: 100,
+  });
+};
+
+export const changeDateHandler = async (req, res) => {
+  await page.click(".datePickerBtn");
+  await page.waitForTimeout(1000 * 3);
+
+  const { startDate, endDate } = req.body;
+
+  console.log({
+    startDate: customDateFormat(startDate),
+  });
+
+  await selectDeleteAllInputDate(
+    startDateInputS,
+    customDateFormat(startDate)
+  );
+
+  await page.waitForTimeout(1000 * 1);
+
+  await selectDeleteAllInputDate(
+    endDateInputS,
+    customDateFormat(endDate)
+  );
+  await page.waitForTimeout(1000 * 1);
+  await page.click(applyDateS);
+
+  res.json({ message: "working!", status: "success" });
 };

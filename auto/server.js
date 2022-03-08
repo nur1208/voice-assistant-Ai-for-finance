@@ -1,10 +1,9 @@
 import express from "express";
-import morgan from "morgan";
-
 import puppeteer from "puppeteer";
 import cors from "cors";
 import cheerio from "cheerio";
 import axios from "axios";
+import morgan from "morgan";
 import { scrollHandler } from "./controllers/newsControllers.js";
 import {
   checkForBrowser,
@@ -15,6 +14,8 @@ import {
 } from "./controllers/commonController.js";
 import {
   changeChartHandler,
+  changeDateHandler,
+  dateValidation,
   zoomHandler,
 } from "./controllers/chartController.js";
 const app = express();
@@ -44,6 +45,13 @@ app.post("/scroll", scrollHandler);
 app.post("/zoom", checkForBrowser("chart"), zoomHandler);
 
 app.post("/changeChart", changeChartHandler);
+
+app.post(
+  "/changeDate",
+  checkForBrowser("chart"),
+  dateValidation,
+  changeDateHandler
+);
 
 app.listen(port, () => {
   console.log(
