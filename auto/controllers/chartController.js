@@ -48,18 +48,18 @@ export const changeChartHandler = async (req, res) => {
 
 export const zoomHandler = async (req, res) => {
   const { type } = req.body;
-  if (browser && page && windowTypeHolder === "chart") {
-    let isZoomed = false;
-    if (type === "out") {
-      await page.click("span.stx-zoom-out");
-      isZoomed = true;
-    } else if (type === "in") {
-      await page.click("span.stx-zoom-in");
-      isZoomed = true;
-    }
-
-    res.json({ message: "zoom working", isZoomed });
-    return;
+  // if (browser && page && windowTypeHolder === "chart") {
+  let isZoomed = false;
+  if (type === "out") {
+    await page.click("span.stx-zoom-out");
+    isZoomed = true;
+  } else if (type === "in") {
+    await page.click("span.stx-zoom-in");
+    isZoomed = true;
   }
-  res.status(404).json({ message: "browser is not open" });
+
+  res.json({ message: "zoom working", isZoomed });
+  return;
+  // }
+  // res.status(404).json({ message: "browser is not open" });
 };

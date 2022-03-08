@@ -381,12 +381,13 @@ export const useNewsCommandsHandler = (
           }
         );
         // this is just for pushing popup window at top
-        const w = window.open(
-          goToUrl,
-          "ORIGIN_ARTICLE_WINDOW",
-          "popup"
-        );
-        w.close();
+        // const w = window.open(
+        //   goToUrl,
+        //   "ORIGIN_ARTICLE_WINDOW",
+        //   "popup"
+        // );
+        // w.close();
+        // sleep()
         setCurrentArticle(newsArticles[articleNum - 1]);
         console.log(data);
         setPopupWindow(data.isAutoBrowserOpen);

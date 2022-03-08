@@ -338,7 +338,8 @@ deadline - before 2022-2-6 ❌ DONE on 2022-3-6
                 - note: use 'openMultipleCharts' function to open all charts
 deadline - before 2022-3-10 ✔ DONE on 2022-3-8
 130 - {DONE} check for internat connection changes and user location every 5 seconds
-131 - {TODO} show the user sold stock start using yahoo finance chart 
+131 - {TODO} show the user sold stock using yahoo finance chart
+            - create change 
 132 - {TODO} test Modal component 
 133 - {TODO} create callAxios function and use it in useBackTest for clean up axios calls   
 134 - {TODO} make sure that finansis voice is always "Google US English"
@@ -377,6 +378,14 @@ deadline - before 2022-3-12
 - {TODO} let the user update his/her options (like alway with your controller, ignore Multiple stocks,...)
 - {TODO} move useGetCurrentCountry TO hooks folder
 - {TODO} useGetCurrentCountry test if that function doesn't slow down finansis
+- {TODO} make the following data in openHandler function in commonController dynamic:
+        const width = 1366 - 20;
+        const height = 768 - 20;
+        const timeout = 1000 * 90;
+- {TODO} MAKE executablePath dynamic too
+- {TODO} try to make your won useSpeechSynthesis and test it 
+        note: use https://github.com/MikeyParton/react-speech-kit/blob/master/src/useSpeechSynthesis.jsx
+                as reference
 ----- NOT IMPORTANT NOW
 - {TODO} let the user type the symbol or choose a number from his watch list
 - {TODO NOT IMPORTANT NOW} save S&P 500 stocks like {date:{added:[stocks],removed:[stocks] }}

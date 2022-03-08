@@ -1,10 +1,13 @@
 import express from "express";
+import morgan from "morgan";
+
 import puppeteer from "puppeteer";
 import cors from "cors";
 import cheerio from "cheerio";
 import axios from "axios";
 import { scrollHandler } from "./controllers/newsControllers.js";
 import {
+  checkForBrowser,
   closeHandler,
   findingAnswersHandler,
   findingCompaniesHandler,
@@ -27,7 +30,7 @@ let windowTypeHolder;
 
 app.use(express.json());
 app.use(cors("http://localhost:3000"));
-// app.use(morgan("dev"));
+app.use(morgan("dev"));
 
 app.post("/findingAnswers", findingAnswersHandler);
 
@@ -38,10 +41,12 @@ app.post("/open", openHandler);
 app.post("/close", closeHandler);
 
 app.post("/scroll", scrollHandler);
-app.post("/zoom", zoomHandler);
+app.post("/zoom", checkForBrowser("chart"), zoomHandler);
 
 app.post("/changeChart", changeChartHandler);
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+  console.log(
+    `Example app listening at http://localhost:${port}`
+  );
 });

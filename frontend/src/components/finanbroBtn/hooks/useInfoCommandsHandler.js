@@ -155,15 +155,15 @@ export const useInfoCommandsHandler = (
       type.toLowerCase()
     );
 
-    if (!popupWWControl) {
-      response(
-        "the window is close so I can not zoom in or out"
-      );
+    if (!isValidOption) {
+      response(`${type} is not valid option for zooming`);
       return;
     }
 
-    if (!isValidOption) {
-      response(`${type} is not valid option for zooming`);
+    if (!popupWWControl) {
+      response(
+        `chart window is close so I can not zoom ${type}`
+      );
       return;
     }
 

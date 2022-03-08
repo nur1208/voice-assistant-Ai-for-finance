@@ -272,5 +272,15 @@ export const closeHandler = async (req, res) => {
     windowTypeHolder = null;
     page = null;
   }
-  res.json({ message: "close working", isAutoBrowserOpen: false });
+  res.json({
+    message: "close working",
+    isAutoBrowserOpen: false,
+  });
+};
+
+export const checkForBrowser = (type) => (req, res, next) => {
+  if (browser && page && windowTypeHolder === "chart") {
+    return next();
+  }
+  res.status(404).json({ message: "browser is not open" });
 };
