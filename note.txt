@@ -339,9 +339,9 @@ deadline - before 2022-2-6 ❌ DONE on 2022-3-6
 deadline - before 2022-3-10 ✔ DONE on 2022-3-8
 130 - {DONE} check for internat connection changes and user location every 5 seconds
 131 - {TODO} show the user sold stock using yahoo finance chart
-            - {TODO} create changeDate with automation functionality
-            - {TODO} create soldStock state in useTradingHandlers
-            - {TODO} create 'show me sold stocks' command let the user show the stocks
+            - {DONE} create automation changeDate functionality
+            - {DONE} create soldStock state in useFinansis
+            - {TODO} create 'show me sold stocks chart' command let the user show the stocks
                     don't open all the stocks
             - {TODO} add test data to soldStocks and test 'show me sold stocks' command
             - {TODO} let sellSignal function in python script return sold stocks
@@ -393,7 +393,7 @@ deadline - before 2022-3-12
         note: use https://github.com/MikeyParton/react-speech-kit/blob/master/src/useSpeechSynthesis.jsx
                 as reference
 - {TODO} use checkForBrowser middleware and all the routes that needs it in auto api 
-
+- {TODO} close the browser when is unmounted
 ----- NOT IMPORTANT NOW
 - {TODO} let the user type the symbol or choose a number from his watch list
 - {TODO NOT IMPORTANT NOW} save S&P 500 stocks like {date:{added:[stocks],removed:[stocks] }}

@@ -67,7 +67,7 @@ export const useTradingCommendsHandler = (
           response("didn't find any buy signal");
         }
 
-        setFoundBuySignalStocks(foundBuySignalStocks);;
+        setFoundBuySignalStocks(foundBuySignalStocks);
         return { totalNumberOfBuying };
       } catch (error) {
         response(

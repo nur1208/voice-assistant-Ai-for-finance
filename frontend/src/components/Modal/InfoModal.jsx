@@ -36,7 +36,8 @@ export const InfoModal = ({ title, content }) => {
             id="modal-modal-description"
             sx={{ mt: 2 }}
           >
-            {index + 1} - symbol: {symbol}, company name: {name}
+            {index + 1} - symbol: {symbol}
+            {name && <span>, company name: {name}</span>}
           </Typography>
         ))
       ) : (

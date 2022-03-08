@@ -38,6 +38,19 @@ export const useFinansis = ({
   const [currentQuestion, setCurrentQuestion] = useState(null);
   const [foundBuySignalStocks, setFoundBuySignalStocks] =
     useState([]);
+  const [soldStocks, setSoldStocks] = useState([
+    {
+      dateOfBuying: "2020-02-18",
+      dateOfSelling: "2020-03-18",
+      boughtPrice: 93.61,
+      currentPrice: 80.3,
+      previousPrice: 72.67,
+      shares: 712,
+      stopLossPrice: 65.53,
+      symbol: "ABBV",
+    },
+  ]);
+
   const handleOpenModal = (title, content, isInput, label) => {
     setOpenModal(true);
     setModalTitle(title);
@@ -92,38 +105,18 @@ export const useFinansis = ({
     zoomChart,
     openMultipleCharts,
     changeChartTo,
+    showSoldStockChart,
   } = useInfoCommandsHandler(
     response,
     handleOpenModal,
-    handleCloseModal
+    handleCloseModal,
+    soldStocks
   );
 
   const history = useHistory();
   const { pathname } = useLocation();
 
   const [questions, setQuestions] = useState([]);
-
-  // const [localStorageData] = useSaveTestedData();
-
-  // const [isResetBTData, setIsResetBTData] = useLocalStorage(
-  //   "isResetBTData",
-  //   false
-  // );
-
-  // useEffect(() => {
-  //   console.log(
-  //     "useEffect for starting finansis after reloading the page "
-  //   );
-
-  //   if (isResetBTData) {
-  //     SpeechRecognition.startListening({ continuous: true });
-  //     setIsResetBTData(false);
-  //     response("starting back testing");
-
-  //   }
-  // }, [isResetBTData, setIsResetBTData]);
-
-  // SpeechRecognition.startListening({ continuous: true });
 
   const {
     goBackHandler,
@@ -511,6 +504,17 @@ export const useFinansis = ({
         await openMultipleCharts(
           foundBuySignalStocks.join(" and ")
         ),
+      commandFor: "trading",
+    },
+    {
+      command: [
+        "show me (a) chart sold (stocks)",
+        "show me (a) chart salt (stocks)",
+        "show me chart for salt tax",
+        "sold stocks",
+        "sold stocks chart",
+      ],
+      callback: async () => await showSoldStockChart(),
       commandFor: "trading",
     },
     // sellWithProfitOrNot

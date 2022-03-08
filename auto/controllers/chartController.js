@@ -127,28 +127,39 @@ const selectDeleteAllInputDate = async (selector, date) => {
 };
 
 export const changeDateHandler = async (req, res) => {
-  await page.click(".datePickerBtn");
-  await page.waitForTimeout(1000 * 3);
+  try {
+    await page.waitForSelector(".datePickerBtn", {
+      timeout: 1000 * 60,
+    });
+    await page.click(".datePickerBtn");
+    await page.waitForTimeout(1000 * 3);
 
-  const { startDate, endDate } = req.body;
+    const { startDate, endDate } = req.body;
 
-  console.log({
-    startDate: customDateFormat(startDate),
-  });
+    console.log({
+      startDate: customDateFormat(startDate),
+    });
 
-  await selectDeleteAllInputDate(
-    startDateInputS,
-    customDateFormat(startDate)
-  );
+    await selectDeleteAllInputDate(
+      startDateInputS,
+      customDateFormat(startDate)
+    );
 
-  await page.waitForTimeout(1000 * 1);
+    await page.waitForTimeout(1000 * 1);
 
-  await selectDeleteAllInputDate(
-    endDateInputS,
-    customDateFormat(endDate)
-  );
-  await page.waitForTimeout(1000 * 1);
-  await page.click(applyDateS);
+    await selectDeleteAllInputDate(
+      endDateInputS,
+      customDateFormat(endDate)
+    );
+    await page.waitForTimeout(1000 * 1);
+    await page.click(applyDateS);
 
-  res.json({ message: "working!", status: "success" });
+    res.json({ message: "working!", status: "success" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "something went wrong while selecting dates",
+      status: "fall",
+    });
+  }
 };

@@ -17,11 +17,13 @@ import {
   KNOWN_KEYWORD_ROUTE,
   YAHOO_FINANCE_URL,
 } from "../../../utils/serverUtils";
+import { sleep } from "../../../utils/sleep";
 
 export const useInfoCommandsHandler = (
   response,
   handleOpenModal,
-  handleCloseModal
+  handleCloseModal,
+  soldStocks
 ) => {
   const [popupWindow, setPopupWindow] = useState(null);
   const [foundStock, setFoundStock] = useState([]);
@@ -30,6 +32,8 @@ export const useInfoCommandsHandler = (
   const width = window.outerWidth - 20;
   const height = window.outerHeight - 20;
   const [popupWWControl, setPopupWWControl] = useState(null);
+  const [chooseNum, setChooseNum] = useState(-1);
+  // const [currentStock, setCurrentStock] = useState({});
 
   const changeChartTo = async (type) => {
     const validOptions = [
@@ -130,6 +134,31 @@ export const useInfoCommandsHandler = (
     }, 1000 * 7);
   };
 
+  let currentStock = {};
+  const changeDate = async () => {
+    console.log({ currentStock });
+
+    try {
+      const { data } = await axios.post(
+        `${AUTO_API_URL}/changeDate`,
+        {
+          startDate: currentStock.dateOfBuying,
+          endDate: currentStock.dateOfSelling,
+        }
+      );
+      response(`here is sold chart ${currentStock.symbol}`);
+    } catch (error) {
+      console.log(error);
+
+      if (error.response?.data?.message)
+        response(error.response.data.message);
+      else
+        response(
+          "something wrong from auto app, please make sure your auto app is running"
+        );
+    }
+  };
+
   const openChartWithControl = async (symbol) => {
     try {
       response("loading the page will take seconds");
@@ -140,7 +169,11 @@ export const useInfoCommandsHandler = (
 
       setPopupWWControl(data.isAutoBrowserOpen);
       response("the page is done loading");
-
+      await sleep(1000 * 5);
+      response("setting dates")
+      if (windowType.type === "soldChart") {
+        await changeDate();
+      }
       // window.open(goToUrl, "_blank");
     } catch (error) {
       response(
@@ -232,63 +265,6 @@ export const useInfoCommandsHandler = (
         break;
     }
   };
-  const foundMultipleStocks = async (num) => {
-    const wordNum = [
-      "zero",
-      "one",
-      "two",
-      "three",
-      "four",
-      "five",
-      "six",
-      "seven",
-      "eight",
-      "nine",
-      "ten",
-      "eleven",
-      "twelve",
-      "thirteen",
-      "fourteen",
-      "fifteen",
-      "sixteen",
-      "seventeen",
-      "eighteen",
-      "nineteen",
-    ];
-    let finalNum = num;
-    if (wordNum.includes(finalNum)) {
-      finalNum = wordNum.indexOf(finalNum);
-    }
-    console.log({ finalNum });
-    if (finalNum > 0 && finalNum <= foundStock.length) {
-      const { symbol } = foundStock[finalNum - 1];
-
-      yahooFinanceOpeningWResponses(windowType.type, symbol);
-      handleCloseModal();
-      // const width = window.outerWidth - 20;
-      // const height = (window.outerHeight - 20) / 2;
-      // const newPopupWindow = window.open(
-      //   `https://finance.yahoo.com/chart/${symbol}`,
-      //   `ORIGIN_CHART_WINDOW_${openedChartsNum + 1}`,
-      //   `popup,width=${width},height=${height}`
-      // );
-      // setPopupWindow([...popupWindow, newPopupWindow]);
-      // setOpenedChartsNum(openedChartsNum + 1);
-
-      if (windowType.type === "currentPrice") {
-        await currentStockPrice(symbol);
-        return;
-      }
-
-      if (windowType.isWithControl) {
-        openChartWithControl(symbol);
-      } else {
-        openWindow(windowType.type, symbol);
-      }
-    } else {
-      response(`number ${finalNum} out of range`);
-    }
-  };
 
   const openYahooFinance = async (
     type,
@@ -296,7 +272,7 @@ export const useInfoCommandsHandler = (
     isWithControl,
     isIgnoreFoundMultiple
   ) => {
-    let finalTarget = target;
+    let finalTarget = target.trim();
     // const isFound
     if (!(await lookupForTickersV2(finalTarget))) {
       const symbolsFound = await searchCompanyNameV2(
@@ -420,6 +396,61 @@ export const useInfoCommandsHandler = (
     }
   };
 
+  const foundMultipleStocks = async (num) => {
+    const wordNum = [
+      "zero",
+      "one",
+      "two",
+      "three",
+      "four",
+      "five",
+      "six",
+      "seven",
+      "eight",
+      "nine",
+      "ten",
+      "eleven",
+      "twelve",
+      "thirteen",
+      "fourteen",
+      "fifteen",
+      "sixteen",
+      "seventeen",
+      "eighteen",
+      "nineteen",
+    ];
+    let finalNum = num;
+    if (wordNum.includes(finalNum)) {
+      finalNum = wordNum.indexOf(finalNum);
+    }
+    console.log({ finalNum });
+    // setChooseNum(finalNum);
+    if (finalNum > 0 && finalNum <= foundStock.length) {
+      const { symbol } = foundStock[finalNum - 1];
+      currentStock = soldStocks[finalNum - 1];
+      handleCloseModal();
+
+      if (windowType.type === "soldChart") {
+        openYahooFinance("chart", symbol, true, true);
+        return;
+      }
+
+      yahooFinanceOpeningWResponses(windowType.type, symbol);
+      if (windowType.type === "currentPrice") {
+        await currentStockPrice(symbol);
+        return;
+      }
+
+      if (windowType.isWithControl) {
+        openChartWithControl(symbol);
+      } else {
+        openWindow(windowType.type, symbol);
+      }
+    } else {
+      response(`number ${finalNum} out of range`);
+    }
+  };
+
   const closeChart = async () => {
     if (popupWindow) {
       if (popupWindow.length === 1)
@@ -517,6 +548,19 @@ export const useInfoCommandsHandler = (
     }
   };
 
+  const showSoldStockChart = async () => {
+    response("the following stocks has been sold");
+    // const onlySymbols = soldStocks.map(({ symbol }) => ({
+    //   symbol,
+    // }));
+    handleOpenModal("sold the following stocks:", soldStocks);
+    await sleep(1000);
+    response("choose one by saying stock number 3 for example");
+
+    setWindowType({ type: "soldChart", isWithControl: true });
+    setFoundStock(soldStocks);
+  };
+
   return {
     openYahooFinance,
     closeChart,
@@ -526,5 +570,7 @@ export const useInfoCommandsHandler = (
     zoomChart,
     openMultipleCharts,
     changeChartTo,
+
+    showSoldStockChart,
   };
 };
