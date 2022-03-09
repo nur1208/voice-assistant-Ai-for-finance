@@ -158,7 +158,8 @@ export const useFinansis = ({
     setIsWaitingUserDone,
     isForceSellAgain,
     setIsForceSellAgain,
-    setFoundBuySignalStocks
+    setFoundBuySignalStocks,
+    setSoldStocks
   );
 
   const [findingAnswerFor, setFindingAnswerFor] = useState("");

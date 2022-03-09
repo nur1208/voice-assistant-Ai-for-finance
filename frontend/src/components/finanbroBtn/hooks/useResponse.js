@@ -17,6 +17,25 @@ export const useResponse = () => {
     useSpeechSynthesis();
 
   const [randomIndex, setRandomIndex] = useState(0);
+  const [currentVoiceIndex, setCurrentVoiceIndex] =
+    useLocalStorage("currentVoiceIndex", 7);
+  const FINANSIS_VOICE = "Google US English";
+
+  // make sure that finansis voice is always "Google US English" if the voice exit
+  const changeVoiceToFinansisVoice = () => {
+    console.log("in changeVoiceToFinansisVoice");
+
+    let voiceIndex = currentVoiceIndex;
+    for (let index = 0; index < voices.length; index++) {
+      const voice = voices[index];
+      if (FINANSIS_VOICE === voice.name) {
+        setCurrentVoiceIndex(index);
+        voiceIndex = index;
+      }
+    }
+
+    return voiceIndex;
+  };
 
   const response = (optionsResponse) => {
     let randomOption;
@@ -24,15 +43,35 @@ export const useResponse = () => {
       randomOption = optionsResponse[0];
     else randomOption = optionsResponse[randomIndex];
     console.log("here");
-    console.log({ voices });
-    if (typeof optionsResponse !== "object")
-      speak({ text: optionsResponse, voice: voices[7] });
-    else {
-      speak({ text: randomOption, voice: voices[7] });
-      setRandomIndex(
-        Math.floor(Math.random() * optionsResponse.length)
-      );
-      // setRandomIndex(10);
+    // let currentVoiceIndex = 7;
+    console.log({
+      voices,
+      finansisVoice: voices[currentVoiceIndex].name,
+    });
+
+    const handleResponse = (voiceIndex) => {
+      if (typeof optionsResponse !== "object")
+        speak({
+          text: optionsResponse,
+          voice: voices[voiceIndex],
+        });
+      else {
+        speak({
+          text: randomOption,
+          voice: voices[voiceIndex],
+        });
+        setRandomIndex(
+          Math.floor(Math.random() * optionsResponse.length)
+        );
+        // setRandomIndex(10);
+      }
+    };
+
+    if (voices[currentVoiceIndex].name === FINANSIS_VOICE) {
+      handleResponse(currentVoiceIndex);
+    } else {
+      const voiceIndex = changeVoiceToFinansisVoice();
+      handleResponse(voiceIndex);
     }
   };
 

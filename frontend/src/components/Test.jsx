@@ -9,6 +9,7 @@ import { useBackTest } from "./Simulator/utils/useBackTest";
 import { useDispatch } from "react-redux";
 import { actionCreators } from "../state";
 import { bindActionCreators } from "redux";
+import { useAxiosFetch } from "../hooks/useAxiosFetch";
 
 export const Test = () => {
   const {
@@ -25,13 +26,33 @@ export const Test = () => {
     actionCreators,
     dispatch
   );
+
+  // const { data, loading, error, errorMessage } = useAxiosFetch(
+  //   `${PYTHON_API}/findBuySignal`
+  // );
+  const [controller, setcontroller] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      const controllerLocal = new AbortController();
+
+      setcontroller(controllerLocal);
+      const { data } = await axios({
+        url: `${PYTHON_API}/findBuySignal`,
+        method: "get",
+        signal: controllerLocal.signal,
+
+        // signal: controller.signal,
+      });
+    })();
+  }, []);
   return (
     <div>
       <h1>{holdingStocks.length}</h1>
       <h1>{count}</h1>
       <h1>{loop + ""}</h1>
       <h1>{currentCash}</h1>
-      <button onClick={() => updateBTState("working")}>
+      <button onClick={() => controller.abort()}>
         click here to get data
       </button>{" "}
       <ul>

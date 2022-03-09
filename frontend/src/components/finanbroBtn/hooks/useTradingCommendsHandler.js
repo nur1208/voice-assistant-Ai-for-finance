@@ -44,7 +44,8 @@ export const useTradingCommendsHandler = (
   setIsWaitingUserDone,
   isForceSellAgain,
   setIsForceSellAgain,
-  setFoundBuySignalStocks
+  setFoundBuySignalStocks,
+  setSoldStocks
 ) => {
   const findBuySignal = async () => {
     try {
@@ -107,10 +108,12 @@ export const useTradingCommendsHandler = (
     try {
       response("checking for sell signals");
       const {
-        data: { totalNumberOfSell },
+        data: { totalNumberOfSell,soldStocks },
       } = await axios(`${PYTHON_API}/findSellSignal`);
 
+
       if (totalNumberOfSell > 0) {
+        setSoldStocks(soldStocks)
         // if (4 > 0) {
         try {
           response(`found ${totalNumberOfSell} sell signals`);

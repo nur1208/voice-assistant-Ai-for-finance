@@ -61,16 +61,17 @@ export const PAGES = [
   },
   {
     path: "/test",
-    Component: (props) => (
-      <BasicModal
-        open={true}
-        isProgress
-        progressData={{
-          sell: "fall",
-          buy: "loading",
-          setStopLoss: "success",
-        }}
-      />
+    Component: () => (
+      // <BasicModal
+      //   open={true}
+      //   isProgress
+      //   progressData={{
+      //     sell: "fall",
+      //     buy: "loading",
+      //     setStopLoss: "success",
+      //   }}
+      // />
+      <Test />
     ),
   },
 ];
@@ -146,7 +147,8 @@ export const App = () => {
 
   // tell users finansis doesn't work without internet connection
   // if the user offline
-  if (networkStatus === "offline") return <Offline />;
+  if (!navigator.onLine || networkStatus === "offline")
+    return <Offline />;
   // getAllTickersInDatabaseToJson();
   const waitOption = {
     // handleWaitUserInput,

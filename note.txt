@@ -341,16 +341,15 @@ deadline - before 2022-3-10 ✔ DONE on 2022-3-8
 131 - {TODO} show the user sold stock using yahoo finance chart
             - {DONE} create automation changeDate functionality
             - {DONE} create soldStock state in useFinansis
-            - {TODO} create 'show me sold stocks chart' command let the user show the stocks
+            - {DONE} create 'show me sold stocks chart' command let the user choose the stocks
                     don't open all the stocks
-            - {TODO} add test data to soldStocks and test 'show me sold stocks' command
-            - {TODO} let sellSignal function in python script return sold stocks
-            - {TODO} save returned stocks in sold stocks  
-132 - {TODO} test Modal component 
-133 - {TODO} create callAxios function and use it in useBackTest for clean up axios calls   
-134 - {TODO} make sure that finansis voice is always "Google US English"
-deadline - before 2022-3-12 
+            - {DONE} add test data to soldStocks and test 'show me sold stocks' command
+            - {DONE} let sellSignal function in python script return sold stocks
+            - {DONE} save returned stocks in sold stocks  
+132 - {DONE} test Modal component 
+134 - {DONE} make sure that finansis voice is always "Google US English"
 135 - {TODO} fix user say 'close the window' after opening statistic window error and also for 'open * chart with your control'
+deadline - before 2022-3-12 
 136 - {TODO} fix 2
 
     {catch: 884659.884098053, date: "2020-04-30", stock…}
@@ -394,7 +393,17 @@ deadline - before 2022-3-12
                 as reference
 - {TODO} use checkForBrowser middleware and all the routes that needs it in auto api 
 - {TODO} close the browser when is unmounted
+- {TODO} TEST let sellSignal function in python script return sold stocks
 ----- NOT IMPORTANT NOW
+133 - {TODO} create callAxios function and use it in useBackTest for clean up axios calls
+            note: this is not easy to do so do it later if it still important
+                here is a hint of how you can do it?
+                first update findBuySignal in python script
+                let the script process stock by stocks 
+                and let the frontend send the s&p 500 stocks 
+                to api one by one
+                tell the user your about to reload if the process
+                still going
 - {TODO} let the user type the symbol or choose a number from his watch list
 - {TODO NOT IMPORTANT NOW} save S&P 500 stocks like {date:{added:[stocks],removed:[stocks] }}
 get  is the market open data using python and get the data every day
