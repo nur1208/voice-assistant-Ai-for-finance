@@ -349,7 +349,7 @@ deadline - before 2022-3-10 ✔ DONE on 2022-3-8
 132 - {DONE} test Modal component 
 134 - {DONE} make sure that finansis voice is always "Google US English"
 135 - {DONE} fix user say 'close the window' after opening statistic window error and also for 'open * chart with your control'
-deadline - before 2022-3-12 
+deadline - before 2022-3-12 ✔ DONE on 2022-3-10
 136 - {TODO} fix 2
 
     {catch: 884659.884098053, date: "2020-04-30", stock…}
@@ -395,7 +395,7 @@ deadline - before 2022-3-12
 - {TODO} TEST let sellSignal function in python script return sold stocks
 - {TODO} fix finansis say 'i don't find stocks for * from yahoo finance when backend server down'
 - {TODO} let finansis ask 'do you want me to learn about {book} company' when book keyword not exist in the database
-
+- {TODO} add initial value for accountValue and sp500Data states that in useBackTest and it will fix TOTAL GAIN/LOSS error
 ----- NOT IMPORTANT NOW
 - {TODO} change closeChart name to closeYahooFinance
 133 - {TODO} create callAxios function and use it in useBackTest for clean up axios calls

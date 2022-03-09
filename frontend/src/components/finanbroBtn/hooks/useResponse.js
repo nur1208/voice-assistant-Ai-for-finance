@@ -44,10 +44,10 @@ export const useResponse = () => {
     else randomOption = optionsResponse[randomIndex];
     console.log("here");
     // let currentVoiceIndex = 7;
-    console.log({
-      voices,
-      finansisVoice: voices[currentVoiceIndex].name,
-    });
+    // console.log({
+    //   voices,
+    //   finansisVoice: voices[currentVoiceIndex].name,
+    // });
 
     const handleResponse = (voiceIndex) => {
       if (typeof optionsResponse !== "object")
@@ -66,6 +66,10 @@ export const useResponse = () => {
         // setRandomIndex(10);
       }
     };
+
+    if (!voices[currentVoiceIndex]) {
+      return;
+    }
 
     if (voices[currentVoiceIndex].name === FINANSIS_VOICE) {
       handleResponse(currentVoiceIndex);

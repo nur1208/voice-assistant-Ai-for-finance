@@ -358,44 +358,57 @@ export const useBackTest = () => {
 
         if (holdStocksLocal.length > 0) {
           // get the current price fot hold stocks
-
-          await handleBackTestingAxiosError(
-            getSp500Data,
+          console.log({
+            sp500CallCondition:
+              !sp500Data.length ||
+              sp500Data[sp500Data.length - 1].date !== date,
             date,
-            "something went wrong while getting S&P 500 data ❌"
-          );
+          });
 
-          await handleBackTestingAxiosError(
-            updateCurrentPrice,
-            date,
-            "something went wrong while updating Stocks price ❌"
-          );
-          // look for sell signals for hold stocks
-
-          await handleBackTestingAxiosError(
-            sell,
-            date,
-            "something went wrong while selling Stocks price ❌",
-            isForceSell,
-            isWithProfitOrNot
-          );
-          // setAccountValue((oldData) => [
-          //   ...oldData,
-          //   {
-          //     catch: currentCashLocal,
-          //     stockValue: currentStockPriceLocal,
-          //     date,
-          //   },
-          // ]);
-
-          accountValueLocal = [
-            ...accountValueLocal,
-            {
-              catch: currentCashLocal,
-              stockValue: currentStockPriceLocal,
+          // fixing updating data for the same date when first date of force selling
+          if (
+            !sp500Data.length ||
+            sp500Data[sp500Data.length - 1].date !== date
+          ) {
+            // console.log("call getSp500Data");
+            await handleBackTestingAxiosError(
+              getSp500Data,
               date,
-            },
-          ];
+              "something went wrong while getting S&P 500 data ❌"
+            );
+
+            await handleBackTestingAxiosError(
+              updateCurrentPrice,
+              date,
+              "something went wrong while updating Stocks price ❌"
+            );
+            // look for sell signals for hold stocks
+
+            await handleBackTestingAxiosError(
+              sell,
+              date,
+              "something went wrong while selling Stocks price ❌",
+              isForceSell,
+              isWithProfitOrNot
+            );
+            // setAccountValue((oldData) => [
+            //   ...oldData,
+            //   {
+            //     catch: currentCashLocal,
+            //     stockValue: currentStockPriceLocal,
+            //     date,
+            //   },
+            // ]);
+
+            accountValueLocal = [
+              ...accountValueLocal,
+              {
+                catch: currentCashLocal,
+                stockValue: currentStockPriceLocal,
+                date,
+              },
+            ];
+          }
         }
         // look for buy signals TODO clean up this code
         if (!isForceSell) {

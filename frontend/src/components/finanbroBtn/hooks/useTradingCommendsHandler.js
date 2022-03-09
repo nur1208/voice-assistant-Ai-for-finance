@@ -108,12 +108,11 @@ export const useTradingCommendsHandler = (
     try {
       response("checking for sell signals");
       const {
-        data: { totalNumberOfSell,soldStocks },
+        data: { totalNumberOfSell, soldStocks },
       } = await axios(`${PYTHON_API}/findSellSignal`);
 
-
       if (totalNumberOfSell > 0) {
-        setSoldStocks(soldStocks)
+        setSoldStocks(soldStocks);
         // if (4 > 0) {
         try {
           response(`found ${totalNumberOfSell} sell signals`);
@@ -188,7 +187,7 @@ export const useTradingCommendsHandler = (
   const getBTInput = async (label, message) => {
     response(message);
     await sleep(1000);
-    response("then click enter to submit");
+    // response("then click enter to submit");
     handleOpenModal("", "", true, label);
   };
 
