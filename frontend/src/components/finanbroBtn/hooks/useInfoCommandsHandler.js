@@ -170,7 +170,7 @@ export const useInfoCommandsHandler = (
       setPopupWWControl(data.isAutoBrowserOpen);
       response("the page is done loading");
       await sleep(1000 * 5);
-      response("setting dates")
+      response("setting dates");
       if (windowType.type === "soldChart") {
         await changeDate();
       }
@@ -469,7 +469,7 @@ export const useInfoCommandsHandler = (
 
       setPopupWWControl(data.isAutoBrowserOpen);
     } else {
-      response(`there is no chart open to close it`);
+      response(`there is no window open to close it`);
     }
   };
 

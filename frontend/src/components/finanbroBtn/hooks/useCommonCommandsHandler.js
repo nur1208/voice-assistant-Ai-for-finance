@@ -13,7 +13,9 @@ export const useCommonCommandsHandler = (
   handleOpenModal,
   handleCloseModal,
   questions,
-  setQuestions
+  setQuestions,
+  handleClosePopupWindow,
+  closeChart
 ) => {
   const history = useHistory();
 
@@ -184,6 +186,13 @@ export const useCommonCommandsHandler = (
     setQuestions([...questions, questionObject]);
   };
 
+  const handleCloseAnyPopup = async () => {
+    console.log("in handleCloseAnyPopup");
+    const isWindowClose = await handleClosePopupWindow();
+    console.log({ isWindowClose });
+    if (!isWindowClose) await closeChart();
+  };
+
   return {
     goBackHandler,
     handleStopListening,
@@ -192,5 +201,6 @@ export const useCommonCommandsHandler = (
     handleFindingAnswer,
     openAnswerDetail,
     closeAnswerDetail,
+    handleCloseAnyPopup,
   };
 };

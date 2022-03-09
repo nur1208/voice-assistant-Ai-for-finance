@@ -348,7 +348,7 @@ deadline - before 2022-3-10 ✔ DONE on 2022-3-8
             - {DONE} save returned stocks in sold stocks  
 132 - {DONE} test Modal component 
 134 - {DONE} make sure that finansis voice is always "Google US English"
-135 - {TODO} fix user say 'close the window' after opening statistic window error and also for 'open * chart with your control'
+135 - {DONE} fix user say 'close the window' after opening statistic window error and also for 'open * chart with your control'
 deadline - before 2022-3-12 
 136 - {TODO} fix 2
 
@@ -377,7 +377,6 @@ deadline - before 2022-3-12
         doesn't affect other windows
 - {TODO} let the user type the symbol or choose a number when open Multiple companies found popup 
 
-
 ---- after create user functionality (login, sign up, ...)
 - {TODO} create watchList functionality
 - {TODO} let the user update his/her options (like alway with your controller, ignore Multiple stocks,...)
@@ -394,7 +393,11 @@ deadline - before 2022-3-12
 - {TODO} use checkForBrowser middleware and all the routes that needs it in auto api 
 - {TODO} close the browser when is unmounted
 - {TODO} TEST let sellSignal function in python script return sold stocks
+- {TODO} fix finansis say 'i don't find stocks for * from yahoo finance when backend server down'
+- {TODO} let finansis ask 'do you want me to learn about {book} company' when book keyword not exist in the database
+
 ----- NOT IMPORTANT NOW
+- {TODO} change closeChart name to closeYahooFinance
 133 - {TODO} create callAxios function and use it in useBackTest for clean up axios calls
             note: this is not easy to do so do it later if it still important
                 here is a hint of how you can do it?

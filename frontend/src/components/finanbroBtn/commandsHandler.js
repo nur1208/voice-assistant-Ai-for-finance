@@ -420,19 +420,25 @@ export const useNewsCommandsHandler = (
   };
 
   const handleClosePopupWindow = async () => {
+    console.log("in handleClosePopupWindows");
+
+    let isWindowClosed = true;
     if (popupWindow) {
       const { data } = await axios.post(`${AUTO_API_URL}/close`);
 
       setPopupWindow(data.isAutoBrowserOpen);
       response("closing popup window");
-    } else if (setPopupWindowWithoutController) {
+    } else if (popupWindowWithoutController) {
       popupWindowWithoutController.close();
       //     popupWindow.scrollBy(0, 1000);
       response("closing popup window");
       setPopupWindowWithoutController(null);
     } else {
-      response("popup window is not open, so i can't close it");
+      // response("popup window is not open, so i can't close it");
+      isWindowClosed = false;
     }
+
+    return isWindowClosed;
   };
 
   const handleStopReading = () => {

@@ -87,7 +87,6 @@ export const useFinansis = ({
     setPageNumber,
     setNewsArticles,
     openArticleWithoutControllerItHandler,
-    handleClosePopupWindowWithoutController,
     handleScrollDetailPage,
   } = useNewsCommandsHandler(
     response,
@@ -126,6 +125,7 @@ export const useFinansis = ({
     handleFindingAnswer,
     openAnswerDetail,
     closeAnswerDetail,
+    handleCloseAnyPopup,
   } = useCommonCommandsHandler(
     setPageNumber,
     setNewsArticles,
@@ -136,7 +136,9 @@ export const useFinansis = ({
     handleOpenModal,
     handleCloseModal,
     questions,
-    setQuestions
+    setQuestions,
+    handleClosePopupWindow,
+    closeChart
   );
 
   const {
@@ -271,14 +273,29 @@ export const useFinansis = ({
       callback: (page) => handleGoToPage(page),
       commandFor: "every section",
     },
+    // {
+    //   command: [
+    //     "close pop-up window",
+    //     "close the window",
+    //     "close the article",
+    //   ],
+    //   callback: async () => await handleClosePopupWindow(),
+    //   commandFor: "news",
+    // },
+
     {
       command: [
         "close pop-up window",
         "close the window",
         "close the article",
+        "close (the) chart",
+        "close charts",
+        "close statistics",
+        "close news (window)",
+        "close (the) statistic",
       ],
-      callback: async () => await handleClosePopupWindow(),
-      commandFor: "news",
+      callback: async () => await handleCloseAnyPopup(),
+      commandFor: "every section",
     },
     {
       command: "start reading (news) from article *",
@@ -287,17 +304,17 @@ export const useFinansis = ({
       commandFor: "news",
     },
 
-    {
-      command: [
-        "close (the) chart",
-        "close charts",
-        "close statistics",
-        "close news (window)",
-        "close (the) statistic",
-      ],
-      callback: async (target) => await closeChart(target),
-      commandFor: "info",
-    },
+    // {
+    //   command: [
+    // "close (the) chart",
+    // "close charts",
+    // "close statistics",
+    // "close news (window)",
+    // "close (the) statistic",
+    //   ],
+    //   callback: async (target) => await closeChart(target),
+    //   commandFor: "info",
+    // },
     {
       command: "open * chart",
       callback: async (target) =>
@@ -338,7 +355,7 @@ export const useFinansis = ({
       commandFor: "every section",
     },
     {
-      command: ["give me * statistics", "open Apple statistics"],
+      command: ["give me * statistics", "open * statistics"],
       callback: async (target) =>
         await openYahooFinance("statistics", target),
       commandFor: "info",
