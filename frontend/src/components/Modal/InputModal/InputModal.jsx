@@ -96,7 +96,9 @@ export default function InputModal({
           variant="filled"
           // inputRef={refTF}
           onChange={(e) => setUserInput(e.target.value)}
-        />
+        >
+          soemting
+        </TextField>
       </Wrapper>
     </Box>
   );

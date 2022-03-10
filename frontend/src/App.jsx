@@ -38,6 +38,7 @@ import { LinearLoading } from "./components/LinearLoading";
 import { TradingPage } from "./pages/TradingPage";
 import { ProgressModal } from "./components/Modal/ProgressModal/ProgressModal";
 import { useNetworkStatus } from "./hooks/useNetworkStatus";
+import { DateInputFormat } from "./components/DateInputFormat";
 export const PAGES = [
   {
     path: "/",
@@ -64,14 +65,17 @@ export const PAGES = [
     Component: () => (
       // <BasicModal
       //   open={true}
-      //   isProgress
-      //   progressData={{
-      //     sell: "fall",
-      //     buy: "loading",
-      //     setStopLoss: "success",
-      //   }}
+      //   isInput
+      //   label={{ stateName: "soemthign", label: "date" }}
+      //   // isProgress
+      //   // progressData={{
+      //   //   sell: "fall",
+      //   //   buy: "loading",
+      //   //   setStopLoss: "success",
+      //   // }}
       // />
-      <Test />
+      // <Test />
+      <DateInputFormat />
     ),
   },
 ];
