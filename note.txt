@@ -360,17 +360,14 @@ deadline - before 2022-3-12 ✔ DONE on 2022-3-10
 - {DONE} show the user when the market is close in back testing 
 - {DONE} handle stop force selling after not existing dates
         note: just try not to call force sell function if the current date bigger then 2022-02-01
-deadline - before 2022-3-13
-- {TODO} improve tell the user you are about to close the window when backTesting still not done 
-- {TODO} don't get questions every render from the api, save the documents in 
-        user localStorage and just check the number of the questions in LS 
-        same as in the database
-- {TODO} fix handleGoToPage function when a user say 'go to back testing'
-- {TODO} create 'there was and error while selling stocks, do you want me to try to sell again' command
+deadline - before 2022-3-13 ✔ DONE on 2022-3-10
+- {DONE} fix handleGoToPage function when a user say 'go to back testing'
+- {DONE} create 'do you want me to try to sell again' command loop  
 - {TODO} create trade progress functionality
 - {TODO} create 'show me trade progress' command
 - {TODO} make sure the last line in openMultipleCharts 'setPopupWindow(popupWindows)';
         doesn't affect other windows
+deadline - before 2022-3-14
 - {TODO} let the user type the symbol or choose a number when open Multiple companies found popup 
 
 ---- after create user functionality (login, sign up, ...)
@@ -393,9 +390,14 @@ deadline - before 2022-3-13
 - {TODO} fix finansis say 'i don't find stocks for * from yahoo finance when backend server down'
 - {TODO} let finansis ask 'do you want me to learn about {book} company' when book keyword not exist in the database
 - {TODO} add initial value for accountValue and sp500Data states that in useBackTest and it will fix TOTAL GAIN/LOSS error
-
+- {TODO} let 'what's up with {something}' command gets new news
 final deadline v1 - before 2022-3-31
 ----- NOT IMPORTANT NOW
+- {TODO} don't get questions every render from the api, save the documents in 
+        user localStorage and just check the number of the questions in LS 
+        same as in the database
+    note: use Redis
+- {TODO} improve tell the user you are about to close the window when backTesting still not done
 - {TODO} improve sell strategy by just sell after 30 days of holding stocks
 - {TODO} let the user enter sell after {30, 20, 10, 90} days
 - {TODO} fix finansis btn moving to right when inputModal opened error

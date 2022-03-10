@@ -169,6 +169,8 @@ export const useCommonCommandsHandler = (
     }
 
     if (page === "home") history.push("/");
+    else if (page === "back testing" || page === "pack testing")
+      history.push("/backTesting");
     else {
       const paths = PAGES.map(({ path }) => path.split("/")[1]);
       console.log("🧐");

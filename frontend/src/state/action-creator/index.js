@@ -1,4 +1,14 @@
 import { BT_ACTIONS } from "../reducers/backTestingReducer";
+import { RESPONSE_ACTIONS } from "../reducers/responseReducer";
+
+export const updateSecondCommand = (data) => {
+  return (dispatch) => {
+    dispatch({
+      type: RESPONSE_ACTIONS.UPDATE_SECOND_COMMAND,
+      payload: data,
+    });
+  };
+};
 
 export const updateBTState = (newState) => {
   //   console.log("here where");

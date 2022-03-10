@@ -13,6 +13,7 @@ import { useSaveTestedData } from "../../Simulator/utils/useSaveTestedData";
 export const secondCommandOptions = {
   rewritingTestedData: "rewritingTestedData",
   forceSelling: "forceSelling",
+  tryTradingAgain: "tryTradingAgain",
 };
 
 export const useResponse = () => {
@@ -115,7 +116,8 @@ export const useResponse = () => {
 
   const { forceSelling } = useBackTest();
 
-  const { resetBTState } = useReduxActions();
+  const { resetBTState, updateSecondCommand } =
+    useReduxActions();
 
   const [isResetBTData, setIsResetBTData] = useLocalStorage(
     "isResetBTData",
@@ -126,6 +128,9 @@ export const useResponse = () => {
     (state) => state.back_testing
   );
 
+  const { secondCommand } = useSelector(
+    (state) => state.response_store
+  );
   const respondedWithYesSC = async ({
     handleReadingHeadLines,
     handleScrollDetailPage,
@@ -136,7 +141,13 @@ export const useResponse = () => {
     setIsForceSellAgain,
   }) => {
     console.log(secondCommandFor);
-    switch (secondCommandFor) {
+
+    let localSecondFor = secondCommandFor;
+    if (secondCommand?.type) localSecondFor = secondCommand.type;
+    else if (typeof secondCommandFor === "object")
+      localSecondFor = secondCommandFor.type;
+
+    switch (localSecondFor) {
       case "readThHeadLines":
         handleReadingHeadLines();
 
@@ -202,6 +213,20 @@ export const useResponse = () => {
         response("force selling is done");
         setIsForceSellAgain(true);
         break;
+
+      case secondCommandOptions.tryTradingAgain:
+        setSecondCommandFor("");
+        updateSecondCommand({});
+        response(
+          `okay, I Will try ${secondCommand.other.TradingType} again`
+        );
+
+        await sleep(5000);
+
+        await secondCommand.other.callback();
+
+        break;
+
       default:
         response("I didn't get that. you can try again... bro");
         break;
@@ -210,7 +235,12 @@ export const useResponse = () => {
   };
 
   const respondedWithNoSC = () => {
-    switch (secondCommandFor) {
+    let localSecondFor = secondCommandFor;
+    if (secondCommand?.type) localSecondFor = secondCommand.type;
+    else if (typeof secondCommandFor === "object")
+      localSecondFor = secondCommandFor.type;
+
+    switch (localSecondFor) {
       case "readThHeadLines":
         response("WOW, thank you");
         break;
@@ -228,6 +258,11 @@ export const useResponse = () => {
 
       case secondCommandOptions.forceSelling:
         response("what every you say, I won't force sell");
+        break;
+      case secondCommandOptions.tryTradingAgain:
+        response(
+          `what every you say, I won't ${secondCommand.other.TradingType} again`
+        );
         break;
       default:
         response("I didn't get that. you can try again... bro");

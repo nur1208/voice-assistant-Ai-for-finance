@@ -434,7 +434,7 @@ export const useFinansis = ({
       commandFor: "trading",
     },
     {
-      command: "sell stocks",
+      command: ["tell stocks", "sell stocks", "so stocks"],
       callback: () => sellStocks(),
       commandFor: "trading",
     },

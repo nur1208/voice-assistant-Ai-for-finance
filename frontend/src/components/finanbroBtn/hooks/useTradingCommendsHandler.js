@@ -50,6 +50,9 @@ export const useTradingCommendsHandler = (
   setFoundBuySignalStocks,
   setSoldStocks
 ) => {
+  const { resetBTState, updateSecondCommand } =
+    useReduxActions();
+
   const findBuySignal = async () => {
     try {
       response("getting s&p 500 stocks");
@@ -107,6 +110,22 @@ export const useTradingCommendsHandler = (
     }
   };
 
+  const handleTradingError = async (callback, type) => {
+    await sleep(1000);
+    response(`do you want me to try to ${type} again`);
+    // await callback();
+
+    setSecondCommandFor({
+      type: secondCommandOptions.tryTradingAgain,
+      other: { callback, TradingType: type },
+    });
+
+    updateSecondCommand({
+      type: secondCommandOptions.tryTradingAgain,
+      other: { callback, TradingType: type },
+    });
+  };
+
   const sellStocks = async () => {
     try {
       response("checking for sell signals");
@@ -129,6 +148,7 @@ export const useTradingCommendsHandler = (
           response(message);
         } catch (error) {
           response("something went wrong while selling stocks");
+          await handleTradingError(sellStocks, "sell");
         }
       } else {
         response("didn't find any sell signals today");
@@ -137,6 +157,7 @@ export const useTradingCommendsHandler = (
       response(
         "something went wrong while checking for selling signals"
       );
+      await handleTradingError(sellStocks, "sell");
     }
   };
 
@@ -219,7 +240,6 @@ export const useTradingCommendsHandler = (
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isResetBTData]);
 
-  const { resetBTState } = useReduxActions();
   const startBackTesting = async () => {
     // if (holdingStocks.length > 0 && isBTDone) {
     if (isBTDone) {
