@@ -50,7 +50,7 @@ export const useTradingCommendsHandler = (
   setFoundBuySignalStocks,
   setSoldStocks
 ) => {
-  const { resetBTState, updateSecondCommand } =
+  const { resetBTState, updateSecondCommand, updateProgress } =
     useReduxActions();
 
   const findBuySignal = async () => {
@@ -91,10 +91,21 @@ export const useTradingCommendsHandler = (
   };
 
   const buyStocks = async () => {
+    updateProgress({ buy: "loading" });
+
     const { totalNumberOfBuying, error } = await findBuySignal();
 
     // if findBuySignal through an error exit this function here
-    if (error || !totalNumberOfBuying) return;
+    if (error) {
+      updateProgress({ buy: "fall" });
+      return;
+    }
+
+    // the process is success but din't find any buy signal
+    if (!totalNumberOfBuying) {
+      updateProgress({ buy: "success" });
+      return;
+    }
 
     try {
       response(`found ${totalNumberOfBuying} buying signals`);
@@ -105,8 +116,10 @@ export const useTradingCommendsHandler = (
         `${TRADING_API}/${STOCK_ROUTE}/buyStock?gameNum=${gameNum}`
       );
       response(message);
+      updateProgress({ buy: "success" });
     } catch (error) {
       response("something went wrong while buying Stocks");
+      updateProgress({ buy: "fall" });
     }
   };
 
@@ -128,6 +141,7 @@ export const useTradingCommendsHandler = (
 
   const sellStocks = async () => {
     try {
+      updateProgress({ sell: "loading" });
       response("checking for sell signals");
       const {
         data: { totalNumberOfSell, soldStocks },
@@ -146,23 +160,30 @@ export const useTradingCommendsHandler = (
             `${TRADING_API}/${STOCK_ROUTE}/sellStock?gameNum=${gameNum}`
           );
           response(message);
+          updateProgress({ sell: "success" });
         } catch (error) {
           response("something went wrong while selling stocks");
+          updateProgress({ sell: "fall" });
           await handleTradingError(sellStocks, "sell");
         }
       } else {
         response("didn't find any sell signals today");
+        updateProgress({ sell: "success" });
       }
     } catch (error) {
       response(
         "something went wrong while checking for selling signals"
       );
+      updateProgress({ sell: "fall" });
+
       await handleTradingError(sellStocks, "sell");
     }
   };
 
   const stopLess = async () => {
     try {
+      updateProgress({ setStopLoss: "loading" });
+
       response("buying stop loss");
       const {
         data: { message, status },
@@ -175,8 +196,10 @@ export const useTradingCommendsHandler = (
       } else {
         response(message);
       }
+      updateProgress({ setStopLoss: "success" });
     } catch (error) {
       response("something went wrong while buying stop loss");
+      updateProgress({ setStopLoss: "fall" });
     }
   };
 

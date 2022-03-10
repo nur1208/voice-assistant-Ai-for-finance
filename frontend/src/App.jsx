@@ -83,7 +83,7 @@ export const PAGES = [
 export const WaitForUserInputContext = createContext();
 
 export const App = () => {
-  const state = useSelector((state) => state.back_testing);
+  const state = useSelector((state) => state.trading_store);
 
   const [isWaitingUserDone, setIsWaitingUserDone] = useState("");
 

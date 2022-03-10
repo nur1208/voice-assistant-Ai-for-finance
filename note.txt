@@ -363,7 +363,13 @@ deadline - before 2022-3-12 ✔ DONE on 2022-3-10
 deadline - before 2022-3-13 ✔ DONE on 2022-3-10
 - {DONE} fix handleGoToPage function when a user say 'go to back testing'
 - {DONE} create 'do you want me to try to sell again' command loop  
-- {TODO} create trade progress functionality
+- {DONE} create trade progress functionality
+        - {DONE} create redux functionality for trading 
+        - {DONE} create object like this {sell:status, buy:status, setStopLoss:status}
+            default value for status is empty string 
+            status options are 'success', 'fall', 'loading'
+        - {DONE} let sell function update sell parameter, and so on.
+        - {DONE} use progressData that in redux store in ProgressModal component    
 - {TODO} create 'show me trade progress' command
 - {TODO} make sure the last line in openMultipleCharts 'setPopupWindow(popupWindows)';
         doesn't affect other windows

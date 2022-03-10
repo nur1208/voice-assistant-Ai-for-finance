@@ -14,6 +14,7 @@ import {
 } from "@material-ui/core";
 import { Wrapper } from "../InputModal/InputModalSC";
 import { ProgressModalItem } from "./ProgressModalItem";
+import { useSelector } from "react-redux";
 // import { Wrapper } from "./InputModalSC";
 
 const useStyles = makeStyles((theme) => ({
@@ -37,9 +38,13 @@ const style = {
   p: 4,
 };
 
-export const ProgressModal = ({ progressData }) => {
+export const ProgressModal = () => {
   const classes = useStyles();
   // const refTF = useRef(null);
+
+  const { progressData } = useSelector(
+    (state) => state.trading_store
+  );
 
   return (
     <Box sx={style}>
@@ -55,9 +60,6 @@ export const ProgressModal = ({ progressData }) => {
               status={progressData[key]}
             />
           ))}
-          {/* <ProgressModalItem />
-          <Typography item>Progress Modal</Typography>
-          <Typography item>Progress Modal</Typography> */}
         </Grid>
       </Wrapper>
     </Box>
