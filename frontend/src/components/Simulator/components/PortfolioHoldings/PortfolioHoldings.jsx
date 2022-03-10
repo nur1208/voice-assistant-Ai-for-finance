@@ -34,7 +34,7 @@ export const PortfolioHoldings = ({ getTestedData }) => {
     forceSelling,
     isBTDone,
     accountRisk,
-    isBTRunning,
+    isBTRunning,isMarketOpen
   } = useSelector(({ back_testing }) => back_testing);
 
   const symbolTablePropsHolding = {
@@ -219,118 +219,150 @@ export const PortfolioHoldings = ({ getTestedData }) => {
             <hr className="v-divider theme--light" />
           </div>
         </div>
+
         <div className="row">
           <div className="col-12 pa-0 col">
             <div className="holdings-table">
               <div className="holdings-table-header">
-                <div className="container d-flex white">
-                  <div className="mr-8">
-                    <div className="overline"> Total Value </div>
-                    <div className="semi-bold">
-                      {" "}
-                      ${currentStockPrice.toFixed(2)}
+                <div
+                  className="container d-flex white"
+                  style={{ justifyContent: "space-between" }}
+                >
+                  <div className="d-flex white">
+                    <div className="mr-8">
+                      <div className="overline">
+                        {" "}
+                        Total Value{" "}
+                      </div>
+                      <div className="semi-bold">
+                        {" "}
+                        ${currentStockPrice.toFixed(2)}
+                      </div>
                     </div>
-                  </div>
-                  <div className="mr-8">
-                    <div className="overline text-no-wrap">
-                      Today's Change
-                    </div>
-                    <div
-                      className={`gain-loss semi-bold d-inline-flex align-center ${renderPriceChangeStyle(
-                        renderPriceChangeReturn(
-                          "percentage",
-                          accountValue
-                        )
-                      )}`}
-                    >
-                      <div className="text-no-wrap">
-                        $
-                        {renderPriceChangeReturn(
-                          "money",
-                          accountValue
-                        )}{" "}
-                        (
-                        {renderPriceChangeReturn(
-                          "percentage",
-                          accountValue
-                        )}
-                        %)
-                        {renderPriceChangeIcon(
+                    <div className="mr-8">
+                      <div className="overline text-no-wrap">
+                        Today's Change
+                      </div>
+                      <div
+                        className={`gain-loss semi-bold d-inline-flex align-center ${renderPriceChangeStyle(
                           renderPriceChangeReturn(
                             "percentage",
                             accountValue
-                          ),
-                          "small"
-                        )}
+                          )
+                        )}`}
+                      >
+                        <div className="text-no-wrap">
+                          $
+                          {renderPriceChangeReturn(
+                            "money",
+                            accountValue
+                          )}{" "}
+                          (
+                          {renderPriceChangeReturn(
+                            "percentage",
+                            accountValue
+                          )}
+                          %)
+                          {renderPriceChangeIcon(
+                            renderPriceChangeReturn(
+                              "percentage",
+                              accountValue
+                            ),
+                            "small"
+                          )}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="mr-8">
-                    <div className="overline no-wrap">
-                      Total Gain/Loss
-                    </div>
-                    <div
-                      className={`gain-loss semi-bold d-inline-flex align-center ${renderPriceChangeStyle(
-                        renderPriceChangeReturn(
-                          "percentage",
-                          accountValue,
-                          true
-                        )
-                      )}`}
-                    >
-                      <div className="text-no-wrap">
-                        $
-                        {renderPriceChangeReturn(
-                          "money",
-                          accountValue,
-                          true
-                        )}{" "}
-                        (
-                        {renderPriceChangeReturn(
-                          "percentage",
-                          accountValue,
-                          true
-                        )}
-                        %)
-                        {renderPriceChangeIcon(
+                    <div className="mr-8">
+                      <div className="overline no-wrap">
+                        Total Gain/Loss
+                      </div>
+                      <div
+                        className={`gain-loss semi-bold d-inline-flex align-center ${renderPriceChangeStyle(
                           renderPriceChangeReturn(
                             "percentage",
                             accountValue,
                             true
-                          ),
-                          "small"
-                        )}
+                          )
+                        )}`}
+                      >
+                        <div className="text-no-wrap">
+                          $
+                          {renderPriceChangeReturn(
+                            "money",
+                            accountValue,
+                            true
+                          )}{" "}
+                          (
+                          {renderPriceChangeReturn(
+                            "percentage",
+                            accountValue,
+                            true
+                          )}
+                          %)
+                          {renderPriceChangeIcon(
+                            renderPriceChangeReturn(
+                              "percentage",
+                              accountValue,
+                              true
+                            ),
+                            "small"
+                          )}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="text-left mr-8">
+                      <div className="overline no-wrap">
+                        End Date
+                      </div>
+                      <div
+                        className={`gain-loss  semi-bold d-inline-flex align-center`}
+                      >
+                        <div className="text-no-wrap ">
+                          {`${customDateFormat(endDate)} ${
+                            days[new Date(endDate).getDay()]
+                          }`}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="text-right mr-8">
+                      <div className="overline no-wrap">
+                        Account Risk
+                      </div>
+                      <div
+                        className={`gain-loss  semi-bold d-inline-flex align-center error--text`}
+                      >
+                        <div className="text-no-wrap ">
+                          {accountRisk}% per trade
+                        </div>
                       </div>
                     </div>
                   </div>
-
-                  <div className="text-left mr-8">
-                    <div className="overline no-wrap">
-                      End Date
-                    </div>
+                  <div
+                    className="text-right "
+                    style={{ marginTop: "10px" }}
+                  >
+                    {/* <div className="overline no-wrap"></div> */}
                     <div
                       className={`gain-loss  semi-bold d-inline-flex align-center`}
                     >
                       <div className="text-no-wrap ">
-                        {`${customDateFormat(endDate)} ${
-                          days[new Date(endDate).getDay()]
-                        }`}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <div className="overline no-wrap">
-                      Account Risk
-                    </div>
-                    <div
-                      className={`gain-loss  semi-bold d-inline-flex align-center error--text`}
-                    >
-                      <div className="text-no-wrap ">
-                        {accountRisk}% per trade
+                        Market Is{" "}
+                        <span
+                          className={
+                            isMarketOpen
+                              ? "success--text"
+                              : "error--text"
+                          }
+                        >
+                          {isMarketOpen ? "Open" : "Close"}
+                        </span>
                       </div>
                     </div>
                   </div>
                 </div>
+
                 <hr className="v-divider theme--light" />
               </div>
               <div className="horizontal-scroll-shadow">

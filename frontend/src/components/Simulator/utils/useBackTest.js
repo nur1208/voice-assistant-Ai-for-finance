@@ -86,6 +86,7 @@ export const useBackTest = () => {
     sp500Data,
     currentDate,
     accountRisk,
+    isMarketOpen,
   } = useSelector((state) => state.back_testing);
 
   // 702316;
@@ -101,6 +102,7 @@ export const useBackTest = () => {
   let endDateLocal = endDate;
   let sp500DataLocal = sp500Data;
   let currentDateLocal = currentDate;
+  let isMarketOpenLocal = isMarketOpen;
 
   const handleBackTestingAxiosError = async (
     callFunction,
@@ -126,6 +128,21 @@ export const useBackTest = () => {
         await sleep(1000 * 10);
       }
     }
+  };
+
+  const [some, setIsMarketOpen] = useLocalStorage(
+    "isMarketOpen",
+    true
+  );
+  const checkIsMarketOpen = async (date) => {
+    const {
+      data: { isMarketOpen },
+    } = await axios.get(
+      `${PYTHON_API}/isMarketOpen?date=${date}`
+    );
+
+    setIsMarketOpen(isMarketOpen);
+    updateBTState({ isMarketOpen });
   };
 
   const getSp500Data = async (date) => {
@@ -356,14 +373,16 @@ export const useBackTest = () => {
         // const data = await callApi(date);
         console.log({ holdStocksLocal, endDateP });
 
+        await checkIsMarketOpen(date);
+
         if (holdStocksLocal.length > 0) {
           // get the current price fot hold stocks
-          console.log({
-            sp500CallCondition:
-              !sp500Data.length ||
-              sp500Data[sp500Data.length - 1].date !== date,
-            date,
-          });
+          // console.log({
+          //   sp500CallCondition:
+          //     !sp500Data.length ||
+          //     sp500Data[sp500Data.length - 1].date !== date,
+          //   date,
+          // });
 
           // fixing updating data for the same date when first date of force selling
           if (

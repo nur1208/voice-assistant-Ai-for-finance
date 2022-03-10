@@ -4,6 +4,7 @@ const initialState = {
   ...statesDefault,
   isResetBTData: false,
   accountRisk: 1,
+  isMarketOpen:true
 };
 
 export const BT_ACTIONS = {
