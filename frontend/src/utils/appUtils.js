@@ -126,6 +126,7 @@ export const useFinansis = ({
     openAnswerDetail,
     closeAnswerDetail,
     handleCloseAnyPopup,
+    goForward,
   } = useCommonCommandsHandler(
     setPageNumber,
     setNewsArticles,
@@ -535,6 +536,12 @@ export const useFinansis = ({
       callback: async () => await showSoldStockChart(),
       commandFor: "trading",
     },
+    {
+      command: "go forward",
+      callback: async () => await goForward(),
+      commandFor: "every section",
+    },
+
     // sellWithProfitOrNot
   ];
 

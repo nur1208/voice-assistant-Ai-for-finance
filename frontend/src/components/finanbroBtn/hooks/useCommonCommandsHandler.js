@@ -20,6 +20,10 @@ export const useCommonCommandsHandler = (
   const history = useHistory();
 
   const [appHistoryIndex, setAppHistoryIndex] = useState(0);
+  const [historyStack, setHistoryStack] = useState([
+    history.location.pathname,
+  ]);
+  const [forwardStack, setForwardStack] = useState([]);
   const [openedWindowNum, setOpenedWindowNum] = useState(0);
   const width = window.outerWidth - 20;
   const height = window.outerHeight - 20;
@@ -63,17 +67,28 @@ export const useCommonCommandsHandler = (
     }
   };
   // limiting the user to only move throw the app for 'go back' command
-  useEffect(() => {
-    return history.listen(() => {
-      if (history.action === "PUSH") {
-        setAppHistoryIndex(appHistoryIndex + 1);
-      }
 
-      if (history.action === "POP") {
-        setAppHistoryIndex(appHistoryIndex - 1);
-      }
-    });
-  }, [appHistoryIndex]);
+  // useEffect(() => {
+  //   return history.listen(() => {
+  //     if (history.action === "PUSH") {
+  //       setAppHistoryIndex(appHistoryIndex + 1);
+  //       // historyStack.push(history.location.pathname);
+  //       // setHistoryStack(historyStack);
+  //       // setBackIndexHistory(backIndexHistory + 1);
+  //     }
+
+  //     if (history.action === "POP") {
+  //       setAppHistoryIndex(appHistoryIndex - 1);
+  //       // const poppedPage = historyStack.pop(
+  //       //   history.location.pathname
+  //       // );
+  //       // setHistoryStack(historyStack);
+
+  //       // forwardStack.push(poppedPage);
+  //       // setForwardStack(forwardStack);
+  //     }
+  //   });
+  // }, [appHistoryIndex]);
 
   const goBackHandler = () => {
     // handling going back from list articles page to main news page
@@ -84,16 +99,49 @@ export const useCommonCommandsHandler = (
       return;
     }
     // 0 false, any other number true
-    if (appHistoryIndex > 0) {
+    if (historyStack.length > 1) {
       // console.log(location);
 
       history.goBack();
       response("going back");
 
+      const poppedPage = historyStack.pop(
+        history.location.pathname
+      );
+      setHistoryStack(historyStack);
+
+      forwardStack.push(poppedPage);
+      setForwardStack(forwardStack);
+
+      // forwardStack.push(poppedPage);
+      // setForwardStack(forwardStack);
+
       console.log(history.location.pathname);
     } else {
       response("there is nothing back");
       responseAfterTimeout("good morning", { timeout: 500 });
+    }
+  };
+
+  const goForward = () => {
+    if (forwardStack.length) {
+      // console.log(location);
+
+      history.goForward();
+      response("going forward");
+
+      const poppedPage = forwardStack.pop(
+        history.location.pathname
+      );
+      setForwardStack(forwardStack);
+
+      historyStack.push(poppedPage);
+      setHistoryStack(historyStack);
+
+      console.log(history.location.pathname);
+    } else {
+      response("there is nothing forward");
+      // responseAfterTimeout("good morning", { timeout: 500 });
     }
   };
 
@@ -135,6 +183,11 @@ export const useCommonCommandsHandler = (
       }
     }
     response(`here is ${page} page`);
+    historyStack.push(page);
+    setHistoryStack(historyStack);
+    if (forwardStack.length) {
+      setForwardStack([]);
+    }
   };
 
   const handleTodaysDate = () => {
@@ -202,5 +255,6 @@ export const useCommonCommandsHandler = (
     openAnswerDetail,
     closeAnswerDetail,
     handleCloseAnyPopup,
+    goForward,
   };
 };
