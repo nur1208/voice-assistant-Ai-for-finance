@@ -16,6 +16,8 @@ import {
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../../../state";
 
+export const lastBTDate = "2022-2-1";
+
 export const useBackTest = () => {
   const [_, { updateLocalStorage }] = useSaveTestedData();
   // const [holdingStocks, setHoldingStocks] = useState(
@@ -452,6 +454,16 @@ export const useBackTest = () => {
       );
       currentDateLocal = new Date(newDate);
 
+      // console.log({
+      //   stopBackTestingC:
+      //     currentDateLocal > new Date("2022-2-1"),
+      // });
+
+      // if (currentDateLocal > new Date("2022-2-1")) {
+      //   console.log("stop back testing now");
+      //   updateBTState({ isBTRunning: false });
+      //   return;
+      // }
       // loop = new Date(newDate);
       // loop =
       // setCurrentDate(new Date(newDate));
@@ -489,6 +501,7 @@ export const useBackTest = () => {
       // setCurrentDate(new Date(newDate));
       countDaysLocal = countDaysLocal - 1;
       // setCountDays((oldValue) => oldValue - 1);
+
       if (isForceSell) {
         endDateLocal = new Date(newDate);
         // setEndDate(new Date(newDate));

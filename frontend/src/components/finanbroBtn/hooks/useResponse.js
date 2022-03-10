@@ -4,7 +4,10 @@ import { useSpeechSynthesis } from "react-speech-kit";
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
 import { useReduxActions } from "../../../hooks/useReduxActions";
 import { sleep } from "../../../utils/sleep";
-import { useBackTest } from "../../Simulator/utils/useBackTest";
+import {
+  lastBTDate,
+  useBackTest,
+} from "../../Simulator/utils/useBackTest";
 import { useSaveTestedData } from "../../Simulator/utils/useSaveTestedData";
 
 export const secondCommandOptions = {
@@ -119,7 +122,7 @@ export const useResponse = () => {
     false
   );
 
-  const { holdingStocks } = useSelector(
+  const { holdingStocks, currentDate } = useSelector(
     (state) => state.back_testing
   );
 
@@ -186,6 +189,13 @@ export const useResponse = () => {
         break;
       case secondCommandOptions.forceSelling:
         setSecondCommandFor("");
+
+        if (currentDate > new Date(lastBTDate)) {
+          response(
+            "sorry I don't have more data to test, right now"
+          );
+          return;
+        }
         response("starting force selling");
 
         await forceSelling();

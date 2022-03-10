@@ -357,8 +357,9 @@ deadline - before 2022-3-12 ✔ DONE on 2022-3-10
     {catch: 884659.884098053, date: "2020-04-30", stock…} for accountValue and sp500Data
 - {DONE} create 'go froward' commands and improving 'go back' commands
 - {DONE} fix  buying stock if the share is zero in buySignalBT python's function error 
-- {TODO} show the user when the market is close in back testing 
-- {TODO} handle stop force selling after not existing dates
+- {DONE} show the user when the market is close in back testing 
+- {DONE} handle stop force selling after not existing dates
+        note: just try not to call force sell function if the current date bigger then 2022-02-01
 deadline - before 2022-3-13
 - {TODO} improve tell the user you are about to close the window when backTesting still not done 
 - {TODO} don't get questions every render from the api, save the documents in 

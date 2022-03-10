@@ -4,7 +4,10 @@ import {
   STOCK_ROUTE,
   TRADING_API,
 } from "../../../utils/serverUtils";
-import { useBackTest } from "../../Simulator/utils/useBackTest";
+import {
+  lastBTDate,
+  useBackTest,
+} from "../../Simulator/utils/useBackTest";
 import { sleep } from "../../../utils/sleep";
 import { secondCommandOptions } from "../hooks/useResponse";
 import { useSelector } from "react-redux";
@@ -158,7 +161,7 @@ export const useTradingCommendsHandler = (
 
   const { getTestedData, forceSelling } = useBackTest();
 
-  const { holdingStocks, isBTDone } = useSelector(
+  const { holdingStocks, isBTDone, currentDate } = useSelector(
     (state) => state.back_testing
   );
 
@@ -304,6 +307,19 @@ export const useTradingCommendsHandler = (
   }, [isForForceSell]);
 
   const forceSellingHandler = async () => {
+    console.log({
+      finalDate: new Date("2022-2-1"),
+      currentDate,
+      stopBackTestingC: currentDate > new Date("2022-2-1"),
+    });
+
+    if (currentDate > new Date(lastBTDate)) {
+      response(
+        "sorry I don't have more data to test, right now"
+      );
+      return;
+    }
+
     if (holdingStocks.length > 0) {
       response("starting force selling");
       await forceSelling();
