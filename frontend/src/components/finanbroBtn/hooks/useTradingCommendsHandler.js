@@ -16,6 +16,7 @@ import { useLocalStorage } from "../../../hooks/useLocalStorage";
 import { useReduxActions } from "../../../hooks/useReduxActions";
 import { WaitForUserInputContext } from "../../../App";
 import { useHandleUserInput } from "./useHandleUserInput";
+import { MODAL_TYPE_OPTIONS } from "../../Modal/BasicModal";
 
 export const BTfields = {
   CASH: {
@@ -48,9 +49,10 @@ export const useTradingCommendsHandler = (
   isForceSellAgain,
   setIsForceSellAgain,
   setFoundBuySignalStocks,
-  setSoldStocks
+  setSoldStocks,
+  handleCloseModal
 ) => {
-  const { resetBTState, updateSecondCommand, updateProgress } =
+  const { resetBTState, updateSecondCommand, updateProgress, updateModal } =
     useReduxActions();
 
   const findBuySignal = async () => {
@@ -412,6 +414,15 @@ export const useTradingCommendsHandler = (
     await buyStocks();
   };
 
+  const openProgressModal =async () => {
+    response("here is your trading progress")
+    handleOpenModal("Trading Progress")
+    updateModal({type:MODAL_TYPE_OPTIONS.PROGRESS})
+
+    await sleep(1000 * 10)
+    handleCloseModal()
+  }
+
   return {
     buyStocks,
     sellStocks,
@@ -422,5 +433,6 @@ export const useTradingCommendsHandler = (
     sellWithProfitOrNot,
     tradeStocks,
     findBuySignal,
+    openProgressModal,
   };
 };

@@ -370,7 +370,7 @@ deadline - before 2022-3-13 ✔ DONE on 2022-3-10
             status options are 'success', 'fall', 'loading'
         - {DONE} let sell function update sell parameter, and so on.
         - {DONE} use progressData that in redux store in ProgressModal component    
-- {TODO} create 'show me trade progress' command
+- {DONE} create 'show me trade progress' command
 - {TODO} make sure the last line in openMultipleCharts 'setPopupWindow(popupWindows)';
         doesn't affect other windows
 deadline - before 2022-3-14
@@ -399,6 +399,7 @@ deadline - before 2022-3-14
 - {TODO} let 'what's up with {something}' command gets new news
 final deadline v1 - before 2022-3-31
 ----- NOT IMPORTANT NOW
+- {TODO} put all modal data in redux store
 - {TODO} don't get questions every render from the api, save the documents in 
         user localStorage and just check the number of the questions in LS 
         same as in the database

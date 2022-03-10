@@ -95,14 +95,21 @@ export const useInfoCommandsHandler = (
         if (finalTarget) {
           newPopupWindow = window.open(
             `${YAHOO_FINANCE_URL}/chart/${finalTarget}`,
-            `ORIGIN_CHART_WINDOW_${index + 1}`,
+            `ORIGIN_CHART_WINDOW_${openedWindowNum + index + 1}`,
             `popup,width=${width},height=${height}`
           );
           popupWindows.push(newPopupWindow);
         }
       }
 
-      setPopupWindow(popupWindows);
+      setOpenedWindowNum(
+        openedWindowNum + companiesArray.length
+      );
+
+      setPopupWindow((currentWindows) => [
+        ...currentWindows,
+        ...popupWindows,
+      ]);
     } else {
       response("sorry I can't open that");
     }

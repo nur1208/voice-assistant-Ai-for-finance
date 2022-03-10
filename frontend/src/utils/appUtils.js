@@ -19,6 +19,7 @@ import { useTradingCommendsHandler } from "../components/finanbroBtn/hooks/useTr
 import { useBackTest } from "../components/Simulator/utils/useBackTest";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { sleep } from "./sleep";
+import { useReduxActions } from "../hooks/useReduxActions";
 // export const useSecondCommand = (commands) => {
 //   const { transcript } = useSpeechRecognition();
 // };
@@ -51,6 +52,8 @@ export const useFinansis = ({
     },
   ]);
 
+  const { updateModal } = useReduxActions();
+
   const handleOpenModal = (title, content, isInput, label) => {
     setOpenModal(true);
     setModalTitle(title);
@@ -58,7 +61,10 @@ export const useFinansis = ({
     setModalIsInput(isInput);
     setModalIsLabel(label);
   };
-  const handleCloseModal = () => setOpenModal(false);
+  const handleCloseModal = () => {
+    setOpenModal(false);
+    updateModal({ type: "" });
+  };
 
   const [isForceSellAgain, setIsForceSellAgain] =
     useState(false);
@@ -152,6 +158,7 @@ export const useFinansis = ({
     sellWithProfitOrNot,
     tradeStocks,
     findBuySignal,
+    openProgressModal,
   } = useTradingCommendsHandler(
     response,
     setSecondCommandFor,
@@ -162,7 +169,8 @@ export const useFinansis = ({
     isForceSellAgain,
     setIsForceSellAgain,
     setFoundBuySignalStocks,
-    setSoldStocks
+    setSoldStocks,
+    handleCloseModal
   );
 
   const [findingAnswerFor, setFindingAnswerFor] = useState("");
@@ -356,7 +364,11 @@ export const useFinansis = ({
       commandFor: "every section",
     },
     {
-      command: ["give me * statistics", "open * statistics"],
+      command: [
+        "give me * statistics",
+        "open * statistics",
+        "show me * statistics",
+      ],
       callback: async (target) =>
         await openYahooFinance("statistics", target),
       commandFor: "info",
@@ -407,7 +419,7 @@ export const useFinansis = ({
       commandFor: "info",
     },
     {
-      command: "show me * charts",
+      command: ["show me * charts", "open * charts"],
       callback: async (companies) =>
         await openMultipleCharts(companies),
       commandFor: "info",
@@ -542,6 +554,15 @@ export const useFinansis = ({
       commandFor: "every section",
     },
 
+    {
+      command: [
+        "show me trading progress",
+        "open trading progress",
+        "show me trade in progress",
+      ],
+      callback: async () => await openProgressModal(),
+      commandFor: "every section",
+    },
     // sellWithProfitOrNot
   ];
 
