@@ -74,8 +74,8 @@ export const PAGES = [
       //   //   setStopLoss: "success",
       //   // }}
       // />
-      // <Test />
-      <DateInputFormat />
+      <Test />
+      // <DateInputFormat />
     ),
   },
 ];

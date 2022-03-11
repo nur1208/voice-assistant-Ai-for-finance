@@ -371,13 +371,26 @@ deadline - before 2022-3-13 ✔ DONE on 2022-3-10
         - {DONE} let sell function update sell parameter, and so on.
         - {DONE} use progressData that in redux store in ProgressModal component    
 - {DONE} create 'show me trade progress' command
-- {TODO} make sure the last line in openMultipleCharts 'setPopupWindow(popupWindows)';
-        doesn't affect other windows
-deadline - before 2022-3-14
-- {TODO} let the user type the symbol or choose a number when open Multiple companies found popup 
+- {DONE} make sure the last line in openMultipleCharts 'setPopupWindow(popupWindows)' doesn't affect other windows fixed
+deadline - before 2022-3-14 ✔ DONE on 2022-3-10
+- {TODO} create sign up functionality
+        - {TODO} user redux functionality
+        - {TODO} make InputModal component more dynamic
+        - {TODO} create useUserCommandsHandler custom hook 
+        - {TODO} create 'sign up' command 
+        - {TODO} connect 'sign up' command and 'sign up' api route  
+- {TODO} create login functionality
+        note: use JWT
+- {TODO} create update user info functionality
+- {TODO} create forget password functionality
+        note: use traveling project as reference
+- {TODO} create logout functionality
+
+deadline - before 2022-3-15 
+
 
 ---- after create user functionality (login, sign up, ...)
-- {TODO} create "you not login, do you want to login" command
+- {TODO} create "you not login, do you want to login for you" command
 - {TODO} create watchList functionality
 - {TODO} let the user update his/her options (like alway with your controller, ignore Multiple stocks,...)
 - {TODO} move useGetCurrentCountry TO hooks folder
@@ -398,7 +411,10 @@ deadline - before 2022-3-14
 - {TODO} add initial value for accountValue and sp500Data states that in useBackTest and it will fix TOTAL GAIN/LOSS error
 - {TODO} let 'what's up with {something}' command gets new news
 final deadline v1 - before 2022-3-31
+
 ----- NOT IMPORTANT NOW
+- {TODO} don't let the use see server errors like 'data and salt arguments required'
+- {TODO} let the user type the symbol or choose a number when open Multiple companies found popup 
 - {TODO} put all modal data in redux store
 - {TODO} don't get questions every render from the api, save the documents in 
         user localStorage and just check the number of the questions in LS 
