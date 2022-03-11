@@ -4,6 +4,7 @@ import { MODAL_TYPE_OPTIONS } from "../../Modal/BasicModal";
 import { useHandleUserInput } from "./useHandleUserInput";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
+
 export const USER_FIELDS = {
   NAME: {
     label: "Name",
@@ -37,7 +38,7 @@ export const useUserCommandsHandler = (
   handleOpenModal
 ) => {
   const { updateModal, signUp } = useReduxActions();
-  const { userInputs } = useSelector(
+  const { userInputs, invalidMessage } = useSelector(
     (state) => state.modal_store
   );
 
@@ -99,7 +100,7 @@ export const useUserCommandsHandler = (
     async () => {
       response(`Your password start with`);
       await sleep(1000);
-      response("nah, I'm just miss with you");
+      response("nah, I'm just missing with you");
       await getUserInputHandler(
         USER_FIELDS.PASSWORD_CONFIRM.label,
         USER_FIELDS.PASSWORD_CONFIRM.stateName,
@@ -132,6 +133,16 @@ export const useUserCommandsHandler = (
       signUp({ ...userInputs }, response);
     }
   );
+
+  // listening to invalid message
+  useEffect(() => {
+    if (invalidMessage) {
+      response(invalidMessage);
+      updateModal({ invalidMessage: "" });
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [invalidMessage]);
 
   return { signUp: signUpHandler };
 };

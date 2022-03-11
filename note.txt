@@ -380,8 +380,15 @@ deadline - before 2022-3-14 ✔ DONE on 2022-3-10
                         if isReduxState true create new logic else use the old logic
                 - {DONE} create updateUserInput action and let modalReducer handle the action
         - {DONE} create useUserCommandsHandler custom hook 
-        - {TODO} create 'sign up' command 
-        - {TODO} connect 'sign up' command and 'sign up' api route  
+        - {DONE} create 'sign up' command 
+        - {DONE} connect 'sign up' command and 'sign up' api route  
+        - {DONE} create make sure that a user entered required fields
+        - {DONE} validation name must be less than 15 letters
+        - {DONE} valid email
+        - {DONE} password must be between 8 - 15 letters
+        - {DONE} confirm password must be equals to password
+        - {DONE} gender must be male or female
+        - {TODO} handle backend error
 - {TODO} create login functionality
         note: use JWT
 - {TODO} create update user info functionality
@@ -413,10 +420,14 @@ deadline - before 2022-3-15
 - {TODO} let finansis ask 'do you want me to learn about {book} company' when book keyword not exist in the database
 - {TODO} add initial value for accountValue and sp500Data states that in useBackTest and it will fix TOTAL GAIN/LOSS error
 - {TODO} let 'what's up with {something}' command gets new news
+- {TODO} let the user reselect his gender when click on delete keyword
+- {TODO} create 'do you want to enter password again, if no just enter confirm password again' command
+        note: use stateName is signal
 final deadline v1 - before 2022-3-31
 
 ----- NOT IMPORTANT NOW
-- {TODO} fix typo gander to gender
+- {TODO} don't let the user enter sign up info again when there is an error from the backend
+- {DONE} fix typo gander to gender
 - {TODO} don't let the use see server errors like 'data and salt arguments required'
 - {TODO} let the user type the symbol or choose a number when open Multiple companies found popup 
 - {TODO} put all modal data in redux store

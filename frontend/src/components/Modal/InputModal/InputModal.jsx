@@ -7,7 +7,7 @@ import React, {
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 // import MenuItem from '@material-ui/core/MenuItem';
-import { Box, MenuItem, Select } from "@material-ui/core";
+import { Box, Input, MenuItem, Select } from "@material-ui/core";
 import { Wrapper } from "./InputModalSC";
 import { WaitForUserInputContext } from "../../../App";
 import { useReduxActions } from "../../../hooks/useReduxActions";
@@ -15,6 +15,8 @@ import { useSaveTestedData } from "../../Simulator/utils/useSaveTestedData";
 import { BTfields } from "../../finanbroBtn/hooks/useTradingCommendsHandler";
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
 import { useSelector } from "react-redux";
+import { USER_FIELDS } from "../../finanbroBtn/hooks/useUserCommandsHandler";
+import { isValidEmail } from "../../../utils/isValidEmail";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -63,13 +65,92 @@ export default function InputModal({
     1
   );
 
-  const { isReduxState, label, stateName, selectOptions } =
-    useSelector((state) => state.modal_store);
+  const {
+    isReduxState,
+    label,
+    stateName,
+    selectOptions,
+    userInputs,
+  } = useSelector((state) => state.modal_store);
+
+  const isValidInput = () => {
+    if (!userInput.length) {
+      // console.log(`${label} is required field`);
+      updateModal({
+        invalidMessage: `${label} is required field, please ${
+          selectOptions ? "select" : "enter"
+        } it`,
+      });
+
+      return false;
+    }
+
+    if (
+      (stateName === USER_FIELDS.NAME.stateName ||
+        stateName === USER_FIELDS.PASSWORD.stateName) &&
+      userInput.length > 15
+    ) {
+      updateModal({
+        invalidMessage: `${label} must be less than 15 letters, please enter a shorter ${label}`,
+      });
+
+      return false;
+    }
+    // checkForEmail
+    if (
+      stateName === USER_FIELDS.EMAIL.stateName &&
+      !isValidEmail(userInput)
+    ) {
+      updateModal({
+        invalidMessage: `${label} is invalid, please enter a valid ${label}`,
+      });
+
+      return false;
+    }
+
+    if (
+      stateName === USER_FIELDS.PASSWORD.stateName &&
+      userInput.length < 8
+    ) {
+      updateModal({
+        invalidMessage: `${label} must be more than 7 letters, please enter a longer ${label}`,
+      });
+
+      return false;
+    }
+    // userInputs
+    if (
+      stateName === USER_FIELDS.PASSWORD_CONFIRM.stateName &&
+      userInputs.password !== userInput
+    ) {
+      updateModal({
+        invalidMessage: `${label} must be equal to password, please enter a correct ${label}`,
+      });
+
+      return false;
+    }
+
+    const genderOptions = ["male", "female"];
+    if (
+      stateName === USER_FIELDS.GENDER.stateName &&
+      !genderOptions.includes(userInput.toLocaleLowerCase())
+    ) {
+      updateModal({
+        invalidMessage: `${label} must be male or female, please select a correct ${label}`,
+      });
+
+      setUserInput("");
+      return false;
+    }
+    return true;
+  };
 
   const handleKeypress = (e) => {
     //it triggers by pressing the enter key
 
     if (e.key === "Enter") {
+      if (!isValidInput()) return;
+
       console.log({ userInput });
       handleClose();
       if (isReduxState) {
@@ -77,7 +158,6 @@ export default function InputModal({
         const newUserInput = {};
         newUserInput[stateName] = userInput;
         setUserInputRedux(newUserInput);
-        console.log("do redux stuff here");
       } else {
         setIsWaitingUserDone(labelProps.stateName);
         const newState = {};
@@ -113,6 +193,7 @@ export default function InputModal({
           label={label || labelProps.view}
           variant="filled"
           // inputRef={refTF}
+          // disabled={userInput && selectOptions}
           select={!userInput && selectOptions}
           value={userInput}
           type={
@@ -124,6 +205,10 @@ export default function InputModal({
           }
           onChange={(e) => setUserInput(e.target.value)}
         >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+
           {selectOptions &&
             selectOptions.map((option, index) => (
               <MenuItem value={option} key={`id-${index}`}>

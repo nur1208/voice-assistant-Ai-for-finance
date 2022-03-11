@@ -33,6 +33,12 @@ export const createUser = async (req, res) => {
   } catch (error) {
     console.log(error);
 
+    if (error.message.includes("duplicate key error"))
+      return res.status(401).json({
+        status: "fall",
+        message: "email is exist",
+      });
+
     res.status(500).json({
       status: "fall",
       message: error.message,

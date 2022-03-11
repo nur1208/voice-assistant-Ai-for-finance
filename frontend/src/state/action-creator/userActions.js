@@ -24,8 +24,18 @@ export const signUp =
         payload: doc,
       });
     } catch (error) {
+      console.log(userDate);
+
+      if (error.response.status === 401) {
+        response && response(`${userDate.email} email is exist`);
+      } else {
+        response &&
+          response("something went wrong while signing up");
+      }
+
       response &&
-        response("something went wrong while signing up");
+        response("if you want to try again say, 'sign up");
+
       const errorMessage = error?.response?.data?.message
         ? error?.response?.data?.message
         : error.message;
