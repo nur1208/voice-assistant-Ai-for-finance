@@ -4,12 +4,12 @@ const initialState = {
   ...statesDefault,
   isResetBTData: false,
   accountRisk: 1,
-  isMarketOpen:true
+  isMarketOpen: true,
 };
 
 export const BT_ACTIONS = {
-  UPDATE_STATE: "UPDATE_STATE",
-  RESET_STATE: "RESET_STATE",
+  UPDATE_STATE: "UPDATE_BT_STATE",
+  RESET_STATE: "RESET_BT_STATE",
   UPDATE_IS_RESET_BT_DATA: "UPDATE_IS_RESET_BT_DATA",
 };
 

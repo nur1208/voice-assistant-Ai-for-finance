@@ -5,7 +5,10 @@ import { InfoModal } from "./InfoModal";
 import InputModal from "./InputModal/InputModal";
 import { ProgressModal } from "./ProgressModal/ProgressModal";
 import { useSelector } from "react-redux";
-export const MODAL_TYPE_OPTIONS = { PROGRESS: "PROGRESS" };
+export const MODAL_TYPE_OPTIONS = {
+  PROGRESS: "PROGRESS",
+  INPUT: "INPUT",
+};
 
 export default function BasicModal({
   open,
@@ -38,7 +41,7 @@ export default function BasicModal({
       >
         {isProgress || type === MODAL_TYPE_OPTIONS.PROGRESS ? (
           <ProgressModal {...progressModalProps} />
-        ) : isInput ? (
+        ) : isInput || type === MODAL_TYPE_OPTIONS.INPUT ? (
           <InputModal {...inputModalProps} />
         ) : (
           <InfoModal {...infoModalProps} />

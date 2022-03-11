@@ -374,9 +374,12 @@ deadline - before 2022-3-13 ✔ DONE on 2022-3-10
 - {DONE} make sure the last line in openMultipleCharts 'setPopupWindow(popupWindows)' doesn't affect other windows fixed
 deadline - before 2022-3-14 ✔ DONE on 2022-3-10
 - {TODO} create sign up functionality
-        - {TODO} user redux functionality
-        - {TODO} make InputModal component more dynamic
-        - {TODO} create useUserCommandsHandler custom hook 
+        - {DONE} user sign up redux functionality and update createUser function that in api
+        - {DONE} make InputModal component more dynamic
+                - {DONE} create isReduxState parameter in modal_store for not effect old code
+                        if isReduxState true create new logic else use the old logic
+                - {DONE} create updateUserInput action and let modalReducer handle the action
+        - {DONE} create useUserCommandsHandler custom hook 
         - {TODO} create 'sign up' command 
         - {TODO} connect 'sign up' command and 'sign up' api route  
 - {TODO} create login functionality
@@ -413,6 +416,7 @@ deadline - before 2022-3-15
 final deadline v1 - before 2022-3-31
 
 ----- NOT IMPORTANT NOW
+- {TODO} fix typo gander to gender
 - {TODO} don't let the use see server errors like 'data and salt arguments required'
 - {TODO} let the user type the symbol or choose a number when open Multiple companies found popup 
 - {TODO} put all modal data in redux store

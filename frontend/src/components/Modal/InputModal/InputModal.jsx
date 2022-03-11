@@ -6,13 +6,15 @@ import React, {
 } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
-import { Box } from "@material-ui/core";
+// import MenuItem from '@material-ui/core/MenuItem';
+import { Box, MenuItem, Select } from "@material-ui/core";
 import { Wrapper } from "./InputModalSC";
 import { WaitForUserInputContext } from "../../../App";
 import { useReduxActions } from "../../../hooks/useReduxActions";
 import { useSaveTestedData } from "../../Simulator/utils/useSaveTestedData";
 import { BTfields } from "../../finanbroBtn/hooks/useTradingCommendsHandler";
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,16 +39,18 @@ const style = {
 
 export default function InputModal({
   handleClose,
-  label: { stateName, view },
+  // label: { stateName, view },
+  label: labelProps,
 }) {
   const classes = useStyles();
   // const refTF = useRef(null);
   const [userInput, setUserInput] = useState("");
-  // useEffect(() => {
-  //   refTF.current.focus();
-  // }, []);
 
-  const { updateBTState } = useReduxActions();
+  const {
+    updateBTState,
+    updateModal,
+    setUserInput: setUserInputRedux,
+  } = useReduxActions();
   const { setIsWaitingUserDone } = useContext(
     WaitForUserInputContext
   );
@@ -59,23 +63,37 @@ export default function InputModal({
     1
   );
 
+  const { isReduxState, label, stateName, selectOptions } =
+    useSelector((state) => state.modal_store);
+
   const handleKeypress = (e) => {
     //it triggers by pressing the enter key
 
     if (e.key === "Enter") {
       console.log({ userInput });
       handleClose();
-      setIsWaitingUserDone(stateName);
-      const newState = {};
-      if (stateName.includes("Date"))
-        newState[stateName] = new Date(userInput);
-      else {
-        newState[stateName] = Number(userInput);
-        if (stateName === BTfields.ACCOUNT_RISK.label.stateName)
-          setAccountRisk(Number(userInput));
+      if (isReduxState) {
+        updateModal({ finishInputtingFor: stateName });
+        const newUserInput = {};
+        newUserInput[stateName] = userInput;
+        setUserInputRedux(newUserInput);
+        console.log("do redux stuff here");
+      } else {
+        setIsWaitingUserDone(labelProps.stateName);
+        const newState = {};
+        if (labelProps.stateName.includes("Date"))
+          newState[labelProps.stateName] = new Date(userInput);
+        else {
+          newState[labelProps.stateName] = Number(userInput);
+          if (
+            labelProps.stateName ===
+            BTfields.ACCOUNT_RISK.label.stateName
+          )
+            setAccountRisk(Number(userInput));
+        }
+        // updateLocalStorage({ ...currentLocalStorage, newState });
+        updateBTState(newState);
       }
-      // updateLocalStorage({ ...currentLocalStorage, newState });
-      updateBTState(newState);
     }
   };
 
@@ -92,13 +110,47 @@ export default function InputModal({
           style={{ width: 350 }}
           id="filled-basic"
           onKeyPress={handleKeypress}
-          label={view}
+          label={label || labelProps.view}
           variant="filled"
           // inputRef={refTF}
+          select={!userInput && selectOptions}
+          value={userInput}
+          type={
+            stateName.includes("password")
+              ? "password"
+              : stateName.includes("email")
+              ? "email"
+              : "text"
+          }
           onChange={(e) => setUserInput(e.target.value)}
         >
-          soemting
+          {selectOptions &&
+            selectOptions.map((option, index) => (
+              <MenuItem value={option} key={`id-${index}`}>
+                {option}
+              </MenuItem>
+            ))}
         </TextField>
+
+        {/* <Select
+          // labelId="demo-simple-select-helper-label"
+          id="demo-simple-select-helper"
+          autoFocus={true}
+          onKeyPress={handleKeypress}
+          label={label || labelProps.view}
+          style={{ width: 250 }}
+          // id="filled-basic"
+          placeholder="select your gender"
+          helperText="click enter to submit"
+          value={userInput}
+          onChange={(e) => setUserInput(e.target.value)}
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          <MenuItem value="Female">Female</MenuItem>
+          <MenuItem value="Male">Male</MenuItem>
+        </Select> */}
       </Wrapper>
     </Box>
   );

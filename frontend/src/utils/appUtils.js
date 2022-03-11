@@ -20,6 +20,7 @@ import { useBackTest } from "../components/Simulator/utils/useBackTest";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { sleep } from "./sleep";
 import { useReduxActions } from "../hooks/useReduxActions";
+import { useUserCommandsHandler } from "../components/finanbroBtn/hooks/useUserCommandsHandler";
 // export const useSecondCommand = (commands) => {
 //   const { transcript } = useSpeechRecognition();
 // };
@@ -63,7 +64,13 @@ export const useFinansis = ({
   };
   const handleCloseModal = () => {
     setOpenModal(false);
-    updateModal({ type: "" });
+    updateModal({
+      type: "",
+      stateName: "",
+      label: "",
+      isReduxState: false,
+      selectOptions: null,
+    });
   };
 
   const [isForceSellAgain, setIsForceSellAgain] =
@@ -173,10 +180,20 @@ export const useFinansis = ({
     handleCloseModal
   );
 
+  const { signUp } = useUserCommandsHandler(
+    response,
+    handleOpenModal
+  );
+
   const [findingAnswerFor, setFindingAnswerFor] = useState("");
 
   // const { startBackTesting } = useBackTest();
   const commands = [
+    {
+      command: ["sign up", "register"],
+      commandFor: "every section",
+      callback: async () => await signUp(),
+    },
     // {
     //   command: ["你叫什么名字"],
     //   callback: () =>

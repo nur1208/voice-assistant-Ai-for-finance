@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema(
     name: { type: String, required: true },
     email: { type: String, unique: true, required: true },
     password: { type: String, required: true, select: false },
-    gander: { type: String, enum: ["male", "female"] },
+    gender: { type: String, enum: ["male", "female"] },
     executableChromePath: String,
     chromeDataPath: String,
   },

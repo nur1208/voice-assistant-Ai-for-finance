@@ -12,23 +12,23 @@ export const createUser = async (req, res) => {
     );
     // console.log({ password, body, hashedPassword });
 
-    let ganderLocal;
-    if (body.gander) {
-      ganderLocal = body.gander.toLowerCase();
+    let genderLocal;
+    if (body.gender) {
+      genderLocal = body.gender.toLowerCase();
     }
 
     const newUser = new UserModel({
       ...body,
       password: hashedPassword,
-      gander: ganderLocal,
+      gender: genderLocal,
     });
 
-    const { name, email, gander } = await newUser.save();
+    const { name, email, gender } = await newUser.save();
 
     res.json({
       status: "success",
       message: "user added successfully",
-      doc: { name, email, gander },
+      doc: { name, email, gender },
     });
   } catch (error) {
     console.log(error);
