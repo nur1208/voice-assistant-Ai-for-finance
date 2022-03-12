@@ -16,6 +16,8 @@
     "axios": "^0.24.0",
     "bcrypt": "^5.0.1",
     "cheerio": "^1.0.0-rc.10",
+    "cookie-parser": "^1.4.6",
+    "cookies": "^0.8.0",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
     "dotenv": "^10.0.0",

@@ -3,6 +3,7 @@ import morgan from "morgan";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import newsRouter from "./routes/newsRoute.js";
 import companyRouter from "./routes/companyRoute.js";
 import questionRouter from "./routes/questionRoute.js";
@@ -29,7 +30,8 @@ const main = async () => {
     app.use(morgan("dev"));
     app.use(express.json()); // support json encoded bodies
     // app.use(express.urlencoded({ extended: true })); // support encoded bodies
-
+    // app.use(express.cookieParser());
+    // app.use(cookieParser());
     // Setting up middleware
     app.use(cors("http://localhost:3000"));
     // app.use(express.static("public"));

@@ -15,8 +15,9 @@ import { useSaveTestedData } from "../../Simulator/utils/useSaveTestedData";
 import { BTfields } from "../../finanbroBtn/hooks/useTradingCommendsHandler";
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
 import { useSelector } from "react-redux";
-import { USER_FIELDS } from "../../finanbroBtn/hooks/useUserCommandsHandler";
+import { SIGN_UP_FIELDS } from "../../finanbroBtn/hooks/useSignUpFields";
 import { isValidEmail } from "../../../utils/isValidEmail";
+import { LOGIN_FIELDS } from "../../finanbroBtn/hooks/useLoginFields";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -86,8 +87,9 @@ export default function InputModal({
     }
 
     if (
-      (stateName === USER_FIELDS.NAME.stateName ||
-        stateName === USER_FIELDS.PASSWORD.stateName) &&
+      (stateName === SIGN_UP_FIELDS.NAME.stateName ||
+        stateName === SIGN_UP_FIELDS.PASSWORD.stateName ||
+        stateName === LOGIN_FIELDS.EMAIL.stateName) &&
       userInput.length > 15
     ) {
       updateModal({
@@ -98,7 +100,8 @@ export default function InputModal({
     }
     // checkForEmail
     if (
-      stateName === USER_FIELDS.EMAIL.stateName &&
+      (stateName === SIGN_UP_FIELDS.EMAIL.stateName ||
+        stateName === LOGIN_FIELDS.EMAIL.stateName) &&
       !isValidEmail(userInput)
     ) {
       updateModal({
@@ -109,7 +112,8 @@ export default function InputModal({
     }
 
     if (
-      stateName === USER_FIELDS.PASSWORD.stateName &&
+      (stateName === SIGN_UP_FIELDS.PASSWORD.stateName ||
+        stateName === LOGIN_FIELDS.EMAIL.stateName) &&
       userInput.length < 8
     ) {
       updateModal({
@@ -120,7 +124,7 @@ export default function InputModal({
     }
     // userInputs
     if (
-      stateName === USER_FIELDS.PASSWORD_CONFIRM.stateName &&
+      stateName === SIGN_UP_FIELDS.PASSWORD_CONFIRM.stateName &&
       userInputs.password !== userInput
     ) {
       updateModal({
@@ -132,7 +136,7 @@ export default function InputModal({
 
     const genderOptions = ["male", "female"];
     if (
-      stateName === USER_FIELDS.GENDER.stateName &&
+      stateName === SIGN_UP_FIELDS.GENDER.stateName &&
       !genderOptions.includes(userInput.toLocaleLowerCase())
     ) {
       updateModal({

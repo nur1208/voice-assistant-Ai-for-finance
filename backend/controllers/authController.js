@@ -1,7 +1,7 @@
 import { promisify } from "util";
 // import crypto from "crypto";
 import jwt from "jsonwebtoken";
-
+import Cookies from "cookies";
 import User from "../models/userModel.js";
 import AppError from "../utils/appError.js";
 import catchAsync from "../utils/catchAsync.js";
@@ -20,19 +20,39 @@ const signToken = (id) => {
   );
 };
 
-const createSendToken = (user, statusCode, res) => {
+const keys = ["keyboard cat"];
+
+const createSendToken = (user, statusCode, req, res) => {
   const token = signToken(user._id);
 
-  res.cookie("jwt", token, {
+  // Create a cookies object
+  const cookies = new Cookies(req, res, { keys: keys });
+
+  // Get a cookie
+  const lastVisit = cookies.get("LastVisit", { signed: true });
+
+  // Set the cookie to a value
+  cookies.set("jwt", token, {
     expires: new Date(
       Date.now() +
         process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
     ),
     // if env production set secure to true
     // cuz we only need that in production
-    secure: process.env.NODE_ENV === "production",
+    // secure: process.env.NODE_ENV === "production",
     httpOnly: true,
   });
+
+  // res.cookie("jwt", token, {
+  //   expires: new Date(
+  //     Date.now() +
+  //       process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
+  //   ),
+  //   // if env production set secure to true
+  //   // cuz we only need that in production
+  //   // secure: process.env.NODE_ENV === "production",
+  //   httpOnly: true,
+  // });
 
   const { name, gender, email } = user;
 
@@ -58,7 +78,7 @@ export const signUp = catchAsync(async (req, res) => {
     gender: genderLocal,
   });
 
-  createSendToken(newUser, 201, res);
+  createSendToken(newUser, 201, req, res);
 });
 
 /**
@@ -101,7 +121,7 @@ export const login = catchAsync(async (req, res, next) => {
 
   // 3 if the everything okay send the token to the clint
 
-  createSendToken(user, 200, res);
+  createSendToken(user, 200, req, res);
 });
 
 /**

@@ -180,7 +180,7 @@ export const useFinansis = ({
     handleCloseModal
   );
 
-  const { signUp } = useUserCommandsHandler(
+  const { signUp, login } = useUserCommandsHandler(
     response,
     handleOpenModal
   );
@@ -193,6 +193,11 @@ export const useFinansis = ({
       command: ["sign up", "register"],
       commandFor: "every section",
       callback: async () => await signUp(),
+    },
+    {
+      command: "login",
+      commandFor: "every section",
+      callback: async () => await login(),
     },
     // {
     //   command: ["你叫什么名字"],

@@ -20,7 +20,7 @@ Content-Type: application/json
 
 {
     "name":"nur",
-    "email":"ass4@yahoo.com",
+    "email":"dadsdfsdadds4@yahoo.com",
     "password":"12341234",
     "gender":"Male"
 }
@@ -33,6 +33,6 @@ Content-Type: application/json
 {
     
     "email":"ass4@yahoo.com",
-    "password":"12341234"
+    "password":"1D2341234"
     
 }
