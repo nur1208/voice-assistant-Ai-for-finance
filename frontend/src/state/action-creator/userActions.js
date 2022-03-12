@@ -105,3 +105,9 @@ export const login =
       });
     }
   };
+
+export const autoLogin = (userDate) => async (dispatch) =>
+  dispatch({
+    type: USER_ACTIONS.LOGIN.SUCCESS,
+    payload: userDate,
+  });

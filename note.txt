@@ -392,7 +392,7 @@ deadline - before 2022-3-14 ✔ DONE on 2022-3-10
 - {TODO} create login functionality
         - {DONE} create login api route and upgrading sign up  route
         - {DONE} create login redux functionality
-        - {TODO} create 'login' command
+        - {DONE} create 'login' command
         - {TODO} let the user logged in 
         note: use JWT
 - {TODO} create update user info functionality

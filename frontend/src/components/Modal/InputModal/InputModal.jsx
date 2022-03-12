@@ -89,7 +89,7 @@ export default function InputModal({
     if (
       (stateName === SIGN_UP_FIELDS.NAME.stateName ||
         stateName === SIGN_UP_FIELDS.PASSWORD.stateName ||
-        stateName === LOGIN_FIELDS.EMAIL.stateName) &&
+        stateName === LOGIN_FIELDS.PASSWORD.stateName) &&
       userInput.length > 15
     ) {
       updateModal({
@@ -113,7 +113,7 @@ export default function InputModal({
 
     if (
       (stateName === SIGN_UP_FIELDS.PASSWORD.stateName ||
-        stateName === LOGIN_FIELDS.EMAIL.stateName) &&
+        stateName === LOGIN_FIELDS.PASSWORD.stateName) &&
       userInput.length < 8
     ) {
       updateModal({

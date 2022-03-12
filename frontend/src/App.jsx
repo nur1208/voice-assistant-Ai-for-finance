@@ -95,7 +95,7 @@ export const App = () => {
   //     }
   //   });
 
-  const { updateBTState } = useReduxActions();
+  const { updateBTState, autoLogin } = useReduxActions();
 
   // const { updateBTState, resetBTState } = bindActionCreators(
   //   actionCreators,
@@ -119,11 +119,19 @@ export const App = () => {
     1
   );
 
+  const [userData, setUserData] = useLocalStorage(
+    "userData",
+    null
+  );
+
   useExitPrompt(false);
 
   useEffect(() => {
     updateBTState({ ...localStorageData, accountRisk });
 
+    if (userData) {
+      autoLogin(userData);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
