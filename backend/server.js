@@ -9,6 +9,7 @@ import questionRouter from "./routes/questionRoute.js";
 import unknownKeywordForCompanyRouter from "./routes/unknownKeywordForCompanyRoute.js";
 import strategyTestedRouter from "./routes/strategyTestedRoute.js";
 import userRouter from "./routes/userRoutes.js";
+import globalErrorHandler from "./controllers/errorController.js";
 
 dotenv.config();
 
@@ -53,6 +54,7 @@ const main = async () => {
     app.use("/api/v1/testedStrategy", strategyTestedRouter);
     app.use("/api/v1/users", userRouter);
 
+    app.use(globalErrorHandler);
     app.listen(port, () => {
       console.log(
         `express app listening at http://localhost:${port}`

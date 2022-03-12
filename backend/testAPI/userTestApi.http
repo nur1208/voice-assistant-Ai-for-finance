@@ -13,3 +13,26 @@ Content-Type: application/json
     "gander":"Male"
 }
 
+###
+
+POST {{Host}}:{{port}}/{{route}}/signup
+Content-Type: application/json
+
+{
+    "name":"nur",
+    "email":"ass4@yahoo.com",
+    "password":"12341234",
+    "gender":"Male"
+}
+
+###
+
+POST {{Host}}:{{port}}/{{route}}/login
+Content-Type: application/json
+
+{
+    
+    "email":"ass4@yahoo.com",
+    "password":"12341234"
+    
+}

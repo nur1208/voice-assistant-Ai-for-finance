@@ -373,7 +373,7 @@ deadline - before 2022-3-13 ✔ DONE on 2022-3-10
 - {DONE} create 'show me trade progress' command
 - {DONE} make sure the last line in openMultipleCharts 'setPopupWindow(popupWindows)' doesn't affect other windows fixed
 deadline - before 2022-3-14 ✔ DONE on 2022-3-10
-- {TODO} create sign up functionality
+- {DONE} create sign up functionality
         - {DONE} user sign up redux functionality and update createUser function that in api
         - {DONE} make InputModal component more dynamic
                 - {DONE} create isReduxState parameter in modal_store for not effect old code
@@ -388,8 +388,11 @@ deadline - before 2022-3-14 ✔ DONE on 2022-3-10
         - {DONE} password must be between 8 - 15 letters
         - {DONE} confirm password must be equals to password
         - {DONE} gender must be male or female
-        - {TODO} handle backend error
+        - {DONE} handle backend error
 - {TODO} create login functionality
+        - {TODO} create login api route
+        - {TODO} create 'login in' command
+        - {TODO} let the user logged in 
         note: use JWT
 - {TODO} create update user info functionality
 - {TODO} create forget password functionality
