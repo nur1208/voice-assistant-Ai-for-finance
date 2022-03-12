@@ -8,6 +8,10 @@ import {
   useSignUpFields,
 } from "./useSignUpFields";
 import { LOGIN_FIELDS, useLoginFields } from "./useLoginFields";
+import {
+  UPDATE_USER_INFO_FIELDS,
+  useUpdateFields,
+} from "./useUpdateFields";
 
 export const useUserCommandsHandler = (
   response,
@@ -55,6 +59,16 @@ export const useUserCommandsHandler = (
   };
 
   useLoginFields(response, getUserInputHandler);
+
+  const updateUserInfo = async () => {
+    await getUserInputHandler(
+      UPDATE_USER_INFO_FIELDS.NAME.label,
+      UPDATE_USER_INFO_FIELDS.NAME.stateName,
+      UPDATE_USER_INFO_FIELDS.NAME.message
+    );
+  };
+
+  useUpdateFields(response, getUserInputHandler);
   // listening to invalid message
   useEffect(() => {
     if (invalidMessage) {
@@ -65,5 +79,5 @@ export const useUserCommandsHandler = (
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [invalidMessage]);
 
-  return { signUp, login };
+  return { signUp, login, updateUserInfo };
 };

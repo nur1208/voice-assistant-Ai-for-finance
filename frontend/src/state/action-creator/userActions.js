@@ -3,7 +3,7 @@ import {
   BACKEND_API_URL,
   USER_ROUTE,
 } from "../../utils/serverUtils";
-import { USER_ACTIONS } from "../reducers/userReducer";
+import { USER_ACTIONS } from "../reducers/userReducer/userReducerUtils";
 
 export const signUp =
   (userData, response) => async (dispatch, getState) => {
@@ -108,6 +108,60 @@ export const login =
 
 export const autoLogin = (userDate) => async (dispatch) =>
   dispatch({
-    type: USER_ACTIONS.LOGIN.SUCCESS,
+    type: USER_ACTIONS.AUTO_LOGIN,
     payload: userDate,
   });
+
+export const updateUserInfo =
+  (userId, userData, response) => async (dispatch, getState) => {
+    try {
+      response && response("updating your info");
+      dispatch({ type: USER_ACTIONS.UPDATE_INFO.LOADING });
+      // response.data.doc
+      const { data } = await axios.put(
+        `${BACKEND_API_URL}/${USER_ROUTE}/${userId}`,
+        {
+          ...userData,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${
+              getState().user_store.userData.token
+            }`,
+          },
+        }
+      );
+      response && response("your info updated successfully");
+      // response &&
+      //   response(`welcome back ${data.data.user.name}`);
+
+      const serverUserDate = {
+        ...data.data.user,
+        token: getState().user_store.userData.token,
+      };
+      localStorage.setItem(
+        "userData",
+        JSON.stringify(serverUserDate)
+      );
+      dispatch({
+        type: USER_ACTIONS.UPDATE_INFO.SUCCESS,
+        payload: serverUserDate,
+      });
+    } catch (error) {
+      response && response("updating your info failed");
+
+      const errorMessage = error?.response?.data?.message
+        ? error?.response?.data?.message
+        : error.message;
+
+      response && response(errorMessage);
+
+      // response &&
+      //   response("if you want to try again say, login");
+
+      dispatch({
+        type: USER_ACTIONS.UPDATE_INFO.FALL,
+        payload: errorMessage,
+      });
+    }
+  };

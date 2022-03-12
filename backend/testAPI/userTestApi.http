@@ -3,6 +3,7 @@
 
 @route = api/v1/users
 
+@userToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmM5MDE3NTRmZjVhZTQ4OTc4ZGFiZSIsImlhdCI6MTY0NzExMjM2MiwiZXhwIjoxNjU0ODAxOTYyfQ.Z4-NSEQBLPkUUFYZ-PbcfDfx9e3d5v2DHXgqDRZXT3U
 POST {{Host}}:{{port}}/{{route}}
 Content-Type: application/json
 
@@ -33,6 +34,18 @@ Content-Type: application/json
 {
     
     "email":"ass4@yahoo.com",
-    "password":"1D2341234"
+    "password":"12341234"
     
+}
+
+###
+
+PUT {{Host}}:{{port}}/{{route}}/622c901754ff5ae48978dabe
+Content-Type: application/json
+Authorization: Bearer {{userToken}}
+
+{
+    
+    "name":"ben",
+    "gender":"female"
 }

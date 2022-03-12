@@ -1,0 +1,58 @@
+export const initialValue = {};
+
+export const USER_ACTIONS = {
+  SIGN_UP: {
+    SUCCESS: "SIGN_UP_SUCCESS",
+    FALL: "SIGN_UP_FALL",
+    LOADING: "SIGN_UP_LOADING",
+  },
+  LOGIN: {
+    SUCCESS: "LOGIN_SUCCESS",
+    FALL: "LOGIN_FALL",
+    LOADING: "LOGIN_LOADING",
+  },
+  UPDATE_INFO: {
+    SUCCESS: "UPDATE_INFO_SUCCESS",
+    FALL: "UPDATE_INFO_FALL",
+    LOADING: "UPDATE_INFO_LOADING",
+  },
+  AUTO_LOGIN: "AUTO_LOGIN",
+};
+
+export const REDUCER_RETURN = {
+  LOADING: "LOADING",
+  SUCCESS: "SUCCESS",
+  FAIL: "FAIL",
+};
+
+export const handleReducerReturn = (type, state, payload) => {
+  switch (type) {
+    case REDUCER_RETURN.LOADING:
+      return {
+        ...state,
+        loading: true,
+        success: false,
+        error: null,
+      };
+
+    case REDUCER_RETURN.SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: true,
+        error: null,
+        userData: { ...payload },
+      };
+
+    case REDUCER_RETURN.FAIL:
+      return {
+        ...state,
+        loading: false,
+        success: false,
+        error: payload,
+      };
+
+    default:
+      return state;
+  }
+};

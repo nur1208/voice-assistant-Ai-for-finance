@@ -18,6 +18,7 @@ import { useSelector } from "react-redux";
 import { SIGN_UP_FIELDS } from "../../finanbroBtn/hooks/useSignUpFields";
 import { isValidEmail } from "../../../utils/isValidEmail";
 import { LOGIN_FIELDS } from "../../finanbroBtn/hooks/useLoginFields";
+import { UPDATE_USER_INFO_FIELDS } from "../../finanbroBtn/hooks/useUpdateFields";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -67,12 +68,27 @@ export default function InputModal({
   );
 
   const {
-    isReduxState,
-    label,
-    stateName,
-    selectOptions,
-    userInputs,
-  } = useSelector((state) => state.modal_store);
+    modal_store: {
+      isReduxState,
+      label,
+      stateName,
+      selectOptions,
+      userInputs,
+    },
+    user_store: { userData },
+  } = useSelector((state) => state);
+
+  // set default value for update fields
+  useEffect(() => {
+    if (stateName === UPDATE_USER_INFO_FIELDS.NAME.stateName) {
+      setUserInput(userData.name);
+    } else if (
+      stateName === UPDATE_USER_INFO_FIELDS.GENDER.stateName
+    ) {
+      setUserInput(userData.gender);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [stateName]);
 
   const isValidInput = () => {
     if (!userInput.length) {
@@ -88,6 +104,7 @@ export default function InputModal({
 
     if (
       (stateName === SIGN_UP_FIELDS.NAME.stateName ||
+        stateName === UPDATE_USER_INFO_FIELDS.NAME.stateName ||
         stateName === SIGN_UP_FIELDS.PASSWORD.stateName ||
         stateName === LOGIN_FIELDS.PASSWORD.stateName) &&
       userInput.length > 15
@@ -136,7 +153,9 @@ export default function InputModal({
 
     const genderOptions = ["male", "female"];
     if (
-      stateName === SIGN_UP_FIELDS.GENDER.stateName &&
+      (stateName === SIGN_UP_FIELDS.GENDER.stateName ||
+        stateName ===
+          UPDATE_USER_INFO_FIELDS.GENDER.stateName) &&
       !genderOptions.includes(userInput.toLocaleLowerCase())
     ) {
       updateModal({

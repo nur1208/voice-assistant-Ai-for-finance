@@ -180,10 +180,8 @@ export const useFinansis = ({
     handleCloseModal
   );
 
-  const { signUp, login } = useUserCommandsHandler(
-    response,
-    handleOpenModal
-  );
+  const { signUp, login, updateUserInfo } =
+    useUserCommandsHandler(response, handleOpenModal);
 
   const [findingAnswerFor, setFindingAnswerFor] = useState("");
 
@@ -198,6 +196,16 @@ export const useFinansis = ({
       command: "login",
       commandFor: "every section",
       callback: async () => await login(),
+    },
+    {
+      command: [
+        "update my info",
+        "change my info",
+        "update my information",
+        "change my information",
+      ],
+      commandFor: "every section",
+      callback: async () => await updateUserInfo(),
     },
     // {
     //   command: ["你叫什么名字"],

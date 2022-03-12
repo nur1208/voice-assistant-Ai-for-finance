@@ -3,7 +3,7 @@ import { backTestingReducer } from "./backTestingReducer";
 import { modalReducer } from "./modalReducer";
 import { responseReducer } from "./responseReducer";
 import { tradingReducer } from "./tradingReducer";
-import { userReducer } from "./userReducer";
+import { userReducer } from "./userReducer/userReducer";
 
 const reducers = combineReducers({
   back_testing: backTestingReducer,

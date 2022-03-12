@@ -54,12 +54,12 @@ const createSendToken = (user, statusCode, req, res) => {
   //   httpOnly: true,
   // });
 
-  const { name, gender, email } = user;
+  const { name, gender, email, _id } = user;
 
   res.status(statusCode).json({
     status: "success",
     token,
-    data: { user: { name, gender, email } },
+    data: { user: { name, gender, email, id: _id } },
   });
 };
 
@@ -158,7 +158,7 @@ export const protect = catchAsync(async (req, res, next) => {
 
   // 3 check if user still exists
   const currentUser = await User.findById(decode.id);
-  // if the user delete after we send him a token
+  // if the user deleted after we send him a token
   // and before the token expired
   if (!currentUser) {
     return next(
