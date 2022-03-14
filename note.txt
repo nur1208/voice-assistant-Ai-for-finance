@@ -403,10 +403,10 @@ deadline - before 2022-3-14 ✔ DONE on 2022-3-10
         note: use traveling project as reference
         failed to use nodemailer so i will create automation script
         to send emails
-        - {TODO} create puppeteer script for sending emails to users
-        - {TODO} create a route to call puppeteer script in auto api
-        - {TODO} call the above route in forgetPassword backend route
-
+        - {DONE} create puppeteer script for sending emails to users
+        - {DONE} create a route to call puppeteer script in auto api
+        - {DONE} call the above route in forgetPassword backend route
+        - {DONE} crate new puppeteer script because sendEmailHandler has limitation 
         javascript script
         document.querySelector("body").removeChild(document.querySelector("body > p"))
         document.querySelector("body").insertAdjacentHTML("afterbegin",'<div style="text-align: center; "><span style="font-size: 18px;">hey i\'m finansis,please click the link to reset your password</span></div><div style="text-align: center; "><span style="font-size: 18px;">https://www.wikihow.com/Send-HTML-Emails</span></div>')

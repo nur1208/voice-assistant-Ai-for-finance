@@ -21,6 +21,7 @@ import {
   zoomHandler,
 } from "./controllers/chartController.js";
 import { sendEmailHandler } from "./controllers/sendEmailController.js";
+import { sendEmailHandlerV2 } from "./controllers/sendEmailHandlerV2.js";
 
 dotenv.config();
 
@@ -59,7 +60,7 @@ app.post(
   changeDateHandler
 );
 
-app.post("/sendEmail", sendEmailHandler);
+app.post("/sendEmail", sendEmailHandlerV2);
 
 app.listen(port, () => {
   console.log(

@@ -72,5 +72,5 @@ Content-Type: application/json
 {
     "to":"mdnur1208@163.com",
     "subject":"Forgot Your Password from auto",
-    "html":"<div style=\"text-align: center; \"><span style=\"font-size: 18px;\">hey i am finansis,please click the link to reset your password </span></div><div style=\"text-align: center; \"><span style=\"font-size: 14px;\">(or copy the link in your browser if you can't click it)</span><div style=\"text-align: center; \"><span style=\"font-size: 18px;\">https://www.wikihow.com/Send-HTML-Emails</span></div>"
+    "html":"<div style=\"text-align: center; \"><span style=\"font-size: 18px;\">hey i am finansis,please click the link to reset your password </span></div><div style=\"text-align: center; \"><span style=\"font-size: 14px;\">(or copy the link and paste in your browser if you can't click it)</span><div style=\"text-align: center; \"><span style=\"font-size: 18px;\">https://www.wikihow.com/Send-HTML-Emails</span></div>"
 }

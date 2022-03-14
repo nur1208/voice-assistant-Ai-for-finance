@@ -166,13 +166,13 @@ export const sendEmailHandler = async (req, res) => {
       }
     };
 
-    wrap = document.querySelector(
-      "div._3O5VW6cr2qOqPhMqw-gxyk.css-155"
-    );
-    removeChilds(wrap.querySelectorAll("div")[156]);
+    const s =
+      "#ReadingPaneContainerId > div > div > div > div._17WvdmDfhREFqBNvlLv75X > div.bAHScQgzLTvwiV2QXvzpa._2kZu_nrsBS0LQbV-DFQuPl > div > div > div";
 
-    wrap
-      .querySelectorAll("div")[156]
+    removeChilds(document.querySelector(s));
+
+    document
+      .querySelector(s)
       .insertAdjacentHTML("afterbegin", html);
   }, html);
 

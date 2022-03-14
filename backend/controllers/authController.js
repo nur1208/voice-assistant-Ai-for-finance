@@ -2,10 +2,15 @@ import { promisify } from "util";
 // import crypto from "crypto";
 import jwt from "jsonwebtoken";
 import Cookies from "cookies";
+import axios from "axios";
 import User from "../models/userModel.js";
 import AppError from "../utils/appError.js";
 import catchAsync from "../utils/catchAsync.js";
 import sendEmail from "../utils/sendEmail.js";
+import {
+  AUTO_SERVER,
+  FRONTEND_SERVER,
+} from "../utils/serverUtils.js";
 // import sendEmail from "../../utils/sendEmail.js";
 // import { Email } from "../../utils/email.js";
 
@@ -200,19 +205,25 @@ export const forgetPassword = catchAsync(
     await user.save({ validateBeforeSave: false });
 
     // 3) send it to user's email
-    const resetURL = `${req.protocol}://${req.get(
-      "host"
-    )}/api/users/resetPassword/${resetToken}`;
+    const resetURL = `${FRONTEND_SERVER}/resetPassword/${resetToken}`;
 
-    const message = `Forgot your password? Submit a PUT request with your new password and passwordConfirm to ${resetURL}. if you didn't forget your password, please ignore this email`;
+    const message = `<div style="text-align: center; "><span style="font-size: 18px;">hey ${user.name}, i am finansis, please click the link to reset your password </span></div><div style="text-align: center; "><span style="font-size: 14px;">(or copy the link and paste in your browser if you can't click it)</span><div style="text-align: center; "><span style="font-size: 18px;">${resetURL}</span></div>`;
+
+    console.log(message);
 
     try {
-      await sendEmail({
-        email: user.email,
-        subject:
-          "your password reset token valid for 10 minutes",
-        message,
+      await axios.post(`${AUTO_SERVER}/sendEmail`, {
+        to: user.email,
+        subject: "Forgot Your Password from backend",
+        html: message,
       });
+
+      // await sendEmail({
+      //   email: user.email,
+      //   subject:
+      //     "your password reset token valid for 10 minutes",
+      //   message,
+      // });
 
       // console.log("here");
 
@@ -228,7 +239,7 @@ export const forgetPassword = catchAsync(
       await user.save({ validateBeforeSave: false });
 
       console.log(error);
-      
+
       return next(
         new AppError(
           "there was an error sending the email, Try again later",
