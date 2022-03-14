@@ -432,7 +432,7 @@ deadline - before 2022-3-15
 - {TODO} create watchList functionality
 - {TODO} let the user update his/her options (like alway with your controller, ignore Multiple stocks,...)
 - {TODO} move useGetCurrentCountry TO hooks folder
-- {TODO} useGetCurrentCountry test if that function doesn't slow down finansis
+- {TODO} useGetCurrentCountry test if that function doesn't slow down finansis if yes improve it
 - {TODO} make the following data in openHandler function in commonController dynamic:
         const width = 1366 - 20;
         const height = 768 - 20;
@@ -544,3 +544,26 @@ Playing ----
     using fundamental analysis + technical analysis + machine learning RNN algorithm     
 
 finansis color 1 - #0033CC , 2 - #131313 3 - #FAFAFA
+
+the big problems that happened when building finansis:
+- how to let finansis recognize, English words [solved]
+- how to let finansis speak out loud [solved]
+- how to run scraping news script for 24 hours [solved]
+- how to let finansis recognize unknown commands [solved]
+- how to deploy new's api [solved]
+- how to open yahoo finance website with different stocks (with dynamic value) [solved]
+- how to get real-time stock prices [solved]
+- how to call puppeteer scripts using rest api [solved]
+- how to let finansis controller windows that she opened [solved]
+- how to call python scripts using rest api [solved]
+- how to let the user enter info field by field and finansis keep interacting with the user [solved]
+- how to send emails to a users [solved]
+- how to create backTesting interface [solved]
+- how to create backTesting functionality (using python and react) [solved]
+- how to manage status in big application [solved]
+- how to get the real stocks in s&p 500 for specific year in backTesting functionality [failed]
+- how to let finansis learning about finance questions [solved]
+- how to let finansis learning about stocks symbol and their company name [solved]
+- how to let finansis remember unknown keyword in yahoo finance database for stocks
+  like 'something' or 'finansis' [solved]    
+
