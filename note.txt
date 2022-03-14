@@ -336,7 +336,7 @@ deadline - before 2022-2-6 ❌ DONE on 2022-3-6
         - {DONE} save found stocks in a state call foundBuySignalStocks
         - {DONE} create 'show me charts for found buy signals (stocks)' command
                 - note: use 'openMultipleCharts' function to open all charts
-deadline - before 2022-3-10 ✔ DONE on 2022-3-8
+deadline - before 2022-3-10 ✅ DONE on 2022-3-8
 130 - {DONE} check for internat connection changes and user location every 5 seconds
 131 - {TODO} show the user sold stock using yahoo finance chart
             - {DONE} create automation changeDate functionality
@@ -349,7 +349,7 @@ deadline - before 2022-3-10 ✔ DONE on 2022-3-8
 132 - {DONE} test Modal component 
 134 - {DONE} make sure that finansis voice is always "Google US English"
 135 - {DONE} fix user say 'close the window' after opening statistic window error and also for 'open * chart with your control'
-deadline - before 2022-3-12 ✔ DONE on 2022-3-10
+deadline - before 2022-3-12 ✅ DONE on 2022-3-10
 136 - {DONE} fixing updating data for the same date when first date of force selling fix 2
 
     {catch: 884659.884098053, date: "2020-04-30", stock…}
@@ -360,7 +360,7 @@ deadline - before 2022-3-12 ✔ DONE on 2022-3-10
 - {DONE} show the user when the market is close in back testing 
 - {DONE} handle stop force selling after not existing dates
         note: just try not to call force sell function if the current date bigger then 2022-02-01
-deadline - before 2022-3-13 ✔ DONE on 2022-3-10
+deadline - before 2022-3-13 ✅ DONE on 2022-3-10
 - {DONE} fix handleGoToPage function when a user say 'go to back testing'
 - {DONE} create 'do you want me to try to sell again' command loop  
 - {DONE} create trade progress functionality
@@ -372,7 +372,7 @@ deadline - before 2022-3-13 ✔ DONE on 2022-3-10
         - {DONE} use progressData that in redux store in ProgressModal component    
 - {DONE} create 'show me trade progress' command
 - {DONE} make sure the last line in openMultipleCharts 'setPopupWindow(popupWindows)' doesn't affect other windows fixed
-deadline - before 2022-3-14 ✔ DONE on 2022-3-10
+deadline - before 2022-3-14 ✅ DONE on 2022-3-10
 - {DONE} create sign up functionality
         - {DONE} user sign up redux functionality and update createUser function that in api
         - {DONE} make InputModal component more dynamic
@@ -407,6 +407,18 @@ deadline - before 2022-3-14 ✔ DONE on 2022-3-10
         - {DONE} create a route to call puppeteer script in auto api
         - {DONE} call the above route in forgetPassword backend route
         - {DONE} crate new puppeteer script because sendEmailHandler has limitation 
+        - {DONE} test sendEmailHandlerV2 script with resetToken that will be create in forgetPassword's backend route
+        - {TODO} create 'i forget my password' command
+                - {TODO} if user email exist send  a user reset password token to his/ her email
+                - {TODO} else tell a user 'your email is not exist, if you want to try again say 'forget my password'
+                
+        - {TODO} create frontend route call "resetToken" to handle sending token to backend again
+                - {TODO} open popup window then tell and show a user 
+                        'give me a second to validity your token'
+                - {TODO} show loading icon 
+                - {TODO} if the token is valid let the user input new password and confirm password
+                        then tell the user 'okay, your password update successfully 
+                - {TODO} else tell a user our token expired or it's invalid
         javascript script
         document.querySelector("body").removeChild(document.querySelector("body > p"))
         document.querySelector("body").insertAdjacentHTML("afterbegin",'<div style="text-align: center; "><span style="font-size: 18px;">hey i\'m finansis,please click the link to reset your password</span></div><div style="text-align: center; "><span style="font-size: 18px;">https://www.wikihow.com/Send-HTML-Emails</span></div>')

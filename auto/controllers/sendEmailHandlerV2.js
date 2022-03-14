@@ -129,7 +129,7 @@ export const sendEmailHandlerV2 = async (req, res) => {
   await page.waitForTimeout(1000 * 15);
 
   //   // const message = `Forgot your password? Submit a PUT request with your new password and passwordConfirm to SOMEFJAL. if you didn't forget your password, please ignore this email`;
-  //   await browser.close();
+  await browser.close();
   res.json({
     status: "success",
     message: `message send successfully to ${to}`,

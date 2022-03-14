@@ -207,14 +207,15 @@ export const forgetPassword = catchAsync(
     // 3) send it to user's email
     const resetURL = `${FRONTEND_SERVER}/resetPassword/${resetToken}`;
 
-    const message = `<div style="text-align: center; "><span style="font-size: 18px;">hey ${user.name}, i am finansis, please click the link to reset your password </span></div><div style="text-align: center; "><span style="font-size: 14px;">(or copy the link and paste in your browser if you can't click it)</span><div style="text-align: center; "><span style="font-size: 18px;">${resetURL}</span></div>`;
+    const message = `<div style="text-align: center; "><span style="font-size: 18px;">hey ${user.name}, I am finansis, please click the link to reset your password </span></div><div style="text-align: center; "><span style="font-size: 14px;">(or copy the link and paste it in your browser if you can't click it)</span><span style="font-size: 14px;">, (if you didn't forget your password, please ignore this email)</span><div style="text-align: center; "><span style="font-size: 18px;">${resetURL}</span></div>`;
 
     console.log(message);
 
     try {
       await axios.post(`${AUTO_SERVER}/sendEmail`, {
         to: user.email,
-        subject: "Forgot Your Password from backend",
+        subject:
+          "your password reset token valid for 10 minutes",
         html: message,
       });
 
