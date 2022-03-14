@@ -1,6 +1,8 @@
 import express from "express";
 import puppeteer from "puppeteer";
 import cors from "cors";
+import dotenv from "dotenv";
+
 import cheerio from "cheerio";
 import axios from "axios";
 import morgan from "morgan";
@@ -18,6 +20,10 @@ import {
   dateValidation,
   zoomHandler,
 } from "./controllers/chartController.js";
+import { sendEmailHandler } from "./controllers/sendEmailController.js";
+
+dotenv.config();
+
 const app = express();
 const port = 3333;
 
@@ -52,6 +58,8 @@ app.post(
   dateValidation,
   changeDateHandler
 );
+
+app.post("/sendEmail", sendEmailHandler);
 
 app.listen(port, () => {
   console.log(

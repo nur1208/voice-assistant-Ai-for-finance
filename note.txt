@@ -395,12 +395,21 @@ deadline - before 2022-3-14 ✔ DONE on 2022-3-10
         - {DONE} create 'login' command
         - {DONE} let the user logged in 
         note: use JWT
-- {TODO} create update user info functionality
+- {DONE} create update user info functionality
         - {DONE} create update user info api route
         - {DONE} create redux functionality
-        - {TODO} create 'update my [info|name|gender]' if info let the user update his name and gender
+        - {DONE} create 'update my info' command
 - {TODO} create forget password functionality
         note: use traveling project as reference
+        failed to use nodemailer so i will create automation script
+        to send emails
+        - {TODO} create puppeteer script for sending emails to users
+        - {TODO} create a route to call puppeteer script in auto api
+        - {TODO} call the above route in forgetPassword backend route
+
+        javascript script
+        document.querySelector("body").removeChild(document.querySelector("body > p"))
+        document.querySelector("body").insertAdjacentHTML("afterbegin",'<div style="text-align: center; "><span style="font-size: 18px;">hey i\'m finansis,please click the link to reset your password</span></div><div style="text-align: center; "><span style="font-size: 18px;">https://www.wikihow.com/Send-HTML-Emails</span></div>')
 - {TODO} create logout functionality
 
 deadline - before 2022-3-15 
@@ -434,6 +443,8 @@ deadline - before 2022-3-15
 final deadline v1 - before 2022-3-31
 
 ----- NOT IMPORTANT NOW
+- {TODO} create 'update my [name|info|gender]' if info let the user update his name and gender
+- {TODO} create up auto server.js file by moving routes to different file
 - {TODO} don't let the user enter sign up info again when there is an error from the backend
 - {DONE} fix typo gander to gender
 - {TODO} don't let the use see server errors like 'data and salt arguments required'

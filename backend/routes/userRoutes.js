@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  forgetPassword,
   login,
   protect,
   signUp,
@@ -13,6 +14,11 @@ const userRouter = express.Router();
 
 userRouter.post("/signup", signUp);
 userRouter.post("/login", login);
+
+// if the user forget his/her password, he/she can reset his/her password,
+//this route for sending the token to hir/her email using one middleware:
+// forgetPassword
+userRouter.post("/forgetPassword", forgetPassword);
 
 // only logged in users allowed to access routes after this line
 userRouter.use(protect);
