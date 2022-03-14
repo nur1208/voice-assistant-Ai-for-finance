@@ -545,7 +545,7 @@ Playing ----
 
 finansis color 1 - #0033CC , 2 - #131313 3 - #FAFAFA
 
-the big problems that happened when building finansis:
+big problems that happened when building finansis:
 - how to let finansis recognize, English words [solved]
 - how to let finansis speak out loud [solved]
 - how to run scraping news script for 24 hours [solved]
@@ -566,4 +566,16 @@ the big problems that happened when building finansis:
 - how to let finansis learning about stocks symbol and their company name [solved]
 - how to let finansis remember unknown keyword in yahoo finance database for stocks
   like 'something' or 'finansis' [solved]    
+- how to not have duplicate news articles in the database [solved 90%]  
 
+big problems that happened before building finansis:
+- learning fundamental of programming
+- learning how to learn from internat
+- learning how to solve problems
+- how to use javascript, html, css, react, node js, express, mongodb
+- how to use puppeteer for scraping and automation  
+- how to build full stack application 
+- how to clone a website
+- what is stock market
+- how I can make money from the stock market
+- how to use python to build a stock market bot
