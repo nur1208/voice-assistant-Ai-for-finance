@@ -409,7 +409,8 @@ deadline - before 2022-3-14 ✅ DONE on 2022-3-10
         - {DONE} crate new puppeteer script because sendEmailHandler has limitation 
         - {DONE} test sendEmailHandlerV2 script with resetToken that will be create in forgetPassword's backend route
         - {TODO} create 'i forget my password' command
-                - {TODO} if user email exist send  a user reset password token to his/ her email
+                - {DONE} create redux functionality for forgetPassword
+                - {TODO} if email exist send  a user reset password token to his/ her email
                 - {TODO} else tell a user 'your email is not exist, if you want to try again say 'forget my password'
                 
         - {TODO} create frontend route call "resetToken" to handle sending token to backend again
@@ -573,8 +574,8 @@ big problems that happened before building finansis:
 - learning how to learn from internat
 - learning how to solve problems
 - how to use javascript, html, css, react, node js, express, mongodb
-- how to use puppeteer for scraping and automation  
 - how to build full stack application 
+- how to use puppeteer for scraping and automation  
 - how to clone a website
 - what is stock market
 - how I can make money from the stock market

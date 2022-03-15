@@ -231,7 +231,7 @@ export const forgetPassword = catchAsync(
       res.status(200).json({
         status: "success",
         message:
-          "Token set to email, your password reset token valid for 10 minutes",
+          "reset Token sent to your email successfully, the reset token valid for 10 minutes",
         data: {},
       });
     } catch (error) {

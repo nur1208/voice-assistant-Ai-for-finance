@@ -12,7 +12,10 @@ import {
   UPDATE_USER_INFO_FIELDS,
   useUpdateFields,
 } from "./useUpdateFields";
-
+import {
+  FORGET_PASS_FIELDS,
+  useForgetPass,
+} from "./useForgetPassFields";
 export const useUserCommandsHandler = (
   response,
   handleOpenModal
@@ -69,6 +72,17 @@ export const useUserCommandsHandler = (
   };
 
   useUpdateFields(response, getUserInputHandler);
+
+  const sendResetForgotPassToken = async () => {
+    await getUserInputHandler(
+      FORGET_PASS_FIELDS.EMAIL.label,
+      FORGET_PASS_FIELDS.EMAIL.stateName,
+      FORGET_PASS_FIELDS.EMAIL.message
+    );
+  };
+
+  useForgetPass(response, getUserInputHandler);
+
   // listening to invalid message
   useEffect(() => {
     if (invalidMessage) {
@@ -79,5 +93,10 @@ export const useUserCommandsHandler = (
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [invalidMessage]);
 
-  return { signUp, login, updateUserInfo };
+  return {
+    signUp,
+    login,
+    updateUserInfo,
+    sendResetForgotPassToken,
+  };
 };

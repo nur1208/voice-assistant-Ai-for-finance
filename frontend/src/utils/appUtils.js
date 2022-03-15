@@ -180,8 +180,12 @@ export const useFinansis = ({
     handleCloseModal
   );
 
-  const { signUp, login, updateUserInfo } =
-    useUserCommandsHandler(response, handleOpenModal);
+  const {
+    signUp,
+    login,
+    updateUserInfo,
+    sendResetForgotPassToken,
+  } = useUserCommandsHandler(response, handleOpenModal);
 
   const [findingAnswerFor, setFindingAnswerFor] = useState("");
 
@@ -198,6 +202,11 @@ export const useFinansis = ({
       callback: async () => await login(),
     },
     {
+      command: "forgot (my) password",
+      commandFor: "every section",
+      callback: async () => await sendResetForgotPassToken(),
+    },
+    {
       command: [
         "update my info",
         "change my info",
@@ -207,6 +216,7 @@ export const useFinansis = ({
       commandFor: "every section",
       callback: async () => await updateUserInfo(),
     },
+
     // {
     //   command: ["你叫什么名字"],
     //   callback: () =>

@@ -165,3 +165,54 @@ export const updateUserInfo =
       });
     }
   };
+
+export const forgetPass =
+  (email, response) => async (dispatch, getState) => {
+    try {
+      response &&
+        response(
+          "sending reset password token, this will take more then three minutes"
+        );
+      dispatch({ type: USER_ACTIONS.FORGET_PASS.LOADING });
+      // response.data.doc
+      const { data } = await axios.post(
+        `${BACKEND_API_URL}/${USER_ROUTE}/forgetPassword`,
+        {
+          email,
+        }
+      );
+      response && response(data.message);
+      // response &&
+      //   response(`welcome back ${data.data.user.name}`);
+
+      // const serverUserDate = {
+      //   ...data.data.user,
+      //   token: data.token,
+      // };
+      // localStorage.setItem(
+      //   "userData",
+      //   JSON.stringify(serverUserDate)
+      // );
+      dispatch({
+        type: USER_ACTIONS.FORGET_PASS.SUCCESS,
+      });
+    } catch (error) {
+      response && response("sending reset token failed");
+
+      const errorMessage = error?.response?.data?.message
+        ? error?.response?.data?.message
+        : error.message;
+
+      response && response(errorMessage);
+
+      response &&
+        response(
+          "if you want to try again say, forget password"
+        );
+
+      dispatch({
+        type: USER_ACTIONS.FORGET_PASS.FALL,
+        payload: errorMessage,
+      });
+    }
+  };

@@ -16,6 +16,11 @@ export const USER_ACTIONS = {
     FALL: "UPDATE_INFO_FALL",
     LOADING: "UPDATE_INFO_LOADING",
   },
+  FORGET_PASS: {
+    SUCCESS: "FORGET_PASS_SUCCESS",
+    FALL: "FORGET_PASS_FALL",
+    LOADING: "FORGET_PASS_LOADING",
+  },
   AUTO_LOGIN: "AUTO_LOGIN",
 };
 
@@ -25,7 +30,12 @@ export const REDUCER_RETURN = {
   FAIL: "FAIL",
 };
 
-export const handleReducerReturn = (type, state, payload) => {
+export const handleReducerReturn = (
+  type,
+  state,
+  payload,
+  isIgnoreUpdate
+) => {
   switch (type) {
     case REDUCER_RETURN.LOADING:
       return {
@@ -41,7 +51,9 @@ export const handleReducerReturn = (type, state, payload) => {
         loading: false,
         success: true,
         error: null,
-        userData: { ...payload },
+        userData: isIgnoreUpdate
+          ? state.userData
+          : { ...payload },
       };
 
     case REDUCER_RETURN.FAIL:

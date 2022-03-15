@@ -11,6 +11,7 @@ export const userReducer = (state = initialValue, action) => {
     case USER_ACTIONS.SIGN_UP.LOADING:
     case USER_ACTIONS.LOGIN.LOADING:
     case USER_ACTIONS.UPDATE_INFO.LOADING:
+    case USER_ACTIONS.FORGET_PASS.LOADING:
       return handleReducerReturn(REDUCER_RETURN.LOADING, state);
     case USER_ACTIONS.SIGN_UP.SUCCESS:
     case USER_ACTIONS.LOGIN.SUCCESS:
@@ -21,9 +22,17 @@ export const userReducer = (state = initialValue, action) => {
         state,
         action.payload
       );
+    case USER_ACTIONS.FORGET_PASS.SUCCESS:
+      return handleReducerReturn(
+        REDUCER_RETURN.SUCCESS,
+        state,
+        action.payload,
+        true
+      );
     case USER_ACTIONS.SIGN_UP.FALL:
     case USER_ACTIONS.LOGIN.FALL:
     case USER_ACTIONS.UPDATE_INFO.FALL:
+    case USER_ACTIONS.FORGET_PASS.FALL:
       return handleReducerReturn(
         REDUCER_RETURN.FAIL,
         state,
