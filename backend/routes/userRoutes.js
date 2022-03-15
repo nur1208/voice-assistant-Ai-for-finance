@@ -3,6 +3,7 @@ import {
   forgetPassword,
   login,
   protect,
+  resetPassword,
   signUp,
 } from "../controllers/authController.js";
 import {
@@ -19,6 +20,8 @@ userRouter.post("/login", login);
 //this route for sending the token to hir/her email using one middleware:
 // forgetPassword
 userRouter.post("/forgetPassword", forgetPassword);
+
+userRouter.put("/resetPassword", resetPassword);
 
 // only logged in users allowed to access routes after this line
 userRouter.use(protect);

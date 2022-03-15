@@ -3,6 +3,7 @@ import { promisify } from "util";
 import jwt from "jsonwebtoken";
 import Cookies from "cookies";
 import axios from "axios";
+import crypto from "crypto";
 import User from "../models/userModel.js";
 import AppError from "../utils/appError.js";
 import catchAsync from "../utils/catchAsync.js";
@@ -30,35 +31,6 @@ const keys = ["keyboard cat"];
 
 const createSendToken = (user, statusCode, req, res) => {
   const token = signToken(user._id);
-
-  // Create a cookies object
-  const cookies = new Cookies(req, res, { keys: keys });
-
-  // Get a cookie
-  const lastVisit = cookies.get("LastVisit", { signed: true });
-
-  // Set the cookie to a value
-  cookies.set("jwt", token, {
-    expires: new Date(
-      Date.now() +
-        process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
-    ),
-    // if env production set secure to true
-    // cuz we only need that in production
-    // secure: process.env.NODE_ENV === "production",
-    httpOnly: true,
-  });
-
-  // res.cookie("jwt", token, {
-  //   expires: new Date(
-  //     Date.now() +
-  //       process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
-  //   ),
-  //   // if env production set secure to true
-  //   // cuz we only need that in production
-  //   // secure: process.env.NODE_ENV === "production",
-  //   httpOnly: true,
-  // });
 
   const { name, gender, email, _id } = user;
 
@@ -250,3 +222,41 @@ export const forgetPassword = catchAsync(
     }
   }
 );
+
+/**
+ * resetPassword middleware for validating reset token and reset a user password if the token is valid using the following steps:
+ * -  get user base on the token.
+ * - if token has not expired and there is a user so in that case, set the new password
+ * - update the changedPasswordAt for the current user
+ * - log the user in, send the JSON Web Token to the client
+ */
+export const resetPassword = async (req, res, next) => {
+  // 1) get user base on the token.
+
+  const hashedToken = crypto
+    .createHash("sha256")
+    .update(req.body.token)
+    .digest("hex");
+
+  const user = await User.findOne({
+    passwordResetToken: hashedToken,
+    passwordResetExpires: { $gt: Date.now() },
+  });
+
+  //2)if token has not expired and there is a user so in that case, set the new password
+  if (!user) {
+    return next(
+      new AppError("Token is invalid or has expired", 400)
+    );
+  }
+
+  user.password = req.body.password;
+  user.passwordResetToken = undefined;
+  user.passwordResetExpires = undefined;
+  // 3) update the changedPasswordAt for the current user
+  // we did using per save mongoose middleware
+  await user.save();
+
+  //4) log the user in, send the JSON Web Token to the client
+  createSendToken(user, 201, req, res);
+};

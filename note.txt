@@ -408,12 +408,12 @@ deadline - before 2022-3-14 ✅ DONE on 2022-3-10
         - {DONE} call the above route in forgetPassword backend route
         - {DONE} crate new puppeteer script because sendEmailHandler has limitation 
         - {DONE} test sendEmailHandlerV2 script with resetToken that will be create in forgetPassword's backend route
-        - {TODO} create 'i forget my password' command
+        - {DONE} create 'i forget my password' command
                 - {DONE} create redux functionality for forgetPassword
-                - {TODO} if email exist send  a user reset password token to his/ her email
-                - {TODO} else tell a user 'your email is not exist, if you want to try again say 'forget my password'
-                
-        - {TODO} create frontend route call "resetToken" to handle sending token to backend again
+                - {DONE} if email exist send  a user reset password token to his/ her email
+                - {DONE} else tell a user 'your email is not exist, if you want to try again say 'forget my password'
+        - {DONE} create "resetToken" API route        
+        - {TODO} let finansis call "resetToken" route  to handle sending token to backend again
                 - {TODO} open popup window then tell and show a user 
                         'give me a second to validity your token'
                 - {TODO} show loading icon 
