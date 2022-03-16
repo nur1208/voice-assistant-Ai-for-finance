@@ -399,7 +399,7 @@ deadline - before 2022-3-14 ✅ DONE on 2022-3-10
         - {DONE} create update user info api route
         - {DONE} create redux functionality
         - {DONE} create 'update my info' command
-- {TODO} create forget password functionality
+- {DONE} create forget password functionality
         note: use traveling project as reference
         failed to use nodemailer so i will create automation script
         to send emails
@@ -413,7 +413,7 @@ deadline - before 2022-3-14 ✅ DONE on 2022-3-10
                 - {DONE} if email exist send  a user reset password token to his/ her email
                 - {DONE} else tell a user 'your email is not exist, if you want to try again say 'forget my password'
         - {DONE} create "resetToken" API route        
-        - {TODO} let finansis call "resetToken" route  to handle sending token to backend again
+        - {DONE} let finansis call "resetToken" route  to handle sending token to backend again
                 - {DONE} open popup window then tell and show a user 
                         'give me a second to validate your token'
                 - {DONE} show loading icon 
@@ -424,6 +424,8 @@ deadline - before 2022-3-14 ✅ DONE on 2022-3-10
         document.querySelector("body").removeChild(document.querySelector("body > p"))
         document.querySelector("body").insertAdjacentHTML("afterbegin",'<div style="text-align: center; "><span style="font-size: 18px;">hey i\'m finansis,please click the link to reset your password</span></div><div style="text-align: center; "><span style="font-size: 18px;">https://www.wikihow.com/Send-HTML-Emails</span></div>')
 - {TODO} create logout functionality
+        - {DONE} create logout redux functionality
+        - {DONE} create 'logout' commands
 
 
 deadline - before 2022-3-15 
@@ -438,7 +440,7 @@ deadline - before 2022-3-15
          do you want to logout and 'create new account'   
 - {TODO} tell the user you are logged in when a user logged in after saying 'forget password'
         do you want to update your password
-
+- {TODO} handle if the user said log out when a user not logged in 
 ---- after create user functionality (login, sign up, ...)
 - {TODO} create "you not login, do you want to login for you" command
 - {TODO} create watchList functionality
@@ -468,6 +470,7 @@ deadline - before 2022-3-15
 final deadline v1 - before 2022-3-31
 
 ----- NOT IMPORTANT NOW
+- {TODO} make sure that message been sent to users in sendEmailHandlerV2 script
 - {TODO} create 'do you want me to open gmail website' command after send password reset token
 - {TODO} create 'update my [name|info|gender]' if info let the user update his name and gender
 - {TODO} create up auto server.js file by moving routes to different file
@@ -498,6 +501,7 @@ final deadline v1 - before 2022-3-31
                 still going
 - {TODO} let the user type the symbol or choose a number from his watch list
 - {TODO NOT IMPORTANT NOW} save S&P 500 stocks like {date:{added:[stocks],removed:[stocks] }}
+- {TODO} set cookie in react
 get  is the market open data using python and get the data every day
 
 - {TODO NOT IMPORTANT NOW} add cancel axios request when the page unmounted 

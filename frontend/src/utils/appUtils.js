@@ -179,6 +179,7 @@ export const useFinansis = ({
     login,
     updateUserInfo,
     sendResetForgotPassToken,
+    logout,
   } = useUserCommandsHandler(response, handleOpenModal);
 
   const [findingAnswerFor, setFindingAnswerFor] = useState("");
@@ -209,6 +210,11 @@ export const useFinansis = ({
       ],
       commandFor: "every section",
       callback: async () => await updateUserInfo(),
+    },
+    {
+      command: ["logout", "log out"],
+      commandFor: "every section",
+      callback: async () => await logout(),
     },
 
     // {

@@ -20,10 +20,11 @@ export const useUserCommandsHandler = (
   response,
   handleOpenModal
 ) => {
-  const { updateModal } = useReduxActions();
-  const { invalidMessage } = useSelector(
-    (state) => state.modal_store
-  );
+  const { updateModal, logout: logoutRedux } = useReduxActions();
+  const {
+    modal_store: { invalidMessage },
+    user_store: { userData },
+  } = useSelector((state) => state);
 
   const getUserInputHandler = async (
     label,
@@ -83,6 +84,11 @@ export const useUserCommandsHandler = (
 
   useForgetPass(response, getUserInputHandler);
 
+  const logout = async () => {
+    response(`good bye, ${userData.name}`);
+    response("logged out successfully");
+    logoutRedux();
+  };
   // listening to invalid message
   useEffect(() => {
     if (invalidMessage) {
@@ -98,5 +104,6 @@ export const useUserCommandsHandler = (
     login,
     updateUserInfo,
     sendResetForgotPassToken,
+    logout,
   };
 };

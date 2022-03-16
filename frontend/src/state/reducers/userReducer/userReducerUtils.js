@@ -27,6 +27,7 @@ export const USER_ACTIONS = {
     LOADING: "RESET_PASS_LOADING",
   },
   AUTO_LOGIN: "AUTO_LOGIN",
+  LOGOUT: "LOGOUT",
 };
 
 export const REDUCER_RETURN = {

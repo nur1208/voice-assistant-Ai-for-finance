@@ -278,3 +278,9 @@ export const resetPassword =
 
     dispatch({ type: MODAL_ACTIONS.CLOSE_MODAL });
   };
+
+export const logout = () => (dispatch) => {
+  localStorage.setItem("userData", null);
+
+  dispatch({ type: USER_ACTIONS.LOGOUT });
+};
