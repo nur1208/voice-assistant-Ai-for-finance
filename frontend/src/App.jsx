@@ -3,6 +3,7 @@ import React, {
   useEffect,
   useState,
   createContext,
+  useRef,
 } from "react";
 import { FinanbroBtn } from "./components/finanbroBtn/finanbroBtn";
 import { NewsPage } from "./pages/NewsPage";
@@ -134,12 +135,16 @@ export const App = () => {
 
   useExitPrompt(false);
 
+  const appRef = useRef(null);
   useEffect(() => {
     updateBTState({ ...localStorageData, accountRisk });
 
     if (userData) {
       autoLogin(userData);
     }
+    appRef.current.click();
+    appRef.current.focus();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -175,17 +180,19 @@ export const App = () => {
     setIsWaitingUserDone,
   };
   return (
-    <WaitForUserInputContext.Provider value={waitOption}>
-      <GlobalStyle />
-      <Switch>
-        {PAGES.map((page, index) => (
-          <Route exact path={page.path} key={index}>
-            {page.Component(NewsPageProps)}
-          </Route>
-        ))}
-      </Switch>
-      <FinanbroBtn {...FinanbroBtnProps} />
-      <BasicModal {...modalProps} />
-    </WaitForUserInputContext.Provider>
+    <div ref={appRef}>
+      <WaitForUserInputContext.Provider value={waitOption}>
+        <GlobalStyle />
+        <Switch>
+          {PAGES.map((page, index) => (
+            <Route exact path={page.path} key={index}>
+              {page.Component(NewsPageProps)}
+            </Route>
+          ))}
+        </Switch>
+        <FinanbroBtn {...FinanbroBtnProps} />
+        <BasicModal {...modalProps} />
+      </WaitForUserInputContext.Provider>
+    </div>
   );
 };

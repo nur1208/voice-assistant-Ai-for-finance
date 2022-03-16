@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useSpeechSynthesis } from "react-speech-kit";
+// import { useSpeechSynthesis } from "react-speech-kit";
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
 import { useReduxActions } from "../../../hooks/useReduxActions";
 import { sleep } from "../../../utils/sleep";
@@ -9,6 +9,7 @@ import {
   useBackTest,
 } from "../../Simulator/utils/useBackTest";
 import { useSaveTestedData } from "../../Simulator/utils/useSaveTestedData";
+import useSpeechSynthesis from "./useSpeechSynthesis";
 
 export const secondCommandOptions = {
   rewritingTestedData: "rewritingTestedData",
@@ -16,8 +17,8 @@ export const secondCommandOptions = {
   tryTradingAgain: "tryTradingAgain",
 };
 
-export const useResponse = () => {
-  const { speak, voices, speaking, cancel } =
+export const useResponse = (SpeechRecognition) => {
+  const { speak, voices, speaking, cancel, speakAsync } =
     useSpeechSynthesis();
 
   const [randomIndex, setRandomIndex] = useState(0);
@@ -82,6 +83,53 @@ export const useResponse = () => {
       handleResponse(voiceIndex);
     }
   };
+  const { resetBTState, updateSecondCommand, updateSpeaking } =
+    useReduxActions();
+
+  const responseAsync = async (optionsResponse) => {
+    updateSpeaking(true);
+    let randomOption;
+    if (optionsResponse.length - 1 < randomIndex)
+      randomOption = optionsResponse[0];
+    else randomOption = optionsResponse[randomIndex];
+    console.log("here");
+    // let currentVoiceIndex = 7;
+    // console.log({
+    //   voices,
+    //   finansisVoice: voices[currentVoiceIndex].name,
+    // });
+
+    const handleResponse = async (voiceIndex) => {
+      if (typeof optionsResponse !== "object")
+        await speakAsync({
+          text: optionsResponse,
+          voice: voices[voiceIndex],
+        });
+      else {
+        await speakAsync({
+          text: randomOption,
+          voice: voices[voiceIndex],
+        });
+        setRandomIndex(
+          Math.floor(Math.random() * optionsResponse.length)
+        );
+        // setRandomIndex(10);
+      }
+    };
+
+    if (!voices[currentVoiceIndex]) {
+      return;
+    }
+
+    if (voices[currentVoiceIndex].name === FINANSIS_VOICE) {
+      await handleResponse(currentVoiceIndex);
+    } else {
+      const voiceIndex = changeVoiceToFinansisVoice();
+      await handleResponse(voiceIndex);
+    }
+
+    updateSpeaking(false);
+  };
 
   const responseAfterTimeout = (title, option = {}) =>
     new Promise((resolve, reject) => {
@@ -115,9 +163,6 @@ export const useResponse = () => {
   const [secondCommandFor, setSecondCommandFor] = useState("");
 
   const { forceSelling } = useBackTest();
-
-  const { resetBTState, updateSecondCommand } =
-    useReduxActions();
 
   const [isResetBTData, setIsResetBTData] = useLocalStorage(
     "isResetBTData",
@@ -272,6 +317,22 @@ export const useResponse = () => {
     // resetTranscript();
   };
 
+  // make sure not to let finansis recognize her won voice
+  useEffect(() => {
+    if (speaking) {
+      // console.log({
+      //   conditionLisping: "stop finansis recognizing",
+      // });
+      SpeechRecognition.stopListening();
+    } else {
+      SpeechRecognition.startListening({ continuous: true });
+      // console.log({
+      //   conditionLisping: "start finansis recognizing",
+      // });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [speaking]);
+
   return {
     response,
     responseAfterTimeout,
@@ -280,5 +341,6 @@ export const useResponse = () => {
     respondedWithYesSC,
     respondedWithNoSC,
     setSecondCommandFor,
+    responseAsync,
   };
 };

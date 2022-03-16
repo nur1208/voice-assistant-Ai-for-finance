@@ -52,7 +52,7 @@ export const useFinansis = ({
       symbol: "ABBV",
     },
   ]);
-
+  // const [first, setfirst] = useState(second)
   const { closeModal } = useReduxActions();
 
   const handleOpenModal = (title, content, isInput, label) => {
@@ -77,7 +77,8 @@ export const useFinansis = ({
     respondedWithYesSC,
     respondedWithNoSC,
     setSecondCommandFor,
-  } = useResponse();
+    responseAsync,
+  } = useResponse(SpeechRecognition);
 
   const {
     getNews,
@@ -215,6 +216,20 @@ export const useFinansis = ({
       command: ["logout", "log out"],
       commandFor: "every section",
       callback: async () => await logout(),
+    },
+    {
+      command: "test",
+      commandFor: "every section",
+      callback: async () => {
+        await responseAsync(
+          "Firstly, wrap the index.js or the root app component of your application with the CookiesProvider component from the react-cookie package."
+        );
+        await responseAsync(
+          "Cookies: Javascript object with all of the user’s cookies."
+        );
+        await responseAsync("someting short");
+        await responseAsync("Function to remove the cookies.");
+      },
     },
 
     // {

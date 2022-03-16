@@ -423,23 +423,27 @@ deadline - before 2022-3-14 ✅ DONE on 2022-3-10
         javascript script
         document.querySelector("body").removeChild(document.querySelector("body > p"))
         document.querySelector("body").insertAdjacentHTML("afterbegin",'<div style="text-align: center; "><span style="font-size: 18px;">hey i\'m finansis,please click the link to reset your password</span></div><div style="text-align: center; "><span style="font-size: 18px;">https://www.wikihow.com/Send-HTML-Emails</span></div>')
-- {TODO} create logout functionality
+- {DONE} create logout functionality
         - {DONE} create logout redux functionality
         - {DONE} create 'logout' commands
 
 
-deadline - before 2022-3-15 
+deadline - before 2022-3-15 ❌ DONE on 2022-3-17
 - {TODO IMPORTANT} don't let finansis recognize her won voice 
+        - {TODO} if there are two response after each other use responseAsync 
+        - {TODO} try to set use responseAsync function in redux store to call 
+                the same instant all over the app
 - {TODO IMPORTANT} don't let finansis response when people are talking
                     note: check for the length of the command if it's longer 
                             then some num 
-
 - {TODO} tell the user you are logged in when a user logged in after saying 'login'
          do you want to logout and 'login with different account'   
 - {TODO} tell the user you are logged in when a user logged in after saying 'sign up'
          do you want to logout and 'create new account'   
 - {TODO} tell the user you are logged in when a user logged in after saying 'forget password'
         do you want to update your password
+deadline - before 2022-3-20
+
 - {TODO} handle if the user said log out when a user not logged in 
 ---- after create user functionality (login, sign up, ...)
 - {TODO} create "you not login, do you want to login for you" command
@@ -470,6 +474,7 @@ deadline - before 2022-3-15
 final deadline v1 - before 2022-3-31
 
 ----- NOT IMPORTANT NOW
+- {TODO} don't let finansis start listen enter the user click on finansis btn
 - {TODO} make sure that message been sent to users in sendEmailHandlerV2 script
 - {TODO} create 'do you want me to open gmail website' command after send password reset token
 - {TODO} create 'update my [name|info|gender]' if info let the user update his name and gender

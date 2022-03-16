@@ -8,3 +8,12 @@ export const updateSecondCommand = (data) => {
     });
   };
 };
+
+export const updateSpeaking = (data) => {
+  return (dispatch) => {
+    dispatch({
+      type: RESPONSE_ACTIONS.UPDATE_SPEAKING,
+      payload: data,
+    });
+  };
+};
