@@ -19,6 +19,7 @@ import { SIGN_UP_FIELDS } from "../../finanbroBtn/hooks/useSignUpFields";
 import { isValidEmail } from "../../../utils/isValidEmail";
 import { LOGIN_FIELDS } from "../../finanbroBtn/hooks/useLoginFields";
 import { UPDATE_USER_INFO_FIELDS } from "../../finanbroBtn/hooks/useUpdateFields";
+import { FORGET_PASS_FIELDS } from "../../finanbroBtn/hooks/useForgetPassFields";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -74,6 +75,7 @@ export default function InputModal({
       stateName,
       selectOptions,
       userInputs,
+      extraHelperText,
     },
     user_store: { userData },
   } = useSelector((state) => state);
@@ -106,6 +108,7 @@ export default function InputModal({
       (stateName === SIGN_UP_FIELDS.NAME.stateName ||
         stateName === UPDATE_USER_INFO_FIELDS.NAME.stateName ||
         stateName === SIGN_UP_FIELDS.PASSWORD.stateName ||
+        stateName === FORGET_PASS_FIELDS.PASSWORD.stateName ||
         stateName === LOGIN_FIELDS.PASSWORD.stateName) &&
       userInput.length > 15
     ) {
@@ -118,6 +121,7 @@ export default function InputModal({
     // checkForEmail
     if (
       (stateName === SIGN_UP_FIELDS.EMAIL.stateName ||
+        stateName === FORGET_PASS_FIELDS.EMAIL.stateName ||
         stateName === LOGIN_FIELDS.EMAIL.stateName) &&
       !isValidEmail(userInput)
     ) {
@@ -130,6 +134,7 @@ export default function InputModal({
 
     if (
       (stateName === SIGN_UP_FIELDS.PASSWORD.stateName ||
+        stateName === FORGET_PASS_FIELDS.PASSWORD.stateName ||
         stateName === LOGIN_FIELDS.PASSWORD.stateName) &&
       userInput.length < 8
     ) {
@@ -141,8 +146,11 @@ export default function InputModal({
     }
     // userInputs
     if (
-      stateName === SIGN_UP_FIELDS.PASSWORD_CONFIRM.stateName &&
-      userInputs.password !== userInput
+      (stateName === SIGN_UP_FIELDS.PASSWORD_CONFIRM.stateName &&
+        userInputs.password !== userInput) ||
+      (stateName ===
+        FORGET_PASS_FIELDS.CONFIRM_PASSWORD.stateName &&
+        userInputs.passwordReset !== userInput)
     ) {
       updateModal({
         invalidMessage: `${label} must be equal to password, please enter a correct ${label}`,
@@ -208,7 +216,9 @@ export default function InputModal({
         autoComplete="off"
       >
         <TextField
-          helperText="click enter to submit"
+          helperText={`${
+            extraHelperText ? extraHelperText : ""
+          }click enter to submit`}
           autoFocus={true}
           style={{ width: 350 }}
           id="filled-basic"
@@ -220,9 +230,9 @@ export default function InputModal({
           select={!userInput && selectOptions}
           value={userInput}
           type={
-            stateName.includes("password")
+            stateName?.includes("password")
               ? "password"
-              : stateName.includes("email")
+              : stateName?.includes("email")
               ? "email"
               : "text"
           }

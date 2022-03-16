@@ -27,8 +27,6 @@ const signToken = (id) => {
   );
 };
 
-const keys = ["keyboard cat"];
-
 const createSendToken = (user, statusCode, req, res) => {
   const token = signToken(user._id);
 
@@ -191,6 +189,7 @@ export const forgetPassword = catchAsync(
         html: message,
       });
 
+      // for test
       // await sendEmail({
       //   email: user.email,
       //   subject:

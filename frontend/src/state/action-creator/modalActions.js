@@ -10,3 +10,9 @@ export const setUserInput = (userInput) => (dispatch) => {
     payload: userInput,
   });
 };
+
+export const closeModal = () => (dispatch) => {
+  dispatch({
+    type: MODAL_ACTIONS.CLOSE_MODAL,
+  });
+};

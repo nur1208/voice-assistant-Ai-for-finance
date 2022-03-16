@@ -1,6 +1,6 @@
 import { sleep } from "../../../utils/sleep";
 import { useReduxActions } from "../../../hooks/useReduxActions";
-import { MODAL_TYPE_OPTIONS } from "../../Modal/BasicModal";
+import { MODAL_TYPE_OPTIONS } from "../../Modal/BasicModal/BasicModalUtils";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import {

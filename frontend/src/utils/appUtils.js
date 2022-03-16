@@ -53,7 +53,7 @@ export const useFinansis = ({
     },
   ]);
 
-  const { updateModal } = useReduxActions();
+  const { closeModal } = useReduxActions();
 
   const handleOpenModal = (title, content, isInput, label) => {
     setOpenModal(true);
@@ -64,13 +64,7 @@ export const useFinansis = ({
   };
   const handleCloseModal = () => {
     setOpenModal(false);
-    updateModal({
-      type: "",
-      stateName: "",
-      label: "",
-      isReduxState: false,
-      selectOptions: null,
-    });
+    closeModal();
   };
 
   const [isForceSellAgain, setIsForceSellAgain] =

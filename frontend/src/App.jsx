@@ -30,7 +30,7 @@ import { bindActionCreators } from "redux";
 import { actionCreators } from "./state";
 import { useReduxActions } from "./hooks/useReduxActions";
 import { useSaveTestedData } from "./components/Simulator/utils/useSaveTestedData";
-import BasicModal from "./components/Modal/BasicModal";
+// import BasicModal from "./components/Modal/BasicModal";
 import InputModal from "./components/Modal/InputModal/InputModal";
 import { useLocalStorage } from "./hooks/useLocalStorage";
 import { useExitPrompt } from "./hooks/useExitPrompt";
@@ -39,6 +39,8 @@ import { TradingPage } from "./pages/TradingPage";
 import { ProgressModal } from "./components/Modal/ProgressModal/ProgressModal";
 import { useNetworkStatus } from "./hooks/useNetworkStatus";
 import { DateInputFormat } from "./components/DateInputFormat";
+import { ResetPassword } from "./pages/ResetPassword";
+import BasicModal from "./components/Modal/BasicModal/BasicModal";
 export const PAGES = [
   {
     path: "/",
@@ -65,6 +67,7 @@ export const PAGES = [
     Component: () => (
       // <BasicModal
       //   open={true}
+      //   // isTestIcon
       //   isInput
       //   label={{ stateName: "soemthign", label: "date" }}
       //   // isProgress
@@ -74,9 +77,14 @@ export const PAGES = [
       //   //   setStopLoss: "success",
       //   // }}
       // />
-      <Test />
+      // <Test />
+      <ResetPassword />
       // <DateInputFormat />
     ),
+  },
+  {
+    path: "/resetPassword/:token",
+    Component: () => <ResetPassword />,
   },
 ];
 
