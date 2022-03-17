@@ -16,13 +16,18 @@ export const UPDATE_USER_INFO_FIELDS = {
       "same for your gender but instead of typing, select your gender",
     selectOptions: ["Female", "Male"],
   },
+  PASSWORD: {
+    label: "New Password",
+    stateName: "passwordUpdate",
+    message: "enter your new password",
+  },
 };
 
 export const useUpdateFields = (
   response,
   getUserInputHandler
 ) => {
-  const { updateUserInfo } = useReduxActions();
+  const { updateUserInfo, updatePassword } = useReduxActions();
 
   const {
     modal_store: { userInputs },
@@ -51,6 +56,19 @@ export const useUpdateFields = (
         {
           name: userInputs.nameUpdate,
           gender: userInputs.genderUpdate,
+        },
+        response
+      );
+    }
+  );
+
+  useHandleUserInput(
+    UPDATE_USER_INFO_FIELDS.PASSWORD.stateName,
+    {},
+    async () => {
+      updatePassword(
+        {
+          password: userInputs.passwordUpdate,
         },
         response
       );

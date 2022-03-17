@@ -488,6 +488,8 @@ deadline - before 2022-3-20
 final deadline v1 - before 2022-3-31
 
 ----- NOT IMPORTANT NOW
+- {TODO} change appUtils file name to useFinansis 
+- {TODO} create useUnknownCommands hook and use it in appUtils
 - {TODO} clean up the code in userActions by making the actions function dynamic
 - {TODO} sorry you not vpn user i con't help you with that
 - {TODO} ask the user please use headphones or buy smart speaker for better experience

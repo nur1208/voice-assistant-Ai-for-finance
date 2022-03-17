@@ -295,6 +295,13 @@ export const updatePassword =
         `${BACKEND_API_URL}/${USER_ROUTE}/updateMyPassword`,
         {
           ...data,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${
+              getState().user_store.userData.token
+            }`,
+          },
         }
       );
       response &&

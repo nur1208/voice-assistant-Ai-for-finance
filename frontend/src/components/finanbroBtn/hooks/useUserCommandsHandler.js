@@ -128,6 +128,21 @@ export const useUserCommandsHandler = (
     response("logged out successfully");
     logoutRedux();
   };
+
+  const updatePassword = async () => {
+    if (userData) {
+      await getUserInputHandler(
+        UPDATE_USER_INFO_FIELDS.PASSWORD.label,
+        UPDATE_USER_INFO_FIELDS.PASSWORD.stateName,
+        UPDATE_USER_INFO_FIELDS.PASSWORD.message
+      );
+    } else {
+      response(
+        "oops, you not logged in to update your password"
+      );
+    }
+  };
+
   // listening to invalid message
   useEffect(() => {
     if (invalidMessage) {
@@ -144,5 +159,6 @@ export const useUserCommandsHandler = (
     updateUserInfo,
     sendResetForgotPassToken,
     logout,
+    updatePassword,
   };
 };

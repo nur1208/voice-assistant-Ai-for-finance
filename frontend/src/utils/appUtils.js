@@ -183,6 +183,7 @@ export const useFinansis = ({
     updateUserInfo,
     sendResetForgotPassToken,
     logout,
+    updatePassword
   } = useUserCommandsHandler(
     response,
     handleOpenModal,
@@ -222,6 +223,11 @@ export const useFinansis = ({
       command: ["logout", "log out"],
       commandFor: "every section",
       callback: async () => await logout(),
+    },
+    {
+      command: ["update (my) password","change (my) password" ],
+      commandFor: "every section",
+      callback: async () => await updatePassword(),
     },
     {
       command: "test",
@@ -697,6 +703,7 @@ export const useFinansis = ({
     useState(false);
 
   const [isStopListing, setIsStopListing] = useState(false);
+
   // code for handling unknown commands
   const responseFoUnknownCommand = [
     "I didn't get that. you can try again... bro",
