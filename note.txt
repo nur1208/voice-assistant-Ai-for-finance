@@ -256,7 +256,7 @@ deadline - before 2022-1-18 ✅ DONE on 2022-1-17
     - create routes (get and put) for strategyTested model
     - improve getStrategyTested controller 
 deadline - before 2022-1-20 ❌ DONE on 2022-2-2
-120 - {TODO} create simulator for back testing
+120 - {DONE} create simulator for back testing
     - {DONE} creating backTesting interface the interface like https://www.investopedia.com/simulator/
     - {DONE} let finansis pass day by day 
     - {DONE} save the historical price to save time
@@ -429,10 +429,18 @@ deadline - before 2022-3-14 ✅ DONE on 2022-3-10
 
 
 deadline - before 2022-3-15 ❌ DONE on 2022-3-17
-- {TODO IMPORTANT} don't let finansis recognize her won voice 
-        - {TODO} if there are two response after each other use responseAsync 
-        - {TODO} try to set use responseAsync function in redux store to call 
+- {DONE IMPORTANT} don't let finansis recognize her own voice 
+        - {DONE} if there are two response after each other use responseAsync 
+        - {DONE} try to set use responseAsync function in redux store to call 
                 the same instant all over the app
+        - {DONE} fix letting finansis start listen after the first render
+                - {DONE} create isStartRecognize parameter in response_store
+                - {DONE} when the user toggle finansis btn change isStartRecognize value 
+                - {DONE} use isStartRecognize in 'make sure not to let finansis recognize her won voice' useEffect
+        - {DONE} fix 'stop listening' command
+
+
+        ask the user please use headphones or buy smart speaker for better experience
 - {TODO IMPORTANT} don't let finansis response when people are talking
                     note: check for the length of the command if it's longer 
                             then some num 
@@ -443,7 +451,8 @@ deadline - before 2022-3-15 ❌ DONE on 2022-3-17
 - {TODO} tell the user you are logged in when a user logged in after saying 'forget password'
         do you want to update your password
 deadline - before 2022-3-20
-
+- {TODO} fix 'currentWindows is not iterable' when say open 'apple and tesla charts'
+- {TODO} fix after opening 'https://finance.yahoo.com/most-active' window finansis couldn't close it
 - {TODO} handle if the user said log out when a user not logged in 
 ---- after create user functionality (login, sign up, ...)
 - {TODO} create "you not login, do you want to login for you" command
@@ -590,6 +599,7 @@ big problems that happened when building finansis:
 - how to let finansis remember unknown keyword in yahoo finance database for stocks
   like 'something' or 'finansis' [solved]    
 - how to not have duplicate news articles in the database [solved 90%]  
+- how to not let finansis recognize her won voice
 
 big problems that happened before building finansis:
 - learning fundamental of programming

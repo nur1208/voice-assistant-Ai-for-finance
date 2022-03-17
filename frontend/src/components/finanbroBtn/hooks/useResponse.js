@@ -173,9 +173,8 @@ export const useResponse = (SpeechRecognition) => {
     (state) => state.back_testing
   );
 
-  const { secondCommand } = useSelector(
-    (state) => state.response_store
-  );
+  const { secondCommand, isSpeaking, isStartRecognize } =
+    useSelector((state) => state.response_store);
   const respondedWithYesSC = async ({
     handleReadingHeadLines,
     handleScrollDetailPage,
@@ -317,21 +316,25 @@ export const useResponse = (SpeechRecognition) => {
     // resetTranscript();
   };
 
-  // make sure not to let finansis recognize her won voice
+  // make sure not to let finansis recognize her own voice
   useEffect(() => {
-    if (speaking) {
-      // console.log({
-      //   conditionLisping: "stop finansis recognizing",
-      // });
-      SpeechRecognition.stopListening();
+    if (isStartRecognize) {
+      if (isSpeaking) {
+        console.log({
+          conditionLisping: "stop finansis recognizing",
+        });
+        SpeechRecognition.abortListening();
+      } else {
+        SpeechRecognition.startListening({ continuous: true });
+        console.log({
+          conditionLisping: "start finansis recognizing",
+        });
+      }
     } else {
-      SpeechRecognition.startListening({ continuous: true });
-      // console.log({
-      //   conditionLisping: "start finansis recognizing",
-      // });
+      SpeechRecognition.stopListening();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [speaking]);
+  }, [isSpeaking]);
 
   return {
     response,

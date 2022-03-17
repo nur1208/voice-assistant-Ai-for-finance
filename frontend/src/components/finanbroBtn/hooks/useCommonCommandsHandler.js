@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { PAGES } from "../../../App";
+import { useReduxActions } from "../../../hooks/useReduxActions";
 import { AUTO_API_URL } from "../../../utils/serverUtils";
 export const useCommonCommandsHandler = (
   setPageNumber,
@@ -28,6 +29,8 @@ export const useCommonCommandsHandler = (
   const width = window.outerWidth - 20;
   const height = window.outerHeight - 20;
   const [popupWindow, setPopupWindow] = useState(null);
+
+  const { updateIsStartRecognize } = useReduxActions();
 
   const openAnswerDetail = (questionObject) => {
     console.log({ questionObject });
@@ -146,7 +149,8 @@ export const useCommonCommandsHandler = (
   };
 
   const handleStopListening = () => {
-    console.log("here");
+    updateIsStartRecognize(false);
+
     SpeechRecognition.stopListening();
     response("okay, I'll stop listening");
   };

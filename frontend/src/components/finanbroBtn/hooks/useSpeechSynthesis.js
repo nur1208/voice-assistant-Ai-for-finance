@@ -51,7 +51,7 @@ const useSpeechSynthesis = (props = {}) => {
       pitch = 1,
       volume = 1,
     } = args;
-    updateSpeaking(true);
+
     if (!supported) return;
     setSpeaking(true);
     // Firefox won't repeat an utterance that has been
@@ -60,9 +60,11 @@ const useSpeechSynthesis = (props = {}) => {
     utterance.text = text;
     utterance.voice = voice;
     utterance.onend = handleEnd;
+    utterance.onstart = () => updateSpeaking(true);
     utterance.rate = rate;
     utterance.pitch = pitch;
     utterance.volume = volume;
+
     window.speechSynthesis.speak(utterance);
   };
 

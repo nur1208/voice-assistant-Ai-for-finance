@@ -17,3 +17,12 @@ export const updateSpeaking = (data) => {
     });
   };
 };
+
+export const updateIsStartRecognize = (data) => {
+  return (dispatch) => {
+    dispatch({
+      type: RESPONSE_ACTIONS.UPDATE_IS_START_RECOGNIZE,
+      payload: data,
+    });
+  };
+};

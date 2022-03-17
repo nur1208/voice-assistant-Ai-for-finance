@@ -53,7 +53,8 @@ export const useFinansis = ({
     },
   ]);
   // const [first, setfirst] = useState(second)
-  const { closeModal } = useReduxActions();
+  const { closeModal, updateIsStartRecognize } =
+    useReduxActions();
 
   const handleOpenModal = (title, content, isInput, label) => {
     setOpenModal(true);
@@ -963,9 +964,13 @@ export const useFinansis = ({
     //     language: "zh-CN",
     //   }),
     onClick: () => {
-      if (!listening)
+      if (!listening) {
         SpeechRecognition.startListening({ continuous: true });
-      else SpeechRecognition.stopListening();
+        updateIsStartRecognize(true);
+      } else {
+        SpeechRecognition.stopListening();
+        updateIsStartRecognize(false);
+      }
     },
     isListening: listening,
     isSpeaking: speaking,

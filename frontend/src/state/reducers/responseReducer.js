@@ -1,6 +1,7 @@
 export const RESPONSE_ACTIONS = {
   UPDATE_SECOND_COMMAND: "UPDATE_SECOND_COMMAND",
   UPDATE_SPEAKING: "UPDATE_SPEAKING",
+  UPDATE_IS_START_RECOGNIZE: "UPDATE_IS_START_RECOGNIZE",
 };
 
 export const responseReducer = (state = {}, action) => {
@@ -10,6 +11,10 @@ export const responseReducer = (state = {}, action) => {
 
     case RESPONSE_ACTIONS.UPDATE_SPEAKING:
       return { ...state, isSpeaking: action.payload };
+
+    case RESPONSE_ACTIONS.UPDATE_IS_START_RECOGNIZE:
+      return { ...state, isStartRecognize: action.payload };
+
     default:
       return state;
   }
