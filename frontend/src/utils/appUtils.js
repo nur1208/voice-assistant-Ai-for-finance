@@ -25,6 +25,7 @@ import { useUserCommandsHandler } from "../components/finanbroBtn/hooks/useUserC
 //   const { transcript } = useSpeechRecognition();
 // };
 
+const COMMAND_LENGTH_NOT_COMMAND = 66;
 export const useFinansis = ({
   isWaitingUserDone,
   setIsWaitingUserDone,
@@ -847,8 +848,15 @@ export const useFinansis = ({
         // if(checkForQW && commandsWithQuestionWord.includes(finalTranscript))
       }
       // console.log({ isCommandExist: isCommandExistLocal });
+      debugger;
+      // ignore command longer than COMMAND_LENGTH_NOT_COMMAND
+      if (transcript.length > COMMAND_LENGTH_NOT_COMMAND) {
+        resetTranscript();
 
+        return;
+      }
       setIsCommandExist(isCommandExistLocal);
+
       if (!isCommandExistLocal) {
         // Look for questions
         if (finalTranscript && questions.length !== undefined) {
