@@ -50,6 +50,17 @@ export const useUserCommandsHandler = (
     handleOpenModal();
   };
 
+  const handleAlreadyLoggedIn = (callback, action, type) => {
+    updateSecondCommand({
+      type,
+      other: { callback, action },
+    });
+    setSecondCommandFor({
+      type,
+      other: { callback, action },
+    });
+  };
+
   const signUp = async (isIgnore) => {
     if (isIgnore || !userData) {
       await getUserInputHandler(
@@ -90,16 +101,39 @@ export const useUserCommandsHandler = (
     }
   };
 
-  const handleAlreadyLoggedIn = (callback, action, type) => {
-    updateSecondCommand({
-      type,
-      other: { callback, action },
-    });
-    setSecondCommandFor({
-      type,
-      other: { callback, action },
-    });
+  const updatePassword = async () => {
+    if (userData) {
+      await getUserInputHandler(
+        UPDATE_USER_INFO_FIELDS.PASSWORD.label,
+        UPDATE_USER_INFO_FIELDS.PASSWORD.stateName,
+        UPDATE_USER_INFO_FIELDS.PASSWORD.message
+      );
+    } else {
+      response(
+        "oops, you not logged in to update your password"
+      );
+    }
   };
+
+  const sendResetForgotPassToken = async () => {
+    if (!userData) {
+      await getUserInputHandler(
+        FORGET_PASS_FIELDS.EMAIL.label,
+        FORGET_PASS_FIELDS.EMAIL.stateName,
+        FORGET_PASS_FIELDS.EMAIL.message
+      );
+    } else {
+      response("you are logged in");
+      response("do you want to update your password");
+      handleAlreadyLoggedIn(
+        updatePassword,
+        "updatePassword",
+        secondCommandOptions.updatePassword
+      );
+    }
+  };
+
+  useForgetPass(response, getUserInputHandler);
 
   useLoginFields(response, getUserInputHandler);
 
@@ -113,34 +147,10 @@ export const useUserCommandsHandler = (
 
   useUpdateFields(response, getUserInputHandler);
 
-  const sendResetForgotPassToken = async () => {
-    await getUserInputHandler(
-      FORGET_PASS_FIELDS.EMAIL.label,
-      FORGET_PASS_FIELDS.EMAIL.stateName,
-      FORGET_PASS_FIELDS.EMAIL.message
-    );
-  };
-
-  useForgetPass(response, getUserInputHandler);
-
   const logout = async () => {
     response(`good bye, ${userData.name}`);
     response("logged out successfully");
     logoutRedux();
-  };
-
-  const updatePassword = async () => {
-    if (userData) {
-      await getUserInputHandler(
-        UPDATE_USER_INFO_FIELDS.PASSWORD.label,
-        UPDATE_USER_INFO_FIELDS.PASSWORD.stateName,
-        UPDATE_USER_INFO_FIELDS.PASSWORD.message
-      );
-    } else {
-      response(
-        "oops, you not logged in to update your password"
-      );
-    }
   };
 
   // listening to invalid message

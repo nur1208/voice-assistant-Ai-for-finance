@@ -448,12 +448,12 @@ deadline - before 2022-3-15 ❌ DONE on 2022-3-17
          do you want to logout and 'login with different account'   
 - {DONE} tell the user you are logged in when a user logged in after saying 'sign up'
          do you want to logout and 'create new account'   
-- {TODO} tell the user you are logged in when a user logged in after saying 'forget password'
+- {DONE} tell the user you are logged in when a user logged in after saying 'forget password'
         do you want to update your password
         - {DONE} create update password route in the backend
         - {DONE} create update password redux functionality
-        - {TODO} create 'update my password' command 
-        - {TODO} create 'do you want to update your password' command after saying 'forget password'
+        - {DONE} create 'update my password' command 
+        - {DONE} create 'do you want to update your password' command after saying 'forget password' when the user logged in
         
 deadline - before 2022-3-20
 - {TODO} fix 'currentWindows is not iterable' when say open 'apple and tesla charts'
@@ -488,6 +488,8 @@ deadline - before 2022-3-20
 final deadline v1 - before 2022-3-31
 
 ----- NOT IMPORTANT NOW
+- {TODO} create 'am i logged in' command
+- {TODO} create 'do you want to login' when a user say 'update my password' command and his/her not logged in
 - {TODO} change appUtils file name to useFinansis 
 - {TODO} create useUnknownCommands hook and use it in appUtils
 - {TODO} clean up the code in userActions by making the actions function dynamic

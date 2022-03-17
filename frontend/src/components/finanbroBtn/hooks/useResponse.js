@@ -17,6 +17,7 @@ export const secondCommandOptions = {
   tryTradingAgain: "tryTradingAgain",
   loginAgain: "loginAgain",
   signupAgain: "signupAgain",
+  updatePassword: "updatePassword",
 };
 
 export const useResponse = (SpeechRecognition) => {
@@ -299,7 +300,13 @@ export const useResponse = (SpeechRecognition) => {
         await callback(true);
 
         break;
+      case secondCommandOptions.updatePassword:
+        setSecondCommandFor("");
+        updateSecondCommand({});
 
+        response(`okay, I will let you update your password`);
+        secondCommandFor.other.callback();
+        break;
       // case secondCommandOptions.signupAgain:
       //   setSecondCommandFor("");
       //   updateSecondCommand({});
@@ -354,6 +361,13 @@ export const useResponse = (SpeechRecognition) => {
       case secondCommandOptions.loginAgain:
       case secondCommandOptions.signupAgain:
         response(`okay, i won't log you out`);
+        break;
+
+      case secondCommandOptions.updatePassword:
+        response(
+          `what every you say, i won't update your password`
+        );
+
         break;
 
       default:

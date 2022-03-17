@@ -34,7 +34,7 @@ Content-Type: application/json
 {
     
     "email":"mdnur1208@163.com",
-    "password":"11111111"
+    "password":"12341234"
     
 }
 
@@ -84,5 +84,6 @@ Authorization: Bearer {{userToken}}
 
 {
     
-    "password":"12341234"
+    "password":"12345678",
+    "newPassword":"12341234"
 }

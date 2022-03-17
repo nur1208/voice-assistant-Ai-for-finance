@@ -17,9 +17,19 @@ export const UPDATE_USER_INFO_FIELDS = {
     selectOptions: ["Female", "Male"],
   },
   PASSWORD: {
-    label: "New Password",
+    label: "Current Password",
     stateName: "passwordUpdate",
+    message: "enter your current password",
+  },
+  NEW_PASSWORD: {
+    label: "New Password",
+    stateName: "passwordNewUpdate",
     message: "enter your new password",
+  },
+  CONFIRM_PASSWORD: {
+    label: "Confirm Password",
+    stateName: "passwordConfirmUpdate",
+    message: "enter confirm password",
   },
 };
 
@@ -66,9 +76,35 @@ export const useUpdateFields = (
     UPDATE_USER_INFO_FIELDS.PASSWORD.stateName,
     {},
     async () => {
+      //   response(`I got it`);
+      await getUserInputHandler(
+        UPDATE_USER_INFO_FIELDS.NEW_PASSWORD.label,
+        UPDATE_USER_INFO_FIELDS.NEW_PASSWORD.stateName,
+        UPDATE_USER_INFO_FIELDS.NEW_PASSWORD.message
+      );
+    }
+  );
+
+  useHandleUserInput(
+    UPDATE_USER_INFO_FIELDS.NEW_PASSWORD.stateName,
+    {},
+    async () => {
+      //   response(`I got it`);
+      await getUserInputHandler(
+        UPDATE_USER_INFO_FIELDS.CONFIRM_PASSWORD.label,
+        UPDATE_USER_INFO_FIELDS.CONFIRM_PASSWORD.stateName,
+        UPDATE_USER_INFO_FIELDS.CONFIRM_PASSWORD.message
+      );
+    }
+  );
+  useHandleUserInput(
+    UPDATE_USER_INFO_FIELDS.CONFIRM_PASSWORD.stateName,
+    {},
+    async () => {
       updatePassword(
         {
           password: userInputs.passwordUpdate,
+          newPassword: userInputs.passwordNewUpdate,
         },
         response
       );

@@ -107,6 +107,10 @@ export default function InputModal({
     if (
       (stateName === SIGN_UP_FIELDS.NAME.stateName ||
         stateName === UPDATE_USER_INFO_FIELDS.NAME.stateName ||
+        stateName ===
+          UPDATE_USER_INFO_FIELDS.PASSWORD.stateName ||
+        stateName ===
+          UPDATE_USER_INFO_FIELDS.NEW_PASSWORD.stateName ||
         stateName === SIGN_UP_FIELDS.PASSWORD.stateName ||
         stateName === FORGET_PASS_FIELDS.PASSWORD.stateName ||
         stateName === LOGIN_FIELDS.PASSWORD.stateName) &&
@@ -135,7 +139,12 @@ export default function InputModal({
     if (
       (stateName === SIGN_UP_FIELDS.PASSWORD.stateName ||
         stateName === FORGET_PASS_FIELDS.PASSWORD.stateName ||
-        stateName === LOGIN_FIELDS.PASSWORD.stateName) &&
+        stateName ===
+          UPDATE_USER_INFO_FIELDS.PASSWORD.stateName ||
+        stateName ===
+          UPDATE_USER_INFO_FIELDS.NEW_PASSWORD.stateName ||
+        (stateName === stateName) ===
+          LOGIN_FIELDS.PASSWORD.stateName) &&
       userInput.length < 8
     ) {
       updateModal({
@@ -150,7 +159,10 @@ export default function InputModal({
         userInputs.password !== userInput) ||
       (stateName ===
         FORGET_PASS_FIELDS.CONFIRM_PASSWORD.stateName &&
-        userInputs.passwordReset !== userInput)
+        userInputs.passwordReset !== userInput) ||
+      (stateName ===
+        UPDATE_USER_INFO_FIELDS.CONFIRM_PASSWORD.stateName &&
+        userInputs.passwordNewUpdate !== userInput)
     ) {
       updateModal({
         invalidMessage: `${label} must be equal to password, please enter a correct ${label}`,

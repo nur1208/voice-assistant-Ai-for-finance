@@ -269,7 +269,7 @@ export const resetPassword = async (req, res, next) => {
  */
 export const updatePassword = async (req, res, next) => {
   //  1 ) get the user from the collection
-  const { password } = req.body;
+  const { password, newPassword } = req.body;
   const user = await User.findById(req.user.id).select(
     "+password"
   );
@@ -285,12 +285,16 @@ export const updatePassword = async (req, res, next) => {
     return next(new AppError("password is required", 400));
   }
 
+  if (!newPassword) {
+    return next(new AppError("newPassword is required", 400));
+  }
+
   if (await user.correctPassword(password, user.password)) {
     return next(new AppError("incorrect password", 401));
   }
   // 3 ) if _id, update password
 
-  user.password = password;
+  user.password = newPassword;
 
   await user.save();
   // 4 ) log in the user
