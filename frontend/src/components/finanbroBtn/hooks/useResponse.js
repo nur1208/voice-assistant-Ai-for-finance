@@ -15,6 +15,7 @@ export const secondCommandOptions = {
   rewritingTestedData: "rewritingTestedData",
   forceSelling: "forceSelling",
   tryTradingAgain: "tryTradingAgain",
+  loginAgain: "loginAgain",
 };
 
 export const useResponse = (SpeechRecognition) => {
@@ -83,8 +84,13 @@ export const useResponse = (SpeechRecognition) => {
       handleResponse(voiceIndex);
     }
   };
-  const { resetBTState, updateSecondCommand, updateSpeaking } =
-    useReduxActions();
+  const {
+    resetBTState,
+    updateSecondCommand,
+    updateSpeaking,
+    login,
+    logout,
+  } = useReduxActions();
 
   const responseAsync = async (optionsResponse) => {
     updateSpeaking(true);
@@ -271,6 +277,20 @@ export const useResponse = (SpeechRecognition) => {
 
         break;
 
+      case secondCommandOptions.loginAgain:
+        setSecondCommandFor("");
+        updateSecondCommand({});
+        response(
+          `okay, I will log you out and let you login again`
+        );
+
+        await sleep(1000);
+        logout();
+        await sleep(1000);
+        await secondCommandFor.other.callback(true);
+
+        break;
+
       default:
         response("I didn't get that. you can try again... bro");
         break;
@@ -308,11 +328,17 @@ export const useResponse = (SpeechRecognition) => {
           `what every you say, I won't ${secondCommand.other.TradingType} again`
         );
         break;
+      case secondCommandOptions.loginAgain:
+        response(`okay, i won't log you out`);
+        break;
+
       default:
         response("I didn't get that. you can try again... bro");
         break;
     }
     setSecondCommandFor("");
+    updateSecondCommand({});
+
     // resetTranscript();
   };
 
@@ -339,7 +365,7 @@ export const useResponse = (SpeechRecognition) => {
   return {
     response,
     responseAfterTimeout,
-    speaking,
+    speaking: isSpeaking,
     cancel,
     respondedWithYesSC,
     respondedWithNoSC,

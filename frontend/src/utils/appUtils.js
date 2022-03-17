@@ -183,7 +183,11 @@ export const useFinansis = ({
     updateUserInfo,
     sendResetForgotPassToken,
     logout,
-  } = useUserCommandsHandler(response, handleOpenModal);
+  } = useUserCommandsHandler(
+    response,
+    handleOpenModal,
+    setSecondCommandFor
+  );
 
   const [findingAnswerFor, setFindingAnswerFor] = useState("");
 
@@ -848,7 +852,7 @@ export const useFinansis = ({
         // if(checkForQW && commandsWithQuestionWord.includes(finalTranscript))
       }
       // console.log({ isCommandExist: isCommandExistLocal });
-      debugger;
+      // debugger;
       // ignore command longer than COMMAND_LENGTH_NOT_COMMAND
       if (transcript.length > COMMAND_LENGTH_NOT_COMMAND) {
         resetTranscript();

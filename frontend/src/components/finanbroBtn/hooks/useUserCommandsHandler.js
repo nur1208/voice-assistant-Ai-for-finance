@@ -16,11 +16,17 @@ import {
   FORGET_PASS_FIELDS,
   useForgetPass,
 } from "./useForgetPassFields";
+import { secondCommandOptions } from "./useResponse";
 export const useUserCommandsHandler = (
   response,
-  handleOpenModal
+  handleOpenModal,
+  setSecondCommandFor
 ) => {
-  const { updateModal, logout: logoutRedux } = useReduxActions();
+  const {
+    updateModal,
+    logout: logoutRedux,
+    updateSecondCommand,
+  } = useReduxActions();
   const {
     modal_store: { invalidMessage },
     user_store: { userData },
@@ -54,12 +60,31 @@ export const useUserCommandsHandler = (
 
   useSignUpFields(response, getUserInputHandler);
 
-  const login = async () => {
-    await getUserInputHandler(
-      LOGIN_FIELDS.EMAIL.label,
-      LOGIN_FIELDS.EMAIL.stateName,
-      LOGIN_FIELDS.EMAIL.message
+  const login = async (isIgnore) => {
+    if (isIgnore || !userData) {
+      await getUserInputHandler(
+        LOGIN_FIELDS.EMAIL.label,
+        LOGIN_FIELDS.EMAIL.stateName,
+        LOGIN_FIELDS.EMAIL.message
+      );
+    } else {
+      handleAlreadyLoggedIn(login);
+    }
+  };
+
+  const handleAlreadyLoggedIn = (callback) => {
+    response("you are logged in");
+    response(
+      "do you want to logout and login with different account"
     );
+    updateSecondCommand({
+      type: secondCommandOptions.loginAgain,
+      other: { callback, something: "here" },
+    });
+    setSecondCommandFor({
+      type: secondCommandOptions.loginAgain,
+      other: { callback },
+    });
   };
 
   useLoginFields(response, getUserInputHandler);

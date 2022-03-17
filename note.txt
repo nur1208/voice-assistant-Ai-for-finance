@@ -440,11 +440,11 @@ deadline - before 2022-3-15 ❌ DONE on 2022-3-17
         - {DONE} fix 'stop listening' command
 
 
-- {TODO IMPORTANT} don't let finansis response when people are talking
+- {DONE IMPORTANT} don't let finansis response when people are talking (long commands)
                     note: check for the length of the command if it's longer 
                             then some num 
-                    - {TODO} get command with highest length 
-- {TODO} tell the user you are logged in when a user logged in after saying 'login'
+       
+- {DONE} tell the user you are logged in when a user logged in after saying 'login'
          do you want to logout and 'login with different account'   
 - {TODO} tell the user you are logged in when a user logged in after saying 'sign up'
          do you want to logout and 'create new account'   
