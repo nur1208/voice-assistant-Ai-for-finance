@@ -446,7 +446,7 @@ deadline - before 2022-3-15 ❌ DONE on 2022-3-17
        
 - {DONE} tell the user you are logged in when a user logged in after saying 'login'
          do you want to logout and 'login with different account'   
-- {TODO} tell the user you are logged in when a user logged in after saying 'sign up'
+- {DONE} tell the user you are logged in when a user logged in after saying 'sign up'
          do you want to logout and 'create new account'   
 - {TODO} tell the user you are logged in when a user logged in after saying 'forget password'
         do you want to update your password
@@ -483,6 +483,7 @@ deadline - before 2022-3-20
 final deadline v1 - before 2022-3-31
 
 ----- NOT IMPORTANT NOW
+- {TODO} sorry you not vpn user i con't help you with that
 - {TODO} ask the user please use headphones or buy smart speaker for better experience
 - {TODO} don't let finansis start listen enter the user click on finansis btn
 - {TODO} make sure that message been sent to users in sendEmailHandlerV2 script

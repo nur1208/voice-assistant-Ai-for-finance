@@ -50,12 +50,22 @@ export const useUserCommandsHandler = (
     handleOpenModal();
   };
 
-  const signUp = async () => {
-    await getUserInputHandler(
-      SIGN_UP_FIELDS.NAME.label,
-      SIGN_UP_FIELDS.NAME.stateName,
-      SIGN_UP_FIELDS.NAME.message
-    );
+  const signUp = async (isIgnore) => {
+    if (isIgnore || !userData) {
+      await getUserInputHandler(
+        SIGN_UP_FIELDS.NAME.label,
+        SIGN_UP_FIELDS.NAME.stateName,
+        SIGN_UP_FIELDS.NAME.message
+      );
+    } else {
+      response("you are logged in");
+      response("do you want to logout and create a new account");
+      handleAlreadyLoggedIn(
+        signUp,
+        "signup",
+        secondCommandOptions.signupAgain
+      );
+    }
   };
 
   useSignUpFields(response, getUserInputHandler);
@@ -68,22 +78,26 @@ export const useUserCommandsHandler = (
         LOGIN_FIELDS.EMAIL.message
       );
     } else {
-      handleAlreadyLoggedIn(login);
+      response("you are logged in");
+      response(
+        "do you want to logout and login with different account"
+      );
+      handleAlreadyLoggedIn(
+        login,
+        "login",
+        secondCommandOptions.loginAgain
+      );
     }
   };
 
-  const handleAlreadyLoggedIn = (callback) => {
-    response("you are logged in");
-    response(
-      "do you want to logout and login with different account"
-    );
+  const handleAlreadyLoggedIn = (callback, action, type) => {
     updateSecondCommand({
-      type: secondCommandOptions.loginAgain,
-      other: { callback, something: "here" },
+      type,
+      other: { callback, action },
     });
     setSecondCommandFor({
-      type: secondCommandOptions.loginAgain,
-      other: { callback },
+      type,
+      other: { callback, action },
     });
   };
 

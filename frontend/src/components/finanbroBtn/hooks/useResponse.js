@@ -16,6 +16,7 @@ export const secondCommandOptions = {
   forceSelling: "forceSelling",
   tryTradingAgain: "tryTradingAgain",
   loginAgain: "loginAgain",
+  signupAgain: "signupAgain",
 };
 
 export const useResponse = (SpeechRecognition) => {
@@ -278,18 +279,40 @@ export const useResponse = (SpeechRecognition) => {
         break;
 
       case secondCommandOptions.loginAgain:
+      case secondCommandOptions.signupAgain:
         setSecondCommandFor("");
         updateSecondCommand({});
-        response(
-          `okay, I will log you out and let you login again`
-        );
+        const { action, callback } = secondCommandFor.other;
+
+        if (action === "login")
+          response(
+            `okay, I will log you out and let you log in again`
+          );
+        else if (action === "signup")
+          response(
+            `okay, I will log you out and let you create a new account`
+          );
 
         await sleep(1000);
         logout();
         await sleep(1000);
-        await secondCommandFor.other.callback(true);
+        await callback(true);
 
         break;
+
+      // case secondCommandOptions.signupAgain:
+      //   setSecondCommandFor("");
+      //   updateSecondCommand({});
+      //   response(
+      //     `okay, I will log you out and let you create a new account`
+      //   );
+
+      //   await sleep(1000);
+      //   logout();
+      //   await sleep(1000);
+      //   await secondCommandFor.other.callback(true);
+
+      //   break;
 
       default:
         response("I didn't get that. you can try again... bro");
@@ -329,6 +352,7 @@ export const useResponse = (SpeechRecognition) => {
         );
         break;
       case secondCommandOptions.loginAgain:
+      case secondCommandOptions.signupAgain:
         response(`okay, i won't log you out`);
         break;
 
