@@ -143,8 +143,7 @@ export default function InputModal({
           UPDATE_USER_INFO_FIELDS.PASSWORD.stateName ||
         stateName ===
           UPDATE_USER_INFO_FIELDS.NEW_PASSWORD.stateName ||
-        (stateName === stateName) ===
-          LOGIN_FIELDS.PASSWORD.stateName) &&
+        stateName === LOGIN_FIELDS.PASSWORD.stateName) &&
       userInput.length < 8
     ) {
       updateModal({

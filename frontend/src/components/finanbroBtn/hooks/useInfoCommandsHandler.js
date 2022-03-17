@@ -106,10 +106,12 @@ export const useInfoCommandsHandler = (
         openedWindowNum + companiesArray.length
       );
 
-      setPopupWindow((currentWindows) => [
-        ...currentWindows,
-        ...popupWindows,
-      ]);
+      if (popupWindow)
+        setPopupWindow((currentWindows) => [
+          ...currentWindows,
+          ...popupWindows,
+        ]);
+      else setPopupWindow(popupWindows);
     } else {
       response("sorry I can't open that");
     }

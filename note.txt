@@ -455,13 +455,15 @@ deadline - before 2022-3-15 ❌ DONE on 2022-3-17
         - {DONE} create 'update my password' command 
         - {DONE} create 'do you want to update your password' command after saying 'forget password' when the user logged in
         
-deadline - before 2022-3-20
+deadline - before 2022-3-20 ✅ DONE on 2022-3-18
 - {TODO} fix 'currentWindows is not iterable' when say open 'apple and tesla charts'
 - {TODO} fix after opening 'https://finance.yahoo.com/most-active' window finansis couldn't close it
 - {TODO} handle if the user said log out when a user not logged in 
 ---- after create user functionality (login, sign up, ...)
-- {TODO} create "you not login, do you want to login for you" command
+- {TODO} create "you not login, do you want to login" command when click on finansis btn
 - {TODO} create watchList functionality
+deadline - before 2022-3-22
+
 - {TODO} let the user update his/her options (like alway with your controller, ignore Multiple stocks,...)
 - {TODO} move useGetCurrentCountry TO hooks folder
 - {TODO} useGetCurrentCountry test if that function doesn't slow down finansis if yes improve it
@@ -485,9 +487,11 @@ deadline - before 2022-3-20
         note: use stateName is signal
 - {TODO} make sure the jwt took is available after clean the localStorage        
 - {TODO} fix mic logo when state in other page then home page
+- {TODO} teat login in fields
 final deadline v1 - before 2022-3-31
 
 ----- NOT IMPORTANT NOW
+- {TODO} create 'show me {5|all} charts from my watchList' command 
 - {TODO} create 'am i logged in' command
 - {TODO} create 'do you want to login' when a user say 'update my password' command and his/her not logged in
 - {TODO} change appUtils file name to useFinansis 

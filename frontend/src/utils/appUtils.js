@@ -183,7 +183,7 @@ export const useFinansis = ({
     updateUserInfo,
     sendResetForgotPassToken,
     logout,
-    updatePassword
+    updatePassword,
   } = useUserCommandsHandler(
     response,
     handleOpenModal,
@@ -225,7 +225,7 @@ export const useFinansis = ({
       callback: async () => await logout(),
     },
     {
-      command: ["update (my) password","change (my) password" ],
+      command: ["update (my) password", "change (my) password"],
       commandFor: "every section",
       callback: async () => await updatePassword(),
     },
@@ -398,10 +398,24 @@ export const useFinansis = ({
       commandFor: "info",
     },
     {
-      command: "stock (number) *",
+      command: ["stock (number) *", "Talk (number) *"],
       callback: async (num) => await foundMultipleStocks(num),
       commandFor: "info",
     },
+
+    {
+      command: "do you have a boyfriend",
+      callback: async (num) => {
+        response("off course, I do");
+        response(
+          "he is too handsome, too muscular, his name is"
+        );
+        await sleep(1000 * 3);
+        response("Chris Hemsworth");
+      },
+      commandFor: "info",
+    },
+
     {
       command: "can you hear me",
       callback: (num) =>
@@ -486,7 +500,12 @@ export const useFinansis = ({
       commandFor: "info",
     },
     {
-      command: ["show me * charts", "open * charts"],
+      command: [
+        "show me * charts",
+        "show me * tart",
+        "open * charts",
+        "open * tart",
+      ],
       callback: async (companies) =>
         await openMultipleCharts(companies),
       commandFor: "info",
