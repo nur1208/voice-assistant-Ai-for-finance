@@ -461,7 +461,15 @@ deadline - before 2022-3-20 ✅ DONE on 2022-3-18
 - {DONE} handle if the user said log out when a user not logged in 
 ---- after create user functionality (login, sign up, ...)
 - {DONE} create "you not login, do you want to login" command when click on finansis btn
-- {TODO} create watchList functionality
+- {TODO} create watchList functionality 
+        - {TODO} add watchList property in user model
+                watchList: [companyId]
+        - {TODO} create route to add stock to watchLIst
+        - {TODO} create route to delete stock from watchLIst
+        - {TODO} when sending data from the backend to the frontend add watchList to the data
+        - {TODO} create 'add {apple} stock to my watchLIst' command
+        - {TODO} create 'show me my watchList' command
+        - {TODO} create 'delete {apple} stock from my watchLIst' command
 deadline - before 2022-3-22
 
 - {TODO} let the user update his/her options (like alway with your controller, ignore Multiple stocks,...)
