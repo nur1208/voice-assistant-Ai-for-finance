@@ -458,9 +458,9 @@ deadline - before 2022-3-15 ❌ DONE on 2022-3-17
 deadline - before 2022-3-20 ✅ DONE on 2022-3-18
 - {DONE} fix 'currentWindows is not iterable' when say open 'apple and tesla charts'
 - {DONE} fix after opening 'https://finance.yahoo.com/most-active' window finansis couldn't close it
-- {TODO} handle if the user said log out when a user not logged in 
+- {DONE} handle if the user said log out when a user not logged in 
 ---- after create user functionality (login, sign up, ...)
-- {TODO} create "you not login, do you want to login" command when click on finansis btn
+- {DONE} create "you not login, do you want to login" command when click on finansis btn
 - {TODO} create watchList functionality
 deadline - before 2022-3-22
 

@@ -11,7 +11,10 @@ import {
   getNews,
   useNewsCommandsHandler,
 } from "../components/finanbroBtn/commandsHandler";
-import { useResponse } from "../components/finanbroBtn/hooks/useResponse";
+import {
+  secondCommandOptions,
+  useResponse,
+} from "../components/finanbroBtn/hooks/useResponse";
 import { useHistory, useLocation } from "react-router-dom";
 import { useCommonCommandsHandler } from "../components/finanbroBtn/hooks/useCommonCommandsHandler";
 import { BACKEND_API_URL, QUESTIONS_ROUTE } from "./serverUtils";
@@ -21,6 +24,7 @@ import { useLocalStorage } from "../hooks/useLocalStorage";
 import { sleep } from "./sleep";
 import { useReduxActions } from "../hooks/useReduxActions";
 import { useUserCommandsHandler } from "../components/finanbroBtn/hooks/useUserCommandsHandler";
+import { useSelector } from "react-redux";
 // export const useSecondCommand = (commands) => {
 //   const { transcript } = useSpeechRecognition();
 // };
@@ -54,9 +58,14 @@ export const useFinansis = ({
     },
   ]);
   // const [first, setfirst] = useState(second)
-  const { closeModal, updateIsStartRecognize } =
-    useReduxActions();
-
+  const {
+    closeModal,
+    updateIsStartRecognize,
+    updateSecondCommand,
+  } = useReduxActions();
+  const {
+    user_store: { userData },
+  } = useSelector((state) => state);
   const handleOpenModal = (title, content, isInput, label) => {
     setOpenModal(true);
     setModalTitle(title);
@@ -407,7 +416,7 @@ export const useFinansis = ({
     },
     {
       command: [
-        "(number) *",
+        "number *",
         "stock (number) *",
         "Talk (number) *",
       ],
@@ -1017,6 +1026,17 @@ export const useFinansis = ({
       if (!listening) {
         SpeechRecognition.startListening({ continuous: true });
         updateIsStartRecognize(true);
+        if (!userData) {
+          response("you not login, do you want to login");
+          updateSecondCommand({
+            type: secondCommandOptions.login,
+            other: { action: "login" },
+          });
+          setSecondCommandFor({
+            type: secondCommandOptions.login,
+            other: { callback: login, action: "login" },
+          });
+        }
       } else {
         SpeechRecognition.stopListening();
         updateIsStartRecognize(false);
