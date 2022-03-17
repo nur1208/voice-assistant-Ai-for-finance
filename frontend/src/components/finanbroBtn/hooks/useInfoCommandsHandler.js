@@ -552,8 +552,10 @@ export const useInfoCommandsHandler = (
         window.close();
       }
       // popupWindow.close();
+      return true;
     } else {
-      response(`there is no the most window open to close it`);
+      return false;
+      // response(`there is no the most window open to close it`);
     }
   };
 

@@ -16,7 +16,8 @@ export const useCommonCommandsHandler = (
   questions,
   setQuestions,
   handleClosePopupWindow,
-  closeChart
+  closeChart,
+  closeTheMost
 ) => {
   const history = useHistory();
 
@@ -246,9 +247,11 @@ export const useCommonCommandsHandler = (
   };
 
   const handleCloseAnyPopup = async () => {
-    console.log("in handleCloseAnyPopup");
-    const isWindowClose = await handleClosePopupWindow();
-    console.log({ isWindowClose });
+    let isWindowClose;
+    isWindowClose = await handleClosePopupWindow();
+    if (!isWindowClose) {
+      isWindowClose = closeTheMost();
+    }
     if (!isWindowClose) await closeChart();
   };
 

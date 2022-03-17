@@ -149,7 +149,8 @@ export const useFinansis = ({
     questions,
     setQuestions,
     handleClosePopupWindow,
-    closeChart
+    closeChart,
+    closeTheMost
   );
 
   const {
@@ -392,13 +393,24 @@ export const useFinansis = ({
     //   commandFor: "info",
     // },
     {
-      command: "open * chart",
+      command: [
+        "open * chart",
+        "open * tart",
+        "open * charge",
+        "show me * tart",
+        "show me * chart",
+        "show me * charge",
+      ],
       callback: async (target) =>
         await openYahooFinance("chart", target),
       commandFor: "info",
     },
     {
-      command: ["stock (number) *", "Talk (number) *"],
+      command: [
+        "(number) *",
+        "stock (number) *",
+        "Talk (number) *",
+      ],
       callback: async (num) => await foundMultipleStocks(num),
       commandFor: "info",
     },
