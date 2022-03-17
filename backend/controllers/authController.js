@@ -1,13 +1,12 @@
 import { promisify } from "util";
 // import crypto from "crypto";
 import jwt from "jsonwebtoken";
-import Cookies from "cookies";
 import axios from "axios";
 import crypto from "crypto";
 import User from "../models/userModel.js";
 import AppError from "../utils/appError.js";
 import catchAsync from "../utils/catchAsync.js";
-import sendEmail from "../utils/sendEmail.js";
+// import sendEmail from "../utils/sendEmail.js";
 import {
   AUTO_SERVER,
   FRONTEND_SERVER,
@@ -257,5 +256,43 @@ export const resetPassword = async (req, res, next) => {
   await user.save();
 
   //4) log the user in, send the JSON Web Token to the client
+  createSendToken(user, 201, req, res);
+};
+
+/**
+ * updatePassword is middleware for already logged in users update their password
+ * using the following steps:
+ *  - get the user from the collection
+ *  - check if posted current password is correct
+ *  - if all conditions passed update password
+ *  - "re login" the user
+ */
+export const updatePassword = async (req, res, next) => {
+  //  1 ) get the user from the collection
+  const { password } = req.body;
+  const user = await User.findById(req.user.id).select(
+    "+password"
+  );
+
+  if (!user) {
+    return next(
+      new AppError("user with that id not exist", 404)
+    );
+  }
+  // 2 ) check if posted current password is correct
+
+  if (!password) {
+    return next(new AppError("password is required", 400));
+  }
+
+  if (await user.correctPassword(password, user.password)) {
+    return next(new AppError("incorrect password", 401));
+  }
+  // 3 ) if _id, update password
+
+  user.password = password;
+
+  await user.save();
+  // 4 ) log in the user
   createSendToken(user, 201, req, res);
 };

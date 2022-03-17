@@ -450,6 +450,11 @@ deadline - before 2022-3-15 ❌ DONE on 2022-3-17
          do you want to logout and 'create new account'   
 - {TODO} tell the user you are logged in when a user logged in after saying 'forget password'
         do you want to update your password
+        - {TODO} create update password route in the backend
+        - {TODO} create update password redux functionality
+        - {TODO} create 'update my password' command 
+        - {TODO} create 'do you want to update your password' command after saying 'forget password'
+        
 deadline - before 2022-3-20
 - {TODO} fix 'currentWindows is not iterable' when say open 'apple and tesla charts'
 - {TODO} fix after opening 'https://finance.yahoo.com/most-active' window finansis couldn't close it

@@ -5,6 +5,7 @@ import {
   protect,
   resetPassword,
   signUp,
+  updatePassword,
 } from "../controllers/authController.js";
 import {
   createUser,
@@ -25,6 +26,8 @@ userRouter.put("/resetPassword", resetPassword);
 
 // only logged in users allowed to access routes after this line
 userRouter.use(protect);
+
+userRouter.put("/updateMyPassword", updatePassword);
 
 userRouter.route("/").post(createUser);
 

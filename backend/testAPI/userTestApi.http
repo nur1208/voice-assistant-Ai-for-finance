@@ -3,7 +3,7 @@
 
 @route = api/v1/users
 
-@userToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmM5MDE3NTRmZjVhZTQ4OTc4ZGFiZSIsImlhdCI6MTY0NzExMjM2MiwiZXhwIjoxNjU0ODAxOTYyfQ.Z4-NSEQBLPkUUFYZ-PbcfDfx9e3d5v2DHXgqDRZXT3U
+@userToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmRkYmIzOGY0MGZkMTJiM2M3MTdjNiIsImlhdCI6MTY0NzUzNTc2MSwiZXhwIjoxNjQ3Nzk0OTYxfQ.sq_lqWnr0s5otRag_-xBhhXCVDs6Dk7CV_7j406eKbc
 POST {{Host}}:{{port}}/{{route}}
 Content-Type: application/json
 
@@ -34,7 +34,7 @@ Content-Type: application/json
 {
     
     "email":"mdnur1208@163.com",
-    "password":"12341234"
+    "password":"11111111"
     
 }
 
@@ -74,4 +74,15 @@ Authorization: Bearer {{userToken}}
     
     "name":"ben",
     "gender":"female"
+}
+
+### 
+
+PUT {{Host}}:{{port}}/{{route}}/updateMyPassword
+Content-Type: application/json
+Authorization: Bearer {{userToken}}
+
+{
+    
+    "password":"12341234"
 }
