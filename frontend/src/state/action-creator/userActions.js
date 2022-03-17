@@ -279,6 +279,67 @@ export const resetPassword =
     dispatch({ type: MODAL_ACTIONS.CLOSE_MODAL });
   };
 
+export const updatePassword =
+  (data, response) => async (dispatch, getState) => {
+    try {
+      response && response("updating your password");
+
+      dispatch({ type: USER_ACTIONS.UPDATE_PASSWORD.LOADING });
+      // response.data.doc
+      const {
+        data: {
+          data: { user },
+          token,
+        },
+      } = await axios.put(
+        `${BACKEND_API_URL}/${USER_ROUTE}/updateMyPassword`,
+        {
+          ...data,
+        }
+      );
+      response &&
+        response(
+          "your password updated successfully and logged in successfully"
+        );
+      response &&
+        response(
+          `welcome ${user.name} again and your new password also`
+        );
+
+      const serverUserDate = {
+        ...user,
+        token,
+      };
+      localStorage.setItem(
+        "userData",
+        JSON.stringify(serverUserDate)
+      );
+
+      dispatch({
+        type: USER_ACTIONS.UPDATE_PASSWORD.SUCCESS,
+        payload: serverUserDate,
+      });
+    } catch (error) {
+      // response && response("sending reset token failed");
+
+      const errorMessage = error?.response?.data?.message
+        ? error?.response?.data?.message
+        : error.message;
+
+      response && response(errorMessage);
+
+      response &&
+        response(
+          "if you want to try again say, update my password"
+        );
+
+      dispatch({
+        type: USER_ACTIONS.UPDATE_PASSWORD.FALL,
+        payload: errorMessage,
+      });
+    }
+  };
+
 export const logout = () => (dispatch) => {
   localStorage.setItem("userData", null);
 

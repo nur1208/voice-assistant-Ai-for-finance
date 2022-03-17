@@ -13,11 +13,13 @@ export const userReducer = (state = initialValue, action) => {
     case USER_ACTIONS.UPDATE_INFO.LOADING:
     case USER_ACTIONS.FORGET_PASS.LOADING:
     case USER_ACTIONS.RESET_PASS.LOADING:
+    case USER_ACTIONS.UPDATE_PASSWORD.LOADING:
       return handleReducerReturn(REDUCER_RETURN.LOADING, state);
     case USER_ACTIONS.SIGN_UP.SUCCESS:
     case USER_ACTIONS.LOGIN.SUCCESS:
     case USER_ACTIONS.UPDATE_INFO.SUCCESS:
     case USER_ACTIONS.AUTO_LOGIN:
+    case USER_ACTIONS.UPDATE_PASSWORD.SUCCESS:
     case USER_ACTIONS.RESET_PASS.SUCCESS:
       return handleReducerReturn(
         REDUCER_RETURN.SUCCESS,
@@ -32,6 +34,7 @@ export const userReducer = (state = initialValue, action) => {
         true
       );
     case USER_ACTIONS.SIGN_UP.FALL:
+    case USER_ACTIONS.UPDATE_PASSWORD.FALL:
     case USER_ACTIONS.LOGIN.FALL:
     case USER_ACTIONS.UPDATE_INFO.FALL:
     case USER_ACTIONS.FORGET_PASS.FALL:

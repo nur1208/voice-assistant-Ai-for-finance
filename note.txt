@@ -450,8 +450,8 @@ deadline - before 2022-3-15 ❌ DONE on 2022-3-17
          do you want to logout and 'create new account'   
 - {TODO} tell the user you are logged in when a user logged in after saying 'forget password'
         do you want to update your password
-        - {TODO} create update password route in the backend
-        - {TODO} create update password redux functionality
+        - {DONE} create update password route in the backend
+        - {DONE} create update password redux functionality
         - {TODO} create 'update my password' command 
         - {TODO} create 'do you want to update your password' command after saying 'forget password'
         
@@ -488,6 +488,7 @@ deadline - before 2022-3-20
 final deadline v1 - before 2022-3-31
 
 ----- NOT IMPORTANT NOW
+- {TODO} clean up the code in userActions by making the actions function dynamic
 - {TODO} sorry you not vpn user i con't help you with that
 - {TODO} ask the user please use headphones or buy smart speaker for better experience
 - {TODO} don't let finansis start listen enter the user click on finansis btn
