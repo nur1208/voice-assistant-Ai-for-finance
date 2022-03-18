@@ -17,10 +17,12 @@ import {
   useForgetPass,
 } from "./useForgetPassFields";
 import { secondCommandOptions } from "./useResponse";
+import { YAHOO_FINANCE_OPENING_OPTIONS } from "./useInfoCommandsHandler";
 export const useUserCommandsHandler = (
   response,
   handleOpenModal,
-  setSecondCommandFor
+  setSecondCommandFor,
+  openYahooFinance
 ) => {
   const {
     updateModal,
@@ -164,6 +166,24 @@ export const useUserCommandsHandler = (
 
   useUpdateFields(response, getUserInputHandler);
 
+  const addToWatchList = (target) => {
+    if (userData) {
+      openYahooFinance(
+        YAHOO_FINANCE_OPENING_OPTIONS.ADD_TO_WATCH_LIST,
+        target
+      );
+    } else {
+      response("you not logged in");
+      response("do you want to login");
+
+      handleAlreadyLoggedIn(
+        login,
+        "login",
+        secondCommandOptions.login
+      );
+    }
+  };
+
   // listening to invalid message
   useEffect(() => {
     if (invalidMessage) {
@@ -181,5 +201,6 @@ export const useUserCommandsHandler = (
     sendResetForgotPassToken,
     logout,
     updatePassword,
+    addToWatchList,
   };
 };

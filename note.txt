@@ -462,12 +462,13 @@ deadline - before 2022-3-20 ✅ DONE on 2022-3-18
 ---- after create user functionality (login, sign up, ...)
 - {DONE} create "you not login, do you want to login" command when click on finansis btn
 - {TODO} create watchList functionality 
-        - {TODO} add watchList property in user model
+        - {DONE} add watchList property in user model
                 watchList: [companyId]
-        - {TODO} create route to add stock to watchLIst
-        - {TODO} create route to delete stock from watchLIst
-        - {TODO} when sending data from the backend to the frontend add watchList to the data
+        - {DONE} create add stock to watchLIst in backend
+        - {DONE} create delete stock from watchLIst in backend
         - {TODO} create 'add {apple} stock to my watchLIst' command
+        - {TODO} Populate watchList not just returning companies id
+        - {TODO} don't do the above command if the user not logged in
         - {TODO} create 'show me my watchList' command
         - {TODO} create 'delete {apple} stock from my watchLIst' command
 deadline - before 2022-3-22
@@ -496,9 +497,17 @@ deadline - before 2022-3-22
 - {TODO} make sure the jwt took is available after clean the localStorage        
 - {TODO} fix mic logo when starting in other page then home page
 - {TODO} teat login in fields
+- {TODO} test currentStockPrice function in useInfoCommandsHandler
+- {TODO} let finansis ask do you want me to learning about 'aapl' symbol not just do it
 final deadline v1 - before 2022-3-31
 
 ----- NOT IMPORTANT NOW
+- {TODO} remember last command user said when finansis ask 'do you want to login'
+        if the user said yes and after he/she login let finansis do the command before logging in
+- {TODO} create "add stock to my watchlist" command to let the user type a symbol
+- {TODO} let finansis recognize a command with more than one dynamic word like:
+        "add * (stock) to (my) watchlist"
+- {TODO} create input or say out stocks symbol or name
 - {TODO} create 'show me {5|all} charts from my watchList' command 
 - {TODO} create 'am i logged in' command
 - {TODO} create 'do you want to login' when a user say 'update my password' command and his/her not logged in

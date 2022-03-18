@@ -18,7 +18,7 @@ export const lookupForTickersV2 = async (symbol) => {
     } = await axios.get(`${apiUrl}?symbol=${symbol}`);
     // console.log("🧐🧐");
     // console.log({ doc });
-    return doc.length > 0 ? doc[0].name : null;
+    return doc.length > 0 ? doc[0] : null;
   } catch (error) {
     console.log(error.message);
     return null;
@@ -29,7 +29,9 @@ export const searchCompanyName = (input) => {
   const found = [];
   for (const key in tickers) {
     const ticker = tickers[key];
-    if (ticker.name.toLowerCase().includes(input.toLowerCase())) {
+    if (
+      ticker.name.toLowerCase().includes(input.toLowerCase())
+    ) {
       found.push({ symbol: key, ...ticker });
     }
   }

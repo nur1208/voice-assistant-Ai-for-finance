@@ -61,6 +61,7 @@ export const useUpdateFields = (
     UPDATE_USER_INFO_FIELDS.GENDER.stateName,
     {},
     async () => {
+      response("updating your info");
       updateUserInfo(
         userData.id,
         {

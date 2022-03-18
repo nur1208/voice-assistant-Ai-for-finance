@@ -18,6 +18,12 @@ import {
   YAHOO_FINANCE_URL,
 } from "../../../utils/serverUtils";
 import { sleep } from "../../../utils/sleep";
+import { useReduxActions } from "../../../hooks/useReduxActions";
+import { useSelector } from "react-redux";
+
+export const YAHOO_FINANCE_OPENING_OPTIONS = {
+  ADD_TO_WATCH_LIST: "ADD_TO_WATCH_LIST",
+};
 
 export const useInfoCommandsHandler = (
   response,
@@ -32,8 +38,13 @@ export const useInfoCommandsHandler = (
   const width = window.outerWidth - 20;
   const height = window.outerHeight - 20;
   const [popupWWControl, setPopupWWControl] = useState(null);
-  const [chooseNum, setChooseNum] = useState(-1);
+
   // const [currentStock, setCurrentStock] = useState({});
+
+  const { updateUserInfo } = useReduxActions();
+  const {
+    user_store: { userData },
+  } = useSelector((state) => state);
 
   const changeChartTo = async (type) => {
     const validOptions = [
@@ -179,8 +190,8 @@ export const useInfoCommandsHandler = (
       setPopupWWControl(data.isAutoBrowserOpen);
       response("the page is done loading");
       await sleep(1000 * 5);
-      response("setting dates");
       if (windowType.type === "soldChart") {
+        response("setting dates");
         await changeDate();
       }
       // window.open(goToUrl, "_blank");
@@ -251,6 +262,7 @@ export const useInfoCommandsHandler = (
     setOpenedWindowNum(openedWindowNum + 1);
     setWindowType("");
   };
+
   const yahooFinanceOpeningWResponses = (type, symbol) => {
     switch (type) {
       case "chart":
@@ -262,6 +274,10 @@ export const useInfoCommandsHandler = (
 
       case "currentPrice":
         response(`the current price for ${symbol} is`);
+        break;
+
+      case YAHOO_FINANCE_OPENING_OPTIONS.ADD_TO_WATCH_LIST:
+        response(`adding ${symbol} to your watch list`);
         break;
 
       case "news":
@@ -283,7 +299,12 @@ export const useInfoCommandsHandler = (
   ) => {
     let finalTarget = target.trim();
     // const isFound
-    if (!(await lookupForTickersV2(finalTarget))) {
+    console.log("here in openYahooFinance");
+
+    // debugger;
+    let currentCompany = await lookupForTickersV2(finalTarget);
+    // if (!(await lookupForTickersV2(finalTarget))) {
+    if (!currentCompany) {
       const symbolsFound = await searchCompanyNameV2(
         finalTarget
       );
@@ -291,9 +312,10 @@ export const useInfoCommandsHandler = (
 
       if (symbolsFound && symbolsFound.length > 2) {
         finalTarget = symbolsFound[0].symbol;
-
+        currentCompany = symbolsFound[0];
         if (isIgnoreFoundMultiple) {
           finalTarget = symbolsFound[0].symbol;
+          currentCompany = symbolsFound[0];
         } else {
           response(
             "found the following stocks choose one by saying stock number 3 for example"
@@ -310,6 +332,7 @@ export const useInfoCommandsHandler = (
         }
       } else if (symbolsFound && symbolsFound.length === 1) {
         finalTarget = symbolsFound[0].symbol;
+        currentCompany = symbolsFound[0];
       } else {
         // response(
         //   `so give me a minute to learn about ${target} from yahoo finance`
@@ -343,6 +366,7 @@ export const useInfoCommandsHandler = (
               response(`I can open ${target} chart now`);
               if (isIgnoreFoundMultiple) {
                 finalTarget = companies[0].symbol;
+                currentCompany = symbolsFound[0];
               } else {
                 response(
                   "found the following stocks choose one by saying stock number 3 for example"
@@ -391,8 +415,22 @@ export const useInfoCommandsHandler = (
     }
     yahooFinanceOpeningWResponses(type, target);
 
+    // if a user said 'AAPL' stock symbol
+    // and found symbol in the database
+
+    if (
+      type === YAHOO_FINANCE_OPENING_OPTIONS.ADD_TO_WATCH_LIST
+    ) {
+      updateUserInfo(
+        userData.id,
+        { watchList: [currentCompany._id] },
+        response
+      );
+    }
+
+    // test
     if (type === "currentPrice") {
-      await currentStockPrice(target);
+      await currentStockPrice(finalTarget);
       return;
     }
 
@@ -435,10 +473,20 @@ export const useInfoCommandsHandler = (
     console.log({ finalNum });
     // setChooseNum(finalNum);
     if (finalNum > 0 && finalNum <= foundStock.length) {
-      const { symbol } = foundStock[finalNum - 1];
+      const { symbol, _id } = foundStock[finalNum - 1];
       currentStock = soldStocks[finalNum - 1];
       handleCloseModal();
-
+      // if found multiple stocks and then a user chose one
+      if (
+        windowType.type ===
+        YAHOO_FINANCE_OPENING_OPTIONS.ADD_TO_WATCH_LIST
+      ) {
+        updateUserInfo(
+          userData.id,
+          { watchList: [_id] },
+          response
+        );
+      }
       if (windowType.type === "soldChart") {
         openYahooFinance("chart", symbol, true, true);
         return;

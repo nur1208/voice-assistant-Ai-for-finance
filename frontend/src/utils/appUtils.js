@@ -194,10 +194,12 @@ export const useFinansis = ({
     sendResetForgotPassToken,
     logout,
     updatePassword,
+    addToWatchList,
   } = useUserCommandsHandler(
     response,
     handleOpenModal,
-    setSecondCommandFor
+    setSecondCommandFor,
+    openYahooFinance
   );
 
   const [findingAnswerFor, setFindingAnswerFor] = useState("");
@@ -238,6 +240,14 @@ export const useFinansis = ({
       command: ["update (my) password", "change (my) password"],
       commandFor: "every section",
       callback: async () => await updatePassword(),
+    },
+    {
+      command: [
+        "add * stock to (my) watch list",
+        "add * stock to (my) watchlist",
+      ],
+      commandFor: "every section",
+      callback: async (target) => await addToWatchList(target),
     },
     {
       command: "test",
