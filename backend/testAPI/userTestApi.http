@@ -73,7 +73,13 @@ Authorization: Bearer {{userToken}}
 {
     
     "name":"ben",
-    "gender":"female"
+    "gender":"female",
+    "watchList":[
+        "61da5f731a45ee5a414fce09",
+        "61da5f741a45ee5a414fce0b",
+        "61da5f731a45ee5a414fce07"
+      ]
+
 }
 
 ### 

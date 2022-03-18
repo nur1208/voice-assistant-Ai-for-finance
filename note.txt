@@ -494,7 +494,7 @@ deadline - before 2022-3-22
 - {TODO} create 'do you want to enter password again, if no just enter confirm password again' command
         note: use stateName is signal
 - {TODO} make sure the jwt took is available after clean the localStorage        
-- {TODO} fix mic logo when state in other page then home page
+- {TODO} fix mic logo when starting in other page then home page
 - {TODO} teat login in fields
 final deadline v1 - before 2022-3-31
 

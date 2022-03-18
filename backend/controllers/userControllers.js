@@ -2,6 +2,7 @@ import bcrypt from "bcrypt";
 import UserModel from "../models/userModel.js";
 import AppError from "../utils/appError.js";
 import catchAsync from "../utils/catchAsync.js";
+
 const saltRounds = 10;
 
 export const createUser = async (req, res) => {
@@ -63,8 +64,74 @@ const filterObj = (obj, ...allowedFields) => {
   return newObj;
 };
 
+export const updateWatchList = catchAsync(
+  async (req, res, next) => {
+    let watchList;
+    if (req.body.watchList && req.body.watchList.length > 0) {
+      // if watchList is exist in user document
+      if (req.user.watchList && req.user.watchList.length > 0) {
+        const isThereDuplicate = req.body.watchList.map(
+          (stock) => req.user.watchList.includes(stock)
+        );
+        if (isThereDuplicate.includes(true))
+          return next(
+            new AppError(
+              "found duplicate stocks in watchList, each element in it must be unique",
+              400
+            )
+          );
+
+        watchList = [
+          ...req.user.watchList,
+          ...req.body.watchList,
+        ];
+      } else {
+        watchList = [...req.body.watchList];
+      }
+    }
+
+    if (
+      req.body.removeWatchList &&
+      req.body.removeWatchList.length > 0
+    ) {
+      // if watchList is exist in user document
+      if (req.user.watchList && req.user.watchList.length > 0) {
+        console.log(req.body.removeWatchList);
+
+        const isAllExist = req.body.removeWatchList.map(
+          (stock) => req.user.watchList.includes(stock)
+        );
+        if (isAllExist.includes(false))
+          return next(
+            new AppError(
+              "one of the element in removeWatchList not exist in user's watchList",
+              400
+            )
+          );
+
+        const a = req.user.watchList;
+        const b = req.body.removeWatchList;
+        watchList = a.filter(
+          (x) => b.indexOf(x.toString()) === -1
+        );
+        console.log(watchList);
+      } else {
+        return next(
+          new AppError("user's watchList is empty", 400)
+        );
+      }
+    }
+
+    // remove old watchList and add a new one
+    req.body.watchList = watchList;
+
+    next();
+  }
+);
+
 export const updateMe = catchAsync(async (req, res, next) => {
   // 1) current error if the user posts password data
+
   if (req.body.password || req.body.passwordConfirm) {
     return next(
       new AppError(
@@ -75,7 +142,12 @@ export const updateMe = catchAsync(async (req, res, next) => {
   }
   // 2) update user current data
 
-  const filteredBody = filterObj(req.body, "name", "gender");
+  const filteredBody = filterObj(
+    req.body,
+    "name",
+    "gender",
+    "watchList"
+  );
   if (req.file) filteredBody.photo = req.file.filename;
 
   const updatedUser = await UserModel.findByIdAndUpdate(
@@ -92,6 +164,7 @@ export const updateMe = catchAsync(async (req, res, next) => {
         email: updatedUser.email,
         gender: updatedUser.gender,
         id: updatedUser._id,
+        watchList: updatedUser?.watchList,
       },
     },
   });

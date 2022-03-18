@@ -10,6 +10,7 @@
   "scripts": {
     "test": "jest addingJobs.test.js --verbose",
     "start": "nodemon --exec node --experimental-modules server.js",
+    "debug": "nodemon --exec ndb --experimental-modules server.js",
     "run-script": "node backend/scrapScripts/getYahoofinanceNews.js"
   },
   "dependencies": {

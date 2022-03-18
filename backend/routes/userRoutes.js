@@ -10,6 +10,7 @@ import {
 import {
   createUser,
   updateMe,
+  updateWatchList,
 } from "../controllers/userControllers.js";
 
 const userRouter = express.Router();
@@ -31,6 +32,6 @@ userRouter.put("/updateMyPassword", updatePassword);
 
 userRouter.route("/").post(createUser);
 
-userRouter.route("/:id").put(updateMe);
+userRouter.route("/:id").put(updateWatchList, updateMe);
 
 export default userRouter;
