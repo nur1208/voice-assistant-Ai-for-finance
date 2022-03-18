@@ -154,7 +154,7 @@ export const updateMe = catchAsync(async (req, res, next) => {
     req.user.id,
     filteredBody,
     { new: true, runValidators: true }
-  );
+  ).populate({ path: "watchList" });
 
   res.status(200).json({
     status: "success",

@@ -466,7 +466,7 @@ deadline - before 2022-3-20 ✅ DONE on 2022-3-18
                 watchList: [companyId]
         - {DONE} create add stock to watchLIst in backend
         - {DONE} create delete stock from watchLIst in backend
-        - {TODO} create 'add {apple} stock to my watchLIst' command
+        - {DONE} create 'add {apple} stock to my watchLIst' command
         - {TODO} Populate watchList not just returning companies id
         - {TODO} don't do the above command if the user not logged in
         - {TODO} create 'show me my watchList' command
