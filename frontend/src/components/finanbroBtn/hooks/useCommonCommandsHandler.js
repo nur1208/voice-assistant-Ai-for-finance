@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { PAGES } from "../../../App";
 import { useReduxActions } from "../../../hooks/useReduxActions";
 import { AUTO_API_URL } from "../../../utils/serverUtils";
@@ -31,7 +32,12 @@ export const useCommonCommandsHandler = (
   const height = window.outerHeight - 20;
   const [popupWindow, setPopupWindow] = useState(null);
 
-  const { updateIsStartRecognize } = useReduxActions();
+  const {
+    modal_store: { isModalOpen },
+  } = useSelector((state) => state);
+
+  const { updateIsStartRecognize, updateModal } =
+    useReduxActions();
 
   const openAnswerDetail = (questionObject) => {
     console.log({ questionObject });
@@ -252,6 +258,13 @@ export const useCommonCommandsHandler = (
     if (!isWindowClose) {
       isWindowClose = closeTheMost();
     }
+    if (isModalOpen && !isWindowClose) {
+      response("closing popup window");
+      handleCloseModal();
+      updateModal({ isModalOpen: false });
+      isWindowClose = true;
+    }
+
     if (!isWindowClose) await closeChart();
   };
 

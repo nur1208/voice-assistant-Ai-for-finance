@@ -400,6 +400,7 @@ export const useFinansis = ({
         "close statistics",
         "close news (window)",
         "close (the) statistic",
+        "close my watchList"
       ],
       callback: async () => await handleCloseAnyPopup(),
       commandFor: "every section",

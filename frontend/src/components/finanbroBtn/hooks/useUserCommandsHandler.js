@@ -185,6 +185,7 @@ export const useUserCommandsHandler = (
     if (userData) {
       response("here is your watch list");
       handleOpenModal("Watch List:", userData.watchList);
+      updateModal({ isModalOpen: true });
     } else {
       doWantLogin();
     }
