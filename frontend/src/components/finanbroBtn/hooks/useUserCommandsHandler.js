@@ -183,8 +183,8 @@ export const useUserCommandsHandler = (
 
   const showWatchList = () => {
     if (userData) {
-      response("here is your watch list")
-      handleOpenModal("Watch List:", userData);
+      response("here is your watch list");
+      handleOpenModal("Watch List:", userData.watchList);
     } else {
       doWantLogin();
     }
