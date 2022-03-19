@@ -124,6 +124,7 @@ export const useFinansis = ({
     openMultipleCharts,
     changeChartTo,
     showSoldStockChart,
+    setFoundMultiple,
   } = useInfoCommandsHandler(
     response,
     handleOpenModal,
@@ -196,11 +197,13 @@ export const useFinansis = ({
     updatePassword,
     addToWatchList,
     showWatchList,
+    deleteFromWatchList,
   } = useUserCommandsHandler(
     response,
     handleOpenModal,
     setSecondCommandFor,
-    openYahooFinance
+    openYahooFinance,
+    setFoundMultiple
   );
 
   const [findingAnswerFor, setFindingAnswerFor] = useState("");
@@ -252,6 +255,17 @@ export const useFinansis = ({
     },
     {
       command: [
+        "delete * stock from (my) watchlist",
+        "delete * stock from (my) watch list",
+        "remove * stock from (my) watchlist",
+        "remove * stock from (my) watch list",
+      ],
+      commandFor: "every section",
+      callback: async (target) => deleteFromWatchList(target),
+    },
+
+    {
+      command: [
         "show me (my) watch list",
         "show me (my) watchlist",
         "open (my) watch list",
@@ -260,6 +274,8 @@ export const useFinansis = ({
       commandFor: "every section",
       callback: async () => showWatchList(),
     },
+
+    // deleteFromWatchList
     {
       command: "test",
       commandFor: "every section",
@@ -400,7 +416,8 @@ export const useFinansis = ({
         "close statistics",
         "close news (window)",
         "close (the) statistic",
-        "close my watchList"
+        "close my watchList",
+        "close the watchList",
       ],
       callback: async () => await handleCloseAnyPopup(),
       commandFor: "every section",

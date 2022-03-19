@@ -22,13 +22,16 @@ export const useUserCommandsHandler = (
   response,
   handleOpenModal,
   setSecondCommandFor,
-  openYahooFinance
+  openYahooFinance,
+  setFoundMultiple
 ) => {
   const {
     updateModal,
     logout: logoutRedux,
     updateSecondCommand,
+    updateUserInfo: updateUserInfoRedux,
   } = useReduxActions();
+
   const {
     modal_store: { invalidMessage },
     user_store: { userData },
@@ -191,6 +194,55 @@ export const useUserCommandsHandler = (
     }
   };
 
+  function countInArray(array, what) {
+    var count = 0;
+    for (var i = 0; i < array.length; i++) {
+      if (array[i] === what) {
+        count++;
+      }
+    }
+    return count;
+  }
+
+  const deleteFromWatchList = (target) => {
+    if (userData) {
+      const isStockInWatchList = userData.watchList.map(
+        ({ symbol, name }) =>
+          target === symbol || name.includes(target)
+      );
+
+      // console.log();
+
+      const numFoundStocks = countInArray(
+        isStockInWatchList,
+        true
+      );
+
+      if (numFoundStocks === 1) {
+        response(`removing ${target} from your watch list`);
+        const foundCompany =
+          userData.watchList[isStockInWatchList.indexOf(true)];
+        updateUserInfoRedux(
+          userData.id,
+          { removeWatchList: [foundCompany._id] },
+          response
+        );
+      } else if (numFoundStocks > 1) {
+        setFoundMultiple(
+          userData.watchList.filter(
+            (_, index) => isStockInWatchList[index]
+          ),
+          YAHOO_FINANCE_OPENING_OPTIONS.DELETE_FROM_WATCH_LIST,
+          false
+        );
+      } else {
+        response(`${target} is not in your watch list`);
+      }
+    } else {
+      doWantLogin();
+    }
+  };
+
   // listening to invalid message
   useEffect(() => {
     if (invalidMessage) {
@@ -210,5 +262,6 @@ export const useUserCommandsHandler = (
     updatePassword,
     addToWatchList,
     showWatchList,
+    deleteFromWatchList,
   };
 };

@@ -471,8 +471,10 @@ deadline - before 2022-3-20 ✅ DONE on 2022-3-18
         - {DONE} Populate watchList not just returning companies id
         - {DONE} improving Populate watchList functionality 
         - {DONE} create 'show me my watchList' command
-        - {TODO} create 'close my watchList' command 
-        - {TODO} create 'delete {apple} stock from my watchLIst' command
+        - {DONE} create 'close my watchList' command 
+        - {DONE} create 'delete {apple} stock from my watchLIst' command
+        - {DONE} handle adding duplicate stock to watchList in the frontend
+
 deadline - before 2022-3-22
 
 - {TODO} let the user update his/her options (like alway with your controller, ignore Multiple stocks,...)
@@ -504,6 +506,10 @@ deadline - before 2022-3-22
 final deadline v1 - before 2022-3-31
 
 ----- NOT IMPORTANT NOW
+- {TODO} add current stock Price to user watch List
+        when saying "show me my watch list"
+- {TODO} create 'play music' command 
+        - {TODO} let the user enter youtube paly list or just set my default play list  
 - {TODO} remember last command user said when finansis ask 'do you want to login'
         if the user said yes and after he/she login let finansis do the command before logging in
 - {TODO} create "add stock to my watchlist" command to let the user type a symbol
@@ -634,7 +640,7 @@ big problems that happened when building finansis:
 - how to let finansis remember unknown keyword in yahoo finance database for stocks
   like 'something' or 'finansis' [solved]    
 - how to not have duplicate news articles in the database [solved 90%]  
-- how to not let finansis recognize her won voice
+- how to not let finansis recognize her own voice
 
 big problems that happened before building finansis:
 - learning fundamental of programming

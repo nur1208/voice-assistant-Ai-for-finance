@@ -116,21 +116,6 @@ export const autoLogin = (userDate) => async (dispatch) =>
 export const updateUserInfo =
   (userId, userData, response) => async (dispatch, getState) => {
     try {
-      // if (type === UPDATE_INFO_TYPE.ADD_STOCK_WATCH_LIST) {
-      //   response &&
-      //     response(
-      //       `adding ${userData.symbol} to your watch list`
-      //     );
-      // } else if (
-      //   type === UPDATE_INFO_TYPE.REMOVE_STOCK_WATCH_LIST
-      // ) {
-      //   response &&
-      //     response(
-      //       `removing ${userData.symbol} from your watch list`
-      //     );
-      // } else {
-      //   response && response("updating your info");
-      // }
       dispatch({ type: USER_ACTIONS.UPDATE_INFO.LOADING });
       // response.data.doc
       const { data } = await axios.put(

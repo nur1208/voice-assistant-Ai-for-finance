@@ -14,7 +14,7 @@ export const findingCompaniesHandler = async (req, res) => {
   //   console.log(req.body);
   const width = 1366 - 20;
   const height = 768 - 20;
-  const timeout = 1000 * 90;
+  const timeout = 1000 * 60 * 3;
   //   const { goToUrl } = newsArticles[articleNum - 1];
   //   console.log({ goToUrl });
   const browserLocal = await puppeteer.launch({
@@ -85,12 +85,12 @@ export const findingCompaniesHandler = async (req, res) => {
           "div:nth-child(1) > div:nth-child(2)",
           $(li).html()
         ).text();
-        companies.push(company);
         try {
           const { data } = await axios.post(
             "http://localhost:4050/api/v1/companies",
             company
           );
+          companies.push(data.doc);
         } catch (error) {
           console.log(company);
 

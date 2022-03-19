@@ -23,6 +23,7 @@ import { useSelector } from "react-redux";
 
 export const YAHOO_FINANCE_OPENING_OPTIONS = {
   ADD_TO_WATCH_LIST: "ADD_TO_WATCH_LIST",
+  DELETE_FROM_WATCH_LIST: "DELETE_FROM_WATCH_LIST",
 };
 
 export const useInfoCommandsHandler = (
@@ -280,6 +281,10 @@ export const useInfoCommandsHandler = (
         response(`adding ${symbol} to your watch list`);
         break;
 
+      case YAHOO_FINANCE_OPENING_OPTIONS.DELETE_FROM_WATCH_LIST:
+        response(`removing ${symbol} from your watch list`);
+        break;
+
       case "news":
         response(
           `scroll the window a bit down and you will find ${symbol} news`
@@ -289,6 +294,35 @@ export const useInfoCommandsHandler = (
       default:
         break;
     }
+  };
+
+  const setFoundMultiple = (symbolsP, typeP, isWithControlP) => {
+    response(
+      "found the following stocks choose one by saying stock number 3 for example"
+    );
+    handleOpenModal("found the following stocks:", symbolsP);
+
+    setWindowType({
+      type: typeP,
+      isWithControl: isWithControlP,
+    });
+
+    setFoundStock(symbolsP);
+  };
+
+  const handleAddingToWatch = (symbol, _id) => {
+    const isStockInWatchList = userData.watchList.map(
+      (stocks) => _id === stocks._id
+    );
+
+    if (isStockInWatchList.includes(true)) {
+      response(`oops, ${symbol} is already in your watch list`);
+    } else
+      updateUserInfo(
+        userData.id,
+        { watchList: [_id] },
+        response
+      );
   };
 
   const openYahooFinance = async (
@@ -317,17 +351,7 @@ export const useInfoCommandsHandler = (
           finalTarget = symbolsFound[0].symbol;
           currentCompany = symbolsFound[0];
         } else {
-          response(
-            "found the following stocks choose one by saying stock number 3 for example"
-          );
-          handleOpenModal(
-            "found the following stocks:",
-            symbolsFound
-          );
-
-          setWindowType({ type, isWithControl });
-
-          setFoundStock(symbolsFound);
+          setFoundMultiple(symbolsFound, type, isWithControl);
           return;
         }
       } else if (symbolsFound && symbolsFound.length === 1) {
@@ -368,16 +392,7 @@ export const useInfoCommandsHandler = (
                 finalTarget = companies[0].symbol;
                 currentCompany = symbolsFound[0];
               } else {
-                response(
-                  "found the following stocks choose one by saying stock number 3 for example"
-                );
-                handleOpenModal(
-                  "found the following stocks:",
-                  companies
-                );
-
-                setWindowType({ type, isWithControl });
-                setFoundStock(companies);
+                setFoundMultiple(companies, type, isWithControl);
               }
 
               // await getAllTickersInDatabaseToJson();
@@ -421,10 +436,9 @@ export const useInfoCommandsHandler = (
     if (
       type === YAHOO_FINANCE_OPENING_OPTIONS.ADD_TO_WATCH_LIST
     ) {
-      updateUserInfo(
-        userData.id,
-        { watchList: [currentCompany._id] },
-        response
+      handleAddingToWatch(
+        currentCompany.symbol,
+        currentCompany._id
       );
     }
 
@@ -477,22 +491,38 @@ export const useInfoCommandsHandler = (
       currentStock = soldStocks[finalNum - 1];
       handleCloseModal();
       // if found multiple stocks and then a user chose one
+
+      yahooFinanceOpeningWResponses(windowType.type, symbol);
+
+      if (
+        windowType.type ===
+        YAHOO_FINANCE_OPENING_OPTIONS.DELETE_FROM_WATCH_LIST
+      ) {
+        handleAddingToWatch(symbol, _id);
+      }
+
       if (
         windowType.type ===
         YAHOO_FINANCE_OPENING_OPTIONS.ADD_TO_WATCH_LIST
       ) {
-        updateUserInfo(
-          userData.id,
-          { watchList: [_id] },
-          response
+        const isStockInWatchList = userData.watchList.map(
+          (stocks) => _id === stocks._id
         );
+
+        if (isStockInWatchList.includes(true)) {
+          response(`${symbol} is already in your watch list`);
+        } else
+          updateUserInfo(
+            userData.id,
+            { watchList: [_id] },
+            response
+          );
       }
       if (windowType.type === "soldChart") {
         openYahooFinance("chart", symbol, true, true);
         return;
       }
 
-      yahooFinanceOpeningWResponses(windowType.type, symbol);
       if (windowType.type === "currentPrice") {
         await currentStockPrice(symbol);
         return;
@@ -629,7 +659,7 @@ export const useInfoCommandsHandler = (
     zoomChart,
     openMultipleCharts,
     changeChartTo,
-
     showSoldStockChart,
+    setFoundMultiple,
   };
 };
