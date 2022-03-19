@@ -479,9 +479,9 @@ deadline - before 2022-3-22 ✅ DONE on 2022-3-20
 - {DONE} try to make your won useSpeechSynthesis and test it 
         note: use https://github.com/MikeyParton/react-speech-kit/blob/master/src/useSpeechSynthesis.jsx
                 as reference
-- {TODO} useGetCurrentCountry test if that function doesn't slow down finansis if yes improve it
-        
-- {TODO} make the following data in openHandler function in commonController dynamic:
+- {DONE} useGetCurrentCountry test if that function doesn't slow down finansis if yes improve it
+
+- {DONE} make width and height in openHandler function in commonController dynamic:
         const width = 1366 - 20;
         const height = 768 - 20;
 - {TODO} MAKE executablePath dynamic too
@@ -504,6 +504,8 @@ deadline - before 2022-3-22 ✅ DONE on 2022-3-20
 final deadline v1 - before 2022-3-31
 
 ----- NOT IMPORTANT NOW
+- {TODO} create 'take screen shot' command
+- {TODO} create 'scroll up scroll down' command for news and also when opening a window with finansis control 
 - {TODO} add current stock Price to user watch List
         when saying "show me my watch list"
 - {TODO} let the user update his/her options (like alway with your controller, ignore Multiple stocks,...)

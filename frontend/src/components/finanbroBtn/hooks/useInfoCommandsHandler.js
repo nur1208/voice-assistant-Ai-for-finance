@@ -186,6 +186,8 @@ export const useInfoCommandsHandler = (
       const { data } = await axios.post(`${AUTO_API_URL}/open`, {
         goToUrl: `${YAHOO_FINANCE_URL}/chart/${symbol}`,
         windowType: "chart",
+        windowWidth: width,
+        windowHeight: height,
       });
 
       setPopupWWControl(data.isAutoBrowserOpen);

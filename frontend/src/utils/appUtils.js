@@ -540,6 +540,10 @@ export const useFinansis = ({
         "open * tart with your control",
         "open * chart with you control",
         "open * tart with you control",
+        "open * chart controlled (by you)",
+        "open * tart controlled (by you)",
+        "open * chart controlled (by you)",
+        "open * tart controlled (by you)",
       ],
       callback: async (target) =>
         await openYahooFinance("chart", target, true),

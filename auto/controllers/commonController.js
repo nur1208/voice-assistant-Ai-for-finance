@@ -216,13 +216,14 @@ export const findingAnswersHandler = async (req, res) => {
 export const openHandler = async (req, res) => {
   //   const width = window.outerWidth - 20;
   //   const height = window.outerHeight - 20;
-  const { goToUrl, windowType } = req.body;
+  const { goToUrl, windowType, windowWidth, windowHeight } =
+    req.body;
   if (windowType) {
     windowTypeHolder = windowType;
   }
   //   console.log(req.body);
-  const width = 1366 - 20;
-  const height = 768 - 20;
+  const width = windowWidth;
+  const height = windowHeight;
   const timeout = 1000 * 90;
   //   const { goToUrl } = newsArticles[articleNum - 1];
   //   console.log({ goToUrl });
