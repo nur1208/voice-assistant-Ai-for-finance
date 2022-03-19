@@ -42,6 +42,15 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
+userSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: "watchList",
+    select: "_id symbol name",
+  });
+
+  next();
+});
+
 userSchema.methods.correctPassword = async function (
   candidatePassword,
   userPassword

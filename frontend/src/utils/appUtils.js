@@ -195,6 +195,7 @@ export const useFinansis = ({
     logout,
     updatePassword,
     addToWatchList,
+    showWatchList,
   } = useUserCommandsHandler(
     response,
     handleOpenModal,
@@ -248,6 +249,16 @@ export const useFinansis = ({
       ],
       commandFor: "every section",
       callback: async (target) => await addToWatchList(target),
+    },
+    {
+      command: [
+        "show me (my) watch list",
+        "show me (my) watchlist",
+        "open (my) watch list",
+        "open (my) watchlist",
+      ],
+      commandFor: "every section",
+      callback: async () => showWatchList(),
     },
     {
       command: "test",

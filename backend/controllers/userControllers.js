@@ -70,8 +70,12 @@ export const updateWatchList = catchAsync(
     if (req.body.watchList && req.body.watchList.length > 0) {
       // if watchList is exist in user document
       if (req.user.watchList && req.user.watchList.length > 0) {
+        const userWatchListOnlyIds = req.user.watchList.map(
+          ({ _id }) => _id.toString()
+        );
+
         const isThereDuplicate = req.body.watchList.map(
-          (stock) => req.user.watchList.includes(stock)
+          (stock) => userWatchListOnlyIds.includes(stock)
         );
         if (isThereDuplicate.includes(true))
           return next(
@@ -82,7 +86,7 @@ export const updateWatchList = catchAsync(
           );
 
         watchList = [
-          ...req.user.watchList,
+          ...userWatchListOnlyIds,
           ...req.body.watchList,
         ];
       } else {
@@ -95,11 +99,18 @@ export const updateWatchList = catchAsync(
       req.body.removeWatchList.length > 0
     ) {
       // if watchList is exist in user document
+      debugger;
+      console.log("here");
+
       if (req.user.watchList && req.user.watchList.length > 0) {
+        const userWatchListOnlyIds = req.user.watchList.map(
+          ({ _id }) => _id.toString()
+        );
+
         console.log(req.body.removeWatchList);
 
         const isAllExist = req.body.removeWatchList.map(
-          (stock) => req.user.watchList.includes(stock)
+          (stock) => userWatchListOnlyIds.includes(stock)
         );
         if (isAllExist.includes(false))
           return next(
@@ -109,11 +120,9 @@ export const updateWatchList = catchAsync(
             )
           );
 
-        const a = req.user.watchList;
+        const a = userWatchListOnlyIds;
         const b = req.body.removeWatchList;
-        watchList = a.filter(
-          (x) => b.indexOf(x.toString()) === -1
-        );
+        watchList = a.filter((x) => b.indexOf(x) === -1);
         console.log(watchList);
       } else {
         return next(
@@ -154,7 +163,7 @@ export const updateMe = catchAsync(async (req, res, next) => {
     req.user.id,
     filteredBody,
     { new: true, runValidators: true }
-  ).populate({ path: "watchList" });
+  );
 
   res.status(200).json({
     status: "success",

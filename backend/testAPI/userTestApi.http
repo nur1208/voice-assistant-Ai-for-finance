@@ -74,7 +74,7 @@ Authorization: Bearer {{userToken}}
     
     "name":"ben",
     "gender":"female",
-    "removeWatchList":[
+    "watchList":[
         "61da5f731a45ee5a414fce07",
         "61da5f731a45ee5a414fce09",
         "61da5f741a45ee5a414fce0b"

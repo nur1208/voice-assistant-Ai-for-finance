@@ -83,20 +83,24 @@ export const useUserCommandsHandler = (
 
   useSignUpFields(response, getUserInputHandler);
 
+  const doWantLogin = () => {
+    response("you not logged in");
+    response("do you want to login");
+
+    handleAlreadyLoggedIn(
+      login,
+      "login",
+      secondCommandOptions.login
+    );
+  };
+
   const logout = async () => {
     if (userData) {
       response(`good bye, ${userData.name}`);
       response("logged out successfully");
       logoutRedux();
     } else {
-      response("you not logged in");
-      response("do you want to login");
-
-      handleAlreadyLoggedIn(
-        login,
-        "login",
-        secondCommandOptions.login
-      );
+      doWantLogin();
     }
   };
 
@@ -173,14 +177,16 @@ export const useUserCommandsHandler = (
         target
       );
     } else {
-      response("you not logged in");
-      response("do you want to login");
+      doWantLogin();
+    }
+  };
 
-      handleAlreadyLoggedIn(
-        login,
-        "login",
-        secondCommandOptions.login
-      );
+  const showWatchList = () => {
+    if (userData) {
+      response("here is your watch list")
+      handleOpenModal("Watch List:", userData);
+    } else {
+      doWantLogin();
     }
   };
 
@@ -202,5 +208,6 @@ export const useUserCommandsHandler = (
     logout,
     updatePassword,
     addToWatchList,
+    showWatchList,
   };
 };
