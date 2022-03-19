@@ -29,12 +29,28 @@ const signToken = (id) => {
 const createSendToken = (user, statusCode, req, res) => {
   const token = signToken(user._id);
 
-  const { name, gender, email, _id, watchList } = user;
+  const {
+    name,
+    gender,
+    email,
+    _id,
+    watchList,
+    executableChromePath,
+  } = user;
 
   res.status(statusCode).json({
     status: "success",
     token,
-    data: { user: { name, gender, email, id: _id, watchList } },
+    data: {
+      user: {
+        name,
+        gender,
+        email,
+        id: _id,
+        watchList,
+        executableChromePath,
+      },
+    },
   });
 };
 

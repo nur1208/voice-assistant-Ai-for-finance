@@ -59,8 +59,8 @@ Content-Type: application/json
 
 {
     
-    "token":"470c86d98f31e2648f50cab29cacc5660595f66cf50909f606b49a9ac9ff090c",
-    "password":"12345678"
+    "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmRkYmIzOGY0MGZkMTJiM2M3MTdjNiIsImlhdCI6MTY0NzcxNjcyNCwiZXhwIjoxNjQ3OTc1OTI0fQ.ObES4YS5erVFSWQ-OyoWfjTW-_HaVxidBmhmm_D-mIE",
+    "password":"12345678",
     
 }
 
@@ -74,11 +74,8 @@ Authorization: Bearer {{userToken}}
     
     "name":"ben",
     "gender":"female",
-    "watchList":[
-        "61da5f731a45ee5a414fce07",
-        "61da5f731a45ee5a414fce09",
-        "61da5f741a45ee5a414fce0b"
-      ]
+    "executableChromePath": "C:/Program Files/Google/Chrome/Application/chrome.exe"
+    
 
 }
 

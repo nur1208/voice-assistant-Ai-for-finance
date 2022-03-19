@@ -18,6 +18,8 @@ import {
 } from "./useForgetPassFields";
 import { secondCommandOptions } from "./useResponse";
 import { YAHOO_FINANCE_OPENING_OPTIONS } from "./useInfoCommandsHandler";
+import { useOtherUserFields } from "./useOtherUserFields";
+
 export const useUserCommandsHandler = (
   response,
   handleOpenModal,
@@ -243,6 +245,7 @@ export const useUserCommandsHandler = (
     }
   };
 
+  useOtherUserFields(response, getUserInputHandler);
   // listening to invalid message
   useEffect(() => {
     if (invalidMessage) {

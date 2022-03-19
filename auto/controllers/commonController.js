@@ -216,8 +216,13 @@ export const findingAnswersHandler = async (req, res) => {
 export const openHandler = async (req, res) => {
   //   const width = window.outerWidth - 20;
   //   const height = window.outerHeight - 20;
-  const { goToUrl, windowType, windowWidth, windowHeight } =
-    req.body;
+  const {
+    goToUrl,
+    windowType,
+    windowWidth,
+    windowHeight,
+    executablePath,
+  } = req.body;
   if (windowType) {
     windowTypeHolder = windowType;
   }
@@ -229,8 +234,7 @@ export const openHandler = async (req, res) => {
   //   console.log({ goToUrl });
   browser = await puppeteer.launch({
     headless: false,
-    executablePath:
-      "C:/Program Files/Google/Chrome/Application/chrome.exe",
+    executablePath,
     defaultViewport: { width, height },
     args: [
       `--window-size=${width},${height}`,
@@ -280,7 +284,7 @@ export const closeHandler = async (req, res) => {
 };
 
 export const checkForBrowser = (type) => (req, res, next) => {
-  if (browser && page && windowTypeHolder === "chart") {
+  if (browser && page && windowTypeHolder === type) {
     return next();
   }
   res.status(404).json({ message: "browser is not open" });

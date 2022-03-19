@@ -537,12 +537,13 @@ export const useFinansis = ({
     {
       command: [
         "open * chart with your control",
+        "open * char with your control",
         "open * tart with your control",
         "open * chart with you control",
+        "open * char with you control",
         "open * tart with you control",
         "open * chart controlled (by you)",
-        "open * tart controlled (by you)",
-        "open * chart controlled (by you)",
+        "open * char controlled (by you)",
         "open * tart controlled (by you)",
       ],
       callback: async (target) =>

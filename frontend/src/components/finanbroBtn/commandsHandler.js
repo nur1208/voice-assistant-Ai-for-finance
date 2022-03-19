@@ -1,11 +1,16 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
+import { useReduxActions } from "../../hooks/useReduxActions";
 import {
   AUTO_API_URL,
   NEWS_API_URL_C,
 } from "../../utils/serverUtils";
 import { wordToNumber } from "../../utils/wordToNumber";
+import { MODAL_TYPE_OPTIONS } from "../Modal/BasicModal/BasicModalUtils";
+import { OTHER_USER_FIELDS } from "./hooks/useOtherUserFields";
+import { sleep } from "../../utils/sleep";
 // import puppeteer from "puppeteer";
 
 import { useResponse } from "./hooks/useResponse";
@@ -44,6 +49,10 @@ export const useNewsCommandsHandler = (
     useState([]);
   const [isStopReading, setIsStopReading] = useState(false);
 
+  const {
+    user_store: { userData },
+  } = useSelector((state) => state);
+  const { updateModal } = useReduxActions();
   const getNews = async (type, query) => {
     response(`finding`);
     // 445938e7b4214f4988780151868665cc
@@ -368,33 +377,62 @@ export const useNewsCommandsHandler = (
     const width = window.outerWidth - 20;
     const height = window.outerHeight - 20;
     if (newsArticles.length && articleNumberIsInRange) {
+      if (!userData) {
+        response(
+          "you not logged in, you need to log in for this command"
+        );
+      }
+
+      if (!userData.executableChromePath) {
+        response(
+          "oh no, I don't have your chrome executable path"
+        );
+        response(
+          "paste it here to let me controller your browser"
+        );
+        updateModal({
+          type: MODAL_TYPE_OPTIONS.INPUT,
+          isReduxState: true,
+          open: true,
+          label: OTHER_USER_FIELDS.EXECUTABLE_CHROME_PATH.label,
+          stateName:
+            OTHER_USER_FIELDS.EXECUTABLE_CHROME_PATH.stateName,
+          // text: "token",
+          // extraHelperText: "type your new password, then ",
+        });
+
+        return;
+      }
+
       response(`opening article ${articleNum}`);
       const { goToUrl } = newsArticles[articleNum - 1];
       response("loading the page will take seconds");
-      setCurrentArticle(null);
+      await sleep(1000 * 3);
       try {
         const { data } = await axios.post(
           `${AUTO_API_URL}/open`,
           {
             goToUrl,
             windowType: "detailArticle",
+            windowWidth: width,
+            windowHeight: height,
+            executablePath: userData.executableChromePath,
           }
         );
-        // this is just for pushing popup window at top
-        // const w = window.open(
-        //   goToUrl,
-        //   "ORIGIN_ARTICLE_WINDOW",
-        //   "popup"
-        // );
-        // w.close();
-        // sleep()
-        setCurrentArticle(newsArticles[articleNum - 1]);
-        console.log(data);
-        setPopupWindow(data.isAutoBrowserOpen);
-        response("the page is done loading");
+        await sleep(1000 * 3);
 
-        response("do you want me to scroll every 5 seconds");
+        response(
+          "the page is done loading , do you want me to scroll every 5 seconds"
+        );
+        await sleep(1000 * 1);
+
         setSecondCommandFor("scrollDetailsA");
+        setCurrentArticle(newsArticles[articleNum - 1]);
+        // console.log(data);
+        setPopupWindow(data.isAutoBrowserOpen);
+
+        // response("");
+        // setCurrentArticle(null);
         // window.open(goToUrl, "_blank");
       } catch (error) {
         response(

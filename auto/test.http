@@ -9,7 +9,8 @@ Content-Type: application/json
     "goToUrl":"https://finance.yahoo.com/chart/AAPL",
     "windowType":"chart",
     "windowWidth":1366,
-    "windowHeight":768
+    "windowHeight":768,
+    "executablePath":"C:/Program Files/Google/Chrome/Application/chrome.exe"
 
 }
 ###

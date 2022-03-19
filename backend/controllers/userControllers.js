@@ -99,7 +99,6 @@ export const updateWatchList = catchAsync(
       req.body.removeWatchList.length > 0
     ) {
       // if watchList is exist in user document
-      debugger;
       console.log("here");
 
       if (req.user.watchList && req.user.watchList.length > 0) {
@@ -155,7 +154,8 @@ export const updateMe = catchAsync(async (req, res, next) => {
     req.body,
     "name",
     "gender",
-    "watchList"
+    "watchList",
+    "executableChromePath"
   );
   if (req.file) filteredBody.photo = req.file.filename;
 
@@ -174,6 +174,7 @@ export const updateMe = catchAsync(async (req, res, next) => {
         gender: updatedUser.gender,
         id: updatedUser._id,
         watchList: updatedUser?.watchList,
+        executableChromePath: updatedUser.executableChromePath,
       },
     },
   });

@@ -48,10 +48,18 @@ app.post("/open", openHandler);
 
 app.post("/close", closeHandler);
 
-app.post("/scroll", scrollHandler);
+app.post(
+  "/scroll",
+  checkForBrowser("detailArticle"),
+  scrollHandler
+);
 app.post("/zoom", checkForBrowser("chart"), zoomHandler);
 
-app.post("/changeChart", changeChartHandler);
+app.post(
+  "/changeChart",
+  checkForBrowser("chart"),
+  changeChartHandler
+);
 
 app.post(
   "/changeDate",

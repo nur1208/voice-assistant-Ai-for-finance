@@ -20,6 +20,8 @@ import {
 import { sleep } from "../../../utils/sleep";
 import { useReduxActions } from "../../../hooks/useReduxActions";
 import { useSelector } from "react-redux";
+import { MODAL_TYPE_OPTIONS } from "../../Modal/BasicModal/BasicModalUtils";
+import { OTHER_USER_FIELDS } from "./useOtherUserFields";
 
 export const YAHOO_FINANCE_OPENING_OPTIONS = {
   ADD_TO_WATCH_LIST: "ADD_TO_WATCH_LIST",
@@ -42,7 +44,7 @@ export const useInfoCommandsHandler = (
 
   // const [currentStock, setCurrentStock] = useState({});
 
-  const { updateUserInfo } = useReduxActions();
+  const { updateUserInfo, updateModal } = useReduxActions();
   const {
     user_store: { userData },
   } = useSelector((state) => state);
@@ -182,12 +184,40 @@ export const useInfoCommandsHandler = (
 
   const openChartWithControl = async (symbol) => {
     try {
+      if (!userData) {
+        response(
+          "you not logged in, you need to log in for this command"
+        );
+      }
+
+      if (!userData.executableChromePath) {
+        response(
+          "oh no, I don't have your chrome executable path"
+        );
+        response(
+          "paste it here to let me controller your browser"
+        );
+        updateModal({
+          type: MODAL_TYPE_OPTIONS.INPUT,
+          isReduxState: true,
+          open: true,
+          label: OTHER_USER_FIELDS.EXECUTABLE_CHROME_PATH.label,
+          stateName:
+            OTHER_USER_FIELDS.EXECUTABLE_CHROME_PATH.stateName,
+          // text: "token",
+          // extraHelperText: "type your new password, then ",
+        });
+
+        return;
+      }
+
       response("loading the page will take seconds");
       const { data } = await axios.post(`${AUTO_API_URL}/open`, {
         goToUrl: `${YAHOO_FINANCE_URL}/chart/${symbol}`,
         windowType: "chart",
         windowWidth: width,
         windowHeight: height,
+        executablePath: userData.executableChromePath,
       });
 
       setPopupWWControl(data.isAutoBrowserOpen);

@@ -52,7 +52,7 @@ const useSpeechSynthesis = (props = {}) => {
       volume = 1,
     } = args;
 
-    if (!supported) return;
+    // if (!supported) return;
     setSpeaking(true);
     // Firefox won't repeat an utterance that has been
     // spoken, so we need to create a new instance each time

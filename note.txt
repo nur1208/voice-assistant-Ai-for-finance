@@ -484,8 +484,8 @@ deadline - before 2022-3-22 ✅ DONE on 2022-3-20
 - {DONE} make width and height in openHandler function in commonController dynamic:
         const width = 1366 - 20;
         const height = 768 - 20;
-- {TODO} MAKE executablePath dynamic too
-- {TODO} use checkForBrowser middleware and all the routes that needs it in auto api
+- {DONE} MAKE executablePath dynamic too
+- {DONE} use checkForBrowser middleware and all the routes that needs it in auto api
 - {TODO} close the browser when is unmounted
  deadline - before 2022-3-23 
 - {TODO} TEST let sellSignal function in python script return sold stocks
@@ -501,9 +501,11 @@ deadline - before 2022-3-22 ✅ DONE on 2022-3-20
 - {TODO} teat login in fields
 - {TODO} test currentStockPrice function in useInfoCommandsHandler
 - {TODO} let finansis ask do you want me to learning about 'aapl' symbol not just do it
+- {TODO} improve 'start speaking sound'
 final deadline v1 - before 2022-3-31
 
 ----- NOT IMPORTANT NOW
+- {TODO} show users how to get executablePath
 - {TODO} create 'take screen shot' command
 - {TODO} create 'scroll up scroll down' command for news and also when opening a window with finansis control 
 - {TODO} add current stock Price to user watch List
