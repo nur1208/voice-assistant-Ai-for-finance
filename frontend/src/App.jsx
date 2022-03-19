@@ -156,15 +156,15 @@ export const App = () => {
   //   })();
   // }, []);
 
-  // const userCountry = useGetCurrentCountry();
   const networkStatus = useNetworkStatus();
+  const userCountry = useGetCurrentCountry(networkStatus);
 
-  // if (
-  //   (userCountry !== "loading" && !userCountry) ||
-  //   userCountry.toLowerCase() === "china"
-  // ) {
-  //   return <NotWorkingInChina />;
-  // }
+  if (
+    (userCountry !== "loading" && !userCountry) ||
+    userCountry.toLowerCase() === "china"
+  ) {
+    return <NotWorkingInChina />;
+  }
 
   if (!isBrowserSupportsSpeechRecognition) {
     return <NoBrowserSupport />;

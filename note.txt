@@ -475,21 +475,19 @@ deadline - before 2022-3-20 ✅ DONE on 2022-3-18
         - {DONE} create 'delete {apple} stock from my watchLIst' command
         - {DONE} handle adding duplicate stock to watchList in the frontend
 
-deadline - before 2022-3-22
-
-- {TODO} let the user update his/her options (like alway with your controller, ignore Multiple stocks,...)
-- {TODO} move useGetCurrentCountry TO hooks folder
+deadline - before 2022-3-22 ✅ DONE on 2022-3-20
+- {DONE} try to make your won useSpeechSynthesis and test it 
+        note: use https://github.com/MikeyParton/react-speech-kit/blob/master/src/useSpeechSynthesis.jsx
+                as reference
 - {TODO} useGetCurrentCountry test if that function doesn't slow down finansis if yes improve it
+        
 - {TODO} make the following data in openHandler function in commonController dynamic:
         const width = 1366 - 20;
         const height = 768 - 20;
-        const timeout = 1000 * 90;
 - {TODO} MAKE executablePath dynamic too
-- {TODO} try to make your won useSpeechSynthesis and test it 
-        note: use https://github.com/MikeyParton/react-speech-kit/blob/master/src/useSpeechSynthesis.jsx
-                as reference
-- {TODO} use checkForBrowser middleware and all the routes that needs it in auto api 
+- {TODO} use checkForBrowser middleware and all the routes that needs it in auto api
 - {TODO} close the browser when is unmounted
+ deadline - before 2022-3-23 
 - {TODO} TEST let sellSignal function in python script return sold stocks
 - {TODO} fix finansis say 'i don't find stocks for * from yahoo finance when backend server down'
 - {TODO} let finansis ask 'do you want me to learn about {book} company' when book keyword not exist in the database
@@ -508,6 +506,8 @@ final deadline v1 - before 2022-3-31
 ----- NOT IMPORTANT NOW
 - {TODO} add current stock Price to user watch List
         when saying "show me my watch list"
+- {TODO} let the user update his/her options (like alway with your controller, ignore Multiple stocks,...)
+        'create activate' and deactivate'
 - {TODO} create 'play music' command 
         - {TODO} let the user enter youtube paly list or just set my default play list  
 - {TODO} remember last command user said when finansis ask 'do you want to login'
@@ -535,6 +535,7 @@ final deadline v1 - before 2022-3-31
 - {TODO} let the user type the symbol or choose a number when open Multiple companies found popup 
 - {TODO} put all modal data in redux store
 - {TODO} don't get questions every render from the api, save the documents in 
+- {TODO} move useGetCurrentCountry TO hooks folder
         user localStorage and just check the number of the questions in LS 
         same as in the database
     note: use Redis

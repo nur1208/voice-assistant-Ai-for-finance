@@ -10,18 +10,16 @@ export const getCurrentCountry = async () => {
   return country_name;
 };
 
-export const useGetCurrentCountry = () => {
+export const useGetCurrentCountry = (networkStatus) => {
   const [userCountry, setUserCountry] = useState("loading");
 
   useEffect(() => {
     (async () => {
-      while (true) {
-        const userCurrentCountry = await getCurrentCountry();
-        setUserCountry(userCurrentCountry);
-        await sleep(1000 * 5);
-      }
+      await sleep(1000 * 5);
+      const userCurrentCountry = await getCurrentCountry();
+      setUserCountry(userCurrentCountry);
     })();
-  }, []);
+  }, [networkStatus]);
 
   return userCountry;
 };
