@@ -22,6 +22,7 @@ import { useReduxActions } from "../../../hooks/useReduxActions";
 import { useSelector } from "react-redux";
 import { MODAL_TYPE_OPTIONS } from "../../Modal/BasicModal/BasicModalUtils";
 import { OTHER_USER_FIELDS } from "./useOtherUserFields";
+import { secondCommandOptions } from "./useResponse";
 
 export const YAHOO_FINANCE_OPENING_OPTIONS = {
   ADD_TO_WATCH_LIST: "ADD_TO_WATCH_LIST",
@@ -32,7 +33,8 @@ export const useInfoCommandsHandler = (
   response,
   handleOpenModal,
   handleCloseModal,
-  soldStocks
+  soldStocks,
+  setSecondCommandFor
 ) => {
   const [popupWindow, setPopupWindow] = useState(null);
   const [foundStock, setFoundStock] = useState([]);
@@ -44,7 +46,8 @@ export const useInfoCommandsHandler = (
 
   // const [currentStock, setCurrentStock] = useState({});
 
-  const { updateUserInfo, updateModal } = useReduxActions();
+  const { updateUserInfo, updateModal, updateSecondCommand } =
+    useReduxActions();
   const {
     user_store: { userData },
   } = useSelector((state) => state);
@@ -357,6 +360,135 @@ export const useInfoCommandsHandler = (
       );
   };
 
+  const foundOneStock = async ({
+    type,
+    target,
+    finalTarget,
+    isIgnoreFoundMultiple,
+    isWithControl,
+    currentCompany,
+  }) => {
+    yahooFinanceOpeningWResponses(type, target);
+
+    // if a user said 'AAPL' stock symbol
+    // and found symbol in the database
+
+    if (
+      type === YAHOO_FINANCE_OPENING_OPTIONS.ADD_TO_WATCH_LIST
+    ) {
+      handleAddingToWatch(
+        currentCompany.symbol,
+        currentCompany._id
+      );
+    }
+
+    // test
+    if (type === "currentPrice") {
+      await currentStockPrice(finalTarget);
+      return;
+    }
+
+    if (isWithControl) {
+      await openChartWithControl(finalTarget);
+    } else if (isIgnoreFoundMultiple) {
+      return finalTarget;
+    } else {
+      openWindow(type, finalTarget);
+    }
+  };
+
+  let dataForLearningLocal;
+  const handleLearningAboutCompany = async () => {
+    // debugger;
+    const {
+      type,
+      target,
+      // finalTarget,
+      isIgnoreFoundMultiple,
+      isWithControl,
+      // currentCompany,
+    } = dataForLearningLocal;
+
+    // console.log({ dataForLearningLocal });
+
+    let finalTarget;
+    let currentCompany;
+
+    try {
+      // check if the keyword is not exist in the database
+      const {
+        data: { status },
+      } = await axios.get(
+        `${BACKEND_API_URL}/${KNOWN_KEYWORD_ROUTE}?keyword=${target}`
+      );
+      if (status === "fall") {
+        // response(
+        //   `didn't find chart for ${target}, so give me a minute to learn about ${target} from yahoo finance`
+        // );
+
+        response(`okay, I will learning about ${target}`);
+        // so I'll learn about ${target} and you can try again after 3 minutes
+        const {
+          data: { companies },
+        } = await axios.post(
+          `${AUTO_API_URL}/findingCompanies`,
+          {
+            keyword: target,
+          }
+        );
+
+        // first one
+        if (companies.length > 0) {
+          response(`I can open ${target} chart now`);
+          if (isIgnoreFoundMultiple) {
+            finalTarget = companies[0].symbol;
+            currentCompany = companies[0];
+          } else {
+            setFoundMultiple(companies, type, isWithControl);
+          }
+
+          // await getAllTickersInDatabaseToJson();
+          // TODO clean up the following code
+        } else {
+          response(
+            `I also didn't find chart for ${target} from yahoo finance`
+          );
+
+          await axios.post(
+            `${BACKEND_API_URL}/${KNOWN_KEYWORD_ROUTE}`,
+            {
+              keyword: target,
+            }
+          );
+          return;
+        }
+      } else {
+        response(
+          `I didn't find any chart with ${target} keyword from yahoo finance`
+        );
+        return;
+      }
+    } catch (error) {
+      // response(
+      //   `I didn't find any chart with ${target} keyword from yahoo finance`
+      // );
+      response(
+        `sorry there is something wrong, please try again later`
+      );
+      return;
+    }
+    if (!isIgnoreFoundMultiple) return;
+
+    foundOneStock({
+      type,
+      target,
+      finalTarget,
+      isIgnoreFoundMultiple,
+      isWithControl,
+      currentCompany,
+    });
+  };
+
   const openYahooFinance = async (
     type,
     target,
@@ -390,106 +522,108 @@ export const useInfoCommandsHandler = (
         finalTarget = symbolsFound[0].symbol;
         currentCompany = symbolsFound[0];
       } else {
+        dataForLearningLocal = {
+          type,
+          target,
+          // finalTarget,
+          isIgnoreFoundMultiple,
+          isWithControl,
+          // currentCompany,
+        };
         // response(
         //   `so give me a minute to learn about ${target} from yahoo finance`
         // );
 
+        response(
+          `didn't find chart for ${target}, do you want me to learn about ${target}`
+        );
+
+        updateSecondCommand({
+          type: secondCommandOptions.learningAboutCompany,
+        });
+        setSecondCommandFor({
+          type: secondCommandOptions.learningAboutCompany,
+          other: { callback: handleLearningAboutCompany },
+        });
+
         // just let finansis remember that didn't find stocks for current keyword
-        try {
-          // check if the keyword is not exist in the database
-          const {
-            data: { status },
-          } = await axios.get(
-            `${BACKEND_API_URL}/${KNOWN_KEYWORD_ROUTE}?keyword=${target}`
-          );
-          if (status === "fall") {
-            response(
-              `didn't find chart for ${target}, so give me a minute to learn about ${target} from yahoo finance`
-            );
+        // try {
+        //   // check if the keyword is not exist in the database
+        //   const {
+        //     data: { status },
+        //   } = await axios.get(
+        //     `${BACKEND_API_URL}/${KNOWN_KEYWORD_ROUTE}?keyword=${target}`
+        //   );
+        //   if (status === "fall") {
+        //     response(
+        //       `didn't find chart for ${target}, so give me a minute to learn about ${target} from yahoo finance`
+        //     );
 
-            // so I'll learn about ${target} and you can try again after 3 minutes
-            const {
-              data: { companies },
-            } = await axios.post(
-              `${AUTO_API_URL}/findingCompanies`,
-              {
-                keyword: target,
-              }
-            );
+        //     // so I'll learn about ${target} and you can try again after 3 minutes
+        //     const {
+        //       data: { companies },
+        //     } = await axios.post(
+        //       `${AUTO_API_URL}/findingCompanies`,
+        //       {
+        //         keyword: target,
+        //       }
+        //     );
 
-            // first one
-            if (companies.length > 0) {
-              response(`I can open ${target} chart now`);
-              if (isIgnoreFoundMultiple) {
-                finalTarget = companies[0].symbol;
-                currentCompany = symbolsFound[0];
-              } else {
-                setFoundMultiple(companies, type, isWithControl);
-              }
+        //     // first one
+        //     if (companies.length > 0) {
+        //       response(`I can open ${target} chart now`);
+        //       if (isIgnoreFoundMultiple) {
+        //         finalTarget = companies[0].symbol;
+        //         currentCompany = symbolsFound[0];
+        //       } else {
+        //         setFoundMultiple(companies, type, isWithControl);
+        //       }
 
-              // await getAllTickersInDatabaseToJson();
-              // TODO clean up the following code
-            } else {
-              response(
-                `I also didn't find chart for ${target} from yahoo finance`
-              );
+        //       // await getAllTickersInDatabaseToJson();
+        //       // TODO clean up the following code
+        //     } else {
+        //       response(
+        //         `I also didn't find chart for ${target} from yahoo finance`
+        //       );
 
-              await axios.post(
-                `${BACKEND_API_URL}/${KNOWN_KEYWORD_ROUTE}`,
-                {
-                  keyword: target,
-                }
-              );
-              return;
-            }
-          } else {
-            response(
-              `I didn't find any chart with ${target} keyword from yahoo finance`
-            );
-            return;
-          }
-        } catch (error) {
-          // response(
-          //   `I didn't find any chart with ${target} keyword from yahoo finance`
-          // );
-          response(
-            `sorry there is something wrong, please try again later`
-          );
-          return;
-        }
+        //       await axios.post(
+        //         `${BACKEND_API_URL}/${KNOWN_KEYWORD_ROUTE}`,
+        //         {
+        //           keyword: target,
+        //         }
+        //       );
+        //       return;
+        //     }
+        //   } else {
+        //     response(
+        //       `I didn't find any chart with ${target} keyword from yahoo finance`
+        //     );
+        //     return;
+        //   }
+        // } catch (error) {
+        //   // response(
+        //   //   `I didn't find any chart with ${target} keyword from yahoo finance`
+        //   // );
+        //   response(
+        //     `sorry there is something wrong, please try again later`
+        //   );
+        //   return;
+        // }
 
-        // so I'll learn about ${target} and you can try again after 3 minutes
+        // // so I'll learn about ${target} and you can try again after 3 minutes
 
         if (!isIgnoreFoundMultiple) return;
       }
     }
-    yahooFinanceOpeningWResponses(type, target);
-
-    // if a user said 'AAPL' stock symbol
-    // and found symbol in the database
-
-    if (
-      type === YAHOO_FINANCE_OPENING_OPTIONS.ADD_TO_WATCH_LIST
-    ) {
-      handleAddingToWatch(
-        currentCompany.symbol,
-        currentCompany._id
-      );
-    }
-
-    // test
-    if (type === "currentPrice") {
-      await currentStockPrice(finalTarget);
-      return;
-    }
-
-    if (isWithControl) {
-      await openChartWithControl(finalTarget);
-    } else if (isIgnoreFoundMultiple) {
-      return finalTarget;
-    } else {
-      openWindow(type, finalTarget);
-    }
+    // here
+    foundOneStock({
+      type,
+      target,
+      finalTarget,
+      isIgnoreFoundMultiple,
+      isWithControl,
+      currentCompany,
+    });
   };
 
   const foundMultipleStocks = async (num) => {

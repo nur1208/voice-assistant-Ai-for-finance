@@ -129,7 +129,8 @@ export const useFinansis = ({
     response,
     handleOpenModal,
     handleCloseModal,
-    soldStocks
+    soldStocks,
+    setSecondCommandFor
   );
 
   const history = useHistory();
@@ -442,12 +443,12 @@ export const useFinansis = ({
     // },
     {
       command: [
-        "open * chart",
-        "open * tart",
-        "open * charge",
-        "show me * tart",
-        "show me * chart",
-        "show me * charge",
+        "open * (symbol) chart",
+        "open * (symbol) tart",
+        "open * (symbol) charge",
+        "show me * (symbol) tart",
+        "show me * (symbol) chart",
+        "show me * (symbol) charge",
       ],
       callback: async (target) =>
         await openYahooFinance("chart", target),
@@ -536,12 +537,12 @@ export const useFinansis = ({
     },
     {
       command: [
-        "open * chart with your control",
-        "open * char with your control",
-        "open * tart with your control",
-        "open * chart with you control",
-        "open * char with you control",
-        "open * tart with you control",
+        "open * (symbol) chart with your control",
+        "open * (symbol) char with your control",
+        "open * (symbol) tart with your control",
+        "open * (symbol) chart with you control",
+        "open * (symbol) char with you control",
+        "open * (symbol) tart with you control",
         "open * chart controlled (by you)",
         "open * char controlled (by you)",
         "open * tart controlled (by you)",
