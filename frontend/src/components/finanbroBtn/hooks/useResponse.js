@@ -277,7 +277,7 @@ export const useResponse = (SpeechRecognition) => {
 
         await sleep(5000);
 
-        await secondCommand.other.callback();
+        await secondCommand?.other?.callback();
 
         break;
 
@@ -307,7 +307,7 @@ export const useResponse = (SpeechRecognition) => {
         updateSecondCommand({});
 
         response(`okay, I will let you update your password`);
-        secondCommandFor.other.callback();
+        secondCommandFor?.other?.callback();
         break;
 
       case secondCommandOptions.login:
@@ -315,7 +315,7 @@ export const useResponse = (SpeechRecognition) => {
         updateSecondCommand({});
 
         response(`okay`);
-        secondCommandFor.other.callback();
+        secondCommandFor?.other?.callback();
 
         break;
       case secondCommandOptions.learningAboutCompany:
@@ -323,7 +323,7 @@ export const useResponse = (SpeechRecognition) => {
         updateSecondCommand({});
 
         // response(`okay`);
-        secondCommandFor.other.callback();
+        secondCommandFor?.other?.callback();
 
         break;
 

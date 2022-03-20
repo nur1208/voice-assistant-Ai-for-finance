@@ -95,7 +95,14 @@ export const useBackTest = () => {
   let holdStocksLocal = holdingStocks;
   let currentCashLocal = currentCash;
   let currentStockPriceLocal = currentStockPrice;
-  let accountValueLocal = accountValue;
+  let accountValueLocal = [
+    {
+      catch: currentCash,
+      stockValue: 0,
+      date: customDateFormat(currentDate),
+    },
+  ];
+  let accountValueLocalForce = accountValue;
   // let countDays = 0;
   let countDaysLocal = countDays;
   let soldStocksLocal = soldStocks;
@@ -421,14 +428,26 @@ export const useBackTest = () => {
             //   },
             // ]);
 
-            accountValueLocal = [
-              ...accountValueLocal,
-              {
-                catch: currentCashLocal,
-                stockValue: currentStockPriceLocal,
-                date,
-              },
-            ];
+            if (isForceSell) {
+              debugger;
+              accountValueLocalForce = [
+                ...accountValueLocalForce,
+                {
+                  catch: currentCashLocal,
+                  stockValue: currentStockPriceLocal,
+                  date,
+                },
+              ];
+            } else {
+              accountValueLocal = [
+                ...accountValueLocal,
+                {
+                  catch: currentCashLocal,
+                  stockValue: currentStockPriceLocal,
+                  date,
+                },
+              ];
+            }
           }
         }
         // look for buy signals TODO clean up this code
@@ -480,7 +499,9 @@ export const useBackTest = () => {
         currentCash: currentCashLocal,
         wins: winsLocal,
         losses: lossesLocal,
-        accountValue: accountValueLocal,
+        accountValue: isForceSell
+          ? accountValueLocalForce
+          : accountValueLocal,
         countDays: countDaysLocal,
         endDate: endDateLocal,
         sp500Data: sp500DataLocal,
@@ -516,7 +537,9 @@ export const useBackTest = () => {
         currentCash: currentCashLocal,
         wins: winsLocal,
         losses: lossesLocal,
-        accountValue: accountValueLocal,
+        accountValue: isForceSell
+          ? accountValueLocalForce
+          : accountValueLocal,
         countDays: countDaysLocal,
         endDate: endDateLocal,
         sp500Data: sp500DataLocal,

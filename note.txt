@@ -488,7 +488,7 @@ deadline - before 2022-3-22 ✅ DONE on 2022-3-20
 - {DONE} use checkForBrowser middleware and all the routes that needs it in auto api
 - {DONE} fix finansis say 'i don't find stocks for * from yahoo finance when backend server is down'
 deadline - before 2022-3-23 ✅ DONE on 2022-3-20
-- {TODO} let finansis ask 'do you want me to learn about {book} company' when book keyword not exist in the database
+- {DONE} let finansis ask 'do you want me to learn about {book} company' when book keyword not exist in the database
 - {TODO} add initial value for accountValue and sp500Data states that in useBackTest and it will fix TOTAL GAIN/LOSS error
 - {TODO} let 'what's up with {something}' command gets new news
 - {TODO} let the user reselect his gender when click on delete keyword
@@ -502,6 +502,8 @@ deadline - before 2022-3-24
 - {TODO} let finansis ask do you want me to learning about 'aapl' symbol not just do it
 - {TODO} improve 'start speaking sound'
 - {TODO} TEST let sellSignal function in python script return sold stocks
+- {TODO} fix making finansis think the mark is close when tradingApi server is down isMarketOpen?date=2020-04-04 
+- {TODO} fix finansis stop recognizing after backTesting's reload page
 final deadline v1 - before 2022-3-31
 
 ----- NOT IMPORTANT NOW

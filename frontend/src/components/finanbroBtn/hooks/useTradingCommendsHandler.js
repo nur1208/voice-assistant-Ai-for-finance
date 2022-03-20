@@ -17,6 +17,7 @@ import { useReduxActions } from "../../../hooks/useReduxActions";
 import { WaitForUserInputContext } from "../../../App";
 import { useHandleUserInput } from "./useHandleUserInput";
 import { MODAL_TYPE_OPTIONS } from "../../Modal/BasicModal/BasicModalUtils";
+import { customDateFormat } from "../../Simulator/SimulatorUtils";
 
 export const BTfields = {
   CASH: {
@@ -57,6 +58,7 @@ export const useTradingCommendsHandler = (
     updateSecondCommand,
     updateProgress,
     updateModal,
+    updateBTState,
   } = useReduxActions();
 
   const findBuySignal = async () => {
@@ -211,9 +213,8 @@ export const useTradingCommendsHandler = (
 
   const { getTestedData, forceSelling } = useBackTest();
 
-  const { holdingStocks, isBTDone, currentDate } = useSelector(
-    (state) => state.back_testing
-  );
+  const { holdingStocks, isBTDone, currentDate, currentCash } =
+    useSelector((state) => state.back_testing);
 
   const [isResetBTData, setIsResetBTData] = useLocalStorage(
     "isResetBTData",
@@ -240,6 +241,8 @@ export const useTradingCommendsHandler = (
   const getBTInput = async (label, message) => {
     response(message);
     await sleep(1000);
+    // debugger;
+
     // response("then click enter to submit");
     handleOpenModal("", "", true, label);
   };
@@ -333,6 +336,24 @@ export const useTradingCommendsHandler = (
     otherHandleInputParams,
     async () => {
       response("starting back testing");
+      const date = customDateFormat(currentDate);
+      const {
+        data: { close },
+      } = await axios.get(
+        `${PYTHON_API}/getSP500Date?date=${date}`
+      );
+
+      updateBTState({
+        accountValue: [
+          {
+            catch: currentCash,
+            stockValue: 0,
+            date,
+          },
+        ],
+        sp500Data: [{ date, close }],
+      });
+      await sleep(1000 * 3);
       await getTestedData();
       response("back testing is done");
       console.log("here in last useHandleUser");
