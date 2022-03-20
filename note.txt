@@ -486,10 +486,8 @@ deadline - before 2022-3-22 ✅ DONE on 2022-3-20
         const height = 768 - 20;
 - {DONE} MAKE executablePath dynamic too
 - {DONE} use checkForBrowser middleware and all the routes that needs it in auto api
-- {TODO} close the browser when is unmounted
+- {TODO} fix finansis say 'i don't find stocks for * from yahoo finance when backend server is down'
  deadline - before 2022-3-23 
-- {TODO} TEST let sellSignal function in python script return sold stocks
-- {TODO} fix finansis say 'i don't find stocks for * from yahoo finance when backend server down'
 - {TODO} let finansis ask 'do you want me to learn about {book} company' when book keyword not exist in the database
 - {TODO} add initial value for accountValue and sp500Data states that in useBackTest and it will fix TOTAL GAIN/LOSS error
 - {TODO} let 'what's up with {something}' command gets new news
@@ -502,9 +500,12 @@ deadline - before 2022-3-22 ✅ DONE on 2022-3-20
 - {TODO} test currentStockPrice function in useInfoCommandsHandler
 - {TODO} let finansis ask do you want me to learning about 'aapl' symbol not just do it
 - {TODO} improve 'start speaking sound'
+- {TODO} TEST let sellSignal function in python script return sold stocks
 final deadline v1 - before 2022-3-31
 
 ----- NOT IMPORTANT NOW
+- {TODO} close any opened browser when is unmounted
+        - test create function again put handleCloseAnyPopup before e.preventDefault();
 - {TODO} show users how to get executablePath
 - {TODO} create 'take screen shot' command
 - {TODO} create 'scroll up scroll down' command for news and also when opening a window with finansis control 

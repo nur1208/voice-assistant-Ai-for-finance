@@ -142,8 +142,8 @@ export const App = () => {
     if (userData) {
       autoLogin(userData);
     }
-    appRef.current.click();
-    appRef.current.focus();
+    // appRef.current.click();
+    // appRef.current.focus();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

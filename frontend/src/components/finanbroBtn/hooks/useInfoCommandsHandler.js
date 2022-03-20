@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Typography from "@mui/material/Typography";
 
 import {
@@ -449,8 +449,11 @@ export const useInfoCommandsHandler = (
             return;
           }
         } catch (error) {
+          // response(
+          //   `I didn't find any chart with ${target} keyword from yahoo finance`
+          // );
           response(
-            `I didn't find any chart with ${target} keyword from yahoo finance`
+            `sorry there is something wrong, please try again later`
           );
           return;
         }
@@ -591,6 +594,15 @@ export const useInfoCommandsHandler = (
       response(`there is no window open to close it`);
     }
   };
+  // ``;
+
+  useEffect(() => {
+    return async () => {
+      // window.close();
+      await closeChart();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const [theMostWindow, setTheMostWindow] = useState(null);
   const [theMostNum, setTheMostNum] = useState(0);

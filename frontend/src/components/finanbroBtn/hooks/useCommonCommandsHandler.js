@@ -253,6 +253,8 @@ export const useCommonCommandsHandler = (
   };
 
   const handleCloseAnyPopup = async () => {
+    console.log("in handleCloseAnyPopup");
+
     let isWindowClose;
     isWindowClose = await handleClosePopupWindow();
     if (!isWindowClose) {
@@ -267,6 +269,32 @@ export const useCommonCommandsHandler = (
 
     if (!isWindowClose) await closeChart();
   };
+
+  const test = () => {
+    console.log("in test");
+  };
+
+  // useEffect(() => {
+  //   const handleBeforeUnload = (e) => {
+  //     console.log("in beforeunload");
+  //     handleOpenModal("today's date is:", "something");
+  //     e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
+
+  //     // Chrome requires returnValue to be set
+  //     e.returnValue =
+  //       "it is better to let me close all window browsers first";
+  //   };
+  //   window.addEventListener("beforeunload", async function (e) {
+  //     // Cancel the event
+  //     handleBeforeUnload(e);
+  //   });
+  //   return async () => {
+  //     window.removeEventListener("beforeunload", async (e) => {
+  //       handleBeforeUnload(e);
+  //     });
+  //   };
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   return {
     goBackHandler,
