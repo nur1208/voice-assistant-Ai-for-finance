@@ -187,8 +187,17 @@ export default function InputModal({
     return true;
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Backspace" && selectOptions) {
+      e.preventDefault();
+      setUserInput("");
+    }
+  };
+
   const handleKeypress = (e) => {
     //it triggers by pressing the enter key
+
+    if (selectOptions) e.preventDefault();
 
     if (e.key === "Enter") {
       if (!isValidInput()) return;
@@ -217,6 +226,7 @@ export default function InputModal({
         updateBTState(newState);
       }
     }
+    // eslint-disable-next-line no-unused-expressions
   };
 
   return (
@@ -234,6 +244,7 @@ export default function InputModal({
           style={{ width: 350 }}
           id="filled-basic"
           onKeyPress={handleKeypress}
+          onKeyDown={handleKeyDown}
           label={label || labelProps.view}
           variant="filled"
           // inputRef={refTF}

@@ -492,7 +492,7 @@ deadline - before 2022-3-23 ✅ DONE on 2022-3-20
 - {DONE} add initial value for accountValue state that in useBackTest and it will fix TOTAL GAIN/LOSS error
 - {DONE} let 'what's up with {something}' command gets latest news
         - {DONE} removing 'seeking alpha' when getting news for something else then source=seeking alpha
-- {TODO} let the user reselect his gender when click on delete keyword
+- {DONE} let the user reselect his gender when clicking on delete keyboard and don't let him type any thing when he supposed to select a value
 - {TODO} create 'do you want to enter password again' command if a user entered confirm password wrong for two times
         note: use stateName is signal
 deadline - before 2022-3-24
