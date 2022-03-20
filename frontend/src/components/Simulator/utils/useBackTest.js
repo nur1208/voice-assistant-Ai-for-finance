@@ -429,7 +429,6 @@ export const useBackTest = () => {
             // ]);
 
             if (isForceSell) {
-              debugger;
               accountValueLocalForce = [
                 ...accountValueLocalForce,
                 {

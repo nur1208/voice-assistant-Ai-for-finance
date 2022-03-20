@@ -3,7 +3,7 @@
 
 @route = api/v1/news
 
-@serverUrl = "https://news-api-lovat.vercel.app/api/v1/news"
+@serverUrl = https://news-api-lovat.vercel.app/api/v1/news
 
 GET http://localhost:3050/api/v1/news 
 ###
@@ -22,4 +22,4 @@ Content-Type: application/json
 }
 
 ###
-GET {{serverUrl}}?sortBy=publishedAt
+GET {{serverUrl}}?sortBy=publishedAt&keywordInTitle=Russia&page=5

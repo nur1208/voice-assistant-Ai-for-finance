@@ -489,8 +489,9 @@ deadline - before 2022-3-22 ✅ DONE on 2022-3-20
 - {DONE} fix finansis say 'i don't find stocks for * from yahoo finance when backend server is down'
 deadline - before 2022-3-23 ✅ DONE on 2022-3-20
 - {DONE} let finansis ask 'do you want me to learn about {book} company' when book keyword not exist in the database
-- {TODO} add initial value for accountValue and sp500Data states that in useBackTest and it will fix TOTAL GAIN/LOSS error
-- {TODO} let 'what's up with {something}' command gets new news
+- {DONE} add initial value for accountValue state that in useBackTest and it will fix TOTAL GAIN/LOSS error
+- {DONE} let 'what's up with {something}' command gets latest news
+        - {DONE} removing 'seeking alpha' when getting news for something else then source=seeking alpha
 - {TODO} let the user reselect his gender when click on delete keyword
 - {TODO} create 'do you want to enter password again' command if a user entered confirm password wrong for two times
         note: use stateName is signal
@@ -504,6 +505,7 @@ deadline - before 2022-3-24
 - {TODO} TEST let sellSignal function in python script return sold stocks
 - {TODO} fix making finansis think the mark is close when tradingApi server is down isMarketOpen?date=2020-04-04 
 - {TODO} fix finansis stop recognizing after backTesting's reload page
+- {TODO} fix keywordInTitle: undefined when saying 'give me more news' for the third time
 final deadline v1 - before 2022-3-31
 
 ----- NOT IMPORTANT NOW
@@ -512,6 +514,8 @@ final deadline v1 - before 2022-3-31
         - test create function again put handleCloseAnyPopup before e.preventDefault();
 - {TODO} show users how to get executablePath
 - {TODO} create 'take screen shot' command
+- {TODO} try to fix seeking alpha get news script 
+        there is something wrong with publishedAt 
 - {TODO} create 'scroll up scroll down' command for news and also when opening a window with finansis control 
 - {TODO} add current stock Price to user watch List
         when saying "show me my watch list"
