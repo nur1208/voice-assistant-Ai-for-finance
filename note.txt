@@ -498,7 +498,7 @@ deadline - before 2022-3-23 ✅ DONE on 2022-3-20
 deadline - before 2022-3-24 ✅ DONE on 2022-3-21
 - {DONE} fix updatePassword controller for  'updateMyPassword' route
 - {DONE} make sure the jwt token is available after clean the localStorage
-- {TODO} fix mic logo when starting in other page then home page
+- {DONE} fix mic logo when starting in other page then home page
 - {TODO} test login in fields
 - {TODO} test currentStockPrice function in useInfoCommandsHandler
 deadline - before 2022-3-24
@@ -514,6 +514,7 @@ deadline - before 2022-3-24
 - {TODO} let 'ALT' key toggle finansis btn
 - {TODO} make sure that a user using chrome browser
         https://stackoverflow.com/questions/4565112/javascript-how-to-find-out-if-the-user-browser-is-chrome
+- {TODO} improve 'do you want to enter password again' command by making for updateMyPassword and resetPassword too
 final deadline v1 - before 2022-3-31
 
 ----- NOT IMPORTANT NOW

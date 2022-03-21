@@ -24,6 +24,7 @@ export const useLoginFields = (
   const { userInputs } = useSelector(
     (state) => state.modal_store
   );
+
   useHandleUserInput(
     LOGIN_FIELDS.EMAIL.stateName,
     {},

@@ -68,7 +68,7 @@ export const FinanbroBtn = ({
         <BgUnderstood id="BgUnderstood" />
         <IconWrapper>
           {isListening ? (
-            <Icon id="mic_icon" src="images/mic.png" />
+            <Icon id="app" src="images/mic.png" />
           ) : isSpeaking ? (
             <GiSpeakerIcon />
           ) : (

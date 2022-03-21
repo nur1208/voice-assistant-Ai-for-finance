@@ -111,7 +111,7 @@ export const login =
         payload: serverUserDate,
       });
     } catch (error) {
-      response && response("signing up failed");
+      response && response("logging in failed");
 
       const errorMessage = error?.response?.data?.message
         ? error?.response?.data?.message
