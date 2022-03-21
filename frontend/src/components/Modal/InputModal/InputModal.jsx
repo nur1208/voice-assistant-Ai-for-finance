@@ -76,6 +76,7 @@ export default function InputModal({
       selectOptions,
       userInputs,
       extraHelperText,
+      confirmPasswordCounter,
     },
     user_store: { userData },
   } = useSelector((state) => state);
@@ -165,6 +166,7 @@ export default function InputModal({
     ) {
       updateModal({
         invalidMessage: `${label} must be equal to password, please enter a correct ${label}`,
+        confirmPasswordCounter: confirmPasswordCounter + 1,
       });
 
       return false;

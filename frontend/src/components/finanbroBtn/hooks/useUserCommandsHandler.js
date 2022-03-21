@@ -25,7 +25,8 @@ export const useUserCommandsHandler = (
   handleOpenModal,
   setSecondCommandFor,
   openYahooFinance,
-  setFoundMultiple
+  setFoundMultiple,
+  handleCloseModal
 ) => {
   const {
     updateModal,
@@ -35,7 +36,7 @@ export const useUserCommandsHandler = (
   } = useReduxActions();
 
   const {
-    modal_store: { invalidMessage },
+    modal_store: { invalidMessage, confirmPasswordCounter },
     user_store: { userData },
   } = useSelector((state) => state);
 
@@ -57,7 +58,7 @@ export const useUserCommandsHandler = (
     handleOpenModal();
   };
 
-  const handleAlreadyLoggedIn = (callback, action, type) => {
+  const setSecondCommand = (callback, action, type) => {
     updateSecondCommand({
       type,
       other: { callback, action },
@@ -78,7 +79,7 @@ export const useUserCommandsHandler = (
     } else {
       response("you are logged in");
       response("do you want to logout and create a new account");
-      handleAlreadyLoggedIn(
+      setSecondCommand(
         signUp,
         "signup",
         secondCommandOptions.signupAgain
@@ -92,11 +93,7 @@ export const useUserCommandsHandler = (
     response("you not logged in");
     response("do you want to login");
 
-    handleAlreadyLoggedIn(
-      login,
-      "login",
-      secondCommandOptions.login
-    );
+    setSecondCommand(login, "login", secondCommandOptions.login);
   };
 
   const logout = async () => {
@@ -121,7 +118,7 @@ export const useUserCommandsHandler = (
       response(
         "do you want to logout and login with different account"
       );
-      handleAlreadyLoggedIn(
+      setSecondCommand(
         login,
         "login",
         secondCommandOptions.loginAgain
@@ -153,7 +150,7 @@ export const useUserCommandsHandler = (
     } else {
       response("you are logged in");
       response("do you want to update your password");
-      handleAlreadyLoggedIn(
+      setSecondCommand(
         updatePassword,
         "updatePassword",
         secondCommandOptions.updatePassword
@@ -247,9 +244,29 @@ export const useUserCommandsHandler = (
 
   useOtherUserFields(response, getUserInputHandler);
   // listening to invalid message
+
+  const handleEnterPasswordAgain = async () => {
+    handleCloseModal();
+    await getUserInputHandler(
+      SIGN_UP_FIELDS.PASSWORD.label,
+      SIGN_UP_FIELDS.PASSWORD.stateName,
+      SIGN_UP_FIELDS.PASSWORD.message
+    );
+  };
+
   useEffect(() => {
     if (invalidMessage) {
       response(invalidMessage);
+
+      if (confirmPasswordCounter >= 2) {
+        response("do you want to enter your password again");
+        setSecondCommand(
+          handleEnterPasswordAgain,
+          "",
+          secondCommandOptions.enterPasswordAgain
+        );
+      }
+
       updateModal({ invalidMessage: "" });
     }
 

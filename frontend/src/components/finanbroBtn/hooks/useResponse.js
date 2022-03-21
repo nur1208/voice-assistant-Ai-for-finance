@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 // import { useSpeechSynthesis } from "react-speech-kit";
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
 import { useReduxActions } from "../../../hooks/useReduxActions";
+import { updateModal } from "../../../state/action-creator";
 import { sleep } from "../../../utils/sleep";
 import {
   lastBTDate,
@@ -20,6 +21,7 @@ export const secondCommandOptions = {
   updatePassword: "updatePassword",
   login: "login",
   learningAboutCompany: "learningAboutCompany",
+  enterPasswordAgain: "enterPasswordAgain",
 };
 
 export const useResponse = (SpeechRecognition) => {
@@ -327,6 +329,16 @@ export const useResponse = (SpeechRecognition) => {
 
         break;
 
+      case secondCommandOptions.enterPasswordAgain:
+        setSecondCommandFor("");
+        updateSecondCommand({});
+        // updateModal({isEnterPasswordAgain:true})
+        // handleClose();
+        // response(`okay`);
+        secondCommandFor?.other?.callback();
+
+        break;
+
       // case secondCommandOptions.signupAgain:
       //   setSecondCommandFor("");
       //   updateSecondCommand({});
@@ -397,6 +409,10 @@ export const useResponse = (SpeechRecognition) => {
         response(`okay, I won't learn`);
         break;
 
+      case secondCommandOptions.enterPasswordAgain:
+        response(`okay, try again or click on exit key to exit`);
+        break;
+
       default:
         response("I didn't get that. you can try again... bro");
         break;
@@ -425,7 +441,7 @@ export const useResponse = (SpeechRecognition) => {
       SpeechRecognition.stopListening();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isSpeaking]);
+  }, [isSpeaking, isStartRecognize]);
 
   return {
     response,

@@ -29,6 +29,8 @@ export const modalReducer = (state = initialValue, action) => {
         open: false,
         extraHelperText: "",
         text: "",
+        confirmPasswordCounter: 0,
+        isEnterPasswordAgain: false,
       };
     default:
       return state;

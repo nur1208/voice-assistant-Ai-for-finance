@@ -204,7 +204,8 @@ export const useFinansis = ({
     handleOpenModal,
     setSecondCommandFor,
     openYahooFinance,
-    setFoundMultiple
+    setFoundMultiple,
+    handleCloseModal
   );
 
   const [findingAnswerFor, setFindingAnswerFor] = useState("");
