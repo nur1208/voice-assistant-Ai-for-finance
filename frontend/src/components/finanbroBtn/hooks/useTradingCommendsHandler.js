@@ -59,6 +59,7 @@ export const useTradingCommendsHandler = (
     updateProgress,
     updateModal,
     updateBTState,
+    updateIsStartRecognize,
   } = useReduxActions();
 
   const findBuySignal = async () => {
@@ -255,6 +256,7 @@ export const useTradingCommendsHandler = (
       );
 
       if (isResetBTData) {
+        updateIsStartRecognize(true);
         SpeechRecognition.startListening({ continuous: true });
         setIsResetBTData(false);
         // await sleep(50000);
