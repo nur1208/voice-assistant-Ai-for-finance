@@ -505,7 +505,7 @@ deadline - before 2022-3-24 ✅ DONE on 2022-3-22
 - {DONE} improve 'start speaking sound'
 - {DONE} fix finansis stop recognizing after backTesting's reload page
 - {DONE} fix making finansis think the mark is close when tradingApi server is down isMarketOpen?date=2020-04-04 
-- {TODO} fix keywordInTitle: undefined when saying 'give me more news' for the third time
+- {DONE} fix keywordInTitle: undefined when saying 'give me more news' for the third time
 - {TODO} TEST let sellSignal function in python script return sold stocks
 deadline - before 2022-3-25
 - {TODO} clean up all console.logs

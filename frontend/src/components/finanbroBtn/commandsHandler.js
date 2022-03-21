@@ -101,10 +101,10 @@ export const useNewsCommandsHandler = (
       type === "whatsUpWith" ||
       lastCommand?.type === "whatsUpWith"
     ) {
-      NEWS_API_URL = `${NEWS_API_URL}&keywordInTitle=${
-        type === "whatsUpWith" ? query : lastCommand.query
-      }&sortBy=publishedAt`;
-      setLastGetNewsCommand({ type: "whatsUpWith", query });
+      const localQuery =
+        type === "whatsUpWith" ? query : lastCommand.localQuery;
+      NEWS_API_URL = `${NEWS_API_URL}&keywordInTitle=${localQuery}&sortBy=publishedAt`;
+      setLastGetNewsCommand({ type: "whatsUpWith", localQuery });
     }
     // else if (type === "category") {
     //   NEWS_API_URL = `${NEWS_API_URL}&category=${query
