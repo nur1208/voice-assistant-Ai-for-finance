@@ -33,11 +33,12 @@ export const useUserCommandsHandler = (
     logout: logoutRedux,
     updateSecondCommand,
     updateUserInfo: updateUserInfoRedux,
+    setMessagePopupData,
   } = useReduxActions();
 
   const {
     modal_store: { invalidMessage, confirmPasswordCounter },
-    user_store: { userData },
+    user_store: { userData, error },
   } = useSelector((state) => state);
 
   const getUserInputHandler = async (
@@ -254,6 +255,11 @@ export const useUserCommandsHandler = (
 
   useEffect(() => {
     if (invalidMessage) {
+      setMessagePopupData({
+        open: true,
+        severity: "error",
+        message: invalidMessage,
+      });
       response(invalidMessage);
 
       if (confirmPasswordCounter >= 2) {
@@ -270,6 +276,19 @@ export const useUserCommandsHandler = (
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [invalidMessage]);
+
+  useEffect(() => {
+    if (error) {
+      setTimeout(() => {
+        setMessagePopupData({
+          open: true,
+          severity: "error",
+          message: error,
+        });
+      }, 1000 * 3);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [error]);
 
   return {
     signUp,

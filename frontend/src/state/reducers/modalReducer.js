@@ -4,6 +4,7 @@ export const MODAL_ACTIONS = {
   UPDATE: "MODAL_UPDATE_STATE",
   UPDATE_USER_INPUT: "MODAL_UPDATE_USER_INPUT",
   CLOSE_MODAL: "CLOSE_MODAL",
+  UPDATE_MESSAGE_POPUP: "UPDATE_MESSAGE_POPUP",
 };
 
 export const modalReducer = (state = initialValue, action) => {
@@ -31,6 +32,11 @@ export const modalReducer = (state = initialValue, action) => {
         text: "",
         confirmPasswordCounter: 0,
         isEnterPasswordAgain: false,
+      };
+    case MODAL_ACTIONS.UPDATE_MESSAGE_POPUP:
+      return {
+        ...state,
+        messageData: { ...state.messageData, ...action.payload },
       };
     default:
       return state;

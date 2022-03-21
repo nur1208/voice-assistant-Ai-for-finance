@@ -513,6 +513,7 @@ deadline - before 2022-3-25 ✅ DONE on 2022-3-22
 - {TODO} reset userInputs after submit data to dispatch function
 - {TODO} remove all unneeded npm packages
 - {TODO} let 'ALT' key toggle finansis btn
+deadline - before 2022-3-25 
 - {TODO} make sure that a user using chrome browser
         https://stackoverflow.com/questions/4565112/javascript-how-to-find-out-if-the-user-browser-is-chrome
 - {TODO} improve 'do you want to enter password again' command by making for updateMyPassword and resetPassword too

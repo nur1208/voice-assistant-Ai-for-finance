@@ -11,6 +11,13 @@ export const setUserInput = (userInput) => (dispatch) => {
   });
 };
 
+export const setMessagePopupData = (input) => (dispatch) => {
+  dispatch({
+    type: MODAL_ACTIONS.UPDATE_MESSAGE_POPUP,
+    payload: input,
+  });
+};
+
 export const closeModal = () => (dispatch) => {
   dispatch({
     type: MODAL_ACTIONS.CLOSE_MODAL,

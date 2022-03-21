@@ -43,6 +43,7 @@ import { DateInputFormat } from "./components/DateInputFormat";
 import { ResetPassword } from "./pages/ResetPassword";
 import BasicModal from "./components/Modal/BasicModal/BasicModal";
 import { getCookie } from "./utils/getCookie";
+import { MessagePopup } from "./components/MessagePopup";
 export const PAGES = [
   {
     path: "/",
@@ -194,6 +195,7 @@ export const App = () => {
         </Switch>
         <FinanbroBtn {...FinanbroBtnProps} />
         <BasicModal {...modalProps} />
+        <MessagePopup />
       </WaitForUserInputContext.Provider>
     </div>
   );
