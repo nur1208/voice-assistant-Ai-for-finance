@@ -25,8 +25,12 @@ export const FORGET_PASS_FIELDS = {
 };
 
 export const useForgetPass = (response, getUserInputHandler) => {
-  const { forgetPass, updateModal, resetPassword } =
-    useReduxActions();
+  const {
+    setUserInput,
+    forgetPass,
+    updateModal,
+    resetPassword,
+  } = useReduxActions();
 
   const { userInputs } = useSelector(
     (state) => state.modal_store
@@ -38,6 +42,7 @@ export const useForgetPass = (response, getUserInputHandler) => {
     {},
     async () => {
       forgetPass(userInputs.emailForgetPass, response);
+      setUserInput({ emailForgetPass: "" });
     }
   );
 
@@ -75,6 +80,11 @@ export const useForgetPass = (response, getUserInputHandler) => {
         },
         response
       );
+
+      setUserInput({
+        passwordReset: "",
+        passwordConfirmReset: "",
+      });
 
       history.push("/");
     }

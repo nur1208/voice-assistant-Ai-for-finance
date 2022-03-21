@@ -35,7 +35,7 @@ export const useSignUpFields = (
   response,
   getUserInputHandler
 ) => {
-  const { signUp } = useReduxActions();
+  const { signUp, setUserInput } = useReduxActions();
 
   const { userInputs } = useSelector(
     (state) => state.modal_store
@@ -102,6 +102,13 @@ export const useSignUpFields = (
     async () => {
       // response("I'll sign up for you")
       signUp({ ...userInputs }, response);
+      setUserInput({
+        name: "",
+        email: "",
+        password: "",
+        passwordConfirm: "",
+        gender: "",
+      });
     }
   );
 };

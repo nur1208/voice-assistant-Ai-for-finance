@@ -37,7 +37,8 @@ export const useUpdateFields = (
   response,
   getUserInputHandler
 ) => {
-  const { updateUserInfo, updatePassword } = useReduxActions();
+  const { setUserInput, updateUserInfo, updatePassword } =
+    useReduxActions();
 
   const {
     modal_store: { userInputs },
@@ -70,6 +71,10 @@ export const useUpdateFields = (
         },
         response
       );
+      setUserInput({
+        nameUpdate: "",
+        genderUpdate: "",
+      });
     }
   );
 
@@ -109,6 +114,12 @@ export const useUpdateFields = (
         },
         response
       );
+
+      setUserInput({
+        passwordUpdate: "",
+        passwordNewUpdate: "",
+        passwordConfirmUpdate: "",
+      });
     }
   );
 };

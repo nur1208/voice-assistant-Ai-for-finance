@@ -19,7 +19,8 @@ export const useOtherUserFields = (
   response,
   getUserInputHandler
 ) => {
-  const { updateUserInfo, closeModal } = useReduxActions();
+  const { setUserInput, updateUserInfo, closeModal } =
+    useReduxActions();
 
   const {
     modal_store: { userInputs },
@@ -40,6 +41,11 @@ export const useOtherUserFields = (
         },
         response
       );
+
+      setUserInput({
+        executableChromePath: "",
+      });
+
       closeModal();
     }
   );

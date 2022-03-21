@@ -19,7 +19,7 @@ export const useLoginFields = (
   response,
   getUserInputHandler
 ) => {
-  const { login } = useReduxActions();
+  const { login, setUserInput } = useReduxActions();
 
   const { userInputs } = useSelector(
     (state) => state.modal_store
@@ -49,6 +49,7 @@ export const useLoginFields = (
         },
         response
       );
+      setUserInput({ email: "", password: "" });
     }
   );
 };

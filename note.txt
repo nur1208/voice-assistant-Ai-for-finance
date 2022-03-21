@@ -509,8 +509,8 @@ deadline - before 2022-3-24 ✅ DONE on 2022-3-22
 - {DONE} TEST let sellSignal function in python script return sold stocks
 deadline - before 2022-3-25 ✅ DONE on 2022-3-22
 - {DONE} clean up all console.logs
-- {TODO} show error message for the user when there is error
-- {TODO} reset userInputs after submit data to dispatch function
+- {DONE} show error message for the user when there is error
+- {DONE} reset userInputs after submit data to dispatch function
 - {TODO} remove all unneeded npm packages
 - {TODO} let 'ALT' key toggle finansis btn
 deadline - before 2022-3-25 
