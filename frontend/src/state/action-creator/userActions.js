@@ -6,6 +6,19 @@ import {
 import { MODAL_ACTIONS } from "../reducers/modalReducer";
 import { USER_ACTIONS } from "../reducers/userReducer/userReducerUtils";
 
+const saveUserData = (userData, token) => {
+  const serverUserDate = {
+    ...userData,
+    token,
+  };
+  localStorage.setItem(
+    "userData",
+    JSON.stringify(serverUserDate)
+  );
+
+  return serverUserDate;
+};
+
 export const signUp =
   (userData, response) => async (dispatch, getState) => {
     try {
@@ -22,13 +35,17 @@ export const signUp =
         response("signed up and logged in successfully");
       response && response(`welcome ${userData.name}`);
 
-      const serverUserDate = {
-        ...data.data.user,
-        token: data.token,
-      };
-      localStorage.setItem(
-        "userData",
-        JSON.stringify(serverUserDate)
+      // const serverUserDate = {
+      //   ...data.data.user,
+      //   token: data.token,
+      // };
+      // localStorage.setItem(
+      //   "userData",
+      //   JSON.stringify(serverUserDate)
+      // );
+      const serverUserDate = saveUserData(
+        data.data.user,
+        data.token
       );
       dispatch({
         type: USER_ACTIONS.SIGN_UP.SUCCESS,
@@ -76,13 +93,18 @@ export const login =
       response &&
         response(`welcome back ${data.data.user.name}`);
 
-      const serverUserDate = {
-        ...data.data.user,
-        token: data.token,
-      };
-      localStorage.setItem(
-        "userData",
-        JSON.stringify(serverUserDate)
+      // const serverUserDate = {
+      //   ...data.data.user,
+      //   token: data.token,
+      // };
+      // localStorage.setItem(
+      //   "userData",
+      //   JSON.stringify(serverUserDate)
+      // );
+
+      const serverUserDate = saveUserData(
+        data.data.user,
+        data.token
       );
       dispatch({
         type: USER_ACTIONS.LOGIN.SUCCESS,
@@ -135,13 +157,18 @@ export const updateUserInfo =
       // response &&
       //   response(`welcome back ${data.data.user.name}`);
 
-      const serverUserDate = {
-        ...data.data.user,
-        token: getState().user_store.userData.token,
-      };
-      localStorage.setItem(
-        "userData",
-        JSON.stringify(serverUserDate)
+      // const serverUserDate = {
+      //   ...data.data.user,
+      //   token: getState().user_store.userData.token,
+      // };
+      // localStorage.setItem(
+      //   "userData",
+      //   JSON.stringify(serverUserDate)
+      // );
+
+      const serverUserDate = saveUserData(
+        data.data.user,
+        getState().user_store.userData.token
       );
       dispatch({
         type: USER_ACTIONS.UPDATE_INFO.SUCCESS,
@@ -182,17 +209,7 @@ export const forgetPass =
         }
       );
       response && response(data.message);
-      // response &&
-      //   response(`welcome back ${data.data.user.name}`);
 
-      // const serverUserDate = {
-      //   ...data.data.user,
-      //   token: data.token,
-      // };
-      // localStorage.setItem(
-      //   "userData",
-      //   JSON.stringify(serverUserDate)
-      // );
       dispatch({
         type: USER_ACTIONS.FORGET_PASS.SUCCESS,
       });
@@ -242,15 +259,16 @@ export const resetPassword =
           `welcome ${user.name} again and your new password also`
         );
 
-      const serverUserDate = {
-        ...user,
-        token,
-      };
-      localStorage.setItem(
-        "userData",
-        JSON.stringify(serverUserDate)
-      );
+      // const serverUserDate = {
+      //   ...user,
+      //   token,
+      // };
+      // localStorage.setItem(
+      //   "userData",
+      //   JSON.stringify(serverUserDate)
+      // );
 
+      const serverUserDate = saveUserData(user, token);
       dispatch({
         type: USER_ACTIONS.RESET_PASS.SUCCESS,
         payload: serverUserDate,
@@ -312,14 +330,16 @@ export const updatePassword =
           `welcome ${user.name} again and your new password also`
         );
 
-      const serverUserDate = {
-        ...user,
-        token,
-      };
-      localStorage.setItem(
-        "userData",
-        JSON.stringify(serverUserDate)
-      );
+      // const serverUserDate = {
+      //   ...user,
+      //   token,
+      // };
+      // localStorage.setItem(
+      //   "userData",
+      //   JSON.stringify(serverUserDate)
+      // );
+
+      const serverUserDate = saveUserData(user, token);
 
       dispatch({
         type: USER_ACTIONS.UPDATE_PASSWORD.SUCCESS,
