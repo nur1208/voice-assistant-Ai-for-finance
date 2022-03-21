@@ -610,7 +610,11 @@ export const useFinansis = ({
       commandFor: "trading",
     },
     {
-      command: ["start back testing", "start pack testing"],
+      command: [
+        "start back testing",
+        "start pack testing",
+        "start practicing",
+      ],
       callback: () => startBackTesting(),
       commandFor: "backTesting",
     },

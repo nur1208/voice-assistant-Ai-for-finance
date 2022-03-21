@@ -382,7 +382,13 @@ export const useBackTest = () => {
         // const data = await callApi(date);
         console.log({ holdStocksLocal, endDateP });
 
-        await checkIsMarketOpen(date);
+        // await checkIsMarketOpen(date);
+
+        await handleBackTestingAxiosError(
+          checkIsMarketOpen,
+          date,
+          "something went wrong while checking if market is open ❌"
+        );
 
         if (holdStocksLocal.length > 0) {
           // get the current price fot hold stocks

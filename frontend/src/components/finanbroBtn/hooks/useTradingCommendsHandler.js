@@ -340,23 +340,8 @@ export const useTradingCommendsHandler = (
     async () => {
       response("starting back testing");
       const date = customDateFormat(currentDate);
-      const {
-        data: { close },
-      } = await axios.get(
-        `${PYTHON_API}/getSP500Date?date=${date}`
-      );
 
-      updateBTState({
-        accountValue: [
-          {
-            catch: currentCash,
-            stockValue: 0,
-            date,
-          },
-        ],
-        sp500Data: [{ date, close }],
-      });
-      await sleep(1000 * 3);
+      await sleep(1000 * 1);
       await getTestedData();
       response("back testing is done");
       console.log("here in last useHandleUser");

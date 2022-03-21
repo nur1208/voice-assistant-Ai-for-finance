@@ -499,14 +499,15 @@ deadline - before 2022-3-24 ✅ DONE on 2022-3-21
 - {DONE} fix updatePassword controller for  'updateMyPassword' route
 - {DONE} make sure the jwt token is available after clean the localStorage
 - {DONE} fix mic logo when starting in other page then home page
-- {TODO} test login in fields
-- {TODO} test currentStockPrice function in useInfoCommandsHandler
-deadline - before 2022-3-24
-- {TODO} improve 'start speaking sound'
-- {TODO} TEST let sellSignal function in python script return sold stocks
-- {TODO} fix making finansis think the mark is close when tradingApi server is down isMarketOpen?date=2020-04-04 
-- {TODO} fix finansis stop recognizing after backTesting's reload page
+- {DONE} test login in fields
+- {DONE} test currentStockPrice function in useInfoCommandsHandler
+deadline - before 2022-3-24 ✅ DONE on 2022-3-22
+- {DONE} improve 'start speaking sound'
+- {DONE} fix finansis stop recognizing after backTesting's reload page
+- {DONE} fix making finansis think the mark is close when tradingApi server is down isMarketOpen?date=2020-04-04 
 - {TODO} fix keywordInTitle: undefined when saying 'give me more news' for the third time
+- {TODO} TEST let sellSignal function in python script return sold stocks
+deadline - before 2022-3-25
 - {TODO} clean up all console.logs
 - {TODO} show error message for the user when there is error
 - {TODO} reset userInputs after submit data to dispatch function
@@ -515,9 +516,13 @@ deadline - before 2022-3-24
 - {TODO} make sure that a user using chrome browser
         https://stackoverflow.com/questions/4565112/javascript-how-to-find-out-if-the-user-browser-is-chrome
 - {TODO} improve 'do you want to enter password again' command by making for updateMyPassword and resetPassword too
+- {TODO} 'don't let finansis ask 'you not logged in, do you want to login' when there is a secondCommand already
 final deadline v1 - before 2022-3-31
 
 ----- NOT IMPORTANT NOW
+- {TODO} create 'save my back test data' command
+        - {TODO} save back test data plus userId and backTest title 
+        - {TODO} save the title in user modal make title unique and backTestData id each one in different array
 - {TODO} create 'show me my info' command 
 - {TODO} make finansis ask 'do you want me to {buy/sell} stocks again' when there is an error
 - {TODO} fix when finansis learn about 'dave' something unexcited happened
