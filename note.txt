@@ -497,7 +497,7 @@ deadline - before 2022-3-23 ✅ DONE on 2022-3-20
         note: use stateName is signal
 deadline - before 2022-3-24 ✅ DONE on 2022-3-21
 - {DONE} fix updatePassword controller for  'updateMyPassword' route
-- {TODO} make sure the jwt took is available after clean the localStorage
+- {DONE} make sure the jwt token is available after clean the localStorage
 - {TODO} fix mic logo when starting in other page then home page
 - {TODO} test login in fields
 - {TODO} test currentStockPrice function in useInfoCommandsHandler
@@ -511,11 +511,13 @@ deadline - before 2022-3-24
 - {TODO} show error message for the user when there is error
 - {TODO} reset userInputs after submit data to dispatch function
 - {TODO} remove all unneeded npm packages
+- {TODO} let 'ALT' key toggle finansis btn
+- {TODO} make sure that a user using chrome browser
+        https://stackoverflow.com/questions/4565112/javascript-how-to-find-out-if-the-user-browser-is-chrome
 final deadline v1 - before 2022-3-31
 
 ----- NOT IMPORTANT NOW
 - {TODO} create 'show me my info' command 
-- {TODO} let 'ALT' key toggle finansis btn
 - {TODO} make finansis ask 'do you want me to {buy/sell} stocks again' when there is an error
 - {TODO} fix when finansis learn about 'dave' something unexcited happened
 - {TODO} close any opened browser when is unmounted

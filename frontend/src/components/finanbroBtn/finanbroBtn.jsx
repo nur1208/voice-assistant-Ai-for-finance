@@ -59,13 +59,16 @@ export const FinanbroBtn = ({
         <Div1 id="Div1" />
         <Div2 id="Div2" />
         <BgDefault id="BgDefault" />
-        <BgListening id="BgListening" isListening={isListening} />
+        <BgListening
+          id="BgListening"
+          isListening={isListening}
+        />
         <BgSpeaking id="BgSpeaking" isSpeaking={isSpeaking} />
         <BgIntermediate id="BgIntermediate" />
         <BgUnderstood id="BgUnderstood" />
         <IconWrapper>
           {isListening ? (
-            <Icon src="./images/mic.png" />
+            <Icon id="mic_icon" src="images/mic.png" />
           ) : isSpeaking ? (
             <GiSpeakerIcon />
           ) : (
