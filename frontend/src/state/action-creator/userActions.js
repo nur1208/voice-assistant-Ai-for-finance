@@ -1,8 +1,10 @@
 import axios from "axios";
+import { removeCookie } from "../../utils/removeCookie";
 import {
   BACKEND_API_URL,
   USER_ROUTE,
 } from "../../utils/serverUtils";
+import { setCookie } from "../../utils/setCookie";
 import { MODAL_ACTIONS } from "../reducers/modalReducer";
 import { USER_ACTIONS } from "../reducers/userReducer/userReducerUtils";
 
@@ -11,10 +13,8 @@ const saveUserData = (userData, token) => {
     ...userData,
     token,
   };
-  localStorage.setItem(
-    "userData",
-    JSON.stringify(serverUserDate)
-  );
+
+  setCookie("userData", JSON.stringify(serverUserDate), 3);
 
   return serverUserDate;
 };
@@ -367,7 +367,7 @@ export const updatePassword =
   };
 
 export const logout = () => (dispatch) => {
-  localStorage.setItem("userData", null);
-
+  // localStorage.setItem("userData", null);
+  removeCookie("userData");
   dispatch({ type: USER_ACTIONS.LOGOUT });
 };

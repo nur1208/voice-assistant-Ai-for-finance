@@ -493,14 +493,15 @@ deadline - before 2022-3-23 ✅ DONE on 2022-3-20
 - {DONE} let 'what's up with {something}' command gets latest news
         - {DONE} removing 'seeking alpha' when getting news for something else then source=seeking alpha
 - {DONE} let the user reselect his gender when clicking on delete keyboard and don't let him type any thing when he supposed to select a value
-- {TODO} create 'do you want to enter password again' command if a user entered confirm password wrong for two times
+- {DONE} create 'do you want to enter password again' command if a user entered confirm password wrong for two times
         note: use stateName is signal
-deadline - before 2022-3-24
-- {TODO} make sure the jwt took is available after clean the localStorage        
+deadline - before 2022-3-24 ✅ DONE on 2022-3-21
+- {DONE} fix updatePassword controller for  'updateMyPassword' route
+- {TODO} make sure the jwt took is available after clean the localStorage
 - {TODO} fix mic logo when starting in other page then home page
 - {TODO} test login in fields
 - {TODO} test currentStockPrice function in useInfoCommandsHandler
-- {TODO} let finansis ask do you want me to learning about 'aapl' symbol not just do it
+deadline - before 2022-3-24
 - {TODO} improve 'start speaking sound'
 - {TODO} TEST let sellSignal function in python script return sold stocks
 - {TODO} fix making finansis think the mark is close when tradingApi server is down isMarketOpen?date=2020-04-04 
@@ -508,6 +509,8 @@ deadline - before 2022-3-24
 - {TODO} fix keywordInTitle: undefined when saying 'give me more news' for the third time
 - {TODO} clean up all console.logs
 - {TODO} show error message for the user when there is error
+- {TODO} reset userInputs after submit data to dispatch function
+- {TODO} remove all unneeded npm packages
 final deadline v1 - before 2022-3-31
 
 ----- NOT IMPORTANT NOW

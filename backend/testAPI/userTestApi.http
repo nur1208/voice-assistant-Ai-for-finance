@@ -3,7 +3,7 @@
 
 @route = api/v1/users
 
-@userToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmRkYmIzOGY0MGZkMTJiM2M3MTdjNiIsImlhdCI6MTY0NzUzNTc2MSwiZXhwIjoxNjQ3Nzk0OTYxfQ.sq_lqWnr0s5otRag_-xBhhXCVDs6Dk7CV_7j406eKbc
+@userToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzg5NDE0MGQ3NDMyMzcxOGVkOWMzNiIsImlhdCI6MTY0Nzg3NTA5MywiZXhwIjoxNjQ4MTM0MjkzfQ.Q0V2WLG7zIB2079PoRk5Tx9UdnUFHIaUiQ7FbXOLPUQ
 POST {{Host}}:{{port}}/{{route}}
 Content-Type: application/json
 
@@ -21,7 +21,7 @@ Content-Type: application/json
 
 {
     "name":"nur",
-    "email":"mdnsdur1208@163.com",
+    "email":"mdsnsdur1208@163.com",
     "password":"12341234",
     "gender":"Male"
 }
@@ -87,6 +87,6 @@ Authorization: Bearer {{userToken}}
 
 {
     
-    "password":"12345678",
-    "newPassword":"12341234"
+    "password":"12341234",
+    "newPassword":"12345678"
 }

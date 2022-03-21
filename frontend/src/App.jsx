@@ -42,6 +42,7 @@ import { useNetworkStatus } from "./hooks/useNetworkStatus";
 import { DateInputFormat } from "./components/DateInputFormat";
 import { ResetPassword } from "./pages/ResetPassword";
 import BasicModal from "./components/Modal/BasicModal/BasicModal";
+import { getCookie } from "./utils/getCookie";
 export const PAGES = [
   {
     path: "/",
@@ -128,10 +129,10 @@ export const App = () => {
     1
   );
 
-  const [userData, setUserData] = useLocalStorage(
-    "userData",
-    null
-  );
+  // const [userData, setUserData] = useLocalStorage(
+  //   "userData",
+  //   null
+  // );
 
   useExitPrompt(false);
 
@@ -139,7 +140,10 @@ export const App = () => {
   useEffect(() => {
     updateBTState({ ...localStorageData, accountRisk });
 
+    const userData = getCookie("userData", true);
+
     if (userData) {
+      console.log({ cookie: userData });
       autoLogin(userData);
     }
     // appRef.current.click();

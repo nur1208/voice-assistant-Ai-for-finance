@@ -305,7 +305,7 @@ export const updatePassword = async (req, res, next) => {
     return next(new AppError("newPassword is required", 400));
   }
 
-  if (await user.correctPassword(password, user.password)) {
+  if (!(await user.correctPassword(password, user.password))) {
     return next(new AppError("incorrect password", 401));
   }
   // 3 ) if _id, update password
