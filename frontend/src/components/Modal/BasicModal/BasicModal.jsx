@@ -24,7 +24,6 @@ export default function BasicModal({
   const infoModalProps = { title, content };
   const inputModalProps = { handleClose, label };
   const progressModalProps = { progressData };
-  console.log({ infoModalProps, title, content });
 
   return (
     <div>

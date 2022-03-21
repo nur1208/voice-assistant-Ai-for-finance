@@ -13,7 +13,6 @@ export const createUser = async (req, res) => {
       password,
       saltRounds
     );
-    // console.log({ password, body, hashedPassword });
 
     let genderLocal;
     if (body.gender) {
@@ -99,14 +98,11 @@ export const updateWatchList = catchAsync(
       req.body.removeWatchList.length > 0
     ) {
       // if watchList is exist in user document
-      console.log("here");
 
       if (req.user.watchList && req.user.watchList.length > 0) {
         const userWatchListOnlyIds = req.user.watchList.map(
           ({ _id }) => _id.toString()
         );
-
-        console.log(req.body.removeWatchList);
 
         const isAllExist = req.body.removeWatchList.map(
           (stock) => userWatchListOnlyIds.includes(stock)
@@ -122,7 +118,6 @@ export const updateWatchList = catchAsync(
         const a = userWatchListOnlyIds;
         const b = req.body.removeWatchList;
         watchList = a.filter((x) => b.indexOf(x) === -1);
-        console.log(watchList);
       } else {
         return next(
           new AppError("user's watchList is empty", 400)

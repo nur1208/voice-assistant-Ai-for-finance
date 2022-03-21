@@ -34,7 +34,8 @@ export const PortfolioHoldings = ({ getTestedData }) => {
     forceSelling,
     isBTDone,
     accountRisk,
-    isBTRunning,isMarketOpen
+    isBTRunning,
+    isMarketOpen,
   } = useSelector(({ back_testing }) => back_testing);
 
   const symbolTablePropsHolding = {
@@ -53,16 +54,6 @@ export const PortfolioHoldings = ({ getTestedData }) => {
 
   const { updateIsResetBTData, resetBTState } =
     useReduxActions();
-  // useEffect(() => {
-  //   if (isResetBTData) {
-  //     localStorage.clear();
-  //     // resetAllStates();
-  //     resetBTState();
-  //     updateIsResetBTData(false);
-  //     console.log("reset all states");
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [isResetBTData]);
 
   return (
     <>

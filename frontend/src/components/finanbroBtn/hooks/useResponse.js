@@ -39,8 +39,6 @@ export const useResponse = (SpeechRecognition) => {
 
   // make sure that finansis voice is always "Google US English" if the voice exit
   const changeVoiceToFinansisVoice = () => {
-    console.log("in changeVoiceToFinansisVoice");
-
     let voiceIndex = currentVoiceIndex;
     for (let index = 0; index < voices.length; index++) {
       const voice = voices[index];
@@ -58,12 +56,7 @@ export const useResponse = (SpeechRecognition) => {
     if (optionsResponse.length - 1 < randomIndex)
       randomOption = optionsResponse[0];
     else randomOption = optionsResponse[randomIndex];
-    console.log("here");
     // let currentVoiceIndex = 7;
-    // console.log({
-    //   voices,
-    //   finansisVoice: voices[currentVoiceIndex].name,
-    // });
 
     const handleResponse = (voiceIndex) => {
       if (typeof optionsResponse !== "object")
@@ -108,12 +101,7 @@ export const useResponse = (SpeechRecognition) => {
     if (optionsResponse.length - 1 < randomIndex)
       randomOption = optionsResponse[0];
     else randomOption = optionsResponse[randomIndex];
-    console.log("here");
     // let currentVoiceIndex = 7;
-    // console.log({
-    //   voices,
-    //   finansisVoice: voices[currentVoiceIndex].name,
-    // });
 
     const handleResponse = async (voiceIndex) => {
       if (typeof optionsResponse !== "object")
@@ -154,14 +142,12 @@ export const useResponse = (SpeechRecognition) => {
         option.indexArticle &&
           option.setActiveArticle(option.indexArticle);
         // setActiveArticle(index);
-        // console.log({ index });
         if (option.isLast) {
           option.setIsReadingHeadLines(false);
         }
         resolve();
       }, option.timeout || 1000);
 
-      // console.log({ callbackC: option?.callback });
       // const timeoutId = setTimeout(
       //   option?.callback
       //     ? option.callback(resolve, option?.params)
@@ -200,8 +186,6 @@ export const useResponse = (SpeechRecognition) => {
     resetAllStates,
     setIsForceSellAgain,
   }) => {
-    console.log(secondCommandFor);
-
     let localSecondFor = secondCommandFor;
     if (secondCommand?.type) localSecondFor = secondCommand.type;
     else if (typeof secondCommandFor === "object")
@@ -431,15 +415,9 @@ export const useResponse = (SpeechRecognition) => {
   useEffect(() => {
     if (isStartRecognize) {
       if (isSpeaking) {
-        console.log({
-          conditionLisping: "stop finansis recognizing",
-        });
         SpeechRecognition.abortListening();
       } else {
         SpeechRecognition.startListening({ continuous: true });
-        console.log({
-          conditionLisping: "start finansis recognizing",
-        });
         toggle();
       }
     } else {

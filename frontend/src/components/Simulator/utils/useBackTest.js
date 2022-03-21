@@ -158,13 +158,7 @@ export const useBackTest = () => {
     const {
       data: { close },
     } = await axios.get(
-      `${PYTHON_API}/getSP500Date?date=${date}`,
-      null,
-      {
-        onDownloadProgress(progress) {
-          console.log("download progress:", progress);
-        },
-      }
+      `${PYTHON_API}/getSP500Date?date=${date}`
     );
 
     if (close > 0) {
@@ -198,11 +192,6 @@ export const useBackTest = () => {
       `${PYTHON_API}/getCurrentStockPrice?date=${date}`,
       {
         boughtStocks: holdStocksLocal,
-      },
-      {
-        onDownloadProgress(progress) {
-          console.log("download progress:", progress);
-        },
       }
     );
 
@@ -234,11 +223,6 @@ export const useBackTest = () => {
           isWithProfitOrNot === undefined
             ? false
             : isWithProfitOrNot,
-      },
-      {
-        onDownloadProgress(progress) {
-          console.log("download progress:", progress);
-        },
       }
     );
     if (SoldStocksP.length > 0) {
@@ -254,11 +238,6 @@ export const useBackTest = () => {
           sStock.boughtPrice,
           sStock.soldPrice
         ).percentage;
-
-        // console.log({
-        //   return: Number(returnPercentage),
-        //   returnPercentage,
-        // });
 
         if (
           sStock.isReachedStopLoss ||
@@ -291,10 +270,6 @@ export const useBackTest = () => {
 
   const forceSelling = async (isWithProfitOrNot) => {
     let endDateLocalP = new Date(endDate);
-    // console.log({
-    //   endDateLocal: endDateLocalP,
-    //   type: typeof endDateLocalP,
-    // });
 
     endDateLocalP = new Date(
       endDateLocalP.setDate(endDateLocalP.getDate() + 5)
@@ -325,11 +300,6 @@ export const useBackTest = () => {
         boughtStocks: holdStocksLocal,
         portfolio: currentCashLocal,
         accountRisk,
-      },
-      {
-        onDownloadProgress(progress) {
-          console.log("download progress:", progress);
-        },
       }
     );
 
@@ -358,13 +328,6 @@ export const useBackTest = () => {
     if (typeof currentDateLocal === "string")
       currentDateLocal = new Date(currentDateLocal);
 
-    console.log({
-      currentDateLocal,
-      endDateP,
-      isForceSell,
-      l: holdStocksLocal.length,
-    });
-
     // false
     // getData
     // !(false && false) = !(false && true)  =true && true = go in
@@ -380,7 +343,6 @@ export const useBackTest = () => {
       const date = customDateFormat(currentDateLocal);
       try {
         // const data = await callApi(date);
-        console.log({ holdStocksLocal, endDateP });
 
         // await checkIsMarketOpen(date);
 
@@ -392,19 +354,12 @@ export const useBackTest = () => {
 
         if (holdStocksLocal.length > 0) {
           // get the current price fot hold stocks
-          // console.log({
-          //   sp500CallCondition:
-          //     !sp500Data.length ||
-          //     sp500Data[sp500Data.length - 1].date !== date,
-          //   date,
-          // });
 
           // fixing updating data for the same date when first date of force selling
           if (
             !sp500Data.length ||
             sp500Data[sp500Data.length - 1].date !== date
           ) {
-            // console.log("call getSp500Data");
             await handleBackTestingAxiosError(
               getSp500Data,
               date,
@@ -467,7 +422,6 @@ export const useBackTest = () => {
         }
 
         // setUserChange()
-        // console.log(stocks);
         countDaysLocal = countDaysLocal + 1;
         // setCountDays((oldValue) => oldValue + 1);
       } catch (error) {
@@ -478,13 +432,7 @@ export const useBackTest = () => {
       );
       currentDateLocal = new Date(newDate);
 
-      // console.log({
-      //   stopBackTestingC:
-      //     currentDateLocal > new Date("2022-2-1"),
-      // });
-
       // if (currentDateLocal > new Date("2022-2-1")) {
-      //   console.log("stop back testing now");
       //   updateBTState({ isBTRunning: false });
       //   return;
       // }
@@ -494,7 +442,6 @@ export const useBackTest = () => {
       // }
       // setBough((boughs) => [...boughs, newBought]);
 
-      console.log("here where");
       // updateBTState("soksdja;kl");
       const updateValues = {
         holdingStocks: holdStocksLocal,

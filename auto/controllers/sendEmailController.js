@@ -35,12 +35,10 @@ export const sendEmailHandler = async (req, res) => {
   }
 
   const goToUrl = "https://outlook.live.com/owa/";
-  //   console.log(req.body);
   const width = 1366 - 20;
   const height = 768 - 20;
   const timeout = 1000 * 90;
   //   const { goToUrl } = newsArticles[articleNum - 1];
-  //   console.log({ goToUrl });
   const browser = await puppeteer.launch({
     headless: false,
     executablePath:

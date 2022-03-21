@@ -58,7 +58,6 @@ export const getInvestingNews = async () => {
       let $ = cheerio.load(html.toString());
 
       const articles = $(mainWrapper).children().toArray();
-      console.log(articles.length);
 
       for (let index = 0; index < articles.length; index++) {
         const articleElement = articles[index];
@@ -74,12 +73,20 @@ export const getInvestingNews = async () => {
           )}`;
           article.source = "investing";
 
-          article.imageUrl = $(imageUrlS, articleHtml).attr("src");
+          article.imageUrl = $(imageUrlS, articleHtml).attr(
+            "src"
+          );
 
-          article.description = $(descriptionS, articleHtml).text();
+          article.description = $(
+            descriptionS,
+            articleHtml
+          ).text();
 
           article.publishedAt = convertTimeSinceToDate(
-            $(publishAtS, articleHtml).text().split("-")[1].trim()
+            $(publishAtS, articleHtml)
+              .text()
+              .split("-")[1]
+              .trim()
           );
 
           article.publisher = $(publisherS, articleHtml).text();

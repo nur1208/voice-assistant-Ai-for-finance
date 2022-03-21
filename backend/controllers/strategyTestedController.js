@@ -8,7 +8,9 @@ export const createStrategyTested = async (req, res) => {
     res.json({ status: "success", doc: newDoc });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ status: "fall", message: "something went wrong" });
+    res
+      .status(500)
+      .json({ status: "fall", message: "something went wrong" });
   }
 };
 
@@ -23,18 +25,25 @@ export const getStrategyTested = async (req, res) => {
       "isReachedStopLoss",
     ];
 
-    for (let index = 0; index < validUpdateProp.length; index++) {
+    for (
+      let index = 0;
+      index < validUpdateProp.length;
+      index++
+    ) {
       const prop = validUpdateProp[index];
       if (req.query[prop]) {
         queryObject[prop] = req.query[prop];
       }
     }
 
-    console.log(queryObject);
     const docs = await StrategyTestedModel.find(queryObject);
 
     if (docs.length > 0)
-      res.json({ status: "success", resultLength: docs.length, docs });
+      res.json({
+        status: "success",
+        resultLength: docs.length,
+        docs,
+      });
     else
       res.status(404).json({
         status: "fall",
@@ -42,7 +51,9 @@ export const getStrategyTested = async (req, res) => {
       });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ status: "fall", message: "something went wrong" });
+    res
+      .status(500)
+      .json({ status: "fall", message: "something went wrong" });
   }
 };
 
@@ -55,6 +66,8 @@ export const deleteStrategyTested = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ status: "fall", message: "something went wrong" });
+    res
+      .status(500)
+      .json({ status: "fall", message: "something went wrong" });
   }
 };

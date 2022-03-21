@@ -13,8 +13,6 @@ export const days = [
 ];
 
 export const customDateFormat = (currentDate) => {
-  // console.log({ currentDate, type: typeof currentDate });
-
   let date = currentDate;
   if (typeof date === "string") date = new Date(date);
 
@@ -81,13 +79,6 @@ export const renderPriceChangeReturn = (
   const perPriceTotal = accountValue[0];
   // const currentPriceTotal = accountValue[accountValue.length - 1];
 
-  // console.log({
-  //   isSp500,
-  //   perPrice,
-  //   currentPrice,
-  //   calculateReturn: calculateReturn(perPrice, currentPrice),
-  // });
-
   const returnData =
     accountValue.length > 1
       ? isTotalChange
@@ -102,8 +93,6 @@ export const renderPriceChangeReturn = (
             currentPrice.catch + currentPrice.stockValue
           )
       : { money: 0, percentage: 0 };
-
-  // console.log({ returnData });
 
   return Number(returnData[type]).toFixed(2);
 };

@@ -506,9 +506,9 @@ deadline - before 2022-3-24 ✅ DONE on 2022-3-22
 - {DONE} fix finansis stop recognizing after backTesting's reload page
 - {DONE} fix making finansis think the mark is close when tradingApi server is down isMarketOpen?date=2020-04-04 
 - {DONE} fix keywordInTitle: undefined when saying 'give me more news' for the third time
-- {TODO} TEST let sellSignal function in python script return sold stocks
-deadline - before 2022-3-25
-- {TODO} clean up all console.logs
+- {DONE} TEST let sellSignal function in python script return sold stocks
+deadline - before 2022-3-25 ✅ DONE on 2022-3-22
+- {DONE} clean up all console.logs
 - {TODO} show error message for the user when there is error
 - {TODO} reset userInputs after submit data to dispatch function
 - {TODO} remove all unneeded npm packages
@@ -517,6 +517,7 @@ deadline - before 2022-3-25
         https://stackoverflow.com/questions/4565112/javascript-how-to-find-out-if-the-user-browser-is-chrome
 - {TODO} improve 'do you want to enter password again' command by making for updateMyPassword and resetPassword too
 - {TODO} 'don't let finansis ask 'you not logged in, do you want to login' when there is a secondCommand already
+- {TODO} fix sellSignal python script by setting strategy number
 final deadline v1 - before 2022-3-31
 
 ----- NOT IMPORTANT NOW

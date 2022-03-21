@@ -10,7 +10,10 @@ import {
   publishAtS,
   publishAtSV2,
 } from "./getSeekingalphaNewsS.js";
-import { addArticlesToDB, convertDayTimeToDate } from "../utils.js";
+import {
+  addArticlesToDB,
+  convertDayTimeToDate,
+} from "../utils.js";
 
 export const getSeekingalphaNews = async () => {
   const mainPageHtml = "trailersContainer.html";
@@ -42,9 +45,15 @@ export const getSeekingalphaNews = async () => {
 
       let $ = cheerio.load(html.toString());
 
-      const articleElements = $(mainWrapper).children().toArray();
+      const articleElements = $(mainWrapper)
+        .children()
+        .toArray();
 
-      for (let index = 0; index < articleElements.length; index++) {
+      for (
+        let index = 0;
+        index < articleElements.length;
+        index++
+      ) {
         const articleElement = articleElements[index];
 
         const articleHtml = $(articleElement).html();
@@ -68,10 +77,15 @@ export const getSeekingalphaNews = async () => {
             .attr("src")
             .includes("static.seekingalpha")
         )
-          article.imageUrl = $(imageUrlS, articleHtml).attr("src");
+          article.imageUrl = $(imageUrlS, articleHtml).attr(
+            "src"
+          );
 
         if ($(stockSymbolS, articleHtml).text()) {
-          article.stockSymbol = $(stockSymbolS, articleHtml).text();
+          article.stockSymbol = $(
+            stockSymbolS,
+            articleHtml
+          ).text();
           article.publishedAt = convertDayTimeToDate(
             $(publishAtS, articleHtml).text().split("%")[1]
           );
@@ -83,7 +97,6 @@ export const getSeekingalphaNews = async () => {
         article.source = "seeking alpha";
 
         await addArticlesToDB(article);
-        // console.log(article);
       }
       await page.waitForTimeout(1000 * 60 * 5);
       await page.reload({ timeout });

@@ -14,8 +14,6 @@ export const getAllTickersInDatabaseToJson = async () => {
     tickers[symbol] = { name };
   }
 
-  //   console.log(tickers);
-
   fs.writeFile(
     "tickerToNameV2.json",
     JSON.stringify(tickers),

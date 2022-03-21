@@ -95,7 +95,6 @@ export default function InputModal({
 
   const isValidInput = () => {
     if (!userInput.length) {
-      // console.log(`${label} is required field`);
       updateModal({
         invalidMessage: `${label} is required field, please ${
           selectOptions ? "select" : "enter"
@@ -204,7 +203,6 @@ export default function InputModal({
     if (e.key === "Enter") {
       if (!isValidInput()) return;
 
-      console.log({ userInput });
       handleClose();
       if (isReduxState) {
         updateModal({ finishInputtingFor: stateName });

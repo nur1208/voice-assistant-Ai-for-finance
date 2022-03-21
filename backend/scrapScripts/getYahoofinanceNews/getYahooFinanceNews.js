@@ -66,7 +66,9 @@ export const getYahooFinanceNews = async () => {
 
         const article = {};
         article.title = $(titleS, liHtml).text();
-        article.goToUrl = `${url}${$(titleS, liHtml).attr("href")}`;
+        article.goToUrl = `${url}${$(titleS, liHtml).attr(
+          "href"
+        )}`;
         article.source = "yahoo finance";
         // ads so skip them
         if ($(adDivS, liHtml).text()) continue;
@@ -82,7 +84,9 @@ export const getYahooFinanceNews = async () => {
         } else {
           article.type = $(typeV2S, liHtml).text();
           article.publishedAt = article.publishAt =
-            convertTimeSinceToDate($(publishAtSV2, liHtml).text());
+            convertTimeSinceToDate(
+              $(publishAtSV2, liHtml).text()
+            );
 
           article.publisher = $(sourceSV2, liHtml).text();
           article.description = $(descriptionSV2, liHtml).text();
@@ -118,14 +122,9 @@ export const getYahooFinanceNews = async () => {
       await page.reload({ timeout });
     }
     // loop ends
-
-    // console.log(article);
   }
 
   // await browser.close();
-  console.log(
-    "----------yahoo finance get news script is DONE----------"
-  );
 };
 console.log(
   "----------yahoo finance get news script is running----------"

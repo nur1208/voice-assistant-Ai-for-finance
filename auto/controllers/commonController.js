@@ -11,12 +11,10 @@ export const findingCompaniesHandler = async (req, res) => {
   //   const width = window.outerWidth - 20;
   //   const height = window.outerHeight - 20;
   const { keyword } = req.body;
-  //   console.log(req.body);
   const width = 1366 - 20;
   const height = 768 - 20;
   const timeout = 1000 * 60 * 3;
   //   const { goToUrl } = newsArticles[articleNum - 1];
-  //   console.log({ goToUrl });
   const browserLocal = await puppeteer.launch({
     headless: false,
     executablePath:
@@ -63,7 +61,6 @@ export const findingCompaniesHandler = async (req, res) => {
     for (let index = 0; index < lis.length; index++) {
       const li = lis[index];
 
-      // console.log($("div:nth-child(2)", $(li).html()).text());
       if ($("div:nth-child(2)", $(li).html()).text().trim()) {
         if (
           $(
@@ -72,8 +69,6 @@ export const findingCompaniesHandler = async (req, res) => {
           ).text() === "PRIVATE"
         )
           continue;
-
-        // console.log("found ✅");
 
         const company = {};
         company.symbol = $(
@@ -92,12 +87,8 @@ export const findingCompaniesHandler = async (req, res) => {
           );
           companies.push(data.doc);
         } catch (error) {
-          console.log(company);
-
           console.log(error.message + "❌");
         }
-
-        // console.log(data);
       } else
         console.log($("div:nth-child(1)", $(li).html()).text());
     }
@@ -122,12 +113,10 @@ export const findingAnswersHandler = async (req, res) => {
   //   const width = window.outerWidth - 20;
   //   const height = window.outerHeight - 20;
   const { question } = req.body;
-  //   console.log(req.body);
   const width = 1366 - 20;
   const height = 768 - 20;
   const timeout = 1000 * 90;
   //   const { goToUrl } = newsArticles[articleNum - 1];
-  //   console.log({ goToUrl });
   const browserLocal = await puppeteer.launch({
     headless: false,
     executablePath:
@@ -201,8 +190,6 @@ export const findingAnswersHandler = async (req, res) => {
       questionObject
     );
   } catch (error) {
-    console.log(questionObject);
-
     console.log(error.message + "❌");
   }
 
@@ -226,12 +213,10 @@ export const openHandler = async (req, res) => {
   if (windowType) {
     windowTypeHolder = windowType;
   }
-  //   console.log(req.body);
   const width = windowWidth;
   const height = windowHeight;
   const timeout = 1000 * 90;
   //   const { goToUrl } = newsArticles[articleNum - 1];
-  //   console.log({ goToUrl });
   browser = await puppeteer.launch({
     headless: false,
     executablePath,

@@ -40,7 +40,6 @@ export const useCommonCommandsHandler = (
     useReduxActions();
 
   const openAnswerDetail = (questionObject) => {
-    console.log({ questionObject });
     if (!questionObject) {
       response("there is no detail answer page to open");
       return;
@@ -110,8 +109,6 @@ export const useCommonCommandsHandler = (
     }
     // 0 false, any other number true
     if (historyStack.length > 1) {
-      // console.log(location);
-
       history.goBack();
       response("going back");
 
@@ -125,8 +122,6 @@ export const useCommonCommandsHandler = (
 
       // forwardStack.push(poppedPage);
       // setForwardStack(forwardStack);
-
-      console.log(history.location.pathname);
     } else {
       response("there is nothing back");
       responseAfterTimeout("good morning", { timeout: 500 });
@@ -135,8 +130,6 @@ export const useCommonCommandsHandler = (
 
   const goForward = () => {
     if (forwardStack.length) {
-      // console.log(location);
-
       history.goForward();
       response("going forward");
 
@@ -147,8 +140,6 @@ export const useCommonCommandsHandler = (
 
       historyStack.push(poppedPage);
       setHistoryStack(historyStack);
-
-      console.log(history.location.pathname);
     } else {
       response("there is nothing forward");
       // responseAfterTimeout("good morning", { timeout: 500 });
@@ -165,8 +156,6 @@ export const useCommonCommandsHandler = (
   const { pathname } = useLocation();
 
   const handleGoToPage = (page) => {
-    console.log({ page, pathname });
-
     // let pageLocal
 
     // handling going to the current page
@@ -184,8 +173,6 @@ export const useCommonCommandsHandler = (
       history.push("/backTesting");
     else {
       const paths = PAGES.map(({ path }) => path.split("/")[1]);
-      console.log("🧐");
-      console.log(paths);
       if (paths.includes(page.toLocaleLowerCase())) {
         history.push(`/${page}`);
 
@@ -208,9 +195,7 @@ export const useCommonCommandsHandler = (
     // var options = { dateStyle: "full", timeStyle: "long" };
     var options = { dateStyle: "full" };
     // new Intl.DateTimeFormat("en-US", options);
-    // console.log(
-    //   new Intl.DateTimeFormat("en-US", options).format(today)
-    // );
+
     handleOpenModal(
       "today's date is:",
       new Intl.DateTimeFormat("en-US", options).format(today)
@@ -253,8 +238,6 @@ export const useCommonCommandsHandler = (
   };
 
   const handleCloseAnyPopup = async () => {
-    console.log("in handleCloseAnyPopup");
-
     let isWindowClose;
     isWindowClose = await handleClosePopupWindow();
     if (!isWindowClose) {
@@ -270,13 +253,8 @@ export const useCommonCommandsHandler = (
     if (!isWindowClose) await closeChart();
   };
 
-  const test = () => {
-    console.log("in test");
-  };
-
   // useEffect(() => {
   //   const handleBeforeUnload = (e) => {
-  //     console.log("in beforeunload");
   //     handleOpenModal("today's date is:", "something");
   //     e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
 

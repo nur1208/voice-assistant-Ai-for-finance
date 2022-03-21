@@ -111,7 +111,6 @@ export const App = () => {
   //   actionCreators,
   //   dispatch
   // );
-  console.log({ stateBackTesting: state });
 
   // const [userCountry, setUserCountry] = useState("loading");
   const {
@@ -143,7 +142,6 @@ export const App = () => {
     const userData = getCookie("userData", true);
 
     if (userData) {
-      console.log({ cookie: userData });
       autoLogin(userData);
     }
     // appRef.current.click();

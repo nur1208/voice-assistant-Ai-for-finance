@@ -56,7 +56,6 @@ export const useAxiosFetch = (
     // eslint-disable-next-line react-hooks/exhaustive-deps
     return () => {
       // eslint-disable-next-line react-hooks/exhaustive-deps
-      console.log("here in clean");
 
       unmounted = true;
       controller.abort();

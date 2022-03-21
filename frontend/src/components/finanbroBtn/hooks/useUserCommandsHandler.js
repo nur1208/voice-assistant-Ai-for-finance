@@ -210,8 +210,6 @@ export const useUserCommandsHandler = (
           target === symbol || name.includes(target)
       );
 
-      // console.log();
-
       const numFoundStocks = countInArray(
         isStockInWatchList,
         true

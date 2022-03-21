@@ -83,7 +83,6 @@ export const signUp = catchAsync(async (req, res) => {
  */
 export const login = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
-  // console.log("here");
 
   // 1 check if email and password exist
 
@@ -102,7 +101,6 @@ export const login = catchAsync(async (req, res, next) => {
     password,
     user.password
   );
-  // console.log({ isCorrectPassword });
 
   // 401 means unauthorized
   if (!user || !isCorrectPassword) {
@@ -124,7 +122,6 @@ export const login = catchAsync(async (req, res, next) => {
  */
 export const protect = catchAsync(async (req, res, next) => {
   let token;
-  // console.log(`here`);
 
   // 1 getting token and check if it's there
   if (
@@ -195,8 +192,6 @@ export const forgetPassword = catchAsync(
 
     const message = `<div style="text-align: center; "><span style="font-size: 18px;">hey ${user.name}, I am finansis, please click the link to reset your password </span></div><div style="text-align: center; "><span style="font-size: 14px;">(or copy the link and paste it in your browser if you can't click it)</span><span style="font-size: 14px;">, (if you didn't forget your password, please ignore this email)</span><div style="text-align: center; "><span style="font-size: 18px;">${resetURL}</span></div>`;
 
-    console.log(message);
-
     try {
       await axios.post(`${AUTO_SERVER}/sendEmail`, {
         to: user.email,
@@ -212,8 +207,6 @@ export const forgetPassword = catchAsync(
       //     "your password reset token valid for 10 minutes",
       //   message,
       // });
-
-      // console.log("here");
 
       res.status(200).json({
         status: "success",

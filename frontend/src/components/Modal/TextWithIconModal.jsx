@@ -45,7 +45,6 @@ export const TextWithIconModal = () => {
 
   const { text } = useSelector((state) => state.modal_store);
 
-  console.log({ text, length: text.length * 10 });
   return (
     <Box
       sx={{

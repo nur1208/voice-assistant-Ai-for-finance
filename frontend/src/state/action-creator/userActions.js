@@ -52,8 +52,6 @@ export const signUp =
         payload: serverUserDate,
       });
     } catch (error) {
-      console.log(userData);
-
       response && response("signing up failed");
 
       if (error.response.status === 400) {

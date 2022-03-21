@@ -19,11 +19,8 @@ export const createQuestion = async (req, res) => {
 };
 
 export const getQuestions = async (req, res) => {
-  console.log(req.query);
-
   const docs = await QuestionModel.find(req.query);
 
-  console.log(docs);
   if (docs.length)
     res.json({
       status: "success",

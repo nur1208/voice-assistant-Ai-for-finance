@@ -251,10 +251,6 @@ export const useTradingCommendsHandler = (
 
   useEffect(() => {
     (async () => {
-      console.log(
-        "useEffect for starting finansis after reloading the page "
-      );
-
       if (isResetBTData) {
         updateIsStartRecognize(true);
         SpeechRecognition.startListening({ continuous: true });
@@ -344,7 +340,6 @@ export const useTradingCommendsHandler = (
       await sleep(1000 * 1);
       await getTestedData();
       response("back testing is done");
-      console.log("here in last useHandleUser");
       await sleep(1000);
       setIsForForceSell(true);
     }
@@ -352,8 +347,6 @@ export const useTradingCommendsHandler = (
 
   useEffect(() => {
     if (isForForceSell) {
-      console.log(holdingStocks.length);
-      console.log("in useEffect check for force sell");
       if (holdingStocks.length > 0) {
         response("do you want me to force sell");
         setSecondCommandFor(secondCommandOptions.forceSelling);
@@ -365,12 +358,6 @@ export const useTradingCommendsHandler = (
   }, [isForForceSell]);
 
   const forceSellingHandler = async () => {
-    console.log({
-      finalDate: new Date("2022-2-1"),
-      currentDate,
-      stopBackTestingC: currentDate > new Date("2022-2-1"),
-    });
-
     if (currentDate > new Date(lastBTDate)) {
       response(
         "sorry I don't have more data to test, right now"

@@ -34,10 +34,7 @@ export const PortfolioSummary = () => {
   // ) => {
   //   const perPrice = accountValue[accountValue.length - 2];
   //   const currentPrice = accountValue[accountValue.length - 1];
-  //   console.log({
-  //     accountLength: accountValue.length,
-  //     accountValue,
-  //   });
+
   //   const returnData =
   //     accountValue.length > 1
   //       ? calculateReturn(

@@ -221,7 +221,6 @@ export const useNewsCommandsHandler = (
       } else {
         startReadingIndex =
           pageNumber === 1 ? 0 : pageNumber * 10 - 10;
-        // console.log("🧐");
 
         // read the news from the last one has been read.
         const addMore =
@@ -249,42 +248,7 @@ export const useNewsCommandsHandler = (
             isLast: index === newsArticles.length - 1,
           });
 
-          // const callback = (resolve) => {
-          //   response(title);
-          //   index && setActiveArticle(index);
-          //   // setActiveArticle(index);
-          //   // console.log({ index });
-          //   if (index === newsArticles.length - 1) {
-          //     setIsReadingHeadLines(false);
-          //   }
-          //   resolve();
-          // };
-          // await responseAfterTimeout(title, {
-          //   timeout,
-          //   ids,
-          //   params: {
-          //     indexArticle: index,
-          //     isLast: index === newsArticles.length - 1,
-          //     setActiveArticle,
-          //     setIsReadingHeadLines,
-          //   },
-          //   callback: (resolve, params = {}) => {
-          //     response(title);
-          //     console.log({ params });
-          //     params?.indexArticle &&
-          //       params?.setActiveArticle(params?.indexArticle);
-          //     // setActiveArticle(index);
-          //     // console.log({ index });
-          //     if (params?.isLast) {
-          //       params?.setIsReadingHeadLines(false);
-          //     }
-          //     resolve();
-          //   },
-          // });
-
-          // console.log({ isStopReading });
           setTimeoutIdsForReadingH(ids);
-          // console.log({ timeoutId });
         } else {
           response(title);
           setActiveArticle(index);
@@ -296,44 +260,6 @@ export const useNewsCommandsHandler = (
       response("there is no news to read.");
     }
   };
-
-  // const respondedWithYesSC = async () => {
-  //   console.log(secondCommandFor);
-  //   switch (secondCommandFor) {
-  //     case "readThHeadLines":
-  //       handleReadingHeadLines();
-
-  //       break;
-
-  //     case "scrollDetailsA":
-  //       response("scrolling the page every 5 seconds");
-
-  //       await handleScrollDetailPage();
-
-  //       break;
-
-  //     default:
-  //       response("I didn't get that. you can try again... bro");
-  //       break;
-  //   }
-  //   setSecondCommandFor("");
-  // };
-
-  // const respondedWithNoSC = () => {
-  //   switch (secondCommandFor) {
-  //     case "readThHeadLines":
-  //       response("WOW, thank you");
-  //       break;
-  //     case "scrollDetailsA":
-  //       response("thank you, I was feeling lazy to scroll");
-  //       break;
-  //     default:
-  //       response("I didn't get that. you can try again... bro");
-  //       break;
-  //   }
-  //   setSecondCommandFor("");
-  //   // resetTranscript();
-  // };
 
   const [popupWindow, setPopupWindow] = useState(null);
   const [
@@ -348,7 +274,6 @@ export const useNewsCommandsHandler = (
     if (newsArticles.length && articleNumberIsInRange) {
       response(`opening article ${articleNum} without my help`);
       const { goToUrl } = newsArticles[articleNum - 1];
-      console.log({ goToUrl });
       const newPopupWindow = window.open(
         goToUrl,
         "ORIGIN_ARTICLE_WINDOW",
@@ -428,7 +353,6 @@ export const useNewsCommandsHandler = (
 
         setSecondCommandFor("scrollDetailsA");
         setCurrentArticle(newsArticles[articleNum - 1]);
-        // console.log(data);
         setPopupWindow(data.isAutoBrowserOpen);
 
         // response("");
@@ -458,8 +382,6 @@ export const useNewsCommandsHandler = (
   };
 
   const handleClosePopupWindow = async () => {
-    console.log("in handleClosePopupWindows");
-
     let isWindowClosed = true;
     if (popupWindow) {
       const { data } = await axios.post(`${AUTO_API_URL}/close`);
@@ -489,15 +411,8 @@ export const useNewsCommandsHandler = (
     // SpeechRecognition.stopListening();
   };
 
-  function postinsql(topicId) {
-    console.log(topicId);
-  }
-
-  const num = 1;
   const scrollAfterTimeout = (source) =>
     new Promise((resolve, reject) => {
-      console.log({ source });
-
       const callApi = async (source) => {
         const {
           data: { isEndOfPage },
@@ -547,10 +462,6 @@ export const useNewsCommandsHandler = (
   useEffect(() => {
     let timeId;
     if (isStopReading) {
-      console.log({
-        isStopReading,
-        timeoutIds: timeoutIdsForReadingH,
-      });
       timeoutIdsForReadingH.forEach((id) => clearTimeout(id));
 
       timeId = setTimeout(() => {

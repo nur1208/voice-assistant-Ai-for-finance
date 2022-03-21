@@ -95,8 +95,6 @@ export const dateValidation = (req, res, next) => {
 };
 
 const customDateFormat = (currentDate) => {
-  // console.log({ currentDate, type: typeof currentDate });
-
   let date = currentDate;
   if (typeof date === "string") date = new Date(date);
 
@@ -132,10 +130,6 @@ export const changeDateHandler = async (req, res) => {
     await page.waitForTimeout(1000 * 3);
 
     const { startDate, endDate } = req.body;
-
-    console.log({
-      startDate: customDateFormat(startDate),
-    });
 
     await selectDeleteAllInputDate(
       startDateInputS,

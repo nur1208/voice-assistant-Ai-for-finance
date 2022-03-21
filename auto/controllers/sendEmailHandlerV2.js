@@ -32,12 +32,10 @@ export const sendEmailHandlerV2 = async (req, res) => {
   }
 
   const goToUrl = "https://account.protonmail.com/login";
-  //   console.log(req.body);
   const width = 1366 - 20;
   const height = 768 - 20;
   const timeout = 1000 * 90;
   //   const { goToUrl } = newsArticles[articleNum - 1];
-  //   console.log({ goToUrl });
   const browser = await puppeteer.launch({
     headless: false,
     executablePath:
@@ -74,8 +72,6 @@ export const sendEmailHandlerV2 = async (req, res) => {
   await page.waitForTimeout(1000 * 30);
 
   await page.waitForSelector(USERNAME_INPUT_S, { timeout });
-
-  console.log(process.env.MAIL_USERNAME_V2);
 
   await page.type(
     USERNAME_INPUT_S,

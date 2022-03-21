@@ -13,7 +13,9 @@ export const getYahooFinanceNews = async () => {
   await page.goto(`${url}/news`);
   await page.waitForSelector(mainNewsWrapperV2);
 
-  const html = await page.evaluate(() => document.body.innerHTML);
+  const html = await page.evaluate(
+    () => document.body.innerHTML
+  );
 
   fs.writeFile(mainPageHtml, html, function (err) {
     if (err) throw err;
@@ -24,7 +26,6 @@ export const getYahooFinanceNews = async () => {
   //   const html = await promisify(fs.readFile)(mainPageHtml);
 
   let $ = cheerio.load(html.toString());
-  console.log($);
 
   await browser.close();
   console.log(

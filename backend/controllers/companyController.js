@@ -41,7 +41,6 @@ export const getCompanies = async (req, res) => {
 
 export const currentPrice = async (req, res, next) => {
   try {
-    console.log("here");
     const { data } = await axios.get(
       `https://cors-anywhere.herokuapp.com/https://query1.finance.yahoo.com/v8/finance/chart/${req.params.ticker}`,
       {

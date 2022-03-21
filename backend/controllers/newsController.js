@@ -1,7 +1,6 @@
 import NewsModel from "../models/News.js";
 
 export const createNews = async (req, res) => {
-  console.log(req.body);
   try {
     const news = new NewsModel(req.body);
 
@@ -52,19 +51,8 @@ export const getNews = async (req, res) => {
   }
 
   try {
-    console.log({ query, options });
     // await NewsModel.deleteMany();
     const news = await NewsModel.find(query, null, options);
-
-    // console.log({
-    //   query,
-    //   publishedAt,
-    //   publishedAtP,
-    //   news,
-    //   publishedE:
-    //     news.length !== 0 &&
-    //     setMSSecondsToZero(news[0].publishedAt),
-    // });
 
     if (
       news.length === 0 ||

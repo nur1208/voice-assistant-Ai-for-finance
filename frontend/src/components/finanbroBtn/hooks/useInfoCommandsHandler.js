@@ -132,7 +132,6 @@ export const useInfoCommandsHandler = (
     } else {
       response("sorry I can't open that");
     }
-    // console.log({ companiesArray });
     // response(`DONE opening ${companiesArray.join(" and ")} charts`);
   };
 
@@ -162,8 +161,6 @@ export const useInfoCommandsHandler = (
 
   let currentStock = {};
   const changeDate = async () => {
-    console.log({ currentStock });
-
     try {
       const { data } = await axios.post(
         `${AUTO_API_URL}/changeDate`,
@@ -409,8 +406,6 @@ export const useInfoCommandsHandler = (
       // currentCompany,
     } = dataForLearningLocal;
 
-    // console.log({ dataForLearningLocal });
-
     let finalTarget;
     let currentCompany;
 
@@ -497,7 +492,6 @@ export const useInfoCommandsHandler = (
   ) => {
     let finalTarget = target.trim();
     // const isFound
-    console.log("here in openYahooFinance");
 
     // debugger;
     let currentCompany = await lookupForTickersV2(finalTarget);
@@ -506,7 +500,6 @@ export const useInfoCommandsHandler = (
       const symbolsFound = await searchCompanyNameV2(
         finalTarget
       );
-      console.log(symbolsFound);
 
       if (symbolsFound && symbolsFound.length > 2) {
         finalTarget = symbolsFound[0].symbol;
@@ -653,7 +646,6 @@ export const useInfoCommandsHandler = (
     if (wordNum.includes(finalNum)) {
       finalNum = wordNum.indexOf(finalNum);
     }
-    console.log({ finalNum });
     // setChooseNum(finalNum);
     if (finalNum > 0 && finalNum <= foundStock.length) {
       const { symbol, _id } = foundStock[finalNum - 1];

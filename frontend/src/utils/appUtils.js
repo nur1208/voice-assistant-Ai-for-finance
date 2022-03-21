@@ -748,7 +748,6 @@ export const useFinansis = ({
     const newCommandWithQW = [];
     for (const index in commands) {
       const element = commands[index];
-      // console.log(element);
       const { command, commandFor } = element;
       if (typeof command === "string") {
         // if (command.includes("what") || command.includes("how")) {
@@ -803,7 +802,6 @@ export const useFinansis = ({
     // check if finalTranscript is one of the questions
 
     let foundQuestion = null;
-    console.log({ questions });
 
     //   // const checkForQW = finalTranscript.includes("what") || finalTranscript.includes("how")
 
@@ -814,9 +812,7 @@ export const useFinansis = ({
     // the command not question and finalTranscript not empty string
     // if (!foundQuestion && finalTranscript) {
     if (finalTranscript) {
-      // console.log(
-      //   onlyCommands.includes(finalTranscript.toLocaleLowerCase())
-      // );
+      
       let foundCommand = "";
       for (let index = 0; index < onlyCommands.length; index++) {
         let element = onlyCommands[index];
@@ -901,19 +897,13 @@ export const useFinansis = ({
                 checkDWIsExistInTranscript &&
                 checkDWInCommandNotSameIndexDWInTranscript;
 
-              // console.log({
-              //   checkDWInCommandNotSameIndexDWInTranscript,
-              //   checkWithoutDynamicWord,
-              //   checkDWIsExistInTranscript,
-              //   finalCondition,
-              // });
+              
 
               if (finalCondition) {
                 isCommandExistLocal = true;
                 foundCommand = onlyCommands[index];
               }
             } else {
-              // console.log("here 1");
               // fix the error here
               isCommandExistLocal = true;
               foundCommand = onlyCommands[index];
@@ -941,11 +931,9 @@ export const useFinansis = ({
           history.push(`/${currentCommandFor}`);
         }
 
-        // console.log(onlyCommands.indexOf(transcript));
 
         // if(checkForQW && commandsWithQuestionWord.includes(finalTranscript))
       }
-      // console.log({ isCommandExist: isCommandExistLocal });
       // debugger;
       // ignore command longer than COMMAND_LENGTH_NOT_COMMAND
       if (transcript.length > COMMAND_LENGTH_NOT_COMMAND) {
@@ -978,12 +966,6 @@ export const useFinansis = ({
               question = question.replace("?", "");
             }
 
-            console.log({
-              questionNoOptionsWord,
-              question,
-              finalTranscript,
-            });
-
             if (
               finalTranscript.toLocaleLowerCase() === question ||
               finalTranscript.toLocaleLowerCase() ===
@@ -993,7 +975,6 @@ export const useFinansis = ({
           }
 
           if (foundQuestion) {
-            // console.log("do something 🧐🧐");
             handleOpenModal(
               foundQuestion.question,
               foundQuestion.answer
@@ -1018,7 +999,6 @@ export const useFinansis = ({
                 `do you want me to learn about ${finalTranscript}`
               );
               setSecondCommandFor("findingAnswer");
-              // console.log("do something 🧐🧐");
               setFindingAnswerFor(finalTranscript);
             } else response(responseFoUnknownCommand);
           }

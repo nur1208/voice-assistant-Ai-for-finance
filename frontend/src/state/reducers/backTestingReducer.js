@@ -17,8 +17,6 @@ export const backTestingReducer = (
   state = initialState,
   action
 ) => {
-  console.log({ action });
-
   switch (action.type) {
     case BT_ACTIONS.UPDATE_STATE:
       return { ...state, ...action.payload };
