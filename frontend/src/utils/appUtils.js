@@ -5,7 +5,7 @@ import SpeechRecognition, {
 import { useSpeechSynthesis } from "react-speech-kit";
 import { useEffect } from "react";
 import axios from "axios";
-import { useAudio } from "../hooks/useAudio";
+// import { useAudio } from "../hooks/useAudio";
 import { useInfoCommandsHandler } from "../components/finanbroBtn/hooks/useInfoCommandsHandler";
 import {
   getNews,
@@ -34,9 +34,6 @@ export const useFinansis = ({
   isWaitingUserDone,
   setIsWaitingUserDone,
 }) => {
-  const [playing, toggle] = useAudio(
-    "./audio/zapsplat_multimedia_button_click_007_53868.mp3"
-  );
   const [openModal, setOpenModal] = useState(false);
   const [modalTitle, setModalTitle] = useState("");
   const [modalContent, setModalContent] = useState("");
@@ -345,7 +342,7 @@ export const useFinansis = ({
       commandFor: "every section",
     },
     {
-      command: ["no", "nope"],
+      command: ["no", "nope", "nah"],
       callback: () => respondedWithNoSC(),
       commandFor: "every section",
     },
@@ -559,8 +556,8 @@ export const useFinansis = ({
     },
     {
       command: [
-        "what is the current price for * (share)",
-        "what's the current price for * (share)",
+        "what is the current price for * (symbol)",
+        "what's the current price for * (symbol)",
       ],
       callback: async (symbol) =>
         await openYahooFinance("currentPrice", symbol),
@@ -1050,9 +1047,9 @@ export const useFinansis = ({
       if (!isStopListing) {
         resetTranscript();
 
-        setTimeout(() => {
-          toggle();
-        }, 1000 * 5);
+        // setTimeout(() => {
+        //   toggle();
+        // }, 1000 * 5);
       }
       setIsStopListing(false);
       setIsCommandExist(true);

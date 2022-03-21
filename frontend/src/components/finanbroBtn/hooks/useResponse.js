@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useAudio } from "../../../hooks/useAudio";
 // import { useSpeechSynthesis } from "react-speech-kit";
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
 import { useReduxActions } from "../../../hooks/useReduxActions";
@@ -25,6 +26,9 @@ export const secondCommandOptions = {
 };
 
 export const useResponse = (SpeechRecognition) => {
+  const [playing, toggle] = useAudio(
+    "./audio/zapsplat_multimedia_button_click_007_53868.mp3"
+  );
   const { speak, voices, speaking, cancel, speakAsync } =
     useSpeechSynthesis();
 
@@ -436,6 +440,7 @@ export const useResponse = (SpeechRecognition) => {
         console.log({
           conditionLisping: "start finansis recognizing",
         });
+        toggle();
       }
     } else {
       SpeechRecognition.stopListening();
