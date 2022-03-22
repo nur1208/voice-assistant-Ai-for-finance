@@ -2,7 +2,6 @@ import { useState } from "react";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
-import { useSpeechSynthesis } from "react-speech-kit";
 import { useEffect } from "react";
 import axios from "axios";
 // import { useAudio } from "../hooks/useAudio";
@@ -812,7 +811,6 @@ export const useFinansis = ({
     // the command not question and finalTranscript not empty string
     // if (!foundQuestion && finalTranscript) {
     if (finalTranscript) {
-      
       let foundCommand = "";
       for (let index = 0; index < onlyCommands.length; index++) {
         let element = onlyCommands[index];
@@ -897,8 +895,6 @@ export const useFinansis = ({
                 checkDWIsExistInTranscript &&
                 checkDWInCommandNotSameIndexDWInTranscript;
 
-              
-
               if (finalCondition) {
                 isCommandExistLocal = true;
                 foundCommand = onlyCommands[index];
@@ -930,7 +926,6 @@ export const useFinansis = ({
         ) {
           history.push(`/${currentCommandFor}`);
         }
-
 
         // if(checkForQW && commandsWithQuestionWord.includes(finalTranscript))
       }
@@ -1051,6 +1046,7 @@ export const useFinansis = ({
     //   }),
     onClick: () => {
       if (!listening) {
+        response("yo");
         SpeechRecognition.startListening({ continuous: true });
         updateIsStartRecognize(true);
         if (!userData) {

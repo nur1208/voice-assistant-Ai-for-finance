@@ -511,8 +511,8 @@ deadline - before 2022-3-25 ✅ DONE on 2022-3-22
 - {DONE} clean up all console.logs
 - {DONE} show error message for the user when there is error
 - {DONE} reset userInputs after submit data to dispatch function
-- {TODO} remove all unneeded npm packages
-- {TODO} let 'ALT' key toggle finansis btn
+- {DONE} remove all unneeded npm packages
+- {DONE} let 'Ctrl + V' key start finansis btn
 deadline - before 2022-3-25 
 - {TODO} make sure that a user using chrome browser
         https://stackoverflow.com/questions/4565112/javascript-how-to-find-out-if-the-user-browser-is-chrome

@@ -145,12 +145,25 @@ export const App = () => {
     if (userData) {
       autoLogin(userData);
     }
+
     // appRef.current.click();
     // appRef.current.focus();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Control") {
+      FinanbroBtnProps.onClick();
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () =>
+      window.removeEventListener("keydown", handleKeyDown);
+  }, []);
   // get user current country
   // useEffect(() => {
   //   (async () => {
@@ -182,6 +195,7 @@ export const App = () => {
     // handleWaitUserInput,
     setIsWaitingUserDone,
   };
+
   return (
     <div ref={appRef}>
       <WaitForUserInputContext.Provider value={waitOption}>
