@@ -37,7 +37,11 @@ export const useUserCommandsHandler = (
   } = useReduxActions();
 
   const {
-    modal_store: { invalidMessage, confirmPasswordCounter },
+    modal_store: {
+      invalidMessage,
+      confirmPasswordCounter,
+      stateName: stateNameRedux,
+    },
     user_store: { userData, error },
   } = useSelector((state) => state);
 
@@ -253,6 +257,39 @@ export const useUserCommandsHandler = (
     );
   };
 
+  const handleUpdatePasswordAgain = async () => {
+    handleCloseModal();
+
+    await getUserInputHandler(
+      UPDATE_USER_INFO_FIELDS.NEW_PASSWORD.label,
+      UPDATE_USER_INFO_FIELDS.NEW_PASSWORD.stateName,
+      UPDATE_USER_INFO_FIELDS.NEW_PASSWORD.message
+    );
+  };
+
+  const handleForgetPasswordAgain = async () => {
+    handleCloseModal();
+
+    getUserInputHandler(
+      FORGET_PASS_FIELDS.PASSWORD.label,
+      FORGET_PASS_FIELDS.PASSWORD.stateName,
+      FORGET_PASS_FIELDS.PASSWORD.message
+    );
+  };
+
+  const passwordsAgainFunction = (stateName) => {
+    switch (stateName) {
+      case SIGN_UP_FIELDS.PASSWORD_CONFIRM.stateName:
+        return handleEnterPasswordAgain;
+      case UPDATE_USER_INFO_FIELDS.CONFIRM_PASSWORD.stateName:
+        return handleUpdatePasswordAgain;
+      case FORGET_PASS_FIELDS.CONFIRM_PASSWORD.stateName:
+        return handleForgetPasswordAgain;
+      default:
+        return null;
+    }
+  };
+
   useEffect(() => {
     if (invalidMessage) {
       setMessagePopupData({
@@ -264,8 +301,9 @@ export const useUserCommandsHandler = (
 
       if (confirmPasswordCounter >= 2) {
         response("do you want to enter your password again");
+
         setSecondCommand(
-          handleEnterPasswordAgain,
+          passwordsAgainFunction(stateNameRedux),
           "",
           secondCommandOptions.enterPasswordAgain
         );

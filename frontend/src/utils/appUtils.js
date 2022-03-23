@@ -1046,7 +1046,6 @@ export const useFinansis = ({
     //   }),
     onClick: () => {
       if (!listening) {
-        response("yo");
         SpeechRecognition.startListening({ continuous: true });
         updateIsStartRecognize(true);
         if (!userData) {

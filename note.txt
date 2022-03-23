@@ -513,12 +513,11 @@ deadline - before 2022-3-25 ✅ DONE on 2022-3-22
 - {DONE} reset userInputs after submit data to dispatch function
 - {DONE} remove all unneeded npm packages
 - {DONE} let 'Ctrl + V' key start finansis btn
-deadline - before 2022-3-25 
-- {TODO} make sure that a user using chrome browser
-        https://stackoverflow.com/questions/4565112/javascript-how-to-find-out-if-the-user-browser-is-chrome
+deadline - before 2022-3-25 ✅ DONE on 2022-3-22
 - {TODO} improve 'do you want to enter password again' command by making for updateMyPassword and resetPassword too
 - {TODO} 'don't let finansis ask 'you not logged in, do you want to login' when there is a secondCommand already
 - {TODO} fix sellSignal python script by setting strategy number
+deadline - before 2022-3-25
 final deadline v1 - before 2022-3-31
 
 ----- NOT IMPORTANT NOW
@@ -594,6 +593,8 @@ get  is the market open data using python and get the data every day
 - {TODO NOT IMPORTANT NOW} add cancel axios request when the page unmounted 
     ref:https://stackoverflow.com/questions/53861916/canceling-an-axios-rest-call-in-react-hooks-useeffects-cleanup-failing
 
+- {CON'T DO IT} make sure that a user using chrome browser
+        https://stackoverflow.com/questions/4565112/javascript-how-to-find-out-if-the-user-browser-is-chrome
 92 - {NOT important NOW TODO} improve offline component by make it like youtube 
 77 - {NOT important NOW TODO} convert all publishedAt timezone to one similarly timezone when scraping articles.
     note - https://stackoverflow.com/questions/10997577/python-timezone-conversion

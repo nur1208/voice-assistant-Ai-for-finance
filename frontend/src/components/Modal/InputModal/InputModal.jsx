@@ -104,6 +104,7 @@ export default function InputModal({
       return false;
     }
 
+    const maxLength = 25;
     if (
       (stateName === SIGN_UP_FIELDS.NAME.stateName ||
         stateName === UPDATE_USER_INFO_FIELDS.NAME.stateName ||
@@ -114,10 +115,10 @@ export default function InputModal({
         stateName === SIGN_UP_FIELDS.PASSWORD.stateName ||
         stateName === FORGET_PASS_FIELDS.PASSWORD.stateName ||
         stateName === LOGIN_FIELDS.PASSWORD.stateName) &&
-      userInput.length > 15
+      userInput.length > maxLength
     ) {
       updateModal({
-        invalidMessage: `${label} must be less than 15 letters, please enter a shorter ${label}`,
+        invalidMessage: `${label} must be less than ${maxLength} letters, please enter a shorter ${label}`,
       });
 
       return false;

@@ -44,6 +44,8 @@ import { ResetPassword } from "./pages/ResetPassword";
 import BasicModal from "./components/Modal/BasicModal/BasicModal";
 import { getCookie } from "./utils/getCookie";
 import { MessagePopup } from "./components/MessagePopup";
+import { useIsChrome } from "./hooks/useIsChrome";
+import { IsNotChromeBrowser } from "./components/IsNotChromeBrowser";
 export const PAGES = [
   {
     path: "/",
@@ -174,6 +176,11 @@ export const App = () => {
 
   const networkStatus = useNetworkStatus();
   const userCountry = useGetCurrentCountry(networkStatus);
+  const isChrome = useIsChrome();
+
+  if (!isChrome) {
+    <IsNotChromeBrowser />;
+  }
 
   if (
     (userCountry !== "loading" && !userCountry) ||
