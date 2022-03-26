@@ -434,5 +434,6 @@ export const useResponse = (SpeechRecognition) => {
     respondedWithNoSC,
     setSecondCommandFor,
     responseAsync,
+    secondCommandFor,
   };
 };

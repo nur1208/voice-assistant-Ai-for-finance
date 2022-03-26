@@ -511,10 +511,10 @@ deadline - before 2022-3-25 ✅ DONE on 2022-3-22
 - {DONE} clean up all console.logs
 - {DONE} show error message for the user when there is error
 - {DONE} reset userInputs after submit data to dispatch function
-- {DONE} remove all unneeded npm packages
+- {DONE} remove all unneeded npm packages 
 - {DONE} let 'Ctrl + V' key start finansis btn
 deadline - before 2022-3-25 ✅ DONE on 2022-3-22
-- {TODO} improve 'do you want to enter password again' command by making for updateMyPassword and resetPassword too
+- {DONE} improve 'do you want to enter password again' command by making for updateMyPassword and resetPassword too
 - {TODO} 'don't let finansis ask 'you not logged in, do you want to login' when there is a secondCommand already
 - {TODO} fix sellSignal python script by setting strategy number
 deadline - before 2022-3-25

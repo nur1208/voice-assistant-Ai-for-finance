@@ -85,6 +85,7 @@ export const useFinansis = ({
     respondedWithNoSC,
     setSecondCommandFor,
     responseAsync,
+    secondCommandFor
   } = useResponse(SpeechRecognition);
 
   const {
@@ -1048,7 +1049,7 @@ export const useFinansis = ({
       if (!listening) {
         SpeechRecognition.startListening({ continuous: true });
         updateIsStartRecognize(true);
-        if (!userData) {
+        if (!secondCommandFor && !userData) {
           response("you not login, do you want to login");
           updateSecondCommand({
             type: secondCommandOptions.login,
