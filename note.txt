@@ -515,8 +515,8 @@ deadline - before 2022-3-25 ✅ DONE on 2022-3-22
 - {DONE} let 'Ctrl + V' key start finansis btn
 deadline - before 2022-3-25 ✅ DONE on 2022-3-22
 - {DONE} improve 'do you want to enter password again' command by making for updateMyPassword and resetPassword too
-- {TODO} 'don't let finansis ask 'you not logged in, do you want to login' when there is a secondCommand already
-- {TODO} fix sellSignal python script by setting strategy number
+- {DONE} 'don't let finansis ask 'you not logged in, do you want to login' when there is a secondCommand already
+- {DONE} fixing trading api for buy, sell and set stop loss 
 deadline - before 2022-3-25
 final deadline v1 - before 2022-3-31
 

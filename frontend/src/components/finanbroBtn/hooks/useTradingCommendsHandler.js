@@ -38,8 +38,8 @@ export const BTfields = {
   },
 };
 
-const gameNum = 2;
-const strategyVersion = 4;
+const gameNum = 1;
+const strategyVersion = 5;
 export const useTradingCommendsHandler = (
   response,
   setSecondCommandFor,
@@ -123,7 +123,7 @@ export const useTradingCommendsHandler = (
       const {
         data: { message },
       } = await axios(
-        `${TRADING_API}/${STOCK_ROUTE}/buyStock?gameNum=${gameNum}`
+        `${TRADING_API}/${STOCK_ROUTE}/buyStock?gameNum=${gameNum}&strategyVersion=${strategyVersion}&isFinansisAccount=true`
       );
       response(message);
       updateProgress({ buy: "success" });
@@ -167,7 +167,7 @@ export const useTradingCommendsHandler = (
           const {
             data: { message },
           } = await axios(
-            `${TRADING_API}/${STOCK_ROUTE}/sellStock?gameNum=${gameNum}`
+            `${TRADING_API}/${STOCK_ROUTE}/sellStock?gameNum=${gameNum}&strategyVersion=${strategyVersion}&isFinansisAccount=true`
           );
           response(message);
           updateProgress({ sell: "success" });
@@ -198,7 +198,7 @@ export const useTradingCommendsHandler = (
       const {
         data: { message, status },
       } = await axios(
-        `${TRADING_API}/${STOCK_ROUTE}/addStopLess?gameNum=${gameNum}&strategyVersion=${strategyVersion}`
+        `${TRADING_API}/${STOCK_ROUTE}/addStopLess?gameNum=${gameNum}&strategyVersion=${strategyVersion}&isFinansisAccount=true`
       );
 
       if (status === "fall") {
