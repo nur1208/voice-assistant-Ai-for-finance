@@ -421,7 +421,7 @@ export const useInfoCommandsHandler = (
         //   `didn't find chart for ${target}, so give me a minute to learn about ${target} from yahoo finance`
         // );
 
-        response(`okay, I will learning about ${target}`);
+        response(`okay, I will learn about ${target}`);
         // so I'll learn about ${target} and you can try again after 3 minutes
         const {
           data: { companies },
