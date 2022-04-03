@@ -519,9 +519,10 @@ deadline - before 2022-3-25 ✅ DONE on 2022-3-22
 - {DONE} fixing trading api for buy, sell and set stop loss 
 deadline - before 2022-3-25 ❌ DONE on 2022-3-30
 final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
-- {DONE} fixing error 🛠: for 'open article {1}' command
-- {DONE} fixing error 🛠: don't let finansis close the details article page before finishing scrolling the page 
-
+- {TODO} testing useResponse custom hook:
+        - {DONE} fixing error 🛠: for 'open article {1}' command
+        - {DONE} fixing error 🛠: don't let finansis close the details article page before finishing scrolling the page 
+        - {DONE} fixing error 🛠: for 'update my info' command when a user logged out
 
 ----- NOT IMPORTANT NOW
 - {TODO} create 'save my back test data' command

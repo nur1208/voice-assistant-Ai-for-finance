@@ -168,11 +168,15 @@ export const useUserCommandsHandler = (
   useLoginFields(response, getUserInputHandler);
 
   const updateUserInfo = async () => {
-    await getUserInputHandler(
-      UPDATE_USER_INFO_FIELDS.NAME.label,
-      UPDATE_USER_INFO_FIELDS.NAME.stateName,
-      UPDATE_USER_INFO_FIELDS.NAME.message
-    );
+    if (userData) {
+      await getUserInputHandler(
+        UPDATE_USER_INFO_FIELDS.NAME.label,
+        UPDATE_USER_INFO_FIELDS.NAME.stateName,
+        UPDATE_USER_INFO_FIELDS.NAME.message
+      );
+    } else {
+      doWantLogin();
+    }
   };
 
   useUpdateFields(response, getUserInputHandler);
