@@ -49,6 +49,7 @@ export const useNewsCommandsHandler = (
     useState([]);
   const [isStopReading, setIsStopReading] = useState(false);
 
+  const [isScrolling, setIsScrolling] = useState(false);
   const {
     user_store: { userData },
   } = useSelector((state) => state);
@@ -383,8 +384,17 @@ export const useNewsCommandsHandler = (
     }
   };
 
+  // let isScrolling = false;
   const handleClosePopupWindow = async () => {
     let isWindowClosed = true;
+
+    if (isScrolling) {
+      response(
+        "sorry, i can't close the window before finishing scrolling"
+      );
+      return isWindowClosed;
+    }
+
     if (popupWindow) {
       const { data } = await axios.post(`${AUTO_API_URL}/close`);
 
@@ -443,10 +453,15 @@ export const useNewsCommandsHandler = (
     if (popupWindow) {
       const { source } = currentArticle;
       await axios.post(`${AUTO_API_URL}/scroll`, { source });
+      setIsScrolling(true);
       for (let index = 0; index < 300; index++) {
         try {
           const isEngOfPage = await scrollAfterTimeout(source);
+          // isScrolling = isEngOfPage;
+
+          // setIsScrolling(isEngOfPage);
           if (isEngOfPage) {
+            setIsScrolling(false);
             response("DONE scrolling");
             break;
           }
