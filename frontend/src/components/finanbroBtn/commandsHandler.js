@@ -306,6 +306,8 @@ export const useNewsCommandsHandler = (
         response(
           "you not logged in, you need to log in for this command"
         );
+
+        return;
       }
 
       if (!userData.executableChromePath) {

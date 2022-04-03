@@ -517,8 +517,9 @@ deadline - before 2022-3-25 ✅ DONE on 2022-3-22
 - {DONE} improve 'do you want to enter password again' command by making for updateMyPassword and resetPassword too
 - {DONE} 'don't let finansis ask 'you not logged in, do you want to login' when there is a secondCommand already
 - {DONE} fixing trading api for buy, sell and set stop loss 
-deadline - before 2022-3-25
-final deadline v1 - before 2022-3-31
+deadline - before 2022-3-25 ❌ DONE on 2022-3-30
+final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
+- {DONE} fixing error 🛠: for 'open article {1}' command
 
 ----- NOT IMPORTANT NOW
 - {TODO} create 'save my back test data' command

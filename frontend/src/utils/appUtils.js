@@ -59,9 +59,11 @@ export const useFinansis = ({
     updateIsStartRecognize,
     updateSecondCommand,
   } = useReduxActions();
+
   const {
     user_store: { userData },
   } = useSelector((state) => state);
+
   const handleOpenModal = (title, content, isInput, label) => {
     setOpenModal(true);
     setModalTitle(title);
@@ -76,6 +78,7 @@ export const useFinansis = ({
 
   const [isForceSellAgain, setIsForceSellAgain] =
     useState(false);
+
   const {
     response,
     speaking,
@@ -85,7 +88,7 @@ export const useFinansis = ({
     respondedWithNoSC,
     setSecondCommandFor,
     responseAsync,
-    secondCommandFor
+    secondCommandFor,
   } = useResponse(SpeechRecognition);
 
   const {

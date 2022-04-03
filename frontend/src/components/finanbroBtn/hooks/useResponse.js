@@ -28,6 +28,7 @@ export const useResponse = (SpeechRecognition) => {
   const [playing, toggle] = useAudio(
     "./audio/zapsplat_multimedia_button_click_007_53868.mp3"
   );
+
   const { speak, voices, speaking, cancel, speakAsync } =
     useSpeechSynthesis();
 
@@ -86,11 +87,11 @@ export const useResponse = (SpeechRecognition) => {
       handleResponse(voiceIndex);
     }
   };
+
   const {
     resetBTState,
     updateSecondCommand,
     updateSpeaking,
-    login,
     logout,
   } = useReduxActions();
 
@@ -176,6 +177,7 @@ export const useResponse = (SpeechRecognition) => {
 
   const { secondCommand, isSpeaking, isStartRecognize } =
     useSelector((state) => state.response_store);
+
   const respondedWithYesSC = async ({
     handleReadingHeadLines,
     handleScrollDetailPage,
@@ -185,6 +187,7 @@ export const useResponse = (SpeechRecognition) => {
     resetAllStates,
     setIsForceSellAgain,
   }) => {
+    
     let localSecondFor = secondCommandFor;
     if (secondCommand?.type) localSecondFor = secondCommand.type;
     else if (typeof secondCommandFor === "object")
