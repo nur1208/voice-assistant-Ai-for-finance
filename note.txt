@@ -523,8 +523,10 @@ final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
         - {DONE} fixing error 🛠: for 'open article {1}' command
         - {DONE} fixing error 🛠: don't let finansis close the details article page before finishing scrolling the page 
         - {DONE} fixing error 🛠: for 'update my info' command when a user logged out
-
+- {TODO} testing useNewsCommandsHandler custom hook:
+        - {DONE} improving 'give me top stories from google finance' command        
 ----- NOT IMPORTANT NOW
+- {TODO} after reading 5 articles let finansis ask 'do you want me to stop reading'
 - {TODO} create 'save my back test data' command
         - {TODO} save back test data plus userId and backTest title 
         - {TODO} save the title in user modal make title unique and backTestData id each one in different array

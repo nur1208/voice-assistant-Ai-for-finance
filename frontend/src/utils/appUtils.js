@@ -532,7 +532,10 @@ export const useFinansis = ({
       commandFor: "info",
     },
     {
-      command: "give me top stories from google finance",
+      command: [
+        "give me top stories from google finance",
+        "give me top stories",
+      ],
       callback: async () => await getNews("topStories"),
       commandFor: "news",
     },
