@@ -26,5 +26,7 @@ export const wordToNumber = (word) => {
     finalNum = wordNum.indexOf(finalNum);
   }
 
+  if (word === "for") finalNum = 4;
+
   return finalNum;
 };

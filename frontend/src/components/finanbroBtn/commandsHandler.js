@@ -273,8 +273,16 @@ export const useNewsCommandsHandler = (
     const articleNumberIsInRange =
       articleNum > 0 && articleNum < newsArticles.length - 1;
     if (newsArticles.length && articleNumberIsInRange) {
+      const { goToUrl, source } = newsArticles[articleNum - 1];
+
+      if (source === "investing") {
+        response(
+          "sorry, i can't open articles from investing source for this command, try 'open article' command"
+        );
+        return;
+      }
+
       response(`opening article ${articleNum} without my help`);
-      const { goToUrl } = newsArticles[articleNum - 1];
       const newPopupWindow = window.open(
         goToUrl,
         "ORIGIN_ARTICLE_WINDOW",

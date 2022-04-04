@@ -491,7 +491,10 @@ export const useFinansis = ({
       commandFor: "every section",
     },
     {
-      command: "open article (number) * without controlling it",
+      command: [
+        "open article (number) * without controlling it",
+        "open article (number) * without control",
+      ],
       callback: async (num) =>
         await openArticleWithoutControllerItHandler(num),
       commandFor: "news",
