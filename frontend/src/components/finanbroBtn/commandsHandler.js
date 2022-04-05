@@ -323,9 +323,7 @@ export const useNewsCommandsHandler = (
         response(
           "oh no, I don't have your chrome executable path"
         );
-        response(
-          "paste it here to let me controller your browser"
-        );
+        response("paste it here to let me control your browser");
         updateModal({
           type: MODAL_TYPE_OPTIONS.INPUT,
           isReduxState: true,

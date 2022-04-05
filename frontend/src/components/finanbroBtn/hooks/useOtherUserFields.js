@@ -31,9 +31,7 @@ export const useOtherUserFields = (
     OTHER_USER_FIELDS.EXECUTABLE_CHROME_PATH.stateName,
     {},
     async () => {
-      response(
-        "try to let me controller your browser after updating your info"
-      );
+      response("try the command again after updating your info");
       updateUserInfo(
         userData.id,
         {

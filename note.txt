@@ -526,6 +526,7 @@ final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
 - {TODO} testing useNewsCommandsHandler custom hook:
         - {DONE} improving 'give me top stories from google finance' command
         - {DONE} fixing error 🛠: for 'open article {1} without control' command when source equal 'investing'
+        - {DONE} fixing typo error 🛠: for 'open article {1}' command
 ----- NOT IMPORTANT NOW
 - {TODO} after reading 5 articles let finansis ask 'do you want me to stop reading'
 - {TODO} create 'save my back test data' command
