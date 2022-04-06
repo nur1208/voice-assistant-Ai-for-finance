@@ -69,6 +69,7 @@ export const useInfoCommandsHandler = (
 
     if (!popupWWControl) {
       response(`browser with my control is closed`);
+      response("so, I can't change the chart");
       return;
     }
 
