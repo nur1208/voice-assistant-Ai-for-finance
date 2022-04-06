@@ -535,6 +535,7 @@ final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
         - {DONE} improving 'change the chart to *' command
         - {DONE} fixing error 🛠: for 'open {apple} and {amazon} charts' command
         - {DONE} improving 'sold stocks chart' command 
+        - {DONE} improving 'open {apple} chart with your control' command 
 ----- NOT IMPORTANT NOW
 - {TODO} create 'scroll' command when finansis open details article page
 - {TODO} after reading 5 articles let finansis ask 'do you want me to stop reading'

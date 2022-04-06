@@ -193,8 +193,7 @@ export const useInfoCommandsHandler = (
 
   let currentStock = {};
   const changeDate = async () => {
-    // if(!isUserInfoValid())
-    //   return;
+    
 
     try {
       const { data } = await axios.post(
@@ -218,34 +217,10 @@ export const useInfoCommandsHandler = (
   };
 
   const openChartWithControl = async (symbol) => {
+    if(!isUserInfoValid())
+      return;
     try {
-      if (!userData) {
-        response(
-          "you not logged in, you need to log in for this command"
-        );
-      }
-
-      if (!userData.executableChromePath) {
-        response(
-          "oh no, I don't have your chrome executable path"
-        );
-        response(
-          "paste it here to let me controller your browser"
-        );
-        updateModal({
-          type: MODAL_TYPE_OPTIONS.INPUT,
-          isReduxState: true,
-          open: true,
-          label: OTHER_USER_FIELDS.EXECUTABLE_CHROME_PATH.label,
-          stateName:
-            OTHER_USER_FIELDS.EXECUTABLE_CHROME_PATH.stateName,
-          // text: "token",
-          // extraHelperText: "type your new password, then ",
-        });
-
-        return;
-      }
-
+      
       response("loading the page will take seconds");
       const { data } = await axios.post(`${AUTO_API_URL}/open`, {
         goToUrl: `${YAHOO_FINANCE_URL}/chart/${symbol}`,
