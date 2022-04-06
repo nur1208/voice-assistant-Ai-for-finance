@@ -494,6 +494,7 @@ export const useNewsCommandsHandler = (
     }
   };
 
+  // lef finansis stop reading
   useEffect(() => {
     let timeId;
     if (isStopReading) {
