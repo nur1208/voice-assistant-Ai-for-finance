@@ -121,6 +121,7 @@ export const App = () => {
     FinanbroBtnProps,
     isBrowserSupportsSpeechRecognition,
     modalProps,
+    isReadingHeadLines,
   } = useFinansis({ isWaitingUserDone, setIsWaitingUserDone });
 
   // get localStorage date in add it to redux store

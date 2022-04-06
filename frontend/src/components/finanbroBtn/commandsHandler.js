@@ -212,8 +212,29 @@ export const useNewsCommandsHandler = (
       );
     }
   };
+  const handleStopReading = () => {
+    setIsStopReading(true);
+    // response("Good");
+    setIsReadingHeadLines(false);
+    cancel();
+    response("okay, I'll stop reading");
+
+    // SpeechRecognition.stopListening();
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Control") {
+      handleStopReading();
+
+      window.removeEventListener("keydown", handleKeyDown);
+    }
+  };
+
   const handleReadingHeadLines = async (startReadingNum) => {
     setIsReadingHeadLines(true);
+
+    window.addEventListener("keydown", handleKeyDown);
+
     if (newsArticles.length) {
       const ids = [];
       let startReadingIndex;
@@ -255,6 +276,7 @@ export const useNewsCommandsHandler = (
           setActiveArticle(index);
         }
       }
+      window.removeEventListener("keydown", handleKeyDown);
 
       // SpeechRecognition.stopListening();
     } else {
@@ -419,16 +441,6 @@ export const useNewsCommandsHandler = (
     return isWindowClosed;
   };
 
-  const handleStopReading = () => {
-    setIsStopReading(true);
-    // response("Good");
-    setIsReadingHeadLines(false);
-    cancel();
-    response("okay, I'll stop reading");
-
-    // SpeechRecognition.stopListening();
-  };
-
   const scrollAfterTimeout = (source) =>
     new Promise((resolve, reject) => {
       const callApi = async (source) => {
@@ -516,5 +528,7 @@ export const useNewsCommandsHandler = (
     setNewsArticles,
     handleClosePopupWindowWithoutController,
     openArticleWithoutControllerItHandler,
+    // setIsStopReading,
+    // isStopReading,
   };
 };

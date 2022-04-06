@@ -107,6 +107,8 @@ export const useFinansis = ({
     setNewsArticles,
     openArticleWithoutControllerItHandler,
     handleScrollDetailPage,
+    // setIsStopReading,
+    isStopReading,
   } = useNewsCommandsHandler(
     response,
     responseAfterTimeout,
@@ -1054,6 +1056,8 @@ export const useFinansis = ({
     //   SpeechRecognition.startListening({
     //     language: "zh-CN",
     //   }),
+
+    handleStopReading,
     onClick: () => {
       if (!listening) {
         SpeechRecognition.startListening({ continuous: true });
@@ -1094,5 +1098,6 @@ export const useFinansis = ({
     NewsPageProps,
     FinanbroBtnProps,
     modalProps,
+    isReadingHeadLines,
   };
 };
