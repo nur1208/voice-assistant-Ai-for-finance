@@ -160,8 +160,42 @@ export const useInfoCommandsHandler = (
     }, 1000 * 7);
   };
 
+  const isUserInfoValid = () => {
+    if (!userData) {
+      response(
+        "you not logged in, you need to log in for this command"
+      );
+
+      return false;
+    }
+
+    if (!userData.executableChromePath) {
+      response(
+        "oh no, I don't have your chrome executable path"
+      );
+      response("paste it here to let me control your browser");
+      updateModal({
+        type: MODAL_TYPE_OPTIONS.INPUT,
+        isReduxState: true,
+        open: true,
+        label: OTHER_USER_FIELDS.EXECUTABLE_CHROME_PATH.label,
+        stateName:
+          OTHER_USER_FIELDS.EXECUTABLE_CHROME_PATH.stateName,
+        // text: "token",
+        // extraHelperText: "type your new password, then ",
+      });
+
+      return false;
+    }
+
+    return true;
+  };
+
   let currentStock = {};
   const changeDate = async () => {
+    // if(!isUserInfoValid())
+    //   return;
+
     try {
       const { data } = await axios.post(
         `${AUTO_API_URL}/changeDate`,
@@ -540,77 +574,11 @@ export const useInfoCommandsHandler = (
           other: { callback: handleLearningAboutCompany },
         });
 
-        // just let finansis remember that didn't find stocks for current keyword
-        // try {
-        //   // check if the keyword is not exist in the database
-        //   const {
-        //     data: { status },
-        //   } = await axios.get(
-        //     `${BACKEND_API_URL}/${KNOWN_KEYWORD_ROUTE}?keyword=${target}`
-        //   );
-        //   if (status === "fall") {
-        //     response(
-        //       `didn't find chart for ${target}, so give me a minute to learn about ${target} from yahoo finance`
-        //     );
-
-        //     // so I'll learn about ${target} and you can try again after 3 minutes
-        //     const {
-        //       data: { companies },
-        //     } = await axios.post(
-        //       `${AUTO_API_URL}/findingCompanies`,
-        //       {
-        //         keyword: target,
-        //       }
-        //     );
-
-        //     // first one
-        //     if (companies.length > 0) {
-        //       response(`I can open ${target} chart now`);
-        //       if (isIgnoreFoundMultiple) {
-        //         finalTarget = companies[0].symbol;
-        //         currentCompany = symbolsFound[0];
-        //       } else {
-        //         setFoundMultiple(companies, type, isWithControl);
-        //       }
-
-        //       // await getAllTickersInDatabaseToJson();
-        //       // TODO clean up the following code
-        //     } else {
-        //       response(
-        //         `I also didn't find chart for ${target} from yahoo finance`
-        //       );
-
-        //       await axios.post(
-        //         `${BACKEND_API_URL}/${KNOWN_KEYWORD_ROUTE}`,
-        //         {
-        //           keyword: target,
-        //         }
-        //       );
-        //       return;
-        //     }
-        //   } else {
-        //     response(
-        //       `I didn't find any chart with ${target} keyword from yahoo finance`
-        //     );
-        //     return;
-        //   }
-        // } catch (error) {
-        //   // response(
-        //   //   `I didn't find any chart with ${target} keyword from yahoo finance`
-        //   // );
-        //   response(
-        //     `sorry there is something wrong, please try again later`
-        //   );
-        //   return;
-        // }
-
-        // // so I'll learn about ${target} and you can try again after 3 minutes
-
         if (!isIgnoreFoundMultiple) return;
       }
     }
     // here
-    foundOneStock({
+    const returnValue = await foundOneStock({
       type,
       target,
       finalTarget,
@@ -618,6 +586,8 @@ export const useInfoCommandsHandler = (
       isWithControl,
       currentCompany,
     });
+
+    if (returnValue) return returnValue;
   };
 
   const foundMultipleStocks = async (num) => {
@@ -809,6 +779,8 @@ export const useInfoCommandsHandler = (
   };
 
   const showSoldStockChart = async () => {
+    if (!isUserInfoValid()) return;
+
     response("the following stocks has been sold");
     // const onlySymbols = soldStocks.map(({ symbol }) => ({
     //   symbol,

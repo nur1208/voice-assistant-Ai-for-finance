@@ -220,7 +220,7 @@ export const useFinansis = ({
       callback: async () => await signUp(),
     },
     {
-      command: "login",
+      command: ["login", "log in"],
       commandFor: "every section",
       callback: async () => await login(),
     },
@@ -704,11 +704,12 @@ export const useFinansis = ({
     },
     {
       command: [
-        "show me (a) chart sold (stocks)",
-        "show me (a) chart salt (stocks)",
         "show me chart for salt tax",
         "sold stocks",
         "sold stocks chart",
+        "sold tax chart",
+        "salt tax chart",
+        "salt stocks chart",
       ],
       callback: async () => await showSoldStockChart(),
       commandFor: "trading",

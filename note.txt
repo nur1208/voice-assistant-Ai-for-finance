@@ -532,7 +532,9 @@ final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
                 so i create shortcut key to stop her 'Control'
 
 - {TODO} testing useInfoCommandsHandler custom hook:
-
+        - {DONE} improving 'change the chart to *' command
+        - {DONE} fixing error 🛠: for 'open {apple} and {amazon} charts' command
+        - {DONE} improving 'sold stocks chart' command 
 ----- NOT IMPORTANT NOW
 - {TODO} create 'scroll' command when finansis open details article page
 - {TODO} after reading 5 articles let finansis ask 'do you want me to stop reading'
