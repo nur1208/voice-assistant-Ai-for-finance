@@ -166,7 +166,17 @@ export const findingAnswersHandler = async (req, res) => {
     page.waitForNavigation({ timeout }),
     page.click("#r1-0 a"),
   ]);
+
   await page.waitForTimeout(1000 * 10);
+
+  if (!(await page.url()).includes("investopedia.com")) {
+    await browserLocal.close();
+
+    return res.status(404).json({
+      status: "fail",
+      message: "didn't find answer for your question",
+    });
+  }
 
   const ul = await page.evaluate(
     () =>

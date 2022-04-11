@@ -506,6 +506,7 @@ export const useFinansis = ({
         "what's the date today",
         "what is the date today",
         "what's today date",
+        "what is today date",
         "what's today's date",
       ],
       callback: (num) => handleTodaysDate(num),
@@ -1072,7 +1073,7 @@ export const useFinansis = ({
       if (!listening) {
         SpeechRecognition.startListening({ continuous: true });
         updateIsStartRecognize(true);
-        debugger;
+
         if (!secondCommandFor && !userData) {
           response("you not login, do you want to login");
           updateSecondCommand({

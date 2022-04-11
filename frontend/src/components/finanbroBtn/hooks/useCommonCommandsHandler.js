@@ -217,28 +217,40 @@ export const useCommonCommandsHandler = (
     findingAnswerFor,
     setCurrentQuestion
   ) => {
-    const {
-      data: { questionObject },
-    } = await axios.post(`${AUTO_API_URL}/findingAnswers`, {
-      question: findingAnswerFor,
-    });
+    try {
+      const {
+        data: { questionObject },
+      } = await axios.post(`${AUTO_API_URL}/findingAnswers`, {
+        question: findingAnswerFor,
+      });
 
-    handleOpenModal(
-      questionObject.question,
-      questionObject.answer
-    );
-    response(questionObject.answer);
+      handleOpenModal(
+        questionObject.question,
+        questionObject.answer
+      );
+      response(questionObject.answer);
 
-    const timeout =
-      questionObject.answer.length > 80 ? 1000 * 10 : 1000 * 7;
+      const timeout =
+        questionObject.answer.length > 80 ? 1000 * 10 : 1000 * 7;
 
-    setTimeout(() => {
-      handleCloseModal();
-    }, timeout);
+      setTimeout(() => {
+        handleCloseModal();
+      }, timeout);
 
-    setCurrentQuestion(questionObject);
+      setCurrentQuestion(questionObject);
 
-    setQuestions([...questions, questionObject]);
+      setQuestions([...questions, questionObject]);
+    } catch (error) {
+      console.log(error);
+
+      console.log(error?.response?.status);
+
+      if (error?.response?.status === 404)
+        return response(error.response.data.message);
+      response(
+        "something went wrong from auto server, please try again later"
+      );
+    }
   };
 
   const handleCloseAnyPopup = async () => {
