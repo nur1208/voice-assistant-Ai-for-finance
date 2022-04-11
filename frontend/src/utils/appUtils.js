@@ -595,7 +595,11 @@ export const useFinansis = ({
       commandFor: "info",
     },
     {
-      command: ["open details page for the answer", "open details (page) answer", "open detail (page) answer"],
+      command: [
+        "open details page for the answer",
+        "open details (page) answer",
+        "open detail (page) answer",
+      ],
       callback: () => openAnswerDetail(currentQuestion),
       commandFor: "every section",
     },
@@ -1011,6 +1015,7 @@ export const useFinansis = ({
                 `do you want me to learn about ${finalTranscript}`
               );
               setSecondCommandFor("findingAnswer");
+              updateSecondCommand(null);
               setFindingAnswerFor(finalTranscript);
             } else response(responseFoUnknownCommand);
           }
@@ -1067,6 +1072,7 @@ export const useFinansis = ({
       if (!listening) {
         SpeechRecognition.startListening({ continuous: true });
         updateIsStartRecognize(true);
+        debugger;
         if (!secondCommandFor && !userData) {
           response("you not login, do you want to login");
           updateSecondCommand({

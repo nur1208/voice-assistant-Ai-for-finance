@@ -108,7 +108,7 @@ export const App = () => {
   //     }
   //   });
 
-  const { updateBTState, autoLogin } = useReduxActions();
+  const { updateBTState, autoLogin, logout } = useReduxActions();
 
   // const { updateBTState, resetBTState } = bindActionCreators(
   //   actionCreators,
