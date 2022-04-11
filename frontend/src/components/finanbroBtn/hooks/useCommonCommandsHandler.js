@@ -59,7 +59,8 @@ export const useCommonCommandsHandler = (
     setOpenedWindowNum(openedWindowNum + 1);
   };
 
-  const closeAnswerDetail = async () => {
+  const closeAnswerDetail = () => {
+    let isWindowClose = true;
     if (popupWindow) {
       if (popupWindow.length === 1)
         response(`closing the window`);
@@ -72,8 +73,11 @@ export const useCommonCommandsHandler = (
       setPopupWindow(null);
       // popupWindow.close();
     } else {
-      response(`there is no chart open to close it`);
+      // response(`there is no chart open to close it`);
+      isWindowClose = false;
     }
+
+    return isWindowClose;
   };
   // limiting the user to only move throw the app for 'go back' command
 
@@ -248,6 +252,10 @@ export const useCommonCommandsHandler = (
       handleCloseModal();
       updateModal({ isModalOpen: false });
       isWindowClose = true;
+    }
+
+    if (!isWindowClose) {
+      isWindowClose = closeAnswerDetail();
     }
 
     if (!isWindowClose) await closeChart();

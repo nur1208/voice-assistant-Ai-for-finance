@@ -595,7 +595,7 @@ export const useFinansis = ({
       commandFor: "info",
     },
     {
-      command: "open details page for the answer",
+      command: ["open details page for the answer", "open details (page) answer", "open detail (page) answer"],
       callback: () => openAnswerDetail(currentQuestion),
       commandFor: "every section",
     },
