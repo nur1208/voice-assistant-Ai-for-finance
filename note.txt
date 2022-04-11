@@ -538,11 +538,12 @@ final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
         - {DONE} improving 'open {apple} chart with your control' command 
 - {DONE} testing useCommonCommandsHandler custom hook:
         - {DONE} move closeAnswerDetail to handleCloseAnyPopup
-        - {DONE} test first second command when a user logged in
-                - {DONE} fixing error: finansis always response for 'do you want me log in' when i user start finansis with keyboard short cut
+        - {DONE} test first 'second command' when a user logged in
+                - {DONE} fixing error: finansis always response for 'do you want me log in' when i user start finansis with keyboard shortcut
         - {DONE} handle errors for 'do you want me to find an answer' command 
         - {DONE} fixing error 🛠: for 'close the window' command when open 'the most' then close it and then open 'watchLst' window. 
-
+- {TODO} testing useTradingCommendsHandler custom hook:
+        - {DONE} improving buySignal python script performance (Big O notation)         
 ----- NOT IMPORTANT NOW
 - {TODO} ler finansis remember question that she didn't find answer for it.
 - {TODO} let finansis knows when api server is down and when i user asked a question let finansis tell them 'the server is down, I can't help you know'. 

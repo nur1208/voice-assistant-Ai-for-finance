@@ -73,7 +73,6 @@ export const useTradingCommendsHandler = (
         const {
           data: { totalNumberOfBuying, foundBuySignalStocks },
         } = await axios(`${PYTHON_API}/findBuySignal`);
-        // # print(f"found {totalNumberOfBuying} buying signals ✅")
 
         if (totalNumberOfBuying > 0) {
           response(
