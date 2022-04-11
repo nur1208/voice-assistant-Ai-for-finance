@@ -259,6 +259,8 @@ export const useCommonCommandsHandler = (
     if (!isWindowClose) {
       isWindowClose = closeTheMost();
     }
+
+    // debugger;
     if (isModalOpen && !isWindowClose) {
       response("closing popup window");
       handleCloseModal();

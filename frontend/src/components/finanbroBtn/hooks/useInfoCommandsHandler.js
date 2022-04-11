@@ -745,6 +745,7 @@ export const useInfoCommandsHandler = (
         const window = theMostWindow[index];
         window.close();
       }
+      setTheMostWindow(null)
       // popupWindow.close();
       return true;
     } else {

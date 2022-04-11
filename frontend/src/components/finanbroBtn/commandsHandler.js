@@ -422,7 +422,6 @@ export const useNewsCommandsHandler = (
       );
       return isWindowClosed;
     }
-
     if (popupWindow) {
       const { data } = await axios.post(`${AUTO_API_URL}/close`);
 
