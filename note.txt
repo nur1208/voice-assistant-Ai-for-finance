@@ -544,8 +544,15 @@ final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
         - {DONE} fixing error 🛠: for 'close the window' command when open 'the most' then close it and then open 'watchLst' window. 
 - {TODO} testing useTradingCommendsHandler custom hook:
         - {DONE} improving buySignal python script performance (Big O notation)         
+        - {DONE} fixing errors 🛠: for secondCommands again 
+- {TODO} testing stopLess function after buying stocks
+- {TODO} testing sellStocks again
 ----- NOT IMPORTANT NOW
-- {TODO} ler finansis remember question that she didn't find answer for it.
+- {TODO} adding handleTradingError for buy stocks and finding buy signals
+- {TODO} improving sellSignal python script performance (Big O notation)
+- {TODO} divide sell stocks and find stocks functionality in 'sellStocks' function
+- {TODO} let finansis remember that she did buy, sell or set stop loss for stocks for a specific day 
+- {TODO} let finansis remember question that she didn't find answer for it.
 - {TODO} let finansis knows when api server is down and when i user asked a question let finansis tell them 'the server is down, I can't help you know'. 
 - {TODO} create 'scroll' command when finansis open details article page
 - {TODO} after reading 5 articles let finansis ask 'do you want me to stop reading'

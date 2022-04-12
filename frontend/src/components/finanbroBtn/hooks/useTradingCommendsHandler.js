@@ -279,6 +279,7 @@ export const useTradingCommendsHandler = (
       setSecondCommandFor(
         secondCommandOptions.rewritingTestedData
       );
+      updateSecondCommand(null);
     } else {
       // updateBTState({ isBTRunning: true });
 
@@ -349,6 +350,7 @@ export const useTradingCommendsHandler = (
       if (holdingStocks.length > 0) {
         response("do you want me to force sell");
         setSecondCommandFor(secondCommandOptions.forceSelling);
+        updateSecondCommand(null);
       }
 
       setIsForForceSell(false);

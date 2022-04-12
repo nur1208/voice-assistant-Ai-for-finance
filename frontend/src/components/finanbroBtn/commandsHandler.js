@@ -53,7 +53,7 @@ export const useNewsCommandsHandler = (
   const {
     user_store: { userData },
   } = useSelector((state) => state);
-  const { updateModal } = useReduxActions();
+  const { updateModal, updateSecondCommand } = useReduxActions();
   const getNews = async (type, query) => {
     response(`finding`);
     // 445938e7b4214f4988780151868665cc
@@ -189,7 +189,7 @@ export const useNewsCommandsHandler = (
 
     response(`do you want me to read the head lines`);
     setSecondCommandFor("readThHeadLines");
-
+    updateSecondCommand(null);
     // wait for 5 second and then let finansis listening again
     // setTimeout(() => {
     //   toggle();
@@ -385,7 +385,7 @@ export const useNewsCommandsHandler = (
         setSecondCommandFor("scrollDetailsA");
         setCurrentArticle(newsArticles[articleNum - 1]);
         setPopupWindow(data.isAutoBrowserOpen);
-
+        updateSecondCommand(null);
         // response("");
         // setCurrentArticle(null);
         // window.open(goToUrl, "_blank");
