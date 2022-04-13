@@ -20,6 +20,11 @@ import { isValidEmail } from "../../../utils/isValidEmail";
 import { LOGIN_FIELDS } from "../../finanbroBtn/hooks/useLoginFields";
 import { UPDATE_USER_INFO_FIELDS } from "../../finanbroBtn/hooks/useUpdateFields";
 import { FORGET_PASS_FIELDS } from "../../finanbroBtn/hooks/useForgetPassFields";
+import {
+  getYearMonthDay,
+  isValidDate,
+  isValidDateFormat,
+} from "../../Simulator/utils/isValidDate";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -79,6 +84,7 @@ export default function InputModal({
       confirmPasswordCounter,
     },
     user_store: { userData },
+    back_testing: { currentDate },
   } = useSelector((state) => state);
 
   // set default value for update fields
@@ -186,6 +192,171 @@ export default function InputModal({
       setUserInput("");
       return false;
     }
+
+    if (stateName === undefined || !stateName) {
+      if (
+        (labelProps?.stateName ===
+          BTfields.CASH.label.stateName ||
+          labelProps?.stateName ===
+            BTfields.ACCOUNT_RISK.label.stateName) &&
+        isNaN(userInput)
+      ) {
+        updateModal({
+          invalidMessage: `${labelProps.view} must be a valid number`,
+        });
+
+        return false;
+      }
+
+      if (
+        labelProps?.stateName ===
+          BTfields.CASH.label.stateName &&
+        Number(userInput) < 1000
+      ) {
+        updateModal({
+          invalidMessage: `${labelProps.view} must be greater then or equal one thousand`,
+        });
+
+        return false;
+      }
+
+      if (
+        labelProps?.stateName ===
+          BTfields.CASH.label.stateName &&
+        Number(userInput) > 1000000000
+      ) {
+        updateModal({
+          invalidMessage: `${labelProps.view} must be less then or equal one billion`,
+        });
+
+        return false;
+      }
+      if (
+        (labelProps?.stateName ===
+          BTfields.START_DATE.label.stateName ||
+          labelProps?.stateName ===
+            BTfields.EDN_DATE.label.stateName) &&
+        !isValidDateFormat(userInput)
+      ) {
+        updateModal({
+          invalidMessage: `${labelProps.view} must be valid format, year -(dash) month -(dash) day`,
+        });
+
+        return false;
+      }
+
+      const yearMonthDay = getYearMonthDay(userInput);
+      const isValidDateV = isValidDate(
+        yearMonthDay[0],
+        yearMonthDay[1],
+        yearMonthDay[2]
+      );
+      if (
+        (labelProps?.stateName ===
+          BTfields.START_DATE.label.stateName ||
+          labelProps?.stateName ===
+            BTfields.EDN_DATE.label.stateName) &&
+        !isValidDateV
+      ) {
+        updateModal({
+          invalidMessage: `${labelProps.view} must be valid date with year -(dash) month -(dash) day format`,
+        });
+
+        return false;
+      }
+
+      if (
+        labelProps?.stateName ===
+          BTfields.START_DATE.label.stateName &&
+        new Date(userInput) < new Date("2015-4-21")
+      ) {
+        updateModal({
+          invalidMessage: `${labelProps.view} must be greater then 2015-(dash)4-(dash)20`,
+        });
+
+        return false;
+      }
+
+      if (
+        labelProps?.stateName ===
+          BTfields.EDN_DATE.label.stateName &&
+        new Date(userInput) < new Date("2015-4-30")
+      ) {
+        updateModal({
+          invalidMessage: `${labelProps.view} must be greater then 2015-(dash)4-(dash)29`,
+        });
+
+        return false;
+      }
+
+      if (
+        labelProps?.stateName ===
+          BTfields.START_DATE.label.stateName &&
+        new Date(userInput) > new Date("2022-1-18")
+      ) {
+        updateModal({
+          invalidMessage: `${labelProps.view} must be less then 2022-(dash)1-(dash)19`,
+        });
+
+        return false;
+      }
+
+      if (
+        labelProps?.stateName ===
+          BTfields.EDN_DATE.label.stateName &&
+        new Date(userInput) > new Date("2022-2-1")
+      ) {
+        updateModal({
+          invalidMessage: `${labelProps.view} must be less then 2022-(dash)2-(dash)1`,
+        });
+
+        return false;
+      }
+
+      console.log({
+        isGreater: new Date(userInput) <= new Date(currentDate),
+        userInput: new Date(userInput),
+        currentDate: new Date(currentDate),
+      });
+      if (
+        labelProps?.stateName ===
+          BTfields.EDN_DATE.label.stateName &&
+        new Date(userInput) <= new Date(currentDate)
+      ) {
+        updateModal({
+          invalidMessage: `${
+            labelProps.view
+          } must be greater then start date (${currentDate.toLocaleString()})`,
+        });
+
+        return false;
+      }
+
+      if (
+        labelProps?.stateName ===
+          BTfields.ACCOUNT_RISK.label.stateName &&
+        Number(userInput) > 10
+      ) {
+        updateModal({
+          invalidMessage: `${labelProps.view} must be less then 11 percent`,
+        });
+
+        return false;
+      }
+
+      if (
+        labelProps?.stateName ===
+          BTfields.ACCOUNT_RISK.label.stateName &&
+        Number(userInput) < 0.2
+      ) {
+        updateModal({
+          invalidMessage: `${labelProps.view} must be greater then 0.1 percent`,
+        });
+
+        return false;
+      }
+    }
+
     return true;
   };
 

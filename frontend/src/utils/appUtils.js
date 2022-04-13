@@ -631,6 +631,7 @@ export const useFinansis = ({
     {
       command: [
         "start back testing",
+        "start Park testing",
         "start pack testing",
         "start practicing",
       ],

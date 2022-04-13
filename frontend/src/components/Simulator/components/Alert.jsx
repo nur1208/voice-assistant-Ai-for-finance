@@ -14,16 +14,19 @@ export const Alert = () => {
         <div class="v-alert__content">
           <div class="row flex-sm-nowrap">
             <div class="sim-warning-alert__message flex-grow-1 flex-shrink-1 col-sm-auto col-12">
-              Welcome to the new Simulator - we have officially switched over
-              from the old version. Get trading and have fun!
-            </div>{" "}
+              The underlying theory is that any strategy that
+              worked well in the past is likely to work well in
+              the future, and conversely, any strategy that
+              performed poorly in the past is likely to perform
+              poorly in the future.
+            </div>
             <div class="flex-grow-0 flex-shrink-0 text-right pt-0 pt-sm-3 col-sm-auto col-12">
-              <button
+              {/* <button
                 type="button"
                 class="sim-warning-alert__button text-right text-h6 v-btn v-btn--text theme--dark v-size--default primary--text"
               >
                 <span class="v-btn__content">Close</span>
-              </button>
+              </button> */}
             </div>
           </div>
         </div>
