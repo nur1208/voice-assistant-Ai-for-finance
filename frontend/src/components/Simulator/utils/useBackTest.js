@@ -15,6 +15,7 @@ import {
 } from "./useSaveTestedData";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../../../state";
+import { useReduxActions } from "../../../hooks/useReduxActions";
 
 export const lastBTDate = "2022-2-1";
 
@@ -52,13 +53,14 @@ export const useBackTest = () => {
   //   localStorageData.sp500Data
   // );
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const { updateBTState, resetBTState } = bindActionCreators(
-    actionCreators,
-    dispatch
-  );
+  // const { updateBTState, resetBTState } = bindActionCreators(
+  //   actionCreators,
+  //   dispatch
+  // );
 
+  const { updateBTState, updateModal } = useReduxActions();
   // const resetAllStates = () => {
   //   setHoldingStocks(statesDefault.holdingStocks);
   //   setSoldStocks(statesDefault.soldStocks);
@@ -133,7 +135,13 @@ export const useBackTest = () => {
         console.log(error);
 
         console.log(messageError);
+        // setMessagePopupData({
+        //   open: true,
+        //   severity: "error",
+        //   message: messageError,
+        // });
 
+        updateModal({ invalidMessage: messageError });
         await sleep(1000 * 10);
       }
     }
@@ -349,7 +357,7 @@ export const useBackTest = () => {
         await handleBackTestingAxiosError(
           checkIsMarketOpen,
           date,
-          "something went wrong while checking if market is open ❌"
+          "something went wrong while checking if market is open"
         );
 
         if (holdStocksLocal.length > 0) {
@@ -363,20 +371,20 @@ export const useBackTest = () => {
             await handleBackTestingAxiosError(
               getSp500Data,
               date,
-              "something went wrong while getting S&P 500 data ❌"
+              "something went wrong while getting S&P 500 data"
             );
 
             await handleBackTestingAxiosError(
               updateCurrentPrice,
               date,
-              "something went wrong while updating Stocks price ❌"
+              "something went wrong while updating Stocks price"
             );
             // look for sell signals for hold stocks
 
             await handleBackTestingAxiosError(
               sell,
               date,
-              "something went wrong while selling Stocks price ❌",
+              "something went wrong while selling Stocks price",
               isForceSell,
               isWithProfitOrNot
             );
@@ -415,7 +423,7 @@ export const useBackTest = () => {
           await handleBackTestingAxiosError(
             buy,
             date,
-            "something went wrong while buying Stocks price ❌"
+            "something went wrong while buying Stocks price"
           );
         } else {
           await sleep(1000 * 10);

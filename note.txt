@@ -545,7 +545,8 @@ final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
 - {TODO} testing useTradingCommendsHandler custom hook:
         - {DONE} improving buySignal python script performance (Big O notation)         
         - {DONE} fixing errors 🛠: for secondCommands again 
-        - {TODO} add validation to back testing fields
+        - {DONE} add validation to back testing fields
+        - {DONE} show and let finansis tell a user back testing's errors message
 - {TODO} testing stopLess function after buying stocks
 - {TODO} testing sellStocks again
 ----- NOT IMPORTANT NOW
