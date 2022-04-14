@@ -101,9 +101,9 @@ export const useTradingCommendsHandler = (
   const buyStocks = async () => {
     updateProgress({ buy: "loading" });
 
-    // const { totalNumberOfBuying, error } = await findBuySignal();
-    const error = false;
-    const totalNumberOfBuying = 8;
+    const { totalNumberOfBuying, error } = await findBuySignal();
+    // const error = false;
+    // const totalNumberOfBuying = 8;
     // if findBuySignal through an error exit this function here
     if (error) {
       updateProgress({ buy: "fall" });
@@ -117,7 +117,7 @@ export const useTradingCommendsHandler = (
     }
 
     try {
-      response(`found ${totalNumberOfBuying} buying signals`);
+      // response(`found ${totalNumberOfBuying} buying signals`);
       response("buying stocks");
       const {
         data: { message },
