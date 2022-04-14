@@ -548,6 +548,7 @@ final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
         - {DONE} add validation to back testing fields
         - {DONE} show and let finansis tell a user back testing's errors message
         - {DONE} creating new better buy stocks strategy for back testing
+        - {TODO} fixing stopLoss automation script in tradingApi 
 - {TODO} testing stopLess function after buying stocks
 - {TODO} testing sellStocks again
 ----- NOT IMPORTANT NOW
