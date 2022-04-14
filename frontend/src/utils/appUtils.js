@@ -734,6 +734,7 @@ export const useFinansis = ({
       command: [
         "show me trading progress",
         "open trading progress",
+        "open trade in progress",
         "show me trade in progress",
       ],
       callback: async () => await openProgressModal(),

@@ -542,7 +542,7 @@ final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
                 - {DONE} fixing error: finansis always response for 'do you want me log in' when i user start finansis with keyboard shortcut
         - {DONE} handle errors for 'do you want me to find an answer' command 
         - {DONE} fixing error 🛠: for 'close the window' command when open 'the most' then close it and then open 'watchLst' window. 
-- {TODO} testing useTradingCommendsHandler custom hook:
+- {DONE} testing useTradingCommendsHandler custom hook:
         - {DONE} improving buySignal python script performance (Big O notation)         
         - {DONE} fixing errors 🛠: for secondCommands again 
         - {DONE} add validation to back testing fields
@@ -550,6 +550,7 @@ final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
         - {DONE} creating new better buy stocks strategy for back testing
         - {DONE} fixing stopLoss automation script in tradingApi 
         - {DONE} fixing finansis saying 'found {6} buy signals twice' after finding buy signals
+        - {DONE} improving 'open trading progress' command
 - {TODO} testing stopLess function after buying stocks
 - {DONE} testing sellStocks again
 ----- NOT IMPORTANT NOW
@@ -558,6 +559,7 @@ final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
 - {TODO} fixing error: finansis always response for 'do you want me log in' when i user start finansis with keyboard shortcut again
 - {TODO} divide sell stocks and find stocks functionality in 'sellStocks' function
 - {TODO} let finansis remember that she did buy, sell or set stop loss for stocks for a specific day 
+        note: use cookies
 - {TODO} let finansis remember question that she didn't find answer for it.
 - {TODO} let finansis knows when api server is down and when i user asked a question let finansis tell them 'the server is down, I can't help you know'. 
 - {TODO} create 'scroll' command when finansis open details article page
