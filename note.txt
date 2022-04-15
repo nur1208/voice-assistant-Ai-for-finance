@@ -555,6 +555,7 @@ final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
 - {DONE} testing stopLess function after buying stocks
 - {TODO} testing useUserCommandsHandler custom hook 
         - {DONE} fixing typo in inputModal component
+        - {DONE} fixing sendEmailHandlerV2 automation script
 - {TODO} testing sellStocks again
 
 ----- NOT IMPORTANT NOW

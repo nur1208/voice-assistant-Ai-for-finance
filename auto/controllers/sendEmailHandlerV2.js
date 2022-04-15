@@ -15,6 +15,8 @@ const NEW_MESSAGE_BTN_S =
 const MESSAGE_WRAPPER_S =
   "body > div.app-root > div.composer-container > div > div > div > div > div";
 
+const INPUTS_S =
+  "body > div.app-root > div.composer-container > div > div > div > div > div input";
 const SEND_BTN_S =
   "body > div.app-root > div.composer-container > div > div > div > footer > div > div.button-group.button-group-solid-norm.button-group-medium > button";
 // const SUBJECT_INPUT_S = "#TextField242";
@@ -88,6 +90,8 @@ export const sendEmailHandlerV2 = async (req, res) => {
     page.click(LOGIN_BTN_S),
   ]);
 
+  await page.waitForTimeout(1000 * 15);
+
   await page.waitForSelector(NEW_MESSAGE_BTN_S);
 
   await page.click(NEW_MESSAGE_BTN_S);
@@ -95,14 +99,14 @@ export const sendEmailHandlerV2 = async (req, res) => {
   await page.waitForSelector(MESSAGE_WRAPPER_S);
   await page.waitForTimeout(1000 * 15);
 
-  const inputs = await page.$$("input");
+  const inputs = await page.$$(INPUTS_S);
 
   await page.waitForTimeout(1000 * 5);
 
-  await inputs[5].type(to);
+  await inputs[0].type(to);
   await page.waitForTimeout(1000 * 5);
 
-  await inputs[6].type(subject);
+  await inputs[1].type(subject);
 
   await page.waitForTimeout(1000 * 5);
 
@@ -124,7 +128,7 @@ export const sendEmailHandlerV2 = async (req, res) => {
 
   await page.waitForTimeout(1000 * 15);
 
-  //   // const message = `Forgot your password? Submit a PUT request with your new password and passwordConfirm to SOMEFJAL. if you didn't forget your password, please ignore this email`;
+  // const message = `Forgot your password? Submit a PUT request with your new password and passwordConfirm to SOMEFJAL. if you didn't forget your password, please ignore this email`;
   await browser.close();
   res.json({
     status: "success",
