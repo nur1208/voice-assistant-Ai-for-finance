@@ -519,6 +519,7 @@ deadline - before 2022-3-25 ✅ DONE on 2022-3-22
 - {DONE} fixing trading api for buy, sell and set stop loss 
 deadline - before 2022-3-25 ❌ DONE on 2022-3-30
 final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
+
 - {DONE} testing useResponse custom hook:
         - {DONE} fixing error 🛠: for 'open article {1}' command
         - {DONE} fixing error 🛠: don't let finansis close the details article page before finishing scrolling the page 
@@ -551,9 +552,13 @@ final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
         - {DONE} fixing stopLoss automation script in tradingApi 
         - {DONE} fixing finansis saying 'found {6} buy signals twice' after finding buy signals
         - {DONE} improving 'open trading progress' command
-- {TODO} testing stopLess function after buying stocks
-- {DONE} testing sellStocks again
+- {DONE} testing stopLess function after buying stocks
+- {TODO} testing useUserCommandsHandler custom hook 
+        - {DONE} fixing typo in inputModal component
+- {TODO} testing sellStocks again
+
 ----- NOT IMPORTANT NOW
+- {TODO} don't let the user enter his info again if the email exist, just let him update his email
 - {TODO} adding handleTradingError for buy stocks and finding buy signals
 - {TODO} improving sellSignal python script performance (Big O notation)
 - {TODO} fixing error: finansis always response for 'do you want me log in' when i user start finansis with keyboard shortcut again

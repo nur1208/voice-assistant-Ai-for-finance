@@ -154,7 +154,7 @@ export default function InputModal({
       userInput.length < 8
     ) {
       updateModal({
-        invalidMessage: `${label} must be more than 7 letters, please enter a longer ${label}`,
+        invalidMessage: `${label} must be more than 8 letters, please enter a longer ${label}`,
       });
 
       return false;
