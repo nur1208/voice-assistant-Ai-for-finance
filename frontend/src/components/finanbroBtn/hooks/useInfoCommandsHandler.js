@@ -193,8 +193,6 @@ export const useInfoCommandsHandler = (
 
   let currentStock = {};
   const changeDate = async () => {
-    
-
     try {
       const { data } = await axios.post(
         `${AUTO_API_URL}/changeDate`,
@@ -217,10 +215,8 @@ export const useInfoCommandsHandler = (
   };
 
   const openChartWithControl = async (symbol) => {
-    if(!isUserInfoValid())
-      return;
+    if (!isUserInfoValid()) return;
     try {
-      
       response("loading the page will take seconds");
       const { data } = await axios.post(`${AUTO_API_URL}/open`, {
         goToUrl: `${YAHOO_FINANCE_URL}/chart/${symbol}`,
@@ -605,25 +601,18 @@ export const useInfoCommandsHandler = (
         windowType.type ===
         YAHOO_FINANCE_OPENING_OPTIONS.DELETE_FROM_WATCH_LIST
       ) {
-        handleAddingToWatch(symbol, _id);
+        updateUserInfo(
+          userData.id,
+          { removeWatchList: [_id] },
+          response
+        );
       }
 
       if (
         windowType.type ===
         YAHOO_FINANCE_OPENING_OPTIONS.ADD_TO_WATCH_LIST
       ) {
-        const isStockInWatchList = userData.watchList.map(
-          (stocks) => _id === stocks._id
-        );
-
-        if (isStockInWatchList.includes(true)) {
-          response(`${symbol} is already in your watch list`);
-        } else
-          updateUserInfo(
-            userData.id,
-            { watchList: [_id] },
-            response
-          );
+        handleAddingToWatch(symbol, _id);
       }
       if (windowType.type === "soldChart") {
         openYahooFinance("chart", symbol, true, true);
@@ -745,7 +734,7 @@ export const useInfoCommandsHandler = (
         const window = theMostWindow[index];
         window.close();
       }
-      setTheMostWindow(null)
+      setTheMostWindow(null);
       // popupWindow.close();
       return true;
     } else {

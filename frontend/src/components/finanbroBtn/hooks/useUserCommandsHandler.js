@@ -294,6 +294,7 @@ export const useUserCommandsHandler = (
     }
   };
 
+  // show client errors
   useEffect(() => {
     if (invalidMessage) {
       setMessagePopupData({
@@ -319,6 +320,7 @@ export const useUserCommandsHandler = (
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [invalidMessage]);
 
+  // show errors the backend
   useEffect(() => {
     if (error) {
       setTimeout(() => {
