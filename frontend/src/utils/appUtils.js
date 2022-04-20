@@ -747,6 +747,8 @@ export const useFinansis = ({
   useEffect(() => {
     (async () => {
       try {
+        console.log({ commandsNum: commands.length });
+
         const {
           data: { docs },
         } = await axios.get(

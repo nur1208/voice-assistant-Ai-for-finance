@@ -558,8 +558,18 @@ final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
         - {DONE} fixing sendEmailHandlerV2 automation script
         - {DONE} fixing errors 🛠: 'remove 'apple' stock from my watchList
 - {TODO} testing sellStocks again
-
+- {TODO} Writing the thesis:
+        - {DONE} starting Writing the thesis
+        - {DONE} Writing the ABSTRACT
+        - {DONE} Writing the keywords
+deadline - before 2022-5-2
 ----- NOT IMPORTANT NOW
+- {TODO} learning blockchain
+- {TODO} adding smart contract 
+        note: for example the user will send 10 'yuan' and he want 
+                his money back if finansis trade the 10 'yuan' 
+                and return 5 'yuan' from the trade or after ten days 
+                return my money
 - {TODO} create 'what's my name' command 
 - {TODO} don't let the user enter his info again if the email exist, just let him update his email
 - {TODO} adding handleTradingError for buy stocks and finding buy signals
@@ -627,6 +637,7 @@ final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
 - {TODO} use react-currency-format package for when a user enter date (startDate, ...) 
         note: clone TextField style 
 - {TODO} change closeChart name to closeYahooFinance
+- {TODO} creating readme in the github
 133 - {TODO} create callAxios function and use it in useBackTest for clean up axios calls
             note: this is not easy to do so do it later if it still important
                 here is a hint of how you can do it?
@@ -702,7 +713,7 @@ Playing ----
 
 finansis color 1 - #0033CC , 2 - #131313 3 - #FAFAFA
 
-big problems that happened when building finansis:
+major problems that happened when building finansis:
 - how to let finansis recognize, English words [solved]
 - how to let finansis speak out loud [solved]
 - how to run scraping news script for 24 hours [solved]
@@ -737,3 +748,25 @@ big problems that happened before building finansis:
 - what is stock market
 - how I can make money from the stock market
 - how to use python to build a stock market bot
+
+thesis notes:
+ABSTRACT:
+This project aims to develop a voice-controlled application 
+for finance, a voice assistant for finance. this application is the same as Siri, 
+Siri is a virtual assistant that is part of Apple Inc.'s iOS but finansis
+is more focused on finance more specific the stock market.
+Finansis develop for traders or normal people that interested in the stock market.
+The system is a web application that can be accessed through the internet.
+This system can be used for knowing the stock market news (real-time news), 
+knowing current a stock price (real-time price), knowing stock information, showing a stock chart,
+asking questions related to the stock market, the ability for finansis to 'learn' about the stock market,
+backtesting a trading strategy,and the most interesting is using Algorithmic Trading to trade stocks.
+
+Keywords:
+Finance Stock Market Algorithmic Trading python MERN STACK NO-SQL Mongo database scraping automation
+sections:
+Stock Market 
+Algorithmic Trading
+React
+mongodb 
+
