@@ -562,8 +562,10 @@ final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
         - {DONE} starting Writing the thesis
         - {DONE} Writing the ABSTRACT
         - {DONE} Writing the keywords
+        - {DONE} Writing the INTRODUCTION of my thesis
 deadline - before 2022-5-2
 ----- NOT IMPORTANT NOW
+- {TODO} fix Dependabot alerts in the github
 - {TODO} learning blockchain
 - {TODO} adding smart contract 
         note: for example the user will send 10 'yuan' and he want 
@@ -650,6 +652,8 @@ deadline - before 2022-5-2
 - {TODO} let the user type the symbol or choose a number from his watch list
 - {TODO NOT IMPORTANT NOW} save S&P 500 stocks like {date:{added:[stocks],removed:[stocks] }}
 - {TODO} set cookie in react
+- {TODO} making news api more secure
+- {TODO} adding private key functionality to new api 
 get  is the market open data using python and get the data every day
 
 - {TODO NOT IMPORTANT NOW} add cancel axios request when the page unmounted 
@@ -764,9 +768,42 @@ backtesting a trading strategy,and the most interesting is using Algorithmic Tra
 
 Keywords:
 Finance Stock Market Algorithmic Trading python MERN STACK NO-SQL Mongo database scraping automation
+
+into:
+The main problem that Finansis application tries to solve is to help
+people to have financial freedom, to create a passive income for
+them and lastly to make the developer of this application extremely rich.
+there are five main modules in this voice-controlled application User management, Stock Market News, 
+Stock information, controlling the app with a voice, and automating stock trading. 
+there are 59 commands that Finansis understand plus stock related questions 
+(for example 'what is market capitalization) and Finansis can 
+ask more than 14 yes/no questions and then respond and do something 
+based on a user's answer and lastly, Finansis can ask a user to choose
+stock from a list of stocks. Finansis has the ability to 'learn' about related 
+Stock market questions and Stocks' symbol, actually Finansis just search in DuckduckGo (search engine like google)
+and then save the piece of information in the database. two mini-projects help Finansis
+news API, and Trading API, Trading API is a private project, news API is an API to save Scraped news in the database and let finansis retrieve news
+from the database and news API is online (api url: https://news-api-lovat.vercel.app/api/v1/news). 
+there are four python scraping scripts running for 24 hours online (url:  https://replit.com/@mHmdnwr/Chromium-Advanced-5ad#main.py), 
+scraping news from yahoo finance, google finance, investing and seeking websites, and all that for free.
+
+Future Goals For The System 
+- Improving UI design.
+- Trading stocks with real money.
+- Making the System online.
+- Creating our own voice Recognition AI.
+- Adding Smart contracts 
+
+frontend technologies:
+backend technologies:
+Algorithmic Trading technologies:
+scraping technologies:
+automation technologies:
+
 sections:
 Stock Market 
 Algorithmic Trading
 React
 mongodb 
+S&P500
 
