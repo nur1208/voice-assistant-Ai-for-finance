@@ -563,7 +563,8 @@ final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
         - {DONE} Writing the ABSTRACT
         - {DONE} Writing the keywords
         - {DONE} Writing the INTRODUCTION of my thesis
-        - {DONE} Writing SYSTEM PROBLEMS AND REQUIREMENTS ANALYSIS part 1 (User management, Stock Market News, Stock information)       
+        - {DONE} Writing SYSTEM PROBLEMS AND REQUIREMENTS ANALYSIS part 1 (User management, Stock Market News, Stock information)
+        - {DONE} Writing SYSTEM PROBLEMS AND REQUIREMENTS ANALYSIS part 2 (controlling the app with a voice module, making Finansis response, back-testing stock trading strategy)       
 deadline - before 2022-5-2
 ----- NOT IMPORTANT NOW
 - {TODO} fix Dependabot alerts in the github
@@ -801,8 +802,10 @@ SYSTEM PROBLEMS AND REQUIREMENTS ANALYSIS:
 - Stock Market News
 - Stock information
 - controlling the app with a voice
+- making Finansis response
+- asking questions about the stock market
 - back-testing stock trading strategy
-- and automating stock trading
+- automating stock trading
 
 The User management module contains all functionality related to users.
 a user can register to the app, can log in, can update his/her 
@@ -834,10 +837,22 @@ active, gainers, or losers stocks by opening yahoo finance stocks screener.
 showing users a stock statistics by opening yahoo finance stock statistics section.
 showing users sold stocks by opening yahoo finance stock chart and then changing the date range to equal 
 date of buying and selling of the sold stock.
+the main function is useInfoCommandsHandler.
 
+controlling the app with a voice module is to control the app by telling Finansis commands.
+navigating between pages by telling finansis 'go forward', 'go back' or 'go to {news|info|...} page' 
+({news|info|..} is dynamic values,example: 'go to news page'). 
+zooming in or out charts, scrolling news page, scrolling details news page.
+closing any popup windows. 
 
+making Finansis response module is to make Finansis speak out loud.
+responding to users, asking users yes/no questions, or asking users to choose a stock from a stocks list.
+stopping finansis from recognizing when Finansis start speaking out loud
 
-
+back-testing stock trading strategy module is to let users test stock trading strategy.
+users will input start date, end date, initial cash, and account risk per trade.
+helping developers of this app to come up with better trading strategy
+I will talk about back-testing later in this thesis
 
 frontend technologies:
 backend technologies:
@@ -846,6 +861,8 @@ scraping technologies:
 automation technologies:
 
 sections:
+DONE TODOS list:
+Future TODOS list:
 Stock Market 
 Algorithmic Trading
 React
