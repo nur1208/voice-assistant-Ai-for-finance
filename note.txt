@@ -563,6 +563,7 @@ final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
         - {DONE} Writing the ABSTRACT
         - {DONE} Writing the keywords
         - {DONE} Writing the INTRODUCTION of my thesis
+        - {DONE} Writing SYSTEM PROBLEMS AND REQUIREMENTS ANALYSIS part 1 (User management, Stock Market News, Stock information)       
 deadline - before 2022-5-2
 ----- NOT IMPORTANT NOW
 - {TODO} fix Dependabot alerts in the github
@@ -716,7 +717,7 @@ Playing ----
     using fundamental analysis + technical analysis + machine learning RNN algorithm     
 
 finansis color 1 - #0033CC , 2 - #131313 3 - #FAFAFA
-
+major problems occurred in this project:
 major problems that happened when building finansis:
 - how to let finansis recognize, English words [solved]
 - how to let finansis speak out loud [solved]
@@ -773,8 +774,9 @@ into:
 The main problem that Finansis application tries to solve is to help
 people to have financial freedom, to create a passive income for
 them and lastly to make the developer of this application extremely rich.
-there are five main modules in this voice-controlled application User management, Stock Market News, 
-Stock information, controlling the app with a voice, and automating stock trading. 
+there are seven main modules in this voice-controlled application User management, Stock Market News, 
+Stock information, controlling the app with a voice, letting Finansis response
+,back-testing stock trading strategy, and automating stock trading. 
 there are 59 commands that Finansis understand plus stock related questions 
 (for example 'what is market capitalization) and Finansis can 
 ask more than 14 yes/no questions and then respond and do something 
@@ -793,6 +795,49 @@ Future Goals For The System
 - Making the System online.
 - Creating our own voice Recognition AI.
 - Adding Smart contracts 
+SYSTEM PROBLEMS AND REQUIREMENTS ANALYSIS:
+2.1Functional requirement:
+- User management
+- Stock Market News
+- Stock information
+- controlling the app with a voice
+- back-testing stock trading strategy
+- and automating stock trading
+
+The User management module contains all functionality related to users.
+a user can register to the app, can log in, can update his/her 
+information, can update his/her password, can add and remove stocks 
+from his/her watch list, and if a user forgets his/her password a user 
+can create a new password by receiving a reset token in his/her email.
+ the main function responsible for this module is useUserCommandsHandler in the source code
+
+The Stock Market News module contains all functionality related to the news.
+getting news by source, keyword in the headline, latest or top stories.
+Get more news. scraping news from yahoo finance, google finance, investing,
+and seeking websites. saving scraped news in the database. letting Finansis start 
+reading news headlines from the first article, 
+start reading them from specific article's number, or stop reading them.
+opening article's details page with help of Finansis or without, if a window
+opened with Finansis’s help, Finansis can scroll the window. 
+the main function is useNewsCommandsHandler.
+
+Stock information module contains all functionality related to stock 
+information. opening stock chart using yahoo finance's charts 
+with Finansis's help or without, if the chart is opened with 
+Finansis's help, Finansis can change the chart's typed daily,
+1 minute, or whatever valid type, and Finansis can also zoom the 
+chart in or out. opening multiple charts at once only without 
+Finansis's help. Get the stock's current price (real-time price) 
+for free using the following API (URL: https://yahoo-finance-api.vercel.app/AAPL).
+helping finansis to learn about companies. showing users the most
+active, gainers, or losers stocks by opening yahoo finance stocks screener. 
+showing users a stock statistics by opening yahoo finance stock statistics section.
+showing users sold stocks by opening yahoo finance stock chart and then changing the date range to equal 
+date of buying and selling of the sold stock.
+
+
+
+
 
 frontend technologies:
 backend technologies:
@@ -806,4 +851,6 @@ Algorithmic Trading
 React
 mongodb 
 S&P500
+yahoo finance
 
+@1208_noor
