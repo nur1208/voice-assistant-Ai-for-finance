@@ -565,6 +565,7 @@ final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
         - {DONE} Writing the INTRODUCTION of my thesis
         - {DONE} Writing SYSTEM PROBLEMS AND REQUIREMENTS ANALYSIS part 1 (User management, Stock Market News, Stock information)
         - {DONE} Writing SYSTEM PROBLEMS AND REQUIREMENTS ANALYSIS part 2 (controlling the app with a voice module, making Finansis response, back-testing stock trading strategy)       
+        - {DONE} Writing SYSTEM PROBLEMS AND REQUIREMENTS ANALYSIS part 3 (Asking questions about the stock market, )       
 deadline - before 2022-5-2
 ----- NOT IMPORTANT NOW
 - {TODO} fix Dependabot alerts in the github
@@ -805,7 +806,7 @@ SYSTEM PROBLEMS AND REQUIREMENTS ANALYSIS:
 - making Finansis response
 - asking questions about the stock market
 - back-testing stock trading strategy
-- automating stock trading
+- automating stock trading (Trading Bot)
 
 The User management module contains all functionality related to users.
 a user can register to the app, can log in, can update his/her 
@@ -854,6 +855,24 @@ users will input start date, end date, initial cash, and account risk per trade.
 helping developers of this app to come up with better trading strategy
 I will talk about back-testing later in this thesis
 
+
+asking questions about the stock market module is to let users ask questions about 
+the stock market and then Finansis answers the question if the answer of the question
+not exist in the database, then Finansis will search in the DuckduckGo (search engine like Google)
+and after that save the answer in the database and lastly answer the question so if someone asked the same question
+again Finansis just answer it.  
+
+automating stock trading (Trading Bot) module is to let Finansis buy, sell and set stop loss for stocks
+using Algorithmic Trading. the trading flow first set stop loss for bought stocks (I will talk about stop loss in the Algorithmic Trading section),
+second find sell signals for bought stocks and then sell them if a signal has been found, 
+third scrap S&P 500 stocks (I will also talk about S&P 500 stocks in this thesis), and then save them in python array, 
+fourth loop through all S&P 500 stocks to find buy signals then save them in the database if a signal has been found,
+lastly, get found buy signal stocks from the database and then buy them. 
+in this project for current version 1.0 all buy and sell stocks in a simulator for the stock market
+I used Investopedia's simulator (URL: https://www.investopedia.com/simulator).
+
+the trading flow first find buy signals then save them in the database,
+second, get found buy signal stocks from the database and then buy them 
 frontend technologies:
 backend technologies:
 Algorithmic Trading technologies:
