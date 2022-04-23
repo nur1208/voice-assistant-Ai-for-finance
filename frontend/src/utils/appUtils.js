@@ -823,6 +823,7 @@ export const useFinansis = ({
     "i didn't get it. please try again",
     "i didn't get it. try again",
   ];
+
   useEffect(() => {
     // check if finalTranscript is one of the questions
 

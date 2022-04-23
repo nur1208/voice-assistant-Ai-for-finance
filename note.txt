@@ -565,7 +565,8 @@ final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
         - {DONE} Writing the INTRODUCTION of my thesis
         - {DONE} Writing SYSTEM PROBLEMS AND REQUIREMENTS ANALYSIS part 1 (User management, Stock Market News, Stock information)
         - {DONE} Writing SYSTEM PROBLEMS AND REQUIREMENTS ANALYSIS part 2 (controlling the app with a voice module, making Finansis response, back-testing stock trading strategy)       
-        - {DONE} Writing SYSTEM PROBLEMS AND REQUIREMENTS ANALYSIS part 3 (Asking questions about the stock market, Automating stock trading (Trading Bot))       
+        - {DONE} Writing SYSTEM PROBLEMS AND REQUIREMENTS ANALYSIS part 3 (Asking questions about the stock market, Automating stock trading (Trading Bot))
+        - {DONE}Writing major problems occurred in this project part 1       
 deadline - before 2022-5-2
 ----- NOT IMPORTANT NOW
 - {TODO} fix Dependabot alerts in the github
@@ -720,6 +721,14 @@ Playing ----
 
 finansis color 1 - #0033CC , 2 - #131313 3 - #FAFAFA
 major problems occurred in this project:
+- let Finansis recognizes English words: solved by using react-speech-recognition npm package which uses Web Speech API.
+- let Finansis speaks out loud: solved by copying react-speech-kit npm package's  'useSpeechSynthesis' function and then adding more logic to the function. useSpeechSynthesis function uses Web Speech API too.
+- run scraping news script for 24 hours: solved by using python's webbot and Beautiful Soup packages to write scraping news scripts and Replit online IDE to run the scrips for 24 hours and also using python's request package to call news API's 'save articles' endpoint
+- let Finansis recognizes unknown commands: solved by creating some logic to check for the user's command against existing commands, you can find the logic in the source code appUtils file under 'code for handling unknown commands' comment.        
+- deploy new's api: solved by using vercel
+- open yahoo finance website with different stocks (with dynamic value): solved by finding a pattern in yahoo finance' URL which is passing the stock symbol in ${dynamic value} https://finance.yahoo.com/quote/${dynamic value}?p=${dynamic value}
+- get real-time stock prices: solved by finding free API to provide real-time stock prices (API URL: https://yahoo-finance-api.vercel.app/${symbol}), (youtube URL of the Creator: https://www.youtube.com/watch?v=JVZXz6awRj4&t=3573s)  
+- let Finansis calls puppeteer scripts (automation scrips): solved by creating auto API using node js express which is each endpoint will call specific automation script, and then using Axios to let Finansis calls the API. note: I tried to call puppeteer scripts in react which is Client-side rendering but didn't work because puppeteer scripts only run in Server-side rendering.
 major problems that happened when building finansis:
 - how to let finansis recognize, English words [solved]
 - how to let finansis speak out loud [solved]
