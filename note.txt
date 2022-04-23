@@ -566,8 +566,10 @@ final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
         - {DONE} Writing SYSTEM PROBLEMS AND REQUIREMENTS ANALYSIS part 1 (User management, Stock Market News, Stock information)
         - {DONE} Writing SYSTEM PROBLEMS AND REQUIREMENTS ANALYSIS part 2 (controlling the app with a voice module, making Finansis response, back-testing stock trading strategy)       
         - {DONE} Writing SYSTEM PROBLEMS AND REQUIREMENTS ANALYSIS part 3 (Asking questions about the stock market, Automating stock trading (Trading Bot))
-        - {DONE}Writing major problems occurred in this project part 1       
+        - {DONE} Writing major problems occurred in this project part 1       
+        - {DONE} Writing major problems occurred in this project part 2       
 deadline - before 2022-5-2
+- {TODO} creating video for each command to demonstrate each command
 ----- NOT IMPORTANT NOW
 - {TODO} fix Dependabot alerts in the github
 - {TODO} learning blockchain
@@ -729,6 +731,16 @@ major problems occurred in this project:
 - open yahoo finance website with different stocks (with dynamic value): solved by finding a pattern in yahoo finance' URL which is passing the stock symbol in ${dynamic value} https://finance.yahoo.com/quote/${dynamic value}?p=${dynamic value}
 - get real-time stock prices: solved by finding free API to provide real-time stock prices (API URL: https://yahoo-finance-api.vercel.app/${symbol}), (youtube URL of the Creator: https://www.youtube.com/watch?v=JVZXz6awRj4&t=3573s)  
 - let Finansis calls puppeteer scripts (automation scrips): solved by creating auto API using node js express which is each endpoint will call specific automation script, and then using Axios to let Finansis calls the API. note: I tried to call puppeteer scripts in react which is Client-side rendering but didn't work because puppeteer scripts only run in Server-side rendering.
+part 2
+- let Finansis control the popup window that Finansis opened: solved by using puppeteer automation functionality and then doing the same as the above problem's solution. 
+- let Finansis calls python scripts (Algorithmic Trading scripts): solved by creating API using python Flask each endpoint will call specific python script, and then using Axios to let Finansis calls Flask API.
+- let the user enter info field by field and finansis keep interacting with the user: solved by creating 'InputModal' modal which will open when the time to enter information after a user finishes inputting then entering 'Enter' and then close the modal and save entered data in redux, lastly let finansis response when a data in redux changes. 
+- send emails to users: solved by creating endpoint in auto API which will call puppeteer automation script to send emails to a user. note: I tried to use nodemailer but it didn't work without a VPN
+- create backTesting interface: solved by cloning Investopedia simulator home page and then customizing it. 
+- create backTesting functionality: solved by creating python Flask buy, sell, get sp500 Data, update stocks price and check is market open or not endpoints and then using them in React  
+- manage state in big application: solved by using redux which is react state management 
+- get the real stocks in the s&p 500 for a specific year in backTesting functionality: this problem is has been not solved yet.
+- let finansis learn about stock market questions: solved by searching for an answer in DuckduckGo search engine using puppeteer to type the question, select the first website, scrap the answer and then save the answer in the database. actually, if the question was 'what is market capitalization' finansis will search about the question and add 'investopedia' word at the end of the question for example 'what is market capitalization investopedia' so then the first result will be from investopedia website and that because investopedia is a good website for finding stock market answers
 major problems that happened when building finansis:
 - how to let finansis recognize, English words [solved]
 - how to let finansis speak out loud [solved]
@@ -738,7 +750,7 @@ major problems that happened when building finansis:
 - how to open yahoo finance website with different stocks (with dynamic value) [solved]
 - how to get real-time stock prices [solved]
 - how to call puppeteer scripts using rest api [solved]
-- how to let finansis controller windows that she opened [solved]
+- how to let Finansis controller windows that Finansis opened [solved]
 - how to call python scripts using rest api [solved]
 - how to let the user enter info field by field and finansis keep interacting with the user [solved]
 - how to send emails to a users [solved]
