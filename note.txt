@@ -568,6 +568,7 @@ final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
         - {DONE} Writing SYSTEM PROBLEMS AND REQUIREMENTS ANALYSIS part 3 (Asking questions about the stock market, Automating stock trading (Trading Bot))
         - {DONE} Writing major problems occurred in this project part 1       
         - {DONE} Writing major problems occurred in this project part 2       
+        - {DONE} Writing major problems occurred in this project part 3       
 deadline - before 2022-5-2
 - {TODO} creating video for each command to demonstrate each command
 ----- NOT IMPORTANT NOW
@@ -741,6 +742,12 @@ part 2
 - manage state in big application: solved by using redux which is react state management 
 - get the real stocks in the s&p 500 for a specific year in backTesting functionality: this problem is has been not solved yet.
 - let finansis learn about stock market questions: solved by searching for an answer in DuckduckGo search engine using puppeteer to type the question, select the first website, scrap the answer and then save the answer in the database. actually, if the question was 'what is market capitalization' finansis will search about the question and add 'investopedia' word at the end of the question for example 'what is market capitalization investopedia' so then the first result will be from investopedia website and that because investopedia is a good website for finding stock market answers
+part 3
+- let Finansis learn about stocks symbol and their company name: solved by searching for stock in yahoo finance database using puppeteer to type the stock in yahoo finance search bar, select all suggested stocks, scrap the stocks and then save them in the database.
+- let Finansis remember an unknown keyword in yahoo finance database for stocks: solved by creating 'unknownKeywordForCompany' model, if Finansis search for a keyword in yahoo finance search bar, but didn't find any stock with the given keyword so then finansis will save the given keyword in the database, for example searching 'Nur' keyword will return nothing, so next time when searching for 'Nur' keyword it will take short time for Finansis to tell a user 'didn't find a stock with the given keyword', let Finansis remember that 'Nur' keyword returns nothing so no need for searching 'Nur' again. 
+- not having duplicate news article in the database: solved by making the article's title plus published date plus source a unique value for each article, so when the article has been scrapped, first the script will make get request to the news API by passing the unique value if the article exists then no need to save it again, otherwise send a post request to news API to save the article. 
+- not let Finansis recognize her own voice: solved by stopping Finansis from recognizing when Finansis start to speak out loud then after finishing speaking making Finansis start recognize again. in simple words toggle voice recognition.  
+- use python to build a stock market bot: solved by searching different Algorithmic stocks trading python scripts, studying them, combining them, and then customizing them by changing conditions and input numbers.
 major problems that happened when building finansis:
 - how to let finansis recognize, English words [solved]
 - how to let finansis speak out loud [solved]
