@@ -569,7 +569,8 @@ final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
         - {DONE} Writing major problems occurred in this project part 1       
         - {DONE} Writing major problems occurred in this project part 2       
         - {DONE} Writing major problems occurred in this project part 3       
-        - {DONE} Writing The first data flow graph
+        - {DONE} creating The first data flow graph
+        - {DONE} creating The second data flow graph
 deadline - before 2022-5-2
 returning data
 response
