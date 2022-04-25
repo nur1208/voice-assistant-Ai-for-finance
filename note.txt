@@ -571,6 +571,7 @@ final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
         - {DONE} Writing major problems occurred in this project part 3       
         - {DONE} creating The first data flow graph
         - {DONE} creating The second data flow graph
+        - {DONE} creating The third data flow graph (backtesting)
 deadline - before 2022-5-2
 returning data
 response
@@ -920,5 +921,5 @@ React
 mongodb 
 S&P500
 yahoo finance
-
+thanks to every teacher teach me something about computer science in Wenzhou or in the internet , thanks to each programmer in stackoverflow that help me or build technologe I used in this project,  and special thanks to Wingo Laoshi.
 @1208_noor
