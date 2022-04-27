@@ -574,6 +574,7 @@ final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
         - {DONE} creating The third data flow graph (backtesting)
         - {DONE} creating The third data flow graph (questions module)
         - {DONE} creating The third data flow graph (Stock information)
+        - {DONE} creating The third data flow graph (user management)
 deadline - before 2022-5-2
 returning data
 response
