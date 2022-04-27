@@ -576,19 +576,21 @@ final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
         - {DONE} creating The third data flow graph (Stock information)
         - {DONE} creating The third data flow graph (user management)
         - {DONE} creating The third data flow graph (Stock Market News)
+        - {DONE} creating The third data flow graph (automating trading)
 deadline - before 2022-5-2
 returning data
 response
 retrieve
 - {TODO} creating video for each command to demonstrate each command
 ----- NOT IMPORTANT NOW
+- {TODO} show users all commands in each section
 - {TODO} fix Dependabot alerts in the github
 - {TODO} learning blockchain
 - {TODO} adding smart contract 
         note: for example the user will send 10 'yuan' and he want 
                 his money back if finansis trade the 10 'yuan' 
                 and return 5 'yuan' from the trade or after ten days 
-                return my money
+                return the money
 - {TODO} create 'what's my name' command 
 - {TODO} don't let the user enter his info again if the email exist, just let him update his email
 - {TODO} adding handleTradingError for buy stocks and finding buy signals
