@@ -577,6 +577,7 @@ final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
         - {DONE} creating The third data flow graph (Stock Market News)
         - {DONE} creating The third data flow graph (automating trading)
         - {DONE} creating System structure diagram
+        - {DONE} Writing Commands OVERVIEW
 - {TODO} testing sellStocks again
 deadline - before 2022-5-2
 returning data
@@ -914,6 +915,82 @@ I used Investopedia's simulator (URL: https://www.investopedia.com/simulator).
 
 the trading flow first find buy signals then save them in the database,
 second, get found buy signal stocks from the database and then buy them 
+
+3.2Commands description:
+3.2.1User management commands:
+sign up, register
+login
+forgot (my) password
+update my information
+logout
+update (my) password
+add {Apple|AAPL|...} stock to (my) watch list
+delete {Apple|AAPL|...} stock from (my) watch list
+open (my) watch list
+3.2.2Stock Market News commands:
+Give me the news from {yahoo finance|investing|seekingalpha}
+open article (number) {1|5|...}
+what's up with {Apple|China|...}
+Give me the latest news
+read the news
+give me more news
+start reading (news) from article {1|5|...}
+open article (number) {1|5|...} without control
+give me top stories
+give me {Apple|AAPL|...} stock news
+3.2.3Stock information commands:
+open {Apple|AAPL|...} (symbol) chart
+give me {Apple|AAPL|...} statistics
+give me The most {actives|gainers|losers} stocks
+give me trending stocks
+open {Apple|AAPL|...} (symbol) chart with your control
+what is the current price for {Apple|AAPL|...} (symbol)
+show me {Apple and Tesla|AAPL and DD|Apple and Tesla and amazon|...} charts
+
+3.2.4controlling the app with a voice commands:
+go back
+go to {info|news|...} (page)
+close the window
+zoom {in|out}
+change the chart to {1 minute|1 hour|...}
+go forward
+3.2.5asking questions about the stock market commands:
+open details page for the answer
+what is market capitalization
+other questions exist in the database 
+and any unknown command start with 'how' or 'what'  
+3.2.6back-testing stock trading strategy commands:
+start back testing
+reset back testing (data)
+force sell
+sell with profit or without
+3.2.7other commands:
+stock (number) {1|5|...}
+what can you do
+what is your name
+(of course) yes
+no
+do you have a boyfriend
+can you hear me 
+stop listening
+thank you
+what's the date today
+3.2.8automating stock trading commands:
+buy stocks
+sell stocks
+set stop-loss for stocks
+trade stocks for me
+find buy signals
+show me (a) chart for found buy signals (stocks)
+sold stocks chart
+show me trading progress
+
+:YES - NO QUESTIONS
+
+note: if a word between () that means the word is optional.
+note: if a word between {} that means the word is dynamic.
+note: | is separator between the dynamic options for a command.
+note: ... means that there is more dynamic options then words inside {}.  
 frontend technologies:
 backend technologies:
 Algorithmic Trading technologies:

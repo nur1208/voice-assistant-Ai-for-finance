@@ -279,21 +279,21 @@ export const useFinansis = ({
       callback: async () => showWatchList(),
     },
 
-    // deleteFromWatchList
-    {
-      command: "test",
-      commandFor: "every section",
-      callback: async () => {
-        await responseAsync(
-          "Firstly, wrap the index.js or the root app component of your application with the CookiesProvider component from the react-cookie package."
-        );
-        await responseAsync(
-          "Cookies: Javascript object with all of the user’s cookies."
-        );
-        await responseAsync("someting short");
-        await responseAsync("Function to remove the cookies.");
-      },
-    },
+    // // deleteFromWatchList
+    // {
+    //   command: "test",
+    //   commandFor: "every section",
+    //   callback: async () => {
+    //     await responseAsync(
+    //       "Firstly, wrap the index.js or the root app component of your application with the CookiesProvider component from the react-cookie package."
+    //     );
+    //     await responseAsync(
+    //       "Cookies: Javascript object with all of the user’s cookies."
+    //     );
+    //     await responseAsync("someting short");
+    //     await responseAsync("Function to remove the cookies.");
+    //   },
+    // },
 
     // {
     //   command: ["你叫什么名字"],
@@ -466,7 +466,7 @@ export const useFinansis = ({
       callback: async (num) => await foundMultipleStocks(num),
       commandFor: "info",
     },
-
+// it is a joke
     {
       command: "do you have a boyfriend",
       callback: async (num) => {
@@ -477,7 +477,7 @@ export const useFinansis = ({
         await sleep(1000 * 3);
         response("Chris Hemsworth");
       },
-      commandFor: "info",
+      commandFor: "every section",
     },
 
     {
@@ -638,10 +638,12 @@ export const useFinansis = ({
       callback: () => startBackTesting(),
       commandFor: "backTesting",
     },
+// it is a joke
+
     {
       command: ["thank you", "thanks"],
       callback: async () => {
-        response("fuck you");
+        response("hate you");
         await sleep(3000);
         response("no sorry, I meant I love you");
       },
