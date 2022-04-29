@@ -557,7 +557,6 @@ final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
         - {DONE} fixing typo in inputModal component
         - {DONE} fixing sendEmailHandlerV2 automation script
         - {DONE} fixing errors 🛠: 'remove 'apple' stock from my watchList
-- {TODO} testing sellStocks again
 - {TODO} Writing the thesis:
         - {DONE} starting Writing the thesis
         - {DONE} Writing the ABSTRACT
@@ -577,6 +576,8 @@ final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
         - {DONE} creating The third data flow graph (user management)
         - {DONE} creating The third data flow graph (Stock Market News)
         - {DONE} creating The third data flow graph (automating trading)
+        - {DONE} creating System structure diagram
+- {TODO} testing sellStocks again
 deadline - before 2022-5-2
 returning data
 response
