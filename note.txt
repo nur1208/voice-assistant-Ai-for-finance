@@ -578,6 +578,7 @@ final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
         - {DONE} creating The third data flow graph (automating trading)
         - {DONE} creating System structure diagram
         - {DONE} Writing Commands OVERVIEW
+        - {DONE} Writing Commands description (sign up, login, forget my password)
 - {TODO} testing sellStocks again
 deadline - before 2022-5-2
 returning data
@@ -991,6 +992,31 @@ note: if a word between () that means the word is optional.
 note: if a word between {} that means the word is dynamic.
 note: | is separator between the dynamic options for a command.
 note: ... means that there is more dynamic options then words inside {}.  
+
+command: sign up
+input: user commands 'sign up' and then enters name, email, password, confirm password and gender
+process: first, check if a user logged in or not, if a user is not logged in then second response 'enter your name' and open inputModal to let a user enter his/her name
+after a user finishes entering then the third step is to close inputModal and save the user's input, 
+and the same process for email, password, confirm password, and gender fields but with different response messages.
+and then send the user's data to the sign-up endpoint in the main API, and then in the main API check the user's data if valid or not, if it is valid so create a new user in the database and then log in a user by sending JWT token and then tell a user 'signed up and logged in successfully', otherwise response with an error message.
+if a user is logged in so then response 'you are logged in and then ask 'do you want to log out and create a new account', if a user response with 'yes' so then do the above process.     
+
+command: login
+input: user commands 'login' and then enters email, password.
+process: first, check if a user logged in or not, if a user is not logged in then second response 'enter your email' and open inputModal to let a user enter his/her email
+after a user finishes entering then the third step is to close inputModal and save the user's input,
+and the same process for password and then send the user's data to the login endpoint in the main API, and then in the main API check the user's data if valid or not, if it is valid so log in a user by sending JWT token and then tell a user 'logged in successfully', otherwise response with an error message.
+if a user is logged in so then response 'you are logged in and then ask 'do you want to logout and login with different account', if a user response with 'yes' so then do the above login process.
+
+
+
+command: forgot (my) password
+input: user commands 'forgot (my) password' and then enters email.
+process: first, check if a user logged in or not, if a user is not logged in then second response 'enter your email' and open inputModal to let a user enter his/her email
+after a user finishes entering then the third step is to close inputModal and save the user's input,
+and then send the user's data to the 'forget password' endpoint in the main API, and then in the main API check if the user's data valid or not, if it is valid so send a reset token to a user's email using 'send email' puppeteer script, otherwise response with an error message.
+if a user is logged in so then response 'you are logged in' and then ask 'do you want to update your password', if a user response with 'yes' so then do the update password process.
+output: send a reset token to a user's email if a user not logged in and entered a valid email, otherwise response with a error message
 frontend technologies:
 backend technologies:
 Algorithmic Trading technologies:
