@@ -579,6 +579,7 @@ final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
         - {DONE} creating System structure diagram
         - {DONE} Writing Commands OVERVIEW
         - {DONE} Writing Commands description (sign up, login, forget my password)
+        - {DONE} Writing Commands description (update my information, logout, update (my) password, add {Apple|AAPL|...} stock to (my) watch list)
 - {TODO} testing sellStocks again
 deadline - before 2022-5-2
 returning data
@@ -1012,11 +1013,39 @@ if a user is logged in so then response 'you are logged in and then ask 'do you 
 
 command: forgot (my) password
 input: user commands 'forgot (my) password' and then enters email.
-process: first, check if a user logged in or not, if a user is not logged in then second response 'enter your email' and open inputModal to let a user enter his/her email
-after a user finishes entering then the third step is to close inputModal and save the user's input,
-and then send the user's data to the 'forget password' endpoint in the main API, and then in the main API check if the user's data valid or not, if it is valid so send a reset token to a user's email using 'send email' puppeteer script, otherwise response with an error message.
-if a user is logged in so then response 'you are logged in' and then ask 'do you want to update your password', if a user response with 'yes' so then do the update password process.
-output: send a reset token to a user's email if a user not logged in and entered a valid email, otherwise response with a error message
+process: first, check if a user logged in or not, if a user is logged in then second response 'if you want to update your name type your new name, then click enter' and open inputModal with current user's name to let a user update his/her email
+after a user finishes entering then the third step is to close inputModal and update the user's input,
+and the same process for gender and then send the user's data to the 'update user info' endpoint in the main API, and then in the main API update user info in the database, and then send update info.  
+if a user is not logged in so then response 'you not logged in' and then ask 'do you want to login', if a user response with 'yes' so then start the login process.
+output: update user info if a user logged in, otherwise response with a error message
+
+command: update my information
+input: user commands 'update my information' and then enters new name or new gender or both.
+process: first, check if a user logged in or not, if a user is logged in then second response 'if you want to update your name type your new name, then click enter' and open inputModal with current user's name to let a user update his/her email
+after a user finishes entering then the third step is to close inputModal and update the user's input,
+and the same process for gender and then send the user's data to the 'update user info' endpoint in the main API, and then in the main API update user info in the database, and then send update info.  
+if a user is not logged in so then response 'you not logged in' and then ask 'do you want to login', if a user response with 'yes' so then start the login process.
+output: update user info if a user logged in, otherwise response with a error message
+
+command: logout
+input: user commands 'logout' 
+process: first, check if a user logged in or not, if a user is logged in so then logout the user and response 'log out successfully'
+otherwise response 'oops, you not logged in to logout'.
+output: logout a user if a user logged in, otherwise response with a error message
+
+command: update (my) password
+input: user commands 'update (my) password' and then enters current password, new password and confirm password.
+process: first, check if a user logged in or not, if a user is logged in then second response 'enter your current password' and open inputModal to let a user enter his/her current password
+and the same process for new password and confirm password and then send the user's data to the 'update user password' endpoint in the main API, and then in the main API check the user's data if valid or not, if it is valid update user password and re-login the user
+if a user is not logged in so then response 'oops, you not logged in to update your password'.
+output: update user password if a user logged in and enter valid data, otherwise response with an error message
+
+command: add {Apple|AAPL|...} stock to (my) watch list
+input: user commands 'add {Apple} stock to (my) watch list'. a user can use a company name or it's stock symbol 
+process: first, check if a user said a stock's symbol , a company name or unknown keyword
+if the a stock's symbol or company name in the database so then check if the stock not in the user's watch list, if it is not add the stock in the user's watch list.
+if the a stock' symbol or company name not in the database so then search the keyword in yahoo finance and then scrap the data if even did't find any result after scraping so then save the keyword in the database as unknown key word 
+output: save stocks in user's watch list
 frontend technologies:
 backend technologies:
 Algorithmic Trading technologies:

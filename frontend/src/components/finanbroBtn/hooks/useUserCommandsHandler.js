@@ -107,7 +107,11 @@ export const useUserCommandsHandler = (
       response("logged out successfully");
       logoutRedux();
     } else {
-      doWantLogin();
+      // doWantLogin();
+      response(
+        "oops, you not logged in to logout"
+      );
+
     }
   };
 
