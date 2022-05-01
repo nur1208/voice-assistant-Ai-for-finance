@@ -580,6 +580,7 @@ final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
         - {DONE} Writing Commands OVERVIEW
         - {DONE} Writing Commands description (sign up, login, forget my password)
         - {DONE} Writing Commands description (update my information, logout, update (my) password, add {Apple|AAPL|...} stock to (my) watch list)
+        - {DONE} Writing Commands description part 3
 - {TODO} testing sellStocks again
 deadline - before 2022-5-2
 returning data
@@ -1043,14 +1044,83 @@ output: update user password if a user logged in and enter valid data, otherwise
 command: add {Apple|AAPL|...} stock to (my) watch list
 input: user commands 'add {Apple} stock to (my) watch list'. a user can use a company name or it's stock symbol 
 process: first, check if a user said a stock's symbol , a company name or unknown keyword
-if the a stock's symbol or company name in the database so then check if the stock not in the user's watch list, if it is not add the stock in the user's watch list.
-if the a stock' symbol or company name not in the database so then search the keyword in yahoo finance and then scrap the data if even did't find any result after scraping so then save the keyword in the database as unknown key word 
+if the input is a stock symbol or company name and it is in the database so then check if the stock not in the user's watch list, if it is not add the stock in the user's watch list.
+if the input is a stock symbol or company name and it is not in the database so then search the keyword in yahoo finance and then scrap the data if even did't find any result after scraping so then save the keyword in the database as unknown key word 
 output: save stocks in user's watch list
 frontend technologies:
 backend technologies:
 Algorithmic Trading technologies:
 scraping technologies:
 automation technologies:
+
+command: delete {Apple|AAPL|...} stock from (my) watch list
+input: user commands 'delete {Apple} stock from (my) watch list'. a user can use a company name or it's stock symbol inside {}
+process: first, check if a user said a stock's symbol, a company name, or an unknown keyword
+if the input is a stock symbol or company name and it is in the database so then check if the stock is in the user's watch list, if it is delete the stock from the user's watch list.
+if the input is a stock symbol or company name and it is not in the database so then search the keyword in yahoo finance and then scrap the data if even didn't find any result after scraping so then save the keyword in the database as unknown keyword 
+output: deleting stock from a user's watch list
+
+command: open (my) watch list
+input: user commands 'open (my) watch list'.
+process: opening 'infoModal' with a user's watch list
+output: showing a user his/her watch list
+
+command: Give me the news from {yahoo finance|investing|seekingalpha}
+input: user commands 'Give me the news from {yahoo finance}' a user can also use investing or seeking alpha as valid source inside {}
+process: first, send Get HTTP request with 'source' query string to News API, and then check if the given source exists in the database,
+if it exists return 10 documents to the client and then finansis will show the articles to the user, otherwise return 404 code to the client and then finansis will tell the user 'sorry, I didn't find news from {source}'.
+output: show a user news based on the source, if the source exists in the database otherwise respond with an error message   
+
+command: open article (number) {1|5|...}
+input: user commands 'open article (number) {1}'. a user can use another number if the number is in the range of existing articles in the client. if there are ten articles so then a user can choose from 1 to 10. 
+process: first, check if the user logged in, for this command a user must be logged in because this command needs to use the user's executable chrome path to open puppeteer, if the user not logged in stop this process and tell the user "you not logged in, you need to log in for this command".
+second, check if executableChromePath exist in the user's data, if it not exist so then tell a user "oh no, I don't have your chrome executable path" and then open InputModal lastly tell the user  'paste it here to let me control your browser' then save executableChromePath and stop this process
+third, if all check points passed so then send POST HTTP request to auto API (auto API is part of main API)  'open endpoints'.
+fourth, in auto API open puppeteer if puppeteer opened successfully respond with 200 code (okay), otherwise 500 code (server error). 
+output: open details article page if all check points passed successfully otherwise respond with an error message
+
+command: what's up with {Apple|China|...}
+input: user commands 'what's up with {China}', a user can use any other keyword inside {}.  
+process:  first, send Get HTTP request with 'keywordInTitle' query string to News API, and then search for the given keyword in articles' title,
+if found result for the search query so then return 10 documents to the client and then finansis will show the articles to the user
+otherwise return 404 code to the client and then finansis will tell the user 'sorry, I didn't find news for {keyword} keyword'.
+output: show a user news based on the given keyword, if searching for the keyword in articles' title returns articles otherwise respond with an error message
+
+command: Give me the latest news
+input: user commands 'Give me the latest news'
+process: first, send Get HTTP request with 'sortBy=publishedAt' query string to News API and then return the most recent 10 documents
+and then finansis will show the articles to the user and if there is something wrong from News API return 500 code (server error)
+and then finansis will tell the user 'sorry, I didn't find any news'
+output: show a user recent news
+
+command: read the news
+input: user commands 'read the news'
+process: Finansis will start reading the news' headline from first article to the last article if there are article otherwise tell a user 'there is no news to read.'.
+output: Finansis starts reading the news' headline out loud  
+
+command: give me more news
+input: user commands 'give me more news'
+process: add one to page variable then send  send Get HTTP request with 'page=2' string query  plus mine string query to News API and then return 10 articles if there are more articles 
+and then finansis will show the articles to the user
+otherwise return 404 code (didn't find results) to the client 
+and then finansis will tell the user 'sorry, I didn't find any news'
+output: getting more articles
+
+command: start reading (news) from article {1|5|...}
+input: user commands 'start reading (news) from article {5}'. a user can use another number if the number is in the range of existing articles in the client. if there are ten articles so then a user can choose any number from 1 to 10.
+process: first, check if a number is valid number 
+and then Finansis will start reading the news' headline from given number article (ex: 5)  to the last article if there are article otherwise tell a user 'there is no news to read.'.
+if a number is invalid number so tell a user `the article with number {num} not exist so I can't read it.` 
+output: Finansis starts reading the news' headline out loud starting from the given number  
+
+
+command:
+input:
+process:
+output:
+
+
+
 
 sections:
 DONE TODOS list:
