@@ -581,6 +581,7 @@ final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
         - {DONE} Writing Commands description (sign up, login, forget my password)
         - {DONE} Writing Commands description (update my information, logout, update (my) password, add {Apple|AAPL|...} stock to (my) watch list)
         - {DONE} Writing Commands description part 3
+        - {DONE} Writing Commands description part 4
 - {TODO} testing sellStocks again
 deadline - before 2022-5-2
 returning data
@@ -1114,13 +1115,62 @@ if a number is invalid number so tell a user `the article with number {num} not 
 output: Finansis starts reading the news' headline out loud starting from the given number  
 
 
+command: open article (number) {1|5|...} without control
+input: user commands 'open article (number) {1} without control'. a user can use another number if the number is in the range of existing articles in the client. if there are ten articles so then a user can choose from 1 to 10.
+process: first, check if a number is valid number, if it is a valid number open the article
+output: opening an article page
+
+
+
+command: give me top stories
+input:  user commands 'give me top stories'.
+process: first, send Get HTTP request with 'source=google finance' string query to News API and then return top 10 articles because google Finance only shows top stories from all the news websites by default
+and then finansis will show the articles to the user and if there is something wrong from News API return 500 code (server error)
+and then finansis will tell the user the error message 
+output: showing top news articles
+
+command: give me {Apple|AAPL|...} stock news
+input:  user commands 'give me {Apple} stock news'. a user can use a company name or it's stock symbol inside {}
+process: first, check if a user said a stock's symbol, a company name, or an unknown keyword, 
+if the input is a stock symbol or company name and it is in the database so then open open yahoo finances website using `${YAHOO_FINANCE_URL}/quote/${symbol}?p=${symbol}` url.
+if the input is a stock symbol or company name and it is not in the database so then search the keyword in yahoo finance and then scrap the data if even didn't find any result after scraping so then save the keyword in the database as unknown keyword 
+output: opening yahoo finance website news section with a given stock
+
+
+command: open {Apple|AAPL|...} (symbol) chart
+input: user commands 'open {Apple} (symbol) chart'. a user can use a company name or it's stock symbol inside {}
+process: first, check if a user said a stock's symbol, a company name, or an unknown keyword, 
+if the input is a stock symbol or company name and it is in the database so then open yahoo finances website using `${YAHOO_FINANCE_URL}/chart/${symbol}` url.
+otherwise it is not in the database so then search the keyword in yahoo finance and then scrap the data if even didn't find any result after scraping so then save the keyword in the database as unknown keyword 
+output: opening yahoo finance website chart section with a given stock
+
+
+
+command: give me {Apple|AAPL|...} statistics
+input: user commands 'give me {Apple} statistics'. a user can use a company name or it's stock symbol inside {}
+process: first, check if a user said a stock's symbol, a company name, or an unknown keyword, 
+if the input is a stock symbol or company name and it is in the database so then open yahoo finances website using `${YAHOO_FINANCE_URL}/quote/${symbol}/key-statistics?p=${symbol}` url.
+otherwise it is not in the database so then search the keyword in yahoo finance and then scrap the data if even didn't find any result after scraping so then save the keyword in the database as unknown keyword 
+output: opening yahoo finance website statistics section with a given stock
+
+
+
+command: give me The most {actives|gainers|losers} stocks
+input: user commands 'give me The most {actives} stocks'.  a user can also use  gainers or losers inside {} 
+process: first, check if a user said a valid input, if it is open yahoo finances website using `${YAHOO_FINANCE_URL}/most-active` url for the most activates, using `${YAHOO_FINANCE_URL}/gainers` url for the most gainers and using `${YAHOO_FINANCE_URL}/losers` url for the most losers.
+output: opening yahoo finance website the most stocks section with a given keyword
+
+
+command: give me trending stocks
+input: user commands 'give me trending stocks'.
+process: open yahoo finances website using `${YAHOO_FINANCE_URL}/trending-tickers` url. 
+output: opening yahoo finance website trending stocks section
+
+
 command:
 input:
 process:
 output:
-
-
-
 
 sections:
 DONE TODOS list:
