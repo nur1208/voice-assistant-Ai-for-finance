@@ -944,7 +944,7 @@ start reading (news) from article {1|5|...}
 open article (number) {1|5|...} without control
 give me top stories
 give me {Apple|AAPL|...} stock news
-3.2.3Stock information commands:
+3.2.3 Stock information commands:
 open {Apple|AAPL|...} (symbol) chart
 give me {Apple|AAPL|...} statistics
 give me The most {actives|gainers|losers} stocks
@@ -1212,10 +1212,35 @@ second, if the first condition true so then check if a user said a valid page, i
 if all conditions true so then navigate to the given page.
 output: navigating to the given page
 
+
+command: close the window
+input: user commands 'close the window'.
+process: first, check if there is a window opened, if the condition true so then close the window otherwise tell a user 'there is no window open to close it'
+output: closing popup window
+
+command: zoom {in|out}
+input: user commands 'zoom {in}'. a user can also use 'out' inside {}.
+process: first, check if a user said a valid zooming keyword, if the condition false so then stop this process and tell a user '{nur} is not valid option for zooming'
+second, check if a chart window using puppeteer is opened, if the condition false so then spot this process and tell a user 'chart window is close so I can not zoom {in}' 
+third, if all the condition true then send http request to AUTO API to zoom in or out the chart.
+output: zooming the chart, 
+
+
+
+command: change the chart to {1 minute|1 hour|...}
+input: user commands 'change the chart to {1 minute}'. a user can also use '1 hour', '1 day', '1 week' , '1 year' or any other valid chart type inside {}
+process: first check if a chart window using puppeteer is opened if the condition false so then tell a user 'browser with my control is closed so, I can't change the chart' and stop this process,
+second, check if a user said a valid chart type, if the condition false so then tell a user '{Nur} is not valid option' and stop this process,
+third, if all the condition true so then send http request to AUTO API to change the chart type.
+output: changing chart type
+
+
+
 command:
 input:
 process:
 output:
+
 
 sections:
 DONE TODOS list:
