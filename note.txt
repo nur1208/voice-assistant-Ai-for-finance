@@ -582,6 +582,7 @@ final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
         - {DONE} Writing Commands description (update my information, logout, update (my) password, add {Apple|AAPL|...} stock to (my) watch list)
         - {DONE} Writing Commands description part 3
         - {DONE} Writing Commands description part 4
+        - {DONE} Writing Commands description part 5
 - {TODO} testing sellStocks again
 deadline - before 2022-5-2
 returning data
@@ -906,13 +907,14 @@ asking questions about the stock market module is to let users ask questions abo
 the stock market and then Finansis answers the question if the answer of the question
 not exist in the database, then Finansis will search in the DuckduckGo (search engine like Google)
 and after that save the answer in the database and lastly answer the question so if someone asked the same question
-again Finansis just answer it.  
-
-automating stock trading (Trading Bot) module is to let Finansis buy, sell and set stop loss for stocks
+again Finansis just answer 
+a user said invalid stock symbol or name and didn't find result after scraping
+stop this process.
+automating stock trading (Trading Bot) module is to let Finansis , if the buy, sell and set stop loss for stocks
 using Algorithmic Trading. the trading flow first set stop loss for bought stocks (I will talk about stop loss in the Algorithmic Trading section),
 second find sell signals for bought stocks and then sell them if a signal has been found, 
 third scrap S&P 500 stocks (I will also talk about S&P 500 stocks in this thesis), and then save them in python array, 
-fourth loop through all S&P 500 stocks to find buy signals then save them in the database if a signal has been found,
+fivth loop through all S&P 500 stocks to find buy signals then save them in the database if a signal has been found,
 lastly, get found buy signal stocks from the database and then buy them. 
 in this project for current version 1.0 all buy and sell stocks in a simulator for the stock market
 I used Investopedia's simulator (URL: https://www.investopedia.com/simulator).
@@ -1167,6 +1169,49 @@ process: open yahoo finances website using `${YAHOO_FINANCE_URL}/trending-ticker
 output: opening yahoo finance website trending stocks section
 
 
+
+command: open {Apple|AAPL|...} (symbol) chart with your control
+input: user commands 'open {Apple} (symbol) chart with your control'.  a user can use a company name or it's stock symbol inside {}
+process: first, check if a user said a valid stock symbol or name, if
+a user said invalid stock symbol or name and didn't find result after scraping
+stop this process.
+second, check if the user logged in, for this command a user must be logged in because this command needs to use the user's executable chrome path to open puppeteer, if the user not logged in stop this process and tell the user "you not logged in, you need to log in for this command".
+third, check if executableChromePath exist in the user's data, if it not exist so then tell a user "oh no, I don't have your chrome executable path" and then open InputModal lastly tell the user  'paste it here to let me control your browser' then save executableChromePath and stop this process
+fourth, if all check points passed so then send POST HTTP request to auto API (auto API is part of main API)  'open endpoints'.
+fifth, in auto API open puppeteer if puppeteer opened successfully respond with 200 code (okay) and open the chart, otherwise 500 code (server error). 
+output: opening yahoo finance chart using puppeteer
+
+command: what is the current price for {Apple|AAPL|...} (symbol)
+input: user commands 'what is the current price for {Apple} (symbol)'.  a user can use a company name or it's stock symbol inside {}
+process: first, check if a user said a valid stock symbol or name, if a user said invalid stock symbol or name and didn't find result after scraping stop this process.
+otherwise, send http request to Stock Price API then let finansis tell and show it to the user
+output: real-time stock price
+
+
+
+command: show me {Apple and Tesla|AAPL and DD|Apple and Tesla and amazon|...} charts
+input: user commands 'show me {Apple and Tesla} charts'. a user can use  any two, three or more stocks split by 'and' word inside {}. for example 'show me {AAPL and Tesla and amazon} charts'.  
+process:  first, check if all the stocks that the user said a valid stock symbol or name, if a user said invalid stock symbol or name and didn't find result after scraping stop this process.
+otherwise, open a window for each stock a user said.
+output: opening multiple charts
+
+
+
+command: go back
+input: user commands 'go back'.
+process: first, check if there is element in the custom historyStack, if the condition true so then go back and pop the element from historyStack
+and then push it to forwardStack.
+if the condition false so then tell a user 'there is nothing back'.
+output: navigating back 
+
+
+command: go to {info|news|...} (page)
+input: user commands 'go to {info} (page)'. a user can also use back testing, trading , home or news inside {}.
+process: first, check if a user in the same page, if the condition false tell the user 'you are in {info} page' and then stop this process.
+second, if the first condition true so then check if a user said a valid page, if the condition false so then tell the user '{nur} page is not exist' and then stop this process.
+if all conditions true so then navigate to the given page.
+output: navigating to the given page
+
 command:
 input:
 process:
@@ -1175,11 +1220,14 @@ output:
 sections:
 DONE TODOS list:
 Future TODOS list:
-Stock Market 
-Algorithmic Trading
 React
 mongodb 
-S&P500
-yahoo finance
+Topics Related To This Project:
+        Stock Market 
+        Algorithmic Trading
+        S&P500
+        yahoo finance
+        why stock market news important
+
 thanks to every teacher teach me something about computer science in Wenzhou or in the internet , thanks to each programmer in stackoverflow that help me or build technologe I used in this project,  and special thanks to Wingo Laoshi.
 @1208_noor

@@ -111,7 +111,7 @@ export const useCommonCommandsHandler = (
       setPageNumber(1);
       return;
     }
-    // 0 false, any other number true
+
     if (historyStack.length > 1) {
       history.goBack();
       response("going back");
