@@ -583,7 +583,11 @@ final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
         - {DONE} Writing Commands description part 3
         - {DONE} Writing Commands description part 4
         - {DONE} Writing Commands description part 5
+        - {DONE} Writing Commands description part 6
+        - {DONE} Writing Commands description part 7
 - {TODO} testing sellStocks again
+- {TODO} testing handleFindingAnswer if didn't find any answer after scraping 
+        'didn't find answer for your question'
 deadline - before 2022-5-2
 returning data
 response
@@ -960,12 +964,12 @@ close the window
 zoom {in|out}
 change the chart to {1 minute|1 hour|...}
 go forward
-3.2.5asking questions about the stock market commands:
+3.2.5 asking questions about the stock market commands:
 open details page for the answer
 what is market capitalization
 other questions exist in the database 
 and any unknown command start with 'how' or 'what'  
-3.2.6back-testing stock trading strategy commands:
+3.2.6 back-testing stock trading strategy commands:
 start back testing
 reset back testing (data)
 force sell
@@ -991,7 +995,7 @@ show me (a) chart for found buy signals (stocks)
 sold stocks chart
 show me trading progress
 
-:YES - NO QUESTIONS
+QUESTIONS that finansis asks:
 
 note: if a word between () that means the word is optional.
 note: if a word between {} that means the word is dynamic.
@@ -1050,11 +1054,6 @@ process: first, check if a user said a stock's symbol , a company name or unknow
 if the input is a stock symbol or company name and it is in the database so then check if the stock not in the user's watch list, if it is not add the stock in the user's watch list.
 if the input is a stock symbol or company name and it is not in the database so then search the keyword in yahoo finance and then scrap the data if even did't find any result after scraping so then save the keyword in the database as unknown key word 
 output: save stocks in user's watch list
-frontend technologies:
-backend technologies:
-Algorithmic Trading technologies:
-scraping technologies:
-automation technologies:
 
 command: delete {Apple|AAPL|...} stock from (my) watch list
 input: user commands 'delete {Apple} stock from (my) watch list'. a user can use a company name or it's stock symbol inside {}
@@ -1236,11 +1235,62 @@ output: changing chart type
 
 
 
+command: go forward
+input: user commands 'go forward'.
+process: first, check if there is element in the forwardStack, if the condition true so then go forward and pop the element from forwardStack
+and then push it to historyStack.
+if the condition false so then tell a user 'there is nothing forward'.
+output: navigating forward 
+
+
+
+command: open details page for the answer
+input: user commands 'open details page for the answer'.
+process: first, check if there is answer to open its detail page, if the condition true so then tell a user 'there is no detail answer page to open'
+otherwise open a details page for the answer.
+output: opening answers detail page (source)
+
+
+command: what is market capitalization
+input: user asks 'what is market capitalization'. a user can also ask any other question related to the stock market
+process: first, check if there is answer for the question in the database, if the condition true  so then answer the question,
+if the condition false and question or the command starts with 'how' or 'what' so then ask a user "do you want me to find answer for 'what is nur'" if a user says yes so then search for an answer in investopedia website and then scrap the answer  and save the answer in the database and lastly answer the user
+if didn't find an answer after scraping so then tell a user 'didn't find answer for your question' 
+output: answering a users for their questions 
+
+
+
+command: start back testing
+input: user commands 'start back testing' and then enters , initial cash,  start date, account risk by trade and end date. 
+process: first, check if a user already has tested data in his local storage
+if the condition is true so then tell a user 'you already have tested data' and then 
+ask a user 'do you want me to overwrite the old data if a user answers  'no' so then stop this process
+if a user answers 'yes' so then reset back-testing data that is in the user's local storage,
+after that tell a user 'enter initial cash then click enter to submit after the reloading' and reload the page
+after a user enters initial cash tell a user 'enter start date' and after entering 
+let a user enters Account Risk and End Date then start back-testing by first send
+POST request to 'is market open' endpoint in Trading API and second, send
+a POST request to 'get 500 s&p index data' endpoint in Trading API
+third, send a POST request to 'update current stocks price' endpoint in Trading API,
+fourth, sending POST request to 'sell stocks Back-testing' endpoint in Trading API,
+fifth, send a  POST request to 'buy stocks Back-testing' endpoint in Trading API
+and keep sending those requests one by one until the start date equals the end date.
+note if sending the request to 'get 500 s&p stocks' fails so send the request again
+after 10 seconds and only if the request has been sent successfully and then send a request to
+'update current stocks price' endpoint and the same for each request.' 
+output: show a user the result for finansis's stock trading strategy
+
+
 command:
 input:
 process:
 output:
 
+frontend technologies:
+backend technologies:
+Algorithmic Trading technologies:
+scraping technologies:
+automation technologies:
 
 sections:
 DONE TODOS list:
