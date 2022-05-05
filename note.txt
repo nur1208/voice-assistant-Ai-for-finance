@@ -585,6 +585,7 @@ final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
         - {DONE} Writing Commands description part 5
         - {DONE} Writing Commands description part 6
         - {DONE} Writing Commands description part 7
+        - {DONE} Writing Commands description part 8
 - {TODO} testing sellStocks again
 - {TODO} testing handleFindingAnswer if didn't find any answer after scraping 
         'didn't find answer for your question'
@@ -1280,6 +1281,22 @@ after 10 seconds and only if the request has been sent successfully and then sen
 'update current stocks price' endpoint and the same for each request.' 
 output: show a user the result for finansis's stock trading strategy
 
+
+command: reset back testing (data)
+input: user commands 'reset back testing (data)'.
+process: reset back testing by clear the user's localStorage and reloading th page
+output: reset back testing data
+
+
+command: force sell
+input: user commands 'force sell'.
+process: first, check if there is more data in the Trading API to test 
+if the condition false so then tell a user 'sorry I don't have more data to test, right now'
+and then stop this process otherwise check if  a user has stocks to sell in holdingStocks backTest
+array if the condition false so then tell a user 'you don't have any stocks to sell'
+otherwise start back testing process that mentioned above and adding isForce flag to it
+so then send all the requests except 'buy stocks Back-testing' request
+output: force sell (sell the stock without following sell strategy with any profit)
 
 command:
 input:
