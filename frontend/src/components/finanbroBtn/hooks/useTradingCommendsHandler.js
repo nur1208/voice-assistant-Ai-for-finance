@@ -403,9 +403,20 @@ export const useTradingCommendsHandler = (
   };
 
   const sellWithProfitOrNot = async () => {
-    response("starting selling stocks with profit or without");
-    await forceSelling(true);
-    response("selling stocks with profit or without is done");
+    if (currentDate > new Date(lastBTDate)) {
+      response(
+        "sorry I don't have more data to test, right now"
+      );
+      return;
+    }
+
+    if (holdingStocks.length > 0) {
+      response("starting selling stocks with profit or without");
+      await forceSelling(true);
+      response("selling stocks with profit or without is done");
+    } else {
+      response("you don't have any stocks to sell");
+    }
   };
 
   const tradeStocks = async () => {
