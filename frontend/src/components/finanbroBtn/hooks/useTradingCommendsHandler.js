@@ -86,7 +86,7 @@ export const useTradingCommendsHandler = (
         return { totalNumberOfBuying };
       } catch (error) {
         response(
-          "something went wrong while looking for buying signals"
+          "something went wrong while looking for buy signals"
         );
         return { error };
       }

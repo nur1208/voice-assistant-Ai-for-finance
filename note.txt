@@ -597,6 +597,7 @@ deadline - before 2022-5-2
 - {TODO} testing sellWithProfitOrNot function in useTradingCommendsHandler
 - {TODO} creating video for each command to demonstrate each command
 ----- NOT IMPORTANT NOW
+- {TODO} apply handleTradingError function to buy and set stop loss functions
 - {TODO} show users all commands in each section
 - {TODO} fix Dependabot alerts in the github
 - {TODO} learning blockchain
@@ -992,8 +993,8 @@ what's the date today
 buy stocks
 sell stocks
 set stop-loss for stocks
-trade stocks for me
 find buy signals
+trade stocks for me
 show me (a) chart for found buy signals (stocks)
 sold stocks chart
 show me trading progress
@@ -1393,6 +1394,69 @@ send HTTP request to 'buy stocks' endpoint in Trading API and then open Investop
 to automate buying stocks and then save bought stocks in the database
 otherwise tell a user something went wrong while buying Stocks.
 output: buying stocks using puppeteer automation functionality
+
+
+command: sell stocks
+input:  user commands 'sell stocks'
+process: first, finding sell signals for bought stocks, if there is an error tell a user
+'something went wrong while checking for selling signals' and stop this process otherwise
+check if found stocks if didn't find any signals so then tell a user 'didn't find any sell signals today'
+and stop this process otherwise start the second step which is selling stock using puppeteer by sending an HTTP request to Trading API.
+note if there were an error while doing this process finansis will ask the user 'do you want me to try to {sell} again'
+if the answer is yes try selling again.
+output: finding sell signals and selling stocks using puppeteer automation functionality
+
+
+command: set stop-loss for stocks
+input: user commands 'set stop-loss for stocks'
+process: send an HTTP request to trading API's 'set stop loss' endpoint and open Investopedia's simulator
+using puppeteer to automate setting a stop loss for stocks if there were an error so then tell a user 'something went wrong while buying stop loss'
+or if didn't find any stocks to set stop loss to them so tell a user "didn't found stocks to set stop loss to them".   
+output: setting stop loss for stocks using puppeteer automation functionality
+
+command: find buy signals
+input:  user commands 'find buy signals'
+process: first, send an HTTP request to Trading API's 'get S&P 500 stocks' endpoint to scrap s&p 500 stocks and save them, 
+if there were an error so tell a user 'something went wrong while saving S&P 500 stocks'
+otherwise, send an HTTP request to Trading API's 'find buy signals' endpoint to find buy signals and then save them in the database
+if there were an error so tell a user 'something went wrong while looking for buy signals'
+and if didn't find any buy signal so tell a user 'didn't find any buy signal'
+output: scraping s&p 500 stocks and finding buy signals
+
+
+
+command: trade stocks for me
+input: user commands 'trade stocks for me'
+process: 
+first, start the above 'set stop loss' process,
+second, start the above 'sell stocks' process,
+lastly, start the above 'buy stocks' process.
+output: start all trading processes
+
+command: show me (a) chart for found buy signals (stocks)
+input: user commands 'show me (a) chart for found buy signals (stocks)'
+process: opening all stocks that found buy signal for them using the above 'opening multiple chart' process
+output: opening charts for stock that found buy signal for them
+
+
+
+command: sold stocks chart
+input: user commands 'sold stocks chart'
+process:  
+first, check if the user logged in, for this command a user must be logged in because this command needs to use the user's executable chrome path to open puppeteer, if the user is not logged in so then stop this process and tell the user "you not logged in, you need to log in for this command".
+second, let a user choose one of the sold stocks by telling him 'the following stocks have been sold choose one by saying stock number 3 for example'
+third, check if executableChromePath exists in the user's data, if it not exist so then tell a user "oh no, I don't have your chrome executable path" and then open InputModal lastly tell the user  'paste it here to let me control your browser' then save executableChromePath and stop this process
+fourth, if all checkpoints passed so then send a POST HTTP request to auto API (auto API is part of the main API)  'open endpoints'.
+fifth, in auto API open puppeteer, if puppeteer opened successfully respond with 200 code (okay) and open the chart, otherwise 500 code (server error). 
+lastly, send an HTTP request to Trading API's 'change chart date' endpoint to adjust the start date and end date of the chart.
+output: showing a user sold stocks chart 
+
+
+command: show me trading progress
+input: user commands 'show me trading progress'
+process: tell a user 'here is your trading progress' and then open Progress Modal
+and then after 10 seconds close the modal
+output: opening Progress Modal
 
 
 command:
