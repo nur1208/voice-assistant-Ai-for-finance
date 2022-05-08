@@ -589,7 +589,8 @@ final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
         - {DONE} Writing Commands description part 9
         - {DONE} Writing Commands description part 10
         - {DONE} Writing Commands description part 11
-
+        - {DONE} Writing Commands description part 12 
+        - {DONE} researching about 'What is the stock market?' and adding the information to the thesis
 deadline - before 2022-5-2
 - {TODO} testing sellStocks again
 - {TODO} testing handleFindingAnswer if didn't find any answer after scraping 
@@ -1463,6 +1464,59 @@ command:
 input:
 process:
 output:
+
+3.3Topics Related To This Project
+3.3.1The Stock Market
+- What is the stock market?
+Let’s imagine a new coffee company that decides to launch on the market.
+First, the company will advertise itself to big investors.
+If they think the company is a good idea,
+they get the first crack at investing,
+and then sponsor the company’s initial public offering, or IPO.
+This launches the company onto the official public market,
+where any company or individual who believes the business could be profitable
+might buy a stock.
+Buying stocks makes those investors partial owners in the business.
+Their investment helps the company to grow,
+and as it becomes more successful,
+more buyers may see potential and start buying stocks.
+As demand for those stocks increases,
+so does their price, increasing the cost for prospective buyers,
+and raising the value of the company's stocks people already own.
+For the company,
+this increased interest helps fund new initiatives,
+and also boosts its overall market value
+by showing how many people are willing to invest in their idea.
+
+
+
+However, if for some reason a company starts to seem less profitable
+the reverse can also happen.
+If investors think their stock value is going to decline,
+they’ll sell their stocks with the hopes of making a profit
+before the company loses more value.
+As stocks are sold and demand for the stock goes down,
+the stock price falls,
+and with it, the company’s market value.
+This can leave investors with big losses–
+unless the company starts to look profitable again.
+This see-saw of supply and demand is influenced by many factors.
+Companies are under the unavoidable influence of market forces–
+such as the fluctuating price of materials,
+changes in production technology,
+and the shifting costs of labor.
+
+Investors may be worried about changes in leadership,
+bad publicity, or larger factors like new laws and trade policies.
+And of course,
+plenty of investors are simply ready to sell valuable stocks
+and pursue personal interests.
+All these variables cause day-to-day noise in the market,
+which can make companies appear more or less successful.
+And in the stock market,
+appearing to lose value often leads to losing investors,
+and in turn, losing actual value.
+
 
 frontend technologies:
 backend technologies:
