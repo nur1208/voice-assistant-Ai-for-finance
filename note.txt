@@ -592,6 +592,8 @@ final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
         - {DONE} Writing Commands description part 12 
         - {DONE} researching about 'What is the stock market?' and adding the information to the thesis
         - {DONE} researching and adding the information to the thesis part 2
+        - {DONE} Writing about technologies been used in this project
+        - {DONE} Writing about technologies been used in this project 2
 deadline - before 2022-5-2
 - {TODO} testing sellStocks again
 - {TODO} testing handleFindingAnswer if didn't find any answer after scraping 
@@ -1627,11 +1629,45 @@ mongodb
 MongoDB is a source-available cross-platform document-oriented database program. Classified as a NoSQL database program, MongoDB uses JSON-like documents with optional schemas. MongoDB is developed by MongoDB Inc.
 MongoDB Atlas
 A fully managed, global cloud database for MongoDB
+version control:
+GitHub
+GitHub, Inc. is a provider of Internet hosting for software development and version control using Git. It offers the distributed version control and source code management (SCM) functionality of Git, plus its own features. It provides access control and several collaboration features such as bug tracking, feature requests, task management, continuous integration and wikis for every project.[4] Headquartered in California, it has been a subsidiary of Microsoft since 2018
+Git
+Git (/ɡɪt/)[7] is a software for tracking changes in any set of files, usually used for coordinating work among programmers collaboratively developing source code during software development. Its goals include speed, data integrity, and support for distributed, non-linear workflows (thousands of parallel branches running on different systems)
 scraping:
+Replit
+Replit (rep·lit), formerly Repl.it, is a San Francisco-based start-up and an online IDE (integrated development environment).
+Replit allows users to write code and build apps and websites using a browser.
+webbot
+Web automation library for python for web browser automation and end to end UI testing.
+webbot provides a much feature rich automation than selenium for all kinds of automation of webpage. Since the major portion of web automation is to perform actions like click and type into webpage elements , webbot automatically handles finding the right elements to perform the actions.
+BeautifulSoup
+Beautiful Soup is a Python library for pulling data out of HTML and XML files.
+Puppeteer
+Puppeteer is a Node library which provides a high-level API to control Chrome or Chromium over the DevTools Protocol. 
+cheerio
+Cheerio parses markup and provides an API for traversing/manipulating the resulting data structure. It does not interpret the result as a web browser does. 
 
 automation:
+Puppeteer
+Puppeteer is a Node library which provides a high-level API to control Chrome or Chromium over the DevTools Protocol. 
 Algorithmic Trading:
+Flask
+it is a micro web framework written in Python. It is classified as a microframework because it does not require particular tools or libraries
+it is used for creating API
+numpy
+NumPy is a library for the Python programming language, adding support for large, multi-dimensional arrays and matrices, along with a large collection of high-level mathematical functions to operate on these arrays.
+pandas
+pandas is a software library written for the Python programming language for data manipulation and analysis. In particular, it offers data structures and operations for manipulating numerical tables and time series.
+requests
+Requests is a HTTP library for the Python programming language. The goal of the project is to make HTTP requests simpler and more human-friendly. 
+ta 
+It is a Technical Analysis library to financial time series datasets (open, close, high, low, volume). You can use it to do feature engineering from financial datasets. It is built on Python Pandas library.
 
+other technologies:
+Google Search engine
+Stack overflow
+Youtube
 How the News Affects Stock Prices
 
 Stock prices tick up and down constantly due to fluctuations in supply and demand. If more people want to buy a stock, its market price will increase. If more people are trying to sell a stock, its price will fall. The relationship between supply and demand is highly sensitive to the news of the moment.
