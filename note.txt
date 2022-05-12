@@ -594,6 +594,7 @@ final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
         - {DONE} researching and adding the information to the thesis part 2
         - {DONE} Writing about technologies been used in this project
         - {DONE} Writing about technologies been used in this project 2
+        - {DONE} updating the thesis
 deadline - before 2022-5-2
 - {TODO} testing sellStocks again
 - {TODO} testing handleFindingAnswer if didn't find any answer after scraping 
@@ -1694,6 +1695,7 @@ Topics Related To This Project:
         Algorithmic Trading
         yahoo finance
         How the News Affects Stock Prices
+
 
 thanks to every teacher teach me something about computer science in Wenzhou or in the internet , thanks to each programmer in stackoverflow that help me or build technologe I used in this project,  and special thanks to Wingo Laoshi.
 @1208_noor
