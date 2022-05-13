@@ -1,0 +1,597 @@
+1 - {DONE} set up the frontend
+2 - {DONE} install the following packages, react-speech-recognition, react-speech-kit
+    react-speech-recognition is for speech recognition
+    react-speech-kit is for let "finanbro" speak
+3 - {DONE} test react-speech-recognition and  react-speech-kit
+4 - {DONE} let finanbro response with different ways
+5 - {DONE} create response function for finanbro
+6 - {DONE} create finanbro btn like alan ai
+7 - {TODO} make finanbro btn works like alan btn
+    7.1 {DONE} add audio when clicking on finanbro btn
+    7.2 {DONE} adding no internat icon to finanbro btn
+    7.3 {DONE} 🛠 fixing reading everything in the response array options 
+    7.4 {DONE} adding animation to finanbro' button while listening to a user
+    7.5 {DONE} learning how to let alan speak chinese
+    7.6 {DONE} finding a good voice, and changing finanbro to finansis
+    7.8 {DONE} adding animation to finansis's button while listening and adding robot icon 
+    7.9 {DONE} change icons when finansis listening show mic icon, and when she talk show speaker icon
+    7.10 {DONE} adding transcript to finansis btn
+    7.11 {DONE} reset transcript to empty after finansis response
+    7.12 {DONE} making finanbro response faster if there is array of responses options
+8 - {DONE} create main page for news section
+9 - {DONE} add "give me the news from 'source'" functionality to finansis.
+    9.1 - {DONE} 🛠 fixing cards of news UI 
+
+10 - {DONE} create ListNews page to show list of the news that finansis reads
+
+11 - {DONE} if there is no response for a command then send default message 'I did't get that. you can try again... bro'
+    
+12 - {DONE} make 'Try saying' dynamic
+13 - {DONE} clean up App file.
+14 - {DONE} don't show finansis if the browser doesn't support that.
+15 - {DONE} if there is no article for 'give me the news from 'source'' command let finansis tell users 'sorry, didn't find news from 'source''
+16 - {DONE} let finansis ask 'do you want me to read head lines', yes let finansis read, no let her say 'wow, thank you'
+17 - {DONE} highlight THE current article that finansis reading.  
+18 - {DONE} fixing not saying 'I didn't get that. you can try again... bro' for unknown commands between first and second commands
+19 - {DONE} fixing the timing of highlighting the current article that finansis reading
+19.1 - {DONE} make responseAfter5Second function more dynamic.
+19.2 - {DONE} fixing 🛠: Cannot destructure property 'indexArticle' of 'undefined' as it is undefined.
+20 - {DONE} adding 'go back' command when the user in NewsCards page, if the user in main page let finansis say "there is nothing back, you are in the main news page, good morning"
+21 - {DONE} adding 'open article number {number}' command, if the number not exist let finansis say 'i can't open article with {number}' 
+22 - {DONE} handle if user said 'open article number {number}' when a user in th main page for news sections or for unexciting article number 
+23 - {DONE} adding 'what's up with {something}' command 
+23.1 - {DONE} fixing 🛠: saying i 'don't understand that' when the command exist. 
+23.2 - {DONE} combine giveMeSource and whatsUpWith functions to one function getNews
+24 - {DONE} adding 'Give me the latest {categories} news' command
+25 - {DONE} adding 'Give me the latest news" command 
+26 - {DONE} adding 'read the news' command
+27 - {DONE} clean up appUtils file 
+            crete two files finansisCommands and finansisHandlers
+28 {DONE} change finansis name to sis
+29 - {DONE} fixing 🛠: list of news page's style
+29.1 - {DONE} fixing 🛠: getNews function: 'when sis did find any news, do let her say do you want me to read the head lines'
+30 - {DONE} adding 'stop reading' commands
+31 - {DONE} come up with a plan for the project
+32 - {DONE} create time table for the project
+32.1 - {DONE} set up the backend
+33 - {DONE} create news model
+    news model:
+        id: objectId
+        source:String
+        title:String
+        type:String
+        publishedAt:date
+        imageUrl:String
+        description:String
+        goToUrl:String
+        publisher:String
+
+33.1 - {DONE} create news api 
+34 - {DONE} scrap news from yahoo finance and save them in news model
+35 - {DONE} rename sis to finansis again
+36 - {DONE} come up with 10 todos and give them deadline
+37 - {DONE} create getAllNews api's route with query options 
+38 - {DONE} get news from my api for 'give me news from {source}'command
+38.1 - {DONE} fix "open article {number}" command
+39 - {DONE} add get latest news to getAllNews api's route
+40 - {DONE} get news from my api for 'give me the latest news" command
+40.1 - {TODO} crate yahoo finance news scraping script again 
+    40.1.1 {DONE} get simple data
+    40.1.2 {DONE} check if the article exist in the database if not add it
+    40.1.3 {DONE} create reload and scrap more news every 5 minutes
+40.2 - {DONE} fixing: 🛠 scraping white image from yahoo finance scrap script 
+40.3 - {DONE} add if there is an error just reload the page and try to scrap again to yahoo finance news script
+41 - {DONE} add query for keyword in title to getAllNews api's route
+42 - {DONE} get news from my api for 'what's up with {keyword}' command
+43 - {DONE} search for 'how to run my node js script in server for free'
+45 - {DONE} create script for scraping news from 'www.investing.com'
+46 - {DONE} test all the commands for investing's news
+47 - {DONE} scrap news from 'seekingalpha.com'
+    47.1 - {DONE} add new property to News model called 'stockSymbol'
+deadline - 2021-12-18
+48 - {DONE} fix the following error from appUtils "when return an empty articles array handle that error"
+48.1 - {DONE} fix goToUrl property in yahoo finance scraping news script
+48.2 - {DONE} fix the following error from yahoo finance scrap script "error: TimeoutError: waiting for selector `#Fin-Stream > ul` failed: timeout 120000ms exceeded"
+48.3 - {DONE} learning how to use limit and skip 'pagination'
+48.4 - {DONE} just return 10 articles at the time from the backend
+49 - {DONE} create 'give me more news' commands
+51 - {DONE} only show short description and hide the rest in NewsCards
+deadline - 2021-12-21
+52 - {DONE} create news api 
+53 - {DONE} create yahoo finance news scraping news using python
+54 - {DONE} create investing news scraping news using python
+55 - {DONE} create seekingalpha news scraping news using python
+56 - {DONE} host news api in vercel
+57 - {DONE} make each scraping scripts scrap news and add them to database 
+            every 5 minutes using 
+58.1 - {DONE} fixing 🛠 not recognizing commands between two commands and improving handling not recognized commands code
+            1 - get all the commands in one array in the first render
+            2 - check if not finalTranscript in the array
+            3 - then if step 2 true let finansis say 'I didn't get that. you can try again... bro'
+58.2 - {DONE} let finansis listening all the time and stop it when clicking on finansis btn
+58.3 - {DONE} fixing 🛠: scraping duplicate article
+58.4 - {DONE} fixing 🛠 user:'give me more news' finansis: 'do you want me to ready the news' user: 'yes' finansis not reading the news.
+58.5- {DONE} fixing 🛠:❌ An exception occurred in skeeing alpha get news script ,list index out of range and duplicate articles
+58.6 - {DONE} fixing 🛠: 'TypeError: Cannot read property 'split' of undefined' from news api
+58.7 - {DONE} fixing 🛠: xhr.js:210 GET https://news-api-lovat.vercel.app/api/v1/news?&source=a%20stick 400
+58.7 - {DONE} fixing 🛠: 'open article number one' not recognized
+58.8 - {DONE} fixing 🛠: someting went wrong in the server 'get'
+                TypeError: Cannot read property 'publishedAt' of undefined
+59 - {DONE} move all the commands functions to commandsHandler file and create useResponse hook
+58 - {DONE} test news section with crated news api
+60 - {DONE} create simple home page 
+61 - {DONE} create a simple stock information page like news page
+62 - {DONE} create a page to SHow stocks info like the most active in yahoo finance
+deadline - before 2021-12-28 ❌
+63 - {DONE} create 'stop listening' command
+64 - {DONE} fixing 🛠 'start talking sound when finansis reading the news' stop it and stop it after 'stop listening' command.
+65 - {DONE} come up with 5 todos 
+66 - {DONE} create'go to {home} page' command
+    1 - {DONE} handling not exist page 
+    2 - {DONE} handling going to the current page 
+
+68 - {DONE} fixing 🛠: let news commands works from home page and info page
+        1 - add new property to command object called commandFor
+        2 - when the user say a command check if pathname equals commandFor
+        3 - step 2 false use history object in move the user to commandFor correct path 
+69 - {DONE} fixing 🛠: 'read the news' command don't let finansis  read the news that she already read. 
+        1 - create useState called 
+69 - {DONE} fixing 🛠: scrolled view for 'give me the news from yahoo finance' then reading the news the 'give the news' command again but the view not from the first article 
+deadline - before 2022-1-1 ❌
+69 - {DONE} adding the word 'page' to 'go to {page}' command 
+70 - {DONE} fixing 🛠: 'open article {number}' new popup window not new tap 
+        window.open("http://www.cnn.com/", "CNN_WindowName", "popup");
+71 - {DONE} create 'close popup window' command after opening article with number {1}
+71.1 - {DONE} improving  open and close article by using puppeteer to let finansis control the popup window
+72 - {DONE} create 'do you want me to scroll every 5 seconds' command
+deadline - before 2022-1-4 ❌
+72.1 - {DONE} fixing 🛠: 'open article 10' commands when article 10 is exist
+73 - {DONE} fixing 🛠: not reset transcript when saying 'stop listening' while finansis reading headlines
+74 - {DONE} add 'nope', 'yeah' and 'off course' as optional answer to 'do want me to read the headlines'
+75 - {DONE} fixing 🛠: not resetting transcript for 'read the news' commands and improve meanly resetting transcript
+75 - {DONE} creating 'start reading news from article 3 (number)' command
+76 - {DONE} improving 'go back' command make for all the pages not just news page
+deadline - before 2022-1-6 ✅
+78 - {DONE} create 'open {apple} chart'  and 'close chart'  command
+    note - https://finance.yahoo.com/chart/XPEV#eyJpbnRlcnZhbCI6ImRheSIsInBlcmlvZGljaXR5IjoxLCJ0aW1lVW5pdCI6bnVsbCwiY2FuZGxlV2lkdGgiOjE0LjAxMjM0NTY3OTAxMjM0NSwiZmxpcHBlZCI6ZmFsc2UsInZvbHVtZVVuZGVybGF5Ijp0cnVlLCJhZGoiOnRydWUsImNyb3NzaGFpciI6dHJ1ZSwiY2hhcnRUeXBlIjoiY2FuZGxlIiwiZXh0ZW5kZWQiOmZhbHNlLCJtYXJrZXRTZXNzaW9ucyI6e30sImFnZ3JlZ2F0aW9uVHlwZSI6Im9obGMiLCJjaGFydFNjYWxlIjoibGluZWFyIiwicGFuZWxzIjp7ImNoYXJ0Ijp7InBlcmNlbnQiOjEsImRpc3BsYXkiOiJYUEVWIiwiY2hhcnROYW1lIjoiY2hhcnQiLCJpbmRleCI6MCwieUF4aXMiOnsibmFtZSI6ImNoYXJ0IiwicG9zaXRpb24iOm51bGx9LCJ5YXhpc0xIUyI6W10sInlheGlzUkhTIjpbImNoYXJ0Iiwi4oCMdm9sIHVuZHLigIwiXX19LCJzZXRTcGFuIjpudWxsLCJsaW5lV2lkdGgiOjIsInN0cmlwZWRCYWNrZ3JvdW5kIjp0cnVlLCJldmVudHMiOnRydWUsImNvbG9yIjoiIzAwODFmMiIsInN0cmlwZWRCYWNrZ3JvdWQiOnRydWUsInJhbmdlIjpudWxsLCJldmVudE1hcCI6eyJjb3Jwb3JhdGUiOnsiZGl2cyI6dHJ1ZSwic3BsaXRzIjp0cnVlfSwic2lnRGV2Ijp7fX0sInN5bWJvbHMiOlt7InN5bWJvbCI6IlhQRVYiLCJzeW1ib2xPYmplY3QiOnsic3ltYm9sIjoiWFBFViIsInF1b3RlVHlwZSI6IkVRVUlUWSIsImV4Y2hhbmdlVGltZVpvbmUiOiJBbWVyaWNhL05ld19Zb3JrIn0sInBlcmlvZGljaXR5IjoxLCJpbnRlcnZhbCI6ImRheSIsInRpbWVVbml0IjpudWxsLCJzZXRTcGFuIjpudWxsfV0sImN1c3RvbVJhbmdlIjpudWxsLCJzdHVkaWVzIjp7IuKAjHZvbCB1bmRy4oCMIjp7InR5cGUiOiJ2b2wgdW5kciIsImlucHV0cyI6eyJpZCI6IuKAjHZvbCB1bmRy4oCMIiwiZGlzcGxheSI6IuKAjHZvbCB1bmRy4oCMIn0sIm91dHB1dHMiOnsiVXAgVm9sdW1lIjoiIzAwYjA2MSIsIkRvd24gVm9sdW1lIjoiI2ZmMzMzYSJ9LCJwYW5lbCI6ImNoYXJ0IiwicGFyYW1ldGVycyI6eyJ3aWR0aEZhY3RvciI6MC40NSwiY2hhcnROYW1lIjoiY2hhcnQiLCJwYW5lbE5hbWUiOiJjaGFydCJ9fX19
+79 - {DONE} create 'can you hear me' command
+80 - {DONE} come up with more responses for 'unknown commands'
+    - sorry i don't understand that, try again
+    - i didn't get it, please try again
+81 - {DONE} improve the timing of reading news
+deadline - before 2022-1-8 ✅ DONE on 2022-1-7 
+82 - {DONE} movie goBack handle from useNewsCommandsHandler to useCommonCommandsHandler and add all the command handlers to it
+83 - {DONE} let the user chose if he want to let finansis control the popup window or not 
+    note - 'open the article' or 'open the article and control it'
+84 - {DONE} if finansis don't knows a company name let her say "i'm learning about 'company' give me a minute' and search in yahoo finance
+    - steps to let finansis learning about company's name
+    - create company database
+    - create get and post routes for company resource 
+    1 - user says keyword for example 'apple'
+    2 - lookup for the keyword in company's name in the database
+    3 - if found [DONE]
+    4 - else take the keyword and type it in yahoo finance search bar using puppeteer and then add found company the database
+    5 - return found company [DONE]
+    6 - {DONE} creating a better version of lookupForTickers function by connected to the database not just my file system
+    6 - {DONE} creating a better version of searchCompanyName function by connected it to the database not just my file system
+85 - {DONE} improve 'open {} chart' by allowing the user to  open more then one chart
+   - {DONE} handle if the user didn't have internat and if he in china  
+deadline - before 2022-1-11 ✅ DONE on 2022-1-9
+87 - {DONE} fixing 'open chart' and not saying 'i don't recognized that command'
+88 - {DONE} fixing 🛠: finansis not checking any words after dynamic words when checking for unknown commands
+89 - {DONE} creating serverUtils in utile folder and add all server stuff to it like urls
+90 - {DONE} let finansis remember 'not found keyword when searching in yahoo finance for company name' like the keyword 'something'
+    didn't found public company name with 'something' form yahoo finance
+    - create unknownKeywordForCompany database
+        - keyword: unique, index ,type: string
+    - create route for unknownKeywordForCompany source (get and post)
+    - check for keyword in unknownKeywordForCompany before searching
+    - if finansis search in yahoo finance and  did't find any company for the keyword add the keyword to unknownKeywordForCompany
+    -      
+91 - {DONE} creating 'what's the date today' commands
+93 - {DONE} improve 'give me the news {source}' and 'what's up with {something}' commands by return the most published articles
+deadline - before 2022-1-12 ✅ DONE on 2022-1-11
+94 - {DONE} creating 'Give me apple statistics' commands 
+95 - {DONE} creating 'Give me The most active stocks' commands
+96 - {DONE} creating 'Give me The most gainers stocks' commands
+97 - {DONE} creating 'Give me The most losers stocks' commands
+98 - {DONE} creating 'finance questions' commands like 'what is the price-to-book ratio?'
+    - create questions model
+        - question
+        - answer
+        - source
+        - referenceUrl
+    - {DONE} create route for questions Model (get and put)
+    - get all the questions from the database and then add them to commands list
+        - create questions state
+        - get all the question for the database and then add them to questions state using useEffect
+        - then every time there is new transcript check if that transcript in questions state
+        - if use just set IsCommandExist to true 
+        - and create other state isCommandQuestion and set that also to true
+        - use it in checking unknown commands useEffect to stop checking
+
+    - user say 'What Is the Price-to-Book Ratio?'
+    - search for an answer from questions model if found return the answer [DONE]
+    - else search in duckduck 'what Is the Price-to-B7ook Ratio investopedia'
+    - and click on the first link then scrap the first statement is an answer and the other properties for questions model
+    - then add  it to the model
+    - and return the answer
+    98.1 - {DONE} moving respondedWithYesSC and respondedWithNoSC to useResponse
+deadline - before 2022-1-13 ✅ DONE on 2022-1-12
+99 - {DONE} handle the error if a user said 'open article {number}' and auto server is not running    
+100 - {DONE} creating 'give me trending tickers' commands
+101 - {DONE} scrap top stories form google finance
+        https://www.google.com/finance/
+102 - {DONE} creating "give me top stories from google finance" commands
+103 - {DONE} create 'open chart with your control' command
+deadline - before 2022-1-15 ✅ DONE on 2022-1-14
+104 - {DONE} create 'close chart' command for 'open chart with your control' command
+105 - {DONE} create 'zoom in' and 'zoom out' commands when finansis open chart with her control
+106 - {DONE} create  'what is the current price for apple (share)' command
+107 - {DONE} create 'Show me apple and Tesla charts' commands 
+108 - {DONE} create 'change the chart to {chart type daily for example}' command when finansis open chart with her control
+deadline - before 2022-1-17 ✅ DONE on 2022-1-16
+109 - {DONE} come up with simple plan for 'trading' section
+110 - {DONE} clean up server auto file
+111 - {DONE} add windowType to auto opening articles
+112 - {DONE} fix 'close the chart' finansis say 'closing the chart' when there is no opened chart 
+113 - {DONE} improve finansis answers for questions by let finansis open the reference page 'open details page for the answer'
+deadline - before 2022-1-18 ✅ DONE on 2022-1-17
+114 - {DONE} fixing 'show me' command and finansis says 'do you want me to learn about show me'
+    - show = s + how so the finalTranscript includes the word how
+115 - {DONE} set up trading api 
+116 - {DONE} move the code from my trading bot to trading api 
+117 - {DONE} create different database for trading api
+118 - {DONE} create python api using flex for let finansis call buy, sell and stop loss scripts
+ - creating buyStock handler 
+119 - {DONE} improve test script
+    - create strategyTested model:
+        - boughtDate: date
+        - boughtPrice: number
+        - soldDate: date
+        - soldPrice: number
+        - symbol: string
+        - shares: number
+        - return: number
+    - create routes (get and put) for strategyTested model
+    - improve getStrategyTested controller 
+deadline - before 2022-1-20 ❌ DONE on 2022-2-2
+120 - {DONE} create simulator for back testing
+    - {DONE} creating backTesting interface the interface like https://www.investopedia.com/simulator/
+    - {DONE} let finansis pass day by day 
+    - {DONE} save the historical price to save time
+    - {DONE} create finding buy signal api's route for back testing and let finansis use it
+    - {DONE} create find sell signal api's route for back testing and let finansis use it
+    - {DONE} create get stocks price based on specific date
+    - {DONE} create useBackTest hook
+    - {DONE} display the data in similarly page -final
+    - {DONE} fix getting current price on 2021-02-06 from python script  
+    - {DONE} save tested data 
+    - {DONE} fixing todayChange value that return from getCurrentStockPrice in python script and stopLoss from sellSignalBackTest
+    - {DONE} fix user today change not changing for the first loop
+    - {DONE} let the user see number of holding stocks and number of sold and total bought stock 
+    - {DONE} handle error axios error 
+    - {DONE} create reset backTesting functionality
+    - {DONE} improving reset backTesting functionality
+    - {DONE} create justSell than purchase price functionality
+    - {DONE} get S&P 500 changes price
+    - {DONE} learning about redux add create backTestingReducer, redux store and useReduxActions
+    - {DONE} create parameters to show if backTesting is done or not
+    - {DONE} create 'start back testing' command
+    - {DONE} let the user enter start date , end data, catch and Account Risk  
+            - {DONE} create input popup window
+            - {DONE} create when clicking 'enter' keyword (console.log ) the input data functionality 
+            - {DONE} let finansis open the popup window
+            - {DONE} create close the window functionality after clicking on enter
+            - {DONE} make the popup window dynamic 
+            - {DONE} create userBTInput(dataInput) action-creator
+            - {DONE} let backTestingReducer handle USER_INPUT type
+            - {DONE} create finansis script to get user input one by one using inputModal for backTesting
+            - {DONE} improve buySignalBT function in tradeApi by adding accountRisk
+                    and let finansis pass that param to tradeApi 
+            - {DONE} start back testing with user input
+            - {DONE} show the user endData
+
+    - {DONE} tell the user you are about to close the window when backTesting still not done 
+    - {DONE} fix the typo 'loess' to 'losses'
+    - {DONE} show loading for buy sell and stop
+    - {DONE} add 'do you want me to force selling' command
+    - {DONE} add 'what is force selling' question, answer 'I will just only sell stock with any profit without following selling strategy'
+    - {DONE} let finansis say 'if you want me to force sell again, tell me force sell again' and create 'force sell (again)' command 
+    - {DONE} create 'reset back testing data' command
+    - {DONE} create sell stocks anyway functionality with profit or not
+            - {DONE} update sellSignalBT function by adding new param called isWithProfitOrNot and make that is condition to force selling
+            - {DONE} update forceSelling function by adding isWithProfitOrNot param to it and pass it to sell function in useBackTesting
+            - {DONE} create paramsFunction3 param for handleBackTestingAxiosError  function in useBackTest 
+            - {DONE} create  'sell with profit or without' command for back testing
+            - {DONE} count stocks that sold without profit as losses not wins
+
+
+121 - {DONE} create user model
+            - {DONE} database design for user model:
+                    - id : objectId required
+                    - name : String required
+                    - gander : String only ["male", "female"] required
+                    - email : String required
+                    - password: String required
+                    - executableChromePath: String
+                    - chromeDataPath: String
+                    note: update Stock modal by adding userId 
+            - {DONE} create mongoose Schema for user model
+            - {DONE} create express routes and controllers for user model
+            - {DONE} test created express routes, controllers and mongoose Schema
+122 - {DONE} test findingAnswersHandler functions and fixing some error
+123 - {DONE} improve 'code for handling unknown commands' by checking for commands first then for questions
+124 - {DONE} add redux to the project
+deadline - before 2022-2-6 ❌ DONE on 2022-3-6
+125 - {DONE} create 'trade for me' command sell, set stop loss and buy 
+126 - {DONE} create 'trading section'
+127 - {DONE} create trade progress popup window
+128 - {DONE} create 'give me {stocks} stock news' command, 
+    - {DONE} improving set stop loss functionality and fixing errors
+129 - {DONE} show me charts for all stock that you will buy
+        - {DONE} let findBuySignal return stocks not just the number of stocks
+        - {DONE} create findBuySignal function in useTradingHandlers and then use it in buyStock function
+        - {DONE} create 'find buy signals' commands just find signals without buying stocks
+        - {DONE} save found stocks in a state call foundBuySignalStocks
+        - {DONE} create 'show me charts for found buy signals (stocks)' command
+                - note: use 'openMultipleCharts' function to open all charts
+deadline - before 2022-3-10 ✅ DONE on 2022-3-8
+130 - {DONE} check for internat connection changes and user location every 5 seconds
+131 - {TODO} show the user sold stock using yahoo finance chart
+            - {DONE} create automation changeDate functionality
+            - {DONE} create soldStock state in useFinansis
+            - {DONE} create 'show me sold stocks chart' command let the user choose the stocks
+                    don't open all the stocks
+            - {DONE} add test data to soldStocks and test 'show me sold stocks' command
+            - {DONE} let sellSignal function in python script return sold stocks
+            - {DONE} save returned stocks in sold stocks  
+132 - {DONE} test Modal component 
+134 - {DONE} make sure that finansis voice is always "Google US English"
+135 - {DONE} fix user say 'close the window' after opening statistic window error and also for 'open * chart with your control'
+deadline - before 2022-3-12 ✅ DONE on 2022-3-10
+136 - {DONE} fixing updating data for the same date when first date of force selling fix 2
+
+    {catch: 884659.884098053, date: "2020-04-30", stock…}
+
+    {catch: 884659.884098053, date: "2020-04-30", stock…} for accountValue and sp500Data
+- {DONE} create 'go froward' commands and improving 'go back' commands
+- {DONE} fix  buying stock if the share is zero in buySignalBT python's function error 
+- {DONE} show the user when the market is close in back testing 
+- {DONE} handle stop force selling after not existing dates
+        note: just try not to call force sell function if the current date bigger then 2022-02-01
+deadline - before 2022-3-13 ✅ DONE on 2022-3-10
+- {DONE} fix handleGoToPage function when a user say 'go to back testing'
+- {DONE} create 'do you want me to try to sell again' command loop  
+- {DONE} create trade progress functionality
+        - {DONE} create redux functionality for trading 
+        - {DONE} create object like this {sell:status, buy:status, setStopLoss:status}
+            default value for status is empty string 
+            status options are 'success', 'fall', 'loading'
+        - {DONE} let sell function update sell parameter, and so on.
+        - {DONE} use progressData that in redux store in ProgressModal component    
+- {DONE} create 'show me trade progress' command
+- {DONE} make sure the last line in openMultipleCharts 'setPopupWindow(popupWindows)' doesn't affect other windows fixed
+deadline - before 2022-3-14 ✅ DONE on 2022-3-10
+- {DONE} create sign up functionality
+        - {DONE} user sign up redux functionality and update createUser function that in api
+        - {DONE} make InputModal component more dynamic
+                - {DONE} create isReduxState parameter in modal_store for not effect old code
+                        if isReduxState true create new logic else use the old logic
+                - {DONE} create updateUserInput action and let modalReducer handle the action
+        - {DONE} create useUserCommandsHandler custom hook 
+        - {DONE} create 'sign up' command 
+        - {DONE} connect 'sign up' command and 'sign up' api route  
+        - {DONE} create make sure that a user entered required fields
+        - {DONE} validation name must be less than 15 letters
+        - {DONE} valid email
+        - {DONE} password must be between 8 - 15 letters
+        - {DONE} confirm password must be equals to password
+        - {DONE} gender must be male or female
+        - {DONE} handle backend error
+- {DONE} create login functionality
+        - {DONE} create login api route and upgrading sign up  route
+        - {DONE} create login redux functionality
+        - {DONE} create 'login' command
+        - {DONE} let the user logged in 
+        note: use JWT
+- {DONE} create update user info functionality
+        - {DONE} create update user info api route
+        - {DONE} create redux functionality
+        - {DONE} create 'update my info' command
+- {DONE} create forget password functionality
+        note: use traveling project as reference
+        failed to use nodemailer so i will create automation script
+        to send emails
+        - {DONE} create puppeteer script for sending emails to users
+        - {DONE} create a route to call puppeteer script in auto api
+        - {DONE} call the above route in forgetPassword backend route
+        - {DONE} crate new puppeteer script because sendEmailHandler has limitation 
+        - {DONE} test sendEmailHandlerV2 script with resetToken that will be create in forgetPassword's backend route
+        - {DONE} create 'i forget my password' command
+                - {DONE} create redux functionality for forgetPassword
+                - {DONE} if email exist send  a user reset password token to his/ her email
+                - {DONE} else tell a user 'your email is not exist, if you want to try again say 'forget my password'
+        - {DONE} create "resetToken" API route        
+        - {DONE} let finansis call "resetToken" route  to handle sending token to backend again
+                - {DONE} open popup window then tell and show a user 
+                        'give me a second to validate your token'
+                - {DONE} show loading icon 
+                - {DONE} if the token is valid let the user input new password and confirm password
+                        then tell the user 'okay, your password update successfully 
+                - {DONE} else tell a user our token expired or it's invalid
+        javascript script
+        document.querySelector("body").removeChild(document.querySelector("body > p"))
+        document.querySelector("body").insertAdjacentHTML("afterbegin",'<div style="text-align: center; "><span style="font-size: 18px;">hey i\'m finansis,please click the link to reset your password</span></div><div style="text-align: center; "><span style="font-size: 18px;">https://www.wikihow.com/Send-HTML-Emails</span></div>')
+- {DONE} create logout functionality
+        - {DONE} create logout redux functionality
+        - {DONE} create 'logout' commands
+
+
+deadline - before 2022-3-15 ❌ DONE on 2022-3-17
+- {DONE IMPORTANT} don't let finansis recognize her own voice 
+        - {DONE} if there are two response after each other use responseAsync 
+        - {DONE} try to set use responseAsync function in redux store to call 
+                the same instant all over the app
+        - {DONE} fix letting finansis start listen after the first render
+                - {DONE} create isStartRecognize parameter in response_store
+                - {DONE} when the user toggle finansis btn change isStartRecognize value 
+                - {DONE} use isStartRecognize in 'make sure not to let finansis recognize her won voice' useEffect
+        - {DONE} fix 'stop listening' command
+
+
+- {DONE IMPORTANT} don't let finansis response when people are talking (long commands)
+                    note: check for the length of the command if it's longer 
+                            then some num 
+       
+- {DONE} tell the user you are logged in when a user logged in after saying 'login'
+         do you want to logout and 'login with different account'   
+- {DONE} tell the user you are logged in when a user logged in after saying 'sign up'
+         do you want to logout and 'create new account'   
+- {DONE} tell the user you are logged in when a user logged in after saying 'forget password'
+        do you want to update your password
+        - {DONE} create update password route in the backend
+        - {DONE} create update password redux functionality
+        - {DONE} create 'update my password' command 
+        - {DONE} create 'do you want to update your password' command after saying 'forget password' when the user logged in
+        
+deadline - before 2022-3-20 ✅ DONE on 2022-3-18
+- {DONE} fix 'currentWindows is not iterable' when say open 'apple and tesla charts'
+- {DONE} fix after opening 'https://finance.yahoo.com/most-active' window finansis couldn't close it
+- {DONE} handle if the user said log out when a user not logged in 
+---- after create user functionality (login, sign up, ...)
+- {DONE} create "you not login, do you want to login" command when click on finansis btn
+- {TODO} create watchList functionality 
+        - {DONE} add watchList property in user model
+                watchList: [companyId]
+        - {DONE} create add stock to watchLIst in backend
+        - {DONE} create delete stock from watchLIst in backend
+        - {DONE} create 'add {apple} stock to my watchLIst' command
+        - {DONE} don't do the above command if the user not logged in
+        - {DONE} Populate watchList not just returning companies id
+        - {DONE} improving Populate watchList functionality 
+        - {DONE} create 'show me my watchList' command
+        - {DONE} create 'close my watchList' command 
+        - {DONE} create 'delete {apple} stock from my watchLIst' command
+        - {DONE} handle adding duplicate stock to watchList in the frontend
+
+deadline - before 2022-3-22 ✅ DONE on 2022-3-20
+- {DONE} try to make your won useSpeechSynthesis and test it 
+        note: use https://github.com/MikeyParton/react-speech-kit/blob/master/src/useSpeechSynthesis.jsx
+                as reference
+- {DONE} useGetCurrentCountry test if that function doesn't slow down finansis if yes improve it
+
+- {DONE} make width and height in openHandler function in commonController dynamic:
+        const width = 1366 - 20;
+        const height = 768 - 20;
+- {DONE} MAKE executablePath dynamic too
+- {DONE} use checkForBrowser middleware and all the routes that needs it in auto api
+- {DONE} fix finansis say 'i don't find stocks for * from yahoo finance when backend server is down'
+deadline - before 2022-3-23 ✅ DONE on 2022-3-20
+- {DONE} let finansis ask 'do you want me to learn about {book} company' when book keyword not exist in the database
+- {DONE} add initial value for accountValue state that in useBackTest and it will fix TOTAL GAIN/LOSS error
+- {DONE} let 'what's up with {something}' command gets latest news
+        - {DONE} removing 'seeking alpha' when getting news for something else then source=seeking alpha
+- {DONE} let the user reselect his gender when clicking on delete keyboard and don't let him type any thing when he supposed to select a value
+- {DONE} create 'do you want to enter password again' command if a user entered confirm password wrong for two times
+        note: use stateName is signal
+deadline - before 2022-3-24 ✅ DONE on 2022-3-21
+- {DONE} fix updatePassword controller for  'updateMyPassword' route
+- {DONE} make sure the jwt token is available after clean the localStorage
+- {DONE} fix mic logo when starting in other page then home page
+- {DONE} test login in fields
+- {DONE} test currentStockPrice function in useInfoCommandsHandler
+deadline - before 2022-3-24 ✅ DONE on 2022-3-22
+- {DONE} improve 'start speaking sound'
+- {DONE} fix finansis stop recognizing after backTesting's reload page
+- {DONE} fix making finansis think the mark is close when tradingApi server is down isMarketOpen?date=2020-04-04 
+- {DONE} fix keywordInTitle: undefined when saying 'give me more news' for the third time
+- {DONE} TEST let sellSignal function in python script return sold stocks
+deadline - before 2022-3-25 ✅ DONE on 2022-3-22
+- {DONE} clean up all console.logs
+- {DONE} show error message for the user when there is error
+- {DONE} reset userInputs after submit data to dispatch function
+- {DONE} remove all unneeded npm packages 
+- {DONE} let 'Ctrl + V' key start finansis btn
+deadline - before 2022-3-25 ✅ DONE on 2022-3-22
+- {DONE} improve 'do you want to enter password again' command by making for updateMyPassword and resetPassword too
+- {DONE} 'don't let finansis ask 'you not logged in, do you want to login' when there is a secondCommand already
+- {DONE} fixing trading api for buy, sell and set stop loss 
+deadline - before 2022-3-25 ❌ DONE on 2022-3-30
+final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
+
+- {DONE} testing useResponse custom hook:
+        - {DONE} fixing error 🛠: for 'open article {1}' command
+        - {DONE} fixing error 🛠: don't let finansis close the details article page before finishing scrolling the page 
+        - {DONE} fixing error 🛠: for 'update my info' command when a user logged out
+- {DONE} testing useNewsCommandsHandler custom hook:
+        - {DONE} improving 'give me top stories from google finance' command
+        - {DONE} fixing error 🛠: for 'open article {1} without control' command when source equal 'investing'
+        - {DONE} fixing typo error 🛠: for 'open article {1}' command
+        - {DONE} fixing error 🛠: for 'stop reading' command (letting control keyword stop finansis reading headlines)
+                finansis can't recognize and listen at the same time
+                so i create shortcut key to stop her 'Control'
+
+- {DONE} testing useInfoCommandsHandler custom hook:
+        - {DONE} improving 'change the chart to *' command
+        - {DONE} fixing error 🛠: for 'open {apple} and {amazon} charts' command
+        - {DONE} improving 'sold stocks chart' command 
+        - {DONE} improving 'open {apple} chart with your control' command 
+- {DONE} testing useCommonCommandsHandler custom hook:
+        - {DONE} move closeAnswerDetail to handleCloseAnyPopup
+        - {DONE} test first 'second command' when a user logged in
+                - {DONE} fixing error: finansis always response for 'do you want me log in' when i user start finansis with keyboard shortcut
+        - {DONE} handle errors for 'do you want me to find an answer' command 
+        - {DONE} fixing error 🛠: for 'close the window' command when open 'the most' then close it and then open 'watchLst' window. 
+- {DONE} testing useTradingCommendsHandler custom hook:
+        - {DONE} improving buySignal python script performance (Big O notation)         
+        - {DONE} fixing errors 🛠: for secondCommands again 
+        - {DONE} add validation to back testing fields
+        - {DONE} show and let finansis tell a user back testing's errors message
+        - {DONE} creating new better buy stocks strategy for back testing
+        - {DONE} fixing stopLoss automation script in tradingApi 
+        - {DONE} fixing finansis saying 'found {6} buy signals twice' after finding buy signals
+        - {DONE} improving 'open trading progress' command
+- {DONE} testing stopLess function after buying stocks
+- {DONE} testing useUserCommandsHandler custom hook 
+        - {DONE} fixing typo in inputModal component
+        - {DONE} fixing sendEmailHandlerV2 automation script
+        - {DONE} fixing errors 🛠: 'remove 'apple' stock from my watchList
+- {TODO} Writing the thesis:
+        - {DONE} starting Writing the thesis
+        - {DONE} Writing the ABSTRACT
+        - {DONE} Writing the keywords
+        - {DONE} Writing the INTRODUCTION of my thesis
+        - {DONE} Writing SYSTEM PROBLEMS AND REQUIREMENTS ANALYSIS part 1 (User management, Stock Market News, Stock information)
+        - {DONE} Writing SYSTEM PROBLEMS AND REQUIREMENTS ANALYSIS part 2 (controlling the app with a voice module, making Finansis response, back-testing stock trading strategy)       
+        - {DONE} Writing SYSTEM PROBLEMS AND REQUIREMENTS ANALYSIS part 3 (Asking questions about the stock market, Automating stock trading (Trading Bot))
+        - {DONE} Writing major problems occurred in this project part 1       
+        - {DONE} Writing major problems occurred in this project part 2       
+        - {DONE} Writing major problems occurred in this project part 3       
+        - {DONE} creating The first data flow graph
+        - {DONE} creating The second data flow graph
+        - {DONE} creating The third data flow graph (backtesting)
+        - {DONE} creating The third data flow graph (questions module)
+        - {DONE} creating The third data flow graph (Stock information)
+        - {DONE} creating The third data flow graph (user management)
+        - {DONE} creating The third data flow graph (Stock Market News)
+        - {DONE} creating The third data flow graph (automating trading)
+        - {DONE} creating System structure diagram
+        - {DONE} Writing Commands OVERVIEW
+        - {DONE} Writing Commands description (sign up, login, forget my password)
+        - {DONE} Writing Commands description (update my information, logout, update (my) password, add {Apple|AAPL|...} stock to (my) watch list)
+        - {DONE} Writing Commands description part 3
+        - {DONE} Writing Commands description part 4
+        - {DONE} Writing Commands description part 5
+        - {DONE} Writing Commands description part 6
+        - {DONE} Writing Commands description part 7
+        - {DONE} Writing Commands description part 8
+        - {DONE} Writing Commands description part 9
+        - {DONE} Writing Commands description part 10
+        - {DONE} Writing Commands description part 11
+        - {DONE} Writing Commands description part 12 
+        - {DONE} researching about 'What is the stock market?' and adding the information to the thesis
+        - {DONE} researching and adding the information to the thesis part 2
+        - {DONE} Writing about technologies been used in this project
+        - {DONE} Writing about technologies been used in this project 2
+        - {DONE} updating the thesis

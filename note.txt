@@ -595,6 +595,7 @@ final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
         - {DONE} Writing about technologies been used in this project
         - {DONE} Writing about technologies been used in this project 2
         - {DONE} updating the thesis
+        - {DONE} updating the thesis part 2
 deadline - before 2022-5-2
 - {TODO} testing sellStocks again
 - {TODO} testing handleFindingAnswer if didn't find any answer after scraping 
@@ -1696,6 +1697,16 @@ Topics Related To This Project:
         yahoo finance
         How the News Affects Stock Prices
 
+Robert Kiyosaki said in Rich Dad Poor Dad book " Once a dollar goes into your asset column, it becomes your employee. The best thing about money is that it works 24 hours a day and can work for generations.”  
+and inspired by that quote this voice control application named Finansis build
 
-thanks to every teacher teach me something about computer science in Wenzhou or in the internet , thanks to each programmer in stackoverflow that help me or build technologe I used in this project,  and special thanks to Wingo Laoshi.
+Speech recognition:
+this module enable users to speak to Finansis. Speech Recognition module is the most important module in this project
+
+Effective Technologies make users' experience more pleasant and make the live of developers easier.
+thanks to every teacher who taught me something about computer science in Wenzhou or on the internet, thanks to each programmer on StackOverflow that help me or build the technologies I used in this project, and special thanks to Wingo Laoshi that help me to come up with Finansis idea by telling me my old idea is not reasonable which was creating 'stock market production model' using machine learning.
+I will keep working on this project, and keep researching for good developers to build and improve the project,
+and one day we will take Finansis project from a final project for Degree of Bachelor to a real business that anyone interested
+in the stock market or making passive income can use Finansis. and if
+you want to be the first investor in Finansis connect me in my email 'mdnuur1208@gmail.com'
 @1208_noor
