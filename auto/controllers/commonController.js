@@ -164,7 +164,8 @@ export const findingAnswersHandler = async (req, res) => {
 
   await Promise.all([
     page.waitForNavigation({ timeout }),
-    page.click("#r1-0 a"),
+    // page.click("#r1-0 a"),
+    page.click("#r1-0 > div:nth-child(2) > h2 > a"),
   ]);
 
   await page.waitForTimeout(1000 * 10);
