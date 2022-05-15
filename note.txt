@@ -596,6 +596,9 @@ final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
         - {DONE} Writing about technologies been used in this project 2
         - {DONE} updating the thesis
         - {DONE} updating the thesis part 2
+        - {DONE} updating the thesis part 3 and writing some test 
+        - {DONE} writing tests 2
+
 deadline - before 2022-5-2
 - {TODO} testing sellStocks again
 - {TODO} testing handleFindingAnswer if didn't find any answer after scraping 
@@ -603,6 +606,7 @@ deadline - before 2022-5-2
 - {TODO} testing sellWithProfitOrNot function in useTradingCommendsHandler
 - {TODO} creating video for each command to demonstrate each command
 ----- NOT IMPORTANT NOW
+- {TODO} fix Finansis not 'Responding ‘here is top news’' after getting top stories
 - {TODO} apply handleTradingError function to buy and set stop loss functions
 - {TODO} show users all commands in each section
 - {TODO} fix Dependabot alerts in the github

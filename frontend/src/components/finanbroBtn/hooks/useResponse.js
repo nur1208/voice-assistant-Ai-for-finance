@@ -59,12 +59,13 @@ export const useResponse = (SpeechRecognition) => {
     // let currentVoiceIndex = 7;
 
     const handleResponse = (voiceIndex) => {
-      if (typeof optionsResponse !== "object")
+      if (typeof optionsResponse !== "object") {
         speak({
           text: optionsResponse,
           voice: voices[voiceIndex],
         });
-      else {
+        console.log({ FinansisResponse: optionsResponse });
+      } else {
         speak({
           text: randomOption,
           voice: voices[voiceIndex],
@@ -73,6 +74,7 @@ export const useResponse = (SpeechRecognition) => {
           Math.floor(Math.random() * optionsResponse.length)
         );
         // setRandomIndex(10);
+        console.log({ FinansisResponse: randomOption });
       }
     };
 
@@ -187,7 +189,6 @@ export const useResponse = (SpeechRecognition) => {
     resetAllStates,
     setIsForceSellAgain,
   }) => {
-    
     let localSecondFor = secondCommandFor;
     if (secondCommand?.type) localSecondFor = secondCommand.type;
     else if (typeof secondCommandFor === "object")

@@ -204,7 +204,7 @@ export const useNewsCommandsHandler = (
     if (num > 0 && num <= newsArticles.length) {
       response(`reading from article ${num}`);
       setTimeout(async () => {
-        `await handleReadingHeadLines(num);
+        await handleReadingHeadLines(num);
       }, 1000 * 4);
     } else {
       response(

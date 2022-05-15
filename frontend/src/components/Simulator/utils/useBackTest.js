@@ -338,12 +338,12 @@ export const useBackTest = () => {
 
     // false
     // getData
-    // !(false && false) = !(false && true)  =true && true = go in
-    // !(false && false) = !(false && true)  =true && false = go to else
-    // !(true && false) = true && true = go in
-    // !(true && false) = true && false = go to else
-    // !(true && true) = false && false = go to else
-    // !(true && true) = false && true = go to else
+    // (!(false && false) = !(false && true)  =true) && true = go in
+    // (!(false && false) = !(false && true)  =true) && false = go to else
+    // (!(true && false) = true) && true = go in
+    // (!(true && false) = true) && false = go to else
+    // (!(true && true) = false) && false = go to else
+    // (!(true && true) = false) && true = go to else
     if (
       !(isForceSell && holdStocksLocal.length === 0) &&
       currentDateLocal <= endDateP

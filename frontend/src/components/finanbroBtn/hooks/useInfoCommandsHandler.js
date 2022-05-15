@@ -91,9 +91,9 @@ export const useInfoCommandsHandler = (
     if (companies.includes("and")) {
       let companiesArray = companies.split("and");
       // companiesArray = companiesArray.map((s) => s.trim());
-      response(
-        `opening  ${companiesArray.join(" and ")} charts`
-      );
+      // response(
+      //   `opening  ${companiesArray.join(" and ")} charts`
+      // );
 
       const popupWindows = [];
       let newPopupWindow;
