@@ -598,6 +598,9 @@ final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
         - {DONE} updating the thesis part 2
         - {DONE} updating the thesis part 3 and writing some test 
         - {DONE} writing tests 2
+        - {DONE} updating the thesis part 4
+        - {DONE} updating the thesis part 5
+        
 
 deadline - before 2022-5-2
 - {TODO} testing sellStocks again
