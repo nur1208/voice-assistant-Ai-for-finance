@@ -600,6 +600,7 @@ final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
         - {DONE} writing tests 2
         - {DONE} updating the thesis part 4
         - {DONE} updating the thesis part 5
+        - {DONE} updating the thesis part 6 and creating flow charts
         
 
 deadline - before 2022-5-2
