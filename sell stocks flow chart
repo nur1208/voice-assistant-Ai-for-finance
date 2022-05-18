@@ -1,0 +1,202 @@
+<mxfile host="app.diagrams.net" modified="2022-05-18T08:57:26.180Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36" etag="K0awxOoW9SOgW6W3irCU" version="18.0.6" type="github">
+  <diagram id="1Tt1RnIRh9eNSnj04hwX" name="Page-1">
+    <mxGraphModel dx="914" dy="514" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="5y2MscxPAoO9mQQ7TpPa-1" value="start" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="610" y="80" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="5y2MscxPAoO9mQQ7TpPa-2" value="" style="rounded=0;html=1;jettySize=auto;orthogonalLoop=1;fontSize=11;endArrow=block;endFill=0;endSize=8;strokeWidth=1;shadow=0;labelBackgroundColor=none;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" target="5y2MscxPAoO9mQQ7TpPa-3">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="651" y="121" as="sourcePoint" />
+            <mxPoint x="651" y="171" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5y2MscxPAoO9mQQ7TpPa-3" value="Finansis" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="594.5" y="180" width="114.5" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="5y2MscxPAoO9mQQ7TpPa-4" value="sell stocks handler" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="594.5" y="280" width="114.5" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="5y2MscxPAoO9mQQ7TpPa-5" value="" style="rounded=0;html=1;jettySize=auto;orthogonalLoop=1;fontSize=11;endArrow=block;endFill=0;endSize=8;strokeWidth=1;shadow=0;labelBackgroundColor=none;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="654" y="220" as="sourcePoint" />
+            <mxPoint x="654.8" y="279" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5y2MscxPAoO9mQQ7TpPa-6" value="" style="rounded=0;html=1;jettySize=auto;orthogonalLoop=1;fontSize=11;endArrow=block;endFill=0;endSize=8;strokeWidth=1;shadow=0;labelBackgroundColor=none;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="658.2000000000003" y="322" as="sourcePoint" />
+            <mxPoint x="657.4000000000003" y="381" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5y2MscxPAoO9mQQ7TpPa-7" value="send request to &#39;find sell signals&#39;&amp;nbsp;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="602" y="383" width="114.5" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="5y2MscxPAoO9mQQ7TpPa-8" value="" style="rounded=0;html=1;jettySize=auto;orthogonalLoop=1;fontSize=11;endArrow=block;endFill=0;endSize=8;strokeWidth=1;shadow=0;labelBackgroundColor=none;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="602" y="402" as="sourcePoint" />
+            <mxPoint x="531.75" y="402" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5y2MscxPAoO9mQQ7TpPa-9" value="is &#39;find sell singnals&#39; request return error" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="451.75" y="361" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="5y2MscxPAoO9mQQ7TpPa-10" value="yes" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="392" y="379" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="5y2MscxPAoO9mQQ7TpPa-11" value="" style="rounded=0;html=1;jettySize=auto;orthogonalLoop=1;fontSize=11;endArrow=block;endFill=0;endSize=8;strokeWidth=1;shadow=0;labelBackgroundColor=none;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="452" y="401.0000000000001" as="sourcePoint" />
+            <mxPoint x="381.75" y="401.0000000000001" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5y2MscxPAoO9mQQ7TpPa-12" value="ask a user for trying selling again" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="266" y="379" width="114.5" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="5y2MscxPAoO9mQQ7TpPa-14" value="no" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="471.75" y="441" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="5y2MscxPAoO9mQQ7TpPa-15" value="is a user answer yes" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="283.75" y="260" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="5y2MscxPAoO9mQQ7TpPa-16" value="" style="rounded=0;html=1;jettySize=auto;orthogonalLoop=1;fontSize=11;endArrow=block;endFill=0;endSize=8;strokeWidth=1;shadow=0;labelBackgroundColor=none;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="5y2MscxPAoO9mQQ7TpPa-12" target="5y2MscxPAoO9mQQ7TpPa-15">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="320" y="370" as="sourcePoint" />
+            <mxPoint x="323" y="340" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5y2MscxPAoO9mQQ7TpPa-19" value="" style="rounded=0;html=1;jettySize=auto;orthogonalLoop=1;fontSize=11;endArrow=block;endFill=0;endSize=8;strokeWidth=1;shadow=0;labelBackgroundColor=none;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="5y2MscxPAoO9mQQ7TpPa-15" target="5y2MscxPAoO9mQQ7TpPa-4">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="472" y="302" as="sourcePoint" />
+            <mxPoint x="600" y="300" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5y2MscxPAoO9mQQ7TpPa-20" value="yes" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="443" y="277" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="5y2MscxPAoO9mQQ7TpPa-21" value="" style="rounded=0;html=1;jettySize=auto;orthogonalLoop=1;fontSize=11;endArrow=block;endFill=0;endSize=8;strokeWidth=1;shadow=0;labelBackgroundColor=none;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="323.25" y="259" as="sourcePoint" />
+            <mxPoint x="323.75" y="220" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5y2MscxPAoO9mQQ7TpPa-22" value="no" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="283.75" y="230" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="5y2MscxPAoO9mQQ7TpPa-23" value="end" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="285" y="181" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="5y2MscxPAoO9mQQ7TpPa-24" value="send request to &#39;sell stocks&#39;&amp;nbsp;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="602" y="504" width="114.5" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="5y2MscxPAoO9mQQ7TpPa-25" value="is &#39;sell stocks&#39; request return error" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="785.75" y="485" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="5y2MscxPAoO9mQQ7TpPa-26" value="" style="rounded=0;html=1;jettySize=auto;orthogonalLoop=1;fontSize=11;endArrow=block;endFill=0;endSize=8;strokeWidth=1;shadow=0;labelBackgroundColor=none;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="715.75" y="525" as="sourcePoint" />
+            <mxPoint x="786" y="525" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5y2MscxPAoO9mQQ7TpPa-27" value="" style="rounded=0;html=1;jettySize=auto;orthogonalLoop=1;fontSize=11;endArrow=block;endFill=0;endSize=8;strokeWidth=1;shadow=0;labelBackgroundColor=none;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="826" y="565" as="sourcePoint" />
+            <mxPoint x="718" y="612" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="828" y="612" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5y2MscxPAoO9mQQ7TpPa-28" value="" style="rounded=0;html=1;jettySize=auto;orthogonalLoop=1;fontSize=11;endArrow=block;endFill=0;endSize=8;strokeWidth=1;shadow=0;labelBackgroundColor=none;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="492.2000000000003" y="442" as="sourcePoint" />
+            <mxPoint x="491" y="482" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5y2MscxPAoO9mQQ7TpPa-29" value="is sell signals found?" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="451.75" y="482" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="5y2MscxPAoO9mQQ7TpPa-30" value="" style="rounded=0;html=1;jettySize=auto;orthogonalLoop=1;fontSize=11;endArrow=block;endFill=0;endSize=8;strokeWidth=1;shadow=0;labelBackgroundColor=none;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="452" y="522.0000000000001" as="sourcePoint" />
+            <mxPoint x="381.75" y="522.0000000000001" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5y2MscxPAoO9mQQ7TpPa-32" value="end" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="300.5" y="501" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="5y2MscxPAoO9mQQ7TpPa-33" value="no" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="387.75" y="500" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="5y2MscxPAoO9mQQ7TpPa-34" value="" style="rounded=0;html=1;jettySize=auto;orthogonalLoop=1;fontSize=11;endArrow=block;endFill=0;endSize=8;strokeWidth=1;shadow=0;labelBackgroundColor=none;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="531.75" y="522" as="sourcePoint" />
+            <mxPoint x="602" y="522" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5y2MscxPAoO9mQQ7TpPa-35" value="yes" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="531" y="500" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="5y2MscxPAoO9mQQ7TpPa-36" value="tell a user about sold stocks" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="603" y="589" width="114.5" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="5y2MscxPAoO9mQQ7TpPa-37" value="" style="rounded=0;html=1;jettySize=auto;orthogonalLoop=1;fontSize=11;endArrow=block;endFill=0;endSize=8;strokeWidth=1;shadow=0;labelBackgroundColor=none;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="602" y="610.0000000000001" as="sourcePoint" />
+            <mxPoint x="531.75" y="610.0000000000001" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5y2MscxPAoO9mQQ7TpPa-38" value="end" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="450.5" y="589" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="5y2MscxPAoO9mQQ7TpPa-40" value="ask a user for trying selling again" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="768" y="383" width="114.5" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="5y2MscxPAoO9mQQ7TpPa-41" value="is a user answer yes" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="785.75" y="259" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="5y2MscxPAoO9mQQ7TpPa-42" value="" style="rounded=0;html=1;jettySize=auto;orthogonalLoop=1;fontSize=11;endArrow=block;endFill=0;endSize=8;strokeWidth=1;shadow=0;labelBackgroundColor=none;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="5y2MscxPAoO9mQQ7TpPa-40" target="5y2MscxPAoO9mQQ7TpPa-41">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="822" y="374" as="sourcePoint" />
+            <mxPoint x="825" y="344" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5y2MscxPAoO9mQQ7TpPa-43" value="" style="rounded=0;html=1;jettySize=auto;orthogonalLoop=1;fontSize=11;endArrow=block;endFill=0;endSize=8;strokeWidth=1;shadow=0;labelBackgroundColor=none;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="825.2499999999999" y="258" as="sourcePoint" />
+            <mxPoint x="825.7500000000001" y="219" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5y2MscxPAoO9mQQ7TpPa-44" value="no" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="785.75" y="229" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="5y2MscxPAoO9mQQ7TpPa-45" value="end" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="787" y="180" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="5y2MscxPAoO9mQQ7TpPa-46" value="no" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="737.75" y="591" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="5y2MscxPAoO9mQQ7TpPa-47" value="" style="rounded=0;html=1;jettySize=auto;orthogonalLoop=1;fontSize=11;endArrow=block;endFill=0;endSize=8;strokeWidth=1;shadow=0;labelBackgroundColor=none;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" target="5y2MscxPAoO9mQQ7TpPa-40">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="825.75" y="485" as="sourcePoint" />
+            <mxPoint x="817.75" y="445" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5y2MscxPAoO9mQQ7TpPa-48" value="yes" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="807" y="446" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="5y2MscxPAoO9mQQ7TpPa-49" value="" style="rounded=0;html=1;jettySize=auto;orthogonalLoop=1;fontSize=11;endArrow=block;endFill=0;endSize=8;strokeWidth=1;shadow=0;labelBackgroundColor=none;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="5y2MscxPAoO9mQQ7TpPa-41">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="781.0000000000002" y="300" as="sourcePoint" />
+            <mxPoint x="710.75" y="300" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5y2MscxPAoO9mQQ7TpPa-51" value="yes" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="723" y="277" width="60" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
