@@ -466,7 +466,7 @@ export const useFinansis = ({
       callback: async (num) => await foundMultipleStocks(num),
       commandFor: "info",
     },
-// it is a joke
+    // it is a joke
     {
       command: "do you have a boyfriend",
       callback: async (num) => {
@@ -638,7 +638,7 @@ export const useFinansis = ({
       callback: () => startBackTesting(),
       commandFor: "backTesting",
     },
-// it is a joke
+    // it is a joke
 
     {
       command: ["thank you", "thanks"],
@@ -663,6 +663,8 @@ export const useFinansis = ({
         "reset back testing (data)",
         "reset pack testing (data)",
         "reset back-testing (data)",
+        "preset pack testing",
+        "preset back testing",
       ],
       callback: async () => await resetBTDataHandler(),
       commandFor: "backTesting",
