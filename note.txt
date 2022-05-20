@@ -603,8 +603,9 @@ final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
         - {DONE} updating the thesis part 6 and creating flow charts
         - {DONE} updating the thesis part 7 and creating flow charts part 2
         - {DONE} updating the thesis part 8 and creating writing some test part 3
-        
-
+        - {DONE} Finlay done writing my thesis
+        speech synthesis
+investopedia simulator
 deadline - before 2022-5-2
 - {TODO} testing sellStocks again
 - {TODO} testing handleFindingAnswer if didn't find any answer after scraping 
@@ -612,7 +613,11 @@ deadline - before 2022-5-2
 - {TODO} testing sellWithProfitOrNot function in useTradingCommendsHandler
 - {TODO} creating video for each command to demonstrate each command
 ----- NOT IMPORTANT NOW
+- {TODO} something Wrong while selecting stock ❌❌❌ { symbol: 'BALL' } in trading api finansis doesn't think that is an error
 - {TODO} fix Finansis not 'Responding ‘here is top news’' after getting top stories
+- {TODO} let finansis know when the backend server is down
+- {TODO} add command to open investopedia simulator account
+- {TODO} fix returning 'return infinity' after selling stock using Finansis
 - {TODO} apply handleTradingError function to buy and set stop loss functions
 - {TODO} show users all commands in each section
 - {TODO} fix Dependabot alerts in the github

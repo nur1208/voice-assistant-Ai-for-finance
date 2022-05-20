@@ -622,8 +622,11 @@ export const useFinansis = ({
     {
       command: [
         "set stop-loss for stocks",
+        "set stop-loss",
         "buy stop loss for stocks",
+        "buy stop loss",
         "set stop loss for stocks",
+        "set stop loss",
       ],
       callback: () => stopLess(),
       commandFor: "trading",
