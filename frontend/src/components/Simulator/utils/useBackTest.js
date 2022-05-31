@@ -345,6 +345,7 @@ export const useBackTest = () => {
     // (!(true && true) = false) && false = go to else
     // (!(true && true) = false) && true = go to else
     if (
+      // ignore the first condition, it is for force sell only
       !(isForceSell && holdStocksLocal.length === 0) &&
       currentDateLocal <= endDateP
     ) {
@@ -361,8 +362,6 @@ export const useBackTest = () => {
         );
 
         if (holdStocksLocal.length > 0) {
-          // get the current price fot hold stocks
-
           // fixing updating data for the same date when first date of force selling
           if (
             !sp500Data.length ||
@@ -374,11 +373,13 @@ export const useBackTest = () => {
               "something went wrong while getting S&P 500 data"
             );
 
+            // get the current price fot hold stocks
             await handleBackTestingAxiosError(
               updateCurrentPrice,
               date,
               "something went wrong while updating Stocks price"
             );
+
             // look for sell signals for hold stocks
 
             await handleBackTestingAxiosError(
@@ -418,7 +419,7 @@ export const useBackTest = () => {
             }
           }
         }
-        // look for buy signals TODO clean up this code
+        // look for buy signals
         if (!isForceSell) {
           await handleBackTestingAxiosError(
             buy,

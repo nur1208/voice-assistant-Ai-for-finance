@@ -653,6 +653,15 @@ export const useFinansis = ({
       commandFor: "every section",
     },
     {
+      command: ["say hi", "say hey", "say hello"],
+      callback: async () => {
+        response("hi there");
+        await sleep(1000);
+        response("my name is Finansis");
+      },
+      commandFor: "every section",
+    },
+    {
       command: [
         "force",
         "force sell (again)",

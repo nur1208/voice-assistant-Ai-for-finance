@@ -6,9 +6,11 @@ const SIGN_UP_S =
 const USERNAME_INPUT_S = "#username";
 
 const PASSWORD_INPUT_S = "#password";
-const LOGIN_BTN_S =
-  "body > div.app-root > div.ui-prominent.bg-norm.color-norm.h100.flex-no-min-children.flex-nowrap.flex-column.h100.sign-layout-bg.scroll-if-needed > div > div > main > div.sign-layout-main-content > form > button";
+// const LOGIN_BTN_S =
+//   "body > div.app-root > div.ui-prominent.bg-norm.color-norm.h100.flex-no-min-children.flex-nowrap.flex-column.h100.sign-layout-bg.scroll-if-needed > div > div > main > div.sign-layout-main-content > form > button";
 
+const LOGIN_BTN_S =
+  "body > div.app-root > div.flex-no-min-children.flex-nowrap.flex-column.h100.sign-layout-bg.scroll-if-needed.relative > div.sign-layout-container.flex-item-fluid-auto.flex.flex-nowrap.flex-column.flex-justify-space-between > div > main > div.sign-layout-main-content > form > button";
 const NEW_MESSAGE_BTN_S =
   "body > div.app-root > div.content-container.flex.flex-column.flex-nowrap.no-scroll > div.content.ui-prominent.flex-item-fluid-auto.flex.flex-column.flex-nowrap.reset4print > div > div.sidebar.flex.flex-nowrap.flex-column.no-print.outline-none > div.pl1.pr1.pb1.flex-item-noshrink > button";
 

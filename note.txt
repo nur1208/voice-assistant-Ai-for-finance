@@ -604,15 +604,26 @@ final deadline v1 - before 2022-3-31 ✅ DONE on 2022-3-30
         - {DONE} updating the thesis part 7 and creating flow charts part 2
         - {DONE} updating the thesis part 8 and creating writing some test part 3
         - {DONE} Finlay done writing my thesis
-        speech synthesis
-investopedia simulator
+  
 deadline - before 2022-5-2
+
 - {TODO} testing sellStocks again
 - {TODO} testing handleFindingAnswer if didn't find any answer after scraping 
         'didn't find answer for your question'
 - {TODO} testing sellWithProfitOrNot function in useTradingCommendsHandler
 - {TODO} creating video for each command to demonstrate each command
 ----- NOT IMPORTANT NOW
+{TODO} add Detecting when the user denies access to the microphone
+{TODO} make sure that the following code is working in scraping news getAddArticlesToDB function:
+         if(r.status_code):
+                print("so article is added successfully")
+{TODO} handler error server in sendEmailHandlerV2 auto API
+{TDOO} fix finansis saying the following stock bought when didn't buy any stock
+{TODO} handler error server in getNews function 
+    const {
+      data: { articles, isExist },
+    } = await axios.get(NEWS_API_URL);
+
 - {TODO} something Wrong while selecting stock ❌❌❌ { symbol: 'BALL' } in trading api finansis doesn't think that is an error
 - {TODO} fix Finansis not 'Responding ‘here is top news’' after getting top stories
 - {TODO} let finansis know when the backend server is down
@@ -771,6 +782,20 @@ Playing ----
     using fundamental analysis + technical analysis + machine learning RNN algorithm     
 
 finansis color 1 - #0033CC , 2 - #131313 3 - #FAFAFA
+stock information 
+market news 
+interactive user management
+interactive searching 
+automating stock trading
+back-testing trading strategy
+question data
+algorithmic trading
+controlling popup
+management
+sending emails management
+algorithmic trading
+puppeteer
+interactively
 major problems occurred in this project:
 - let Finansis recognizes English words: solved by using react-speech-recognition npm package which uses Web Speech API.
 - let Finansis speaks out loud: solved by copying react-speech-kit npm package's  'useSpeechSynthesis' function and then adding more logic to the function. useSpeechSynthesis function uses Web Speech API too.

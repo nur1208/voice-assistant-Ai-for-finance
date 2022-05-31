@@ -56,12 +56,6 @@ export const useNewsCommandsHandler = (
   const { updateModal, updateSecondCommand } = useReduxActions();
   const getNews = async (type, query) => {
     response(`finding`);
-    // 445938e7b4214f4988780151868665cc
-    // response(`finding news from ${source}`);
-    // const API_KEY = "c8be8b2944eb4366aac8e7c44e783746";
-    // const API_KEY = "445938e7b4214f4988780151868665cc";
-    // let NEWS_API_URL = `https://newsapi.org/v2/top-headlines?apiKey=${API_KEY}&language=en`;
-    // let NEWS_API_URL = `http://localhost:4050/api/v1/news?`;
     let NEWS_API_URL = NEWS_API_URL_C;
 
     let lastCommand;
@@ -113,6 +107,7 @@ export const useNewsCommandsHandler = (
     //     .split(" ")
     //     .join("-")}`;
 
+    // {TODO} handler error server
     const {
       data: { articles, isExist },
     } = await axios.get(NEWS_API_URL);
@@ -128,6 +123,7 @@ export const useNewsCommandsHandler = (
       );
       setActiveArticle(pageNumber * 10);
     }
+
     const responsePositiveOrNegative = (negative, positive) => {
       if (!isExist) {
         response(negative);

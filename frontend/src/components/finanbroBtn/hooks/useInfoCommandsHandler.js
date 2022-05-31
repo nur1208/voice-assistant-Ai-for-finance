@@ -227,6 +227,7 @@ export const useInfoCommandsHandler = (
       });
 
       setPopupWWControl(data.isAutoBrowserOpen);
+      await sleep(1000 * 5);
       response("the page is done loading");
       await sleep(1000 * 5);
       if (windowType.type === "soldChart") {
