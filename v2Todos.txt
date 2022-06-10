@@ -1,0 +1,140 @@
+- {DONE} clean note.txt file
+- {TODO} testing handleFindingAnswer if didn't find any answer after scraping 
+        'didn't find answer for your question'
+- {TODO} testing sellWithProfitOrNot function in useTradingCommendsHandler
+- {TODO} add Detecting when the user denies access to the microphone
+{TODO} make sure that the following code is working in scraping news getAddArticlesToDB function:
+         if(r.status_code):
+                print("so article is added successfully")
+deadline - before 2022-6-13
+
+
+hardhat-simple-storage
+- {TODO} testing sellStocks again
+----- NOT IMPORTANT NOW
+{TODO} handler error server in sendEmailHandlerV2 auto API
+{TDOO} fix finansis saying the following stock bought when didn't buy any stock
+{TODO} handler error server in getNews function 
+    const {
+      data: { articles, isExist },
+    } = await axios.get(NEWS_API_URL);
+- {TODO} create api keys for each api
+- {TODO} something Wrong while selecting stock ❌❌❌ { symbol: 'BALL' } in trading api finansis doesn't think that is an error
+- {TODO} fix Finansis not 'Responding ‘here is top news’' after getting top stories
+- {TODO} let finansis know when the backend server is down
+- {TODO} add command to open investopedia simulator account
+- {TODO} fix returning 'return infinity' after selling stock using Finansis
+- {TODO} apply handleTradingError function to buy and set stop loss functions
+- {TODO} show users all commands in each section
+- {TODO} fix Dependabot alerts in the github
+- {TODO} learning blockchain
+- {TODO} adding smart contract 
+        note: for example the user will send 10 'yuan' and he want 
+                his money back if finansis trade the 10 'yuan' 
+                and return 5 'yuan' from the trade or after ten days 
+                return the money
+- {TODO} create 'what's my name' command 
+- {TODO} don't let the user enter his info again if the email exist, just let him update his email
+- {TODO} adding handleTradingError for buy stocks and finding buy signals
+- {TODO} improving sellSignal python script performance (Big O notation)
+- {TODO} fixing error: finansis always response for 'do you want me log in' when i user start finansis with keyboard shortcut again
+- {TODO} divide sell stocks and find stocks functionality in 'sellStocks' function
+- {TODO} let finansis remember that she did buy, sell or set stop loss for stocks for a specific day 
+        note: use cookies
+- {TODO} let finansis remember question that she didn't find answer for it.
+- {TODO} let finansis knows when api server is down and when i user asked a question let finansis tell them 'the server is down, I can't help you know'. 
+- {TODO} create 'scroll' command when finansis open details article page
+- {TODO} after reading 5 articles let finansis ask 'do you want me to stop reading'
+- {TODO} create 'save my back test data' command
+        - {TODO} save back test data plus userId and backTest title 
+        - {TODO} save the title in user modal make title unique and backTestData id each one in different array
+- {TODO} create 'show me my info' command 
+- {TODO} make finansis ask 'do you want me to {buy/sell} stocks again' when there is an error
+- {TODO} fix when finansis learn about 'dave' something unexcited happened
+- {TODO} close any opened browser when is unmounted
+        - test create function again put handleCloseAnyPopup before e.preventDefault();
+- {TODO} show users how to get executablePath
+- {TODO} create 'take screen shot' command
+- {TODO} try to fix seeking alpha get news script 
+        there is something wrong with publishedAt 
+- {TODO} create 'scroll up scroll down' command for news and also when opening a window with finansis control 
+- {TODO} add current stock Price to user watch List
+        when saying "show me my watch list"
+- {TODO} let the user update his/her options (like alway with your controller, ignore Multiple stocks,...)
+        'create activate' and deactivate'
+- {TODO} create 'play music' command 
+        - {TODO} let the user enter youtube paly list or just set my default play list  
+- {TODO} remember last command user said when finansis ask 'do you want to login'
+        if the user said yes and after he/she login let finansis do the command before logging in
+- {TODO} create "add stock to my watchlist" command to let the user type a symbol
+- {TODO} let finansis recognize a command with more than one dynamic word like:
+        "add * (stock) to (my) watchlist"
+- {TODO} create input or say out stocks symbol or name
+- {TODO} create 'show me {5|all} charts from my watchList' command 
+- {TODO} create 'am i logged in' command
+- {TODO} create 'do you want to login' when a user say 'update my password' command and his/her not logged in
+- {TODO} change appUtils file name to useFinansis 
+- {TODO} create useUnknownCommands hook and use it in appUtils
+- {TODO} clean up the code in userActions by making the actions function dynamic
+- {TODO} sorry you not vpn user i con't help you with that
+- {TODO} ask the user please use headphones or buy smart speaker for better experience
+- {TODO} don't let finansis start listen enter the user click on finansis btn
+- {TODO} make sure that message been sent to users in sendEmailHandlerV2 script
+- {TODO} create 'do you want me to open gmail website' command after send password reset token
+- {TODO} create 'update my [name|info|gender]' if info let the user update his name and gender
+- {TODO} create up auto server.js file by moving routes to different file
+- {TODO} creating video for each command to demonstrate each command
+- {TODO} don't let the user enter sign up info again when there is an error from the backend
+- {DONE} fix typo gander to gender
+- {TODO} don't let the use see server errors like 'data and salt arguments required'
+- {TODO} let the user type the symbol or choose a number when open Multiple companies found popup 
+- {TODO} put all modal data in redux store
+- {TODO} don't get questions every render from the api, save the documents in 
+- {TODO} move useGetCurrentCountry TO hooks folder
+        user localStorage and just check the number of the questions in LS 
+        same as in the database
+    note: use Redis
+- {TODO} improve tell the user you are about to close the window when backTesting still not done
+- {TODO} improve sell strategy by just sell after 30 days of holding stocks
+- {TODO} let the user enter sell after {30, 20, 10, 90} days
+- {TODO} fix finansis btn moving to right when inputModal opened error
+- {TODO} use react-currency-format package for when a user enter date (startDate, ...) 
+        note: clone TextField style 
+- {TODO} change closeChart name to closeYahooFinance
+- {TODO} creating readme in the github
+133 - {TODO} create callAxios function and use it in useBackTest for clean up axios calls
+            note: this is not easy to do so do it later if it still important
+                here is a hint of how you can do it?
+                first update findBuySignal in python script
+                let the script process stock by stocks 
+                and let the frontend send the s&p 500 stocks 
+                to api one by one
+                tell the user your about to reload if the process
+                still going
+- {TODO} let the user type the symbol or choose a number from his watch list
+- {TODO NOT IMPORTANT NOW} save S&P 500 stocks like {date:{added:[stocks],removed:[stocks] }}
+- {TODO} set cookie in react
+- {TODO} making news api more secure
+- {TODO} adding private key functionality to new api 
+get  is the market open data using python and get the data every day
+
+- {TODO NOT IMPORTANT NOW} add cancel axios request when the page unmounted 
+    ref:https://stackoverflow.com/questions/53861916/canceling-an-axios-rest-call-in-react-hooks-useeffects-cleanup-failing
+
+- {CON'T DO IT} make sure that a user using chrome browser
+        https://stackoverflow.com/questions/4565112/javascript-how-to-find-out-if-the-user-browser-is-chrome
+92 - {NOT important NOW TODO} improve offline component by make it like youtube 
+77 - {NOT important NOW TODO} convert all publishedAt timezone to one similarly timezone when scraping articles.
+    note - https://stackoverflow.com/questions/10997577/python-timezone-conversion
+
+69 - {NOT BIG NOW TODO} fixing 🛠:don't let finansis listen to herself  
+    1 - stop listening if speaking true (not sometime don's work)
+- {CHANGED} add optional (finansis) word at the beginning of each command   
+50 - {CHANGED} create 'give me more {number} news' commands
+52 - {CHANGED} learning how to use vercel 
+    1- {CHANGED} create api that calls scrips
+    2- {CHANGED} deploy the api in vercel
+    3 - {CHANGED} call api's routes every 5min using replit
+53 - {CHANGED} create different folder and repository for each scraping script
+54 - {CHANGED} deploy each scraping script 
+67 - {FAILED, TRY AGAIN LATER} improve 'responseAfterTimeout' function by making the callback inside setTimeout dynamic
