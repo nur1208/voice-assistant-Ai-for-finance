@@ -178,6 +178,19 @@ export const findingAnswersHandler = async (req, res) => {
       message: "didn't find answer for your question",
     });
   }
+  try {
+    await page.waitForSelector(
+      "#mntl-sc-block-callout-body_1-0",
+      { timeout: 1000 * 15 }
+    );
+  } catch (error) {
+    await browserLocal.close();
+
+    return res.status(404).json({
+      status: "fail",
+      message: "didn't find answer for your question",
+    });
+  }
 
   const ul = await page.evaluate(
     () =>

@@ -12,6 +12,7 @@ deadline - before 2022-6-13
 hardhat-simple-storage
 - {TODO} testing sellStocks again
 ----- NOT IMPORTANT NOW
+- {TODO} add 'is that a good answer' question after scraping an answer, if the answer is no so then removing the question from the database 
 {TODO} handler error server in sendEmailHandlerV2 auto API
 {TDOO} fix finansis saying the following stock bought when didn't buy any stock
 {TODO} handler error server in getNews function 
