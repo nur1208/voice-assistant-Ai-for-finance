@@ -3,9 +3,11 @@
         'didn't find answer for your question'
 - {DONE} testing sellWithProfitOrNot function in useTradingCommendsHandler and improving 'just sell' command
 - {DONE} adding Detecting when the user denies access to the microphone
-{TODO} make sure that the following code is working in scraping news getAddArticlesToDB function:
+{DONE} make sure that the following code is working in scraping news getAddArticlesToDB function:
          if(r.status_code):
                 print("so article is added successfully")
+        - {DONE} adding console log for create news endpoint in news api
+        - {DONE} Fixing errors in getYahooFinance scraping script and getAddArticlesToDB function in python scraping scripts
 deadline - before 2022-6-13
 
 
