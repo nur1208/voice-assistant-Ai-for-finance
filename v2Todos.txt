@@ -1,7 +1,7 @@
 - {DONE} clean note.txt file
-- {TODO} testing handleFindingAnswer if didn't find any answer after scraping 
+- {DONE} testing handleFindingAnswer if didn't find any answer after scraping 
         'didn't find answer for your question'
-- {TODO} testing sellWithProfitOrNot function in useTradingCommendsHandler
+- {DONE} testing sellWithProfitOrNot function in useTradingCommendsHandler and improving 'just sell' command
 - {TODO} add Detecting when the user denies access to the microphone
 {TODO} make sure that the following code is working in scraping news getAddArticlesToDB function:
          if(r.status_code):
@@ -13,6 +13,7 @@ hardhat-simple-storage
 - {TODO} testing sellStocks again
 ----- NOT IMPORTANT NOW
 - {TODO} add 'is that a good answer' question after scraping an answer, if the answer is no so then removing the question from the database 
+- {TODO} create admin page to let a admin check the answer for questions
 {TODO} handler error server in sendEmailHandlerV2 auto API
 {TDOO} fix finansis saying the following stock bought when didn't buy any stock
 {TODO} handler error server in getNews function 
