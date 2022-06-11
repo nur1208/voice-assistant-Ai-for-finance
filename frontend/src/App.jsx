@@ -46,6 +46,7 @@ import { getCookie } from "./utils/getCookie";
 import { MessagePopup } from "./components/MessagePopup";
 import { useIsChrome } from "./hooks/useIsChrome";
 import { IsNotChromeBrowser } from "./components/IsNotChromeBrowser";
+import { SorryMessage } from "./components/SorryMessage";
 export const PAGES = [
   {
     path: "/",
@@ -122,6 +123,7 @@ export const App = () => {
     isBrowserSupportsSpeechRecognition,
     modalProps,
     isReadingHeadLines,
+    isMicrophoneAvailable,
   } = useFinansis({ isWaitingUserDone, setIsWaitingUserDone });
 
   // get localStorage date in add it to redux store
@@ -179,8 +181,17 @@ export const App = () => {
   const userCountry = useGetCurrentCountry(networkStatus);
   const isChrome = useIsChrome();
 
+  if (!isMicrophoneAvailable) {
+    return (
+      <SorryMessage
+        mainMessage="you must allow microphone to use Finansis"
+        subMessage="Please allow access to the microphone"
+      />
+    );
+  }
+
   if (!isChrome) {
-    <IsNotChromeBrowser />;
+    return <IsNotChromeBrowser />;
   }
 
   if (

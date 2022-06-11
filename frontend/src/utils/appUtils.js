@@ -826,6 +826,7 @@ export const useFinansis = ({
     listening,
     resetTranscript,
     finalTranscript,
+    isMicrophoneAvailable
   } = useSpeechRecognition({
     commands,
   });
@@ -1136,5 +1137,6 @@ export const useFinansis = ({
     FinanbroBtnProps,
     modalProps,
     isReadingHeadLines,
+    isMicrophoneAvailable
   };
 };
