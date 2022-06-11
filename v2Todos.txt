@@ -3,29 +3,28 @@
         'didn't find answer for your question'
 - {DONE} testing sellWithProfitOrNot function in useTradingCommendsHandler and improving 'just sell' command
 - {DONE} adding Detecting when the user denies access to the microphone
-{DONE} make sure that the following code is working in scraping news getAddArticlesToDB function:
+- {DONE} make sure that the following code is working in scraping news getAddArticlesToDB function:
          if(r.status_code):
                 print("so article is added successfully")
         - {DONE} adding console log for create news endpoint in news api
         - {DONE} Fixing errors in getYahooFinance scraping script and getAddArticlesToDB function in python scraping scripts
-deadline - before 2022-6-13
-
-
-hardhat-simple-storage
-- {TODO} testing sellStocks again
------ NOT IMPORTANT NOW
-- {TODO} add 'is that a good answer' question after scraping an answer, if the answer is no so then removing the question from the database 
-- {TODO} create admin page to let a admin check the answer for questions
-- {TODO} handler error server in sendEmailHandlerV2 auto API
+deadline - before 2022-6-13 ✅ DONE on 2022-6-11
+- {DONE} handler error server in sendEmailHandlerV2 auto API
 - {TODO} fix finansis saying the following stock bought when didn't buy any stock
 - {TODO} handler error server in getNews function 
     const {
       data: { articles, isExist },
     } = await axios.get(NEWS_API_URL);
-- {TODO} clean IsNotChromeBrowser, NotWorkingInChina and NoBrowserSupport redundancy
-- {TODO} create api keys for each api
 - {TODO} something Wrong while selecting stock ❌❌❌ { symbol: 'BALL' } in trading api finansis doesn't think that is an error
 - {TODO} fix Finansis not 'Responding ‘here is top news’' after getting top stories
+deadline - before 2022-6-14 
+hardhat-simple-storage
+----- NOT IMPORTANT NOW
+- {TODO} testing sellStocks again
+- {TODO} add 'is that a good answer' question after scraping an answer, if the answer is no so then removing the question from the database 
+- {TODO} create admin page to let a admin check the answer for questions
+- {TODO} clean IsNotChromeBrowser, NotWorkingInChina and NoBrowserSupport redundancy
+- {TODO} create api keys for each api
 - {TODO} let finansis know when the backend server is down
 - {TODO} add command to open investopedia simulator account
 - {TODO} fix returning 'return infinity' after selling stock using Finansis
