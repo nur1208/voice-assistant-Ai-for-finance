@@ -10,7 +10,7 @@
         - {DONE} Fixing errors in getYahooFinance scraping script and getAddArticlesToDB function in python scraping scripts
 deadline - before 2022-6-13 ✅ DONE on 2022-6-11
 - {DONE} handler error server in sendEmailHandlerV2 auto API
-- {TODO} fix finansis saying the following stock bought when didn't buy any stock
+- {DONE} fix Finansis saying the 'following stock bought' when didn't buy any stock
 - {TODO} handler error server in getNews function 
     const {
       data: { articles, isExist },
@@ -25,6 +25,10 @@ hardhat-simple-storage
 - {TODO} create admin page to let a admin check the answer for questions
 - {TODO} clean IsNotChromeBrowser, NotWorkingInChina and NoBrowserSupport redundancy
 - {TODO} create api keys for each api
+- {TODO} fix puppteere window size of trading api
+- {TODO} make sure that finansis find buy signals only once
+        note: add new field in user modal called 'lostFindBuySignalDate' and just comaper it with today's date
+- {TODO} impore buy stocks by if there is no stock to buy don't open puppteere window
 - {TODO} let finansis know when the backend server is down
 - {TODO} add command to open investopedia simulator account
 - {TODO} fix returning 'return infinity' after selling stock using Finansis
