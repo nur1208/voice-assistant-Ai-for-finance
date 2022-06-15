@@ -11,7 +11,7 @@
 deadline - before 2022-6-13 ✅ DONE on 2022-6-11
 - {DONE} handler error server in sendEmailHandlerV2 auto API
 - {DONE} fix Finansis saying the 'following stock bought' when didn't buy any stock
-- {TODO} handler error server in getNews function 
+- {DONE} handler error server in getNews function which is in commandHandler file 
     const {
       data: { articles, isExist },
     } = await axios.get(NEWS_API_URL);

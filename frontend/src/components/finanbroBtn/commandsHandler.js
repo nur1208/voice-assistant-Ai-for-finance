@@ -107,85 +107,93 @@ export const useNewsCommandsHandler = (
     //     .split(" ")
     //     .join("-")}`;
 
-    // {TODO} handler error server
-    const {
-      data: { articles, isExist },
-    } = await axios.get(NEWS_API_URL);
+    try {
+      const {
+        data: { articles, isExist },
+      } = await axios.get(NEWS_API_URL);
 
-    if (type !== "giveMeMore") {
-      setNewsArticles(isExist ? articles : []);
-      setActiveArticle(-1);
-      setPageNumber(1);
-      window.scroll(0, 0);
-    } else {
-      setNewsArticles(
-        isExist ? [...newsArticles, ...articles] : newsArticles
-      );
-      setActiveArticle(pageNumber * 10);
-    }
-
-    const responsePositiveOrNegative = (negative, positive) => {
-      if (!isExist) {
-        response(negative);
-        return false;
+      if (type !== "giveMeMore") {
+        setNewsArticles(isExist ? articles : []);
+        setActiveArticle(-1);
+        setPageNumber(1);
+        window.scroll(0, 0);
       } else {
-        response(positive);
-        return true;
+        setNewsArticles(
+          isExist ? [...newsArticles, ...articles] : newsArticles
+        );
+        setActiveArticle(pageNumber * 10);
       }
-    };
 
-    let isPositiveResponse;
-    switch (type) {
-      case "giveMeSource":
-        isPositiveResponse = responsePositiveOrNegative(
-          `sorry, I didn't find news from ${query}`,
-          `here is the news from ${query}`
-        );
+      const responsePositiveOrNegative = (
+        negative,
+        positive
+      ) => {
+        if (!isExist) {
+          response(negative);
+          return false;
+        } else {
+          response(positive);
+          return true;
+        }
+      };
 
-        if (!isPositiveResponse) return;
-        break;
-      case "whatsUpWith":
-        isPositiveResponse = responsePositiveOrNegative(
-          `sorry, I didn't find news for ${query} keyword`,
-          `here is what's up with ${query}`
-        );
-        if (!isPositiveResponse) return;
+      let isPositiveResponse;
+      switch (type) {
+        case "giveMeSource":
+          isPositiveResponse = responsePositiveOrNegative(
+            `sorry, I didn't find news from ${query}`,
+            `here is the news from ${query}`
+          );
 
-        break;
-      case "category":
-        isPositiveResponse = responsePositiveOrNegative(
-          `sorry, I didn't find news for ${query} category`,
-          `here is the news for ${query} category`
-        );
-        if (!isPositiveResponse) return;
+          if (!isPositiveResponse) return;
+          break;
+        case "whatsUpWith":
+          isPositiveResponse = responsePositiveOrNegative(
+            `sorry, I didn't find news for ${query} keyword`,
+            `here is what's up with ${query}`
+          );
+          if (!isPositiveResponse) return;
 
-        break;
+          break;
+        case "category":
+          isPositiveResponse = responsePositiveOrNegative(
+            `sorry, I didn't find news for ${query} category`,
+            `here is the news for ${query} category`
+          );
+          if (!isPositiveResponse) return;
 
-      case "latestNews":
-        isPositiveResponse = responsePositiveOrNegative(
-          `sorry, I didn't find any news`,
-          `here is the latest news`
-        );
+          break;
 
-        if (!isPositiveResponse) return;
-        break;
+        case "latestNews":
+          isPositiveResponse = responsePositiveOrNegative(
+            `sorry, I didn't find any news`,
+            `here is the latest news`
+          );
 
-      case "giveMeMore":
-        isPositiveResponse = responsePositiveOrNegative(
-          `sorry, I didn't find any more news`,
-          `here is more news`
-        );
+          if (!isPositiveResponse) return;
+          break;
 
-        if (!isPositiveResponse) return;
-        break;
+        case "giveMeMore":
+          isPositiveResponse = responsePositiveOrNegative(
+            `sorry, I didn't find any more news`,
+            `here is more news`
+          );
 
-      default:
-        break;
+          if (!isPositiveResponse) return;
+          break;
+
+        default:
+          break;
+      }
+
+      response(`do you want me to read the head lines`);
+      setSecondCommandFor("readThHeadLines");
+      updateSecondCommand(null);
+    } catch (error) {
+      response(
+        `something went wrong from news API, pleas try again later`
+      );
     }
-
-    response(`do you want me to read the head lines`);
-    setSecondCommandFor("readThHeadLines");
-    updateSecondCommand(null);
     // wait for 5 second and then let finansis listening again
     // setTimeout(() => {
     //   toggle();
