@@ -15,7 +15,7 @@ deadline - before 2022-6-13 ✅ DONE on 2022-6-11
     const {
       data: { articles, isExist },
     } = await axios.get(NEWS_API_URL);
-- {TODO} something Wrong while selecting stock ❌❌❌ { symbol: 'BALL' } in trading api finansis doesn't think that is an error
+- {DONE} something Wrong while selecting stock ❌❌❌ { symbol: 'NUR' } in trading api finansis doesn't think that is an error
 - {TODO} fix Finansis not 'Responding ‘here is top news’' after getting top stories
 deadline - before 2022-6-14 
 hardhat-simple-storage
@@ -25,6 +25,7 @@ hardhat-simple-storage
 - {TODO} create admin page to let a admin check the answer for questions
 - {TODO} clean IsNotChromeBrowser, NotWorkingInChina and NoBrowserSupport redundancy
 - {TODO} create api keys for each api
+- {TODO} let finansis ask 'you not log in, do you want log in only once for each page load
 - {TODO} fix puppteere window size of trading api
 - {TODO} make sure that finansis find buy signals only once
         note: add new field in user modal called 'lostFindBuySignalDate' and just comaper it with today's date

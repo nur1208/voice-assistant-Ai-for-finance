@@ -127,7 +127,13 @@ export const useTradingCommendsHandler = (
       response(message);
       updateProgress({ buy: "success" });
     } catch (error) {
-      response("something went wrong while buying Stocks");
+      console.log({ error });
+
+      if (error?.response?.data?.message) {
+        response(error?.response?.data?.message);
+      } else {
+        response("something went wrong while buying Stocks");
+      }
       updateProgress({ buy: "fall" });
     }
   };
