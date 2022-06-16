@@ -182,6 +182,15 @@ export const useNewsCommandsHandler = (
           if (!isPositiveResponse) return;
           break;
 
+        case "topStories":
+          isPositiveResponse = responsePositiveOrNegative(
+            `sorry, I didn't find any news`,
+            `here is top news`
+          );
+
+          if (!isPositiveResponse) return;
+          break;
+
         default:
           break;
       }

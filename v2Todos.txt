@@ -15,8 +15,8 @@ deadline - before 2022-6-13 ✅ DONE on 2022-6-11
     const {
       data: { articles, isExist },
     } = await axios.get(NEWS_API_URL);
-- {DONE} something Wrong while selecting stock ❌❌❌ { symbol: 'NUR' } in trading api finansis doesn't think that is an error
-- {TODO} fix Finansis not 'Responding ‘here is top news’' after getting top stories
+- {DONE} something Wrong while selecting stock ❌❌❌  symbol: 'NUR'  in trading api finansis doesn't think that is an error
+- {DONE} fix Finansis not 'Responding ‘here is top news’' after getting top stories
 deadline - before 2022-6-14 
 hardhat-simple-storage
 ----- NOT IMPORTANT NOW
