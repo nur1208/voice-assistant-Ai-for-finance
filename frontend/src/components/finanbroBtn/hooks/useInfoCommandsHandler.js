@@ -218,13 +218,19 @@ export const useInfoCommandsHandler = (
     if (!isUserInfoValid()) return;
     try {
       response("loading the page will take seconds");
-      const { data } = await axios.post(`${AUTO_API_URL}/open`, {
-        goToUrl: `${YAHOO_FINANCE_URL}/chart/${symbol}`,
-        windowType: "chart",
-        windowWidth: width,
-        windowHeight: height,
-        executablePath: userData.executableChromePath,
-      });
+      const { data } = await axios.post(
+        `${AUTO_API_URL}/open`,
+        {
+          goToUrl: `${YAHOO_FINANCE_URL}/chart/${symbol}`,
+          windowType: "chart",
+          windowWidth: width,
+          windowHeight: height,
+          executablePath: userData.executableChromePath,
+        },
+        {
+          headers: { authorization: `Bearer ${userData.token}` },
+        }
+      );
 
       setPopupWWControl(data.isAutoBrowserOpen);
       await sleep(1000 * 5);

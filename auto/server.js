@@ -22,6 +22,7 @@ import {
 } from "./controllers/chartController.js";
 import { sendEmailHandler } from "./controllers/sendEmailController.js";
 import { sendEmailHandlerV2 } from "./controllers/sendEmailHandlerV2.js";
+import { protect } from "./controllers/authController.js";
 
 dotenv.config();
 
@@ -39,6 +40,7 @@ let windowTypeHolder;
 app.use(express.json());
 app.use(cors("http://localhost:3000"));
 app.use(morgan("dev"));
+// app.use(protect);
 
 app.post("/findingAnswers", findingAnswersHandler);
 

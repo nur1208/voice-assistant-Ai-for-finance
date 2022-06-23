@@ -17,24 +17,31 @@ deadline - before 2022-6-13 ✅ DONE on 2022-6-11
     } = await axios.get(NEWS_API_URL);
 - {DONE} something Wrong while selecting stock ❌❌❌  symbol: 'NUR'  in trading api finansis doesn't think that is an error
 - {DONE} fix Finansis not 'Responding ‘here is top news’' after getting top stories
-deadline - before 2022-6-14 
-hardhat-simple-storage
+deadline - before 2022-6-14 ❌ DONE on 2022-6-16
+- {TODO} deploy main API using vercel
+- {TODO} create api keys for each api
+- {TODO} let finansis knows when api server is down and when i user asked a question let finansis tell them 'the server is down, I can't help you know'. 
+- {TODO} show users all commands in each section
+- {TODO} create 'what's my name' command 
+- {TODO} don't let the user enter his info again if the email exist, just let him update his email when sign up
+- {TODO} create 'show me my info' command 
+- {TODO} sorry you not vpn user i con't help you with that
 ----- NOT IMPORTANT NOW
+- {TODO} don't let finansis auto sell stock if all found stock are stop losses
+        note: check find sell singals scrips for why didn't set isRechedstopLoss to true
+- {TODO} create 'auto trade command' let the user select end date
 - {TODO} testing sellStocks again
 - {TODO} add 'is that a good answer' question after scraping an answer, if the answer is no so then removing the question from the database 
 - {TODO} create admin page to let a admin check the answer for questions
 - {TODO} clean IsNotChromeBrowser, NotWorkingInChina and NoBrowserSupport redundancy
-- {TODO} create api keys for each api
 - {TODO} let finansis ask 'you not log in, do you want log in only once for each page load
 - {TODO} fix puppteere window size of trading api
 - {TODO} make sure that finansis find buy signals only once
         note: add new field in user modal called 'lostFindBuySignalDate' and just comaper it with today's date
 - {TODO} impore buy stocks by if there is no stock to buy don't open puppteere window
-- {TODO} let finansis know when the backend server is down
 - {TODO} add command to open investopedia simulator account
 - {TODO} fix returning 'return infinity' after selling stock using Finansis
 - {TODO} apply handleTradingError function to buy and set stop loss functions
-- {TODO} show users all commands in each section
 - {TODO} fix Dependabot alerts in the github
 - {TODO} learning blockchain
 - {TODO} adding smart contract 
@@ -42,22 +49,19 @@ hardhat-simple-storage
                 his money back if finansis trade the 10 'yuan' 
                 and return 5 'yuan' from the trade or after ten days 
                 return the money
-- {TODO} create 'what's my name' command 
-- {TODO} don't let the user enter his info again if the email exist, just let him update his email
 - {TODO} adding handleTradingError for buy stocks and finding buy signals
 - {TODO} improving sellSignal python script performance (Big O notation)
 - {TODO} fixing error: finansis always response for 'do you want me log in' when i user start finansis with keyboard shortcut again
 - {TODO} divide sell stocks and find stocks functionality in 'sellStocks' function
-- {TODO} let finansis remember that she did buy, sell or set stop loss for stocks for a specific day 
+- {TODO} let finansis remember that it did buy, sell or set stop loss for stocks for a specific day 
         note: use cookies
-- {TODO} let finansis remember question that she didn't find answer for it.
-- {TODO} let finansis knows when api server is down and when i user asked a question let finansis tell them 'the server is down, I can't help you know'. 
+- {TODO} let finansis remember question that it didn't find answer for it.
+
 - {TODO} create 'scroll' command when finansis open details article page
 - {TODO} after reading 5 articles let finansis ask 'do you want me to stop reading'
 - {TODO} create 'save my back test data' command
         - {TODO} save back test data plus userId and backTest title 
         - {TODO} save the title in user modal make title unique and backTestData id each one in different array
-- {TODO} create 'show me my info' command 
 - {TODO} make finansis ask 'do you want me to {buy/sell} stocks again' when there is an error
 - {TODO} fix when finansis learn about 'dave' something unexcited happened
 - {TODO} close any opened browser when is unmounted
@@ -81,21 +85,16 @@ hardhat-simple-storage
 - {TODO} create input or say out stocks symbol or name
 - {TODO} create 'show me {5|all} charts from my watchList' command 
 - {TODO} create 'am i logged in' command
-- {TODO} create 'do you want to login' when a user say 'update my password' command and his/her not logged in
 - {TODO} change appUtils file name to useFinansis 
 - {TODO} create useUnknownCommands hook and use it in appUtils
 - {TODO} clean up the code in userActions by making the actions function dynamic
-- {TODO} sorry you not vpn user i con't help you with that
 - {TODO} ask the user please use headphones or buy smart speaker for better experience
 - {TODO} don't let finansis start listen enter the user click on finansis btn
 - {TODO} make sure that message been sent to users in sendEmailHandlerV2 script
 - {TODO} create 'do you want me to open gmail website' command after send password reset token
 - {TODO} create 'update my [name|info|gender]' if info let the user update his name and gender
-- {TODO} create up auto server.js file by moving routes to different file
 - {TODO} creating video for each command to demonstrate each command
 - {TODO} don't let the user enter sign up info again when there is an error from the backend
-- {DONE} fix typo gander to gender
-- {TODO} don't let the use see server errors like 'data and salt arguments required'
 - {TODO} let the user type the symbol or choose a number when open Multiple companies found popup 
 - {TODO} put all modal data in redux store
 - {TODO} don't get questions every render from the api, save the documents in 

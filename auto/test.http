@@ -2,6 +2,8 @@
 
     # "goToUrl":"https://finance.yahoo.com/news/tech-stocks-stumble-worst-start-211736815.html",
     # "windowType":"chart"
+GET {{url}}
+###
 POST {{url}}/open
 Content-Type: application/json
 
