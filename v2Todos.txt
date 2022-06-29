@@ -19,6 +19,12 @@ deadline - before 2022-6-13 ✅ DONE on 2022-6-11
 - {DONE} fix Finansis not 'Responding ‘here is top news’' after getting top stories
 deadline - before 2022-6-14 ❌ DONE on 2022-6-16
 - {TODO} deploy main API using vercel
+        - adding vercel config file
+        - adding node-sass to fix an erorr
+        - adding @vercel/node to fix an erorr and removing node-sass
+        - updating start scrips
+    // "start": "nodemon --exec node --experimental-modules server.js",
+
 - {TODO} create api keys for each api
 - {TODO} let finansis knows when api server is down and when i user asked a question let finansis tell them 'the server is down, I can't help you know'. 
 - {TODO} show users all commands in each section
