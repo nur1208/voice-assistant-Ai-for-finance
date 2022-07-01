@@ -18,13 +18,17 @@ deadline - before 2022-6-13 ✅ DONE on 2022-6-11
 - {DONE} something Wrong while selecting stock ❌❌❌  symbol: 'NUR'  in trading api finansis doesn't think that is an error
 - {DONE} fix Finansis not 'Responding ‘here is top news’' after getting top stories
 deadline - before 2022-6-14 ❌ DONE on 2022-6-16
-- {TODO} deploy main API using vercel
+- {DONE} create finansis-backend project
+        - {DONE} set up the backend 
+        - {DONE} deploy the finansis-backend to vercel
+- {DONE} deploy main API using vercel
         - adding vercel config file
-        - adding node-sass to fix an erorr
-        - adding @vercel/node to fix an erorr and removing node-sass
+        - adding node-sass to fix an error
+        - adding @vercel/node to fix an error and removing node-sass
         - updating start scrips
     // "start": "nodemon --exec node --experimental-modules server.js",
-
+- {TODO} use finansis-backend-v2 in Finansis project
+        - {DONE} make backend-url in auto commonController dynamic 
 - {TODO} create api keys for each api
 - {TODO} let finansis knows when api server is down and when i user asked a question let finansis tell them 'the server is down, I can't help you know'. 
 - {TODO} show users all commands in each section
@@ -32,6 +36,7 @@ deadline - before 2022-6-14 ❌ DONE on 2022-6-16
 - {TODO} don't let the user enter his info again if the email exist, just let him update his email when sign up
 - {TODO} create 'show me my info' command 
 - {TODO} sorry you not vpn user i con't help you with that
+- {TODO} fix 'finansis saying didn't find apple' when there is a server error
 ----- NOT IMPORTANT NOW
 - {TODO} don't let finansis auto sell stock if all found stock are stop losses
         note: check find sell singals scrips for why didn't set isRechedstopLoss to true

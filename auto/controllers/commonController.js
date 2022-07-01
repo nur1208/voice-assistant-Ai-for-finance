@@ -6,7 +6,8 @@ import axios from "axios";
 export let browser;
 export let page;
 export let windowTypeHolder;
-
+// const BACKEND_API_URL = "http://localhost:4050"
+const BACKEND_API_URL = "https://finansis-backend-v2.vercel.app";
 export const findingCompaniesHandler = async (req, res) => {
   //   const width = window.outerWidth - 20;
   //   const height = window.outerHeight - 20;
@@ -82,7 +83,7 @@ export const findingCompaniesHandler = async (req, res) => {
         ).text();
         try {
           const { data } = await axios.post(
-            "http://localhost:4050/api/v1/companies",
+            `${BACKEND_API_URL}/api/v1/companies`,
             company
           );
           companies.push(data.doc);
@@ -210,7 +211,7 @@ export const findingAnswersHandler = async (req, res) => {
 
   try {
     const { data } = await axios.post(
-      "http://localhost:4050/api/v1/questions",
+      `${BACKEND_API_URL}/api/v1/questions`,
       questionObject
     );
   } catch (error) {
