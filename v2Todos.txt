@@ -27,8 +27,9 @@ deadline - before 2022-6-14 ❌ DONE on 2022-6-16
         - adding @vercel/node to fix an error and removing node-sass
         - updating start scrips
     // "start": "nodemon --exec node --experimental-modules server.js",
-- {TODO} use finansis-backend-v2 in Finansis project
+- {DONE} use finansis-backend-v2 in Finansis project
         - {DONE} make backend-url in auto commonController dynamic 
+        - {DONE} fix 'Client network socket disconnected before secure TLS connection was established' error in auto server using node-fetch and https-proxy-agent
 - {TODO} create api keys for each api
 - {TODO} let finansis knows when api server is down and when i user asked a question let finansis tell them 'the server is down, I can't help you know'. 
 - {TODO} show users all commands in each section
@@ -38,6 +39,7 @@ deadline - before 2022-6-14 ❌ DONE on 2022-6-16
 - {TODO} sorry you not vpn user i con't help you with that
 - {TODO} fix 'finansis saying didn't find apple' when there is a server error
 ----- NOT IMPORTANT NOW
+- {TODO} fix didn't find any companies when the keyword is 'game'
 - {TODO} don't let finansis auto sell stock if all found stock are stop losses
         note: check find sell singals scrips for why didn't set isRechedstopLoss to true
 - {TODO} create 'auto trade command' let the user select end date

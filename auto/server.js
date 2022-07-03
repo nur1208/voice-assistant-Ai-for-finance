@@ -4,7 +4,10 @@ import cors from "cors";
 import dotenv from "dotenv";
 
 import cheerio from "cheerio";
+// let axios = require("axios");
 import axios from "axios";
+import fetch from "node-fetch";
+import HttpsProxyAgent from "https-proxy-agent";
 import morgan from "morgan";
 import { scrollHandler } from "./controllers/newsControllers.js";
 import {
@@ -29,18 +32,61 @@ dotenv.config();
 const app = express();
 const port = 3333;
 
+app.use(express.json());
+app.use(cors("http://localhost:3000"));
+app.use(morgan("dev"));
+// app.use(protect);
+
 app.get("/", (req, res) => {
   res.send("Hello World!");
+});
+
+// const BACKEND_API_URL = "http://localhost:4050";
+const BACKEND_API_URL = "https://finansis-backend-v2.vercel.app";
+const httpsAgent = new HttpsProxyAgent("http://127.0.0.1:9999");
+const axiosWtihHA = axios.create({ httpsAgent });
+
+app.post("/test", async (req, res) => {
+  console.log(req.body);
+
+  const questionObject = req.body;
+  console.log(questionObject);
+
+  try {
+    // const { data } = await axiosWtihHA.post(
+    //   `${BACKEND_API_URL}/api/v1/questions`,
+    //   questionObject
+    // );
+
+    const response = await fetch(
+      `${BACKEND_API_URL}/api/v1/questions`,
+      {
+        agent: httpsAgent,
+        method: "POST",
+        body: JSON.stringify(questionObject),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      }
+    );
+    const body = await response.text();
+    console.log(body);
+  } catch (error) {
+    console.log(error);
+
+    console.log(error.message + "❌");
+    console.log("here");
+    return res.status(500).json({
+      status: "fail",
+      message: "something went wrong from auto server",
+    });
+  }
+  res.send("working!");
 });
 
 // export let browser;
 // export let page;
 let windowTypeHolder;
-
-app.use(express.json());
-app.use(cors("http://localhost:3000"));
-app.use(morgan("dev"));
-// app.use(protect);
 
 app.post("/findingAnswers", findingAnswersHandler);
 

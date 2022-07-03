@@ -36,6 +36,15 @@
       "label": "npm: debug - backend",
       "detail": "nodemon --exec ndb --experimental-modules server.js",
       "group": "build"
+    },
+    {
+      "type": "npm",
+      "script": "debug",
+      "path": "auto/",
+      "problemMatcher": [],
+      "label": "npm: debug - auto",
+      "detail": "nodemon --exec ndb --experimental-modules server.js",
+      "group": "build"
     }
   ]
 }

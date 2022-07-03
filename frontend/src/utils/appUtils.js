@@ -462,6 +462,7 @@ export const useFinansis = ({
         "number *",
         "stock (number) *",
         "Talk (number) *",
+        "Start (number) *",
       ],
       callback: async (num) => await foundMultipleStocks(num),
       commandFor: "info",
