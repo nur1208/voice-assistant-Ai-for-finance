@@ -2,12 +2,16 @@
 import puppeteer from "puppeteer";
 import cheerio from "cheerio";
 import axios from "axios";
+import HttpsProxyAgent from "https-proxy-agent";
+import fetch from "node-fetch";
 
 export let browser;
 export let page;
 export let windowTypeHolder;
-// const BACKEND_API_URL = "http://localhost:4050"
+// const BACKEND_API_URL = "http://localhost:4050";
 const BACKEND_API_URL = "https://finansis-backend-v2.vercel.app";
+
+const httpsAgent = new HttpsProxyAgent("http://127.0.0.1:9999");
 export const findingCompaniesHandler = async (req, res) => {
   //   const width = window.outerWidth - 20;
   //   const height = window.outerHeight - 20;
@@ -59,9 +63,10 @@ export const findingCompaniesHandler = async (req, res) => {
     console.log("yes ✅");
     const $ = cheerio.load(ul);
     const lis = $("li").toArray();
+
     for (let index = 0; index < lis.length; index++) {
       const li = lis[index];
-
+      console.log(li);
       if ($("div:nth-child(2)", $(li).html()).text().trim()) {
         if (
           $(
@@ -82,11 +87,27 @@ export const findingCompaniesHandler = async (req, res) => {
           $(li).html()
         ).text();
         try {
-          const { data } = await axios.post(
+          console.log(company);
+
+          const response = await fetch(
             `${BACKEND_API_URL}/api/v1/companies`,
-            company
+            {
+              agent: httpsAgent,
+              method: "POST",
+              body: JSON.stringify(company),
+              headers: {
+                "Content-type":
+                  "application/json; charset=UTF-8",
+              },
+            }
           );
-          companies.push(data.doc);
+          const body = await response.json();
+          console.log(body);
+          // const { data } = await axios.post(
+          //   `${BACKEND_API_URL}/api/v1/companies`,
+          //   company
+          // );
+          companies.push(body.doc);
         } catch (error) {
           console.log(error.message + "❌");
         }
@@ -210,12 +231,32 @@ export const findingAnswersHandler = async (req, res) => {
   questionObject.referenceUrl = page.url();
 
   try {
-    const { data } = await axios.post(
+    const response = await fetch(
       `${BACKEND_API_URL}/api/v1/questions`,
-      questionObject
+      {
+        agent: httpsAgent,
+        method: "POST",
+        body: JSON.stringify(questionObject),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      }
     );
+    const body = await response.text();
+    console.log(body);
+    // const { data } = await axios.post(
+    //   `${BACKEND_API_URL}/api/v1/questions`,
+    //   questionObject
+    // );
+    // console.log(questionObject);
   } catch (error) {
     console.log(error.message + "❌");
+    console.log("here");
+    await browserLocal.close();
+    return res.status(500).json({
+      status: "fail",
+      message: "something went wrong from auto server",
+    });
   }
 
   await browserLocal.close();
