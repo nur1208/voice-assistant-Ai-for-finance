@@ -23,6 +23,7 @@ import { useSelector } from "react-redux";
 import { MODAL_TYPE_OPTIONS } from "../../Modal/BasicModal/BasicModalUtils";
 import { OTHER_USER_FIELDS } from "./useOtherUserFields";
 import { secondCommandOptions } from "./useResponse";
+import KnownKeywordEndPoints from "../../../services/KnownKeyword";
 
 export const YAHOO_FINANCE_OPENING_OPTIONS = {
   ADD_TO_WATCH_LIST: "ADD_TO_WATCH_LIST",
@@ -424,11 +425,16 @@ export const useInfoCommandsHandler = (
 
     try {
       // check if the keyword is not exist in the database
+      // const {
+      //   data: { status },
+      // } = await axios.get(
+      //   `${BACKEND_API_URL}/${KNOWN_KEYWORD_ROUTE}?keyword=${target}`
+      // );
+
       const {
         data: { status },
-      } = await axios.get(
-        `${BACKEND_API_URL}/${KNOWN_KEYWORD_ROUTE}?keyword=${target}`
-      );
+      } = await KnownKeywordEndPoints.get(target);
+
       if (status === "fall") {
         // response(
         //   `didn't find chart for ${target}, so give me a minute to learn about ${target} from yahoo finance`
@@ -462,12 +468,13 @@ export const useInfoCommandsHandler = (
             `I also didn't find chart for ${target} from yahoo finance`
           );
 
-          await axios.post(
-            `${BACKEND_API_URL}/${KNOWN_KEYWORD_ROUTE}`,
-            {
-              keyword: target,
-            }
-          );
+          // await axios.post(
+          //   `${BACKEND_API_URL}/${KNOWN_KEYWORD_ROUTE}`,
+          //   {
+          //     keyword: target,
+          //   }
+          // );
+          await KnownKeywordEndPoints.post(target);
           return;
         }
       } else {

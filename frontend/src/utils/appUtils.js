@@ -24,6 +24,7 @@ import { sleep } from "./sleep";
 import { useReduxActions } from "../hooks/useReduxActions";
 import { useUserCommandsHandler } from "../components/finanbroBtn/hooks/useUserCommandsHandler";
 import { useSelector } from "react-redux";
+import QuestionEndPoints from "../services/Questions";
 // export const useSecondCommand = (commands) => {
 //   const { transcript } = useSpeechRecognition();
 // };
@@ -770,11 +771,15 @@ export const useFinansis = ({
       try {
         console.log({ commandsNum: commands.length });
 
+        // const {
+        //   data: { docs },
+        // } = await axios.get(
+        //   `${BACKEND_API_URL}/${QUESTIONS_ROUTE}`
+        // );
+
         const {
           data: { docs },
-        } = await axios.get(
-          `${BACKEND_API_URL}/${QUESTIONS_ROUTE}`
-        );
+        } = await QuestionEndPoints.get();
 
         setQuestions(docs);
       } catch (error) {
@@ -827,7 +832,7 @@ export const useFinansis = ({
     listening,
     resetTranscript,
     finalTranscript,
-    isMicrophoneAvailable
+    isMicrophoneAvailable,
   } = useSpeechRecognition({
     commands,
   });
@@ -1138,6 +1143,6 @@ export const useFinansis = ({
     FinanbroBtnProps,
     modalProps,
     isReadingHeadLines,
-    isMicrophoneAvailable
+    isMicrophoneAvailable,
   };
 };

@@ -44,7 +44,6 @@ app.get("/", (req, res) => {
 // const BACKEND_API_URL = "http://localhost:4050";
 const BACKEND_API_URL = "https://finansis-backend-v2.vercel.app";
 const httpsAgent = new HttpsProxyAgent("http://127.0.0.1:9999");
-const axiosWtihHA = axios.create({ httpsAgent });
 
 app.post("/test", async (req, res) => {
   console.log(req.body);
@@ -57,7 +56,17 @@ app.post("/test", async (req, res) => {
     //   `${BACKEND_API_URL}/api/v1/questions`,
     //   questionObject
     // );
-
+    // const response = await fetch(`${BACKEND_API_URL}`, {
+    //   agent: httpsAgent,
+    //   // method: "POST",
+    //   // body: JSON.stringify({
+    //   //   autoKey: process.env.AUTO_SERVER_SECRET,
+    //   // }),
+    //   headers: {
+    //     auth: process.env.AUTO_SERVER_SECRET,
+    //     host: "something else",
+    //   },
+    // });
     const response = await fetch(
       `${BACKEND_API_URL}/api/v1/questions`,
       {
@@ -66,10 +75,12 @@ app.post("/test", async (req, res) => {
         body: JSON.stringify(questionObject),
         headers: {
           "Content-type": "application/json; charset=UTF-8",
+          auth: process.env.AUTO_SERVER_SECRET,
         },
       }
     );
     const body = await response.text();
+    console.log("here");
     console.log(body);
   } catch (error) {
     console.log(error);

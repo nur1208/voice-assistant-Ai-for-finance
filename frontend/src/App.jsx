@@ -47,6 +47,10 @@ import { MessagePopup } from "./components/MessagePopup";
 import { useIsChrome } from "./hooks/useIsChrome";
 import { IsNotChromeBrowser } from "./components/IsNotChromeBrowser";
 import { SorryMessage } from "./components/SorryMessage";
+import axios from "axios";
+import dotenv from "dotenv";
+import { BACKEND_API_URL } from "./utils/serverUtils";
+// dotenv.config();
 export const PAGES = [
   {
     path: "/",

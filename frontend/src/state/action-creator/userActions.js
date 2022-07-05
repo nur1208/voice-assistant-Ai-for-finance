@@ -1,4 +1,5 @@
 import axios from "axios";
+import UserEndPoints from "../../services/User";
 import { removeCookie } from "../../utils/removeCookie";
 import {
   BACKEND_API_URL,
@@ -25,12 +26,13 @@ export const signUp =
       response && response("signing up");
       dispatch({ type: USER_ACTIONS.SIGN_UP.LOADING });
       // response.data.doc
-      const { data } = await axios.post(
-        `${BACKEND_API_URL}/${USER_ROUTE}/signup`,
-        {
-          ...userData,
-        }
-      );
+      const { data } = await UserEndPoints.signup(userData);
+      // const { data } = await axios.post(
+      //   `${BACKEND_API_URL}/${USER_ROUTE}/signup`,
+      //   {
+      //     ...userData,
+      //   }
+      // );
       response &&
         response("signed up and logged in successfully");
       response && response(`welcome ${userData.name}`);

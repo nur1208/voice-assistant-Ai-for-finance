@@ -98,6 +98,7 @@ export const findingCompaniesHandler = async (req, res) => {
               headers: {
                 "Content-type":
                   "application/json; charset=UTF-8",
+                  auth: process.env.REACT_APP_AUTO_SERVER_SECRET
               },
             }
           );
@@ -239,6 +240,7 @@ export const findingAnswersHandler = async (req, res) => {
         body: JSON.stringify(questionObject),
         headers: {
           "Content-type": "application/json; charset=UTF-8",
+          auth: process.env.REACT_APP_AUTO_SERVER_SECRET
         },
       }
     );
