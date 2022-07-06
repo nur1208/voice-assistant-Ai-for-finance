@@ -83,12 +83,14 @@ export const login =
       response && response("logging in");
       dispatch({ type: USER_ACTIONS.LOGIN.LOADING });
       // response.data.doc
-      const { data } = await axios.post(
-        `${BACKEND_API_URL}/${USER_ROUTE}/login`,
-        {
-          ...userData,
-        }
-      );
+      const { data } = await UserEndPoints.login(userData);
+      // const { data } = await axios.post(
+      //   `${BACKEND_API_URL}/${USER_ROUTE}/login`,
+      //   {
+      //     ...userData,
+      //   }
+      // );
+
       response && response("logged in successfully");
       response &&
         response(`welcome back ${data.data.user.name}`);
@@ -140,19 +142,24 @@ export const updateUserInfo =
     try {
       dispatch({ type: USER_ACTIONS.UPDATE_INFO.LOADING });
       // response.data.doc
-      const { data } = await axios.put(
-        `${BACKEND_API_URL}/${USER_ROUTE}/${userId}`,
-        {
-          ...userData,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${
-              getState().user_store.userData.token
-            }`,
-          },
-        }
+      const { data } = await UserEndPoints.updateInfo(
+        userId,
+        userData,
+        getState().user_store.userData.token
       );
+      // const { data } = await axios.put(
+      //   `${BACKEND_API_URL}/${USER_ROUTE}/${userId}`,
+      //   {
+      //     ...userData,
+      //   },
+      //   {
+      //     headers: {
+      //       Authorization: `Bearer ${
+      //         getState().user_store.userData.token
+      //       }`,
+      //     },
+      //   }
+      // );
       response && response("your info updated successfully");
       // response &&
       //   response(`welcome back ${data.data.user.name}`);
@@ -202,12 +209,13 @@ export const forgetPass =
         );
       dispatch({ type: USER_ACTIONS.FORGET_PASS.LOADING });
       // response.data.doc
-      const { data } = await axios.post(
-        `${BACKEND_API_URL}/${USER_ROUTE}/forgetPassword`,
-        {
-          email,
-        }
-      );
+      const { data } = await UserEndPoints.forgetPassword(email);
+      // const { data } = await axios.post(
+      //   `${BACKEND_API_URL}/${USER_ROUTE}/forgetPassword`,
+      //   {
+      //     email,
+      //   }
+      // );
       response && response(data.message);
 
       dispatch({
@@ -239,17 +247,23 @@ export const resetPassword =
     try {
       dispatch({ type: USER_ACTIONS.RESET_PASS.LOADING });
       // response.data.doc
+      // const {
+      //   data: {
+      //     data: { user },
+      //     token,
+      //   },
+      // } = await axios.put(
+      //   `${BACKEND_API_URL}/${USER_ROUTE}/resetPassword`,
+      //   {
+      //     ...data,
+      //   }
+      // );
       const {
         data: {
           data: { user },
           token,
         },
-      } = await axios.put(
-        `${BACKEND_API_URL}/${USER_ROUTE}/resetPassword`,
-        {
-          ...data,
-        }
-      );
+      } = await UserEndPoints.resetPassword(data);
       response &&
         response(
           "your password updated successfully and logged in successfully"
@@ -303,23 +317,32 @@ export const updatePassword =
 
       dispatch({ type: USER_ACTIONS.UPDATE_PASSWORD.LOADING });
       // response.data.doc
+      // const {
+      //   data: {
+      //     data: { user },
+      //     token,
+      //   },
+      // } = await axios.put(
+      //   `${BACKEND_API_URL}/${USER_ROUTE}/updateMyPassword`,
+      //   {
+      //     ...data,
+      //   },
+      //   {
+      //     headers: {
+      //       Authorization: `Bearer ${
+      //         getState().user_store.userData.token
+      //       }`,
+      //     },
+      //   }
+      // );
       const {
         data: {
           data: { user },
           token,
         },
-      } = await axios.put(
-        `${BACKEND_API_URL}/${USER_ROUTE}/updateMyPassword`,
-        {
-          ...data,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${
-              getState().user_store.userData.token
-            }`,
-          },
-        }
+      } = await UserEndPoints.updatePassword(
+        data,
+        getState().user_store.userData.token
       );
       response &&
         response(

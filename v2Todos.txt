@@ -31,7 +31,7 @@ deadline - before 2022-6-14 ❌ DONE on 2022-6-16
         - {DONE} make backend-url in auto commonController dynamic 
         - {DONE} fix 'Client network socket disconnected before secure TLS connection was established' error in auto server using node-fetch and https-proxy-agent
 - {DONE} make axios requests generic part 1
-- {TODO} create API keys express for each api
+- {DONE} make axios requests generic part 2
 - {TODO} let finansis knows when api server is down and when i user asked a question let finansis tell them 'the server is down, I can't help you know'. 
 - {TODO} show users all commands in each section
 - {TODO} create 'what's my name' command 
@@ -39,6 +39,8 @@ deadline - before 2022-6-14 ❌ DONE on 2022-6-16
 - {TODO} create 'show me my info' command 
 - {TODO} sorry you not vpn user i con't help you with that
 - {TODO} fix 'finansis saying didn't find apple' when there is a server error
+- {TODO} create API keys express for each api
+- {TODO} 
 ----- NOT IMPORTANT NOW
 - {TODO} fix didn't find any companies when the keyword is 'game'
 - {TODO} don't let finansis auto sell stock if all found stock are stop losses
