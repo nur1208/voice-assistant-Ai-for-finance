@@ -296,6 +296,11 @@ export const useCommonCommandsHandler = (
   //   // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, []);
 
+  const howCanHelp = () => {
+    response("I help you with finance using the stock market");
+    updateModal({ open: true, isModalOpen: true });
+  };
+
   return {
     goBackHandler,
     handleStopListening,
@@ -306,5 +311,6 @@ export const useCommonCommandsHandler = (
     closeAnswerDetail,
     handleCloseAnyPopup,
     goForward,
+    howCanHelp,
   };
 };

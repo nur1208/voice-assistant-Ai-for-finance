@@ -35,6 +35,8 @@ deadline - before 2022-6-14 ❌ DONE on 2022-6-16
 - {DONE} let finansis knows when api server is down and let finansis tell them 'the server is down, I can't help you know'. 
 - {DONE} let finansis tell users that 'the app is loading please wait a second' when the app is loading.
 - {TODO} show users all commands in each section
+        - {DONE} update 'what can you do' command
+        - {TODO} add 'renderContent' props when opening modal in howCanHelp function and using it in infoModal component
 - {TODO} create 'what's my name' command 
 - {TODO} don't let the user enter his info again if the email exist, just let him update his email when sign up
 - {TODO} create 'show me my info' command 
