@@ -2,6 +2,7 @@ export const RESPONSE_ACTIONS = {
   UPDATE_SECOND_COMMAND: "UPDATE_SECOND_COMMAND",
   UPDATE_SPEAKING: "UPDATE_SPEAKING",
   UPDATE_IS_START_RECOGNIZE: "UPDATE_IS_START_RECOGNIZE",
+  UPDATE_IS_SERVER_DOWN: "UPDATE_IS_SERVER_DOWN",
 };
 
 export const responseReducer = (state = {}, action) => {
@@ -14,6 +15,9 @@ export const responseReducer = (state = {}, action) => {
 
     case RESPONSE_ACTIONS.UPDATE_IS_START_RECOGNIZE:
       return { ...state, isStartRecognize: action.payload };
+
+    case RESPONSE_ACTIONS.UPDATE_IS_SERVER_DOWN:
+      return { ...state, isServerDown: action.payload };
 
     default:
       return state;

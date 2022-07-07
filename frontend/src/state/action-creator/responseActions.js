@@ -26,3 +26,12 @@ export const updateIsStartRecognize = (data) => {
     });
   };
 };
+
+export const updateIServerDown = (data) => {
+  return (dispatch) => {
+    dispatch({
+      type: RESPONSE_ACTIONS.UPDATE_IS_SERVER_DOWN,
+      payload: data,
+    });
+  };
+};

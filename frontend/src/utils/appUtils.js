@@ -59,10 +59,12 @@ export const useFinansis = ({
     closeModal,
     updateIsStartRecognize,
     updateSecondCommand,
+    updateIServerDown,
   } = useReduxActions();
 
   const {
     user_store: { userData },
+    response_store: { isServerDown },
   } = useSelector((state) => state);
 
   const handleOpenModal = (title, content, isInput, label) => {
@@ -783,7 +785,8 @@ export const useFinansis = ({
 
         setQuestions(docs);
       } catch (error) {
-        console.log(error);
+        console.log(error.code);
+        updateIServerDown(true);
         setQuestions([]);
       }
     })();
@@ -1090,9 +1093,6 @@ export const useFinansis = ({
     }
   }, [resetTranscript, speaking]);
 
-  if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
-    return null;
-  }
   const NewsPageProps = { activeArticle, newsArticles };
   const FinanbroBtnProps = {
     // onClick: () =>
@@ -1102,6 +1102,10 @@ export const useFinansis = ({
 
     handleStopReading,
     onClick: () => {
+      if (isServerDown)
+        return response(
+          "the server is down, I can't help you now, try later"
+        );
       if (!listening) {
         SpeechRecognition.startListening({ continuous: true });
         updateIsStartRecognize(true);
@@ -1127,6 +1131,23 @@ export const useFinansis = ({
     transcript,
   };
 
+  const handleKeyDown = (e) => {
+    if (isServerDown)
+      return response(
+        "the server is down, I can't help you now, try later"
+      );
+
+    if (e.key === "Control") {
+      FinanbroBtnProps.onClick();
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () =>
+      window.removeEventListener("keydown", handleKeyDown);
+  }, [isServerDown]);
   const modalProps = {
     open: openModal,
     handleClose: handleCloseModal,
@@ -1135,6 +1156,9 @@ export const useFinansis = ({
     isInput: modalIsInput,
     label: modalIsLabel,
   };
+  if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
+    return null;
+  }
 
   return {
     isBrowserSupportsSpeechRecognition:
