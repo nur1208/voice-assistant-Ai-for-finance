@@ -33,6 +33,7 @@ deadline - before 2022-6-14 ❌ DONE on 2022-6-16
 - {DONE} make axios requests generic part 1
 - {DONE} make axios requests generic part 2
 - {DONE} let finansis knows when api server is down and let finansis tell them 'the server is down, I can't help you know'. 
+- {DONE} let finansis tell users that 'the app is loading please wait a second' when the app is loading.
 - {TODO} show users all commands in each section
 - {TODO} create 'what's my name' command 
 - {TODO} don't let the user enter his info again if the email exist, just let him update his email when sign up
@@ -40,8 +41,9 @@ deadline - before 2022-6-14 ❌ DONE on 2022-6-16
 - {TODO} sorry you not vpn user i con't help you with that
 - {TODO} fix 'finansis saying didn't find apple' when there is a server error
 - {TODO} create API keys express for each api
-- {TODO} 
+
 ----- NOT IMPORTANT NOW
+- {TODO} change 'response_store' to 'finansis_store' in reducers/index.js file
 - {TODO} fix didn't find any companies when the keyword is 'game'
 - {TODO} don't let finansis auto sell stock if all found stock are stop losses
         note: check find sell singals scrips for why didn't set isRechedstopLoss to true

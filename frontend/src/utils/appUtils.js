@@ -59,12 +59,13 @@ export const useFinansis = ({
     closeModal,
     updateIsStartRecognize,
     updateSecondCommand,
-    updateIServerDown,
+    updateIsServerDown,
+    updateIsLoading,
   } = useReduxActions();
 
   const {
     user_store: { userData },
-    response_store: { isServerDown },
+    response_store: { isLoading, isServerDown },
   } = useSelector((state) => state);
 
   const handleOpenModal = (title, content, isInput, label) => {
@@ -786,9 +787,10 @@ export const useFinansis = ({
         setQuestions(docs);
       } catch (error) {
         console.log(error.code);
-        updateIServerDown(true);
+        updateIsServerDown(true);
         setQuestions([]);
       }
+      updateIsLoading(false);
     })();
   }, []);
 
@@ -1102,6 +1104,10 @@ export const useFinansis = ({
 
     handleStopReading,
     onClick: () => {
+      if (isLoading)
+        return response(
+          "the app is loading please wait a second"
+        );
       if (isServerDown)
         return response(
           "the server is down, I can't help you now, try later"
@@ -1132,6 +1138,8 @@ export const useFinansis = ({
   };
 
   const handleKeyDown = (e) => {
+    if (isLoading)
+      return response("the app is loading please wait a second");
     if (isServerDown)
       return response(
         "the server is down, I can't help you now, try later"
@@ -1147,7 +1155,7 @@ export const useFinansis = ({
 
     return () =>
       window.removeEventListener("keydown", handleKeyDown);
-  }, [isServerDown]);
+  }, [isServerDown, isLoading]);
   const modalProps = {
     open: openModal,
     handleClose: handleCloseModal,
