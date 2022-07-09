@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { PAGES } from "../../../App";
 import { useReduxActions } from "../../../hooks/useReduxActions";
 import { AUTO_API_URL } from "../../../utils/serverUtils";
+import { Typography } from "@mui/material";
 export const useCommonCommandsHandler = (
   setPageNumber,
   setNewsArticles,
@@ -296,9 +297,21 @@ export const useCommonCommandsHandler = (
   //   // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, []);
 
+  const sections = ["news", "trading", "common", "stock info"];
+
   const howCanHelp = () => {
+    const renderContent = () =>
+      sections.map((section, index) => (
+        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+          {section} section
+        </Typography>
+      ));
     response("I help you with finance using the stock market");
-    updateModal({ open: true, isModalOpen: true });
+    updateModal({
+      open: true,
+      isModalOpen: true,
+      renderContent,
+    });
   };
 
   return {

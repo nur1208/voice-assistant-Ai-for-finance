@@ -32,6 +32,7 @@ export const modalReducer = (state = initialValue, action) => {
         text: "",
         confirmPasswordCounter: 0,
         isEnterPasswordAgain: false,
+        renderContent: null,
       };
     case MODAL_ACTIONS.UPDATE_MESSAGE_POPUP:
       return {

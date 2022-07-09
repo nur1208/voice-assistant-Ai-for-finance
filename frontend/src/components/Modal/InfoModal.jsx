@@ -1,6 +1,7 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import { useSelector } from "react-redux";
 
 const style = {
   position: "absolute",
@@ -15,6 +16,9 @@ const style = {
 };
 
 export const InfoModal = ({ title, content }) => {
+  const { renderContent } = useSelector(
+    (state) => state.modal_store
+  );
   return (
     <Box sx={style}>
       <Typography
@@ -30,7 +34,9 @@ export const InfoModal = ({ title, content }) => {
               {index + 1} - symbol: AAPL, company name: Apple inc.
             </Typography>
           ))} */}
-      {typeof content === "object" ? (
+      {renderContent ? (
+        renderContent()
+      ) : typeof content === "object" ? (
         content.map(({ symbol, name }, index) => (
           <Typography
             id="modal-modal-description"
