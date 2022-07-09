@@ -22,6 +22,7 @@ export const modalReducer = (state = initialValue, action) => {
     case MODAL_ACTIONS.CLOSE_MODAL:
       return {
         ...state,
+        title: "",
         type: "",
         stateName: "",
         label: "",

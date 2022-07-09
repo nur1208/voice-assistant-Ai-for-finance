@@ -37,6 +37,8 @@ deadline - before 2022-6-14 ❌ DONE on 2022-6-16
 - {TODO} show users all commands in each section
         - {DONE} update 'what can you do' command
         - {DONE} add 'renderContent' props when opening modal in howCanHelp function and using it in infoModal component
+        - {TODO} add modal's title in redux store and use it in infoModal component
+        
 - {TODO} create 'what's my name' command 
 - {TODO} don't let the user enter his info again if the email exist, just let him update his email when sign up
 - {TODO} create 'show me my info' command 

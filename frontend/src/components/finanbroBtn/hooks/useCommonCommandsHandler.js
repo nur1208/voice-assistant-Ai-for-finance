@@ -307,10 +307,14 @@ export const useCommonCommandsHandler = (
         </Typography>
       ));
     response("I help you with finance using the stock market");
+    response(
+      "plese select a section to show all possible commands"
+    );
     updateModal({
       open: true,
       isModalOpen: true,
       renderContent,
+      title: "select a section to show all possible commands:",
     });
   };
 

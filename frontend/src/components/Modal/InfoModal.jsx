@@ -16,7 +16,7 @@ const style = {
 };
 
 export const InfoModal = ({ title, content }) => {
-  const { renderContent } = useSelector(
+  const { renderContent, title: titleRedux } = useSelector(
     (state) => state.modal_store
   );
   return (
@@ -26,7 +26,7 @@ export const InfoModal = ({ title, content }) => {
         variant="h6"
         component="h2"
       >
-        {title}
+        {titleRedux || title}
       </Typography>
       {/* {typeof content === "function" ? content() : null} */}
       {/* {new Array(5).fill(true).map((_, index) => (
