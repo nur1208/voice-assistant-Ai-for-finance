@@ -4,6 +4,7 @@ export const RESPONSE_ACTIONS = {
   UPDATE_IS_START_RECOGNIZE: "UPDATE_IS_START_RECOGNIZE",
   UPDATE_IS_SERVER_DOWN: "UPDATE_IS_SERVER_DOWN",
   UPDATE_IS_LOADING: "UPDATE_IS_LOADING",
+  UPDATE_COMMANDS_NUM: "UPDATE_COMMANDS_NUM",
 };
 
 const initState = {
@@ -26,6 +27,9 @@ export const responseReducer = (state = initState, action) => {
 
     case RESPONSE_ACTIONS.UPDATE_IS_LOADING:
       return { ...state, isLoading: action.payload };
+
+    case RESPONSE_ACTIONS.UPDATE_COMMANDS_NUM:
+      return { ...state, comandsNum: action.payload };
 
     default:
       return state;

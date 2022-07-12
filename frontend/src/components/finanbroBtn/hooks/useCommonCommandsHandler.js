@@ -35,6 +35,7 @@ export const useCommonCommandsHandler = (
 
   const {
     modal_store: { isModalOpen },
+    response_store: { comandsNum },
   } = useSelector((state) => state);
 
   const { updateIsStartRecognize, updateModal, closeModal } =
@@ -410,6 +411,9 @@ export const useCommonCommandsHandler = (
     response(`here is ${section} commands`);
   };
 
+  const commandsAnswer = () => {
+    response(`I can understand ${comandsNum} differnt commands`);
+  };
   return {
     goBackHandler,
     handleStopListening,
@@ -422,5 +426,6 @@ export const useCommonCommandsHandler = (
     goForward,
     howCanHelp,
     showCommands,
+    commandsAnswer,
   };
 };

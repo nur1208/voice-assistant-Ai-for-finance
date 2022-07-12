@@ -61,6 +61,7 @@ export const useFinansis = ({
     updateSecondCommand,
     updateIsServerDown,
     updateIsLoading,
+    updateCommandsNum,
   } = useReduxActions();
 
   const {
@@ -156,6 +157,7 @@ export const useFinansis = ({
     goForward,
     howCanHelp,
     showCommands,
+    commandsAnswer,
   } = useCommonCommandsHandler(
     setPageNumber,
     setNewsArticles,
@@ -312,6 +314,11 @@ export const useFinansis = ({
     {
       command: ["* section", "show me * section (commands)"],
       callback: (section) => showCommands(section),
+      commandFor: "every section",
+    },
+    {
+      command: "how many commands do you understand",
+      callback: (section) => commandsAnswer(section),
       commandFor: "every section",
     },
     {
@@ -781,7 +788,7 @@ export const useFinansis = ({
     (async () => {
       try {
         console.log({ commandsNum: commands.length });
-
+        updateCommandsNum(commands.length);
         // const {
         //   data: { docs },
         // } = await axios.get(

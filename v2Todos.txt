@@ -34,13 +34,13 @@ deadline - before 2022-6-14 ❌ DONE on 2022-6-16
 - {DONE} make axios requests generic part 2
 - {DONE} let finansis knows when api server is down and let finansis tell them 'the server is down, I can't help you know'. 
 - {DONE} let finansis tell users that 'the app is loading please wait a second' when the app is loading.
-- {TODO} show users all commands in each section
+- {DONE} show users all commands in each section
         - {DONE} update 'what can you do' command
         - {DONE} add 'renderContent' props when opening modal in howCanHelp function and using it in infoModal component
         - {DONE} add modal's title in redux store and use it in infoModal component
         - {DONE} let a user select a section and then show the user all possible commands for selected section
                 Note: you will find the commands in your thesis
-- {TODO} create 'how many commands do you understod' command
+- {DONE} create 'how many commands do you understood' command
 - {TODO} create 'what's my name' command 
 - {TODO} don't let the user enter his info again if the email exist, just let him update his email when sign up
 - {TODO} create 'show me my info' command 
@@ -49,6 +49,7 @@ deadline - before 2022-6-14 ❌ DONE on 2022-6-16
 - {TODO} create API keys express for each api
 
 ----- NOT IMPORTANT NOW
+- {TODO} use commonDispatch for all redux actions
 - {TODO} change 'response_store' to 'finansis_store' in reducers/index.js file
 - {TODO} fix didn't find any companies when the keyword is 'game'
 - {TODO} don't let finansis auto sell stock if all found stock are stop losses

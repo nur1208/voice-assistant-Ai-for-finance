@@ -44,3 +44,15 @@ export const updateIsLoading = (data) => {
     });
   };
 };
+
+const commonDispatch = (type, data) => {
+  return (dispatch) => {
+    dispatch({
+      type,
+      payload: data,
+    });
+  };
+};
+
+export const updateCommandsNum = (data) =>
+  commonDispatch(RESPONSE_ACTIONS.UPDATE_COMMANDS_NUM, data);
