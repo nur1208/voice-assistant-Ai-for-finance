@@ -155,6 +155,7 @@ export const useFinansis = ({
     handleCloseAnyPopup,
     goForward,
     howCanHelp,
+    showCommands,
   } = useCommonCommandsHandler(
     setPageNumber,
     setNewsArticles,
@@ -309,9 +310,17 @@ export const useFinansis = ({
     //     }),
     // },
     {
-      command: ["help (me)","what can you do", "how can you help me"],
-      callback: () =>
-        howCanHelp(),
+      command: ["* section", "show me * section (commands)"],
+      callback: (section) => showCommands(section),
+      commandFor: "every section",
+    },
+    {
+      command: [
+        "help (me)",
+        "what can you do",
+        "how can you help me",
+      ],
+      callback: () => howCanHelp(),
       commandFor: "every section",
     },
     {

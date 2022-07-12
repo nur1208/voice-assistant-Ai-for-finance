@@ -37,7 +37,7 @@ export const useCommonCommandsHandler = (
     modal_store: { isModalOpen },
   } = useSelector((state) => state);
 
-  const { updateIsStartRecognize, updateModal } =
+  const { updateIsStartRecognize, updateModal, closeModal } =
     useReduxActions();
 
   const openAnswerDetail = (questionObject) => {
@@ -297,7 +297,13 @@ export const useCommonCommandsHandler = (
   //   // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, []);
 
-  const sections = ["news", "trading", "common", "stock info"];
+  const sections = [
+    "news",
+    "trading",
+    "common",
+    "stock info",
+    "user",
+  ];
 
   const howCanHelp = () => {
     const renderContent = () =>
@@ -318,6 +324,92 @@ export const useCommonCommandsHandler = (
     });
   };
 
+  const secoinsCommands = {
+    user: [
+      "login",
+      "sign up",
+      "update my info",
+      "forgot (my) password",
+      "logout",
+      "update (my) password",
+      "add {Apple|AAPL|...} stock to (my) watch list",
+      "delete {Apple|AAPL|...} stock from (my) watch list",
+      "open (my) watch list",
+    ],
+    trading: [
+      "buy stocks",
+      "sell stocks",
+      "start back testing",
+      "reset back testing (data)",
+      "force sell",
+      "sell with profit or without",
+      "set stop loss for stocks",
+      "trade stocks for me",
+      "find buy signals",
+      "show me (a) chart for found buy signals (stocks)",
+      "sold stocks chart",
+      "show me trading progress",
+    ],
+    news: [
+      "Give me the news from {yahoo finance|investing|seekingalpha}",
+      "open article (number) {1|5|...}",
+      "what's up with {Apple|China|...}",
+      "Give me the latest new",
+      "read the news",
+      "give me more news",
+      "start reading (news) from article {1|5|...}",
+      "open article (number) {1|5|...} without control",
+      "give me top stories",
+      "give me {Apple|AAPL|...} stock news",
+    ],
+    info: [
+      "open {Apple|AAPL|...} (symbol) chart",
+      "give me {Apple|AAPL|...} statistics",
+      "give me The most {actives|gainers|losers} stocks",
+      "give me trending stocks",
+      "open {Apple|AAPL|...} (symbol) chart with your control",
+      "what is the current price for {Apple|AAPL|...} (symbol)",
+      "show me {Apple and Tesla|AAPL and DD|Apple and Tesla and amazon|...} charts",
+    ],
+    common: [
+      "stock (number) {1|5|...}",
+      "what can you do",
+      "what is your name",
+      "(of course) yes",
+      "no",
+      "do you have a boyfriend",
+      "can you hear me",
+      "stop listening",
+      "thank you",
+      "what's the date today",
+    ],
+  };
+
+  const showCommands = (section) => {
+    if (!sections.includes(section.toLowerCase()))
+      return response(`${section} section not exist`);
+
+    if (isModalOpen) closeModal();
+    const renderContent = () =>
+      secoinsCommands[section.toLowerCase()].map(
+        (command, index) => (
+          <Typography
+            id="modal-modal-description"
+            sx={{ mt: 2 }}
+          >
+            - {command}
+          </Typography>
+        )
+      );
+    updateModal({
+      open: true,
+      isModalOpen: true,
+      renderContent,
+      title: `${section} commands:`,
+    });
+    response(`here is ${section} commands`);
+  };
+
   return {
     goBackHandler,
     handleStopListening,
@@ -329,5 +421,6 @@ export const useCommonCommandsHandler = (
     handleCloseAnyPopup,
     goForward,
     howCanHelp,
+    showCommands,
   };
 };
