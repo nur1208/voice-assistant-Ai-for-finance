@@ -337,6 +337,7 @@ export const useCommonCommandsHandler = (
       "delete {Apple|AAPL|...} stock from (my) watch list",
       "open (my) watch list",
       "what's my {name|email|gender}",
+      "show me my infomation",
     ],
     trading: [
       "buy stocks",

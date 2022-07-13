@@ -19,6 +19,7 @@ import {
 import { secondCommandOptions } from "./useResponse";
 import { YAHOO_FINANCE_OPENING_OPTIONS } from "./useInfoCommandsHandler";
 import { useOtherUserFields } from "./useOtherUserFields";
+import { Typography } from "@mui/material";
 
 export const useUserCommandsHandler = (
   response,
@@ -308,6 +309,36 @@ export const useUserCommandsHandler = (
     response(`your ${type} is ${userData[type]}`);
   };
 
+  const showMeMyInfo = () => {
+    if (!userData) return doWantLogin();
+
+    const renderContent = () => (
+      <>
+        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+          Name : {userData.name}
+        </Typography>
+        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+          Email : {userData.email}
+        </Typography>
+        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+          Gender : {userData.gender}
+        </Typography>
+        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+          Executable Chrome Path :{" "}
+          {userData.executableChromePath}
+        </Typography>
+      </>
+    );
+
+    updateModal({
+      open: true,
+      isModalOpen: true,
+      renderContent,
+      title: `your info:`,
+    });
+    response(`here is your info`);
+  };
+
   // show client errors
   useEffect(() => {
     if (invalidMessage) {
@@ -359,5 +390,6 @@ export const useUserCommandsHandler = (
     showWatchList,
     deleteFromWatchList,
     whatsMy,
+    showMeMyInfo
   };
 };

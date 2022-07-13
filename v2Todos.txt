@@ -42,12 +42,13 @@ deadline - before 2022-6-14 ❌ DONE on 2022-6-16
                 Note: you will find the commands in your thesis
 - {DONE} create 'how many commands do you understand' command
 - {DONE} create 'what's my {name|email|gender}' command 
-- {TODO} create 'show me my info' command 
+- {DONE} create 'show me my info' command 
 - {TODO} sorry you not vpn user i con't help you with that 
+        note: create checkIsVpn function and called in commands list for vpn commands
 - {TODO} fix 'finansis saying didn't find apple' when there is a server error
-- {TODO} create API keys express for each api
 
 ----- NOT IMPORTANT NOW
+- {TODO} create API keys express for each api
 - {TODO} don't let the user enter his info again if the email exist, just let him update his email when sign up
 - {TODO} add 'what is my age' command
 - {TODO} use commonDispatch for all redux actions
