@@ -209,6 +209,7 @@ export const useFinansis = ({
     addToWatchList,
     showWatchList,
     deleteFromWatchList,
+    whatsMy,
   } = useUserCommandsHandler(
     response,
     handleOpenModal,
@@ -314,6 +315,11 @@ export const useFinansis = ({
     {
       command: ["* section", "show me * section (commands)"],
       callback: (section) => showCommands(section),
+      commandFor: "every section",
+    },
+    {
+      command: ["what is my *", "what's my *"],
+      callback: (type) => whatsMy(type),
       commandFor: "every section",
     },
     {

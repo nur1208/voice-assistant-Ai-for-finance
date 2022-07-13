@@ -336,6 +336,7 @@ export const useCommonCommandsHandler = (
       "add {Apple|AAPL|...} stock to (my) watch list",
       "delete {Apple|AAPL|...} stock from (my) watch list",
       "open (my) watch list",
+      "what's my {name|email|gender}",
     ],
     trading: [
       "buy stocks",
@@ -383,6 +384,7 @@ export const useCommonCommandsHandler = (
       "stop listening",
       "thank you",
       "what's the date today",
+      "how many commands do you understand",
     ],
   };
 
@@ -414,6 +416,7 @@ export const useCommonCommandsHandler = (
   const commandsAnswer = () => {
     response(`I can understand ${comandsNum} differnt commands`);
   };
+
   return {
     goBackHandler,
     handleStopListening,

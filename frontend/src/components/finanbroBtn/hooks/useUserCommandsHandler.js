@@ -108,10 +108,7 @@ export const useUserCommandsHandler = (
       logoutRedux();
     } else {
       // doWantLogin();
-      response(
-        "oops, you not logged in to logout"
-      );
-
+      response("oops, you not logged in to logout");
     }
   };
 
@@ -298,6 +295,19 @@ export const useUserCommandsHandler = (
     }
   };
 
+  const whatsMy = (type) => {
+    const validOptions = ["name", "email", "gender"];
+
+    if (!validOptions.includes(type))
+      return response(
+        `${type} is invalid type for this command`
+      );
+
+    if (!userData) return doWantLogin();
+
+    response(`your ${type} is ${userData[type]}`);
+  };
+
   // show client errors
   useEffect(() => {
     if (invalidMessage) {
@@ -348,5 +358,6 @@ export const useUserCommandsHandler = (
     addToWatchList,
     showWatchList,
     deleteFromWatchList,
+    whatsMy,
   };
 };
