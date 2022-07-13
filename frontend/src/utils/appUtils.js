@@ -211,6 +211,7 @@ export const useFinansis = ({
     deleteFromWatchList,
     whatsMy,
     showMeMyInfo,
+    checkIsVPN,
   } = useUserCommandsHandler(
     response,
     handleOpenModal,
@@ -592,8 +593,11 @@ export const useFinansis = ({
         "open * chat controlled (by you)",
         "open * tart controlled (by you)",
       ],
-      callback: async (target) =>
-        await openYahooFinance("chart", target, true),
+      callback: async (target) => {
+        if (checkIsVPN())
+          await openYahooFinance("chart", target, true);
+      },
+
       commandFor: "info",
     },
     {
@@ -643,12 +647,16 @@ export const useFinansis = ({
     },
     {
       command: "buy stocks",
-      callback: () => buyStocks(),
+      callback: () => {
+        if (checkIsVPN()) buyStocks();
+      },
       commandFor: "trading",
     },
     {
       command: ["tell stocks", "sell stocks", "so stocks"],
-      callback: () => sellStocks(),
+      callback: () => {
+        if (checkIsVPN()) sellStocks();
+      },
       commandFor: "trading",
     },
     {
@@ -660,7 +668,9 @@ export const useFinansis = ({
         "set stop loss for stocks",
         "set stop loss",
       ],
-      callback: () => stopLess(),
+      callback: () => {
+        if (checkIsVPN()) stopLess();
+      },
       commandFor: "trading",
     },
     {
@@ -670,7 +680,9 @@ export const useFinansis = ({
         "start pack testing",
         "start practicing",
       ],
-      callback: () => startBackTesting(),
+      callback: () => {
+        if (checkIsVPN()) startBackTesting();
+      },
       commandFor: "backTesting",
     },
     // it is a joke
@@ -699,7 +711,9 @@ export const useFinansis = ({
         "force sell (again)",
         "for sale (again)",
       ],
-      callback: async () => await forceSellingHandler(),
+      callback: async () => {
+        if (checkIsVPN()) await forceSellingHandler();
+      },
       commandFor: "backTesting",
     },
     {
@@ -710,7 +724,9 @@ export const useFinansis = ({
         "preset pack testing",
         "preset back testing",
       ],
-      callback: async () => await resetBTDataHandler(),
+      callback: async () => {
+        if (checkIsVPN()) await resetBTDataHandler();
+      },
       commandFor: "backTesting",
     },
     {
@@ -726,12 +742,16 @@ export const useFinansis = ({
         // "reset pack testing (data)",
         // "reset back-testing (data)",
       ],
-      callback: async () => await sellWithProfitOrNot(),
+      callback: async () => {
+        if (checkIsVPN()) await sellWithProfitOrNot();
+      },
       commandFor: "backTesting",
     },
     {
       command: ["trade stocks for me", "trade stocks"],
-      callback: async () => await tradeStocks(),
+      callback: async () => {
+        if (checkIsVPN()) await tradeStocks();
+      },
       commandFor: "trading",
     },
     {
@@ -747,7 +767,9 @@ export const useFinansis = ({
         "find by signals",
         "find by signal",
       ],
-      callback: async () => await findBuySignal(),
+      callback: async () => {
+        if (checkIsVPN()) await findBuySignal();
+      },
       commandFor: "trading",
     },
     {
@@ -757,10 +779,12 @@ export const useFinansis = ({
         "show me (a) chart for found by signals (stocks)",
         "show me (a) chart for found by signal (stocks)",
       ],
-      callback: async () =>
-        await openMultipleCharts(
-          foundBuySignalStocks.join(" and ")
-        ),
+      callback: async () => {
+        if (checkIsVPN())
+          await openMultipleCharts(
+            foundBuySignalStocks.join(" and ")
+          );
+      },
       commandFor: "trading",
     },
     {
@@ -773,7 +797,9 @@ export const useFinansis = ({
         "salt stocks chart",
         "fold tax chart",
       ],
-      callback: async () => await showSoldStockChart(),
+      callback: async () => {
+        if (checkIsVPN()) await showSoldStockChart();
+      },
       commandFor: "trading",
     },
     {
@@ -789,7 +815,9 @@ export const useFinansis = ({
         "open trade in progress",
         "show me trade in progress",
       ],
-      callback: async () => await openProgressModal(),
+      callback: async () => {
+        if (checkIsVPN()) await openProgressModal();
+      },
       commandFor: "every section",
     },
     // sellWithProfitOrNot

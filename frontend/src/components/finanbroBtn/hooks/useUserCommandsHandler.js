@@ -96,7 +96,9 @@ export const useUserCommandsHandler = (
   useSignUpFields(response, getUserInputHandler);
 
   const doWantLogin = () => {
-    response("you not logged in");
+    response(
+      "you not logged in, you need to login for this command"
+    );
     response("do you want to login");
 
     setSecondCommand(login, "login", secondCommandOptions.login);
@@ -339,6 +341,14 @@ export const useUserCommandsHandler = (
     response(`here is your info`);
   };
 
+  const checkIsVPN = () => {
+    if (!userData) return doWantLogin();
+
+    if (!userData.isVPN)
+      return response("sorry, this command only for VPN users");
+
+    return true;
+  };
   // show client errors
   useEffect(() => {
     if (invalidMessage) {
@@ -390,6 +400,7 @@ export const useUserCommandsHandler = (
     showWatchList,
     deleteFromWatchList,
     whatsMy,
-    showMeMyInfo
+    showMeMyInfo,
+    checkIsVPN,
   };
 };

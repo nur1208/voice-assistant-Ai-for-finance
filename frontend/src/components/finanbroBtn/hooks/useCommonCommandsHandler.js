@@ -315,13 +315,14 @@ export const useCommonCommandsHandler = (
       ));
     response("I help you with finance using the stock market");
     response(
-      "plese select a section to show all possible commands"
+      "plese select a section to show you all possible commands"
     );
     updateModal({
       open: true,
       isModalOpen: true,
       renderContent,
-      title: "select a section to show all possible commands:",
+      title:
+        "select a section to show you all possible commands:",
     });
   };
 

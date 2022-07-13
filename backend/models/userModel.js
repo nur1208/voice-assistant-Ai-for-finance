@@ -8,6 +8,7 @@ const userSchema = new mongoose.Schema(
     email: { type: String, unique: true, required: true },
     password: { type: String, required: true, select: false },
     gender: { type: String, enum: ["male", "female"] },
+    isVPN: { type: Boolean, defaul: false },
     executableChromePath: String,
     chromeDataPath: String,
     passwordChangedAt: Date,

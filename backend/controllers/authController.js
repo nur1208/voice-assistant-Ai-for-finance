@@ -67,6 +67,7 @@ export const signUp = catchAsync(async (req, res) => {
   const newUser = await User.create({
     ...req.body,
     gender: genderLocal,
+    isVPN: false,
   });
 
   createSendToken(newUser, 201, req, res);
