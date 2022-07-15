@@ -46,8 +46,9 @@ deadline - before 2022-6-14 ❌ DONE on 2022-6-16
 - {DONE} add VPN functionality if a user not VPN user let finansis tell them 'sorry, this command only for VPN users' 
         note: create checkIsVpn function and called in commands list for vpn commands
 - {DONE} fix 'finansis saying didn't find apple' when there is a server error
-- {TODO} make open article without controller as default openArticleWithoutControllerItHandler
-
+- {DONE} make open article without controller as default openArticleWithoutControllerItHandler
+- {TODO} fix user says 'control open article one' but finansis doesn't say anything
+- {TODO} deploy the frontend
 ----- NOT IMPORTANT NOW
 - {TODO} create API keys express for each api
 - {TODO} don't let the user enter his info again if the email exist, just let him update his email when sign up

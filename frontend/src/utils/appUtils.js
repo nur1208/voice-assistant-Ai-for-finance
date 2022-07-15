@@ -389,8 +389,14 @@ export const useFinansis = ({
       commandFor: "every section",
     },
     {
-      command: "open article (number) *",
-      callback: (articleNum) => openArticleHandler(articleNum),
+      command: [
+        "with controlling it open article (number) *",
+        "with control open article (number) *",
+        "control open article (number) *",
+        "with your control open article (number) *",
+      ],
+      callback: async (articleNum) =>
+        await openArticleHandler(articleNum),
       commandFor: "news",
     },
     {
@@ -526,10 +532,8 @@ export const useFinansis = ({
       commandFor: "every section",
     },
     {
-      command: [
-        "open article (number) * without controlling it",
-        "open article (number) * without control",
-      ],
+      command: "open article (number) *",
+
       callback: async (num) =>
         await openArticleWithoutControllerItHandler(num),
       commandFor: "news",

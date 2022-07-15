@@ -339,8 +339,7 @@ export const useNewsCommandsHandler = (
     // and 'open article number (number) *' commands are similar
     // before '*' dynamic content symbol
     //  so the flowing code will' fix it
-    if (articleNum.includes("without")) return;
-
+    // if (articleNum.includes("without")) return;
     const articleNumberIsInRange =
       articleNum > 0 && articleNum <= newsArticles.length;
     const width = window.outerWidth - 20;
