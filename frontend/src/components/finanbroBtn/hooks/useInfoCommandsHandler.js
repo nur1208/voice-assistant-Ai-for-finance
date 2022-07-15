@@ -515,11 +515,21 @@ export const useInfoCommandsHandler = (
 
     // debugger;
     let currentCompany = await lookupForTickersV2(finalTarget);
+
+    if (currentCompany?.error)
+      return response(
+        `there was a server error while finding ${finalTarget}, please try later`
+      );
     // if (!(await lookupForTickersV2(finalTarget))) {
     if (!currentCompany) {
       const symbolsFound = await searchCompanyNameV2(
         finalTarget
       );
+
+      if (symbolsFound?.error)
+        return response(
+          `there was a server error while finding ${finalTarget}, please try later`
+        );
 
       if (symbolsFound && symbolsFound.length > 2) {
         finalTarget = symbolsFound[0].symbol;

@@ -12,6 +12,11 @@ export const lookupForTickers = (input) => {
 };
 
 const apiUrl = `${BACKEND_API_URL}/${COMPANIES_ROUTE}`;
+const checkForSeverError = (error) => {
+  if (error.response && error.response.status === 404)
+    return null;
+  return { error: true };
+};
 export const lookupForTickersV2 = async (symbol) => {
   try {
     // const {
@@ -24,7 +29,7 @@ export const lookupForTickersV2 = async (symbol) => {
     return doc.length > 0 ? doc[0] : null;
   } catch (error) {
     console.log(error.message);
-    return null;
+    return checkForSeverError(error);
   }
 };
 
@@ -53,6 +58,6 @@ export const searchCompanyNameV2 = async (name) => {
     return doc.length > 0 ? doc : null;
   } catch (error) {
     console.log(error.message);
-    return null;
+    return checkForSeverError(error);
   }
 };

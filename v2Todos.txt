@@ -45,8 +45,8 @@ deadline - before 2022-6-14 ❌ DONE on 2022-6-16
 - {DONE} create 'show me my info' command 
 - {DONE} add VPN functionality if a user not VPN user let finansis tell them 'sorry, this command only for VPN users' 
         note: create checkIsVpn function and called in commands list for vpn commands
-- {TODO} fix 'finansis saying didn't find apple' when there is a server error
-- {TODO} make open articla without controller as default openArticleWithoutControllerItHandler
+- {DONE} fix 'finansis saying didn't find apple' when there is a server error
+- {TODO} make open article without controller as default openArticleWithoutControllerItHandler
 
 ----- NOT IMPORTANT NOW
 - {TODO} create API keys express for each api
