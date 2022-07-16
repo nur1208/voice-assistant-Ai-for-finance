@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.js": "/finansis/static/js/main.5e5ff6b2.chunk.js",
-    "main.js.map": "/finansis/static/js/main.5e5ff6b2.chunk.js.map",
-    "runtime-main.js": "/finansis/static/js/runtime-main.c2b2560b.js",
-    "runtime-main.js.map": "/finansis/static/js/runtime-main.c2b2560b.js.map",
-    "static/js/2.fc1e2abc.chunk.js": "/finansis/static/js/2.fc1e2abc.chunk.js",
-    "static/js/2.fc1e2abc.chunk.js.map": "/finansis/static/js/2.fc1e2abc.chunk.js.map",
-    "index.html": "/finansis/index.html",
-    "static/js/2.fc1e2abc.chunk.js.LICENSE.txt": "/finansis/static/js/2.fc1e2abc.chunk.js.LICENSE.txt"
+    "main.js": "/finansisFrontend/static/js/main.5e5ff6b2.chunk.js",
+    "main.js.map": "/finansisFrontend/static/js/main.5e5ff6b2.chunk.js.map",
+    "runtime-main.js": "/finansisFrontend/static/js/runtime-main.95d03f5a.js",
+    "runtime-main.js.map": "/finansisFrontend/static/js/runtime-main.95d03f5a.js.map",
+    "static/js/2.79929817.chunk.js": "/finansisFrontend/static/js/2.79929817.chunk.js",
+    "static/js/2.79929817.chunk.js.map": "/finansisFrontend/static/js/2.79929817.chunk.js.map",
+    "index.html": "/finansisFrontend/index.html",
+    "static/js/2.79929817.chunk.js.LICENSE.txt": "/finansisFrontend/static/js/2.79929817.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.c2b2560b.js",
-    "static/js/2.fc1e2abc.chunk.js",
+    "static/js/runtime-main.95d03f5a.js",
+    "static/js/2.79929817.chunk.js",
     "static/js/main.5e5ff6b2.chunk.js"
   ]
 }
